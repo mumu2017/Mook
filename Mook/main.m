@@ -2,8 +2,8 @@
 //  main.m
 //  Mook
 //
-//  Created by 陈林 on 16/3/12.
-//  Copyright © 2016年 Chen Lin. All rights reserved.
+//  Created by 陈林 on 15/11/16.
+//  Copyright © 2015年 ChenLin. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>

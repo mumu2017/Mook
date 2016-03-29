@@ -1,0 +1,28 @@
+//
+//  PrefixHeader.pch
+//  Deck
+//
+//  Created by 陈林 on 15/11/5.
+//  Copyright © 2015年 ChenLin. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+#import "AppDelegate.h"
+#import "Constants.h"
+#import "NSString+Tools.h"
+#import "UIResponder+FirstResponder.h"
+#import "UITextView+Tools.h"
+#import "UITextField+Tools.h"
+#import "UITableView+Tools.h"
+#import "UIView+Tools.h"
+#import "UIImage+Tools.h"
+#import "UIImageView+Tools.h"
+#import "SWTableViewCell.h"
+#import "UINavigationBar+Awesome.h"
+#import "NSDate+MJ.h"
+
+#endif /* PrefixHeader_pch */

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>name</key>
+		<string>流程</string>
+		<key>icon</key>
+		<string>routine</string>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>灵感</string>
+		<key>icon</key>
+		<string>idea</string>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>手法</string>
+		<key>icon</key>
+		<string>sleight</string>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>道具</string>
+		<key>icon</key>
+		<string>prop</string>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>梗</string>
+		<key>icon</key>
+		<string>gag</string>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>标签</string>
+		<key>icon</key>
+		<string>tag</string>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>设置</string>
+		<key>icon</key>
+		<string>setting</string>
+	</dict>
+</array>
+</plist>
