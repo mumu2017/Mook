@@ -1256,48 +1256,71 @@ BOOL editingBooleans[5] = {YES, YES, YES, YES, YES};
     if (indexPath.section == 1) [self performSegueWithIdentifier:kEditingSegue sender:indexPath];
     
     if (indexPath.section == 2) {
-        if (self.editingContentType == kEditingContentTypeRoutine) {
-            if (self.propModelList.count == 1 && !self.propModelList[0].isWithProp && !self.propModelList[0].isWithDetail && !self.propModelList[0].isWithQuantity) {
-                [self performSegueWithIdentifier:kEditingSegue sender:indexPath];
+        
+        if (indexPath.row == 0) { // 当选中第一行时
+            if (self.editingContentType == kEditingContentTypeRoutine) {
+                if (self.propModelList.count == 1 && !self.propModelList[0].isWithProp && !self.propModelList[0].isWithDetail && !self.propModelList[0].isWithQuantity) {
+                    [self performSegueWithIdentifier:kEditingSegue sender:indexPath];
+                } else {
+                    [self addProp];
+                }
+                
             } else {
-                [self addProp];
+                if (self.prepModelList.count == 1 && !self.prepModelList[0].isWithPrep && !self.prepModelList[0].isWithImage && !self.prepModelList[0].isWithVideo) {
+                    [self performSegueWithIdentifier:kEditingSegue sender:indexPath];
+                } else {
+                    [self addPrep];
+                }
+                
             }
-            
-        } else {
-            if (self.prepModelList.count == 1 && !self.prepModelList[0].isWithPrep && !self.prepModelList[0].isWithImage && !self.prepModelList[0].isWithVideo) {
-                [self performSegueWithIdentifier:kEditingSegue sender:indexPath];
-            } else {
-                [self addPrep];
-            }
-            
+        } else { // 当选中其他行时
+            [self performSegueWithIdentifier:kEditingSegue sender:indexPath];
+
         }
     }
     
     if (indexPath.section == 3) {
-        if (self.prepModelList.count == 1) {
-            CLPrepModel *model = self.prepModelList[0];
-            if (!model.isWithPrep && !model.isWithImage && !model.isWithVideo) {
-                [self performSegueWithIdentifier:kEditingSegue sender:indexPath];
+        
+        if (indexPath.row == 0) {
+            if (self.prepModelList.count == 1) {
+                CLPrepModel *model = self.prepModelList[0];
+                if (!model.isWithPrep && !model.isWithImage && !model.isWithVideo) {
+                    [self performSegueWithIdentifier:kEditingSegue sender:indexPath];
+                }
+            } else {
+                [self addPrep];
             }
         } else {
-            [self addPrep];
+            [self performSegueWithIdentifier:kEditingSegue sender:indexPath];
         }
+        
+        
     }
     
     if (indexPath.section == 4) {
-        if (self.performModelList.count == 1 && !self.performModelList[0].isWithPerform && !self.performModelList[0].isWithImage && !self.performModelList[0].isWithVideo) {
-            [self performSegueWithIdentifier:kEditingSegue sender:indexPath];
+        if (indexPath.row == 0) {
+            if (self.performModelList.count == 1 && !self.performModelList[0].isWithPerform && !self.performModelList[0].isWithImage && !self.performModelList[0].isWithVideo) {
+                [self performSegueWithIdentifier:kEditingSegue sender:indexPath];
+            } else {
+                [self addPerform];
+            }
         } else {
-            [self addPerform];
+            [self performSegueWithIdentifier:kEditingSegue sender:indexPath];
         }
     }
     
     if (indexPath.section == 5) {
-        if (self.notesModelList.count == 1 && !self.notesModelList[0].isWithNotes) {
-            [self performSegueWithIdentifier:kEditingSegue sender:indexPath];
+        if (indexPath.row == 0) {
+            if (self.notesModelList.count == 1 && !self.notesModelList[0].isWithNotes) {
+                [self performSegueWithIdentifier:kEditingSegue sender:indexPath];
+            } else {
+                [self addNotes];
+            }
         } else {
-            [self addNotes];
+            [self performSegueWithIdentifier:kEditingSegue sender:indexPath];
+
         }
+        
     }
     
 }
@@ -1321,22 +1344,37 @@ BOOL editingBooleans[5] = {YES, YES, YES, YES, YES};
                 
                 if (i != path.section) {
                     
-                    if (i == 1) {
-                        NSUInteger numberOfRows = [self.tableView.dataSource tableView:self.tableView numberOfRowsInSection:i];
-                        selectedVCIndex += numberOfRows;
-                    } else {
-                        NSUInteger numberOfRows = [self.tableView.dataSource tableView:self.tableView numberOfRowsInSection:i];
-                        selectedVCIndex += (numberOfRows-1);
+                    if (i == 1) { // effectSection
+                        selectedVCIndex += 1;
+                        
+                    } else if (i == 2) { // propSection
+                        
+                        if (self.editingContentType == kEditingContentTypeRoutine) {
+                            selectedVCIndex += self.propModelList.count;
+                        } else {
+                            selectedVCIndex += self.prepModelList.count;
+                        }
+                        
+                    } else if (i == 3) { // prepSection
+                        selectedVCIndex += self.prepModelList.count;
+
+                    } else if (i == 4) { // performSection
+                        selectedVCIndex += self.performModelList.count;
+
+                    } else if (i == 5) { // notesSection
+                        selectedVCIndex += self.notesModelList.count;
+
                     }
-                    
                     
                 } else if (i == path.section) {
                     if (i == 1) { // effectSection
-                        selectedVCIndex += path.row;
+                        selectedVCIndex = 0;
                     } else { // effectSection下面的内容
                         if (path.row == 0) { // 如果是第一行, 则表明是当模型数组只有一个且模型中无内容时跳转,所以直接用上面的selectedVCIndex
                             selectedVCIndex += 0;
-                        } else {
+                            
+                        } else { // 如果不是第一行,说明该section没有隐藏cell, 可以直接用row来进行计算
+                            
                             selectedVCIndex += (path.row-1);
                         }
                     }
