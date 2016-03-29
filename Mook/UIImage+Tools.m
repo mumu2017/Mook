@@ -7,7 +7,7 @@
 //
 
 #import "UIImage+Tools.h"
-
+//#import "UIImage+WaterMark.h"
 #import <AVFoundation/AVFoundation.h>
 
 @implementation UIImage (Tools)
@@ -66,7 +66,7 @@
     UIImage *thumbnailImage = thumbnailImageRef
     ? [[UIImage alloc] initWithCGImage:thumbnailImageRef]
     : nil;
-    
+
     return thumbnailImage;
 }
 

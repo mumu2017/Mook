@@ -17,7 +17,6 @@ typedef enum {
     kListTypeSleight,
     kListTypeProp,
     kListTypeLines,
-    kListTypeTag
 } ListType;
 
 typedef enum {

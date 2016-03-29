@@ -23,20 +23,7 @@
 
 - (void)setButtonImage:(UIImage *)image {
 
-    if (image == nil) {
-        [self.imageButton setBackgroundImage:nil forState:UIControlStateNormal];
-        return;
-    } else {
-//        dispatch_async(dispatch_get_global_queue(0, 0), ^{
-        
-            UIImage *scaledImg = [image imageByScalingProportionallyToSize:self.imageButton.bounds.size];
-            
-//            dispatch_async(dispatch_get_main_queue(), ^{
-        
-                [self.imageButton setBackgroundImage:scaledImg forState:UIControlStateNormal];
-//            });
-//        });
-    }
+    [self.imageButton setBackgroundImage:image forState:UIControlStateNormal];
 }
 
 - (void)setImageName:(NSString *)imageName {
@@ -88,28 +75,17 @@
 
 - (void)setButtonImageWithImageName:(NSString *)imageName {
     
-//    dispatch_async(dispatch_get_global_queue(0, 0), ^{
-    
-        UIImage *image = [imageName getNamedImage];
-        
-//        dispatch_async(dispatch_get_main_queue(), ^{
-    
-            [self setButtonImage:image];
-//        });
-//    });
+    UIImage *image = [imageName getNamedThumbnail];
+
+    [self setButtonImage:image];
+
 }
 
 - (void)setButtonImageWithVideoName:(NSString *)videoName {
     
-//    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+    UIImage *videoImage = [videoName getNamedThumbnail];
     
-        UIImage *videoImage = [videoName getFirstFrameOfNamedVideo];
-        
-//        dispatch_async(dispatch_get_main_queue(), ^{
-            [self setButtonImage:videoImage];
-
-//        });
-//    });
+    [self setButtonImage:videoImage];
 }
 
 - (void)awakeFromNib {

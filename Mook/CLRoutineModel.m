@@ -14,6 +14,7 @@
 #import "CLPerformModel.h"
 #import "CLNotesModel.h"
 #import "SMTag.h"
+#import "UIImage+WaterMark.h"
 
 @implementation CLRoutineModel
 
@@ -136,64 +137,71 @@
 }
 
 - (UIImage *)getImage {
-    UIImage *image = nil;
-    NSString *name = nil;
-
-    // 先从效果中找图片或视频首帧
+    UIImage *image;
+    // 先从effeceModel中找图片或视频首帧
     if (self.effectModel.isWithImage) {
-        name = self.effectModel.image;
-        image = [name getNamedImage];
+        
+        image = [self.effectModel.image getNamedThumbnail];
+        // 如果model中显示isWithImage,但是无法获取缩略图,则生成并存储缩略图
+        if (image == nil)  [self.effectModel.image saveNamedImageThumbnailImageToCache];
+        image = [self.effectModel.image getNamedThumbnail];
+
     } else if (self.effectModel.isWithVideo) {
-        name = self.effectModel.video;
-        image = [name getFirstFrameOfNamedVideo];
+        
+        image = [self.effectModel.video getNamedThumbnail];
+        if (image == nil)  [self.effectModel.video saveNamedVideoThumbnailImageToCache];
+        image = [self.effectModel.video getNamedThumbnail];
+    }
+    
+    // 如果效果中没有, 则从performModel中从效果中找图片或视频首帧
+    if (image == nil) {
+        for (CLPerformModel *model in self.performModelList) {
+            if (model.isWithImage) {
+                image = [model.image getNamedThumbnail];
+                if (image == nil)  [model.image saveNamedImageThumbnailImageToCache];
+                image = [model.image getNamedThumbnail];
+                break;
+            }
+        }
+    }
+    
+    if (image == nil) {
+        for (CLPerformModel *model in self.performModelList) {
+            if (model.isWithVideo) {
+                image = [model.video getNamedThumbnail];
+                if (image == nil)  [model.video saveNamedVideoThumbnailImageToCache];
+                image = [model.video getNamedThumbnail];
+                break;
+            }
+        }
+    }
+    
+    // 如果效果中没有, 则从prepModel中从效果中找图片或视频首帧
+    if (image == nil) {
+        for (CLPrepModel *model in self.prepModelList) {
+            if (model.isWithImage) {
+                image = [model.image getNamedThumbnail];
+                if (image == nil)  [model.image saveNamedImageThumbnailImageToCache];
+                image = [model.image getNamedThumbnail];
+                break;
+            }
+        }
+    }
+    
+    if (image == nil) {
+        for (CLPrepModel *model in self.prepModelList) {
+            if (model.isWithVideo) {
+                image = [model.video getNamedThumbnail];
+                if (image == nil)  [model.video saveNamedVideoThumbnailImageToCache];
+                image = [model.video getNamedThumbnail];
+                break;
+            }
+        }
         
     }
-    
-    // 如果效果中没有, 则从表演中从效果中找图片或视频首帧
-    if (image == nil) {
-        for (CLPerformModel *performModel in self.performModelList) {
-            if (performModel.isWithImage) {
-                name = performModel.image;
-                image = [name getNamedImage];
-                break;
-            }
-        }
-    }
-    
-    if (image == nil) {
-        for (CLPerformModel *performModel in self.performModelList) {
-            if (performModel.isWithVideo) {
-                name = performModel.video;
-                image = [name getFirstFrameOfNamedVideo];
-                break;
-            }
-        }
 
-    }
     
-    // 如果效果中没有, 则从准备中从效果中找图片或视频首帧
-    if (image == nil) {
-        for (CLPrepModel *prepModel in self.prepModelList) {
-            if (prepModel.isWithImage) {
-                name = prepModel.image;
-                image = [name getNamedImage];
-                break;
-            }
-        }
-    }
-    
-    if (image == nil) {
-        for (CLPrepModel *prepModel in self.prepModelList) {
-            if (prepModel.isWithVideo) {
-                name = prepModel.video;
-                image = [name getFirstFrameOfNamedVideo];
-                break;
-            }
-        }
-        
-    }
-
-    return image;
+   return image;
 }
 
 @end

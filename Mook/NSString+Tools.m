@@ -9,6 +9,8 @@
 #import "NSString+Tools.h"
 #import <AVFoundation/AVFoundation.h>
 #import "NSDate+MJ.h"
+#import "UIImage+WaterMark.h"
+
 @implementation NSString (Tools)
 
 // self就是调用当前成员方法的NSString对象
@@ -119,6 +121,8 @@
     return _created_at;
 }
 
+#pragma mark - 获取多媒体文件路径
+
 + (NSString *)videoPath {
     NSError *error;
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -141,29 +145,74 @@
     return imagePath;
 }
 
++ (NSString *)thumbnailPath {
+    NSError *error;
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0]; // Get documents folder
+    NSString *thumbnailPath = [documentsDirectory stringByAppendingPathComponent:@"/Thumbnails"];
+    
+    if (![[NSFileManager defaultManager] fileExistsAtPath:thumbnailPath])
+        [[NSFileManager defaultManager] createDirectoryAtPath:thumbnailPath withIntermediateDirectories:NO attributes:nil error:&error]; //Create folder
+    return thumbnailPath;
+}
+
+#pragma mark - 储存多媒体
+- (void)saveNamedImageThumbnailImageToCache {
+    // 存储缩略图文件
+    NSString *thumbnailPath = [[NSString thumbnailPath] stringByAppendingPathComponent:self];
+    UIImage *thumbnail0 = [UIImage imageWithImage:[self getNamedImage] scaledToSize:CGSizeMake(210, 210)];
+    UIImage *thumbnail = [thumbnail0 imageByCroppingImageToSize:CGSizeMake(210, 210)];
+
+    [UIImageJPEGRepresentation(thumbnail, 1.0) writeToFile:thumbnailPath atomically:YES];
+}
+
+- (void)saveNamedVideoThumbnailImageToCache {
+    
+    // 存储缩略图文件
+    NSString *thumbnailPath = [[NSString thumbnailPath] stringByAppendingPathComponent:self];
+    UIImage *thumbnail0 = [UIImage imageWithImage:[self getFirstFrameOfNamedVideo] scaledToSize:CGSizeMake(210, 210)];
+    UIImage *baseImage = [thumbnail0 imageByCroppingImageToSize:CGSizeMake(210, 210)];
+    UIImage *thumbnail = [baseImage imageWaterMarkWithImage:[UIImage imageNamed:@"iconVideoCamera"] imageRect:CGRectMake(20, 156, 44, 44) alpha:1]; // 146 = 210 - 44 - 10 也就是水印距离底部20pix
+    [UIImageJPEGRepresentation(thumbnail, 1.0) writeToFile:thumbnailPath atomically:YES];
+}
+
 - (void)saveNamedImageToDocument:(UIImage *)image {
     
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         
-        NSString *path = [[NSString imagePath] stringByAppendingPathComponent:self];
+        // 存储原图文件
+        NSString *imagePath = [[NSString imagePath] stringByAppendingPathComponent:self];
+        [UIImageJPEGRepresentation(image, 0.5) writeToFile:imagePath atomically:YES];
         
-        [UIImageJPEGRepresentation(image, 0.5) writeToFile:path atomically:YES];
-     
+        // 存储缩略图文件
+        NSString *thumbnailPath = [[NSString thumbnailPath] stringByAppendingPathComponent:self];
+        UIImage *thumbnail0 = [UIImage imageWithImage:image scaledToSize:CGSizeMake(210, 210)];
+        UIImage *thumbnail = [thumbnail0 imageByCroppingImageToSize:CGSizeMake(210, 210)];
+        
+        [UIImageJPEGRepresentation(thumbnail, 1.0) writeToFile:thumbnailPath atomically:YES];
     });
 }
 
 - (void)saveNamedVideoToDocument:(NSURL *)videoURL {
     
+    // 储存视频文件
     NSData *videoData = [NSData dataWithContentsOfURL:videoURL];
     NSString *path = [[NSString videoPath] stringByAppendingPathComponent:self];
     
     [videoData writeToFile:path atomically:NO];
-    
+
+    // 存储缩略图文件
+    NSString *thumbnailPath = [[NSString thumbnailPath] stringByAppendingPathComponent:self];
+    UIImage *thumbnail0 = [UIImage imageWithImage:[UIImage thumbnailImageForVideo:videoURL atTime:0] scaledToSize:CGSizeMake(210, 210)];
+    UIImage *baseImage = [thumbnail0 imageByCroppingImageToSize:CGSizeMake(210, 210)];
+    UIImage *thumbnail = [baseImage imageWaterMarkWithImage:[UIImage imageNamed:@"iconVideoCamera"] imageRect:CGRectMake(20, 156, 44, 44) alpha:1]; // 146 = 210 - 44 - 10 也就是水印距离底部20pix
+    [UIImageJPEGRepresentation(thumbnail, 1.0) writeToFile:thumbnailPath atomically:YES];
+
     // 清除掉tmp文件夹中的临时视频文件
     [NSString clearTmpDirectory];
-
 }
 
+#pragma 清除临时文件夹
 + (void)clearTmpDirectory
 {
     NSArray* tmpDirectory = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:NSTemporaryDirectory() error:NULL];
@@ -173,7 +222,7 @@
 }
 
 
-
+#pragma mark - 删除多媒体文件
 - (void)deleteNamedVideoFromDocument {
     
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
@@ -189,8 +238,27 @@
         }else {
 //            NSLog(@" file exists");
             BOOL fileDeleted= [fileManager removeItemAtPath:uniquePath error:nil];
+            
             if (fileDeleted) {
                 NSLog(@"video deleted");
+                
+                // 如果视频删除成功,则删除缩略图
+                NSString *thumbnailPath = [[NSString thumbnailPath] stringByAppendingPathComponent:self];
+                // 判定图片是否存在
+                BOOL fileExists=[[NSFileManager defaultManager] fileExistsAtPath:thumbnailPath];
+                if (!fileExists) {
+                    //            NSLog(@"file does not exist");
+                    return ;
+                }else {
+                    //            NSLog(@" file exists");
+                    BOOL fileDeleted= [fileManager removeItemAtPath:thumbnailPath error:nil];
+                    if (fileDeleted) {
+                        NSLog(@"thumbnail deleted");
+                    }else {
+                        NSLog(@"deleting thumbnail failed");
+                    }
+                }
+                
             }else {
                 NSLog(@"deleting video failed");
             }
@@ -216,6 +284,23 @@
             BOOL fileDeleted= [fileManager removeItemAtPath:uniquePath error:nil];
             if (fileDeleted) {
                 NSLog(@"image deleted");
+                
+                // 如果视频删除成功,则删除缩略图
+                NSString *thumbnailPath = [[NSString thumbnailPath] stringByAppendingPathComponent:self];
+                // 判定图片是否存在
+                BOOL fileExists=[[NSFileManager defaultManager] fileExistsAtPath:thumbnailPath];
+                if (!fileExists) {
+                    //            NSLog(@"file does not exist");
+                    return ;
+                }else {
+                    //            NSLog(@" file exists");
+                    BOOL fileDeleted= [fileManager removeItemAtPath:thumbnailPath error:nil];
+                    if (fileDeleted) {
+                        NSLog(@"thumbnail deleted");
+                    }else {
+                        NSLog(@"deleting thumbnail failed");
+                    }
+                }
             }else {
                 NSLog(@"deleting image failed");
             }
@@ -224,6 +309,7 @@
 }
 
 
+#pragma mark - 获取多媒体文件
 - (AVPlayerItem *)getNamedAVPlayerItem {
     NSString *path = [[NSString videoPath] stringByAppendingPathComponent:self];
     
@@ -243,7 +329,7 @@
     NSURL *videoURL = [NSURL fileURLWithPath:path];
     
     UIImage *videoImage = [UIImage thumbnailImageForVideo:videoURL atTime:0];
-    
+                            
     return videoImage;
 }
 
@@ -252,5 +338,11 @@
     UIImage *image = [UIImage imageWithContentsOfFile:path];
     return image;    
 }
-                   
+
+- (UIImage *)getNamedThumbnail {
+    NSString *path = [[NSString thumbnailPath] stringByAppendingPathComponent:self];
+    UIImage *image = [UIImage imageWithContentsOfFile:path];
+    return image;
+}
+
 @end

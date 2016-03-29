@@ -98,6 +98,7 @@
 		43885F711CA5079100269CE1 /* CLContentVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 43885F701CA5079100269CE1 /* CLContentVC.m */; };
 		43885F791CA6A8AC00269CE1 /* CLHomeNavVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 43885F781CA6A8AC00269CE1 /* CLHomeNavVC.m */; };
 		43DF3AC21CAA478500712D81 /* CLPropListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 43DF3AC11CAA478500712D81 /* CLPropListVC.m */; };
+		43DF3AC81CAA78A100712D81 /* UIImage+WaterMark.m in Sources */ = {isa = PBXBuildFile; fileRef = 43DF3AC71CAA78A100712D81 /* UIImage+WaterMark.m */; };
 		43E0F7081C9EB2A2005CAD97 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 43E0F7071C9EB2A2005CAD97 /* libsqlite3.0.tbd */; };
 		43E0F7291CA0FC6E005CAD97 /* CLDataSaveTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E0F7281CA0FC6E005CAD97 /* CLDataSaveTool.m */; };
 		43E0F73A1CA10D27005CAD97 /* MJConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E0F72C1CA10D27005CAD97 /* MJConst.m */; };
@@ -275,6 +276,8 @@
 		43885F781CA6A8AC00269CE1 /* CLHomeNavVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLHomeNavVC.m; sourceTree = "<group>"; };
 		43DF3AC01CAA478500712D81 /* CLPropListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLPropListVC.h; sourceTree = "<group>"; };
 		43DF3AC11CAA478500712D81 /* CLPropListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLPropListVC.m; sourceTree = "<group>"; };
+		43DF3AC61CAA78A100712D81 /* UIImage+WaterMark.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+WaterMark.h"; sourceTree = "<group>"; };
+		43DF3AC71CAA78A100712D81 /* UIImage+WaterMark.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+WaterMark.m"; sourceTree = "<group>"; };
 		43E0F7071C9EB2A2005CAD97 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		43E0F7271CA0FC6E005CAD97 /* CLDataSaveTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLDataSaveTool.h; sourceTree = "<group>"; };
 		43E0F7281CA0FC6E005CAD97 /* CLDataSaveTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLDataSaveTool.m; sourceTree = "<group>"; };
@@ -313,6 +316,8 @@
 		430DFBDF1CA3F3470054DF6B /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				43DF3AC61CAA78A100712D81 /* UIImage+WaterMark.h */,
+				43DF3AC71CAA78A100712D81 /* UIImage+WaterMark.m */,
 				431BCEE11CA968480085D20F /* UINavigationBar+Awesome.h */,
 				431BCEE21CA968480085D20F /* UINavigationBar+Awesome.m */,
 				431BCEDE1CA8F81C0085D20F /* JGActionSheet.h */,
@@ -926,6 +931,7 @@
 				432345AE1C9404FB00200833 /* CLPasswordVC.m in Sources */,
 				4323453D1C94045000200833 /* AppDelegate.m in Sources */,
 				43E0F73C1CA10D27005CAD97 /* MJIvar.m in Sources */,
+				43DF3AC81CAA78A100712D81 /* UIImage+WaterMark.m in Sources */,
 				4323461E1C94054300200833 /* CLListImageCell.m in Sources */,
 				432345E51C94051A00200833 /* CLPropObjModel.m in Sources */,
 				432345651C9404A800200833 /* UIImageView+Tools.m in Sources */,

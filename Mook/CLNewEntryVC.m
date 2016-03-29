@@ -639,25 +639,40 @@ BOOL editingBooleans[5] = {YES, YES, YES, YES, YES};
             }
         case 1:
             {
-                if (self.effectModel.isWithImage) {
+                if (self.effectModel.isWithImage || self.effectModel.isWithVideo) {
                     CLNewEntryImageCell *cell = [tableView dequeueReusableCellWithIdentifier:kNewEntryImageCellID];
-                    
-                    UIImage *image = [UIImage imageWithImage:[self.effectModel.image getNamedImage] scaledToSize:CGSizeMake(210, 210)];
-                    [cell.iconView setImage:image];
+                    if (self.effectModel.isWithImage) {
+                        [cell.iconView setImage:[self.effectModel.image getNamedThumbnail]];
+                    } else if (self.effectModel.isWithVideo) {
+                        [cell.iconView setImage:[self.effectModel.video getNamedThumbnail]];
+
+                    }
                     
                     cell.contentLabel.font = kFontSys16;
                     cell.contentLabel.text = self.effectModel.effect;
                     return cell;
                     
                 } else {
-                    CLNewEntryTextCell *cell = [tableView dequeueReusableCellWithIdentifier:kNewEntryTextCellID];
                     
                     if (self.effectModel.isWithEffect) {
+                        
+                        CLNewEntryTextCell *cell = [tableView dequeueReusableCellWithIdentifier:kNewEntryTextCellID];
+                        
                         cell.contentLabel.font = kFontSys16;
                         cell.contentLabel.text = self.effectModel.effect;
                         cell.accessoryType = UITableViewCellAccessoryNone;
+                        
+                        return cell;
+                        
                     } else {
-                        cell.contentLabel.font = kBoldFontSys16;
+                        
+                        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
+                        if (cell == nil) {
+                            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ID];
+                        }
+                        
+                        cell.textLabel.font = kBoldFontSys16;
+                        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 
                         NSString *effectTitle;
                         
@@ -672,13 +687,10 @@ BOOL editingBooleans[5] = {YES, YES, YES, YES, YES};
                         } else if (self.editingContentType == kEditingContentTypeLines) {
                             effectTitle = @"梗内容";
                         }
-                        cell.contentLabel.text = effectTitle;
-
-                        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                        cell.textLabel.text = effectTitle;
+                        return cell;
                     }
-                    return cell;
                 }
-                
             }
         case 2:
             {
@@ -725,12 +737,16 @@ BOOL editingBooleans[5] = {YES, YES, YES, YES, YES};
                         
                         CLPrepModel *model = self.prepModelList[indexPath.row - 1];
                         
-                        if (model.isWithImage) {
+                        if (model.isWithImage || model.isWithVideo) {
                             
                             CLNewEntryImageCell *cell = [tableView dequeueReusableCellWithIdentifier:kNewEntryImageCellID];
-                            
-                            UIImage *image = [UIImage imageWithImage:[model.image getNamedImage] scaledToSize:CGSizeMake(210, 210)];
-                            [cell.iconView setImage:image];
+        
+                            if (model.isWithImage) {
+                                [cell.iconView setImage:[model.image getNamedThumbnail]];
+                            } else if (model.isWithVideo) {
+                                [cell.iconView setImage:[model.video getNamedThumbnail]];
+                                
+                            }
                             
                             cell.contentLabel.text = model.prep;
                             
@@ -767,13 +783,16 @@ BOOL editingBooleans[5] = {YES, YES, YES, YES, YES};
                     
                     CLPrepModel *model = self.prepModelList[indexPath.row - 1];
                     
-                    if (model.isWithImage) {
+                    if (model.isWithImage || model.isWithVideo) {
                         
                         CLNewEntryImageCell *cell = [tableView dequeueReusableCellWithIdentifier:kNewEntryImageCellID];
                         
-                        UIImage *image = [UIImage imageWithImage:[model.image getNamedImage] scaledToSize:CGSizeMake(210, 210)];
-                        [cell.iconView setImage:image];
-                        
+                        if (model.isWithImage) {
+                            [cell.iconView setImage:[model.image getNamedThumbnail]];
+                        } else if (model.isWithVideo) {
+                            [cell.iconView setImage:[model.video getNamedThumbnail]];
+                            
+                        }
                         cell.contentLabel.text = model.prep;
                         
                         return cell;
@@ -807,12 +826,16 @@ BOOL editingBooleans[5] = {YES, YES, YES, YES, YES};
                     
                     CLPerformModel *model = self.performModelList[indexPath.row - 1];
                     
-                    if (model.isWithImage) {
+                    if (model.isWithImage || model.isWithVideo) {
                         
                         CLNewEntryImageCell *cell = [tableView dequeueReusableCellWithIdentifier:kNewEntryImageCellID];
                         
-                        UIImage *image = [UIImage imageWithImage:[model.image getNamedImage] scaledToSize:CGSizeMake(210, 210)];
-                        [cell.iconView setImage:image];
+                        if (model.isWithImage) {
+                            [cell.iconView setImage:[model.image getNamedThumbnail]];
+                        } else if (model.isWithVideo) {
+                            [cell.iconView setImage:[model.video getNamedThumbnail]];
+                            
+                        }
                         
                         cell.contentLabel.text = model.perform;
                         

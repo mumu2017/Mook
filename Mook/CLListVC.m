@@ -282,10 +282,6 @@
             content = [model getContent];
             break;
         }
-            //
-            //        case kListTypeTag:
-            //            number = self.allItems.count;
-            //            break;
         default:
             break;
     }
@@ -293,7 +289,7 @@
     
     if (image != nil) { // 如果返回图片名称,则表示模型中有图片或多媒体
         CLListImageCell *cell = [tableView dequeueReusableCellWithIdentifier:kListImageCellID forIndexPath:indexPath];
-        cell.image = image;
+        cell.iconView.image = image;
         cell.iconName = iconName;
         [cell setTitle:title content:content];
         

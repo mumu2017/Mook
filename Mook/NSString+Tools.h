@@ -15,6 +15,7 @@
 
 + (NSString *)videoPath;
 + (NSString *)imagePath;
++ (NSString *)thumbnailPath;
 
 // 计算当前字符串显示所需的实际frame,返回的值 x == 0, y == 0
 - (CGRect)textRectWithSize:(CGSize)size attributes:(NSDictionary *)attributes;
@@ -28,13 +29,24 @@
 
 // 设置string的行间距
 - (NSAttributedString *)styledString;
+
 // 根据文件名,存储和删除image 和 video 到沙盒document文件夹中
 - (void)deleteNamedVideoFromDocument;
 - (void)deleteNamedImageFromDocument;
+
+// 储存多媒体
 - (void)saveNamedImageToDocument:(UIImage *)image;
 - (void)saveNamedVideoToDocument:(NSURL *)videoURL;
 
+// 存储多媒体缩略图到缓存文件夹
+- (void)saveNamedImageThumbnailImageToCache;
+- (void)saveNamedVideoThumbnailImageToCache;
+
+// 根据文件名获取多媒体
 - (UIImage *)getNamedImage;
+
+- (UIImage *)getNamedThumbnail;
+
 - (UIImage *)getFirstFrameOfNamedVideo;
 - (AVPlayerItem *)getNamedAVPlayerItem;
 + (void)clearTmpDirectory;
