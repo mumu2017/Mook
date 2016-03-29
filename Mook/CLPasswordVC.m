@@ -130,7 +130,7 @@ typedef enum {
             break;
             
         case 2:
-            self.icon1.textColor = [UIColor whiteColor];
+            self.icon1.textColor = kTintColor;
             self.icon2.textColor = kTintColor;
             self.icon3.textColor = [UIColor darkGrayColor];
             self.icon4.textColor = [UIColor darkGrayColor];
