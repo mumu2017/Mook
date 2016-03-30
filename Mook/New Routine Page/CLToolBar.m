@@ -75,7 +75,7 @@
 
 - (void)setButtonImageWithImageName:(NSString *)imageName {
     
-    UIImage *image = [imageName getNamedThumbnail];
+    UIImage *image = [imageName getNamedImageThumbnail];
 
     [self setButtonImage:image];
 
@@ -83,7 +83,7 @@
 
 - (void)setButtonImageWithVideoName:(NSString *)videoName {
     
-    UIImage *videoImage = [videoName getNamedThumbnail];
+    UIImage *videoImage = [videoName getNamedVideoThumbnail];
     
     [self setButtonImage:videoImage];
 }

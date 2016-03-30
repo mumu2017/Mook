@@ -134,6 +134,17 @@
     return videoPath;
 }
 
++ (NSString *)framePath {
+    NSError *error;
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0]; // Get documents folder
+    NSString *framePath = [documentsDirectory stringByAppendingPathComponent:@"/Frames"];
+    
+    if (![[NSFileManager defaultManager] fileExistsAtPath:framePath])
+        [[NSFileManager defaultManager] createDirectoryAtPath:framePath withIntermediateDirectories:NO attributes:nil error:&error]; //Create folder
+    return framePath;
+}
+
 + (NSString *)imagePath {
     NSError *error;
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -157,6 +168,17 @@
 }
 
 #pragma mark - 储存多媒体
+- (void)saveNamedVideoFrameToCache {
+    
+    NSString *framePath = [[NSString framePath] stringByAppendingPathComponent:self];
+    
+    NSString *videoPath = [[NSString videoPath] stringByAppendingPathComponent:self];
+    NSURL *videoURL = [NSURL fileURLWithPath:videoPath];
+    UIImage *videoFrame = [UIImage thumbnailImageForVideo:videoURL atTime:0];
+    
+    [UIImageJPEGRepresentation(videoFrame, 1.0) writeToFile:framePath atomically:YES];
+}
+
 - (void)saveNamedImageThumbnailImageToCache {
     // 存储缩略图文件
     NSString *thumbnailPath = [[NSString thumbnailPath] stringByAppendingPathComponent:self];
@@ -170,7 +192,7 @@
     
     // 存储缩略图文件
     NSString *thumbnailPath = [[NSString thumbnailPath] stringByAppendingPathComponent:self];
-    UIImage *thumbnail0 = [UIImage imageWithImage:[self getFirstFrameOfNamedVideo] scaledToSize:CGSizeMake(210, 210)];
+    UIImage *thumbnail0 = [UIImage imageWithImage:[self getNamedVideoFrame] scaledToSize:CGSizeMake(210, 210)];
     UIImage *baseImage = [thumbnail0 imageByCroppingImageToSize:CGSizeMake(210, 210)];
     UIImage *thumbnail = [baseImage imageWaterMarkWithImage:[UIImage imageNamed:@"iconVideoCamera"] imageRect:CGRectMake(20, 156, 44, 44) alpha:1]; // 146 = 210 - 44 - 10 也就是水印距离底部20pix
     [UIImageJPEGRepresentation(thumbnail, 1.0) writeToFile:thumbnailPath atomically:YES];
@@ -200,10 +222,15 @@
     NSString *path = [[NSString videoPath] stringByAppendingPathComponent:self];
     
     [videoData writeToFile:path atomically:NO];
-
-    // 存储缩略图文件
+    
+    // 存储视频首帧图片到缓存
+    NSString *framePath = [[NSString framePath] stringByAppendingPathComponent:self];
+    UIImage *videoFrame = [UIImage thumbnailImageForVideo:videoURL atTime:0];
+    [UIImageJPEGRepresentation(videoFrame, 1.0) writeToFile:framePath atomically:YES];
+    
+    // 存储缩略图文件到缓存
     NSString *thumbnailPath = [[NSString thumbnailPath] stringByAppendingPathComponent:self];
-    UIImage *thumbnail0 = [UIImage imageWithImage:[UIImage thumbnailImageForVideo:videoURL atTime:0] scaledToSize:CGSizeMake(210, 210)];
+    UIImage *thumbnail0 = [UIImage imageWithImage:videoFrame scaledToSize:CGSizeMake(210, 210)];
     UIImage *baseImage = [thumbnail0 imageByCroppingImageToSize:CGSizeMake(210, 210)];
     UIImage *thumbnail = [baseImage imageWaterMarkWithImage:[UIImage imageNamed:@"iconVideoCamera"] imageRect:CGRectMake(20, 156, 44, 44) alpha:1]; // 146 = 210 - 44 - 10 也就是水印距离底部20pix
     [UIImageJPEGRepresentation(thumbnail, 1.0) writeToFile:thumbnailPath atomically:YES];
@@ -242,7 +269,7 @@
             if (fileDeleted) {
                 NSLog(@"video deleted");
                 
-                // 如果视频删除成功,则删除缩略图
+                // 如果视频删除成功,则删除缩略图和首帧图
                 NSString *thumbnailPath = [[NSString thumbnailPath] stringByAppendingPathComponent:self];
                 // 判定图片是否存在
                 BOOL fileExists=[[NSFileManager defaultManager] fileExistsAtPath:thumbnailPath];
@@ -256,6 +283,22 @@
                         NSLog(@"thumbnail deleted");
                     }else {
                         NSLog(@"deleting thumbnail failed");
+                    }
+                }
+                
+                NSString *framePath = [[NSString framePath] stringByAppendingPathComponent:self];
+                // 判定图片是否存在
+                BOOL fileExists1=[[NSFileManager defaultManager] fileExistsAtPath:framePath];
+                if (!fileExists1) {
+                    //            NSLog(@"file does not exist");
+                    return ;
+                }else {
+                    //            NSLog(@" file exists");
+                    BOOL fileDeleted= [fileManager removeItemAtPath:framePath error:nil];
+                    if (fileDeleted) {
+                        NSLog(@"frame deleted");
+                    }else {
+                        NSLog(@"deleting frame failed");
                     }
                 }
                 
@@ -323,14 +366,18 @@
     return playerItem;
 }
 
-- (UIImage *)getFirstFrameOfNamedVideo {
-    NSString *path = [[NSString videoPath] stringByAppendingPathComponent:self];
+// 获取缓存中的首帧图片
+- (UIImage *)getNamedVideoFrame {
     
-    NSURL *videoURL = [NSURL fileURLWithPath:path];
+    NSString *path = [[NSString framePath] stringByAppendingPathComponent:self];
+    UIImage *image = [UIImage imageWithContentsOfFile:path];
     
-    UIImage *videoImage = [UIImage thumbnailImageForVideo:videoURL atTime:0];
-                            
-    return videoImage;
+    if (image == nil) {
+        
+        [self saveNamedVideoFrameToCache];
+        image = [UIImage imageWithContentsOfFile:path];
+    }
+    return image;
 }
 
 - (UIImage *)getNamedImage {
@@ -339,9 +386,28 @@
     return image;    
 }
 
-- (UIImage *)getNamedThumbnail {
+- (UIImage *)getNamedVideoThumbnail { // 获取视频缩略图,如果没有就创建一份到缓存中
     NSString *path = [[NSString thumbnailPath] stringByAppendingPathComponent:self];
     UIImage *image = [UIImage imageWithContentsOfFile:path];
+    
+    if (image == nil) {
+        
+        [self saveNamedVideoThumbnailImageToCache];
+        image = [UIImage imageWithContentsOfFile:path];
+    }
+    return image;
+}
+
+- (UIImage *)getNamedImageThumbnail { // 获取图片缩略图,如果没有就创建一份到缓存中
+    NSString *path = [[NSString thumbnailPath] stringByAppendingPathComponent:self];
+    UIImage *image = [UIImage imageWithContentsOfFile:path];
+    
+    if (image == nil) {
+        
+        [self saveNamedImageThumbnailImageToCache];
+        image = [UIImage imageWithContentsOfFile:path];
+    }
+    
     return image;
 }
 

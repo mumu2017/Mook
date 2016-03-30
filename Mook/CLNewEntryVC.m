@@ -642,9 +642,9 @@ BOOL editingBooleans[5] = {YES, YES, YES, YES, YES};
                 if (self.effectModel.isWithImage || self.effectModel.isWithVideo) {
                     CLNewEntryImageCell *cell = [tableView dequeueReusableCellWithIdentifier:kNewEntryImageCellID];
                     if (self.effectModel.isWithImage) {
-                        [cell.iconView setImage:[self.effectModel.image getNamedThumbnail]];
+                        [cell.iconView setImage:[self.effectModel.image getNamedImageThumbnail]];
                     } else if (self.effectModel.isWithVideo) {
-                        [cell.iconView setImage:[self.effectModel.video getNamedThumbnail]];
+                        [cell.iconView setImage:[self.effectModel.video getNamedVideoThumbnail]];
 
                     }
                     
@@ -742,9 +742,9 @@ BOOL editingBooleans[5] = {YES, YES, YES, YES, YES};
                             CLNewEntryImageCell *cell = [tableView dequeueReusableCellWithIdentifier:kNewEntryImageCellID];
         
                             if (model.isWithImage) {
-                                [cell.iconView setImage:[model.image getNamedThumbnail]];
+                                [cell.iconView setImage:[model.image getNamedImageThumbnail]];
                             } else if (model.isWithVideo) {
-                                [cell.iconView setImage:[model.video getNamedThumbnail]];
+                                [cell.iconView setImage:[model.video getNamedVideoThumbnail]];
                                 
                             }
                             
@@ -788,9 +788,9 @@ BOOL editingBooleans[5] = {YES, YES, YES, YES, YES};
                         CLNewEntryImageCell *cell = [tableView dequeueReusableCellWithIdentifier:kNewEntryImageCellID];
                         
                         if (model.isWithImage) {
-                            [cell.iconView setImage:[model.image getNamedThumbnail]];
+                            [cell.iconView setImage:[model.image getNamedImageThumbnail]];
                         } else if (model.isWithVideo) {
-                            [cell.iconView setImage:[model.video getNamedThumbnail]];
+                            [cell.iconView setImage:[model.video getNamedVideoThumbnail]];
                             
                         }
                         cell.contentLabel.text = model.prep;
@@ -831,9 +831,9 @@ BOOL editingBooleans[5] = {YES, YES, YES, YES, YES};
                         CLNewEntryImageCell *cell = [tableView dequeueReusableCellWithIdentifier:kNewEntryImageCellID];
                         
                         if (model.isWithImage) {
-                            [cell.iconView setImage:[model.image getNamedThumbnail]];
+                            [cell.iconView setImage:[model.image getNamedImageThumbnail]];
                         } else if (model.isWithVideo) {
-                            [cell.iconView setImage:[model.video getNamedThumbnail]];
+                            [cell.iconView setImage:[model.video getNamedVideoThumbnail]];
                             
                         }
                         

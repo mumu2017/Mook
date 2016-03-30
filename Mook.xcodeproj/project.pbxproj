@@ -78,8 +78,6 @@
 		432346641C94094D00200833 /* CLOneLabelDisplayCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4323465B1C94094D00200833 /* CLOneLabelDisplayCell.xib */; };
 		432346651C94094D00200833 /* CLOneLabelImageDisplayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4323465D1C94094D00200833 /* CLOneLabelImageDisplayCell.m */; };
 		432346661C94094D00200833 /* CLOneLabelImageDisplayCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4323465E1C94094D00200833 /* CLOneLabelImageDisplayCell.xib */; };
-		432346671C94094D00200833 /* CLOneLabelMediaDisplayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 432346601C94094D00200833 /* CLOneLabelMediaDisplayCell.m */; };
-		432346681C94094D00200833 /* CLOneLabelMediaDisplayCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 432346611C94094D00200833 /* CLOneLabelMediaDisplayCell.xib */; };
 		432346731C9409A400200833 /* XLBarPagerTabStripViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4323466A1C9409A400200833 /* XLBarPagerTabStripViewController.m */; };
 		432346741C9409A400200833 /* XLButtonBarPagerTabStripViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4323466C1C9409A400200833 /* XLButtonBarPagerTabStripViewController.m */; };
 		432346751C9409A400200833 /* XLPagerTabStripViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4323466E1C9409A400200833 /* XLPagerTabStripViewController.m */; };
@@ -240,9 +238,6 @@
 		4323465C1C94094D00200833 /* CLOneLabelImageDisplayCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLOneLabelImageDisplayCell.h; sourceTree = "<group>"; };
 		4323465D1C94094D00200833 /* CLOneLabelImageDisplayCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLOneLabelImageDisplayCell.m; sourceTree = "<group>"; };
 		4323465E1C94094D00200833 /* CLOneLabelImageDisplayCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CLOneLabelImageDisplayCell.xib; sourceTree = "<group>"; };
-		4323465F1C94094D00200833 /* CLOneLabelMediaDisplayCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLOneLabelMediaDisplayCell.h; sourceTree = "<group>"; };
-		432346601C94094D00200833 /* CLOneLabelMediaDisplayCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLOneLabelMediaDisplayCell.m; sourceTree = "<group>"; };
-		432346611C94094D00200833 /* CLOneLabelMediaDisplayCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CLOneLabelMediaDisplayCell.xib; sourceTree = "<group>"; };
 		432346691C9409A400200833 /* XLBarPagerTabStripViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLBarPagerTabStripViewController.h; sourceTree = "<group>"; };
 		4323466A1C9409A400200833 /* XLBarPagerTabStripViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLBarPagerTabStripViewController.m; sourceTree = "<group>"; };
 		4323466B1C9409A400200833 /* XLButtonBarPagerTabStripViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLButtonBarPagerTabStripViewController.h; sourceTree = "<group>"; };
@@ -585,9 +580,6 @@
 				4323465C1C94094D00200833 /* CLOneLabelImageDisplayCell.h */,
 				4323465D1C94094D00200833 /* CLOneLabelImageDisplayCell.m */,
 				4323465E1C94094D00200833 /* CLOneLabelImageDisplayCell.xib */,
-				4323465F1C94094D00200833 /* CLOneLabelMediaDisplayCell.h */,
-				432346601C94094D00200833 /* CLOneLabelMediaDisplayCell.m */,
-				432346611C94094D00200833 /* CLOneLabelMediaDisplayCell.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -860,7 +852,6 @@
 				432346231C94054300200833 /* CLMediaCell.xib in Resources */,
 				432346641C94094D00200833 /* CLOneLabelDisplayCell.xib in Resources */,
 				432345451C94045000200833 /* Assets.xcassets in Resources */,
-				432346681C94094D00200833 /* CLOneLabelMediaDisplayCell.xib in Resources */,
 				4323462D1C94054300200833 /* CLQuickStringCell.xib in Resources */,
 				432346351C94054300200833 /* CLTagField.xib in Resources */,
 				432346211C94054300200833 /* CLListTextCell.xib in Resources */,
@@ -964,7 +955,6 @@
 				432346551C9408F100200833 /* CLToolBar.m in Sources */,
 				432346801C9409BB00200833 /* XLButtonBarViewCell.m in Sources */,
 				432345DD1C94051A00200833 /* CLIdeaObjModel.m in Sources */,
-				432346671C94094D00200833 /* CLOneLabelMediaDisplayCell.m in Sources */,
 				432345641C9404A800200833 /* UIImage+Tools.m in Sources */,
 				432345B71C9404FB00200833 /* CLSettingVC.m in Sources */,
 				432345DF1C94051A00200833 /* CLLinesObjModel.m in Sources */,

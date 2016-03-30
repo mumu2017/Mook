@@ -7,10 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MWPhotoBrowser.h"
+#import <AssetsLibrary/AssetsLibrary.h>
 
 @class CLRoutineModel,CLShowModel,CLIdeaObjModel,CLSleightObjModel,CLPropObjModel,CLLinesObjModel;
 
-@interface CLContentVC : UITableViewController
+@interface CLContentVC : UITableViewController<MWPhotoBrowserDelegate>
 
 @property (nonatomic, assign) ContentType contentType;
 
@@ -24,5 +26,10 @@
 @property (nonatomic, copy) NSAttributedString *titleString;
 @property (nonatomic, strong) NSDate *date;
 
+@property (nonatomic, strong) NSMutableArray *photos;
+@property (nonatomic, strong) NSMutableArray *thumbs;
+@property (nonatomic, strong) NSMutableArray *assets;
+
+@property (nonatomic, strong) ALAssetsLibrary *ALAssetsLibrary;
 
 @end

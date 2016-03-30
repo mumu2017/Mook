@@ -113,25 +113,19 @@
     // 先从effeceModel中找图片或视频首帧
     if (self.effectModel.isWithImage) {
         
-        image = [self.effectModel.image getNamedThumbnail];
-        // 如果model中显示isWithImage,但是无法获取缩略图,则生成并存储缩略图
-        if (image == nil)  [self.effectModel.image saveNamedImageThumbnailImageToCache];
-        image = [self.effectModel.image getNamedThumbnail];
+        image = [self.effectModel.image getNamedImageThumbnail];
         
     } else if (self.effectModel.isWithVideo) {
         
-        image = [self.effectModel.video getNamedThumbnail];
-        if (image == nil)  [self.effectModel.video saveNamedVideoThumbnailImageToCache];
-        image = [self.effectModel.video getNamedThumbnail];
+        image = [self.effectModel.video getNamedVideoThumbnail];
+        
     }
-
+    
     // 如果效果中没有, 则从prepModel中从效果中找图片或视频首帧
     if (image == nil) {
         for (CLPrepModel *model in self.prepModelList) {
             if (model.isWithImage) {
-                image = [model.image getNamedThumbnail];
-                if (image == nil)  [model.image saveNamedImageThumbnailImageToCache];
-                image = [model.image getNamedThumbnail];
+                image = [model.image getNamedImageThumbnail];
                 break;
             }
         }
@@ -140,9 +134,7 @@
     if (image == nil) {
         for (CLPrepModel *model in self.prepModelList) {
             if (model.isWithVideo) {
-                image = [model.video getNamedThumbnail];
-                if (image == nil)  [model.video saveNamedVideoThumbnailImageToCache];
-                image = [model.video getNamedThumbnail];
+                image = [model.video getNamedVideoThumbnail];
                 break;
             }
         }

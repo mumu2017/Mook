@@ -14,6 +14,8 @@
 @interface NSString (Tools)
 
 + (NSString *)videoPath;
++ (NSString *)framePath; // 视频首帧图片缓存文件夹
+
 + (NSString *)imagePath;
 + (NSString *)thumbnailPath;
 
@@ -45,9 +47,12 @@
 // 根据文件名获取多媒体
 - (UIImage *)getNamedImage;
 
-- (UIImage *)getNamedThumbnail;
+- (UIImage *)getNamedImageThumbnail;
+- (UIImage *)getNamedVideoThumbnail;
 
-- (UIImage *)getFirstFrameOfNamedVideo;
+// 获取缓存中的第一帧图片
+- (UIImage *)getNamedVideoFrame;
+//- (UIImage *)getFirstFrameOfNamedVideo;
 - (AVPlayerItem *)getNamedAVPlayerItem;
 + (void)clearTmpDirectory;
 @end

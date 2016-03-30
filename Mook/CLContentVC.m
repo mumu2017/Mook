@@ -24,7 +24,6 @@
 #import "CLNotesModel.h"
 
 #import "CLOneLabelDisplayCell.h"
-#import "CLOneLabelMediaDisplayCell.h"
 #import "CLOneLabelImageDisplayCell.h"
 #import "CLMediaView.h"
 
@@ -57,9 +56,28 @@
 @property (nonatomic, strong) NSMutableArray *performModelList;
 @property (nonatomic, strong) NSMutableArray *notesModelList;
 
+
+//@property (nonatomic, strong) MWPhotoBrowser *photoBrowser;
+
+
 @end
 
 @implementation CLContentVC
+
+- (NSMutableArray *)photos {
+    if (!_photos) {
+        _photos = [self loadPhotos];
+    }
+    return _photos;
+}
+
+- (NSMutableArray *)thumbs {
+    if (!_thumbs) {
+        _thumbs = [self loadThumbs];
+    }
+    return _thumbs;
+}
+
 #pragma mark - 便于显示内容的模型单元
 - (CLInfoModel *)infoModel {
     if (!_infoModel) {
@@ -279,10 +297,6 @@
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
-    [self.tableView registerNib:[UINib nibWithNibName:@"CLOneLabelMediaDisplayCell"
-                                               bundle:nil]
-         forCellReuseIdentifier:kOneLabelMediaDisplayCell];
-    
     [self.tableView registerNib:[UINib nibWithNibName:@"CLOneLabelImageDisplayCell"
                                                bundle:nil]
          forCellReuseIdentifier:kOneLabelImageDisplayCell];
@@ -334,7 +348,11 @@
 }
 
 - (void) update {
+    // 重新刷新所有数据
     [self.tableView reloadData];
+    // 设置图片数组为nil, 这样在懒加载的时候就可以重新刷新图片
+    self.photos = nil;
+    self.thumbs = nil;
 }
 
 - (void)dealloc {
@@ -383,7 +401,7 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+
     // 标题buff
     if (indexPath.section == self.infoSection) {
         
@@ -399,23 +417,23 @@
         
         if (self.effectModel.isWithVideo) {
             
-            CLOneLabelMediaDisplayCell * cell = [self.tableView dequeueReusableCellWithIdentifier:kOneLabelMediaDisplayCell];
+            CLOneLabelImageDisplayCell * cell = [self.tableView dequeueReusableCellWithIdentifier:kOneLabelImageDisplayCell];
             
             cell.contentLabel.attributedText = [self.effectModel.effect styledString];
+            [cell.imageButton addTarget:self action:@selector(showPhotoBrowser:) forControlEvents:UIControlEventTouchUpInside];
+            cell.imageButton.tag = 0; // effectModel肯定是第一张图片或视频,所以作为图片数组中的Index,tag = 0;
+            [cell setImageWithVideoName:self.effectModel.video];
             
-            [cell.mediaView setVideoWithName:self.effectModel.video];
-
             return cell;
-            
-            
         } else if (self.effectModel.isWithImage) {
             
             CLOneLabelImageDisplayCell * cell = [self.tableView dequeueReusableCellWithIdentifier:kOneLabelImageDisplayCell];
             
             cell.contentLabel.attributedText = [self.effectModel.effect styledString];
-            
+            [cell.imageButton addTarget:self action:@selector(showPhotoBrowser:) forControlEvents:UIControlEventTouchUpInside];
+            cell.imageButton.tag = 0;
             [cell setImageWithName:self.effectModel.image];
-
+            
             return cell;
             
         } else {
@@ -457,19 +475,21 @@
             
             if (model.isWithVideo) {
                 
-                CLOneLabelMediaDisplayCell * cell = [self.tableView dequeueReusableCellWithIdentifier:kOneLabelMediaDisplayCell];
+                CLOneLabelImageDisplayCell * cell = [self.tableView dequeueReusableCellWithIdentifier:kOneLabelImageDisplayCell];
                 
                 cell.contentLabel.attributedText = [model.prep styledString];
-                
-                [cell.mediaView setVideoWithName:model.video];
+                [cell.imageButton addTarget:self action:@selector(showPhotoBrowser:) forControlEvents:UIControlEventTouchUpInside];
+                cell.imageButton.tag = [self getButtonTagWithPrepModel:model];
+                [cell setImageWithVideoName:model.video];
                 
                 return cell;
-                
+
             } else if (model.isWithImage) {
                 CLOneLabelImageDisplayCell * cell = [self.tableView dequeueReusableCellWithIdentifier:kOneLabelImageDisplayCell];
                 
                 cell.contentLabel.attributedText = [model.prep styledString];
-                
+                [cell.imageButton addTarget:self action:@selector(showPhotoBrowser:) forControlEvents:UIControlEventTouchUpInside];
+                cell.imageButton.tag = [self getButtonTagWithPrepModel:model];
                 [cell setImageWithName:model.image];
                 
                 return cell;
@@ -492,19 +512,22 @@
             
             if (model.isWithVideo) {
                 
-                CLOneLabelMediaDisplayCell * cell = [self.tableView dequeueReusableCellWithIdentifier:kOneLabelMediaDisplayCell];
+                CLOneLabelImageDisplayCell * cell = [self.tableView dequeueReusableCellWithIdentifier:kOneLabelImageDisplayCell];
                 
                 cell.contentLabel.attributedText = [model.prep styledString];
-                
-                [cell.mediaView setVideoWithName:model.video];
+                [cell.imageButton addTarget:self action:@selector(showPhotoBrowser:) forControlEvents:UIControlEventTouchUpInside];
+                cell.imageButton.tag = [self getButtonTagWithPrepModel:model];
+                [cell setImageWithVideoName:model.video];
                 
                 return cell;
                 
             } else if (model.isWithImage) {
+                
                 CLOneLabelImageDisplayCell * cell = [self.tableView dequeueReusableCellWithIdentifier:kOneLabelImageDisplayCell];
                 
                 cell.contentLabel.attributedText = [model.prep styledString];
-                
+                [cell.imageButton addTarget:self action:@selector(showPhotoBrowser:) forControlEvents:UIControlEventTouchUpInside];
+                cell.imageButton.tag = [self getButtonTagWithPrepModel:model];
                 [cell setImageWithName:model.image];
                 
                 return cell;
@@ -532,22 +555,23 @@
         
         if (model.isWithVideo) {
             
-            CLOneLabelMediaDisplayCell * cell = [self.tableView dequeueReusableCellWithIdentifier:kOneLabelMediaDisplayCell];
+            CLOneLabelImageDisplayCell * cell = [self.tableView dequeueReusableCellWithIdentifier:kOneLabelImageDisplayCell];
             
             cell.contentLabel.attributedText = [perform styledString];
+            [cell.imageButton addTarget:self action:@selector(showPhotoBrowser:) forControlEvents:UIControlEventTouchUpInside];
+            cell.imageButton.tag = [self getButtonTagWithPerformModel:model];
+            [cell setImageWithVideoName:model.video];
             
-            [cell.mediaView setVideoWithName:model.video];
-
             return cell;
             
         } if (model.isWithImage) {
             CLOneLabelImageDisplayCell * cell = [self.tableView dequeueReusableCellWithIdentifier:kOneLabelImageDisplayCell];
             
             cell.contentLabel.attributedText = [perform styledString];
-            
+            [cell.imageButton addTarget:self action:@selector(showPhotoBrowser:) forControlEvents:UIControlEventTouchUpInside];
+            cell.imageButton.tag = [self getButtonTagWithPerformModel:model];
             [cell setImageWithName:model.image];
-
-
+            
             return cell;
             
         } else {
@@ -572,7 +596,6 @@
     }
     
     return nil;
-    
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
@@ -641,6 +664,257 @@
     }
     return kLabelHeight;
 }
+
+#pragma mark - PhotoBrowser方法
+// 遍历模型,加载图片
+- (NSMutableArray *)loadPhotos {
+    
+    NSMutableArray *photos = [NSMutableArray array];
+    MWPhoto *photo;
+    
+    if (self.effectModel.isWithImage) {
+        // Photos
+        photo = [MWPhoto photoWithImage:[self.effectModel.image getNamedImage]];
+        photo.caption = self.effectModel.effect;
+        [photos addObject:photo];
+        
+    } else if (self.effectModel.isWithVideo) {
+        
+        // Photos
+        NSString *path = [[NSString videoPath] stringByAppendingPathComponent:self.effectModel.video];
+        photo = [MWPhoto photoWithImage:[self.effectModel.video getNamedVideoFrame]];
+        photo.videoURL = [NSURL fileURLWithPath:path];
+        photo.caption = self.effectModel.effect;
+        
+        [photos addObject:photo];
+    }
+    
+    for (CLPerformModel *model in self.performModelList) {
+        if (model.isWithImage) {
+            
+            // Photos
+            photo = [MWPhoto photoWithImage:[model.image getNamedImage]];
+            photo.caption = model.perform;
+            [photos addObject:photo];
+        }
+    }
+    
+    
+    for (CLPerformModel *model in self.performModelList) {
+        if (model.isWithVideo) {
+            // Photos
+            NSString *path = [[NSString videoPath] stringByAppendingPathComponent:model.video];
+            photo = [MWPhoto photoWithImage:[model.video getNamedVideoFrame]];
+            photo.videoURL = [NSURL fileURLWithPath:path];
+            photo.caption = model.perform;
+            
+            [photos addObject:photo];
+        }
+    }
+    
+    for (CLPrepModel *model in self.prepModelList) {
+        if (model.isWithImage) {
+            // Photos
+            photo = [MWPhoto photoWithImage:[model.image getNamedImage]];
+            photo.caption = model.prep;
+            [photos addObject:photo];
+            
+        }
+    }
+    
+    
+    for (CLPrepModel *model in self.prepModelList) {
+        if (model.isWithVideo) {
+            // Photos
+            NSString *path = [[NSString videoPath] stringByAppendingPathComponent:model.video];
+            photo = [MWPhoto photoWithImage:[model.video getNamedVideoFrame]];
+            photo.videoURL = [NSURL fileURLWithPath:path];
+            photo.caption = model.prep;
+            
+            [photos addObject:photo];
+        }
+    }
+    return photos;
+}
+
+- (NSMutableArray *)loadThumbs {
+
+    NSMutableArray *thumbs = [NSMutableArray array];
+    
+    MWPhoto *thumb;
+    if (self.effectModel.isWithImage) {
+        
+        thumb = [MWPhoto photoWithImage:[self.effectModel.image getNamedImageThumbnail]];
+        [thumbs addObject:thumb];
+        
+    } else if (self.effectModel.isWithVideo) {
+        
+        thumb = [MWPhoto photoWithImage:[self.effectModel.video getNamedVideoThumbnail]];
+        [thumbs addObject:thumb];
+        
+    }
+    
+    for (CLPerformModel *model in self.performModelList) {
+        if (model.isWithImage) {
+            thumb = [MWPhoto photoWithImage:[model.image getNamedImageThumbnail]];
+            [thumbs addObject:thumb];
+        }
+    }
+    
+    for (CLPerformModel *model in self.performModelList) {
+        if (model.isWithVideo) {
+            thumb = [MWPhoto photoWithImage:[model.video getNamedVideoThumbnail]];
+            [thumbs addObject:thumb];
+        }
+    }
+    
+    for (CLPrepModel *model in self.prepModelList) {
+        if (model.isWithImage) {
+            // Photos
+            thumb = [MWPhoto photoWithImage:[model.image getNamedImageThumbnail]];
+            [thumbs addObject:thumb];
+            
+        }
+    }
+
+    for (CLPrepModel *model in self.prepModelList) {
+        if (model.isWithVideo) {
+            thumb = [MWPhoto photoWithImage:[model.video getNamedVideoThumbnail]];
+            [thumbs addObject:thumb];
+        }
+    }
+    return thumbs;
+}
+
+- (NSInteger)getButtonTagWithPrepModel:(CLPrepModel *)prepModel {
+    NSInteger tag = 0;
+    
+    if (!self.effectModel.isWithImage && !self.effectModel.isWithVideo) {
+        tag = -1;   // 如果effectModel中没有多媒体, 则tag要减一,这样真正的第一张图片出现时就可以从0开始
+    }
+    
+    for (CLPrepModel *model in self.prepModelList) {
+        if (model == prepModel) {
+            tag += 1;
+            return tag;
+        } else {
+            if (model.isWithImage || model.isWithVideo) {
+                tag += 1;
+                
+            }
+        }
+    }
+    
+    return tag;
+}
+
+- (NSInteger)getButtonTagWithPerformModel:(CLPerformModel *)performModel {
+    
+    NSInteger tag = 0;
+    
+    if (!self.effectModel.isWithImage && !self.effectModel.isWithVideo) {
+        tag = -1;   // 如果effectModel中没有多媒体, 则tag要减一,这样真正的第一张图片出现时就可以从0开始
+    }
+    
+    for (CLPrepModel *model in self.prepModelList) {
+        
+        if (model.isWithImage || model.isWithVideo) {
+            tag += 1;
+        }
+    }
+    
+    for (CLPerformModel *model in self.performModelList) {
+        if (model == performModel) {
+            tag += 1;
+            return tag;
+        } else {
+            if (model.isWithImage || model.isWithVideo) {
+                tag += 1;
+            }
+        }
+    }
+    
+    return tag;
+}
+
+- (void)showPhotoBrowser:(UIButton *)button {
+    
+    BOOL displayActionButton = YES;
+    BOOL displaySelectionButtons = NO;
+    BOOL displayNavArrows = NO;
+    BOOL enableGrid = YES;
+    BOOL startOnGrid = NO;
+//    BOOL autoPlayOnAppear = NO;
+    
+    // Create browser
+    MWPhotoBrowser *browser = [[MWPhotoBrowser alloc] initWithDelegate:self];
+    
+    browser.displayActionButton = displayActionButton;
+    browser.displayNavArrows = displayNavArrows;
+    browser.displaySelectionButtons = displaySelectionButtons;
+    browser.alwaysShowControls = displaySelectionButtons;
+    browser.zoomPhotosToFill = YES;
+    browser.enableGrid = enableGrid;
+    browser.startOnGrid = startOnGrid;
+    browser.enableSwipeToDismiss = NO;
+    browser.autoPlayOnAppear = YES;
+    [browser setCurrentPhotoIndex:button.tag];
+    
+    // Show
+    [self.navigationController pushViewController:browser animated:YES];
+}
+
+#pragma mark - MWPhotoBrowserDelegate
+
+- (NSUInteger)numberOfPhotosInPhotoBrowser:(MWPhotoBrowser *)photoBrowser {
+    return self.photos.count;
+}
+
+- (id <MWPhoto>)photoBrowser:(MWPhotoBrowser *)photoBrowser photoAtIndex:(NSUInteger)index {
+    if (index < self.photos.count)
+        return [self.photos objectAtIndex:index];
+    return nil;
+}
+
+- (id <MWPhoto>)photoBrowser:(MWPhotoBrowser *)photoBrowser thumbPhotoAtIndex:(NSUInteger)index {
+    if (index < self.thumbs.count)
+        return [self.thumbs objectAtIndex:index];
+    return nil;
+}
+
+//- (MWCaptionView *)photoBrowser:(MWPhotoBrowser *)photoBrowser captionViewForPhotoAtIndex:(NSUInteger)index {
+//    MWPhoto *photo = [self.photos objectAtIndex:index];
+//    MWCaptionView *captionView = [[MWCaptionView alloc] initWithPhoto:photo];
+//    return [captionView autorelease];
+//}
+
+//- (void)photoBrowser:(MWPhotoBrowser *)photoBrowser actionButtonPressedForPhotoAtIndex:(NSUInteger)index {
+//    NSLog(@"ACTION!");
+//}
+
+- (void)photoBrowser:(MWPhotoBrowser *)photoBrowser didDisplayPhotoAtIndex:(NSUInteger)index {
+    NSLog(@"Did start viewing photo at index %lu", (unsigned long)index);
+}
+
+//- (BOOL)photoBrowser:(MWPhotoBrowser *)photoBrowser isPhotoSelectedAtIndex:(NSUInteger)index {
+//    return [[_selections objectAtIndex:index] boolValue];
+//}
+
+//- (NSString *)photoBrowser:(MWPhotoBrowser *)photoBrowser titleForPhotoAtIndex:(NSUInteger)index {
+//    return [NSString stringWithFormat:@"Photo %lu", (unsigned long)index+1];
+//}
+//
+//- (void)photoBrowser:(MWPhotoBrowser *)photoBrowser photoAtIndex:(NSUInteger)index selectedChanged:(BOOL)selected {
+//    [_selections replaceObjectAtIndex:index withObject:[NSNumber numberWithBool:selected]];
+//    NSLog(@"Photo at index %lu selected %@", (unsigned long)index, selected ? @"YES" : @"NO");
+//}
+
+- (void)photoBrowserDidFinishModalPresentation:(MWPhotoBrowser *)photoBrowser {
+    // If we subscribe to this method we must dismiss the view controller ourselves
+    NSLog(@"Did finish modal presentation");
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 
 #pragma mark - segue 方法
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {

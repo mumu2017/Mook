@@ -11,10 +11,11 @@
 @interface CLOneLabelImageDisplayCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UILabel *contentLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *iconView;
 
-@property (weak, nonatomic) IBOutlet UIScrollView *imageContainer;
+@property (weak, nonatomic) IBOutlet UIView *imageContainer;
 
-@property (weak, nonatomic) IBOutlet UIImageView *contentImageView;
+@property (weak, nonatomic) IBOutlet UIButton *imageButton;
 
 - (void)setImageWithName:(NSString *)imageName;
 - (void)setImageWithVideoName:(NSString *)videoName;
