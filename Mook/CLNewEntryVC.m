@@ -627,7 +627,6 @@ BOOL editingBooleans[5] = {YES, YES, YES, YES, YES};
                 if (indexPath.row == 0) {
                     
                     [cell setEditingContentType:self.editingContentType];
-                    cell.titleLabel.font = kBoldFontSys16;
                     cell.inputTextField.font = kFontSys16;
                     cell.inputTextField.placeholder = self.entryTitle;
                     cell.inputTextField.text = self.infoModel.name;

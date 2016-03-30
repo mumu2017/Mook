@@ -136,10 +136,12 @@
     
     self.shouldInputPassword = [[NSUserDefaults standardUserDefaults] boolForKey:kUsePasswordKey];
     
-    self.window.tintColor = kTintColor;
+    self.window.tintColor = kMenuBackgroundColor;
     
     [[UIToolbar appearance] setTranslucent:NO];
     [[UIToolbar appearance] setOpaque:YES];
+    [[UIToolbar appearance] setTintColor:kTintColor];
+    [[UIToolbar appearance] setBarTintColor:kMenuBackgroundColor];
     
     [[UINavigationBar appearance] setTintColor:kTintColor];
     [[UINavigationBar appearance] setBarTintColor:kMenuBackgroundColor];

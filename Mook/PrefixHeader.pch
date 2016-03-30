@@ -24,5 +24,6 @@
 #import "SWTableViewCell.h"
 #import "UINavigationBar+Awesome.h"
 #import "NSDate+MJ.h"
+#import <ChameleonFramework/Chameleon.h>
 
 #endif /* PrefixHeader_pch */

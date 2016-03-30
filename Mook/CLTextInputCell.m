@@ -48,6 +48,7 @@
             break;
     }
     
+    self.titleLabel.font = kBoldFontSys16;
     self.titleLabel.text = title;
 }
 

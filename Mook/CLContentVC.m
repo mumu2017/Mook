@@ -859,7 +859,6 @@
     browser.enableSwipeToDismiss = NO;
     browser.autoPlayOnAppear = autoPlayOnAppear;
     [browser setCurrentPhotoIndex:button.tag];
-    
     // Show
     [self.navigationController pushViewController:browser animated:YES];
 }
