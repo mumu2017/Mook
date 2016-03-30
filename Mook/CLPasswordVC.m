@@ -124,31 +124,31 @@ typedef enum {
             break;
             
         case 1:
-            self.icon1.textColor = kTintColor;
+            self.icon1.textColor = kMenuBackgroundColor;
             self.icon2.textColor = [UIColor darkGrayColor];
             self.icon3.textColor = [UIColor darkGrayColor];
             self.icon4.textColor = [UIColor darkGrayColor];
             break;
             
         case 2:
-            self.icon1.textColor = kTintColor;
-            self.icon2.textColor = kTintColor;
+            self.icon1.textColor = kMenuBackgroundColor;
+            self.icon2.textColor = kMenuBackgroundColor;
             self.icon3.textColor = [UIColor darkGrayColor];
             self.icon4.textColor = [UIColor darkGrayColor];
             break;
             
         case 3:
-            self.icon1.textColor = kTintColor;
-            self.icon2.textColor = kTintColor;
-            self.icon3.textColor = kTintColor;
+            self.icon1.textColor = kMenuBackgroundColor;
+            self.icon2.textColor = kMenuBackgroundColor;
+            self.icon3.textColor = kMenuBackgroundColor;
             self.icon4.textColor = [UIColor darkGrayColor];
             break;
             
         case 4:
-            self.icon1.textColor = kTintColor;
-            self.icon2.textColor = kTintColor;
-            self.icon3.textColor = kTintColor;
-            self.icon4.textColor = kTintColor;
+            self.icon1.textColor = kMenuBackgroundColor;
+            self.icon2.textColor = kMenuBackgroundColor;
+            self.icon3.textColor = kMenuBackgroundColor;
+            self.icon4.textColor = kMenuBackgroundColor;
             break;
             
         default:
@@ -282,6 +282,12 @@ typedef enum {
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.typedPassword = @"";
+    
+    [self.cancelButton setTitleColor:kMenuBackgroundColor forState:UIControlStateNormal];
+    [self.reminderButton setTitleColor:kMenuBackgroundColor forState:UIControlStateNormal];
+    [self.cancelButton setTitleColor:kMenuBackgroundColor forState:UIControlStateHighlighted];
+    [self.reminderButton setTitleColor:kMenuBackgroundColor forState:UIControlStateHighlighted];
+
     
     if (self.isCreatingNewPassword || self.isChangingPassword) {
 

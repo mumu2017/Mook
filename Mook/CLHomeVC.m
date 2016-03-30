@@ -101,38 +101,19 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(update) name:kUpdateDataNotification
                                                object:nil];
     
-    [self.navigationController.navigationBar lt_setBackgroundColor:[UIColor clearColor]];
-    
 }
 
-
-#define NAVBAR_CHANGE_POINT 50
+#pragma mark 滚动时各子控件位移效果
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    UIColor * color = [UIColor colorWithRed:0/255.0 green:175/255.0 blue:240/255.0 alpha:1];
-    CGFloat offsetY = scrollView.contentOffset.y;
-    if (offsetY > NAVBAR_CHANGE_POINT) {
-        CGFloat alpha = MIN(1, 1 - ((NAVBAR_CHANGE_POINT + 64 - offsetY) / 64));
-        [self.navigationController.navigationBar lt_setBackgroundColor:[color colorWithAlphaComponent:alpha]];
-    } else {
-        [self.navigationController.navigationBar lt_setBackgroundColor:[color colorWithAlphaComponent:0]];
+    // 1. menuHeadView滚动效果
+    // 获得滚动距离
+    CGFloat scrollVerticalDistance = scrollView.contentOffset.y;
+    if (scrollVerticalDistance > 0) {
+        self.topView.alpha = 1 - (scrollVerticalDistance / (self.topView.center.y/2));
     }
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:YES];
-    [self scrollViewDidScroll:self.tableView];
-    [self.navigationController.navigationBar setShadowImage:[UIImage new]];
-//    [self.navigationController setToolbarHidden:NO];
-    
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-    [self.navigationController.navigationBar lt_reset];
-}
 
 - (void) update {
     [self.tableView reloadData];
@@ -223,6 +204,7 @@
     cell.detailTextLabel.textColor = [UIColor grayColor];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 }
+
 
 #pragma mark - Navigation
 
