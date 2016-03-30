@@ -23,6 +23,7 @@
 @interface CLHomeVC ()
 @property (weak, nonatomic) IBOutlet UIButton *leftButton;
 @property (weak, nonatomic) IBOutlet UIButton *rightButton;
+@property (weak, nonatomic) IBOutlet UIView *topView;
 
 @property (nonatomic, strong) NSMutableArray *allItems;
 
@@ -85,14 +86,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-//    [self setToolBarStatus];
-    
     [self.leftButton addTarget:self action:@selector(addNewIdea) forControlEvents:UIControlEventTouchUpInside];
     [self.rightButton addTarget:self action:@selector(addNewEntry) forControlEvents:UIControlEventTouchUpInside];
 
-    
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    
+    self.tableView.separatorInset = UIEdgeInsetsMake(0, 15, 0, 0);
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    self.tableView.rowHeight = kScreenH * 0.6 / 7 ;
+    CGRect frame = self.topView.frame;
+    frame.size.height = kScreenH * 0.4 - 64;
+    self.topView.frame = frame;
     self.tableView.backgroundColor = kMenuBackgroundColor;
     
     self.tableView.tableFooterView = [UIView new];
@@ -103,19 +105,6 @@
     
 }
 
-- (void)setToolBarStatus {
-    self.navigationController.toolbar.barTintColor = kMenuBackgroundColor;
-    self.navigationController.toolbar.tintColor = kTintColor;
-    self.navigationController.toolbar.clipsToBounds = YES;
-    
-    UIBarButtonItem *leftSpace, *buttonItem, *rightSpace;
-    leftSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-    rightSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-    buttonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"iconAdd"] style:UIBarButtonItemStylePlain target:self action:@selector(addNewEntry)];
-    rightSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-    
-    self.toolbarItems = [NSArray arrayWithObjects: leftSpace, buttonItem,rightSpace, nil];
-}
 
 #define NAVBAR_CHANGE_POINT 50
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
@@ -164,46 +153,75 @@
     return 7;
 }
 
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString *ID = @"ID";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:ID];
+    }
+    return cell;
+}
+
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    //    cell.backgroundColor = kCellBgColor;
-    cell.backgroundColor = kMenuBackgroundColor;
-    cell.textLabel.textColor = [UIColor whiteColor];
+    NSString *iconName, *count, *title;
     
     switch (indexPath.row) {
             
         case 0:
-            cell.detailTextLabel.text = [NSString stringWithFormat:@"%ld", (unsigned long)self.allItems.count];
+            title = @"全部";
+            count = [NSString stringWithFormat:@"%ld", (unsigned long)self.allItems.count];
+            iconName = kIconNameAll;
             break;
             
         case 1:
-            cell.detailTextLabel.text = [NSString stringWithFormat:@"%ld", (unsigned long)self.ideaObjModelList.count];
+            title = @"灵感";
+            count = [NSString stringWithFormat:@"%ld", (unsigned long)self.ideaObjModelList.count];
+            iconName = kIconNameIdea;
             break;
             
         case 2:
-            cell.detailTextLabel.text = [NSString stringWithFormat:@"%ld", (unsigned long)self.routineModelList.count];
+            title = @"流程";
+            count = [NSString stringWithFormat:@"%ld", (unsigned long)self.routineModelList.count];
+            iconName = kIconNameRoutine;
             break;
             
         case 3:
-            cell.detailTextLabel.text = [NSString stringWithFormat:@"%ld", (unsigned long)self.sleightObjModelList.count];
+            title = @"技巧";
+            count = [NSString stringWithFormat:@"%ld", (unsigned long)self.sleightObjModelList.count];
+            iconName = kIconNameSleight;
             break;
             
         case 4:
-            cell.detailTextLabel.text = [NSString stringWithFormat:@"%ld", (unsigned long)self.propObjModelList.count];
+            title = @"道具";
+            count = [NSString stringWithFormat:@"%ld", (unsigned long)self.propObjModelList.count];
+            iconName = kIconNameProp;
             break;
             
         case 5:
-            cell.detailTextLabel.text = [NSString stringWithFormat:@"%ld", (unsigned long)self.linesObjModelList.count];
+            title = @"梗";
+            count = [NSString stringWithFormat:@"%ld", (unsigned long)self.linesObjModelList.count];
+            iconName = kIconNameLines;
             break;
             
         case 6:
-            cell.detailTextLabel.text = [NSString stringWithFormat:@"%ld", (unsigned long)self.allTags.count];
+            title = @"标签";
+            count = [NSString stringWithFormat:@"%ld", (unsigned long)self.allTags.count];
+            iconName = kIconNameTag;
             break;
             
         default:
             break;
     }
+    
+    cell.backgroundColor = kCellBgColor;
+    cell.imageView.image = [UIImage imageNamed:iconName];
+    cell.textLabel.text = title;
+    cell.textLabel.font = kFontSys16;
+    cell.textLabel.textColor = [UIColor blackColor];
+    cell.detailTextLabel.text = count;
+    cell.detailTextLabel.textColor = [UIColor grayColor];
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 }
 
 #pragma mark - Navigation

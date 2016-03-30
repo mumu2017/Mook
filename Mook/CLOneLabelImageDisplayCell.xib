@@ -16,23 +16,23 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="300" translatesAutoresizingMaskIntoConstraints="NO" id="52L-a3-j0n">
-                        <rect key="frame" x="10" y="8" width="300" height="0.5"/>
+                        <rect key="frame" x="10" y="8" width="300" height="0.0"/>
                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CPb-Hj-n02">
-                        <rect key="frame" x="10" y="29" width="300" height="225"/>
+                        <rect key="frame" x="0.0" y="28.5" width="45.5" height="34"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7uW-vK-QWX">
-                                <rect key="frame" x="0.0" y="0.0" width="300" height="225"/>
+                                <rect key="frame" x="0.0" y="0.0" width="45.5" height="34"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5n5-MU-jWV">
-                                <rect key="frame" x="0.0" y="0.0" width="300" height="225"/>
+                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5n5-MU-jWV">
+                                <rect key="frame" x="0.0" y="0.0" width="45.5" height="34"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="5n5-MU-jWV" firstAttribute="top" secondItem="7uW-vK-QWX" secondAttribute="top" id="AL5-wk-DTF"/>
                             <constraint firstItem="7uW-vK-QWX" firstAttribute="top" secondItem="CPb-Hj-n02" secondAttribute="top" id="EAW-gj-4W7"/>
@@ -48,12 +48,12 @@
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="CPb-Hj-n02" secondAttribute="trailing" constant="10" id="8pZ-RZ-0me"/>
+                    <constraint firstAttribute="trailing" secondItem="CPb-Hj-n02" secondAttribute="trailing" id="8pZ-RZ-0me"/>
                     <constraint firstItem="52L-a3-j0n" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="Czx-A2-4LF"/>
                     <constraint firstItem="52L-a3-j0n" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="EQG-hb-vzN"/>
                     <constraint firstItem="52L-a3-j0n" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="VC8-Ud-ddk"/>
                     <constraint firstItem="CPb-Hj-n02" firstAttribute="top" secondItem="52L-a3-j0n" secondAttribute="bottom" constant="20" id="cDi-1U-wvK"/>
-                    <constraint firstItem="CPb-Hj-n02" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="jpI-Je-mcT"/>
+                    <constraint firstItem="CPb-Hj-n02" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="jpI-Je-mcT"/>
                     <constraint firstAttribute="bottom" secondItem="CPb-Hj-n02" secondAttribute="bottom" constant="20" id="yCz-em-LKZ"/>
                 </constraints>
             </tableViewCellContentView>

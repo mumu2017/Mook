@@ -19,25 +19,22 @@
 - (void)setImageWithName:(NSString *)imageName {
     
     UIImage *image = [imageName getNamedImage];
-    
+    self.iconView.contentMode = UIViewContentModeScaleAspectFill;
     self.iconView.image = image;
-//    
-//    [self.imageButton setImage:image forState:UIControlStateNormal];
 }
 
 - (void)setImageWithVideoName:(NSString *)videoName {
 
     UIImage *image = [videoName getNamedVideoFrame];
+    self.iconView.contentMode = UIViewContentModeScaleAspectFit;
     self.iconView.image = image;
 
     [self.imageButton setImage:[UIImage imageNamed:@"PlayButtonOverlayLarge"] forState:UIControlStateNormal];
     [self.imageButton setImage:[UIImage imageNamed:@"PlayButtonOverlayLargeTap"] forState:UIControlStateHighlighted];
-
 }
 
 - (void)awakeFromNib {
 
-    self.imageButton.tintColor = [UIColor whiteColor];
     self.iconView.clipsToBounds = YES;
 }
 

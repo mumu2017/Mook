@@ -402,6 +402,7 @@ typedef enum {
 #define kNewPropInfoText    @"新建道具"
 #define kNewLinesInfoText   @"新建台词"
 
+#define kIconNameAll       @"iconNameAll"
 #define kIconNameIdea       @"iconNameIdea"
 #define kIconNameShow       @"iconNameShow"
 #define kIconNameRoutine    @"iconNameRoutine"

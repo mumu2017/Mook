@@ -844,7 +844,7 @@
     BOOL displayNavArrows = NO;
     BOOL enableGrid = YES;
     BOOL startOnGrid = NO;
-//    BOOL autoPlayOnAppear = NO;
+    BOOL autoPlayOnAppear = NO;
     
     // Create browser
     MWPhotoBrowser *browser = [[MWPhotoBrowser alloc] initWithDelegate:self];
@@ -857,7 +857,7 @@
     browser.enableGrid = enableGrid;
     browser.startOnGrid = startOnGrid;
     browser.enableSwipeToDismiss = NO;
-    browser.autoPlayOnAppear = YES;
+    browser.autoPlayOnAppear = autoPlayOnAppear;
     [browser setCurrentPhotoIndex:button.tag];
     
     // Show
