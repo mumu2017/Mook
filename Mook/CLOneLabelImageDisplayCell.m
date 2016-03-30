@@ -30,7 +30,8 @@
     UIImage *image = [videoName getNamedVideoFrame];
     self.iconView.image = image;
 
-    [self.imageButton setImage:[UIImage imageNamed:@"play"] forState:UIControlStateNormal];
+    [self.imageButton setImage:[UIImage imageNamed:@"PlayButtonOverlayLarge"] forState:UIControlStateNormal];
+    [self.imageButton setImage:[UIImage imageNamed:@"PlayButtonOverlayLargeTap"] forState:UIControlStateHighlighted];
 
 }
 
