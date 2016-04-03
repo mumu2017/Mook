@@ -10,9 +10,10 @@
 #import "CLListVC.h"
 #import "CLTagListVC.h"
 #import "CLNewEntryNavVC.h"
+#import "CLNewShowNavVC.h"
 #import "UINavigationBar+Awesome.h"
 
-//#import "CLShowModel.h"
+#import "CLShowModel.h"
 #import "CLIdeaObjModel.h"
 #import "CLRoutineModel.h"
 #import "CLSleightObjModel.h"
@@ -21,9 +22,6 @@
 #import "JGActionSheet.h"
 
 @interface CLHomeVC ()
-@property (weak, nonatomic) IBOutlet UIButton *leftButton;
-@property (weak, nonatomic) IBOutlet UIButton *rightButton;
-@property (weak, nonatomic) IBOutlet UIView *topView;
 
 @property (nonatomic, strong) NSMutableArray *allItems;
 
@@ -85,17 +83,13 @@
 #pragma mark - 控制器方法
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    [self.leftButton addTarget:self action:@selector(addNewIdea) forControlEvents:UIControlEventTouchUpInside];
-    [self.rightButton addTarget:self action:@selector(addNewEntry) forControlEvents:UIControlEventTouchUpInside];
 
     self.tableView.separatorInset = UIEdgeInsetsMake(0, 15, 0, 0);
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-    self.tableView.rowHeight = kScreenH * 0.6 / 7 ;
-    CGRect frame = self.topView.frame;
-    frame.size.height = kScreenH * 0.4 - 64;
-    self.topView.frame = frame;
+    self.tableView.rowHeight = 44;
+
     self.tableView.backgroundColor = kMenuBackgroundColor;
+    [self setToolBarStatus];
     
     self.tableView.tableFooterView = [UIView new];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(update) name:kUpdateDataNotification
@@ -103,17 +97,21 @@
     
 }
 
-#pragma mark 滚动时各子控件位移效果
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView
-{
-    // 1. menuHeadView滚动效果
-    // 获得滚动距离
-    CGFloat scrollVerticalDistance = scrollView.contentOffset.y;
-    if (scrollVerticalDistance > 0) {
-        self.topView.alpha = 1 - (scrollVerticalDistance / (self.topView.center.y/2));
-    }
-}
 
+- (void)setToolBarStatus {
+    self.navigationController.toolbar.hidden = NO;
+    self.navigationController.toolbar.barTintColor = kMenuBackgroundColor;
+    self.navigationController.toolbar.tintColor = kTintColor;
+    self.navigationController.toolbar.clipsToBounds = YES;
+    
+    UIBarButtonItem *leftSpace, *buttonItem, *rightSpace;
+    leftSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    rightSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    buttonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"iconAdd"] style:UIBarButtonItemStylePlain target:self action:@selector(addNewEntry)];
+    rightSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    
+    self.toolbarItems = [NSArray arrayWithObjects: leftSpace, buttonItem,rightSpace, nil];
+}
 
 - (void) update {
     [self.tableView reloadData];
@@ -126,12 +124,34 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+    return 5;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return 7;
+    NSInteger number;
+    
+    switch (section) {
+        case 0:
+            number = 1;
+            break;
+        case 1:
+            number = 1;
+            break;
+        case 2:
+            number = 1;
+            break;
+        case 3:
+            number = 1;
+            break;
+        case 4:
+            number = 3;
+            break;
+            
+        default:
+            break;
+    }
+    return number;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -140,6 +160,11 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:ID];
     }
+    cell.backgroundColor = kMenuBackgroundColor;
+    cell.layer.borderColor = kTintColor.CGColor;
+//    cell.layer.borderWidth = 1.0;
+    cell.textLabel.textColor = [UIColor whiteColor];
+    cell.detailTextLabel.textColor = [UIColor whiteColor];
     return cell;
 }
 
@@ -147,7 +172,7 @@
     
     NSString *iconName, *count, *title;
     
-    switch (indexPath.row) {
+    switch (indexPath.section) {
             
         case 0:
             title = @"全部";
@@ -162,46 +187,47 @@
             break;
             
         case 2:
+            title = @"演出";
+            count = [NSString stringWithFormat:@"%ld", (unsigned long)self.showModelList.count];
+            iconName = kIconNameShow;
+            break;
+            
+        case 3:
             title = @"流程";
             count = [NSString stringWithFormat:@"%ld", (unsigned long)self.routineModelList.count];
             iconName = kIconNameRoutine;
             break;
             
-        case 3:
-            title = @"技巧";
-            count = [NSString stringWithFormat:@"%ld", (unsigned long)self.sleightObjModelList.count];
-            iconName = kIconNameSleight;
-            break;
-            
         case 4:
-            title = @"道具";
-            count = [NSString stringWithFormat:@"%ld", (unsigned long)self.propObjModelList.count];
-            iconName = kIconNameProp;
-            break;
+        {
+            if (indexPath.row == 0) {
+                title = @"技巧";
+                count = [NSString stringWithFormat:@"%ld", (unsigned long)self.sleightObjModelList.count];
+                iconName = kIconNameSleight;
+            } else if (indexPath.row == 1) {
+                title = @"道具";
+                count = [NSString stringWithFormat:@"%ld", (unsigned long)self.propObjModelList.count];
+                iconName = kIconNameProp;
+            } else if (indexPath.row == 2) {
+                title = @"梗";
+                count = [NSString stringWithFormat:@"%ld", (unsigned long)self.linesObjModelList.count];
+                iconName = kIconNameLines;
+            }
+        }
             
-        case 5:
-            title = @"梗";
-            count = [NSString stringWithFormat:@"%ld", (unsigned long)self.linesObjModelList.count];
-            iconName = kIconNameLines;
-            break;
-            
-        case 6:
-            title = @"标签";
-            count = [NSString stringWithFormat:@"%ld", (unsigned long)self.allTags.count];
-            iconName = kIconNameTag;
             break;
             
         default:
             break;
     }
     
-    cell.backgroundColor = kCellBgColor;
+//    cell.backgroundColor = kCellBgColor;
     cell.imageView.image = [UIImage imageNamed:iconName];
     cell.textLabel.text = title;
     cell.textLabel.font = kFontSys16;
-    cell.textLabel.textColor = [UIColor blackColor];
+//    cell.textLabel.textColor = [UIColor blackColor];
     cell.detailTextLabel.text = count;
-    cell.detailTextLabel.textColor = [UIColor grayColor];
+//    cell.detailTextLabel.textColor = [UIColor grayColor];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 }
 
@@ -210,12 +236,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    if (indexPath.row == 6) {
-        [self performSegueWithIdentifier:kSeguekHomeToTagList sender:nil];
-    } else {
-        [self performSegueWithIdentifier:kSegueHomeToList sender:indexPath];
-        
-    }
+    [self performSegueWithIdentifier:kSegueHomeToList sender:indexPath];
+ 
 }
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -230,7 +252,7 @@
         if ([sender isKindOfClass:[NSIndexPath class]]) {
             NSIndexPath *indexPath = (NSIndexPath *)sender;
             
-            switch (indexPath.row) {
+            switch (indexPath.section) {
                 case 0:
                     vc.listType = kListTypeAll;
                     vc.title = kDefaultTitleAll;
@@ -244,28 +266,33 @@
                     break;
                     
                 case 2:
+                    vc.listType = kListTypeShow;
+                    vc.title = kDefaultTitleShow;
+                    
+                    break;
+                    
+                case 3:
                     vc.listType = kListTypeRoutine;
                     vc.title = kDefaultTitleRoutine;
                     
                     break;
                     
-                case 3:
-                    vc.listType = kListTypeSleight;
-                    vc.title = kDefaultTitleSleight;
-                    
-                    break;
-                    
                 case 4:
-                    vc.listType = kListTypeProp;
-                    vc.title = kDefaultTitleProp;
-                    
+                {
+                    if (indexPath.row == 0) {
+                        vc.listType = kListTypeSleight;
+                        vc.title = kDefaultTitleSleight;
+                    } else if (indexPath.row == 1) {
+                        vc.listType = kListTypeProp;
+                        vc.title = kDefaultTitleProp;
+                    } else if (indexPath.row == 2) {
+                        vc.listType = kListTypeLines;
+                        vc.title = kDefaultTitleLines;
+                    }
                     break;
+                }
                     
-                case 5:
-                    vc.listType = kListTypeLines;
-                    vc.title = kDefaultTitleLines;
-                    
-                    break;
+
                 default:
                     break;
             }
@@ -281,23 +308,26 @@
         vc.editingContentType = self.editingContentType;
         
         if (self.editingContentType == kEditingContentTypeIdea) {
-            vc.ideaObjModel = [(AppDelegate *)[[UIApplication sharedApplication] delegate] ideaObjModelList][0];
+            vc.ideaObjModel = kDataListIdea[0];
             
         } else if (self.editingContentType == kEditingContentTypeRoutine) {
-            vc.routineModel = [(AppDelegate *)[[UIApplication sharedApplication] delegate] routineModelList][0];
+            vc.routineModel = kDataListRoutine[0];
         } else if (self.editingContentType == kEditingContentTypeSleight) {
-            vc.sleightObjModel = [(AppDelegate *)[[UIApplication sharedApplication] delegate] sleightObjModelList][0];
+            vc.sleightObjModel = kDataListSleight[0];
         } else if (self.editingContentType == kEditingContentTypeProp) {
-            vc.propObjModel = [(AppDelegate *)[[UIApplication sharedApplication] delegate] propObjModelList][0];
+            vc.propObjModel = kDataListProp[0];
         } else if (self.editingContentType == kEditingContentTypeLines) {
-            vc.linesObjModel = [(AppDelegate *)[[UIApplication sharedApplication] delegate] linesObjModelList][0];
+            vc.linesObjModel = kDataListLines[0];
         }
+    } else if ([destVC isKindOfClass:[CLNewShowNavVC class]]) {
+        CLNewShowNavVC *vc = (CLNewShowNavVC *)destVC;
+        vc.showModel = kDataListShow[0];
     }
 }
 
 - (void)addNewEntry {
     
-    JGActionSheetSection *section1 = [JGActionSheetSection sectionWithTitle:nil message:nil buttonTitles:@[@"新建灵感", @"新建流程", @"新建技巧", @"新建道具", @"新建梗"] buttonStyle:JGActionSheetButtonStyleDefault];
+    JGActionSheetSection *section1 = [JGActionSheetSection sectionWithTitle:nil message:nil buttonTitles:@[@"新建灵感" , @"新建演出", @"新建流程", @"新建技巧", @"新建道具", @"新建梗"] buttonStyle:JGActionSheetButtonStyleDefault];
     JGActionSheetSection *cancelSection = [JGActionSheetSection sectionWithTitle:nil message:nil buttonTitles:@[@"取消"] buttonStyle:JGActionSheetButtonStyleCancel];
     
     NSArray *sections = @[section1, cancelSection];
@@ -313,15 +343,19 @@
                     [self addNewIdea];
                     break;
                 case 1:
+                    [self addNewShow];
+                    break;
+                    
+                case 2:
                     [self addNewRoutine];
                     break;
-                case 2:
+                case 3:
                     [self addNewSleight];
                     break;
-                case 3:
+                case 4:
                     [self addNewProp];
                     break;
-                case 4:
+                case 5:
                     [self addNewLines];
                     break;
                 default:
@@ -343,10 +377,22 @@
     CLIdeaObjModel *model = [CLIdeaObjModel ideaObjModel];
     
     // 将新增的model放在数组第一个,这样在现实到list中时,新增的model会显示在最上面
-    [[(AppDelegate *)[[UIApplication sharedApplication] delegate] ideaObjModelList] insertObject:model atIndex:0];
-    [[(AppDelegate *)[[UIApplication sharedApplication] delegate] allItems] insertObject:model atIndex:0];
+    [kDataListIdea insertObject:model atIndex:0];
+    [kDataListAll insertObject:model atIndex:0];
     
     [self performSegueWithIdentifier:kSegueHomeToNewEntry sender:nil];
+}
+
+- (void)addNewShow {
+    
+    // 创建一个新的routineModel,传递给newRoutineVC,并添加到routineModelList中
+    CLShowModel *model = [CLShowModel showModel];
+    
+    // 将新增的model放在数组第一个,这样在现实到list中时,新增的model会显示在最上面
+    [kDataListShow insertObject:model atIndex:0];
+    [kDataListAll insertObject:model atIndex:0];
+    
+    [self performSegueWithIdentifier:kSegueHomeToNewShow sender:nil];
 }
 
 - (void)addNewRoutine {
@@ -357,8 +403,8 @@
     CLRoutineModel *model = [CLRoutineModel routineModel];
     
     // 将新增的model放在数组第一个,这样在现实到list中时,新增的model会显示在最上面
-    [[(AppDelegate *)[[UIApplication sharedApplication] delegate] routineModelList] insertObject:model atIndex:0];
-    [[(AppDelegate *)[[UIApplication sharedApplication] delegate] allItems] insertObject:model atIndex:0];
+    [kDataListRoutine insertObject:model atIndex:0];
+    [kDataListAll insertObject:model atIndex:0];
     
     [self performSegueWithIdentifier:kSegueHomeToNewEntry sender:nil];
 }
@@ -369,8 +415,8 @@
     CLSleightObjModel *model = [CLSleightObjModel sleightObjModel];
     
     // 将新增的model放在数组第一个,这样在现实到list中时,新增的model会显示在最上面
-    [[(AppDelegate *)[[UIApplication sharedApplication] delegate] sleightObjModelList] insertObject:model atIndex:0];
-    [[(AppDelegate *)[[UIApplication sharedApplication] delegate] allItems] insertObject:model atIndex:0];
+    [kDataListSleight insertObject:model atIndex:0];
+    [kDataListAll insertObject:model atIndex:0];
     
     [self performSegueWithIdentifier:kSegueHomeToNewEntry sender:nil];
 }
@@ -381,8 +427,8 @@
     CLPropObjModel *model = [CLPropObjModel propObjModel];
     
     // 将新增的model放在数组第一个,这样在现实到list中时,新增的model会显示在最上面
-    [[(AppDelegate *)[[UIApplication sharedApplication] delegate] propObjModelList] insertObject:model atIndex:0];
-    [[(AppDelegate *)[[UIApplication sharedApplication] delegate] allItems] insertObject:model atIndex:0];
+    [kDataListProp insertObject:model atIndex:0];
+    [kDataListAll insertObject:model atIndex:0];
     
     [self performSegueWithIdentifier:kSegueHomeToNewEntry sender:nil];
 }
@@ -393,8 +439,8 @@
     CLLinesObjModel *model = [CLLinesObjModel linesObjModel];
     
     // 将新增的model放在数组第一个,这样在现实到list中时,新增的model会显示在最上面
-    [[(AppDelegate *)[[UIApplication sharedApplication] delegate] linesObjModelList] insertObject:model atIndex:0];
-    [[(AppDelegate *)[[UIApplication sharedApplication] delegate] allItems] insertObject:model atIndex:0];
+    [kDataListLines insertObject:model atIndex:0];
+    [kDataListAll insertObject:model atIndex:0];
     
     [self performSegueWithIdentifier:kSegueHomeToNewEntry sender:nil];
 }

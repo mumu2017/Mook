@@ -9,7 +9,7 @@
 #import "XLPagerTabStripViewController.h"
 #import "CLNewEntryVC.h"
 
-@class CLRoutineModel, CLIdeaObjModel, CLSleightObjModel, CLPropObjModel, CLLinesObjModel;
+@class CLRoutineModel, CLIdeaObjModel, CLSleightObjModel, CLPropObjModel, CLLinesObjModel, CLShowModel;
 @class CLEffectModel, CLPropModel, CLPrepModel, CLPerformModel, CLNotesModel;
 
 @interface CLEdtingManageVC : XLPagerTabStripViewController
@@ -21,14 +21,13 @@
 @property (nonatomic, strong) CLSleightObjModel *sleightObjModel;
 @property (nonatomic, strong) CLPropObjModel *propObjModel;
 @property (nonatomic, strong) CLLinesObjModel *linesObjModel;
+@property (nonatomic, strong) CLShowModel *showModel;
 
 @property (nonatomic, strong) CLEffectModel *effectModel;
 @property (nonatomic, strong) NSMutableArray <CLPropModel*> *propModelList;
 @property (nonatomic, strong) NSMutableArray <CLPrepModel*> *prepModelList;
 @property (nonatomic, strong) NSMutableArray <CLPerformModel*> *performModelList;
 @property (nonatomic, strong) NSMutableArray <CLNotesModel*> *notesModelList;
-
-@property (nonatomic, assign) BOOL isEditing;
 
 @property (nonatomic, assign) NSUInteger childVCCount;
 @property (nonatomic, assign) NSUInteger selectedVCIndex;

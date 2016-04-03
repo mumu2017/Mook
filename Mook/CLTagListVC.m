@@ -24,6 +24,7 @@
 @interface CLTagListVC ()<SWTableViewCellDelegate>
 
 @property (nonatomic, strong) NSMutableArray *allTags;
+@property (nonatomic, strong) NSMutableArray *allTagsShow;
 @property (nonatomic, strong) NSMutableArray *allTagsIdea;
 @property (nonatomic, strong) NSMutableArray *allTagsRoutine;
 @property (nonatomic, strong) NSMutableArray *allTagsSleight;
@@ -40,6 +41,9 @@
     if (!_allTags) _allTags = kDataListTagAll;  return _allTags;
 }
 
+- (NSMutableArray *)allTagsShow {
+    if (!_allTagsShow) _allTagsShow = kDataListTagShow;  return _allTagsShow;
+}
 
 - (NSMutableArray *)allTagsIdea {
     if (!_allTagsIdea) _allTagsIdea = kDataListTagIdea;  return _allTagsIdea;
@@ -65,20 +69,10 @@
 
 #pragma mrak - 流程模型数据懒加载
 
-//
-//- (CLTableBackView *)tableBackView {
-//    if (!_tableBackView) {
-//        _tableBackView = [CLTableBackView tableBackView];
-//    }
-//    return _tableBackView;
-//}
-
 #pragma mark - 控制器方法
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.tableView.allowsMultipleSelection = NO;
-    
-//    self.tableView.backgroundView = self.tableBackView;
     
     self.tableView.tableFooterView = [UIView new];
 
@@ -88,7 +82,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.tableView reloadData];
-//    self.tableBackView.hidden = self.allTags.count != 0;
+
 }
 
 
@@ -96,7 +90,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 
-    return 5;
+    return 6;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -106,12 +100,14 @@
     if (section == 0) {
         number = self.allTagsIdea.count;
     } else if (section == 1) {
-        number = self.allTagsRoutine.count;
+        number = self.allTagsShow.count;
     } else if (section == 2) {
-        number = self.allTagsSleight.count;
+        number = self.allTagsRoutine.count;
     } else if (section == 3) {
-        number = self.allTagsProp.count;
+        number = self.allTagsSleight.count;
     } else if (section == 4) {
+        number = self.allTagsProp.count;
+    } else if (section == 5) {
         number = self.allTagsLines.count;
     }
     
@@ -162,12 +158,35 @@
             
         case 1:
             
-            if (self.allTagsRoutine.count == 0) {
+            if (self.allTagsShow.count == 0) {
                 tag = @"无标签";
                 tagCount = @"";
                 cell.accessoryType = UITableViewCellAccessoryNone;
                 cell.rightUtilityButtons = nil;
 
+            } else {
+                tag = self.allTagsShow[indexPath.row];
+                for (CLShowModel *model in kDataListShow) {
+                    
+                    if ([model.tags containsObject:tag]) {
+                        tagItemCount++;
+                    }
+                }
+                tagCount = [NSString stringWithFormat:@"%ld", (long)tagItemCount];
+                
+            }
+            
+            break;
+            
+            
+        case 2:
+            
+            if (self.allTagsRoutine.count == 0) {
+                tag = @"无标签";
+                tagCount = @"";
+                cell.accessoryType = UITableViewCellAccessoryNone;
+                cell.rightUtilityButtons = nil;
+                
             } else {
                 tag = self.allTagsRoutine[indexPath.row];
                 for (CLRoutineModel *model in kDataListRoutine) {
@@ -181,7 +200,8 @@
             }
             
             break;
-        case 2:
+            
+        case 3:
             if (self.allTagsSleight.count == 0) {
                 tag = @"无标签";
                 tagCount = @"";
@@ -202,7 +222,7 @@
             }
             
             break;
-        case 3:
+        case 4:
             if (self.allTagsProp.count == 0) {
                 tag = @"无标签";
                 tagCount = @"";
@@ -223,7 +243,7 @@
             }
             
             break;
-        case 4:
+        case 5:
             if (self.allTagsLines.count == 0) {
                 tag = @"无标签";
                 tagCount = @"";
@@ -256,7 +276,7 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     
-    NSArray *titleArr = @[@"灵感", @"流程", @"技巧", @"道具", @"梗"];
+    NSArray *titleArr = @[@"灵感", @"演出", @"流程", @"技巧", @"道具", @"梗"];
 
     return titleArr[section];
 }
@@ -268,12 +288,14 @@
     if (indexPath.section == 0) {
         number = self.allTagsIdea.count;
     } else if (indexPath.section == 1) {
-        number = self.allTagsRoutine.count;
+        number = self.allTagsShow.count;
     } else if (indexPath.section == 2) {
-        number = self.allTagsSleight.count;
+        number = self.allTagsRoutine.count;
     } else if (indexPath.section == 3) {
-        number = self.allTagsProp.count;
+        number = self.allTagsSleight.count;
     } else if (indexPath.section == 4) {
+        number = self.allTagsProp.count;
+    } else if (indexPath.section == 5) {
         number = self.allTagsLines.count;
     }
     
@@ -323,6 +345,24 @@
                     
                 case 1:
                 {
+                    type = kTypeShow;
+                    tag = self.allTagsShow[path.row];
+                    for (CLShowModel *model in kDataListShow) {
+                        if ([model.tags containsObject:tag]) {
+                            [model.tags removeObject:tag];
+                        }
+                    }
+                    [self.allTagsShow removeObject:tag];
+                    if (self.allTagsShow.count == 0) {
+                        [self.tableView reloadRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationAutomatic];
+                    } else {
+                        [self.tableView deleteRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationLeft];
+                    }
+                    break;
+                }
+                    
+                case 2:
+                {
                     type = kTypeRoutine;
                     tag = self.allTagsRoutine[path.row];
                     for (CLRoutineModel *model in kDataListRoutine) {
@@ -339,7 +379,7 @@
                     break;
                 }
 
-                case 2:
+                case 3:
                 {
                     type = kTypeSleight;
                     tag = self.allTagsSleight[path.row];
@@ -358,7 +398,7 @@
                     break;
                 }
                     
-                case 3:
+                case 4:
                 {
                     type = kTypeProp;
                     tag = self.allTagsProp[path.row];
@@ -377,7 +417,7 @@
                     break;
                 }
                     
-                case 4:
+                case 5:
                 {
                     type = kTypeLines;
                     tag = self.allTagsLines[path.row];
@@ -401,8 +441,6 @@
             }
             [self.allTags removeObject:tag];
             
-//            self.tableBackView.hidden = self.allTags.count != 0;
-
             [CLDataSaveTool deleteTag:tag type:type];
             
             break;
@@ -469,7 +507,27 @@
                     vc.ideaObjModelList = arrayM;
                     break;
                 }
+                    
                 case 1:
+                {
+                    vc.listType = kListTypeShow;
+                    vc.title = kDefaultTitleShow;
+                    
+                    vc.tag = self.allTagsShow[indexPath.row];
+                    
+                    NSMutableArray *arrayM = [NSMutableArray array];
+                    for (CLShowModel *model in kDataListShow) {
+                        
+                        if ([model.tags containsObject:vc.tag]) {
+                            [arrayM addObject:model];
+                        }
+                    }
+                    
+                    vc.showModelList = arrayM;
+                    break;
+                }
+
+                case 2:
                 {
                     vc.listType = kListTypeRoutine;
                     vc.title = kDefaultTitleRoutine;
@@ -487,7 +545,7 @@
                     vc.routineModelList = arrayM;
                     break;
                 }
-                case 2:
+                case 3:
                 {
                     vc.listType = kListTypeSleight;
                     vc.title = kDefaultTitleSleight;
@@ -505,7 +563,7 @@
                     vc.sleightObjModelList = arrayM;
                     break;
                 }
-                case 3:
+                case 4:
                 {
                     vc.listType = kListTypeProp;
                     vc.title = kDefaultTitleProp;
@@ -523,7 +581,7 @@
                     vc.propObjModelList = arrayM;
                     break;
                 }
-                case 4:
+                case 5:
                 {
                     vc.listType = kListTypeLines;
                     vc.title = kDefaultTitleLines;

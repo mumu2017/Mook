@@ -22,17 +22,6 @@
 
 @implementation AppDelegate
 
-- (NSMutableArray<CLShowModel *> *)showModelList {
-    if (!_showModelList) {
-//        _showModelList = [NSKeyedUnarchiver unarchiveObjectWithFile:kShowPath];
-        
-        if (!_showModelList) {
-            _showModelList = [NSMutableArray array];
-        }
-    }
-    return _showModelList;
-}
-
 - (NSMutableArray *)allItems {
     if (!_allItems) {
         _allItems = [CLDataSaveTool allItems];
@@ -47,6 +36,23 @@
         if (!_allTags) _allTags = [NSMutableArray array];
     }
     return _allTags;
+}
+
+- (NSMutableArray *)_allTagsShow {
+    if (!_allTagsShow) {
+        _allTagsShow = [CLDataSaveTool allTagsShow];
+        if (!_allTagsShow) _allTagsShow = [NSMutableArray array];
+    }
+    return _allTagsShow;
+}
+
+
+- (NSMutableArray *)allTagsShow {
+    if (!_allTagsShow) {
+        _allTagsShow = [CLDataSaveTool allTagsShow];
+        if (!_allTagsShow) _allTagsShow = [NSMutableArray array];
+    }
+    return _allTagsShow;
 }
 
 - (NSMutableArray *)allTagsIdea {
@@ -87,6 +93,14 @@
         if (!_allTagsLines) _allTagsLines = [NSMutableArray array];
     }
     return _allTagsLines;
+}
+
+- (NSMutableArray<CLShowModel *> *)showModelList {
+    if (!_showModelList) {
+        _showModelList = [CLDataSaveTool allShows];
+        if (!_showModelList) _showModelList = [NSMutableArray array];
+    }
+    return _showModelList;
 }
 
 -(NSMutableArray *)routineModelList {
@@ -137,11 +151,11 @@
     self.shouldInputPassword = [[NSUserDefaults standardUserDefaults] boolForKey:kUsePasswordKey];
     
     self.window.tintColor = kMenuBackgroundColor;
-    
+        
     [[UIToolbar appearance] setTranslucent:NO];
     [[UIToolbar appearance] setOpaque:YES];
     [[UIToolbar appearance] setTintColor:kTintColor];
-    [[UIToolbar appearance] setBarTintColor:kMenuBackgroundColor];
+    [[UIToolbar appearance] setBarTintColor:nil];
     
     [[UINavigationBar appearance] setTintColor:kTintColor];
     [[UINavigationBar appearance] setBarTintColor:kMenuBackgroundColor];
@@ -155,7 +169,7 @@
     [[UINavigationBar appearance] setOpaque:YES];
     
     [[UINavigationBar appearance] setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:
-                                                           [UIColor whiteColor], NSForegroundColorAttributeName, [UIFont boldSystemFontOfSize:17], NSFontAttributeName, nil]];
+                                                           kTintColor, NSForegroundColorAttributeName, [UIFont boldSystemFontOfSize:17], NSFontAttributeName, nil]];
     
     // 已经在info.plist文件中设置了statusBarStyle属性为lightContent
     //    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];

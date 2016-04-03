@@ -25,7 +25,6 @@
 
 #import "CLOneLabelDisplayCell.h"
 #import "CLOneLabelImageDisplayCell.h"
-#import "CLMediaView.h"
 
 #import "QuartzCore/QuartzCore.h"
 #import <AVFoundation/AVFoundation.h>
@@ -55,10 +54,6 @@
 @property (nonatomic, strong) NSMutableArray *prepModelList;
 @property (nonatomic, strong) NSMutableArray *performModelList;
 @property (nonatomic, strong) NSMutableArray *notesModelList;
-
-
-//@property (nonatomic, strong) MWPhotoBrowser *photoBrowser;
-
 
 @end
 

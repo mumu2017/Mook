@@ -9,26 +9,13 @@
 #import <UIKit/UIKit.h>
 #import "CLNewEntryVC.h"
 
-@class CLToolBar, CLEditingVC, CLEdtingManageVC, XLPagerTabStripViewController;
+@class CLToolBar, CLEditingVC, XLPagerTabStripViewController;
 @class CLEffectModel, CLPropModel, CLPrepModel, CLPerformModel, CLNotesModel;
 @class CLMediaView;
 
-typedef enum {
-    kEditingModeEffect = 0,
-    kEditingModeProp,
-    kEditingModePrep,
-    kEditingModePerform,
-    kEditingModeNotes,
-} EditingMode;
-
 @protocol CLEditingVCDelegate <NSObject>
-#warning 是否需要协议?
-@optional
 
-- (void) editingVC:(CLEditingVC *)editingVC saveEffect:(CLEffectModel *)effectModel;
-- (void) editingVC:(CLEditingVC *)editingVC savePrep:(CLPrepModel *)prepModel;
-- (void) editingVC:(CLEditingVC *)editingVC savePerform:(CLPerformModel *)performModel;
-- (void) editingVC:(CLEditingVC *)editingVC saveNotes:(CLNotesModel *)notesModel;
+@optional
 
 - (void) editingVCAddPrep:(CLEditingVC *)editingVC;
 - (void) editingVCAddPerform:(CLEditingVC *)editingVC;
@@ -60,8 +47,6 @@ typedef enum {
 @property (nonatomic, assign) EditingMode editingModel;
 
 @property (nonatomic, strong) CLToolBar *toolBar;
-
-@property (nonatomic, strong) CLEdtingManageVC *manageVC;
 
 @property (nonatomic, weak) id<CLEditingVCDelegate> delegate;
 

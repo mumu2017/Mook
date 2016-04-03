@@ -16,7 +16,7 @@
 
 
 - (void)awakeFromNib {
-
+    self.tintColor = kMenuBackgroundColor;
     self.backgroundColor = [UIColor clearColor];
 //    self.seperatorView.backgroundColor = kMenuBackgroundColor;
 }

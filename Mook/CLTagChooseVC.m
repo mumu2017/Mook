@@ -16,7 +16,7 @@
 
 @property (nonatomic, assign) BOOL tagListChanged;
 
-@property (nonatomic, strong) CLTableBackView *tableBackView;
+//@property (nonatomic, strong) CLTableBackView *tableBackView;
 
 
 @end
@@ -51,7 +51,10 @@
             _tagChooseList = kDataListTagLines;
             
             break;
+        case kEditingContentTypeShow:
+            _tagChooseList = kDataListTagShow;
             
+            break;
         default:
             break;
         }
@@ -60,20 +63,18 @@
     return _tagChooseList;
 }
 
-- (CLTableBackView *)tableBackView {
-    if (!_tableBackView) {
-        _tableBackView = [CLTableBackView tableBackView];
-    }
-    return _tableBackView;
-}
+//- (CLTableBackView *)tableBackView {
+//    if (!_tableBackView) {
+//        _tableBackView = [CLTableBackView tableBackView];
+//    }
+//    return _tableBackView;
+//}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.tableView.allowsMultipleSelection = NO;
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelTagSelection)];
-  
-    self.tableView.backgroundView = self.tableBackView;
     
     self.tableView.tableFooterView = [UIView new];
 }
@@ -81,13 +82,6 @@
 - (void)cancelTagSelection {
     [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"cancelTagSelection" object:nil]];
 }
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-
-    self.tableBackView.hidden = ([self.tagChooseList count] != 0);
-}
-
 
 #pragma mark - Table view data source
 
@@ -97,8 +91,13 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    NSInteger number = [self.tagChooseList count];
     
-    return [self.tagChooseList count];
+    if (number == 0) {  //如果没有标签,则显示一行cell,提示用户没有标签
+        number = 1;
+    }
+
+    return number;
 }
 
 
@@ -114,19 +113,30 @@
     cell.backgroundColor = kCellBgColor;
     cell.accessoryType = UITableViewCellAccessoryNone;
 
-    cell.textLabel.text = self.tagChooseList[indexPath.row];
+    NSString *tag;
+    if (self.tagChooseList.count == 0) {
+        tag = @"无标签";
+    } else {
+        tag = self.tagChooseList[indexPath.row];
+    }
+    cell.textLabel.text = tag;
 
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     
-    NSArray *titleArr = @[@"灵感", @"流程", @"技巧", @"道具", @"梗"];
+    NSArray *titleArr = @[@"灵感", @"流程", @"技巧", @"道具", @"梗", @"演出"];
     
     // editingContentType从0-4与数组一一对应,所以可以用下标取title;
     return titleArr[self.editingContentType];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if (self.tagChooseList.count == 0) {
+#warning 提示用户,还没有添加标签
+        return;
+    }
     
     if ([self.delegate respondsToSelector:@selector(tagChooseVC:didSelectTag:)]) {
         [self.delegate tagChooseVC:self didSelectTag:self.tagChooseList[indexPath.row]];

@@ -11,7 +11,6 @@
 
 #import "CLDataSaveTool.h"
 
-
 #import "CLTagChooseNavVC.h"
 
 #import "CLPerformModel.h"
@@ -34,8 +33,6 @@
 #import "CLNewEntryImageCell.h"
 #import "CLNewEntryTextCell.h"
 #import "CLTextInputCell.h"
-//#import "CLNewEntryEffectImageCell.h"
-//#import "CLNewEntryEffectTextCell.h"
 
 #import "CLTagField.h"
 #import "SMTag.h"
@@ -52,7 +49,6 @@
 @property (nonatomic, strong) NSMutableArray *allTagsProp;
 @property (nonatomic, strong) NSMutableArray *allTagsLines;
 
-
 @property (nonatomic, strong) NSMutableArray <NSString*> *tags;
 
 @property (nonatomic, strong) CLInfoModel *infoModel;
@@ -62,9 +58,6 @@
 @property (nonatomic, strong) NSMutableArray <CLPerformModel*> *performModelList;
 @property (nonatomic, strong) NSMutableArray <CLNotesModel*> *notesModelList;
 
-//@property (nonatomic, strong) CLTableHeader *tableHeader;
-//@property (nonatomic, assign) BOOL viewIsShowing;
-
 @property (nonatomic, strong) UITextField *titleTF;
 
 @property (nonatomic, copy) NSString *entryTitle;
@@ -73,14 +66,7 @@
 
 @property (nonatomic, assign) NSInteger prepSection;
 
-@property (nonatomic, assign) BOOL lastRowReordered;
-@property (nonatomic, assign) BOOL isCreatingNewEntry;
 @end
-
-BOOL foldingBooleans[5] = {YES, YES, YES, YES, YES};
-
-BOOL editingBooleans[5] = {YES, YES, YES, YES, YES};
-
 
 @implementation CLNewEntryVC
 
@@ -264,6 +250,11 @@ BOOL editingBooleans[5] = {YES, YES, YES, YES, YES};
                 break;
         }
     }
+    // 如果模型数组中是空的,则自动生成一个空白模型放入数组中.
+    if (_propModelList.count == 0) {
+        CLPropModel *model = [CLPropModel propModel];
+        [_propModelList addObject:model];
+    }
     
     return _propModelList;
 }
@@ -292,6 +283,11 @@ BOOL editingBooleans[5] = {YES, YES, YES, YES, YES};
                 break;
         }
     }
+    // 如果模型数组中是空的,则自动生成一个空白模型放入数组中.
+    if (_prepModelList.count == 0) {
+        CLPrepModel *model = [CLPrepModel prepModel];
+        [_prepModelList addObject:model];
+    }
     return _prepModelList;
 }
 
@@ -306,6 +302,12 @@ BOOL editingBooleans[5] = {YES, YES, YES, YES, YES};
                 break;
         }
     }
+    // 如果模型数组中是空的,则自动生成一个空白模型放入数组中.
+    if (_performModelList.count == 0) {
+        CLPerformModel *model = [CLPerformModel performModel];
+        [_performModelList addObject:model];
+    }
+    
     return _performModelList;
 }
 
@@ -320,6 +322,12 @@ BOOL editingBooleans[5] = {YES, YES, YES, YES, YES};
                 break;
         }
     }
+    // 如果模型数组中是空的,则自动生成一个空白模型放入数组中.
+    if (_notesModelList.count == 0) {
+        CLNotesModel *model = [CLNotesModel notesModel];
+        [_notesModelList addObject:model];
+    }
+    
     return _notesModelList;
 }
 
@@ -376,10 +384,10 @@ BOOL editingBooleans[5] = {YES, YES, YES, YES, YES};
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-//    self.isShowingViewFirstTime = YES;
-    if (self.isCreatingNewEntry) {
-        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelNewCreation)];
-    }
+////    self.isShowingViewFirstTime = YES;
+//    if (self.isCreatingNewEntry) {
+//        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelNewCreation)];
+//    }
     
     
     [self setTableViewStatus];
@@ -387,6 +395,7 @@ BOOL editingBooleans[5] = {YES, YES, YES, YES, YES};
     [self.tableView setEditing:YES];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cancelTagSelection) name:@"cancelTagSelection" object:nil];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateData) name:kUpdateEntryVCNotification object:nil];
 
 }
@@ -435,14 +444,6 @@ BOOL editingBooleans[5] = {YES, YES, YES, YES, YES};
                                                bundle:nil]
          forCellReuseIdentifier:kNewEntryTextCellID];
     
-//    [self.tableView registerNib:[UINib nibWithNibName:@"CLNewEntryEffectImageCell"
-//                                               bundle:nil]
-//         forCellReuseIdentifier:kNewEntryEffectImageCellID];
-//    
-//    [self.tableView registerNib:[UINib nibWithNibName:@"CLNewEntryEffectTextCell"
-//                                               bundle:nil]
-//         forCellReuseIdentifier:kNewEntryEffectTextCellID];
-    
 }
 
 // 隐藏MBProgreeHUD
@@ -462,11 +463,6 @@ BOOL editingBooleans[5] = {YES, YES, YES, YES, YES};
     //        self.isCreatingNewEntry = NO;
     //        [self performSegueWithIdentifier:kEditingSegue sender:[NSIndexPath indexPathForRow:0 inSection:0]];
     //    }
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    
 }
 
 
@@ -620,7 +616,7 @@ BOOL editingBooleans[5] = {YES, YES, YES, YES, YES};
     switch (indexPath.section) {
         case 0:
         {
-            if (indexPath.section == 0) {
+            {
                 CLTextInputCell *cell = [tableView dequeueReusableCellWithIdentifier:KTextInputCellID];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 
@@ -992,10 +988,8 @@ BOOL editingBooleans[5] = {YES, YES, YES, YES, YES};
     }
 
     if (indexPath.section == 2 || indexPath.section == 3 || indexPath.section == 4 || indexPath.section == 5) {
-        
-        if (indexPath.row > 0) {
-            return YES;
-        }
+
+        return (indexPath.row > 0);
     }
     
     return NO;
@@ -1419,17 +1413,19 @@ BOOL editingBooleans[5] = {YES, YES, YES, YES, YES};
     
     if ([self.navigationController isKindOfClass:[CLNewEntryNavVC class]]) {
         [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:kDismissNewEntryNavVCNotification object:nil]];
-    }
-    
-    if (self.isCreatingNewEntry) {
-        
-        [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"saveNewCreation" object:nil]];
-        
     } else {
-        
         [self.navigationController popViewControllerAnimated:YES];
-        
     }
+//    
+//    if (self.isCreatingNewEntry) {
+//        
+//        [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"saveNewCreation" object:nil]];
+//        
+//    } else {
+//        
+//        [self.navigationController popViewControllerAnimated:YES];
+//        
+//    }
 }
 
 #pragma mark - textField 代理方法

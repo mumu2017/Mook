@@ -13,7 +13,7 @@
 
 #pragma mark - 数据方法
 + (NSMutableArray *)allItems;
-//+ (NSMutableArray <CLShowModel*>*)allShows;
++ (NSMutableArray <CLShowModel*>*)allShows;
 + (NSMutableArray <CLRoutineModel*>*)allRoutines;
 + (NSMutableArray <CLIdeaObjModel*>*)allIdeas;
 + (NSMutableArray <CLSleightObjModel*>*)allSleights;
@@ -23,8 +23,8 @@
 + (void)updateRoutine:(CLRoutineModel *)routineModel;
 + (void)deleteRoutine:(CLRoutineModel *)routineModel;
 
-//+ (void)updateShow:(CLShowModel *)showModel;
-//+ (void)deleteShow:(CLShowModel *)showModel;
++ (void)updateShow:(CLShowModel *)showModel;
++ (void)deleteShow:(CLShowModel *)showModel;
 
 + (void)updateIdea:(CLIdeaObjModel *)ideaObjModel;
 + (void)deleteIdea:(CLIdeaObjModel *)ideaObjModel;
@@ -40,6 +40,7 @@
 
 #pragma mark - 标签方法
 + (NSMutableArray *)allTags;
++ (NSMutableArray *)allTagsShow;
 + (NSMutableArray *)allTagsIdea;
 + (NSMutableArray *)allTagsRoutine;
 + (NSMutableArray *)allTagsSleight;

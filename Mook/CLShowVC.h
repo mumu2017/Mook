@@ -9,20 +9,10 @@
 #import <UIKit/UIKit.h>
 @class CLShowModel, CLShowVC;
 
-@protocol CLShowVCDelegate <NSObject>
-
-@optional
-- (void)showVCDidFinishEditingShow:(CLShowVC *)showVC withShow:(CLShowModel *)show;
-
-@end
-
 @interface CLShowVC : UITableViewController
 
 @property (nonatomic, strong) CLShowModel *showModel;
 
-@property (nonatomic, strong) NSIndexPath *dataPath;
-
-@property (nonatomic, weak) id<CLShowVCDelegate> delegate;
-
+@property (nonatomic, strong) NSDate *date;
 
 @end

@@ -30,6 +30,4 @@
 @property (nonatomic, strong) NSMutableArray *thumbs;
 @property (nonatomic, strong) NSMutableArray *assets;
 
-@property (nonatomic, strong) ALAssetsLibrary *ALAssetsLibrary;
-
 @end

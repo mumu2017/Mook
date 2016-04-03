@@ -8,20 +8,21 @@
 
 #import "CLShowVC.h"
 #import "CLShowModel.h"
+#import "CLContentVC.h"
+#import "CLNewShowVC.h"
 
-#import "CLListImageCell.h"
-
+#import "CLOneLabelDisplayCell.h"
+#import "CLOneLabelImageDisplayCell.h"
 #import "CLNewShowVC.h"
 
 #import "CLRoutineModel.h"
 #import "CLInfoModel.h"
 #import "CLEffectModel.h"
 
-#import "CLTableBackView.h"
+@interface CLShowVC ()<SWTableViewCellDelegate>
 
-@interface CLShowVC ()<SWTableViewCellDelegate, CLNewShowVCDelegate>
+@property (nonatomic, strong) NSMutableArray *routineModelList;
 
-@property (nonatomic, strong) CLTableBackView *tableBackView;
 
 @end
 
@@ -35,140 +36,198 @@
     return _showModel;
 }
 
-- (CLTableBackView *)tableBackView {
-    if (!_tableBackView) {
-        _tableBackView = [CLTableBackView tableBackView];
+- (NSMutableArray *)routineModelList {
+    if (!_routineModelList) {
+        _routineModelList = [self.showModel getRountineModelList];
     }
-    return _tableBackView;
+    return _routineModelList;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.tableView.allowsMultipleSelection = NO;
 
-    self.tableView.rowHeight = kListCellHeight;
-
-    self.tableView.backgroundView = self.tableBackView;
-    self.tableBackView.hidden = !(self.showModel.openerShow.count == 0 && self.showModel.middleShow.count == 0 && self.showModel.endingShow.count == 0);
+    self.title = @"演出";
+    self.tableView.estimatedRowHeight = 44;
     
     self.tableView.tableFooterView = [UIView new];
-    
-    self.tableView.backgroundColor = kDisplayBgColor;
-    
-    [self.tableView registerNib:[UINib nibWithNibName:@"CLListImageCell"
+    self.tableView.allowsSelection = NO;
+
+    self.tableView.backgroundColor = [UIColor whiteColor];
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+
+    [self.tableView registerNib:[UINib nibWithNibName:@"CLOneLabelImageDisplayCell"
                                                bundle:nil]
-         forCellReuseIdentifier:kListImageCellID];
+         forCellReuseIdentifier:kOneLabelImageDisplayCell];
+    
+    [self.tableView registerNib:[UINib nibWithNibName:@"CLOneLabelDisplayCell"
+                                               bundle:nil]
+         forCellReuseIdentifier:kOneLabelDisplayCell];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(update) name:kUpdateDataNotification
+                                               object:nil];
 
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void) update {
+    // 重新刷新所有数据
+    [self.tableView reloadData];
+//    // 设置图片数组为nil, 这样在懒加载的时候就可以重新刷新图片
+//    self.photos = nil;
+//    self.thumbs = nil;
 }
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 
-    return 3;
+    return 4;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
     NSInteger number;
-    
     switch (section) {
         case 0:
-            number = self.showModel.openerShow.count;
+            number = 1;
             break;
-            
+          
         case 1:
-            number = self.showModel.middleShow.count;
+            number = 3;
             break;
             
         case 2:
-            number = self.showModel.endingShow.count;
+            number = 1;
+            break;
+            
+        case 3:
+            number = self.routineModelList.count;
             break;
             
         default:
             break;
     }
-    
     return number;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    CLListImageCell *cell = [tableView dequeueReusableCellWithIdentifier:kListImageCellID forIndexPath:indexPath];
-    
-    return cell;
-    
-}
-
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    CLListImageCell *listCell = (CLListImageCell *)cell;
-    
-    NSString *imageName, *name, *effect;
-    
-    CLRoutineModel *model;
     switch (indexPath.section) {
         case 0:
-            model = self.showModel.openerShow[indexPath.row];
-            break;
+        {
+            CLOneLabelDisplayCell *cell = [self.tableView dequeueReusableCellWithIdentifier:kOneLabelDisplayCell forIndexPath:indexPath];
             
+            NSString *title;
+            if (self.showModel.name.length > 0) {
+                title = self.showModel.name;
+            } else {
+                title = @"请编辑标题";
+            }
+            
+            NSAttributedString *titleString = [NSString titleString:title withDate:self.date];
+
+            cell.contentLabel.attributedText = titleString;
+            cell.contentLabel.textAlignment = NSTextAlignmentCenter;
+            
+            return cell;
+        }
         case 1:
-            model = self.showModel.middleShow[indexPath.row];
-            break;
-            
+        {
+            UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+            return cell;
+        }
         case 2:
-            model = self.showModel.endingShow[indexPath.row];
+        {
+            if (self.showModel.effectModel.isWithVideo) {
+                
+                CLOneLabelImageDisplayCell * cell = [self.tableView dequeueReusableCellWithIdentifier:kOneLabelImageDisplayCell];
+                
+                cell.contentLabel.attributedText = [self.showModel.effectModel.effect styledString];
+                [cell.imageButton addTarget:self action:@selector(showPhotoBrowser:) forControlEvents:UIControlEventTouchUpInside];
+                cell.imageButton.tag = 0; // effectModel肯定是第一张图片或视频,所以作为图片数组中的Index,tag = 0;
+                [cell setImageWithVideoName:self.showModel.effectModel.video];
+                
+                return cell;
+            } else if (self.showModel.effectModel.isWithImage) {
+                
+                CLOneLabelImageDisplayCell * cell = [self.tableView dequeueReusableCellWithIdentifier:kOneLabelImageDisplayCell];
+                
+                cell.contentLabel.attributedText = [self.showModel.effectModel.effect styledString];
+                [cell.imageButton addTarget:self action:@selector(showPhotoBrowser:) forControlEvents:UIControlEventTouchUpInside];
+                cell.imageButton.tag = 0;
+                [cell setImageWithName:self.showModel.effectModel.image];
+                
+                return cell;
+                
+            } else {
+                CLOneLabelDisplayCell *cell = [self.tableView dequeueReusableCellWithIdentifier:kOneLabelDisplayCell forIndexPath:indexPath];
+                
+                cell.contentLabel.attributedText = [self.showModel.effectModel.effect styledString];
+                
+                return cell;
+            }
+
             break;
+        }
+        case 3:
+        {
+            CLRoutineModel *model = self.routineModelList[indexPath.row];
+            CLEffectModel *effectModel = model.effectModel;
             
+            if (effectModel.isWithVideo) {
+                
+                CLOneLabelImageDisplayCell * cell = [self.tableView dequeueReusableCellWithIdentifier:kOneLabelImageDisplayCell];
+                
+                cell.contentLabel.attributedText = [effectModel.effect styledString];
+                [cell.imageButton addTarget:self action:@selector(showPhotoBrowser:) forControlEvents:UIControlEventTouchUpInside];
+                cell.imageButton.tag = 0; // effectModel肯定是第一张图片或视频,所以作为图片数组中的Index,tag = 0;
+                [cell setImageWithVideoName:effectModel.video];
+                
+                cell.tintColor = kMenuBackgroundColor;
+                cell.accessoryType = UITableViewCellAccessoryDetailButton;
+            
+                return cell;
+            } else if (effectModel.isWithImage) {
+                
+                CLOneLabelImageDisplayCell * cell = [self.tableView dequeueReusableCellWithIdentifier:kOneLabelImageDisplayCell];
+                
+                cell.contentLabel.attributedText = [effectModel.effect styledString];
+                [cell.imageButton addTarget:self action:@selector(showPhotoBrowser:) forControlEvents:UIControlEventTouchUpInside];
+                cell.imageButton.tag = 0;
+                [cell setImageWithName:effectModel.image];
+                
+                cell.tintColor = kMenuBackgroundColor;
+                cell.accessoryType = UITableViewCellAccessoryDetailButton;
+
+                return cell;
+                
+            } else {
+                CLOneLabelDisplayCell *cell = [self.tableView dequeueReusableCellWithIdentifier:kOneLabelDisplayCell forIndexPath:indexPath];
+                
+                cell.contentLabel.attributedText = [effectModel.effect styledString];
+                
+                cell.tintColor = kMenuBackgroundColor;
+                cell.accessoryType = UITableViewCellAccessoryDetailButton;
+
+                return cell;
+            }
+
+            break;
+        }
         default:
             break;
     }
     
-    listCell.picCnt = model.picCnt;
-    listCell.vidCnt = model.vidCnt;
-    listCell.tags = model.tags;
-    
-//    imageName = [model getImage];
-    name = model.infoModel.name;
-    
-    
-    if (model.isStarred) {
-        if (model.effectModel.isWithEffect) {
-            effect = [NSString stringWithFormat:@"★%@", model.effectModel.effect];
-        } else {
-            effect = @"★";
-        }
-    } else {
-        effect = model.effectModel.effect;
-    }
-    
-//    listCell.imageName = imageName;
-//    listCell.dateLabel.text = date;
-    listCell.titleLabel.text = name;
-    
-    listCell.contentLabel.text = effect;
-    
-    listCell.rightUtilityButtons = [self rightButtons];
-    listCell.delegate = self;
-
+    return nil;
 }
 
-
-- (NSArray *)rightButtons
-{
-    NSMutableArray *rightUtilityButtons = [NSMutableArray new];
-    [rightUtilityButtons sw_addUtilityButtonWithColor:[UIColor redColor] title:@"删除"];
-    //    [rightUtilityButtons sw_addUtilityButtonWithColor:
-    //     [UIColor colorWithRed:1.0f green:0.231f blue:0.188 alpha:1.0f]
-    //                                                title:@"setting"];
-    //    [rightUtilityButtons sw_addUtilityButtonWithColor:[UIColor grayColor] icon:[UIImage imageNamed:@"setting"]];
-    
-    return rightUtilityButtons;
+- (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath {
+    // show full routine
+    [self performSegueWithIdentifier:kShowToRoutineSegue sender:indexPath];
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
@@ -196,11 +255,13 @@
         
         NSString *sectionTitle;
         if (section == 0) {
-            sectionTitle = @"开场表演";
+            sectionTitle = @"演出名称";
         } else if (section == 1) {
-            sectionTitle = @"中场表演";
+            sectionTitle = @"演出信息";
         } else if (section == 2) {
-            sectionTitle = @"终场表演";
+            sectionTitle = @"演出说明";
+        } else if (section == 3) {
+            sectionTitle = @"演出流程";
         }
         
         label.text = sectionTitle;
@@ -219,122 +280,24 @@
     return kLabelHeight;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    [self performSegueWithIdentifier:kShowToRoutineSegue sender:indexPath];
-}
-
-
 #pragma mark - SWTableViewDelegate
-
-- (void)swipeableTableViewCell:(SWTableViewCell *)cell didTriggerRightUtilityButtonWithIndex:(NSInteger)index
-{
-    switch (index) {
-        case 0:
-        {
-            NSIndexPath *path = [self.tableView indexPathForCell:cell];
-            
-            switch (path.section) {
-                case 0:
-                    [self.showModel.openerShow removeObjectAtIndex:path.row];
-                    break;
-                    
-                case 1:
-                    [self.showModel.middleShow removeObjectAtIndex:path.row];
-                    break;
-                    
-                case 2:
-                    [self.showModel.endingShow removeObjectAtIndex:path.row];
-                    break;
-                    
-                default:
-                    break;
-            }
-            
-            [self.tableView deleteRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationFade];
-            
-            self.tableBackView.hidden = !(self.showModel.openerShow.count == 0 && self.showModel.middleShow.count == 0 && self.showModel.endingShow.count == 0);
-            
-            dispatch_async(dispatch_get_global_queue(0, 0), ^{
-//                [NSKeyedArchiver archiveRootObject:[(AppDelegate *)[[UIApplication sharedApplication] delegate] showModelList] toFile:kShowPath];
-            });
-            
-            break;
-        }
-        case 1:
-        {
-  
-            break;
-        }
-            
-        default:
-            break;
-    }
-}
-
-- (BOOL)swipeableTableViewCellShouldHideUtilityButtonsOnSwipe:(SWTableViewCell *)cell
-{
-    // allow just one cell's utility button to be open at once
-    return YES;
-}
-
-- (BOOL)swipeableTableViewCell:(SWTableViewCell *)cell canSwipeToState:(SWCellState)state
-{
-    switch (state) {
-        case 1:
-            // set to NO to disable all left utility buttons appearing
-            return NO;
-            break;
-        case 2:
-            // set to NO to disable all right utility buttons appearing
-            return YES;
-            break;
-        default:
-            break;
-    }
-    
-    return YES;
-}
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
-//    id destVC = [segue destinationViewController];
-//    if ([destVC isKindOfClass:[CLRoutineVC class]]) {
-//        CLRoutineVC *vc = (CLRoutineVC *)destVC;
-////        vc.delegate = self;
-//        vc.hidesBottomBarWhenPushed = YES;
-//        
-//        if ([sender isKindOfClass:[NSIndexPath class]]) {
-//            NSIndexPath *path = (NSIndexPath *)sender;
-//            vc.dataPath = path;
-//            
-//            CLRoutineModel *model;
-//            if (path.section == 0) {
-//                model = self.showModel.openerShow[path.row];
-//            } else if (path.section == 1) {
-//                model = self.showModel.middleShow[path.row];
-//            } else if (path.section == 2) {
-//                model = self.showModel.endingShow[path.row];
-//            }
-//            
-//            vc.routineModel = model;
-//            vc.title = vc.routineModel.infoModel.name;
-//        }
-//        
-//    } else if ([destVC isKindOfClass:[CLNewShowVC class]]) {
-//        CLNewShowVC *vc = (CLNewShowVC *)destVC;
-//        vc.showModel = self.showModel;
-//        vc.delegate = self;
-//        vc.hidesBottomBarWhenPushed = YES;
-//    }
-}
+    id destVC = [segue destinationViewController];
+    if ([destVC isKindOfClass:[CLContentVC class]]) {
+        CLContentVC *vc = (CLContentVC *)destVC;
 
-- (void)newShowVC:(CLNewShowVC *)newShowVC didSaveShow:(CLShowModel *)showModel {
-    [self.tableView reloadData];
-    self.tableBackView.hidden = !(self.showModel.openerShow.count == 0 && self.showModel.middleShow.count == 0 && self.showModel.endingShow.count == 0);
-
-    if ([self.delegate respondsToSelector:@selector(showVCDidFinishEditingShow:withShow:)]) {
-        [self.delegate showVCDidFinishEditingShow:self withShow:self.showModel];
+        if ([sender isKindOfClass:[NSIndexPath class]]) {
+            NSIndexPath *path = (NSIndexPath *)sender;
+            CLRoutineModel *model = self.routineModelList[path.row];
+            vc.contentType = kContentTypeRoutine;
+            vc.routineModel = model;
+            vc.date = model.date;
+        }
+    } else if ([destVC isKindOfClass:[CLNewShowVC class]]) {
+        CLNewShowVC *vc = (CLNewShowVC *)destVC;
+        vc.showModel = self.showModel;
     }
 }
 

@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-@class CLPropModel, CLPropInputVC, CLEdtingManageVC;
+@class CLPropModel, CLPropInputVC;
 
 @protocol CLPropInputVCDelegate <NSObject>
 
@@ -24,8 +24,6 @@
 @property (nonatomic, strong) CLPropModel *propModel;
 
 @property (nonatomic, weak) id<CLPropInputVCDelegate> delegate;
-
-@property (nonatomic, strong) CLEdtingManageVC *manageVC;
 
 @property (nonatomic, assign) BOOL isEditingExistingProp;
 @end

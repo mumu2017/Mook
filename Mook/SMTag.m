@@ -15,12 +15,12 @@
 {
     self = [super init];
     if (self) {
-        self.backgroundColor = [UIColor blackColor];
-        [self setTitleColor:[UIColor whiteColor] forState:UIControlStateDisabled];
+        self.backgroundColor = kMenuBackgroundColor;
+        [self setTitleColor:kTintColor forState:UIControlStateDisabled];
         self.titleLabel.font    = kFontSys14;
         self.layer.cornerRadius = 11;
         self.layer.masksToBounds= YES;
-        self.layer.borderColor  = [UIColor blackColor].CGColor;
+        self.layer.borderColor  = [UIColor whiteColor].CGColor;
         self.layer.borderWidth  = 1;
         self.showsTouchWhenHighlighted = YES;
         
@@ -40,12 +40,12 @@
 -(id)initWithTag:(NSString *)tag{
     if(self = [super init]){
 
-        self.backgroundColor = [UIColor blackColor];
-        [self setTitleColor:[UIColor whiteColor] forState:UIControlStateDisabled];
+        self.backgroundColor = kMenuBackgroundColor;
+        [self setTitleColor:kTintColor forState:UIControlStateDisabled];
         self.titleLabel.font    = kFontSys14;
         self.layer.cornerRadius = 11;
         self.layer.masksToBounds= YES;
-        self.layer.borderColor  = [UIColor blackColor].CGColor;
+        self.layer.borderColor  = [UIColor whiteColor].CGColor;
         self.layer.borderWidth  = 1;
         self.showsTouchWhenHighlighted = YES;
         

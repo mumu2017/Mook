@@ -119,7 +119,6 @@
     } else {
         return kDefaultTitleRoutine;
     }
-    
 }
 
 - (NSAttributedString *)getContent {

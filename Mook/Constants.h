@@ -34,8 +34,17 @@ typedef enum {
     kEditingContentTypeRoutine,
     kEditingContentTypeSleight,
     kEditingContentTypeProp,
-    kEditingContentTypeLines
+    kEditingContentTypeLines,
+    kEditingContentTypeShow
 } EditingContentType;
+
+typedef enum {
+    kEditingModeEffect = 0,
+    kEditingModeProp,
+    kEditingModePrep,
+    kEditingModePerform,
+    kEditingModeNotes,
+} EditingMode;
 
 
 #define kDataListAll   [(AppDelegate *)[[UIApplication sharedApplication] delegate] allItems]
@@ -47,7 +56,7 @@ typedef enum {
 #define kDataListLines   [(AppDelegate *)[[UIApplication sharedApplication] delegate] linesObjModelList]
 
 #define kDataListTagAll   [(AppDelegate *)[[UIApplication sharedApplication] delegate] allTags]
-
+#define kDataListTagShow   [(AppDelegate *)[[UIApplication sharedApplication] delegate] allTagsShow]
 #define kDataListTagIdea   [(AppDelegate *)[[UIApplication sharedApplication] delegate] allTagsIdea]
 #define kDataListTagRoutine   [(AppDelegate *)[[UIApplication sharedApplication] delegate] allTagsRoutine]
 #define kDataListTagSleight   [(AppDelegate *)[[UIApplication sharedApplication] delegate] allTagsSleight]
@@ -134,8 +143,15 @@ typedef enum {
 #define kSegueTagToListSegue    @"tagToListSegue"
 
 #define kSegueListToContent @"listToContentSegue"
+#define kSegueListToShow   @"listToShowSegue"
+#define kSegueShowToRoutine    @"showToRoutineSegue"
 #define kSegueHomeToNewEntry @"homeToNewEntrySegue"
 #define kSegueListToNewEntry   @"listToNewEntrySegue"
+#define kSegueListToNewShow     @"listToNewShowSegue"
+#define kSegueHomeToNewShow    @"homeToNewShowSegue"
+#define KSegueListToNewShow     @"listToNewShowSegue"
+#define kSegueNewShowToEditingSegue @"newShowToEditingSegue"
+#define kSegueNewShowToRoutineChoose   @"newShowToRoutineChooseSegue"
 
 #define kEditingSegue   @"editingSegue"
 #define kPropInputSegue @"propInputSegue"
@@ -350,7 +366,7 @@ typedef enum {
 
 #define kBarTintColor     [UIColor colorWithRed:247/255.0 green:247/255.0 blue:247/255.0 alpha:1.0]
 
-#define kTintColor          [UIColor colorWithContrastingBlackOrWhiteColorOn:[UIColor flatMintColorDark] isFlat:YES]    // FlatColor
+#define kTintColor          [UIColor colorWithContrastingBlackOrWhiteColorOn:kMenuBackgroundColor isFlat:YES]    // FlatColor
 #define kMenuBackgroundColor    [UIColor flatMintColorDark]
 //#define kTintColor     [UIColor colorWithRed:248/255.0 green:128/255.0 blue:4/255.0 alpha:1.0] //黄色
 //#define kMenuBackgroundColor    [UIColor colorWithRed:26/255.0 green:29/255.0 blue:33/255.0 alpha:1.0]
@@ -384,6 +400,7 @@ typedef enum {
 
 #pragma mark - NSStrings
 // NSString
+#define kTypeShow    @"show"
 #define kTypeRoutine    @"routine"
 #define kTypeIdea    @"idea"
 #define kTypeSleight    @"sleight"
@@ -426,6 +443,7 @@ typedef enum {
 #define kUpdateLinesNotification @"UpdateLinesNotification"
 #define kUpdateTagsNotification @"UpdateTagsNotification"
 
+#define kDismissNewShowNavVCNotification   @"kDismissNewShowNavVCNotification"
 #define kDismissNewEntryNavVCNotification   @"kDismissNewEntryNavVCNotification"
 #define kDismissSettingNavVCNotification  @"kDismissSettingNavVCNotification"
 

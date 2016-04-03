@@ -16,7 +16,7 @@
 
 #import "CLTableBackView.h"
 
-@interface CLShowListVC ()<CLNewShowVCDelegate, SWTableViewCellDelegate, CLShowVCDelegate>
+@interface CLShowListVC ()<SWTableViewCellDelegate>
 
 @property (nonatomic, strong) CLTableBackView *tableBackView;
 
@@ -105,7 +105,7 @@
         // 创建一个新的Model,传递给newShowVC,并添加到ModelList中
         CLShowModel *model = [CLShowModel showModel];
         model.name = nameTF.text;
-        model.time = timeTF.text;
+        model.duration = timeTF.text;
         
         // 将新增的model放在数组第一个,这样在现实到list中时,新增的model会显示在最上面
         [[(AppDelegate *)[[UIApplication sharedApplication] delegate] showModelList] insertObject:model atIndex:0];
@@ -164,7 +164,7 @@
         textField.font = kFontSys16;
 //        textField.borderStyle = UITextBorderStyleRoundedRect;
 
-        textField.text = model.time;
+        textField.text = model.duration;
         textField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(alertTextFieldDidChange:) name:UITextFieldTextDidChangeNotification object:textField];
@@ -176,7 +176,7 @@
         UITextField *timeTF = alertController.textFields[1];
 
         model.name = nameTF.text;
-        model.time = timeTF.text;
+        model.duration = timeTF.text;
         
         [[NSNotificationCenter defaultCenter] removeObserver:self name:UITextFieldTextDidChangeNotification object:nil];
         
@@ -242,21 +242,20 @@
     
     CLShowModel *model = self.showModelList[indexPath.row];
     
-    listCell.picCnt = model.picCnt;
-    listCell.vidCnt = model.vidCnt;
+
     listCell.tags = model.tags;
     
-    imageName = [model getImage];
+//    imageName = [model getImage];
     
-    NSString *time = [model.time stringByAppendingString:@"分钟"];
-    NSInteger count = model.openerShow.count + model.middleShow.count + model.endingShow.count;
-    
-    if (model.isStarred) {
-        effect = [NSString stringWithFormat:@"★时长:%@  流程数:%ld个", time, (long)count];
-    } else {
-        effect = [NSString stringWithFormat:@"时长:%@  流程数:%ld个", time, (long)count];
-        
-    }
+////    NSString *time = [model.time stringByAppendingString:@"分钟"];
+//    NSInteger count = model.openerShow.count + model.middleShow.count + model.endingShow.count;
+//    
+//    if (model.isStarred) {
+//        effect = [NSString stringWithFormat:@"★时长:%@  流程数:%ld个", time, (long)count];
+//    } else {
+//        effect = [NSString stringWithFormat:@"时长:%@  流程数:%ld个", time, (long)count];
+//        
+//    }
     
     name = model.name;
     
@@ -366,20 +365,19 @@
     
     if ([destVC isKindOfClass:[CLShowVC class]]) {
         CLShowVC *vc = (CLShowVC *)destVC;
-        vc.delegate = self;
+//        vc.delegate = self;
         vc.hidesBottomBarWhenPushed = YES;
 
         if ([sender isKindOfClass:[UITableViewCell class]]) {
             UITableViewCell *cell = (UITableViewCell *)sender;
             NSIndexPath *path = [self.tableView indexPathForCell:cell];
-            vc.dataPath = path;
+//            vc.dataPath = path;
             vc.showModel = self.showModelList[path.row];
             vc.title = vc.showModel.name;
         }
         
     } else if ([destVC isKindOfClass:[CLNewShowVC class]]) {
         CLNewShowVC *vc = (CLNewShowVC *)destVC;
-        vc.delegate = self;
         vc.hidesBottomBarWhenPushed = YES;
         
         vc.showModel = [(AppDelegate *)[[UIApplication sharedApplication] delegate] showModelList][0];

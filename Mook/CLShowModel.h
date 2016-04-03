@@ -7,29 +7,29 @@
 //
 
 #import <Foundation/Foundation.h>
-@class CLRoutineModel;
+@class CLRoutineModel, CLEffectModel;
 
 @interface CLShowModel : NSObject
 
-@property (nonatomic, copy) NSString *date;
+@property (nonatomic, copy) NSDate *date;
 @property (nonatomic, copy) NSString *timeStamp;
 
 @property (nonatomic, strong) NSMutableArray <NSString*> *tags;
+
 @property (nonatomic, assign) BOOL isStarred;
 
 @property (nonatomic, copy) NSString *name;
+@property (nonatomic, copy) NSString *place;
+@property (nonatomic, copy) NSString *duration;
+@property (nonatomic, copy) NSString *audianceCount;
+@property (nonatomic, strong) CLEffectModel *effectModel;
 
-@property (nonatomic, assign) NSString *time;
-
-@property (nonatomic, strong) NSMutableArray <CLRoutineModel*> *openerShow;
-@property (nonatomic, strong) NSMutableArray <CLRoutineModel*> *middleShow;
-@property (nonatomic, strong) NSMutableArray <CLRoutineModel*> *endingShow;
-
-@property (nonatomic, assign) NSInteger vidCnt;
-@property (nonatomic, assign) NSInteger picCnt;
+@property (nonatomic, strong) NSMutableArray *routineTimeStampList;
 
 + (instancetype)showModel;
-- (NSString *)getImage;
 
-
+- (NSMutableArray *)getRountineModelList;
+- (UIImage *)getImage;
+- (NSString *)getTitle;
+- (NSAttributedString *)getContent;
 @end

@@ -8,6 +8,7 @@
 
 #import "CLShowModel.h"
 #import "CLRoutineModel.h"
+#import "CLEffectModel.h"
 
 @implementation CLShowModel
 
@@ -33,13 +34,10 @@
     return _timeStamp;
 }
 
-- (NSString *)date {
+- (NSDate *)date {
     
     if (_date == nil) {
-        NSDate *todayDate = [NSDate date]; // get today date
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init]; // here we create NSDateFormatter object for change the Format of date..
-        [dateFormatter setDateFormat:@"yyyy-MM-dd"]; //Here we can set the format which we need
-        _date = [dateFormatter stringFromDate:todayDate];// here convert date in
+        _date = [NSDate date]; // get today date
     }
     
     return _date;
@@ -53,122 +51,63 @@
     return _tags;
 }
 
-- (NSMutableArray<CLRoutineModel *> *)openerShow {
-    if (!_openerShow) {
-        _openerShow = [NSMutableArray array];
+- (CLEffectModel *)effectModel {
+    if (!_effectModel) {
+        _effectModel = [CLEffectModel effectModel];
     }
-    return _openerShow;
+    return _effectModel;
 }
 
-- (NSMutableArray<CLRoutineModel *> *)middleShow {
-    if (!_middleShow) {
-        _middleShow = [NSMutableArray array];
+- (NSMutableArray *)routineTimeStampList {
+    if (!_routineTimeStampList) {
+        _routineTimeStampList = [NSMutableArray array];
     }
-    return _middleShow;
+    return _routineTimeStampList;
 }
 
-- (NSMutableArray<CLRoutineModel *> *)endingShow {
-    if (!_endingShow) {
-        _endingShow = [NSMutableArray array];
-    }
-    return _endingShow;
-}
-
-- (NSString *)getImage {
-    NSString *imageName = nil;
-    
-    for (CLRoutineModel *model in self.openerShow) {
-        imageName = [model getImage];
-        if (imageName) break;
-    }
-    
-    if (imageName == nil) {
-        for (CLRoutineModel *model in self.middleShow) {
-            imageName = [model getImage];
-            if (imageName) break;
+// 根据timeStamp来获取routineModel;
+- (NSMutableArray *)getRountineModelList {
+    NSMutableArray *arrM = [NSMutableArray array];
+    for (NSString *timeStamp in self.routineTimeStampList) {
+        for (CLRoutineModel *model in kDataListRoutine) {
+            if ([model.timeStamp isEqualToString:timeStamp]) {
+                [arrM addObject:model];
+                break;
+            }
         }
     }
-    
-    if (imageName == nil) {
-        for (CLRoutineModel *model in self.endingShow) {
-            imageName = [model getImage];
-            if (imageName) break;
-        }
-    }
-
-    return imageName;
+    return arrM;
 }
 
-- (NSInteger)picCnt {
-    _picCnt = 0;
-    
-    for (CLRoutineModel *model in self.openerShow) {
-        _picCnt += model.picCnt;
+- (NSString *)getTitle {
+    if (self.name.length > 0) {
+        return self.name;
+    } else {
+        return kDefaultTitleShow;
     }
-    
-
-    for (CLRoutineModel *model in self.middleShow) {
-        _picCnt += model.picCnt;
-
-    }
-
-    for (CLRoutineModel *model in self.endingShow) {
-        _picCnt += model.picCnt;
-
-    }
-    
-    return _picCnt;
 }
 
-- (NSInteger)vidCnt {
-    _vidCnt = 0;
-    
-    for (CLRoutineModel *model in self.openerShow) {
-        _vidCnt += model.vidCnt;
+- (UIImage *)getImage {
+    UIImage *image;
+    NSArray *array = [self getRountineModelList];
+    for (CLRoutineModel *model in array) {
+        image = [model getImage];
     }
+    return image;
+}
+
+- (NSAttributedString *)getContent {
     
+    NSString *effect;
     
-    for (CLRoutineModel *model in self.middleShow) {
-        _vidCnt += model.vidCnt;
+    if (self.effectModel.isWithEffect) {
+        effect = [NSString stringWithFormat:@"  %@", self.effectModel.effect];
         
+    } else {
+        effect = @"";
     }
     
-    for (CLRoutineModel *model in self.endingShow) {
-        _vidCnt += model.vidCnt;
-        
-    }
-    
-    return _vidCnt;
+    return [effect contentStringWithDate:[NSString getDateString:self.date]];
 }
-
-//- (void)encodeWithCoder:(NSCoder *)coder
-//{
-//    [coder encodeObject:self.date forKey:kDateKey];
-//    [coder encodeObject:self.tags forKey:kTagListKey];
-//    [coder encodeObject:self.name forKey:kShowNameKey];
-//    [coder encodeObject:self.time forKey:kShowDurationKey];
-//
-//    [coder encodeObject:self.openerShow forKey:kShowOpenerKey];
-//    [coder encodeObject:self.middleShow forKey:kShowMiddleKey];
-//    [coder encodeObject:self.endingShow forKey:kShowEndingKey];
-//    
-//}
-//
-//- (instancetype)initWithCoder:(NSCoder *)coder
-//{
-//    self = [super init];
-//    if (self) {
-//        self.date = [coder decodeObjectForKey:kDateKey];
-//        self.tags = [coder decodeObjectForKey:kTagListKey];
-//        self.name = [coder decodeObjectForKey:kShowNameKey];
-//        self.time = [coder decodeObjectForKey:kShowDurationKey];
-//        
-//        self.openerShow = [coder decodeObjectForKey:kShowOpenerKey];
-//        self.middleShow = [coder decodeObjectForKey:kShowMiddleKey];
-//        self.endingShow = [coder decodeObjectForKey:kShowEndingKey];
-//
-//    }
-//    return self;
-//}
 
 @end

@@ -8,15 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-
-
 @class CLNewEntryVC;
 @class CLRoutineModel, CLIdeaObjModel, CLSleightObjModel, CLPropObjModel, CLLinesObjModel;
 
 @interface CLNewEntryVC : UITableViewController
 
 @property (nonatomic, assign) EditingContentType editingContentType;
-
 @property (nonatomic, strong) CLRoutineModel *routineModel;
 @property (nonatomic, strong) CLIdeaObjModel *ideaObjModel;
 @property (nonatomic, strong) CLSleightObjModel *sleightObjModel;

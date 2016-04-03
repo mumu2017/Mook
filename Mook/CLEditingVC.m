@@ -25,8 +25,6 @@
 #import "CLInfoModel.h"
 
 #import <MobileCoreServices/MobileCoreServices.h> // needed for video types
-
-#import "CLEdtingManageVC.h"
 #import "XLPagerTabStripViewController.h"
 
 @interface CLEditingVC ()<CLToolBarDelegate, CLQuickInputBarDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIPickerViewDataSource, UIPickerViewDelegate, XLPagerTabStripChildItem>
@@ -347,7 +345,7 @@
     
     self.editTextView.inputAccessoryView = self.toolBar;
     self.editTextView.delegate = self;
-    
+    self.editTextView.tintColor = kMenuBackgroundColor;
     [self.editTextView addPlaceHolderWithText:@"写点儿什么吧..." andFont:kFontSys16];
     
     if ([self.editTextView hasText]) {
@@ -401,15 +399,11 @@
 
     [super viewWillAppear:animated];
     
-    if (self.manageVC.isEditing && [self.editTextView isFirstResponder] == NO) {
+    if ([self.editTextView isFirstResponder] == NO) {
         [self.editTextView becomeFirstResponder];
-    } else {
-        if (!self.manageVC.isEditing && [self.editTextView isFirstResponder] == YES) {
-            [self.editTextView resignFirstResponder];
 
-        }
     }
-    
+        
     if ([self.toolBar.imageButton backgroundImageForState:UIControlStateNormal] == nil) {
         [self setToolBarImage];
     }
@@ -431,9 +425,7 @@
 
 // Called when the UIKeyboardDidShowNotification is sent.
 - (void)keyboardWillShown:(NSNotification*)aNotification
-{
-    self.manageVC.isEditing = YES;
-    
+{    
     NSDictionary* info = [aNotification userInfo];
 
     CGFloat aniTime = [[info objectForKey:UIKeyboardAnimationDurationUserInfoKey] floatValue];
@@ -462,9 +454,6 @@
 // Called when the UIKeyboardWillHideNotification is sent
 - (void)keyboardWillBeHidden:(NSNotification*)aNotification
 {
-    self.manageVC.isEditing = NO;
-
-    
     UIEdgeInsets contentInsets = UIEdgeInsetsZero;
     self.editTextView.contentInset = contentInsets;
     self.editTextView.scrollIndicatorInsets = contentInsets;

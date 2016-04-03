@@ -375,7 +375,7 @@ static BOOL disableCustomEasing = NO;
     }
     else if (buttonStyle == JGActionSheetButtonStyleCancel) {
         font = [UIFont boldSystemFontOfSize:16.0f];
-        titleColor = [UIColor whiteColor];
+        titleColor = kMenuBackgroundColor;
         
         backgroundColor = kTintColor;
         borderColor = kMenuBackgroundColor;

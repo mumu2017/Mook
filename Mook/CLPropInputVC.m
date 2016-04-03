@@ -13,7 +13,6 @@
 #import "CLInfoModel.h"
 #import "CLPropChooseNavVC.h"
 
-#import "CLEdtingManageVC.h"
 #import "XLPagerTabStripViewController.h"
 
 @interface CLPropInputVC ()<UITextFieldDelegate, CLToolBarDelegate, CLPropChooseNavVCDelegate, XLPagerTabStripChildItem>
@@ -70,34 +69,7 @@
     self.propDetailTextField.delegate = self;
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cancelSelection) name:@"cancelSelection" object:nil];
-    
-    [self registerForKeyboardNotifications];
 }
-
-- (void)registerForKeyboardNotifications
-{
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWillShown:)
-                                                 name:UIKeyboardWillShowNotification object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWillBeHidden:)
-                                                 name:UIKeyboardWillHideNotification object:nil];
-    
-}
-
-// Called when the UIKeyboardDidShowNotification is sent.
-- (void)keyboardWillShown:(NSNotification*)aNotification
-{
-    self.manageVC.isEditing = YES;
-}
-
-// Called when the UIKeyboardWillHideNotification is sent
-- (void)keyboardWillBeHidden:(NSNotification*)aNotification
-{
-    self.manageVC.isEditing = NO;
-}
-
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
@@ -121,15 +93,9 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    if (self.manageVC.isEditing && [self.propNameTextField isFirstResponder] == NO) {
+    if ([self.propNameTextField isFirstResponder] == NO) {
         [self.propNameTextField becomeFirstResponder];
-    } else {
-        if (!self.manageVC.isEditing && [self.propNameTextField isFirstResponder] == YES) {
-            [self.propNameTextField resignFirstResponder];
-            
-        }
     }
-
 }
 
 #pragma mark - Table view data source

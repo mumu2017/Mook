@@ -12,6 +12,9 @@
 
 - (void)awakeFromNib {
     // Initialization code
+    self.titleLabel.font = kBoldFontSys16;
+    self.tintColor = kMenuBackgroundColor;
+
 }
 
 - (void)setEditingContentType:(EditingContentType)editingContentType {
@@ -48,7 +51,6 @@
             break;
     }
     
-    self.titleLabel.font = kBoldFontSys16;
     self.titleLabel.text = title;
 }
 

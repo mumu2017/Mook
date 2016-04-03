@@ -10,7 +10,9 @@
 
 #import "CLDataSaveTool.h"
 #import "CLNewEntryNavVC.h"
+#import "CLNewShowNavVC.h"
 #import "CLContentVC.h"
+#import "CLShowVC.h"
 
 #import "CLListTextCell.h"
 #import "CLListImageCell.h"
@@ -167,10 +169,7 @@
         case kListTypeLines:
             number = self.linesObjModelList.count;
             break;
-//            
-//        case kListTypeTag:
-//            number = self.allItems.count;
-//            break;
+            
         default:
             break;
     }
@@ -196,10 +195,11 @@
                 title = [model getTitle];
                 content = [model getContent];
             } else if ([modelUnknown isKindOfClass:[CLShowModel class]]) {
-//                CLShowModel *model = (CLShowModel *)modelUnknown;
-//                imageName = [model getImage];
-//                title = [model getTitle];
-//                content = [model getContent];
+                CLShowModel *model = (CLShowModel *)modelUnknown;
+                image = [model getImage];
+                iconName = kIconNameShow;
+                title = [model getTitle];
+                content = [model getContent];
             } else if ([modelUnknown isKindOfClass:[CLRoutineModel class]]) {
                 CLRoutineModel *model = (CLRoutineModel *)modelUnknown;
                 image = [model getImage];
@@ -239,10 +239,12 @@
             
         case kListTypeShow:
         {
-//            CLShowModel *model = self.showModelList[indexPath.row];
-//            imageName = [model getImage];
-//            title = [model getTitle];
-//            content = [model getContent];
+            CLShowModel *model = self.showModelList[indexPath.row];
+            image = [model getImage];
+            iconName = kIconNameShow;
+            title = [model getTitle];
+            content = [model getContent];
+            
             break;
         }
         case kListTypeRoutine:
@@ -339,12 +341,12 @@
                 if ([modelUnknown isKindOfClass:[CLIdeaObjModel class]]) {
                     CLIdeaObjModel *model = (CLIdeaObjModel *)modelUnknown;
                     
-                    if (self.tag.length > 0 && self.ideaObjModelList != [(AppDelegate *)[[UIApplication sharedApplication] delegate] ideaObjModelList]) {
+                    if (self.tag.length > 0 && self.ideaObjModelList != kDataListIdea) {
                         [self.ideaObjModelList removeObject:model];
                     }
                     
-                    [[(AppDelegate *)[[UIApplication sharedApplication] delegate] ideaObjModelList] removeObject:model];
-                    [[(AppDelegate *)[[UIApplication sharedApplication] delegate] allItems] removeObject:model];
+                    [kDataListIdea removeObject:model];
+                    [kDataListAll removeObject:model];
                     
                     [self.tableView deleteRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationLeft];
                     
@@ -354,13 +356,30 @@
                     });
 
                     
+                } else if ([modelUnknown isKindOfClass:[CLShowModel class]]) {
+                    CLShowModel *model = (CLShowModel *)modelUnknown;
+                    
+                    [kDataListShow removeObject:model];
+                    [kDataListAll removeObject:model];
+                    
+                    if (self.showModelList != kDataListShow) {
+                        [self.showModelList removeObject:model];
+                    }
+                    
+                    [self.tableView deleteRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationLeft];
+                    
+                    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+                        
+                        [CLDataSaveTool deleteShow:model];
+                    });
+                    
                 } else if ([modelUnknown isKindOfClass:[CLRoutineModel class]]) {
                     CLRoutineModel *model = (CLRoutineModel *)modelUnknown;
                    
-                    [[(AppDelegate *)[[UIApplication sharedApplication] delegate] routineModelList] removeObject:model];
-                    [[(AppDelegate *)[[UIApplication sharedApplication] delegate] allItems] removeObject:model];
+                    [kDataListRoutine removeObject:model];
+                    [kDataListAll removeObject:model];
                     
-                    if (self.routineModelList != [(AppDelegate *)[[UIApplication sharedApplication] delegate] routineModelList]) {
+                    if (self.routineModelList != kDataListRoutine) {
                         [self.routineModelList removeObject:model];
                     }
                     
@@ -374,12 +393,12 @@
                 } else if ([modelUnknown isKindOfClass:[CLSleightObjModel class]]) {
                     CLSleightObjModel *model = (CLSleightObjModel *)modelUnknown;
                     
-                    if (self.tag.length > 0 && self.sleightObjModelList != [(AppDelegate *)[[UIApplication sharedApplication] delegate] sleightObjModelList]) {
+                    if (self.tag.length > 0 && self.sleightObjModelList != kDataListSleight) {
                         [self.sleightObjModelList removeObject:model];
                     }
                     
-                    [[(AppDelegate *)[[UIApplication sharedApplication] delegate] sleightObjModelList] removeObject:model];
-                    [[(AppDelegate *)[[UIApplication sharedApplication] delegate] allItems] removeObject:model];
+                    [kDataListSleight removeObject:model];
+                    [kDataListAll removeObject:model];
                     
                     [self.tableView deleteRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationLeft];
                     
@@ -391,12 +410,12 @@
                 } else if ([modelUnknown isKindOfClass:[CLPropObjModel class]]) {
                     CLPropObjModel *model = (CLPropObjModel *)modelUnknown;
                     
-                    if (self.tag.length > 0 && self.propObjModelList != [(AppDelegate *)[[UIApplication sharedApplication] delegate] propObjModelList]) {
+                    if (self.tag.length > 0 && self.propObjModelList != kDataListProp) {
                         [self.propObjModelList removeObject:model];
                     }
                     
-                    [[(AppDelegate *)[[UIApplication sharedApplication] delegate] propObjModelList] removeObject:model];
-                    [[(AppDelegate *)[[UIApplication sharedApplication] delegate] allItems] removeObject:model];
+                    [kDataListProp removeObject:model];
+                    [kDataListAll removeObject:model];
                     
                     [self.tableView deleteRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationLeft];
                     
@@ -408,12 +427,12 @@
                 } else if ([modelUnknown isKindOfClass:[CLLinesObjModel class]]) {
                     CLLinesObjModel *model = (CLLinesObjModel *)modelUnknown;
                    
-                    if (self.tag.length > 0 && self.linesObjModelList != [(AppDelegate *)[[UIApplication sharedApplication] delegate] linesObjModelList]) {
+                    if (self.tag.length > 0 && self.linesObjModelList != kDataListLines) {
                         [self.linesObjModelList removeObject:model];
                     }
                     
-                    [[(AppDelegate *)[[UIApplication sharedApplication] delegate] linesObjModelList] removeObject:model];
-                    [[(AppDelegate *)[[UIApplication sharedApplication] delegate] allItems] removeObject:model];
+                    [kDataListLines removeObject:model];
+                    [kDataListAll removeObject:model];
                     
                     [self.tableView deleteRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationLeft];
                     
@@ -437,7 +456,7 @@
                 }
                 
                 [[(AppDelegate *)[[UIApplication sharedApplication] delegate] ideaObjModelList] removeObject:model];
-                [[(AppDelegate *)[[UIApplication sharedApplication] delegate] allItems] removeObject:model];
+                [kDataListAll removeObject:model];
                 
                 [self.tableView deleteRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationLeft];
                 
@@ -449,14 +468,35 @@
                 });
                 break;
             }
+            case kListTypeShow:
+            {
+                CLShowModel *model = self.showModelList[path.row];
+
+                [kDataListShow removeObject:model];
+                [kDataListAll removeObject:model];
+                
+                if (self.showModelList != kDataListShow) {
+                    [self.showModelList removeObject:model];
+                }
+                
+                [self.tableView deleteRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationLeft];
+                
+                dispatch_async(dispatch_get_global_queue(0, 0), ^{
+                    
+                    [CLDataSaveTool deleteShow:model];
+                });
+                
+                break;
+            }
+                
             case kListTypeRoutine:
             {
                 CLRoutineModel *model = self.routineModelList[path.row];
                
-                [[(AppDelegate *)[[UIApplication sharedApplication] delegate] routineModelList] removeObject:model];
-                [[(AppDelegate *)[[UIApplication sharedApplication] delegate] allItems] removeObject:model];
+                [kDataListRoutine removeObject:model];
+                [kDataListAll removeObject:model];
                 
-                if (self.routineModelList != [(AppDelegate *)[[UIApplication sharedApplication] delegate] routineModelList]) {
+                if (self.routineModelList != kDataListRoutine) {
                     [self.routineModelList removeObject:model];
                 }
                 
@@ -472,8 +512,8 @@
             case kListTypeSleight:
             {
                 CLSleightObjModel *model = self.sleightObjModelList[path.row];
-                [[(AppDelegate *)[[UIApplication sharedApplication] delegate] sleightObjModelList] removeObject:model];
-                [[(AppDelegate *)[[UIApplication sharedApplication] delegate] allItems] removeObject:model];
+                [kDataListSleight removeObject:model];
+                [kDataListAll removeObject:model];
                 
                 self.tableBackView.hidden = !(self.sleightObjModelList.count == 0);
                 
@@ -491,12 +531,12 @@
             case kListTypeProp:
             {
                 CLPropObjModel *model = self.propObjModelList[path.row];
-                if (self.tag.length > 0 && self.propObjModelList != [(AppDelegate *)[[UIApplication sharedApplication] delegate] propObjModelList]) {
+                if (self.tag.length > 0 && self.propObjModelList != kDataListProp) {
                     [self.propObjModelList removeObject:model];
                 }
                 
-                [[(AppDelegate *)[[UIApplication sharedApplication] delegate] propObjModelList] removeObject:model];
-                [[(AppDelegate *)[[UIApplication sharedApplication] delegate] allItems] removeObject:model];
+                [kDataListProp removeObject:model];
+                [kDataListAll removeObject:model];
                 
                 [self.tableView deleteRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationLeft];
                 
@@ -513,12 +553,12 @@
             case kListTypeLines:
             {
                 CLLinesObjModel *model = self.linesObjModelList[path.row];
-                if (self.tag.length > 0 && self.linesObjModelList != [(AppDelegate *)[[UIApplication sharedApplication] delegate] linesObjModelList]) {
+                if (self.tag.length > 0 && self.linesObjModelList != kDataListLines) {
                     [self.linesObjModelList removeObject:model];
                 }
                 
-                [[(AppDelegate *)[[UIApplication sharedApplication] delegate] linesObjModelList] removeObject:model];
-                [[(AppDelegate *)[[UIApplication sharedApplication] delegate] allItems] removeObject:model];
+                [kDataListLines removeObject:model];
+                [kDataListAll removeObject:model];
                 
                 [self.tableView deleteRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationLeft];
                 
@@ -532,10 +572,7 @@
                 
                 break;
             }
-                //
-                //        case kListTypeTag:
-                //            number = self.allItems.count;
-                //            break;
+   
             default:
                 break;
         }
@@ -548,8 +585,11 @@
 #pragma mark 选中cell跳转
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
    
-    [self performSegueWithIdentifier:kSegueListToContent sender:indexPath];
-    
+    if (self.listType == kListTypeShow) {
+        [self performSegueWithIdentifier:kSegueListToShow sender:indexPath];
+    } else {
+        [self performSegueWithIdentifier:kSegueListToContent sender:indexPath];
+    }
 }
 
 #pragma mark - segue方法
@@ -558,7 +598,6 @@
     if ([destVC isKindOfClass:[CLContentVC class]]) {
         CLContentVC *vc = (CLContentVC *)destVC;
 
-        
         if ([sender isKindOfClass:[NSIndexPath class]]) {
             NSIndexPath *indexPath = (NSIndexPath *)sender;
 
@@ -681,6 +720,19 @@
         } else if (self.editingContentType == kEditingContentTypeLines) {
             vc.linesObjModel = [(AppDelegate *)[[UIApplication sharedApplication] delegate] linesObjModelList][0];
         }
+    } else if ([destVC isKindOfClass:[CLNewShowNavVC class]]) {
+        CLNewShowNavVC *vc = (CLNewShowNavVC *)destVC;
+        vc.showModel = kDataListShow[0];
+        
+    } else if ([destVC isKindOfClass:[CLShowVC class]]) {
+        CLShowVC *vc = (CLShowVC *)destVC;
+        if ([sender isKindOfClass:[NSIndexPath class]]) {
+            NSIndexPath *indexPath = (NSIndexPath *)sender;
+            
+            CLShowModel *model = self.showModelList[indexPath.row];
+            vc.showModel = model;
+            vc.date = model.date;
+        }
     }
 
 }
@@ -694,6 +746,10 @@
             
         case kListTypeIdea:
             [self addNewIdea];
+            break;
+          
+        case kListTypeShow:
+            [self addNewShow];
             break;
             
         case kListTypeRoutine:
@@ -711,10 +767,7 @@
         case kListTypeLines:
             [self addNewLines];
             break;
-            //
-            //        case kListTypeTag:
-            //            number = self.allItems.count;
-            //            break;
+          
         default:
             break;
     }
@@ -722,7 +775,8 @@
 }
 
 - (void)addNewEntry {
-    JGActionSheetSection *section1 = [JGActionSheetSection sectionWithTitle:nil message:nil buttonTitles:@[@"新建灵感", @"新建流程", @"新建技巧", @"新建道具", @"新建梗"] buttonStyle:JGActionSheetButtonStyleDefault];
+    
+    JGActionSheetSection *section1 = [JGActionSheetSection sectionWithTitle:nil message:nil buttonTitles:@[@"新建灵感" , @"新建演出", @"新建流程", @"新建技巧", @"新建道具", @"新建梗"] buttonStyle:JGActionSheetButtonStyleDefault];
     JGActionSheetSection *cancelSection = [JGActionSheetSection sectionWithTitle:nil message:nil buttonTitles:@[@"取消"] buttonStyle:JGActionSheetButtonStyleCancel];
     
     NSArray *sections = @[section1, cancelSection];
@@ -738,15 +792,19 @@
                     [self addNewIdea];
                     break;
                 case 1:
+                    [self addNewShow];
+                    break;
+                    
+                case 2:
                     [self addNewRoutine];
                     break;
-                case 2:
+                case 3:
                     [self addNewSleight];
                     break;
-                case 3:
+                case 4:
                     [self addNewProp];
                     break;
-                case 4:
+                case 5:
                     [self addNewLines];
                     break;
                 default:
@@ -756,7 +814,6 @@
         }
         
         [sheet dismissAnimated:YES];
-
     }];
     
     [sheet showInView:self.navigationController.view animated:YES];
@@ -779,6 +836,24 @@
     }
     
     [self performSegueWithIdentifier:kSegueListToNewEntry sender:nil];
+}
+
+- (void)addNewShow {
+    
+    // 创建一个新的routineModel,传递给newRoutineVC,并添加到routineModelList中
+    CLShowModel *model = [CLShowModel showModel];
+    
+    // 将新增的model放在数组第一个,这样在现实到list中时,新增的model会显示在最上面
+    [kDataListShow insertObject:model atIndex:0];
+    [kDataListAll insertObject:model atIndex:0];
+    
+    // 当有tag的时候,说明是tag页面跳转而来, 新增模型时, 自动添加该tag, 且添加到tag的ModelList中
+    if (self.tag.length > 0 && self.showModelList != kDataListShow) {
+        [model.tags addObject:self.tag];
+        [self.showModelList insertObject:model atIndex:0];
+    }
+    
+    [self performSegueWithIdentifier:kSegueListToNewShow sender:nil];
 }
 
 - (void)addNewRoutine {

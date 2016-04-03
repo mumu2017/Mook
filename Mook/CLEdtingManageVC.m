@@ -11,6 +11,7 @@
 #import "CLPropInputVC.h"
 #import "CLEditingVC.h"
 
+#import "CLShowModel.h"
 #import "CLRoutineModel.h"
 #import "CLIdeaObjModel.h"
 #import "CLSleightObjModel.h"
@@ -103,6 +104,9 @@
                 _effectModel = self.linesObjModel.effectModel;
                 break;
                 
+            case kEditingContentTypeShow:
+                _effectModel = self.showModel.effectModel;
+                break;
             default:
                 break;
         }
@@ -219,13 +223,44 @@
     return _linesObjModel;
 }
 
+- (void)updateProgressToRight:(NSInteger)fromIndex withPercent:(CGFloat)percent {
+    
+    CGFloat progress = (1.0 * (fromIndex + 1 + percent)) / self.childVCCount;
+    CGFloat topProgress = progress - (1.0/self.childVCCount);
+
+    [self.progressView setProgress:progress animated:NO];
+    [self.topProgressView setProgress:topProgress animated:NO];
+}
+
+- (void)updateProgressToLeft:(NSInteger)fromIndex withPercent:(CGFloat)percent {
+    
+    CGFloat progress = (1.0 * (fromIndex + 1 - percent)) / self.childVCCount;
+    CGFloat topProgress = progress - (1.0/self.childVCCount);
+    
+    [self.progressView setProgress:progress animated:NO];
+    [self.topProgressView setProgress:topProgress animated:NO];
+}
+
 - (void)updateProgress {
     
     CGFloat progress = (1.0 * (self.currentIndex + 1)) / self.childVCCount;
-    CGFloat topProgress = (1.0 * (self.currentIndex)) / self.childVCCount;
+    CGFloat topProgress = progress - (1.0/self.childVCCount);
+    
+    [self.progressView setProgress:progress animated:NO];
+    [self.topProgressView setProgress:topProgress animated:NO];
+    [self updateTitle];
+}
 
-    [self.progressView setProgress:progress animated:YES];
-    [self.topProgressView setProgress:topProgress animated:YES];
+- (void)updateTitle {
+    [self.pagerTabStripChildViewControllers enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        NSAssert([obj conformsToProtocol:@protocol(XLPagerTabStripChildItem)], @"child view controller must conform to XLPagerTabStripChildItem");
+        
+        if (idx == self.currentIndex) {
+            UIViewController<XLPagerTabStripChildItem> * childViewController = (UIViewController<XLPagerTabStripChildItem> *)obj;
+            
+            self.navigationItem.title = [childViewController titleForPagerTabStripViewController:self];
+        }
+    }];
 }
 
 #pragma mark - VC数量
@@ -254,6 +289,10 @@
             _childVCCount = kEffectCount;
             break;
             
+        case kEditingContentTypeShow:
+            _childVCCount = kEffectCount;
+            break;
+            
         default:
             break;
     }
@@ -265,64 +304,40 @@
     [super viewDidLoad];
 
     [self mediaView];
-    self.isProgressiveIndicator = NO;
+    self.isProgressiveIndicator = YES;
     self.isElasticIndicatorLimit = YES;
-    self.isEditing = YES;
-
-    // Do any additional setup after loading the view.
-
-//    self.pageControl.dotColor = [UIColor lightGrayColor];
-//    self.pageControl.selectedDotColor = kTintColor;
 }
 
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    [self.pagerTabStripChildViewControllers enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        NSAssert([obj conformsToProtocol:@protocol(XLPagerTabStripChildItem)], @"child view controller must conform to XLPagerTabStripChildItem");
-        
-        if (idx == self.selectedVCIndex) {
-            [self moveToViewControllerAtIndex:idx];
-
-            UIViewController<XLPagerTabStripChildItem> * childViewController = (UIViewController<XLPagerTabStripChildItem> *)obj;
-            
-            self.navigationItem.title = [childViewController titleForPagerTabStripViewController:self];
-            [self updateProgress];
-            
-        }
-    }];
+    [self moveToViewControllerAtIndex:self.selectedVCIndex];
+    [self updateProgress];
     
+//    [self.pagerTabStripChildViewControllers enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+//        NSAssert([obj conformsToProtocol:@protocol(XLPagerTabStripChildItem)], @"child view controller must conform to XLPagerTabStripChildItem");
+//        
+//        if (idx == self.selectedVCIndex) {
+//            
+//
+//            UIViewController<XLPagerTabStripChildItem> * childViewController = (UIViewController<XLPagerTabStripChildItem> *)obj;
+//            
+//            self.navigationItem.title = [childViewController titleForPagerTabStripViewController:self];
+//            [self updateProgress];
+//        }
+//    }];
+//    
     
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
     
-//    NSLog(@"llllllllllllll");
-
     if (self.presentedViewController == nil) {
         
         [[NSNotificationCenter defaultCenter] postNotificationName:kUpdateEntryVCNotification object:self];
-        
-//        NSString *notification = nil;
-//        
-//        if (self.editingContentType == kEditingContentTypeRoutine) {
-//            notification = kUpdateRoutinesNotification;
-//        } else if (self.editingContentType == kEditingContentTypeIdea) {
-//            notification = kUpdateIdeasNotification;
-//        } else if (self.editingContentType == kEditingContentTypeSleight) {
-//            notification = kUpdateSleightsNotification;
-//        } else if (self.editingContentType == kEditingContentTypeProp) {
-//            notification = kUpdatePropsNotification;
-//        } else if (self.editingContentType == kEditingContentTypeLines) {
-//            notification = kUpdateLinesNotification;
-//        }
-//        
-//        [[NSNotificationCenter defaultCenter] postNotificationName:notification object:self];
-//        NSLog(@"xxxxxxxxxxxx");
     }
-    
 }
 
 #pragma mark - XLPagerTabStripViewControllerDataSource
@@ -343,14 +358,12 @@
                 vc.editingContentType = self.editingContentType;
                 vc.timeStamp = self.routineModel.timeStamp;
                 vc.delegate = self;
-                vc.manageVC = self;
                 vc.mediaView = self.mediaView;
                 [childVCArray addObject:vc];
             } else if (i > 0 && i <= self.routineModel.propModelList.count) {
                 CLPropInputVC *vc = [sb instantiateViewControllerWithIdentifier:@"propInputVC"];
                 vc.propModel = self.routineModel.propModelList[i-1];
                 vc.delegate = self;
-                vc.manageVC = self;
 
                 [childVCArray addObject:vc];
             } else if (i > self.routineModel.propModelList.count && i <= self.routineModel.propModelList.count + self.routineModel.prepModelList.count) {
@@ -362,7 +375,6 @@
                 vc.timeStamp = self.routineModel.timeStamp;
 
                 vc.delegate = self;
-                vc.manageVC = self;
                 vc.mediaView = self.mediaView;
 
                 [childVCArray addObject:vc];
@@ -376,7 +388,6 @@
                 vc.timeStamp = self.routineModel.timeStamp;
 
                 vc.delegate = self;
-                vc.manageVC = self;
                 vc.mediaView = self.mediaView;
 
                 [childVCArray addObject:vc];
@@ -386,7 +397,6 @@
                 vc.editingModel = kEditingModeNotes;
                 vc.editingContentType = self.editingContentType;
                 vc.delegate = self;
-                vc.manageVC = self;
                 vc.mediaView = self.mediaView;
 
                 [childVCArray addObject:vc];
@@ -395,7 +405,6 @@
         } else {
             CLEditingVC *vc = [sb instantiateViewControllerWithIdentifier:@"editingVC"];
             vc.delegate = self;
-            vc.manageVC = self;
             vc.editingContentType = self.editingContentType;
             vc.mediaView = self.mediaView;
 
@@ -444,6 +453,12 @@
                     vc.editingModel = kEditingModeEffect;
 
                 }
+            } else if (self.editingContentType == kEditingContentTypeShow) {
+                if (i == 0) {
+                    vc.effectModel = self.showModel.effectModel;
+                    vc.editingModel = kEditingModeEffect;
+                    
+                }
             }
 
             [childVCArray addObject:vc];
@@ -458,44 +473,50 @@
 
 #pragma mark - XLPagerTabStripViewControllerDelegate
 
--(void)pagerTabStripViewController:(XLPagerTabStripViewController *)pagerTabStripViewController
-          updateIndicatorFromIndex:(NSInteger)fromIndex
-                           toIndex:(NSInteger)toIndex
-{
-    
-    [self.pagerTabStripChildViewControllers enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        NSAssert([obj conformsToProtocol:@protocol(XLPagerTabStripChildItem)], @"child view controller must conform to XLPagerTabStripChildItem");
-        
-        if (idx == toIndex) {
-            UIViewController<XLPagerTabStripChildItem> * childViewController = (UIViewController<XLPagerTabStripChildItem> *)obj;
-            
-            self.navigationItem.title = [childViewController titleForPagerTabStripViewController:self];
-            [self updateProgress];
-        }
-    }];
-    
-}
-
 //-(void)pagerTabStripViewController:(XLPagerTabStripViewController *)pagerTabStripViewController
 //          updateIndicatorFromIndex:(NSInteger)fromIndex
 //                           toIndex:(NSInteger)toIndex
-//            withProgressPercentage:(CGFloat)progressPercentage
-//                   indexWasChanged:(BOOL)indexWasChanged
 //{
-//
+//    
 //    [self.pagerTabStripChildViewControllers enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
 //        NSAssert([obj conformsToProtocol:@protocol(XLPagerTabStripChildItem)], @"child view controller must conform to XLPagerTabStripChildItem");
 //        
 //        if (idx == toIndex) {
 //            UIViewController<XLPagerTabStripChildItem> * childViewController = (UIViewController<XLPagerTabStripChildItem> *)obj;
 //            
-//            self.titleView.text = [childViewController titleForPagerTabStripViewController:self];
-//            self.titleView.alpha = progressPercentage;
+//            self.navigationItem.title = [childViewController titleForPagerTabStripViewController:self];
+//            [self updateProgress];
 //        }
-//        
-//        
 //    }];
+//    
 //}
+
+-(void)pagerTabStripViewController:(XLPagerTabStripViewController *)pagerTabStripViewController
+          updateIndicatorFromIndex:(NSInteger)fromIndex
+                           toIndex:(NSInteger)toIndex
+            withProgressPercentage:(CGFloat)progressPercentage
+                   indexWasChanged:(BOOL)indexWasChanged
+{
+
+    if (!indexWasChanged) {
+        if (toIndex > fromIndex) {
+            [self updateProgressToRight:fromIndex withPercent:progressPercentage];
+        } else if (toIndex < fromIndex) {
+            [self updateProgressToLeft:fromIndex withPercent:progressPercentage];
+        }
+    }
+
+    if (indexWasChanged) {
+
+        [self.pagerTabStripChildViewControllers enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            NSAssert([obj conformsToProtocol:@protocol(XLPagerTabStripChildItem)], @"child view controller must conform to XLPagerTabStripChildItem");
+
+            if (indexWasChanged) {
+                [self updateTitle];
+            }
+        }];
+    }
+}
 
 #pragma mark EditingVC 代理方法
 - (void)editingVCDidSwitchPerformContent:(CLEditingVC *)editingVC {
@@ -509,8 +530,9 @@
     [self.prepModelList insertObject:model atIndex:self.indexInPrepModelList];
     
     [self reloadPagerTabStripView];
-    self.isEditing = YES;
     [self moveToViewControllerAtIndex:self.currentIndex+1 animated:YES];
+    [self updateProgress];
+
 //    NSUInteger tempIndex = self.indexInPrepModelList + 1;
 //    [self reloadPagerTabStripView];
 //    [self moveToViewControllerAtIndex:self.propModelList.count + tempIndex animated:YES];
@@ -523,9 +545,9 @@
     [self.performModelList insertObject:model atIndex:self.indexInPerformModelList];
     
     [self reloadPagerTabStripView];
-    self.isEditing = YES;
 
     [self moveToViewControllerAtIndex:self.currentIndex+1 animated:YES];
+    [self updateProgress];
 }
 
 - (void)editingVCAddNotes:(CLEditingVC *)editingVC {
@@ -533,21 +555,20 @@
     [self.notesModelList insertObject:model atIndex:self.indexInNotesModelList];
     
     [self reloadPagerTabStripView];
-    self.isEditing = YES;
 
     [self moveToViewControllerAtIndex:self.currentIndex+1 animated:YES];
-
+    [self updateProgress];
 }
 
 - (void)editingVCDeletePrep:(CLEditingVC *)editingVC {
     
     [self.prepModelList removeObject:editingVC.prepModel];
-    
+
     [self reloadPagerTabStripView];
-    self.isEditing = YES;
-
-    [self moveToViewControllerAtIndex:self.currentIndex-1 animated:YES];
-
+    if (self.currentIndex > 0 && self.currentIndex != self.childVCCount-1) {
+        [self moveToViewControllerAtIndex:self.currentIndex-1 animated:YES];
+    }
+    [self updateProgress];
 }
 
 - (void)editingVCDeletePerform:(CLEditingVC *)editingVC {
@@ -555,20 +576,21 @@
     [self.performModelList removeObject:editingVC.performModel];
     
     [self reloadPagerTabStripView];
-    self.isEditing = YES;
-
-    [self moveToViewControllerAtIndex:self.currentIndex-1 animated:YES];
+    if (self.currentIndex > 0 && self.currentIndex != self.childVCCount-1) {
+        [self moveToViewControllerAtIndex:self.currentIndex-1 animated:YES];
+    }
+    [self updateProgress];
 }
 
 - (void)editingVCDeleteNotes:(CLEditingVC *)editingVC {
     
     [self.notesModelList removeObject:editingVC.notesModel];
-
+    
     [self reloadPagerTabStripView];
-    self.isEditing = YES;
-
-    [self moveToViewControllerAtIndex:self.currentIndex-1 animated:YES];
-
+    if (self.currentIndex > 0 && self.currentIndex != self.childVCCount-1) {
+        [self moveToViewControllerAtIndex:self.currentIndex-1 animated:YES];
+    }
+    [self updateProgress];
 }
 
 #pragma mark -PropInputVC 代理方法
@@ -577,18 +599,19 @@
     [self.propModelList insertObject:model atIndex:self.indexInPropModelList];
     
     [self reloadPagerTabStripView];
-    self.isEditing = YES;
 
     [self moveToViewControllerAtIndex:self.currentIndex+1 animated:YES];
+    [self updateProgress];
 }
 
 - (void)propInputVCDeleteProp:(CLPropInputVC *)propInputVC {
     [self.propModelList removeObject:propInputVC.propModel];
     
     [self reloadPagerTabStripView];
-    self.isEditing = YES;
-
-    [self moveToViewControllerAtIndex:self.currentIndex-1 animated:YES];
+    if (self.currentIndex > 0 && self.currentIndex != self.childVCCount-1) {
+        [self moveToViewControllerAtIndex:self.currentIndex-1 animated:YES];
+    }
+    [self updateProgress];
 }
 
 - (IBAction)doneButtonClicked:(id)sender {

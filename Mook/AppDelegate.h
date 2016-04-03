@@ -15,6 +15,7 @@
 
 @property (nonatomic, strong) NSMutableArray *allItems;
 @property (nonatomic, strong) NSMutableArray *allTags;
+@property (nonatomic, strong) NSMutableArray *allTagsShow;
 @property (nonatomic, strong) NSMutableArray *allTagsIdea;
 @property (nonatomic, strong) NSMutableArray *allTagsRoutine;
 @property (nonatomic, strong) NSMutableArray *allTagsSleight;
