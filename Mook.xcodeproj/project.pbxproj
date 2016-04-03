@@ -95,6 +95,11 @@
 		43885F6E1CA4F9BE00269CE1 /* CLListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 43885F6D1CA4F9BE00269CE1 /* CLListVC.m */; };
 		43885F711CA5079100269CE1 /* CLContentVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 43885F701CA5079100269CE1 /* CLContentVC.m */; };
 		43885F791CA6A8AC00269CE1 /* CLHomeNavVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 43885F781CA6A8AC00269CE1 /* CLHomeNavVC.m */; };
+		43C2068A1CB10CF300CEF992 /* CLListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 43C206881CB10CF300CEF992 /* CLListCell.m */; };
+		43C2068B1CB10CF300CEF992 /* CLListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43C206891CB10CF300CEF992 /* CLListCell.xib */; };
+		43C2068E1CB12A6400CEF992 /* CLMediaVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 43C2068D1CB12A6400CEF992 /* CLMediaVC.m */; };
+		43C206921CB12BED00CEF992 /* CLMediaCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 43C206901CB12BED00CEF992 /* CLMediaCollectionCell.m */; };
+		43C206931CB12BED00CEF992 /* CLMediaCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43C206911CB12BED00CEF992 /* CLMediaCollectionCell.xib */; };
 		43DF3AC21CAA478500712D81 /* CLPropListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 43DF3AC11CAA478500712D81 /* CLPropListVC.m */; };
 		43DF3AC81CAA78A100712D81 /* UIImage+WaterMark.m in Sources */ = {isa = PBXBuildFile; fileRef = 43DF3AC71CAA78A100712D81 /* UIImage+WaterMark.m */; };
 		43E0F7081C9EB2A2005CAD97 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 43E0F7071C9EB2A2005CAD97 /* libsqlite3.0.tbd */; };
@@ -275,6 +280,14 @@
 		43885F701CA5079100269CE1 /* CLContentVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLContentVC.m; sourceTree = "<group>"; };
 		43885F771CA6A8AC00269CE1 /* CLHomeNavVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLHomeNavVC.h; sourceTree = "<group>"; };
 		43885F781CA6A8AC00269CE1 /* CLHomeNavVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLHomeNavVC.m; sourceTree = "<group>"; };
+		43C206871CB10CF300CEF992 /* CLListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLListCell.h; sourceTree = "<group>"; };
+		43C206881CB10CF300CEF992 /* CLListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLListCell.m; sourceTree = "<group>"; };
+		43C206891CB10CF300CEF992 /* CLListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CLListCell.xib; sourceTree = "<group>"; };
+		43C2068C1CB12A6400CEF992 /* CLMediaVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLMediaVC.h; sourceTree = "<group>"; };
+		43C2068D1CB12A6400CEF992 /* CLMediaVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLMediaVC.m; sourceTree = "<group>"; };
+		43C2068F1CB12BED00CEF992 /* CLMediaCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLMediaCollectionCell.h; sourceTree = "<group>"; };
+		43C206901CB12BED00CEF992 /* CLMediaCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLMediaCollectionCell.m; sourceTree = "<group>"; };
+		43C206911CB12BED00CEF992 /* CLMediaCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CLMediaCollectionCell.xib; sourceTree = "<group>"; };
 		43DF3AC01CAA478500712D81 /* CLPropListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLPropListVC.h; sourceTree = "<group>"; };
 		43DF3AC11CAA478500712D81 /* CLPropListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLPropListVC.m; sourceTree = "<group>"; };
 		43DF3AC61CAA78A100712D81 /* UIImage+WaterMark.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+WaterMark.h"; sourceTree = "<group>"; };
@@ -505,6 +518,11 @@
 				43885F781CA6A8AC00269CE1 /* CLHomeNavVC.m */,
 				43885F691CA4EB3800269CE1 /* CLHomeVC.h */,
 				43885F6A1CA4EB3800269CE1 /* CLHomeVC.m */,
+				43C2068C1CB12A6400CEF992 /* CLMediaVC.h */,
+				43C2068D1CB12A6400CEF992 /* CLMediaVC.m */,
+				43C2068F1CB12BED00CEF992 /* CLMediaCollectionCell.h */,
+				43C206901CB12BED00CEF992 /* CLMediaCollectionCell.m */,
+				43C206911CB12BED00CEF992 /* CLMediaCollectionCell.xib */,
 			);
 			name = Home;
 			sourceTree = "<group>";
@@ -617,6 +635,9 @@
 				432345F11C94054300200833 /* CLListTextCell.h */,
 				432345F21C94054300200833 /* CLListTextCell.m */,
 				432345F31C94054300200833 /* CLListTextCell.xib */,
+				43C206871CB10CF300CEF992 /* CLListCell.h */,
+				43C206881CB10CF300CEF992 /* CLListCell.m */,
+				43C206891CB10CF300CEF992 /* CLListCell.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -863,12 +884,14 @@
 				4323461F1C94054300200833 /* CLListImageCell.xib in Resources */,
 				432346951C96B4C200200833 /* CLTextInputCell.xib in Resources */,
 				4323462B1C94054300200833 /* CLQuickInputBar.xib in Resources */,
+				43C206931CB12BED00CEF992 /* CLMediaCollectionCell.xib in Resources */,
 				432346561C9408F100200833 /* CLToolBar.xib in Resources */,
 				432346311C94054300200833 /* CLTableBackView.xib in Resources */,
 				432346661C94094D00200833 /* CLOneLabelImageDisplayCell.xib in Resources */,
 				4323464F1C9405F900200833 /* menu.plist in Resources */,
 				432346481C9405A900200833 /* LaunchScreen.storyboard in Resources */,
 				43EEE7E31CAD329B00F0BCCF /* CLRoutineTextCell.xib in Resources */,
+				43C2068B1CB10CF300CEF992 /* CLListCell.xib in Resources */,
 				432346231C94054300200833 /* CLMediaCell.xib in Resources */,
 				432346641C94094D00200833 /* CLOneLabelDisplayCell.xib in Resources */,
 				432345451C94045000200833 /* Assets.xcassets in Resources */,
@@ -936,6 +959,7 @@
 			files = (
 				432346631C94094D00200833 /* CLOneLabelDisplayCell.m in Sources */,
 				432345A41C9404FB00200833 /* CLEditingVC.m in Sources */,
+				43C2068A1CB10CF300CEF992 /* CLListCell.m in Sources */,
 				432345E71C94051A00200833 /* CLRoutineModel.m in Sources */,
 				432345BC1C9404FB00200833 /* CLTagChooseNavVC.m in Sources */,
 				4323462A1C94054300200833 /* CLQuickInputBar.m in Sources */,
@@ -943,6 +967,7 @@
 				4323453D1C94045000200833 /* AppDelegate.m in Sources */,
 				43E0F73C1CA10D27005CAD97 /* MJIvar.m in Sources */,
 				43DF3AC81CAA78A100712D81 /* UIImage+WaterMark.m in Sources */,
+				43C2068E1CB12A6400CEF992 /* CLMediaVC.m in Sources */,
 				4323461E1C94054300200833 /* CLListImageCell.m in Sources */,
 				432345E51C94051A00200833 /* CLPropObjModel.m in Sources */,
 				432345651C9404A800200833 /* UIImageView+Tools.m in Sources */,
@@ -975,6 +1000,7 @@
 				432346301C94054300200833 /* CLTableBackView.m in Sources */,
 				431BCEE01CA8F81C0085D20F /* JGActionSheet.m in Sources */,
 				432346551C9408F100200833 /* CLToolBar.m in Sources */,
+				43C206921CB12BED00CEF992 /* CLMediaCollectionCell.m in Sources */,
 				432346801C9409BB00200833 /* XLButtonBarViewCell.m in Sources */,
 				432345DD1C94051A00200833 /* CLIdeaObjModel.m in Sources */,
 				432345641C9404A800200833 /* UIImage+Tools.m in Sources */,

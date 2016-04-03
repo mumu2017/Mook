@@ -66,7 +66,7 @@ static FMDatabase *_db;
     }
     
     // 创建Media表格
-    BOOL flag3 = [_db executeUpdate:@"create table if not exists t_media (id integer primary key autoincrement,type text,name text,model_time_stamp text);"];
+    BOOL flag3 = [_db executeUpdate:@"create table if not exists t_media (id integer primary key autoincrement,type text,name text,content text,model_time_stamp text,model_type text);"];
     if (flag3) {
         NSLog(@"创建Media索引表成功");
     }else{
@@ -203,6 +203,64 @@ static FMDatabase *_db;
     return arrM;
 }
 
++ (CLShowModel *)showByName:(NSString *)name {
+    return nil;
+}
+
++ (CLRoutineModel *)routineByName:(NSString *)name {
+    FMResultSet *set = [_db executeQuery:@"select * from t_mook where type=? and time_stamp=?;",kTypeRoutine, name];
+    while ([set next]) {
+        NSData *data = [set dataForColumn:@"dict"];
+        NSDictionary *dict = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        CLRoutineModel *model = [CLRoutineModel objectWithKeyValues:dict];
+        return model;
+    }
+    return nil;
+}
+
++ (CLIdeaObjModel *)ideaByName:(NSString *)name {
+    FMResultSet *set = [_db executeQuery:@"select * from t_mook where type=? and time_stamp=?;",kTypeIdea, name];
+    while ([set next]) {
+        NSData *data = [set dataForColumn:@"dict"];
+        NSDictionary *dict = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        CLIdeaObjModel *model = [CLIdeaObjModel objectWithKeyValues:dict];
+        return model;
+    }
+    return nil;
+}
+
++ (CLSleightObjModel *)sleightByName:(NSString *)name {
+    FMResultSet *set = [_db executeQuery:@"select * from t_mook where type=? and time_stamp=?;",kTypeSleight, name];
+    while ([set next]) {
+        NSData *data = [set dataForColumn:@"dict"];
+        NSDictionary *dict = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        CLSleightObjModel *model = [CLSleightObjModel objectWithKeyValues:dict];
+        return model;
+    }
+    return nil;
+}
+
++ (CLPropObjModel *)propByName:(NSString *)name {
+    FMResultSet *set = [_db executeQuery:@"select * from t_mook where type=? and time_stamp=?;",kTypeProp, name];
+    while ([set next]) {
+        NSData *data = [set dataForColumn:@"dict"];
+        NSDictionary *dict = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        CLPropObjModel *model = [CLPropObjModel objectWithKeyValues:dict];
+        return model;
+    }
+    return nil;
+}
+
++ (CLLinesObjModel *)linesModelByName:(NSString *)name {
+    FMResultSet *set = [_db executeQuery:@"select * from t_mook where type=? and time_stamp=?;",kTypeLines, name];
+    while ([set next]) {
+        NSData *data = [set dataForColumn:@"dict"];
+        NSDictionary *dict = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        CLLinesObjModel *model = [CLLinesObjModel objectWithKeyValues:dict];
+        return model;
+    }
+    return nil;
+}
 
 + (void)updateShow:(CLShowModel *)showModel;
 {
@@ -496,11 +554,43 @@ static FMDatabase *_db;
 }
 
 #pragma mark - 多媒体方法
-+ (NSMutableArray *)allVideos {
-    return nil;
++ (NSMutableArray *)allMedia {
+    FMResultSet *set = [_db executeQuery:@"select * from t_media;"];
+    NSMutableArray *arrM = [NSMutableArray array];
+    while ([set next]) {
+        NSString *type = [set stringForColumn:@"type"];
+        NSString *name = [set stringForColumn:@"name"];
+        NSString *content = [set stringForColumn:@"content"];
+        if (content == nil) content = @" "; // content可能没有内容
+        NSString *modelName = [set stringForColumn:@"model_time_stamp"];
+        NSString *modelType = [set stringForColumn:@"model_type"];
+        NSDictionary *dict = @{@"type":type, @"name":name, @"content":content, @"model_time_stamp":modelName, @"model_type":modelType};
+        [arrM insertObject:dict atIndex:0];
+    }
+    
+    return arrM;
 }
+
++ (NSMutableArray *)allVideos {
+    FMResultSet *set = [_db executeQuery:@"select * from t_media where type=?;",@"video"];
+    NSMutableArray *arrM = [NSMutableArray array];
+    while ([set next]) {
+        NSString *name = [set stringForColumn:@"name"];
+        [arrM insertObject:name atIndex:0];
+    }
+    
+    return arrM;
+}
+
 + (NSMutableArray *)allImages {
-    return nil;
+    FMResultSet *set = [_db executeQuery:@"select * from t_media where type=?;",@"image"];
+    NSMutableArray *arrM = [NSMutableArray array];
+    while ([set next]) {
+        NSString *name = [set stringForColumn:@"name"];
+        [arrM insertObject:name atIndex:0];
+    }
+    
+    return arrM;
 }
 
 + (NSData *)videoByName:(NSString *)name {
@@ -512,9 +602,9 @@ static FMDatabase *_db;
 }
 
 // timaStamp是多媒体所在模型的timaStamp, 这样可以建立模型与多媒体之间的联系
-+ (void)addVideoByName:(NSString *)name timesStamp:(NSString *)timeStamp {
++ (void)addVideoByName:(NSString *)name timesStamp:(NSString *)timeStamp content:(NSString *)content type:(NSString *)type{
     
-    BOOL flag = [_db executeUpdate:@"insert into t_media (type, name, model_time_stamp) values(?,?,?)", @"video", name, timeStamp];
+    BOOL flag = [_db executeUpdate:@"insert into t_media (type, name, content, model_time_stamp, model_type) values(?,?,?,?,?)", @"video", name, content, timeStamp, type];
     if (flag) {
         NSLog(@"插入media索引成功");
     }else{
@@ -524,8 +614,8 @@ static FMDatabase *_db;
 
 //id integer primary key autoincrement,type text,name text,model_time_stamp text)
 
-+ (void)addImageByName:(NSString *)name timesStamp:(NSString *)timeStamp {
-    BOOL flag = [_db executeUpdate:@"insert into t_media (type, name, model_time_stamp) values(?,?,?)", @"image", name, timeStamp];
++ (void)addImageByName:(NSString *)name timesStamp:(NSString *)timeStamp content:(NSString *)content type:(NSString *)type {
+    BOOL flag = [_db executeUpdate:@"insert into t_media (type, name, content, model_time_stamp, model_type) values(?,?,?,?,?)", @"image", name, content, timeStamp, type];
     if (flag) {
         NSLog(@"插入media索引成功");
     }else{

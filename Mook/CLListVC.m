@@ -14,6 +14,7 @@
 #import "CLContentVC.h"
 #import "CLShowVC.h"
 
+#import "CLListCell.h"
 #import "CLListTextCell.h"
 #import "CLListImageCell.h"
 
@@ -100,6 +101,10 @@
     self.tableView.backgroundView = self.tableBackView;
     self.tableView.rowHeight = kListCellHeight;
     self.tableView.tableFooterView = [UIView new];
+    
+    [self.tableView registerNib:[UINib nibWithNibName:@"CLListCell"
+                                               bundle:nil]
+         forCellReuseIdentifier:kListCellID];
     
     [self.tableView registerNib:[UINib nibWithNibName:@"CLListImageCell"
                                                bundle:nil]
@@ -190,31 +195,31 @@
             id modelUnknown = self.allItems[indexPath.row];
             if ([modelUnknown isKindOfClass:[CLIdeaObjModel class]]) {
                 CLIdeaObjModel *model = (CLIdeaObjModel *)modelUnknown;
-                image = [model getImage];
+                image = [model getThumbnail];
                 iconName = kIconNameIdea;
                 title = [model getTitle];
                 content = [model getContent];
             } else if ([modelUnknown isKindOfClass:[CLShowModel class]]) {
                 CLShowModel *model = (CLShowModel *)modelUnknown;
-                image = [model getImage];
+                image = [model getThumbnail];
                 iconName = kIconNameShow;
                 title = [model getTitle];
                 content = [model getContent];
             } else if ([modelUnknown isKindOfClass:[CLRoutineModel class]]) {
                 CLRoutineModel *model = (CLRoutineModel *)modelUnknown;
-                image = [model getImage];
+                image = [model getThumbnail];
                 iconName = kIconNameRoutine;
                 title = [model getTitle];
                 content = [model getContent];
             } else if ([modelUnknown isKindOfClass:[CLSleightObjModel class]]) {
                 CLSleightObjModel *model = (CLSleightObjModel *)modelUnknown;
-                image = [model getImage];
+                image = [model getThumbnail];
                 iconName = kIconNameSleight;
                 title = [model getTitle];
                 content = [model getContent];
             } else if ([modelUnknown isKindOfClass:[CLPropObjModel class]]) {
                 CLPropObjModel *model = (CLPropObjModel *)modelUnknown;
-                image = [model getImage];
+                image = [model getThumbnail];
                 iconName = kIconNameProp;
                 title = [model getTitle];
                 content = [model getContent];
@@ -230,7 +235,7 @@
         case kListTypeIdea:
         {
             CLIdeaObjModel *model = self.ideaObjModelList[indexPath.row];
-            image = [model getImage];
+            image = [model getThumbnail];
             iconName = kIconNameIdea;
             title = [model getTitle];
             content = [model getContent];
@@ -240,7 +245,7 @@
         case kListTypeShow:
         {
             CLShowModel *model = self.showModelList[indexPath.row];
-            image = [model getImage];
+            image = [model getThumbnail];
             iconName = kIconNameShow;
             title = [model getTitle];
             content = [model getContent];
@@ -250,7 +255,7 @@
         case kListTypeRoutine:
         {
             CLRoutineModel *model = self.routineModelList[indexPath.row];
-            image = [model getImage];
+            image = [model getThumbnail];
             iconName = kIconNameRoutine;
             title = [model getTitle];
             content = [model getContent];
@@ -259,7 +264,7 @@
         case kListTypeSleight:
         {
             CLSleightObjModel *model = self.sleightObjModelList[indexPath.row];
-            image = [model getImage];
+            image = [model getThumbnail];
             iconName = kIconNameSleight;
             title = [model getTitle];
             content = [model getContent];
@@ -270,7 +275,7 @@
         case kListTypeProp:
         {
             CLPropObjModel *model = self.propObjModelList[indexPath.row];
-            image = [model getImage];
+            image = [model getThumbnail];
             iconName = kIconNameProp;
             title = [model getTitle];
             content = [model getContent];
@@ -288,6 +293,12 @@
             break;
     }
     
+//    CLListCell *cell = [tableView dequeueReusableCellWithIdentifier:kListCellID forIndexPath:indexPath];
+//    [cell setTitle:title content:content];
+//    cell.iconView.image = image;
+//    cell.backgroundColor = [UIColor flatBlackColorDark];
+//    
+//    return cell;
     
     if (image != nil) { // 如果返回图片名称,则表示模型中有图片或多媒体
         CLListImageCell *cell = [tableView dequeueReusableCellWithIdentifier:kListImageCellID forIndexPath:indexPath];
@@ -595,6 +606,9 @@
 #pragma mark - segue方法
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     id destVC = segue.destinationViewController;
+    UIViewController *vc = (UIViewController *)destVC;
+    vc.hidesBottomBarWhenPushed = YES;
+    
     if ([destVC isKindOfClass:[CLContentVC class]]) {
         CLContentVC *vc = (CLContentVC *)destVC;
 
@@ -613,7 +627,7 @@
                         
                     } else if ([modelUnknown isKindOfClass:[CLShowModel class]]) {
 //                        CLShowModel *model = (CLShowModel *)modelUnknown;
-                        //                imageName = [model getImage];
+                        //                imageName = [model getThumbnail];
                         //                title = [model getTitle];
                         //                content = [model getContent];
                     } else if ([modelUnknown isKindOfClass:[CLRoutineModel class]]) {
@@ -655,7 +669,7 @@
                 case kListTypeShow:
                 {
 //                    CLShowModel *model = self.showModelList[indexPath.row];
-                    //            imageName = [model getImage];
+                    //            imageName = [model getThumbnail];
                     //            title = [model getTitle];
                     //            content = [model getContent];
                     break;

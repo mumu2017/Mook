@@ -35,6 +35,7 @@
 - (NSString *)getTitle;
 - (NSAttributedString *)getContent;
 - (UIImage *)getImage;
+- (UIImage *)getThumbnail;
 //- (BOOL)isWithMedia;
 
 @end

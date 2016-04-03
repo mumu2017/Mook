@@ -245,7 +245,7 @@
 
     listCell.tags = model.tags;
     
-//    imageName = [model getImage];
+//    imageName = [model getThumbnail];
     
 ////    NSString *time = [model.time stringByAppendingString:@"分钟"];
 //    NSInteger count = model.openerShow.count + model.middleShow.count + model.endingShow.count;

@@ -96,6 +96,15 @@
     return image;
 }
 
+- (UIImage *)getThumbnail {
+    UIImage *image;
+    NSArray *array = [self getRountineModelList];
+    for (CLRoutineModel *model in array) {
+        image = [model getThumbnail];
+    }
+    return image;
+}
+
 - (NSAttributedString *)getContent {
     
     NSString *effect;

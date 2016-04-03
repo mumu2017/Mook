@@ -34,6 +34,7 @@
 }
 
 - (void)awakeFromNib {
+    [super awakeFromNib];
     self.iconView.layer.cornerRadius = 3.0;
 }
 

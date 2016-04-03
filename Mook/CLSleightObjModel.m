@@ -86,6 +86,42 @@
     // 先从effeceModel中找图片或视频首帧
     if (self.effectModel.isWithImage) {
         
+        image = [self.effectModel.image getNamedImage];
+        
+    } else if (self.effectModel.isWithVideo) {
+        
+        image = [self.effectModel.video getNamedVideoFrame];
+        
+    }
+    
+    // 如果效果中没有, 则从prepModel中从效果中找图片或视频首帧
+    if (image == nil) {
+        for (CLPrepModel *model in self.prepModelList) {
+            if (model.isWithImage) {
+                image = [model.image getNamedImage];
+                break;
+            }
+        }
+    }
+    
+    if (image == nil) {
+        for (CLPrepModel *model in self.prepModelList) {
+            if (model.isWithVideo) {
+                image = [model.video getNamedVideoFrame];
+                break;
+            }
+        }
+        
+    }
+    
+    return image;
+}
+
+- (UIImage *)getThumbnail {
+    UIImage *image;
+    // 先从effeceModel中找图片或视频首帧
+    if (self.effectModel.isWithImage) {
+        
         image = [self.effectModel.image getNamedImageThumbnail];
         
     } else if (self.effectModel.isWithVideo) {

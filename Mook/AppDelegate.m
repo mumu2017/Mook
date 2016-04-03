@@ -150,7 +150,7 @@
     
     self.shouldInputPassword = [[NSUserDefaults standardUserDefaults] boolForKey:kUsePasswordKey];
     
-    self.window.tintColor = kMenuBackgroundColor;
+    self.window.tintColor = kTintColor;
         
     [[UIToolbar appearance] setTranslucent:NO];
     [[UIToolbar appearance] setOpaque:YES];
@@ -160,9 +160,10 @@
     [[UINavigationBar appearance] setTintColor:kTintColor];
     [[UINavigationBar appearance] setBarTintColor:kMenuBackgroundColor];
 
-    [[UINavigationBar appearance] setBackgroundImage:[[UIImage alloc] init]
-                                      forBarPosition:UIBarPositionAny
-                                          barMetrics:UIBarMetricsDefault];
+    // 设置导航栏没有边线
+//    [[UINavigationBar appearance] setBackgroundImage:[[UIImage alloc] init]
+//                                      forBarPosition:UIBarPositionAny
+//                                          barMetrics:UIBarMetricsDefault];
     
     [[UINavigationBar appearance] setShadowImage:[[UIImage alloc] init]];
     [[UINavigationBar appearance] setTranslucent:NO];

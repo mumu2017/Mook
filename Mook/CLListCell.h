@@ -1,19 +1,14 @@
 //
-//  CLListImageCell.h
+//  CLListCell.h
 //  Mook
 //
-//  Created by 陈林 on 15/12/25.
-//  Copyright © 2015年 ChenLin. All rights reserved.
+//  Created by 陈林 on 16/4/3.
+//  Copyright © 2016年 Chen Lin. All rights reserved.
 //
 
-//#import <SWTableViewCell/SWTableViewCell.h>
-@class SMTag;
-@class CLInfoModel, CLEffectModel, CLPrepModel;
+#import <UIKit/UIKit.h>
 
-@interface CLListImageCell : SWTableViewCell
-
-@property (weak, nonatomic) IBOutlet UIImageView *iconType;
-
+@interface CLListCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *iconView;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *contentLabel;
@@ -23,7 +18,6 @@
 @property (nonatomic, copy) NSString *date;
 @property (nonatomic, strong) NSMutableArray <NSString*> *tags;
 
-+ (instancetype)listImageCell;
 - (void)setTitle:(NSString *)title content:(NSAttributedString *)content;
 
 @end

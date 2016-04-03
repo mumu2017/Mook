@@ -142,6 +142,8 @@ typedef enum {
 #define kSeguekHomeToTagList @"kHomeToTagListSegue"
 #define kSegueTagToListSegue    @"tagToListSegue"
 
+#define kSegueMediaToContent    @"mediaToContentSegue"
+
 #define kSegueListToContent @"listToContentSegue"
 #define kSegueListToShow   @"listToShowSegue"
 #define kSegueShowToRoutine    @"showToRoutineSegue"
@@ -314,6 +316,8 @@ typedef enum {
 #define kShowListTextCellID     @"showListTextCell"
 #define kListTextCellID     @"listTextCell"
 #define kListImageCellID     @"listImageCell"
+#define kListCellID     @"listCell"
+
 #define kOneLabelImageCellID     @"oneLabelImageCell"
 #define kQuickStringCellID     @"quickStringCell"
 
@@ -367,7 +371,7 @@ typedef enum {
 #define kBarTintColor     [UIColor colorWithRed:247/255.0 green:247/255.0 blue:247/255.0 alpha:1.0]
 
 #define kTintColor          [UIColor colorWithContrastingBlackOrWhiteColorOn:kMenuBackgroundColor isFlat:YES]    // FlatColor
-#define kMenuBackgroundColor    [UIColor flatMintColorDark]
+#define kMenuBackgroundColor    [UIColor flatWhiteColor]
 //#define kTintColor     [UIColor colorWithRed:248/255.0 green:128/255.0 blue:4/255.0 alpha:1.0] //黄色
 //#define kMenuBackgroundColor    [UIColor colorWithRed:26/255.0 green:29/255.0 blue:33/255.0 alpha:1.0]
 

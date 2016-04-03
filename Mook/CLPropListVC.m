@@ -118,7 +118,7 @@
     CLPropObjModel *model = self.propObjModelList[indexPath.row];
 
     NSString *imageName;
-//    imageName = [model getImage];
+//    imageName = [model getThumbnail];
     
     if (imageName != nil) { // 如果没有返回图片名称,则表示模型中没有图片或多媒体
         CLListImageCell *cell = [tableView dequeueReusableCellWithIdentifier:kListImageCellID forIndexPath:indexPath];
@@ -159,7 +159,7 @@
 //    listCell.vidCnt = model.vidCnt;
 //    listCell.tags = model.tags;
 //    
-//    imageName = [model getImage];
+//    imageName = [model getThumbnail];
 //    isStarred = model.isStarred;
 //    date = model.date;
 //    name = model.infoModel.name;

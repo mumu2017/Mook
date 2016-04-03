@@ -267,7 +267,7 @@
             return cell;
         } else {
             CLRoutineModel *model = self.routineModelList[indexPath.row - 1];
-            UIImage *image = [model getImage];
+            UIImage *image = [model getThumbnail];
             if (image) {
                 CLNewEntryImageCell *cell = [tableView dequeueReusableCellWithIdentifier:kNewEntryImageCellID];
                 

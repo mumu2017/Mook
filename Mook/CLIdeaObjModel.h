@@ -36,5 +36,6 @@
 - (NSString *)getTitle;
 - (NSAttributedString *)getContent;
 - (UIImage *)getImage;
+- (UIImage *)getThumbnail;
 
 @end

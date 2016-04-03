@@ -88,29 +88,12 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     self.tableView.rowHeight = 44;
 
-    self.tableView.backgroundColor = kMenuBackgroundColor;
-    [self setToolBarStatus];
+//    self.tableView.backgroundColor = kMenuBackgroundColor;
     
     self.tableView.tableFooterView = [UIView new];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(update) name:kUpdateDataNotification
                                                object:nil];
     
-}
-
-
-- (void)setToolBarStatus {
-    self.navigationController.toolbar.hidden = NO;
-    self.navigationController.toolbar.barTintColor = kMenuBackgroundColor;
-    self.navigationController.toolbar.tintColor = kTintColor;
-    self.navigationController.toolbar.clipsToBounds = YES;
-    
-    UIBarButtonItem *leftSpace, *buttonItem, *rightSpace;
-    leftSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-    rightSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-    buttonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"iconAdd"] style:UIBarButtonItemStylePlain target:self action:@selector(addNewEntry)];
-    rightSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-    
-    self.toolbarItems = [NSArray arrayWithObjects: leftSpace, buttonItem,rightSpace, nil];
 }
 
 - (void) update {
@@ -124,34 +107,12 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 5;
+    return 6;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    NSInteger number;
-    
-    switch (section) {
-        case 0:
-            number = 1;
-            break;
-        case 1:
-            number = 1;
-            break;
-        case 2:
-            number = 1;
-            break;
-        case 3:
-            number = 1;
-            break;
-        case 4:
-            number = 3;
-            break;
-            
-        default:
-            break;
-    }
-    return number;
+    return 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -160,11 +121,11 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:ID];
     }
-    cell.backgroundColor = kMenuBackgroundColor;
-    cell.layer.borderColor = kTintColor.CGColor;
+//    cell.backgroundColor = [UIColor flatBlackColorDark];
+//    cell.layer.borderColor = kTintColor.CGColor;
 //    cell.layer.borderWidth = 1.0;
-    cell.textLabel.textColor = [UIColor whiteColor];
-    cell.detailTextLabel.textColor = [UIColor whiteColor];
+    cell.textLabel.textColor = [UIColor blackColor];
+    cell.detailTextLabel.textColor = [UIColor darkGrayColor];
     return cell;
 }
 
@@ -175,47 +136,39 @@
     switch (indexPath.section) {
             
         case 0:
-            title = @"全部";
-            count = [NSString stringWithFormat:@"%ld", (unsigned long)self.allItems.count];
-            iconName = kIconNameAll;
-            break;
-            
-        case 1:
             title = @"灵感";
             count = [NSString stringWithFormat:@"%ld", (unsigned long)self.ideaObjModelList.count];
             iconName = kIconNameIdea;
             break;
             
-        case 2:
+        case 1:
             title = @"演出";
             count = [NSString stringWithFormat:@"%ld", (unsigned long)self.showModelList.count];
             iconName = kIconNameShow;
             break;
             
-        case 3:
+        case 2:
             title = @"流程";
             count = [NSString stringWithFormat:@"%ld", (unsigned long)self.routineModelList.count];
             iconName = kIconNameRoutine;
             break;
             
-        case 4:
-        {
-            if (indexPath.row == 0) {
-                title = @"技巧";
-                count = [NSString stringWithFormat:@"%ld", (unsigned long)self.sleightObjModelList.count];
-                iconName = kIconNameSleight;
-            } else if (indexPath.row == 1) {
-                title = @"道具";
-                count = [NSString stringWithFormat:@"%ld", (unsigned long)self.propObjModelList.count];
-                iconName = kIconNameProp;
-            } else if (indexPath.row == 2) {
-                title = @"梗";
-                count = [NSString stringWithFormat:@"%ld", (unsigned long)self.linesObjModelList.count];
-                iconName = kIconNameLines;
-            }
-        }
-            
+        case 3:
+            title = @"技巧";
+            count = [NSString stringWithFormat:@"%ld", (unsigned long)self.sleightObjModelList.count];
+            iconName = kIconNameSleight;
             break;
+            
+        case 4:
+            title = @"道具";
+            count = [NSString stringWithFormat:@"%ld", (unsigned long)self.propObjModelList.count];
+            iconName = kIconNameProp;
+            break;
+            
+        case 5:
+            title = @"梗";
+            count = [NSString stringWithFormat:@"%ld", (unsigned long)self.linesObjModelList.count];
+            iconName = kIconNameLines;
             
         default:
             break;
@@ -244,6 +197,8 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
     id destVC = [segue destinationViewController];
+    UIViewController *vc = (UIViewController *)destVC;
+    vc.hidesBottomBarWhenPushed = YES;
     
     if ([destVC isKindOfClass:[CLListVC class]]) {
         
@@ -253,46 +208,43 @@
             NSIndexPath *indexPath = (NSIndexPath *)sender;
             
             switch (indexPath.section) {
+                    
                 case 0:
-                    vc.listType = kListTypeAll;
-                    vc.title = kDefaultTitleAll;
-                    
-                    break;
-                    
-                case 1:
                     vc.listType = kListTypeIdea;
                     vc.title = kDefaultTitleIdea;
                     
                     break;
                     
-                case 2:
+                case 1:
                     vc.listType = kListTypeShow;
                     vc.title = kDefaultTitleShow;
                     
                     break;
                     
-                case 3:
+                case 2:
                     vc.listType = kListTypeRoutine;
                     vc.title = kDefaultTitleRoutine;
                     
                     break;
+                   
+                case 3:
+                    vc.listType = kListTypeSleight;
+                    vc.title = kDefaultTitleSleight;
+                    
+                    break;
                     
                 case 4:
-                {
-                    if (indexPath.row == 0) {
-                        vc.listType = kListTypeSleight;
-                        vc.title = kDefaultTitleSleight;
-                    } else if (indexPath.row == 1) {
-                        vc.listType = kListTypeProp;
-                        vc.title = kDefaultTitleProp;
-                    } else if (indexPath.row == 2) {
-                        vc.listType = kListTypeLines;
-                        vc.title = kDefaultTitleLines;
-                    }
-                    break;
-                }
+                    vc.listType = kListTypeProp;
+                    vc.title = kDefaultTitleProp;
                     
-
+                    break;
+                    
+                case 5:
+                    vc.listType = kListTypeLines;
+                    vc.title = kDefaultTitleLines;
+                    
+                    break;
+                    
                 default:
                     break;
             }

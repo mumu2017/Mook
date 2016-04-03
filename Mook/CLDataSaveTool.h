@@ -20,6 +20,14 @@
 + (NSMutableArray <CLPropObjModel*>*)allProps;
 + (NSMutableArray <CLLinesObjModel*>*)allLines;
 
++ (CLShowModel *)showByName:(NSString *)name;
++ (CLRoutineModel *)routineByName:(NSString *)name;
++ (CLIdeaObjModel *)ideaByName:(NSString *)name;
++ (CLSleightObjModel *)sleightByName:(NSString *)name;
++ (CLPropObjModel *)propByName:(NSString *)name;
++ (CLLinesObjModel *)linesByName:(NSString *)name;
+
+
 + (void)updateRoutine:(CLRoutineModel *)routineModel;
 + (void)deleteRoutine:(CLRoutineModel *)routineModel;
 
@@ -51,6 +59,7 @@
 + (void)deleteTag:(NSString *)tag type:(NSString *)type;
 
 #pragma mark - 多媒体方法
++ (NSMutableArray *)allMedia;
 + (NSMutableArray *)allVideos;
 + (NSMutableArray *)allImages;
 
@@ -58,8 +67,8 @@
 + (UIImage *)imageByName:(NSString *)name;
 
 // timaStamp是多媒体所在模型的timaStamp, 这样可以建立模型与多媒体之间的联系
-+ (void)addVideoByName:(NSString *)name timesStamp:(NSString *)timeStamp;
-+ (void)addImageByName:(NSString *)name timesStamp:(NSString *)timeStamp;
++ (void)addVideoByName:(NSString *)name timesStamp:(NSString *)timeStamp content:(NSString *)content type:(NSString *)type;
++ (void)addImageByName:(NSString *)name timesStamp:(NSString *)timeStamp content:(NSString *)content type:(NSString *)type;
 
 + (void)deleteVideoByName:(NSString *)name;
 + (void)deleteImageByName:(NSString *)name;

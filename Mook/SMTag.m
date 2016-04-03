@@ -15,8 +15,8 @@
 {
     self = [super init];
     if (self) {
-        self.backgroundColor = kMenuBackgroundColor;
-        [self setTitleColor:kTintColor forState:UIControlStateDisabled];
+        self.backgroundColor = kTintColor;
+        [self setTitleColor:kMenuBackgroundColor forState:UIControlStateDisabled];
         self.titleLabel.font    = kFontSys14;
         self.layer.cornerRadius = 11;
         self.layer.masksToBounds= YES;
@@ -40,8 +40,8 @@
 -(id)initWithTag:(NSString *)tag{
     if(self = [super init]){
 
-        self.backgroundColor = kMenuBackgroundColor;
-        [self setTitleColor:kTintColor forState:UIControlStateDisabled];
+        self.backgroundColor = kTintColor;
+        [self setTitleColor:kMenuBackgroundColor forState:UIControlStateDisabled];
         self.titleLabel.font    = kFontSys14;
         self.layer.cornerRadius = 11;
         self.layer.masksToBounds= YES;

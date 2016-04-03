@@ -30,6 +30,8 @@
 
 - (NSMutableArray *)getRountineModelList;
 - (UIImage *)getImage;
+- (UIImage *)getThumbnail;
+
 - (NSString *)getTitle;
 - (NSAttributedString *)getContent;
 @end

@@ -101,7 +101,7 @@
     NSAttributedString *content;
     
     CLRoutineModel *model = self.routineModelList[indexPath.row];
-    image = [model getImage];
+    image = [model getThumbnail];
     iconName = kIconNameRoutine;
     title = [model getTitle];
     content = [model getContent];

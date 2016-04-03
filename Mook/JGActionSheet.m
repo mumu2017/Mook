@@ -368,7 +368,7 @@ static BOOL disableCustomEasing = NO;
     
     if (buttonStyle == JGActionSheetButtonStyleDefault) {
         font = [UIFont systemFontOfSize:16.0f];
-        titleColor = [UIColor whiteColor];
+        titleColor = kTintColor;
         
         backgroundColor = kMenuBackgroundColor;
         borderColor = kTintColor;

@@ -995,9 +995,36 @@
 - (void) saveImage:(UIImage *)image {
     
     NSString *imageName = [kTimestamp stringByAppendingString:@".jpg"];
+    NSString *type;
+    switch (self.editingContentType) {
+        case kEditingContentTypeIdea:
+            type = kTypeIdea;
+            break;
+            
+        case kEditingContentTypeRoutine:
+            type = kTypeRoutine;
+            break;
+            
+        case kEditingContentTypeSleight:
+            type = kTypeSleight;
+            break;
+            
+            
+        case kEditingContentTypeProp:
+            type = kTypeProp;
+            break;
+            
+            
+        case kEditingContentTypeLines:
+            type = kTypeLines;
+            break;
+            
+        default:
+            break;
+    }
     
     [imageName saveNamedImageToDocument:image];
-    [CLDataSaveTool addImageByName:imageName timesStamp:self.timeStamp];
+    [CLDataSaveTool addImageByName:imageName timesStamp:self.timeStamp content:self.effectModel.effect type:type];
     
     self.imageName = imageName;
     
@@ -1037,7 +1064,35 @@
         });
     });
     
-    [CLDataSaveTool addVideoByName:videoName timesStamp:self.timeStamp];
+    NSString *type;
+    switch (self.editingContentType) {
+        case kEditingContentTypeIdea:
+            type = kTypeIdea;
+            break;
+            
+        case kEditingContentTypeRoutine:
+            type = kTypeRoutine;
+            break;
+            
+        case kEditingContentTypeSleight:
+            type = kTypeSleight;
+            break;
+            
+            
+        case kEditingContentTypeProp:
+            type = kTypeProp;
+            break;
+            
+            
+        case kEditingContentTypeLines:
+            type = kTypeLines;
+            break;
+            
+        default:
+            break;
+    }
+    
+    [CLDataSaveTool addVideoByName:videoName timesStamp:self.timeStamp content:self.effectModel.effect type:type];
     self.videoName = videoName;
     
     switch (self.editingModel) {
