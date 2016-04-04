@@ -70,6 +70,9 @@
 + (void)addVideoByName:(NSString *)name timesStamp:(NSString *)timeStamp content:(NSString *)content type:(NSString *)type;
 + (void)addImageByName:(NSString *)name timesStamp:(NSString *)timeStamp content:(NSString *)content type:(NSString *)type;
 
++ (void)updateVideoByName:(NSString *)name withContent:(NSString *)content;
++ (void)updateImageByName:(NSString *)name withContent:(NSString *)content;
+
 + (void)deleteVideoByName:(NSString *)name;
 + (void)deleteImageByName:(NSString *)name;
 

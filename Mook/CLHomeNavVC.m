@@ -19,12 +19,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    self.isLaunched = [[NSUserDefaults standardUserDefaults] boolForKey:kUsePasswordKey];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(passwordMatch) name:@"passwordMatch" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(inputPassword) name:UIApplicationWillEnterForegroundNotification object:nil];
-    
+
     // Do any additional setup after loading the view.
     UIViewController *rootViewController = [[self viewControllers] firstObject];
     
@@ -36,33 +31,6 @@
 
 }
 
-
-- (void)inputPassword {
-    
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:kCheckIfShouldPasswordKey]) {
-        [self performSegueWithIdentifier:kMookToPasswordSegue sender:nil];
-    }
-}
-
-- (void)passwordMatch {
-    
-    [self dismissViewControllerAnimated:YES completion:nil];
-    
-}
-
-- (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    
-    if (self.isLaunched) {
-        [self performSegueWithIdentifier:kMookToPasswordSegue sender:nil];
-    }
-    
-    self.isLaunched = NO;
-}
 
 /*
 #pragma mark - Navigation

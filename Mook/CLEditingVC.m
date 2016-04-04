@@ -457,6 +457,14 @@
     UIEdgeInsets contentInsets = UIEdgeInsetsZero;
     self.editTextView.contentInset = contentInsets;
     self.editTextView.scrollIndicatorInsets = contentInsets;
+    
+    // 键盘弹下去表示编辑完成, 所以要更新数据库中视频的文本信息
+    if (self.isWithVideo) {
+        [CLDataSaveTool updateVideoByName:self.videoName withContent:self.editTextView.text];
+    } else if (self.isWithImage) {
+        [CLDataSaveTool updateImageByName:self.imageName withContent:self.editTextView.text];
+    }
+    
 }
 
 
@@ -1024,7 +1032,7 @@
     }
     
     [imageName saveNamedImageToDocument:image];
-    [CLDataSaveTool addImageByName:imageName timesStamp:self.timeStamp content:self.effectModel.effect type:type];
+    [CLDataSaveTool addImageByName:imageName timesStamp:self.timeStamp content:self.editTextView.text type:type];
     
     self.imageName = imageName;
     
@@ -1092,7 +1100,7 @@
             break;
     }
     
-    [CLDataSaveTool addVideoByName:videoName timesStamp:self.timeStamp content:self.effectModel.effect type:type];
+    [CLDataSaveTool addVideoByName:videoName timesStamp:self.timeStamp content:self.editTextView.text type:type];
     self.videoName = videoName;
     
     switch (self.editingModel) {

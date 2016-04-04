@@ -623,6 +623,25 @@ static FMDatabase *_db;
     }
 }
 
++ (void)updateVideoByName:(NSString *)name withContent:(NSString *)content {
+    
+    BOOL flag = [_db executeUpdate:@"update t_media set content=? where name=?", content, name];
+    if (flag) {
+        NSLog(@"更新成功");
+    }else{
+        NSLog(@"更新失败");
+    }
+}
+
++ (void)updateImageByName:(NSString *)name withContent:(NSString *)content {
+    BOOL flag = [_db executeUpdate:@"update t_media set content=? where name=?", content, name];
+    if (flag) {
+        NSLog(@"更新成功");
+    }else{
+        NSLog(@"更新失败");
+    }
+}
+
 + (void)deleteVideoByName:(NSString *)name {
     BOOL flag = [_db executeUpdate:@"delete from t_media where type=? and name=?", @"video", name];
     if (flag) {
