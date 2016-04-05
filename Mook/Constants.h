@@ -226,6 +226,7 @@ typedef enum {
 // 字体相关
 #define kFontSys10    [UIFont systemFontOfSize:10]
 #define kFontSys12    [UIFont systemFontOfSize:12]
+#define kFontSys13    [UIFont systemFontOfSize:13]
 #define kFontSys14    [UIFont systemFontOfSize:14]
 #define kFontSys16    [UIFont systemFontOfSize:16]
 #define kFontSys17    [UIFont systemFontOfSize:17]

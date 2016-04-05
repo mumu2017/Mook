@@ -12,7 +12,6 @@
 #import "CLTagListVC.h"
 #import "CLListVC.h"
 
-
 @interface CLLibraryVC ()
 
 @property (nonatomic, strong) NSMutableArray *ideaObjModelList;
@@ -176,7 +175,7 @@ static NSString * const reuseIdentifier = @"Cell";
 //定义每个UICollectionView 的 margin
 -(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
 {
-    return UIEdgeInsetsMake(3, 0, 3, 0);
+    return UIEdgeInsetsMake(0, 0, 0, 0);
 }
 
 #pragma mark <UICollectionViewDelegate>
@@ -191,6 +190,16 @@ static NSString * const reuseIdentifier = @"Cell";
     }
     
     //    NSLog(@"~~");
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionView *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
+{
+    return 10; // This is the minimum inter item spacing, can be more
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionView *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
+{
+    return 0; // This is the minimum inter item spacing, can be more
 }
 
 /*

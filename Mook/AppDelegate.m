@@ -155,11 +155,17 @@
     [[UIToolbar appearance] setTranslucent:NO];
     [[UIToolbar appearance] setOpaque:YES];
     [[UIToolbar appearance] setTintColor:kTintColor];
-    [[UIToolbar appearance] setBarTintColor:nil];
+    [[UIToolbar appearance] setBarTintColor:[UIColor flatSkyBlueColorDark]];
     
     [[UINavigationBar appearance] setTintColor:kTintColor];
     [[UINavigationBar appearance] setBarTintColor:kMenuBackgroundColor];
+    
+//    [[UITableViewCell appearance] setBackgroundColor:[UIColor flatWhiteColor]];
 
+    
+    [[UITabBar appearance] setTintColor:[UIColor flatSkyBlueColorDark]];
+//    [[UITabBar appearance] setBarTintColor:kMenuBackgroundColor];
+    
     // 设置导航栏没有边线
 //    [[UINavigationBar appearance] setBackgroundImage:[[UIImage alloc] init]
 //                                      forBarPosition:UIBarPositionAny

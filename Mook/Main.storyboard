@@ -469,7 +469,7 @@
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="mQe-kW-LzU">
-                                <rect key="frame" x="0.0" y="113.5" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="49.5" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mQe-kW-LzU" id="mHq-pb-X2b">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
@@ -509,7 +509,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="ois-gE-CRY">
-                                <rect key="frame" x="0.0" y="92" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ois-gE-CRY" id="7hE-0Y-PPr">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
@@ -1376,15 +1376,15 @@
             <objects>
                 <tableViewController id="msb-Eh-Iuc" customClass="CLTagListVC" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="dux-ar-N7s">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="tagCell" textLabel="bsq-FM-N2u" detailTextLabel="2MP-tU-4d0" style="IBUITableViewCellStyleValue1" id="M9A-al-vKT" customClass="SWTableViewCell">
-                                <rect key="frame" x="0.0" y="113.5" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="113.5" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="M9A-al-vKT" id="XBT-U5-j1I">
-                                    <rect key="frame" x="0.0" y="0.0" width="342" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="567" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="bsq-FM-N2u">
@@ -1395,7 +1395,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="2MP-tU-4d0">
-                                            <rect key="frame" x="298.5" y="12" width="41.5" height="19.5"/>
+                                            <rect key="frame" x="523.5" y="12" width="41.5" height="19.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                             <color key="textColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="calibratedRGB"/>
@@ -1458,6 +1458,7 @@
             <objects>
                 <collectionViewController id="9fA-HC-Vld" customClass="CLLibraryVC" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="64F-bW-p4u">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="JxA-8Q-EuV">
                             <size key="itemSize" width="50" height="50"/>
@@ -1467,7 +1468,7 @@
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="RV8-uV-o62">
-                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                <rect key="frame" x="0.0" y="64" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
@@ -1517,7 +1518,7 @@
             <objects>
                 <tableViewController id="LBd-Rh-VHR" customClass="CLListVC" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="Cao-Mm-Skw">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <connections>
@@ -1576,7 +1577,7 @@
         <scene sceneID="Bll-BA-05a">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="0aN-7l-1wA" customClass="CLSettingNavVC" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="设置" image="settingIcon" id="7UM-em-4Mb"/>
+                    <tabBarItem key="tabBarItem" title="设置" image="iconsettingLine" selectedImage="iconsettingFill" id="7UM-em-4Mb"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="0zu-k4-g2O">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -1744,7 +1745,7 @@
         <scene sceneID="7HN-8R-7kn">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ZNK-Ui-Mmt" customClass="CLHomeNavVC" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="笔记" id="7U8-cH-grM"/>
+                    <tabBarItem key="tabBarItem" title="笔记" image="iconnotesLine" selectedImage="iconnotesFill" id="7U8-cH-grM"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="eMn-os-yaZ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -1801,7 +1802,7 @@
         <scene sceneID="ENp-8f-x2r">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="a3j-i3-6iI" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="多媒体" id="JG5-Ax-guD"/>
+                    <tabBarItem key="tabBarItem" title="多媒体" image="iconmediaLine" selectedImage="iconmediaFill" id="JG5-Ax-guD"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="FzY-UC-DJK">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -1820,7 +1821,7 @@
         <scene sceneID="C5G-wl-0Wc">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Q9D-A1-sVC" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="分类" id="hKg-es-jeP"/>
+                    <tabBarItem key="tabBarItem" title="分类" image="iconlibraryLine" selectedImage="iconlibraryFill" id="hKg-es-jeP"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="n3U-Su-yMZ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -1837,21 +1838,28 @@
         </scene>
     </scenes>
     <resources>
+        <image name="iconlibraryFill" width="22" height="22"/>
+        <image name="iconlibraryLine" width="22" height="22"/>
+        <image name="iconmediaFill" width="22" height="22"/>
+        <image name="iconmediaLine" width="22" height="22"/>
+        <image name="iconnotesFill" width="22" height="22"/>
+        <image name="iconnotesLine" width="22" height="22"/>
+        <image name="iconsettingFill" width="22" height="22"/>
+        <image name="iconsettingLine" width="22" height="22"/>
         <image name="passwordDelete" width="25" height="25"/>
-        <image name="settingIcon" width="20" height="20"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="NHr-0K-Qxl"/>
-        <segue reference="u0H-cQ-x0W"/>
-        <segue reference="SC9-Mu-JaP"/>
-        <segue reference="o9A-pa-swy"/>
-        <segue reference="Vbh-5V-rgl"/>
-        <segue reference="G4h-Vz-pXE"/>
-        <segue reference="mlI-HE-mUm"/>
-        <segue reference="VDJ-pe-Rdt"/>
         <segue reference="bEc-M4-ajG"/>
+        <segue reference="mlI-HE-mUm"/>
+        <segue reference="kaf-AR-qIR"/>
+        <segue reference="Q5P-dU-GsF"/>
+        <segue reference="VDJ-pe-Rdt"/>
+        <segue reference="G4h-Vz-pXE"/>
         <segue reference="0H7-eX-bPN"/>
         <segue reference="dEz-cj-T12"/>
+        <segue reference="SC9-Mu-JaP"/>
+        <segue reference="u0H-cQ-x0W"/>
+        <segue reference="NHr-0K-Qxl"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
 </document>

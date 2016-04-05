@@ -308,7 +308,8 @@
         
         cell.rightUtilityButtons = [self rightButtons];
         cell.delegate = self;
-        
+        cell.backgroundColor = [UIColor flatWhiteColor];
+
         return cell;
         
     } else {
@@ -318,7 +319,8 @@
         
         cell.rightUtilityButtons = [self rightButtons];
         cell.delegate = self;
-        
+        cell.backgroundColor = [UIColor flatWhiteColor];
+
         return cell;
     }
     
@@ -830,7 +832,7 @@
         [sheet dismissAnimated:YES];
     }];
     
-    [sheet showInView:self.navigationController.view animated:YES];
+    [sheet showInView:self.tabBarController.view animated:YES];
 }
 
 - (void)addNewIdea {

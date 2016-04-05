@@ -28,8 +28,8 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="detail safsafas  sdfsa dsa fdsa fdsa fdsa fda fdafdsa fdsa fda " lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9C8-6j-LAQ">
-                        <rect key="frame" x="30" y="30.5" width="202.5" height="33.5"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <rect key="frame" x="30" y="33.5" width="202.5" height="31.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -45,7 +45,7 @@
                     <constraint firstItem="2Hv-JU-cNn" firstAttribute="leading" secondItem="3kM-bg-f07" secondAttribute="trailing" constant="6" id="0EY-BT-ujg"/>
                     <constraint firstItem="9C8-6j-LAQ" firstAttribute="leading" secondItem="TzT-1U-qrp" secondAttribute="leading" constant="30" id="19a-rI-iX1"/>
                     <constraint firstItem="hol-Nr-reY" firstAttribute="top" secondItem="TzT-1U-qrp" secondAttribute="top" constant="10" id="3XF-IV-dFe"/>
-                    <constraint firstItem="9C8-6j-LAQ" firstAttribute="top" secondItem="2Hv-JU-cNn" secondAttribute="bottom" id="3sE-1S-zQk"/>
+                    <constraint firstItem="9C8-6j-LAQ" firstAttribute="top" secondItem="2Hv-JU-cNn" secondAttribute="bottom" constant="3" id="3sE-1S-zQk"/>
                     <constraint firstItem="3kM-bg-f07" firstAttribute="top" secondItem="2Hv-JU-cNn" secondAttribute="top" id="EXT-Mc-SyZ"/>
                     <constraint firstItem="hol-Nr-reY" firstAttribute="centerY" secondItem="TzT-1U-qrp" secondAttribute="centerY" id="EsH-fc-UQg"/>
                     <constraint firstItem="9C8-6j-LAQ" firstAttribute="width" secondItem="2Hv-JU-cNn" secondAttribute="width" id="Qyy-Qu-bEu"/>
