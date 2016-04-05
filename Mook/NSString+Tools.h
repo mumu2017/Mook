@@ -26,6 +26,7 @@
 // 获取模型创建时间
 + (NSString *)getDateString:(NSDate *)date;
 
++ (NSAttributedString *)attributedStringWithFirstPart:(NSString *)part1 secondPart:(NSString *)part2 firstPartFont:(UIFont *)font1 firstPartColor:(UIColor *)color1 secondPardFont:(UIFont *)font2 secondPartColor:(UIColor *)color2;
 // 组建标题
 + (NSAttributedString *)titleString:(NSString *)title withDate:(NSDate *)date;
 

@@ -65,7 +65,7 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 5;
+    return 6;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -74,7 +74,7 @@
     
     switch (section) {
         case 0:
-            number = 1;
+            number = 2;
             break;
             
         case 1:
@@ -94,7 +94,11 @@
             break;
             
         case 4:
-            number = 1;
+            number = 2;
+            break;
+            
+        case 5:
+            number = 4;
             break;
             
         default:

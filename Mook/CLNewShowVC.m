@@ -201,7 +201,7 @@
             
             cell.titleLabel.text = @"演出场地";
             cell.inputTextField.placeholder = @"编辑演出场地";
-            cell.inputTextField.text = self.showModel.duration;
+            cell.inputTextField.text = self.showModel.place;
             cell.inputTextField.tag = kTagShowPlace;
             //            self.titleTF = cell.inputTextField;
             cell.inputTextField.delegate = self;
@@ -209,7 +209,7 @@
             
             cell.titleLabel.text = @"观众数量";
             cell.inputTextField.placeholder = @"最佳观众数量";
-            cell.inputTextField.text = self.showModel.duration;
+            cell.inputTextField.text = self.showModel.audianceCount;
             cell.inputTextField.tag = kTagShowAudiance;
             //            self.titleTF = cell.inputTextField;
             cell.inputTextField.delegate = self;
@@ -441,7 +441,6 @@
 - (void)textFieldDidEndEditing:(UITextField *)textField {
     
     textField.textAlignment = NSTextAlignmentRight;
-    self.showModel.name = textField.text;
     
     switch (textField.tag) {
         case kTagShowName:

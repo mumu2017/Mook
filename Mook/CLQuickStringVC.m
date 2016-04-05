@@ -10,7 +10,7 @@
 #import "CLQuickStringCell.h"
 #import "CLTableBackView.h"
 
-@interface CLQuickStringVC ()<SWTableViewCellDelegate>
+@interface CLQuickStringVC ()
 
 @property (nonatomic, strong) NSMutableArray <NSString*> *quickStringList;
 @property (nonatomic, strong) CLTableBackView *tableBackView;
@@ -27,6 +27,7 @@
             
             [[NSUserDefaults standardUserDefaults] setObject:_quickStringList forKey:kQuickStringKey];
             [[NSUserDefaults standardUserDefaults] synchronize];
+            
         } else {
             NSArray *array = [[NSUserDefaults standardUserDefaults] objectForKey:kQuickStringKey];
             _quickStringList = [array mutableCopy];
@@ -45,6 +46,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self.tableView setEditing:!self.isPicking];
+    
+    if (self.isPicking) {
+        UIBarButtonItem *cancelBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelSelection)];
+        self.navigationItem.rightBarButtonItem = cancelBtn;
+    }
+    
+    self.tableView.allowsSelectionDuringEditing = YES;
     self.tableView.estimatedRowHeight = 44;
     
     self.tableView.backgroundView = self.tableBackView;
@@ -56,6 +65,10 @@
                                                bundle:nil]
          forCellReuseIdentifier:kQuickStringCellID];
     
+}
+
+- (void)cancelSelection {
+    [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - Table view data source
@@ -75,15 +88,22 @@
     CLQuickStringCell *cell = [tableView dequeueReusableCellWithIdentifier:kQuickStringCellID forIndexPath:indexPath];
     
     cell.contentLabel.text = self.quickStringList[indexPath.row];
-    cell.rightUtilityButtons = [self rightButtons];
-    cell.delegate = self;
     
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    [self editStringWithIndexPath:indexPath];
+    if (self.isPicking) {
+        
+        if ([self.delegate respondsToSelector:@selector(quickStringVC:didSelectQuickString:)]) {
+            [self.delegate quickStringVC:self didSelectQuickString:self.quickStringList[indexPath.row]];
+        }
+        
+    } else {
+        [self editStringWithIndexPath:indexPath];
+
+    }
 }
 
 - (NSArray *)rightButtons
@@ -95,60 +115,56 @@
 }
 
 
-#pragma mark - SWTableViewDelegate
+#pragma mark - tableView 编辑方法
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
 
-- (void)swipeableTableViewCell:(SWTableViewCell *)cell didTriggerRightUtilityButtonWithIndex:(NSInteger)index
-{
-    NSIndexPath *path = [self.tableView indexPathForCell:cell];
-    
-    switch (index) {
-
-        case 0:
-        { 
-            [self.quickStringList removeObjectAtIndex:path.row];
-            
-            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-            [defaults setObject:self.quickStringList forKey:kQuickStringKey];
-            [defaults synchronize];
-            
-            [self.tableView deleteRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationFade];
-            
-            self.tableBackView.hidden = !(self.quickStringList.count == 0);
-            
-            break;
-        }
-            
-        default:
-            break;
-    }
-    [cell hideUtilityButtonsAnimated:YES];
-    
-}
-
-- (BOOL)swipeableTableViewCellShouldHideUtilityButtonsOnSwipe:(SWTableViewCell *)cell
-{
-    // allow just one cell's utility button to be open at once
     return YES;
 }
 
-- (BOOL)swipeableTableViewCell:(SWTableViewCell *)cell canSwipeToState:(SWCellState)state
-{
-    switch (state) {
-        case 1:
-            // set to NO to disable all left utility buttons appearing
-            return NO;
-            break;
-        case 2:
-            // set to NO to disable all right utility buttons appearing
-            return YES;
-            break;
-        default:
-            break;
-    }
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    return UITableViewCellEditingStyleDelete;
+}
+
+- (BOOL)tableView:(UITableView *)tableView shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath {
     
     return YES;
 }
 
+// Override to support editing the table view.
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        
+        [self.quickStringList removeObjectAtIndex:indexPath.row];
+        
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        [defaults setObject:self.quickStringList forKey:kQuickStringKey];
+        [defaults synchronize];
+        
+        [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        
+        self.tableBackView.hidden = !(self.quickStringList.count == 0);
+    }
+}
+
+
+- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
+
+    NSString *str = self.quickStringList[fromIndexPath.row];
+    [self.quickStringList removeObjectAtIndex:fromIndexPath.row];
+    [self.quickStringList insertObject:str atIndex:toIndexPath.row];
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:self.quickStringList forKey:kQuickStringKey];
+    [defaults synchronize];
+}
+
+
+- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    return YES;
+}
 
 #pragma mark - 数据添加和编辑
 - (IBAction)addNewQuickString:(id)sender {

@@ -143,6 +143,7 @@ typedef enum {
 #define kSegueTagToListSegue    @"tagToListSegue"
 
 #define kSegueMediaToContent    @"mediaToContentSegue"
+#define kSegueMediaToShow    @"mediaToShowSegue"
 
 #define kSegueListToContent @"listToContentSegue"
 #define kSegueListToShow   @"listToShowSegue"
@@ -155,6 +156,7 @@ typedef enum {
 #define kSegueNewShowToEditingSegue @"newShowToEditingSegue"
 #define kSegueNewShowToRoutineChoose   @"newShowToRoutineChooseSegue"
 
+#define kQuickStringSegue   @"quickStringSegue"
 #define kEditingSegue   @"editingSegue"
 #define kPropInputSegue @"propInputSegue"
 
@@ -346,6 +348,10 @@ typedef enum {
 
 #define kDeleteRoutineCellID  @"deleteRoutineCell"
 
+#define kShowInfoCell    @"showInfoCell"
+#define kRoutineImageCell    @"routineImageCell"
+#define kRoutineTextCell    @"routineTextCell"
+
 #define kOneLabelDisplayCell    @"oneLabelDisplayCell"
 #define kOneLabelMediaDisplayCell   @"oneLabelMediaDisplayCell"
 #define kOneLabelImageDisplayCell @"oneLabelImageDisplayCell"
@@ -372,7 +378,7 @@ typedef enum {
 #define kBarTintColor     [UIColor colorWithRed:247/255.0 green:247/255.0 blue:247/255.0 alpha:1.0]
 
 #define kTintColor          [UIColor colorWithContrastingBlackOrWhiteColorOn:kMenuBackgroundColor isFlat:YES]    // FlatColor
-#define kMenuBackgroundColor    [UIColor flatBlackColorDark]
+#define kMenuBackgroundColor    [UIColor flatSkyBlueColorDark]
 //#define kTintColor     [UIColor colorWithRed:248/255.0 green:128/255.0 blue:4/255.0 alpha:1.0] //黄色
 //#define kMenuBackgroundColor    [UIColor colorWithRed:26/255.0 green:29/255.0 blue:33/255.0 alpha:1.0]
 

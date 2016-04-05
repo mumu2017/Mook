@@ -9,16 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @class CLTagChooseVC;
-//
-//typedef enum {
-//    kTagChooseModeShow = 0,
-//    kTagChooseModeRoutine,
-//    kTagChooseModeIdea,
-//    kTagChooseModeSleight,
-//    kTagChooseModeProp,
-//    kTagChooseModeLines
-//    
-//} TagChooseMode;
 
 @protocol CLTagChooseVCDelegate <NSObject>
 

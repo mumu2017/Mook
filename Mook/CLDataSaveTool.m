@@ -41,14 +41,6 @@ static FMDatabase *_db;
         NSLog(@"打开失败");
     }
     
-    // 创建Show表格
-    BOOL flag0 = [_db executeUpdate:@"create table if not exists t_show (id integer primary key autoincrement,time_stamp text,dict blob);"];
-    if (flag0) {
-        NSLog(@"创建Show表成功");
-    }else{
-        NSLog(@"创建Show表失败");
-    }
-    
     // 创建Data表格
     BOOL flag1 = [_db executeUpdate:@"create table if not exists t_mook (id integer primary key autoincrement,type text,time_stamp text,dict blob);"];
     if (flag1) {
@@ -86,6 +78,9 @@ static FMDatabase *_db;
         if ([type isEqualToString:kTypeIdea]) {
             CLIdeaObjModel *model = [CLIdeaObjModel objectWithKeyValues:dict];
             [arrM insertObject:model atIndex:0];
+        } else if ([type isEqualToString:kTypeShow]) {
+            CLShowModel *model = [CLShowModel objectWithKeyValues:dict];
+            [arrM insertObject:model atIndex:0];
         } else if ([type isEqualToString:kTypeRoutine]) {
             CLRoutineModel *model = [CLRoutineModel objectWithKeyValues:dict];
             [arrM insertObject:model atIndex:0];
@@ -106,7 +101,7 @@ static FMDatabase *_db;
 
 + (NSMutableArray<CLShowModel *> *)allShows {
     // 进入程序第一次获取的查询语句
-    FMResultSet *set = [_db executeQuery:@"select * from t_show;"];
+    FMResultSet *set = [_db executeQuery:@"select * from t_mook where type=?;", kTypeShow];
     NSMutableArray *arrM = [NSMutableArray array];
     while ([set next]) {
         NSData *data = [set dataForColumn:@"dict"];
@@ -204,6 +199,13 @@ static FMDatabase *_db;
 }
 
 + (CLShowModel *)showByName:(NSString *)name {
+    FMResultSet *set = [_db executeQuery:@"select * from t_mook where type=? and time_stamp=?;",kTypeShow, name];
+    while ([set next]) {
+        NSData *data = [set dataForColumn:@"dict"];
+        NSDictionary *dict = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        CLShowModel *model = [CLShowModel objectWithKeyValues:dict];
+        return model;
+    }
     return nil;
 }
 
@@ -268,12 +270,12 @@ static FMDatabase *_db;
     NSString *timeStamp = showModel.timeStamp;
     NSData *data = [NSKeyedArchiver archivedDataWithRootObject:dict];
     
-    FMResultSet *set = [_db executeQuery:@"select * from t_show where time_stamp=?", timeStamp];
+    FMResultSet *set = [_db executeQuery:@"select * from t_mook where time_stamp=?", timeStamp];
     
     // 如果[set next]不为空,则表示查询到至少一个结果.所以更新数据.
     if ([set next]) {
         
-        BOOL flag = [_db executeUpdate:@"update t_show set dict=? where time_stamp=?", data, timeStamp];
+        BOOL flag = [_db executeUpdate:@"update t_mook set dict=? where time_stamp=?", data, timeStamp];
         if (flag) {
             NSLog(@"更新Show成功");
         }else{
@@ -281,7 +283,7 @@ static FMDatabase *_db;
         }
         
     } else {    // 如果为空,则表示没有查询到任何符合条件的结果,所以插入数据.
-        BOOL flag = [_db executeUpdate:@"insert into t_show (time_stamp, dict) values(?,?)", timeStamp, data];
+        BOOL flag = [_db executeUpdate:@"insert into t_mook (type, time_stamp, dict) values(?,?,?)", kTypeShow, timeStamp, data];
         if (flag) {
             NSLog(@"插入Show成功");
         }else{
@@ -294,7 +296,7 @@ static FMDatabase *_db;
     
     NSString *timeStamp = showModel.timeStamp;
     
-    BOOL flag = [_db executeUpdate:@"delete from t_show where time_stamp=?", timeStamp];
+    BOOL flag = [_db executeUpdate:@"delete from t_mook where time_stamp=?", timeStamp];
     if (flag) {
         NSLog(@"删除Show成功");
     }else{

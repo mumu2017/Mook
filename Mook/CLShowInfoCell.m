@@ -1,18 +1,18 @@
 //
-//  CLRoutineTextCell.m
+//  CLShowInfoCell.m
 //  Mook
 //
-//  Created by 陈林 on 16/3/31.
+//  Created by 陈林 on 16/4/5.
 //  Copyright © 2016年 Chen Lin. All rights reserved.
 //
 
-#import "CLRoutineTextCell.h"
+#import "CLShowInfoCell.h"
 
-@implementation CLRoutineTextCell
+@implementation CLShowInfoCell
 
 - (void)awakeFromNib {
+    [super awakeFromNib];
     // Initialization code
-    self.infoButton.tintColor = kMenuBackgroundColor;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

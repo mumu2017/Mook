@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CLQuickStringCell : SWTableViewCell
+@interface CLQuickStringCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UILabel *contentLabel;
 

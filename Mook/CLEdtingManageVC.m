@@ -457,7 +457,8 @@
                 if (i == 0) {
                     vc.effectModel = self.showModel.effectModel;
                     vc.editingModel = kEditingModeEffect;
-                    
+                    vc.timeStamp = self.showModel.timeStamp;
+
                 }
             }
 

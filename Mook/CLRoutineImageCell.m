@@ -10,14 +10,28 @@
 
 @implementation CLRoutineImageCell
 
-- (void)awakeFromNib {
-    // Initialization code
+- (void)setImageWithName:(NSString *)imageName {
+    
+    UIImage *image = [imageName getNamedImage];
+    self.iconView.contentMode = UIViewContentModeScaleAspectFill;
+    self.iconView.image = image;
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
+- (void)setImageWithVideoName:(NSString *)videoName {
+    
+    UIImage *image = [videoName getNamedVideoFrame];
+    self.iconView.contentMode = UIViewContentModeScaleAspectFit;
+    self.iconView.image = image;
+    
+    [self.iconButton setImage:[UIImage imageNamed:@"PlayButtonOverlayLarge"] forState:UIControlStateNormal];
+    [self.iconButton setImage:[UIImage imageNamed:@"PlayButtonOverlayLargeTap"] forState:UIControlStateHighlighted];
+}
 
-    // Configure the view for the selected state
+- (void)awakeFromNib {
+    
+    self.iconView.clipsToBounds = YES;
+    self.infoButton.tintColor = kMenuBackgroundColor;
+
 }
 
 @end

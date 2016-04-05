@@ -23,8 +23,8 @@
 - (NSAttributedString *)styledString {
 
     NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
-    [style setLineSpacing:4];
-    [style setParagraphSpacing:8];
+    [style setLineSpacing:5];
+    [style setParagraphSpacing:10];
     NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:self];
     [attrString addAttribute:NSParagraphStyleAttributeName
                        value:style
@@ -44,6 +44,22 @@
     [datePart appendAttributedString:contentPart];
     
     return datePart;
+}
+
+// 将两个文本组合在一起,并各自定义字体和颜色
++ (NSAttributedString *)attributedStringWithFirstPart:(NSString *)part1 secondPart:(NSString *)part2 firstPartFont:(UIFont *)font1 firstPartColor:(UIColor *)color1 secondPardFont:(UIFont *)font2 secondPartColor:(UIColor *)color2 {
+    
+    NSMutableAttributedString * firstPart = [[NSMutableAttributedString alloc] initWithString:part1];
+    NSDictionary * firstAttributes = @{ NSFontAttributeName:font1,NSForegroundColorAttributeName:color1,};
+    [firstPart setAttributes:firstAttributes range:NSMakeRange(0,firstPart.length)];
+    
+    NSMutableAttributedString * secondPart = [[NSMutableAttributedString alloc] initWithString:part2];
+    NSDictionary * secondAttributes = @{NSFontAttributeName:font2,NSForegroundColorAttributeName:color2,};
+    [secondPart setAttributes:secondAttributes range:NSMakeRange(0,secondPart.length)];
+    
+    [firstPart appendAttributedString:secondPart];
+    
+    return firstPart;
 }
 
 // 获取ContentVC中的标题文本格式

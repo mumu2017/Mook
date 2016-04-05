@@ -14,15 +14,21 @@
 #import "CLOneLabelDisplayCell.h"
 #import "CLOneLabelImageDisplayCell.h"
 #import "CLNewShowVC.h"
+#import "CLRoutineImageCell.h"
+#import "CLRoutineTextCell.h"
+#import "CLShowInfoCell.h"
 
 #import "CLRoutineModel.h"
 #import "CLInfoModel.h"
 #import "CLEffectModel.h"
 
-@interface CLShowVC ()<SWTableViewCellDelegate>
+@interface CLShowVC ()<SWTableViewCellDelegate, MWPhotoBrowserDelegate>
 
 @property (nonatomic, strong) NSMutableArray *routineModelList;
 
+@property (nonatomic, strong) NSMutableArray *photos;
+@property (nonatomic, strong) NSMutableArray *thumbs;
+@property (nonatomic, assign) NSInteger tag;
 
 @end
 
@@ -41,6 +47,93 @@
         _routineModelList = [self.showModel getRountineModelList];
     }
     return _routineModelList;
+}
+
+- (NSMutableArray *)photos {
+    if (!_photos) {
+        _photos = [self loadPhotos];
+    }
+    return _photos;
+}
+
+- (NSMutableArray *)thumbs {
+    if (!_thumbs) {
+        _thumbs = [self loadThumbs];
+    }
+    return _thumbs;
+}
+
+// 遍历模型,加载图片
+- (NSMutableArray *)loadPhotos {
+    
+    NSMutableArray *photos = [NSMutableArray array];
+    MWPhoto *photo;
+    
+    if (self.showModel.effectModel.isWithImage) {
+        // Photos
+        photo = [MWPhoto photoWithImage:[self.showModel.effectModel.image getNamedImage]];
+        photo.caption = self.showModel.effectModel.effect;
+        [photos addObject:photo];
+        
+    } else if (self.showModel.effectModel.isWithVideo) {
+        
+        // Photos
+        NSString *path = [[NSString videoPath] stringByAppendingPathComponent:self.showModel.effectModel.video];
+        photo = [MWPhoto photoWithImage:[self.showModel.effectModel.video getNamedVideoFrame]];
+        photo.videoURL = [NSURL fileURLWithPath:path];
+        photo.caption = self.showModel.effectModel.effect;
+        
+        [photos addObject:photo];
+    }
+    
+    for (CLRoutineModel *model in self.routineModelList) {
+        if (model.effectModel.isWithImage) {
+            
+            // Photos
+            photo = [MWPhoto photoWithImage:[model.effectModel.image getNamedImage]];
+            photo.caption = model.effectModel.effect;
+            [photos addObject:photo];
+        } else if (model.effectModel.isWithVideo) {
+            NSString *path = [[NSString videoPath] stringByAppendingPathComponent:model.effectModel.video];
+            photo = [MWPhoto photoWithImage:[model.effectModel.video getNamedVideoFrame]];
+            photo.videoURL = [NSURL fileURLWithPath:path];
+            photo.caption = model.effectModel.effect;
+            
+            [photos addObject:photo];
+        }
+    }
+    return photos;
+}
+
+- (NSMutableArray *)loadThumbs {
+    
+    NSMutableArray *thumbs = [NSMutableArray array];
+    
+    MWPhoto *thumb;
+    
+    if (self.showModel.effectModel.isWithImage) {
+        thumb = [MWPhoto photoWithImage:[self.showModel.effectModel.image getNamedImageThumbnail]];
+        [thumbs addObject:thumb];
+        
+    } else if (self.showModel.effectModel.isWithVideo) {
+        
+        thumb = [MWPhoto photoWithImage:[self.showModel.effectModel.video getNamedVideoThumbnail]];
+        [thumbs addObject:thumb];
+    }
+    
+    for (CLRoutineModel *model in self.routineModelList) {
+        if (model.effectModel.isWithImage) {
+            
+            thumb = [MWPhoto photoWithImage:[model.effectModel.image getNamedImageThumbnail]];
+            [thumbs addObject:thumb];
+            
+        } else if (model.effectModel.isWithVideo) {
+            thumb = [MWPhoto photoWithImage:[model.effectModel.video getNamedVideoThumbnail]];
+            [thumbs addObject:thumb];
+        }
+    }
+    
+    return thumbs;
 }
 
 - (void)viewDidLoad {
@@ -62,6 +155,18 @@
     [self.tableView registerNib:[UINib nibWithNibName:@"CLOneLabelDisplayCell"
                                                bundle:nil]
          forCellReuseIdentifier:kOneLabelDisplayCell];
+    
+    [self.tableView registerNib:[UINib nibWithNibName:@"CLShowInfoCell"
+                                               bundle:nil]
+         forCellReuseIdentifier:kShowInfoCell];
+    
+    [self.tableView registerNib:[UINib nibWithNibName:@"CLRoutineImageCell"
+                                               bundle:nil]
+         forCellReuseIdentifier:kRoutineImageCell];
+    
+    [self.tableView registerNib:[UINib nibWithNibName:@"CLRoutineTextCell"
+                                               bundle:nil]
+         forCellReuseIdentifier:kRoutineTextCell];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(update) name:kUpdateDataNotification
                                                object:nil];
@@ -90,7 +195,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    NSInteger number;
+    NSInteger number = 0;
     switch (section) {
         case 0:
             number = 1;
@@ -128,7 +233,7 @@
                 title = @"请编辑标题";
             }
             
-            NSAttributedString *titleString = [NSString titleString:title withDate:self.date];
+            NSAttributedString *titleString = [NSString titleString:title withDate:self.showModel.date];
 
             cell.contentLabel.attributedText = titleString;
             cell.contentLabel.textAlignment = NSTextAlignmentCenter;
@@ -137,7 +242,22 @@
         }
         case 1:
         {
-            UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+            CLShowInfoCell * cell = [self.tableView dequeueReusableCellWithIdentifier:kShowInfoCell];
+            
+            NSString *title, *content;
+            if (indexPath.row == 0) {
+                title = @"演出时长";
+                content = self.showModel.duration;
+            } else if (indexPath.row == 1) {
+                title = @"演出场地";
+                content = self.showModel.place;
+            } else if (indexPath.row == 2) {
+                title = @"观众数量";
+                content = self.showModel.audianceCount;
+            }
+            cell.titleLabel.text = title;
+            cell.contentLabel.text = content;
+            
             return cell;
         }
         case 2:
@@ -146,9 +266,12 @@
                 
                 CLOneLabelImageDisplayCell * cell = [self.tableView dequeueReusableCellWithIdentifier:kOneLabelImageDisplayCell];
                 
-                cell.contentLabel.attributedText = [self.showModel.effectModel.effect styledString];
+                cell.contentLabel.attributedText = [[NSString attributedStringWithFirstPart:@"演出说明\n" secondPart:self.showModel.effectModel.effect firstPartFont:kBoldFontSys17 firstPartColor:[UIColor blackColor] secondPardFont:kFontSys17 secondPartColor:[UIColor blackColor]] styledString];
+                
                 [cell.imageButton addTarget:self action:@selector(showPhotoBrowser:) forControlEvents:UIControlEventTouchUpInside];
-                cell.imageButton.tag = 0; // effectModel肯定是第一张图片或视频,所以作为图片数组中的Index,tag = 0;
+                
+                self.tag = 0;
+                cell.imageButton.tag = self.tag; // effectModel肯定是第一张图片或视频,所以作为图片数组中的Index,tag = 0;
                 [cell setImageWithVideoName:self.showModel.effectModel.video];
                 
                 return cell;
@@ -156,9 +279,12 @@
                 
                 CLOneLabelImageDisplayCell * cell = [self.tableView dequeueReusableCellWithIdentifier:kOneLabelImageDisplayCell];
                 
-                cell.contentLabel.attributedText = [self.showModel.effectModel.effect styledString];
+                cell.contentLabel.attributedText = [[NSString attributedStringWithFirstPart:@"演出说明\n" secondPart:self.showModel.effectModel.effect firstPartFont:kBoldFontSys17 firstPartColor:[UIColor blackColor] secondPardFont:kFontSys17 secondPartColor:[UIColor blackColor]] styledString];
+                
                 [cell.imageButton addTarget:self action:@selector(showPhotoBrowser:) forControlEvents:UIControlEventTouchUpInside];
-                cell.imageButton.tag = 0;
+                
+                self.tag = 0;
+                cell.imageButton.tag = self.tag;
                 [cell setImageWithName:self.showModel.effectModel.image];
                 
                 return cell;
@@ -166,7 +292,9 @@
             } else {
                 CLOneLabelDisplayCell *cell = [self.tableView dequeueReusableCellWithIdentifier:kOneLabelDisplayCell forIndexPath:indexPath];
                 
-                cell.contentLabel.attributedText = [self.showModel.effectModel.effect styledString];
+                cell.contentLabel.attributedText = [[NSString attributedStringWithFirstPart:@"演出说明\n" secondPart:self.showModel.effectModel.effect firstPartFont:kBoldFontSys17 firstPartColor:[UIColor blackColor] secondPardFont:kFontSys17 secondPartColor:[UIColor blackColor]] styledString];
+                
+                self.tag = -1;
                 
                 return cell;
             }
@@ -180,38 +308,59 @@
             
             if (effectModel.isWithVideo) {
                 
-                CLOneLabelImageDisplayCell * cell = [self.tableView dequeueReusableCellWithIdentifier:kOneLabelImageDisplayCell];
+                CLRoutineImageCell * cell = [self.tableView dequeueReusableCellWithIdentifier:kRoutineImageCell];
                 
-                cell.contentLabel.attributedText = [effectModel.effect styledString];
-                [cell.imageButton addTarget:self action:@selector(showPhotoBrowser:) forControlEvents:UIControlEventTouchUpInside];
-                cell.imageButton.tag = 0; // effectModel肯定是第一张图片或视频,所以作为图片数组中的Index,tag = 0;
+                NSString *count = [NSString stringWithFormat:@"流程 %ld  ", indexPath.row+1];
+                cell.titleLabel.text = [count stringByAppendingString:[model getTitle]];
+                
+                cell.effectLabel.attributedText = [[NSString attributedStringWithFirstPart:@"效果  " secondPart:model.effectModel.effect firstPartFont:kBoldFontSys17 firstPartColor:[UIColor blackColor] secondPardFont:kFontSys17 secondPartColor:[UIColor blackColor]] styledString];
+                
+                cell.infoButton.tag = indexPath.row;
+                [cell.infoButton addTarget:self action:@selector(showRoutineDetail:) forControlEvents:UIControlEventTouchUpInside];
+                
+                [cell.iconButton addTarget:self action:@selector(showPhotoBrowser:) forControlEvents:UIControlEventTouchUpInside];
+                
+                self.tag += 1;
+                cell.iconButton.tag = self.tag;
+
                 [cell setImageWithVideoName:effectModel.video];
                 
                 cell.tintColor = kMenuBackgroundColor;
-                cell.accessoryType = UITableViewCellAccessoryDetailButton;
             
                 return cell;
             } else if (effectModel.isWithImage) {
                 
-                CLOneLabelImageDisplayCell * cell = [self.tableView dequeueReusableCellWithIdentifier:kOneLabelImageDisplayCell];
+                CLRoutineImageCell * cell = [self.tableView dequeueReusableCellWithIdentifier:kRoutineImageCell];
                 
-                cell.contentLabel.attributedText = [effectModel.effect styledString];
-                [cell.imageButton addTarget:self action:@selector(showPhotoBrowser:) forControlEvents:UIControlEventTouchUpInside];
-                cell.imageButton.tag = 0;
+                NSString *count = [NSString stringWithFormat:@"流程 %ld  ", indexPath.row+1];
+                cell.titleLabel.text = [count stringByAppendingString:[model getTitle]];
+
+                cell.effectLabel.attributedText = [[NSString attributedStringWithFirstPart:@"效果  " secondPart:model.effectModel.effect firstPartFont:kBoldFontSys17 firstPartColor:[UIColor blackColor] secondPardFont:kFontSys17 secondPartColor:[UIColor blackColor]] styledString];
+                
+                cell.infoButton.tag = indexPath.row;
+                [cell.infoButton addTarget:self action:@selector(showRoutineDetail:) forControlEvents:UIControlEventTouchUpInside];
+
+                [cell.iconButton addTarget:self action:@selector(showPhotoBrowser:) forControlEvents:UIControlEventTouchUpInside];
+                self.tag += 1;
+                cell.iconButton.tag = self.tag;
+                
                 [cell setImageWithName:effectModel.image];
                 
                 cell.tintColor = kMenuBackgroundColor;
-                cell.accessoryType = UITableViewCellAccessoryDetailButton;
 
                 return cell;
                 
             } else {
-                CLOneLabelDisplayCell *cell = [self.tableView dequeueReusableCellWithIdentifier:kOneLabelDisplayCell forIndexPath:indexPath];
+                CLRoutineTextCell *cell = [self.tableView dequeueReusableCellWithIdentifier:kRoutineTextCell forIndexPath:indexPath];
                 
-                cell.contentLabel.attributedText = [effectModel.effect styledString];
-                
+                NSString *count = [NSString stringWithFormat:@"流程 %ld  ", indexPath.row+1];
+                cell.titleLabel.text = [count stringByAppendingString:[model getTitle]];
+
+                cell.effectLabel.attributedText = [[NSString attributedStringWithFirstPart:@"效果  " secondPart:model.effectModel.effect firstPartFont:kBoldFontSys17 firstPartColor:[UIColor blackColor] secondPardFont:kFontSys17 secondPartColor:[UIColor blackColor]] styledString];
+                cell.infoButton.tag = indexPath.row;
+                [cell.infoButton addTarget:self action:@selector(showRoutineDetail:) forControlEvents:UIControlEventTouchUpInside];
+
                 cell.tintColor = kMenuBackgroundColor;
-                cell.accessoryType = UITableViewCellAccessoryDetailButton;
 
                 return cell;
             }
@@ -225,80 +374,161 @@
     return nil;
 }
 
-- (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath {
-    // show full routine
-    [self performSegueWithIdentifier:kShowToRoutineSegue sender:indexPath];
-}
 
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+- (void)showRoutineDetail:(UIButton *)button {
     
-    if ([tableView.dataSource tableView:tableView numberOfRowsInSection:section] == 0) {
-        return nil;
-        
-    } else {
-        
-        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenW, kLabelHeight)];
-        view.backgroundColor = [UIColor lightGrayColor];
-        view.layer.borderColor = [UIColor colorWithRed:221/255.0 green:221/255.0 blue:221/255.0 alpha:1].CGColor;
-        view.layer.borderWidth = 0.5;
-        
-        view.alpha = 0.95;
-        
-        UILabel *label = [[UILabel alloc] init];
-        [view addSubview:label];
-        
-        label.frame = CGRectMake(kPadding, 0, kContentW, kLabelHeight);
-        label.textAlignment =NSTextAlignmentCenter;
-        label.backgroundColor = [UIColor clearColor];
-        label.textColor = [UIColor whiteColor];
-        label.font = kFontSys12;
-        
-        NSString *sectionTitle;
-        if (section == 0) {
-            sectionTitle = @"演出名称";
-        } else if (section == 1) {
-            sectionTitle = @"演出信息";
-        } else if (section == 2) {
-            sectionTitle = @"演出说明";
-        } else if (section == 3) {
-            sectionTitle = @"演出流程";
-        }
-        
-        label.text = sectionTitle;
-        
-        return view;
-    }
+    [self performSegueWithIdentifier:kShowToRoutineSegue sender:button];
+
 }
-
-
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    
-    if ([self.tableView.dataSource tableView:self.tableView numberOfRowsInSection:section] == 0) {
-        return 0;
-    }
-    
-    return kLabelHeight;
-}
-
-#pragma mark - SWTableViewDelegate
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    id destVC = segue.destinationViewController;
     
-    id destVC = [segue destinationViewController];
     if ([destVC isKindOfClass:[CLContentVC class]]) {
         CLContentVC *vc = (CLContentVC *)destVC;
-
-        if ([sender isKindOfClass:[NSIndexPath class]]) {
-            NSIndexPath *path = (NSIndexPath *)sender;
-            CLRoutineModel *model = self.routineModelList[path.row];
+        
+        if ([sender isKindOfClass:[UIButton class]]) {
+            UIButton *btn = (UIButton *)sender;
+            
+            CLRoutineModel *model = self.routineModelList[btn.tag];
             vc.contentType = kContentTypeRoutine;
             vc.routineModel = model;
             vc.date = model.date;
+            
         }
     } else if ([destVC isKindOfClass:[CLNewShowVC class]]) {
         CLNewShowVC *vc = (CLNewShowVC *)destVC;
         vc.showModel = self.showModel;
     }
+ 
 }
+
+//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+//    
+//    if ([tableView.dataSource tableView:tableView numberOfRowsInSection:section] == 0) {
+//        return nil;
+//        
+//    } else {
+//        
+//        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenW, kLabelHeight)];
+//        view.backgroundColor = [UIColor lightGrayColor];
+//        view.layer.borderColor = [UIColor colorWithRed:221/255.0 green:221/255.0 blue:221/255.0 alpha:1].CGColor;
+//        view.layer.borderWidth = 0.5;
+//        
+//        view.alpha = 0.95;
+//        
+//        UILabel *label = [[UILabel alloc] init];
+//        [view addSubview:label];
+//        
+//        label.frame = CGRectMake(kPadding, 0, kContentW, kLabelHeight);
+//        label.textAlignment =NSTextAlignmentCenter;
+//        label.backgroundColor = [UIColor clearColor];
+//        label.textColor = [UIColor whiteColor];
+//        label.font = kFontSys12;
+//        
+//        NSString *sectionTitle;
+//        if (section == 0) {
+//            sectionTitle = @"演出名称";
+//        } else if (section == 1) {
+//            sectionTitle = @"演出信息";
+//        } else if (section == 2) {
+//            sectionTitle = @"演出说明";
+//        } else if (section == 3) {
+//            sectionTitle = @"演出流程";
+//        }
+//        
+//        label.text = sectionTitle;
+//        
+//        return view;
+//    }
+//}
+
+
+//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+//    
+//    if ([self.tableView.dataSource tableView:self.tableView numberOfRowsInSection:section] == 0) {
+//        return 0;
+//    }
+//    
+//    return kLabelHeight;
+//}
+
+- (void)showPhotoBrowser:(UIButton *)button {
+    
+    BOOL displayActionButton = YES;
+    BOOL displaySelectionButtons = NO;
+    BOOL displayNavArrows = NO;
+    BOOL enableGrid = YES;
+    BOOL startOnGrid = NO;
+    BOOL autoPlayOnAppear = NO;
+    
+    // Create browser
+    MWPhotoBrowser *browser = [[MWPhotoBrowser alloc] initWithDelegate:self];
+    
+    browser.displayActionButton = displayActionButton;
+    browser.displayNavArrows = displayNavArrows;
+    browser.displaySelectionButtons = displaySelectionButtons;
+    browser.alwaysShowControls = displaySelectionButtons;
+    browser.zoomPhotosToFill = YES;
+    browser.enableGrid = enableGrid;
+    browser.startOnGrid = startOnGrid;
+    browser.enableSwipeToDismiss = NO;
+    browser.autoPlayOnAppear = autoPlayOnAppear;
+    [browser setCurrentPhotoIndex:button.tag];
+    // Show
+    [self.navigationController pushViewController:browser animated:YES];
+}
+
+#pragma mark - MWPhotoBrowserDelegate
+
+- (NSUInteger)numberOfPhotosInPhotoBrowser:(MWPhotoBrowser *)photoBrowser {
+    return self.photos.count;
+}
+
+- (id <MWPhoto>)photoBrowser:(MWPhotoBrowser *)photoBrowser photoAtIndex:(NSUInteger)index {
+    if (index < self.photos.count)
+        return [self.photos objectAtIndex:index];
+    return nil;
+}
+
+- (id <MWPhoto>)photoBrowser:(MWPhotoBrowser *)photoBrowser thumbPhotoAtIndex:(NSUInteger)index {
+    if (index < self.thumbs.count)
+        return [self.thumbs objectAtIndex:index];
+    return nil;
+}
+
+//- (MWCaptionView *)photoBrowser:(MWPhotoBrowser *)photoBrowser captionViewForPhotoAtIndex:(NSUInteger)index {
+//    MWPhoto *photo = [self.photos objectAtIndex:index];
+//    MWCaptionView *captionView = [[MWCaptionView alloc] initWithPhoto:photo];
+//    return [captionView autorelease];
+//}
+
+//- (void)photoBrowser:(MWPhotoBrowser *)photoBrowser actionButtonPressedForPhotoAtIndex:(NSUInteger)index {
+//    NSLog(@"ACTION!");
+//}
+
+- (void)photoBrowser:(MWPhotoBrowser *)photoBrowser didDisplayPhotoAtIndex:(NSUInteger)index {
+    NSLog(@"Did start viewing photo at index %lu", (unsigned long)index);
+}
+
+//- (BOOL)photoBrowser:(MWPhotoBrowser *)photoBrowser isPhotoSelectedAtIndex:(NSUInteger)index {
+//    return [[_selections objectAtIndex:index] boolValue];
+//}
+
+//- (NSString *)photoBrowser:(MWPhotoBrowser *)photoBrowser titleForPhotoAtIndex:(NSUInteger)index {
+//    return [NSString stringWithFormat:@"Photo %lu", (unsigned long)index+1];
+//}
+//
+//- (void)photoBrowser:(MWPhotoBrowser *)photoBrowser photoAtIndex:(NSUInteger)index selectedChanged:(BOOL)selected {
+//    [_selections replaceObjectAtIndex:index withObject:[NSNumber numberWithBool:selected]];
+//    NSLog(@"Photo at index %lu selected %@", (unsigned long)index, selected ? @"YES" : @"NO");
+//}
+
+- (void)photoBrowserDidFinishModalPresentation:(MWPhotoBrowser *)photoBrowser {
+    // If we subscribe to this method we must dismiss the view controller ourselves
+    NSLog(@"Did finish modal presentation");
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 
 @end

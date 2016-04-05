@@ -12,6 +12,7 @@
 #import "MWPhotoBrowser.h"
 
 #import "CLContentVC.h"
+#import "CLShowVC.h"
 
 #import "CLShowModel.h"
 #import "CLIdeaObjModel.h"
@@ -50,7 +51,11 @@
                 CLIdeaObjModel *model = [CLDataSaveTool ideaByName:modelName];
                 [_dataList addObject:model];
 
-            } else if ([type isEqualToString:kTypeRoutine]) {
+            }  else if ([type isEqualToString:kTypeShow]) {
+                CLShowModel *model = [CLDataSaveTool showByName:modelName];
+                [_dataList addObject:model];
+                
+            }  else if ([type isEqualToString:kTypeRoutine]) {
                 CLRoutineModel *model = [CLDataSaveTool routineByName:modelName];
                 [_dataList addObject:model];
 
@@ -76,13 +81,12 @@
 - (NSMutableArray *)photos {
     if (!_photos) {
         _photos = [NSMutableArray array];
-        NSString *type, *name, *content, *modelName;
+        NSString *type, *name, *content;
         MWPhoto *photo;
         
         for (NSDictionary *dict in self.allMedia) {
             name = [dict objectForKey:@"name"];
             type = [dict objectForKey:@"type"];
-            modelName = [dict objectForKey:@"model_time_stamp"];
             content = [dict objectForKey:@"content"];
             
             if ([type isEqualToString:@"video"]) {
@@ -96,7 +100,7 @@
                 photo = [MWPhoto photoWithImage:[name getNamedImage]];
                 photo.caption = content;
                 [_photos addObject:photo];
-                NSLog(@"111111");
+//                NSLog(@"111111");
             }
         }
     }
@@ -111,20 +115,17 @@ static NSString * const reuseIdentifier = @"Cell";
     // Uncomment the following line to preserve selection between presentations
     // self.clearsSelectionOnViewWillAppear = NO;
     
-    // Register cell classes
-//    [self.collectionView registerClass:[CLMediaCollectionCell class] forCellWithReuseIdentifier:reuseIdentifier];
-    
     [self.collectionView registerNib:[UINib nibWithNibName:@"CLMediaCollectionCell" bundle: nil] forCellWithReuseIdentifier:reuseIdentifier];
     // Do any additional setup after loading the view.
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(update:) name:kUpdateDataNotification
                                                object:nil];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    
-    [self.navigationController setToolbarHidden:YES];
-}
+//- (void)viewWillAppear:(BOOL)animated {
+//    [super viewWillAppear:animated];
+//    
+//    [self.navigationController setToolbarHidden:YES];
+//}
 
 - (void) update:(NSNotification *)noti {
     
@@ -170,6 +171,10 @@ static NSString * const reuseIdentifier = @"Cell";
             title = kDefaultTitleIdea;
             content = [NSString getDateString:model.date];
             
+        } else if ([type isEqualToString:kTypeShow]) {
+            CLShowModel *model = [CLDataSaveTool showByName:modelName];
+            title = kDefaultTitleShow;
+            content = [NSString getDateString:model.date];
         } else if ([type isEqualToString:kTypeRoutine]) {
             CLRoutineModel *model = [CLDataSaveTool routineByName:modelName];
             title = kDefaultTitleRoutine;
@@ -199,7 +204,7 @@ static NSString * const reuseIdentifier = @"Cell";
 //定义每个UICollectionView 的大小
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return CGSizeMake((self.view.frame.size.width)/2, (self.view.frame.size.width)/2);
+    return CGSizeMake((self.view.frame.size.width-2)/2, (self.view.frame.size.width-2)/2);
 }
 //定义每个UICollectionView 的 margin
 -(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
@@ -209,12 +214,12 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionView *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
 {
-    return 0; // This is the minimum inter item spacing, can be more
+    return 1; // This is the minimum inter item spacing, can be more
 }
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionView *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
 {
-    return 0; // This is the minimum inter item spacing, can be more
+    return 1; // This is the minimum inter item spacing, can be more
 }
 
 #pragma mark <UICollectionViewDelegate>
@@ -308,7 +313,13 @@ static NSString * const reuseIdentifier = @"Cell";
     
     id modelUnknown = self.dataList[index];
     
-    [self performSegueWithIdentifier:kSegueMediaToContent sender:modelUnknown];
+    if ([modelUnknown isKindOfClass:[CLShowModel class]]) {
+        
+        [self performSegueWithIdentifier:kSegueMediaToShow sender:modelUnknown];
+    } else {
+        [self performSegueWithIdentifier:kSegueMediaToContent sender:modelUnknown];
+
+    }
 }
 
 - (void)photoBrowser:(MWPhotoBrowser *)photoBrowser didDisplayPhotoAtIndex:(NSUInteger)index {
@@ -347,11 +358,6 @@ static NSString * const reuseIdentifier = @"Cell";
             vc.ideaObjModel = model;
             vc.date = model.date;
             
-        } else if ([modelUnknown isKindOfClass:[CLShowModel class]]) {
-            //                        CLShowModel *model = (CLShowModel *)modelUnknown;
-            //                imageName = [model getThumbnail];
-            //                title = [model getTitle];
-            //                content = [model getContent];
         } else if ([modelUnknown isKindOfClass:[CLRoutineModel class]]) {
             CLRoutineModel *model = (CLRoutineModel *)modelUnknown;
             vc.contentType = kContentTypeRoutine;
@@ -374,6 +380,15 @@ static NSString * const reuseIdentifier = @"Cell";
             CLLinesObjModel *model = (CLLinesObjModel *)modelUnknown;
             vc.contentType = kContentTypeLines;
             vc.linesObjModel = model;
+            vc.date = model.date;
+        }
+        
+    } else if ([destVC isKindOfClass:[CLShowVC class]]) {
+        CLShowVC *vc = (CLShowVC *)destVC;
+        if ([modelUnknown isKindOfClass:[CLShowModel class]]) {
+            
+            CLShowModel *model = (CLShowModel *)modelUnknown;
+            vc.showModel = model;
             vc.date = model.date;
         }
     }

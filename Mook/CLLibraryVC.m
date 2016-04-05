@@ -71,7 +71,7 @@ static NSString * const reuseIdentifier = @"Cell";
     
     // Uncomment the following line to preserve selection between presentations
     // self.clearsSelectionOnViewWillAppear = NO;
-    
+    self.collectionView.backgroundColor = [UIColor whiteColor];
     // Register cell classes
     [self.collectionView registerNib:[UINib nibWithNibName:@"CLLibraryCell" bundle: nil] forCellWithReuseIdentifier:reuseIdentifier];
     
@@ -170,7 +170,7 @@ static NSString * const reuseIdentifier = @"Cell";
 //定义每个UICollectionView 的大小
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return CGSizeMake(self.view.frame.size.width, self.view.frame.size.width*9/32);
+    return CGSizeMake(self.view.frame.size.width, self.view.frame.size.width/2);
 }
 //定义每个UICollectionView 的 margin
 -(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
@@ -192,10 +192,10 @@ static NSString * const reuseIdentifier = @"Cell";
     //    NSLog(@"~~");
 }
 
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionView *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
-{
-    return 10; // This is the minimum inter item spacing, can be more
-}
+//- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionView *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
+//{
+//    return 10; // This is the minimum inter item spacing, can be more
+//}
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionView *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
 {

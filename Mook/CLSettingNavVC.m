@@ -17,18 +17,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dismiss) name:kDismissSettingNavVCNotification
-                                               object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dismiss) name:kDismissSettingNavVCNotification
+//                                               object:nil];
 }
 
 
-- (void) dismiss {
-    [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
-}
-
-- (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
+//- (void) dismiss {
+//    [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+//}
+//
+//- (void)dealloc {
+//    [[NSNotificationCenter defaultCenter] removeObserver:self];
+//}
 
 /*
 #pragma mark - Navigation

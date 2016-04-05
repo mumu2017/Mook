@@ -597,10 +597,22 @@
 
 #pragma mark 选中cell跳转
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-   
+    
     if (self.listType == kListTypeShow) {
-        [self performSegueWithIdentifier:kSegueListToShow sender:indexPath];
+        CLShowModel *model = self.showModelList[indexPath.row];
+        [self performSegueWithIdentifier:kSegueListToShow sender:model];
+        
+    } else if (self.listType == kListTypeAll) {
+        id modelUnknown = self.allItems[indexPath.row];
+        if ([modelUnknown isKindOfClass:[CLShowModel class]]) {
+            [self performSegueWithIdentifier:kSegueListToShow sender:modelUnknown];
+        } else {
+            
+            [self performSegueWithIdentifier:kSegueListToContent sender:indexPath];
+        }
+        
     } else {
+        
         [self performSegueWithIdentifier:kSegueListToContent sender:indexPath];
     }
 }
@@ -627,11 +639,6 @@
                         vc.ideaObjModel = model;
                         vc.date = model.date;
                         
-                    } else if ([modelUnknown isKindOfClass:[CLShowModel class]]) {
-//                        CLShowModel *model = (CLShowModel *)modelUnknown;
-                        //                imageName = [model getThumbnail];
-                        //                title = [model getTitle];
-                        //                content = [model getContent];
                     } else if ([modelUnknown isKindOfClass:[CLRoutineModel class]]) {
                         CLRoutineModel *model = (CLRoutineModel *)modelUnknown;
                         vc.contentType = kContentTypeRoutine;
@@ -667,15 +674,7 @@
                     vc.date = model.date;
                     break;
                 }
-                    
-                case kListTypeShow:
-                {
-//                    CLShowModel *model = self.showModelList[indexPath.row];
-                    //            imageName = [model getThumbnail];
-                    //            title = [model getTitle];
-                    //            content = [model getContent];
-                    break;
-                }
+
                 case kListTypeRoutine:
                 {
                     CLRoutineModel *model = self.routineModelList[indexPath.row];
@@ -710,10 +709,7 @@
                     vc.date = model.date;
                     break;
                 }
-                    //
-                    //        case kListTypeTag:
-                    //            number = self.allItems.count;
-                    //            break;
+
                 default:
                     break;
             }
@@ -742,10 +738,9 @@
         
     } else if ([destVC isKindOfClass:[CLShowVC class]]) {
         CLShowVC *vc = (CLShowVC *)destVC;
-        if ([sender isKindOfClass:[NSIndexPath class]]) {
-            NSIndexPath *indexPath = (NSIndexPath *)sender;
+        if ([sender isKindOfClass:[CLShowModel class]]) {
             
-            CLShowModel *model = self.showModelList[indexPath.row];
+            CLShowModel *model = (CLShowModel *)sender;
             vc.showModel = model;
             vc.date = model.date;
         }

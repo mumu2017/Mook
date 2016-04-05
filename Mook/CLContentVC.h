@@ -26,8 +26,6 @@
 @property (nonatomic, copy) NSAttributedString *titleString;
 @property (nonatomic, strong) NSDate *date;
 
-@property (nonatomic, strong) NSMutableArray *photos;
-@property (nonatomic, strong) NSMutableArray *thumbs;
-@property (nonatomic, strong) NSMutableArray *assets;
+//@property (nonatomic, strong) NSMutableArray *assets;
 
 @end

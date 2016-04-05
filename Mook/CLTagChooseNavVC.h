@@ -22,4 +22,5 @@
 
 @property (nonatomic, assign) EditingContentType editingContentType;
 @property (nonatomic, weak) id<CLTagChooseNavVCDelegate> navDelegate;
+
 @end

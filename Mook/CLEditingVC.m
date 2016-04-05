@@ -7,9 +7,9 @@
 //
 
 #import "CLEditingVC.h"
+#import "CLQuickStringNavVC.h"
 #import "CLDataSaveTool.h"
 #import "CLToolBar.h"
-#import "CLQuickInputBar.h"
 #import "CLMediaView.h"
 
 #import "CLEffectModel.h"
@@ -27,11 +27,9 @@
 #import <MobileCoreServices/MobileCoreServices.h> // needed for video types
 #import "XLPagerTabStripViewController.h"
 
-@interface CLEditingVC ()<CLToolBarDelegate, CLQuickInputBarDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIPickerViewDataSource, UIPickerViewDelegate, XLPagerTabStripChildItem>
+@interface CLEditingVC ()<CLToolBarDelegate, CLQuickStringNavDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIPickerViewDataSource, UIPickerViewDelegate, XLPagerTabStripChildItem>
 
 @property (nonatomic, strong) UIPickerView *pickerView;
-
-@property (nonatomic, strong) CLQuickInputBar *quickInputBar;
 
 @property (nonatomic, assign) NSInteger indexOfSelectedQuickString;
 @property (nonatomic, assign) BOOL slectedStringUsed;
@@ -145,16 +143,6 @@
     return _toolBar;
 }
 
-- (CLQuickInputBar *)quickInputBar {
-    if (!_quickInputBar) {
-        _quickInputBar = [CLQuickInputBar quickInputBar];
-        
-        _quickInputBar.backgroundColor = kDisplayBgColor;
-        _quickInputBar.delegate = self;
-    }
-    return _quickInputBar;
-}
-
 - (UIPickerView *)pickerView {
     if (!_pickerView) {
         _pickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 0, kScreenW, 250)];
@@ -209,29 +197,11 @@
             
 }
 
-#pragma mark - quickInuptBar delegate
-- (void)quickInputBar:(CLQuickInputBar *)quickInputBar didClickButton:(UIButton *)button {
-    
-    if (button == self.quickInputBar.addButton) {
-        
-        [self addQuickStringToContent];
-        
-    } else if (button == self.quickInputBar.cancelButton) {
-        
-        [self cancelChoosingQuickString];
-        
-    }
-}
-
-- (void)addQuickStringToContent {
-    
-    if (self.slectedStringUsed) return;
-    
-    NSString *quickString = self.quickStringList[self.indexOfSelectedQuickString];
+- (void)quickStringNavVC:(CLQuickStringNavVC *)quickStringNavVC didSelectQuickString:(NSString *)quickString {
     
     NSString *text = self.editTextView.text;
     NSString *newText = quickString;
-
+    
     if (text.length == 0) {
         self.editTextView.text = newText;
         [self.editTextView hidePlaceHolder];
@@ -241,22 +211,8 @@
     
     [self saveText:self.editTextView];
     
-    self.slectedStringUsed = YES;
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
-
-- (void)cancelChoosingQuickString {
-    
-    UIView *view = [UIResponder currentFirstResponder];
-    if (view != self.editTextView) {
-        [self.editTextView becomeFirstResponder];
-    }
-    
-    self.editTextView.inputAccessoryView = self.toolBar;
-    self.editTextView.inputView = nil;
-    [self.editTextView reloadInputViews];
-}
-
-
 
 #pragma mark - setter
 //- (void)setEditingContentType:(EditingContentType)editingContentType {
@@ -308,26 +264,6 @@
         default:
             break;
     }
-}
-
-- (void)setSlectedStringUsed:(BOOL)slectedStringUsed {
-    _slectedStringUsed = slectedStringUsed;
-    
-    self.quickInputBar.addButton.enabled = !slectedStringUsed;
-    
-    if (slectedStringUsed == NO) {
-        UILabel *labelSelected = (UILabel*)[self.pickerView viewForRow:self.indexOfSelectedQuickString forComponent:0];
-        labelSelected.backgroundColor = kTintColor;
-        [labelSelected setFont:kBoldFontSys14];
-        labelSelected.textColor = [UIColor whiteColor];
-    } else {
-        UILabel *labelSelected = (UILabel*)[self.pickerView viewForRow:self.indexOfSelectedQuickString forComponent:0];
-        labelSelected.backgroundColor = [UIColor clearColor];
-        [labelSelected setFont:kFontSys14];
-        labelSelected.textColor = [UIColor blackColor];
-    }
-
-    
 }
 
 #pragma mark - Controller 方法
@@ -472,6 +408,15 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+    id destVC = segue.destinationViewController;
+    if ([destVC isKindOfClass:[CLQuickStringNavVC class]]) {
+        CLQuickStringNavVC *vc = (CLQuickStringNavVC *)destVC;
+        vc.navDelegate = self;
+    }
+}
+
 #pragma mark - XLPagerTabStripViewControllerDelegate
 
 -(NSString *)titleForPagerTabStripViewController:(XLPagerTabStripViewController *)pagerTabStripViewController
@@ -548,12 +493,7 @@
         
     } else if (button == toolBar.nextButton) {
 
-        if (self.editTextView.inputView != self.pickerView) {
-            self.editTextView.inputAccessoryView = self.quickInputBar;
-            self.editTextView.inputView = self.pickerView;
-            [self.editTextView reloadInputViews];
-
-        }
+        [self performSegueWithIdentifier:kQuickStringSegue sender:nil];
         
     } else if (button == toolBar.addButton) {
         
@@ -1005,6 +945,10 @@
     NSString *imageName = [kTimestamp stringByAppendingString:@".jpg"];
     NSString *type;
     switch (self.editingContentType) {
+        case kEditingContentTypeShow:
+            type = kTypeShow;
+            break;
+            
         case kEditingContentTypeIdea:
             type = kTypeIdea;
             break;
@@ -1074,6 +1018,11 @@
     
     NSString *type;
     switch (self.editingContentType) {
+            
+        case kEditingContentTypeShow:
+            type = kTypeShow;
+            break;
+            
         case kEditingContentTypeIdea:
             type = kTypeIdea;
             break;
@@ -1085,7 +1034,6 @@
         case kEditingContentTypeSleight:
             type = kTypeSleight;
             break;
-            
             
         case kEditingContentTypeProp:
             type = kTypeProp;

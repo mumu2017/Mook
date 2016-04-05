@@ -55,6 +55,10 @@
 @property (nonatomic, strong) NSMutableArray *performModelList;
 @property (nonatomic, strong) NSMutableArray *notesModelList;
 
+
+@property (nonatomic, strong) NSMutableArray *photos;
+@property (nonatomic, strong) NSMutableArray *thumbs;
+
 @end
 
 @implementation CLContentVC

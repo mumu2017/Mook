@@ -1,66 +1,83 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="374" id="KGk-i7-Jjw" customClass="CLRoutineImageCell">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="374"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="371" id="KGk-i7-Jjw" customClass="CLRoutineImageCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="371"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="373.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="370.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="流程一" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a6W-z1-j2a">
-                        <rect key="frame" x="59" y="8" width="138" height="21"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="阴魂不散" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jQx-38-Fm0">
+                        <rect key="frame" x="15" y="20" width="217" height="21"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="效果:但肯垃圾分开撒酒疯凯撒就分开送大家分开撒娇发牢骚 " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hn4-Jj-CaZ">
-                        <rect key="frame" x="10" y="68" width="300" height="58"/>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kyg-Fc-HhG">
+                        <rect key="frame" x="237" y="14" width="68" height="33"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="阴魂不散" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jQx-38-Fm0">
-                        <rect key="frame" x="90" y="39" width="101" height="21"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aF6-V9-8ru">
-                        <rect key="frame" x="0.0" y="134" width="320" height="240"/>
-                        <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="T8U-Qy-jw3">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                            </imageView>
-                            <button opaque="NO" contentMode="scaleAspectFit" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P5x-qZ-Tjc">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="tintColor" red="0.15410047769546509" green="0.41306763887405396" blue="0.69063264131546021" alpha="1" colorSpace="calibratedRGB"/>
+                        <state key="normal" title="查看流程">
+                            <color key="titleColor" red="0.15410047769999999" green="0.41306763889999998" blue="0.69063264130000002" alpha="1" colorSpace="calibratedRGB"/>
+                        </state>
+                    </button>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lines.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="T8U-Qy-jw3">
+                        <rect key="frame" x="10" y="67" width="300" height="222.5"/>
                         <constraints>
-                            <constraint firstItem="P5x-qZ-Tjc" firstAttribute="leading" secondItem="T8U-Qy-jw3" secondAttribute="leading" id="5QK-9u-X4w"/>
-                            <constraint firstItem="T8U-Qy-jw3" firstAttribute="leading" secondItem="aF6-V9-8ru" secondAttribute="leading" id="65p-tv-DdN"/>
-                            <constraint firstItem="T8U-Qy-jw3" firstAttribute="width" secondItem="aF6-V9-8ru" secondAttribute="width" id="I4d-MH-7ls"/>
-                            <constraint firstItem="P5x-qZ-Tjc" firstAttribute="height" secondItem="T8U-Qy-jw3" secondAttribute="height" id="Kcp-Cr-fWl"/>
-                            <constraint firstItem="P5x-qZ-Tjc" firstAttribute="top" secondItem="T8U-Qy-jw3" secondAttribute="top" id="OUq-Ai-Zzm"/>
-                            <constraint firstItem="P5x-qZ-Tjc" firstAttribute="width" secondItem="T8U-Qy-jw3" secondAttribute="width" id="UjA-f4-YOO"/>
-                            <constraint firstItem="T8U-Qy-jw3" firstAttribute="height" secondItem="aF6-V9-8ru" secondAttribute="height" id="cI1-lY-rHP"/>
-                            <constraint firstAttribute="width" secondItem="aF6-V9-8ru" secondAttribute="height" multiplier="4:3" id="wTt-WT-EHu"/>
-                            <constraint firstItem="T8U-Qy-jw3" firstAttribute="top" secondItem="aF6-V9-8ru" secondAttribute="top" id="y8m-dn-q9X"/>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" secondItem="T8U-Qy-jw3" secondAttribute="height" multiplier="4:3" id="ioB-oI-6hF"/>
                         </constraints>
-                    </view>
+                    </imageView>
+                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P5x-qZ-Tjc">
+                        <rect key="frame" x="10" y="67" width="300" height="222.5"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="效果:但肯垃圾分开撒酒疯凯撒就分开送大家分开撒娇发牢骚 " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hn4-Jj-CaZ">
+                        <rect key="frame" x="15" y="309.5" width="290" height="41"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
-                <color key="backgroundColor" red="0.15101002159999999" green="0.56891876460000002" blue="0.43715286250000002" alpha="1" colorSpace="calibratedRGB"/>
+                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="T8U-Qy-jw3" secondAttribute="trailing" constant="10" id="1vr-wx-rM8"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="jQx-38-Fm0" secondAttribute="trailing" constant="80" id="Cyc-BM-S70"/>
+                    <constraint firstItem="P5x-qZ-Tjc" firstAttribute="height" secondItem="T8U-Qy-jw3" secondAttribute="height" id="G7F-f5-xkf"/>
+                    <constraint firstItem="P5x-qZ-Tjc" firstAttribute="width" secondItem="T8U-Qy-jw3" secondAttribute="width" id="M30-fo-qJx"/>
+                    <constraint firstItem="T8U-Qy-jw3" firstAttribute="top" secondItem="kyg-Fc-HhG" secondAttribute="bottom" constant="20" id="PPW-2P-jxz"/>
+                    <constraint firstItem="jQx-38-Fm0" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="QIA-UZ-Eq8"/>
+                    <constraint firstItem="kyg-Fc-HhG" firstAttribute="centerY" secondItem="jQx-38-Fm0" secondAttribute="centerY" id="UEF-b5-lwQ"/>
+                    <constraint firstItem="P5x-qZ-Tjc" firstAttribute="centerY" secondItem="T8U-Qy-jw3" secondAttribute="centerY" id="b9q-LK-eUF"/>
+                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Hn4-Jj-CaZ" secondAttribute="bottom" constant="20" id="bpY-81-xtB"/>
+                    <constraint firstItem="Hn4-Jj-CaZ" firstAttribute="top" secondItem="T8U-Qy-jw3" secondAttribute="bottom" constant="20" id="fu3-Ah-3q6"/>
+                    <constraint firstItem="jQx-38-Fm0" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="20" id="gPL-2h-N8v"/>
+                    <constraint firstAttribute="trailing" secondItem="Hn4-Jj-CaZ" secondAttribute="trailing" constant="15" id="ing-9h-ocv"/>
+                    <constraint firstAttribute="trailing" secondItem="kyg-Fc-HhG" secondAttribute="trailing" constant="15" id="qQk-g2-Zvd"/>
+                    <constraint firstItem="T8U-Qy-jw3" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="rDM-1V-lOL"/>
+                    <constraint firstItem="P5x-qZ-Tjc" firstAttribute="centerX" secondItem="T8U-Qy-jw3" secondAttribute="centerX" id="rQO-vA-S2v"/>
+                    <constraint firstItem="Hn4-Jj-CaZ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="ul9-jO-dZn"/>
+                </constraints>
             </tableViewCellContentView>
-            <point key="canvasLocation" x="342" y="329"/>
+            <connections>
+                <outlet property="effectLabel" destination="Hn4-Jj-CaZ" id="wGM-Jq-Rb6"/>
+                <outlet property="iconButton" destination="P5x-qZ-Tjc" id="e1Z-fa-xMv"/>
+                <outlet property="iconView" destination="T8U-Qy-jw3" id="XzW-gv-NfN"/>
+                <outlet property="infoButton" destination="kyg-Fc-HhG" id="aai-Eb-0eW"/>
+                <outlet property="titleLabel" destination="jQx-38-Fm0" id="uf2-bS-9Pj"/>
+            </connections>
+            <point key="canvasLocation" x="342" y="327.5"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="lines.jpg" width="1013" height="518"/>
+    </resources>
 </document>

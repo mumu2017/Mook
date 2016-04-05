@@ -14,6 +14,7 @@
 #import "AppDelegate.h"
 #import "Constants.h"
 #import "NSString+Tools.h"
+#import "NSAttributedString+Tools.h"
 #import "UIResponder+FirstResponder.h"
 #import "UITextView+Tools.h"
 #import "UITextField+Tools.h"
