@@ -253,6 +253,8 @@
             break;
             
         case kEditingModePerform:
+            [self.toolBar.previousButton setImage:kToolBarApproveImage forState:UIControlStateNormal];
+            [self.toolBar.previousButton setImage:kToolBarApproveImageHighlighted forState:UIControlStateHighlighted];
             break;
             
         case kEditingModeNotes:
@@ -484,12 +486,7 @@
 
     } else if (button == toolBar.previousButton) {
         
-        if (self.editingModel == kEditingModePerform) {
-            
-            [self switchContent];
-        } else {
-            [self.view endEditing:YES];
-        }
+        [self.view endEditing:YES];
         
     } else if (button == toolBar.nextButton) {
 
@@ -535,9 +532,6 @@
     }
 }
 
-- (void)switchContent {
-
-}
 
 - (void)addPrep {
     
