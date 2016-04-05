@@ -41,6 +41,8 @@ typedef enum {
 
 @property (nonatomic, assign) BOOL passwordMatched;
 
+@property (nonatomic, copy) NSString *passwordReminder;
+
 @property (nonatomic, assign) CreatNewPasswordMode creatNewPasswordMode;
 
 @end
@@ -61,6 +63,20 @@ typedef enum {
     }
     
     return _password;
+}
+
+- (NSString *)passwordReminder {
+    if (!_passwordReminder) {
+        if ([[NSUserDefaults standardUserDefaults] objectForKey:kPasswordReminderKey] == nil) {
+            _passwordReminder = @"";
+            [[NSUserDefaults standardUserDefaults] setObject:_passwordReminder forKey:kPasswordReminderKey];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+        } else {
+            _passwordReminder = [[NSUserDefaults standardUserDefaults] objectForKey:kPasswordReminderKey];
+        }
+    }
+    
+    return _passwordReminder;
 }
 
 - (void)setPassword:(NSString *)password {
@@ -287,7 +303,25 @@ typedef enum {
     [self.reminderButton setTitleColor:kMenuBackgroundColor forState:UIControlStateNormal];
     [self.cancelButton setTitleColor:kMenuBackgroundColor forState:UIControlStateHighlighted];
     [self.reminderButton setTitleColor:kMenuBackgroundColor forState:UIControlStateHighlighted];
-
+    
+    if (self.isCreatingNewPassword  || self.isChangingPassword) {
+        
+        if (self.passwordReminder.length > 0) {
+            [self.reminderButton setTitle:@"修改密码提示" forState:UIControlStateNormal];
+            [self.reminderButton setTitle:@"修改密码提示" forState:UIControlStateHighlighted];
+        } else {
+            [self.reminderButton setTitle:@"添加密码提示" forState:UIControlStateNormal];
+            [self.reminderButton setTitle:@"添加密码提示" forState:UIControlStateHighlighted];
+        }
+        
+        [self.reminderButton addTarget:self action:@selector(addPasswordReminder) forControlEvents:UIControlEventTouchUpInside];
+    } else {
+        
+        [self.reminderButton setTitle:@"显示密码提示" forState:UIControlStateNormal];
+        [self.reminderButton setTitle:@"显示密码提示" forState:UIControlStateHighlighted];
+        [self.reminderButton addTarget:self action:@selector(showPasswordReminder) forControlEvents:UIControlEventTouchUpInside];
+    }
+    
     
     if (self.isCreatingNewPassword || self.isChangingPassword) {
 
@@ -308,6 +342,71 @@ typedef enum {
  
         self.inputNoticeLabel.text = @"请输入密码";
         self.cancelButton.hidden = YES;
+    }
+}
+
+- (void)showPasswordReminder {
+    
+    self.resultNoticeLabel.hidden = NO;
+    self.resultNoticeLabel.text = [NSString stringWithFormat:@"密码提示\n%@",self.passwordReminder];
+}
+
+- (void)addPasswordReminder {
+    
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"添加密码提示" message:nil preferredStyle:UIAlertControllerStyleAlert];
+    
+    [alertController addTextFieldWithConfigurationHandler:^(UITextField *textField){
+        textField.placeholder = @"密码提示";
+        textField.clearButtonMode = UITextFieldViewModeWhileEditing;
+        
+        textField.text = self.passwordReminder;
+        textField.font = kFontSys16;
+        
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(alertTextFieldDidChange:) name:UITextFieldTextDidChangeNotification object:textField];
+        
+    }];
+    
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        UITextField *nameTF = alertController.textFields.firstObject;
+        
+        self.passwordReminder = nameTF.text;
+
+        
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        [defaults setObject:self.passwordReminder forKey:kPasswordReminderKey];
+        [defaults synchronize];
+        
+        self.resultNoticeLabel.hidden = NO;
+        self.resultNoticeLabel.text = @"密码提示设置成功";
+        
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:UITextFieldTextDidChangeNotification object:nil];
+        
+    }];
+    
+    
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:UITextFieldTextDidChangeNotification object:nil];
+        
+    }];
+    
+    [alertController addAction:okAction];
+    [alertController addAction:cancel];
+    
+    [self presentViewController:alertController animated:YES completion:^{
+        UIAlertAction *okAction = alertController.actions.firstObject;
+        okAction.enabled = NO;
+    }];
+
+}
+
+- (void)alertTextFieldDidChange:(NSNotification *)notification{
+    UIAlertController *alertController = (UIAlertController *)self.presentedViewController;
+    
+    if (alertController) {
+        UITextField *reminderTF = alertController.textFields.firstObject;
+        UIAlertAction *okAction = alertController.actions.firstObject;
+        okAction.enabled = reminderTF.text.length > 0;
     }
 }
 

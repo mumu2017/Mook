@@ -28,9 +28,9 @@
 static FMDatabase *_db;
 + (void)initialize
 {
-    NSString *cachePath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
+    NSString *mookPath = [NSString mookPath];
     // 拼接文件名
-    NSString *filePath = [cachePath stringByAppendingPathComponent:@"mook.sqlite"];
+    NSString *filePath = [mookPath stringByAppendingPathComponent:@"mook.sqlite"];
     // 创建了一个数据库实例
     _db = [FMDatabase databaseWithPath:filePath];
     

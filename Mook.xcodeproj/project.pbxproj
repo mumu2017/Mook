@@ -11,7 +11,6 @@
 		430DFBC91CA252DD0054DF6B /* CLNewEntryNavVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 430DFBC81CA252DD0054DF6B /* CLNewEntryNavVC.m */; };
 		430DFBCC1CA393CC0054DF6B /* NSDate+MJ.m in Sources */ = {isa = PBXBuildFile; fileRef = 430DFBCB1CA393CC0054DF6B /* NSDate+MJ.m */; };
 		431BCEE01CA8F81C0085D20F /* JGActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 431BCEDF1CA8F81C0085D20F /* JGActionSheet.m */; };
-		431BCEE31CA968480085D20F /* UINavigationBar+Awesome.m in Sources */ = {isa = PBXBuildFile; fileRef = 431BCEE21CA968480085D20F /* UINavigationBar+Awesome.m */; };
 		4323453D1C94045000200833 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4323453C1C94045000200833 /* AppDelegate.m */; };
 		432345451C94045000200833 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 432345441C94045000200833 /* Assets.xcassets */; };
 		432345631C9404A800200833 /* NSString+Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = 432345511C9404A800200833 /* NSString+Tools.m */; };
@@ -354,6 +353,7 @@
 		43F5F7641CB3A4EE007BFB0C /* NSAttributedString+Tools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSAttributedString+Tools.m"; sourceTree = "<group>"; };
 		43F5F7661CB3BD63007BFB0C /* CLQuickStringNavVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLQuickStringNavVC.h; sourceTree = "<group>"; };
 		43F5F7671CB3BD63007BFB0C /* CLQuickStringNavVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLQuickStringNavVC.m; sourceTree = "<group>"; };
+		43F5F76B1CB3E447007BFB0C /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		5207E880A1B2E72EF9075B94 /* Pods_Mook.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Mook.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0417F5619A3E977F1F0B558 /* Pods-Mook.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mook.release.xcconfig"; path = "Pods/Target Support Files/Pods-Mook/Pods-Mook.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -683,7 +683,6 @@
 			isa = PBXGroup;
 			children = (
 				43E0F7181CA0F12A005CAD97 /* Controllers */,
-				43E0F71A1CA0F134005CAD97 /* Views */,
 				43E0F7191CA0F130005CAD97 /* Models */,
 			);
 			name = "Setting(设置)";
@@ -743,10 +742,7 @@
 				432345951C9404FB00200833 /* CLSettingVC.m */,
 				432345821C9404FB00200833 /* CLPasswordVC.h */,
 				432345831C9404FB00200833 /* CLPasswordVC.m */,
-				43F5F7661CB3BD63007BFB0C /* CLQuickStringNavVC.h */,
-				43F5F7671CB3BD63007BFB0C /* CLQuickStringNavVC.m */,
-				4323458C1C9404FB00200833 /* CLQuickStringVC.h */,
-				4323458D1C9404FB00200833 /* CLQuickStringVC.m */,
+				43F5F76D1CB3E45D007BFB0C /* QuickString */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -771,6 +767,7 @@
 		43E0F71B1CA0F141005CAD97 /* Libs */ = {
 			isa = PBXGroup;
 			children = (
+				43F5F76E1CB3E90B007BFB0C /* SSZipArchive */,
 				430DFBDF1CA3F3470054DF6B /* Other */,
 				43E0F7411CA10D30005CAD97 /* MJ */,
 				432346821C94298600200833 /* Category */,
@@ -917,9 +914,29 @@
 			name = Views;
 			sourceTree = "<group>";
 		};
+		43F5F76D1CB3E45D007BFB0C /* QuickString */ = {
+			isa = PBXGroup;
+			children = (
+				43F5F7661CB3BD63007BFB0C /* CLQuickStringNavVC.h */,
+				43F5F7671CB3BD63007BFB0C /* CLQuickStringNavVC.m */,
+				4323458C1C9404FB00200833 /* CLQuickStringVC.h */,
+				4323458D1C9404FB00200833 /* CLQuickStringVC.m */,
+				43E0F71A1CA0F134005CAD97 /* Views */,
+			);
+			name = QuickString;
+			sourceTree = "<group>";
+		};
+		43F5F76E1CB3E90B007BFB0C /* SSZipArchive */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = SSZipArchive;
+			sourceTree = "<group>";
+		};
 		867DD05412560E63BB6BCE80 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				43F5F76B1CB3E447007BFB0C /* libz.tbd */,
 				43E0F7071C9EB2A2005CAD97 /* libsqlite3.0.tbd */,
 				5207E880A1B2E72EF9075B94 /* Pods_Mook.framework */,
 			);
@@ -964,7 +981,7 @@
 		4323452D1C94045000200833 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0720;
+				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = "Chen Lin";
 				TargetAttributes = {
 					432345341C94045000200833 = {
@@ -1110,7 +1127,6 @@
 				43F5F7681CB3BD63007BFB0C /* CLQuickStringNavVC.m in Sources */,
 				43EEE7E21CAD329B00F0BCCF /* CLRoutineTextCell.m in Sources */,
 				432346651C94094D00200833 /* CLOneLabelImageDisplayCell.m in Sources */,
-				431BCEE31CA968480085D20F /* UINavigationBar+Awesome.m in Sources */,
 				4323467E1C9409BB00200833 /* XLBarView.m in Sources */,
 				432346201C94054300200833 /* CLListTextCell.m in Sources */,
 				43E0F7291CA0FC6E005CAD97 /* CLDataSaveTool.m in Sources */,
@@ -1217,7 +1233,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -1254,7 +1270,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;

@@ -13,6 +13,9 @@
 // 随着学习的深入,我们每个人都会建立一大套属于自己的分类库!
 @interface NSString (Tools)
 
++ (NSString *)backUpPath;
+
++ (NSString *)mookPath;
 + (NSString *)videoPath;
 + (NSString *)framePath; // 视频首帧图片缓存文件夹
 

@@ -139,15 +139,85 @@
 
 #pragma mark - 获取多媒体文件路径
 
-+ (NSString *)videoPath {
+- (NSString *)applicationHiddenDocumentsDirectory {
+    // NSString *path = [[self applicationDocumentsDirectory] stringByAppendingPathComponent:@".data"];
+    NSString *libraryPath = [NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) lastObject];
+    NSString *path = [libraryPath stringByAppendingPathComponent:@"Private Documents"];
+    
+    BOOL isDirectory = NO;
+    if ([[NSFileManager defaultManager] fileExistsAtPath:path isDirectory:&isDirectory]) {
+        if (isDirectory)
+            return path;
+        else {
+            // Handle error. ".data" is a file which should not be there...
+            [NSException raise:@".data exists, and is a file" format:@"Path: %@", path];
+            // NSError *error = nil;
+            // if (![[NSFileManager defaultManager] removeItemAtPath:path error:&error]) {
+            //     [NSException raise:@"could not remove file" format:@"Path: %@", path];
+            // }
+        }
+    }
+    NSError *error = nil;
+    if (![[NSFileManager defaultManager] createDirectoryAtPath:path withIntermediateDirectories:YES attributes:nil error:&error]) {
+        // Handle error.
+        [NSException raise:@"Failed creating directory" format:@"[%@], %@", path, error];
+    }
+    return path;
+}
+
++ (NSString *)backUpPath { // 备份文件路径
+    
     NSError *error;
+
+    // 不再使用Document文件夹,因为它将会暴露在Itunes中
+    NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+    
+    NSString *backUpPath = [documentsDirectory stringByAppendingPathComponent:@"/backup.zip"];
+    
+    if (![[NSFileManager defaultManager] fileExistsAtPath:backUpPath])
+        [[NSFileManager defaultManager] createDirectoryAtPath:backUpPath withIntermediateDirectories:NO attributes:nil error:&error]; //Create folder
+    
+    return backUpPath;
+}
+
++ (NSString *)mookPath {
+    NSError *error;
+    // 因为UIFileSharing的关系, 将Private的文件储存在Library中
+//    
+//    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
+//    
+//    NSString *libraryPath = [paths objectAtIndex:0];
+    
+    // 使用Document文件夹,因为它将会暴露在Itunes中
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0]; // Get documents folder
-    NSString *videoPath = [documentsDirectory stringByAppendingPathComponent:@"/Videos"];
+    
+    NSString *mookPath = [documentsDirectory stringByAppendingPathComponent:@"/Mook"];
+    
+    if (![[NSFileManager defaultManager] fileExistsAtPath:mookPath])
+        [[NSFileManager defaultManager] createDirectoryAtPath:mookPath withIntermediateDirectories:NO attributes:nil error:&error]; //Create folder
+    
+    return mookPath;
+}
+
++ (NSString *)videoPath {
+    NSError *error;
+    NSString *mookPath = [NSString mookPath]; // Get documents folder
+    NSString *videoPath = [mookPath stringByAppendingPathComponent:@"/Videos"];
     
     if (![[NSFileManager defaultManager] fileExistsAtPath:videoPath])
         [[NSFileManager defaultManager] createDirectoryAtPath:videoPath withIntermediateDirectories:NO attributes:nil error:&error]; //Create folder
     return videoPath;
+}
+
++ (NSString *)imagePath {
+    NSError *error;
+    NSString *mookPath = [NSString mookPath]; // Get documents folder
+    NSString *imagePath = [mookPath stringByAppendingPathComponent:@"/Images"];
+    
+    if (![[NSFileManager defaultManager] fileExistsAtPath:imagePath])
+        [[NSFileManager defaultManager] createDirectoryAtPath:imagePath withIntermediateDirectories:NO attributes:nil error:&error]; //Create folder
+    return imagePath;
 }
 
 + (NSString *)framePath {
@@ -161,16 +231,7 @@
     return framePath;
 }
 
-+ (NSString *)imagePath {
-    NSError *error;
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths objectAtIndex:0]; // Get documents folder
-    NSString *imagePath = [documentsDirectory stringByAppendingPathComponent:@"/Images"];
-    
-    if (![[NSFileManager defaultManager] fileExistsAtPath:imagePath])
-        [[NSFileManager defaultManager] createDirectoryAtPath:imagePath withIntermediateDirectories:NO attributes:nil error:&error]; //Create folder
-    return imagePath;
-}
+
 
 + (NSString *)thumbnailPath {
     NSError *error;

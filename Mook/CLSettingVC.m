@@ -8,6 +8,7 @@
 
 #import "CLSettingVC.h"
 #import "CLPasswordVC.h"
+#import "SSZipArchive.h"
 
 @interface CLSettingVC ()
 
@@ -107,6 +108,54 @@
     return number;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 0) {
+        if (indexPath.row == 0) {
+            // Create
+//            [SSZipArchive createZipFileAtPath:[NSString backUpPath] withContentsOfDirectory:[NSString mookPath]];
+            NSLog(@"creating");
+            NSLog(@"%@", [NSString mookPath]);
+#warning zip后压缩文件中没有任何内容
+            NSArray *paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
+            
+            NSString *libraryPath = [paths objectAtIndex:0];
+            
+//                BOOL flag = [SSZipArchive createZipFileAtPath:[NSString backUpPath] withContentsOfDirectory:libraryPath keepParentDirectory:YES];
+            NSString *mookPath = [NSString mookPath];
+            // 拼接文件名
+            NSString *filePath = [mookPath stringByAppendingPathComponent:@"mook.sqlite"];
+            
+            BOOL flag = [SSZipArchive createZipFileAtPath:[NSString backUpPath] withFilesAtPaths:@[filePath]];
+                if (flag) {
+                    NSLog(@"sucess");
+                    
+                } else {
+                    NSLog(@"failed");
+                    
+                }
+      
+
+            
+            
+            
+//            + (BOOL)unzipFileAtPath:(NSString *)path
+//        toDestination:(NSString *)destination
+//        progressHandler:(void (^)(NSString *entry, unz_file_info zipInfo, long entryNumber, long total))progressHandler
+//        completionHandler:(void (^)(NSString *path, BOOL succeeded, NSError *error))completionHandler;
+            
+        } else if (indexPath.row == 1) {
+            // Unzip
+//            NSError *error;
+
+//            [SSZipArchive unzipFileAtPath:[NSString backUpPath] toDestination: [NSString mookPath]];
+            NSLog(@"unzipping");
+
+            [SSZipArchive unzipFileAtPath:[NSString backUpPath] toDestination:[NSString mookPath] overwrite:YES password:nil error:nil];
+            
+        }
+    }
+}
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     id destVC = segue.destinationViewController;
     
@@ -124,10 +173,6 @@
     }
 }
 
-- (IBAction)doneButtonClicked:(id)sender {
-
-    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:kDismissSettingNavVCNotification object:nil]];
-}
 
 #pragma mark -设置 方法
 
