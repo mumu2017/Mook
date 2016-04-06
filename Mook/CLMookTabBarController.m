@@ -9,10 +9,10 @@
 #import "CLMookTabBarController.h"
 #import "EAIntroView.h"
 
-static NSString * const sampleDescription1 = @"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
-static NSString * const sampleDescription2 = @"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore.";
-static NSString * const sampleDescription3 = @"Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.";
-static NSString * const sampleDescription4 = @"Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit.";
+static NSString * const sampleDescription1 = @"随处记录灵感,告别一闪而逝";
+static NSString * const sampleDescription2 = @"私人订制的Magic库,触手可及";
+static NSString * const sampleDescription3 = @"视频,图片,文字...记录魔术从未如此简单";
+static NSString * const sampleDescription4 = @"做一个更好的魔术师";
 
 @interface CLMookTabBarController ()<EAIntroDelegate>
 
@@ -60,28 +60,28 @@ static NSString * const sampleDescription4 = @"Nam libero tempore, cum soluta no
 
 - (void)showIntroWithCrossDissolve {
     EAIntroPage *page1 = [EAIntroPage page];
-    page1.title = @"Mook";
+    page1.title = @"欢迎使用Mook";
     page1.desc = sampleDescription1;
-    page1.bgImage = [UIImage imageNamed:@"show.jpg"];
-    page1.titleIconView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"title1"]];
+    page1.bgImage = [UIImage imageNamed:@"idea.jpg"];
+    page1.titleIconView = nil;
     
     EAIntroPage *page2 = [EAIntroPage page];
-    page2.title = @"This is page 2";
+    page2.title = @"您的Magic管家";
     page2.desc = sampleDescription2;
     page2.bgImage = [UIImage imageNamed:@"prop.jpg"];
-    page2.titleIconView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"title2"]];
+    page2.titleIconView = nil;
     
     EAIntroPage *page3 = [EAIntroPage page];
-    page3.title = @"This is page 3";
-    page3.desc = sampleDescription3;
-    page3.bgImage = [UIImage imageNamed:@"lines.jpg"];
-    page3.titleIconView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"title3"]];
+    page3.title = @"多媒体记录";
+    page3.desc = sampleDescription3; 
+    page3.bgImage = [UIImage imageNamed:@"routine.jpg"];
+    page3.titleIconView = nil;
     
     EAIntroPage *page4 = [EAIntroPage page];
-    page4.title = @"This is page 4";
+    page4.title = @"Mook";
     page4.desc = sampleDescription4;
-    page4.bgImage = [UIImage imageNamed:@"routine.jpg"];
-    page4.titleIconView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"title4"]];
+    page4.bgImage = [UIImage imageNamed:@"show.jpg"];
+    page4.titleIconView = nil;
     
     EAIntroView *intro = [[EAIntroView alloc] initWithFrame:self.rootView.bounds andPages:@[page1,page2,page3,page4]];
     [intro setDelegate:self];

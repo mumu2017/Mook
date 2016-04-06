@@ -131,6 +131,7 @@
 		43F5F7B51CB50039007BFB0C /* tag.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 43F5F7B41CB50039007BFB0C /* tag.jpg */; };
 		43F5F7B71CB50151007BFB0C /* routine.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 43F5F7B61CB50151007BFB0C /* routine.jpg */; };
 		43F5F7B91CB5020F007BFB0C /* prop.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 43F5F7B81CB5020F007BFB0C /* prop.jpg */; };
+		43F5F7BF1CB50AD3007BFB0C /* launch.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 43F5F7BE1CB50AD3007BFB0C /* launch.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -360,6 +361,7 @@
 		43F5F7B41CB50039007BFB0C /* tag.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = tag.jpg; sourceTree = "<group>"; };
 		43F5F7B61CB50151007BFB0C /* routine.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = routine.jpg; sourceTree = "<group>"; };
 		43F5F7B81CB5020F007BFB0C /* prop.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = prop.jpg; sourceTree = "<group>"; };
+		43F5F7BE1CB50AD3007BFB0C /* launch.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = launch.jpg; sourceTree = "<group>"; };
 		5207E880A1B2E72EF9075B94 /* Pods_Mook.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Mook.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0417F5619A3E977F1F0B558 /* Pods-Mook.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mook.release.xcconfig"; path = "Pods/Target Support Files/Pods-Mook/Pods-Mook.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -596,6 +598,7 @@
 		43A281251CB230FE009C2785 /* jpgs */ = {
 			isa = PBXGroup;
 			children = (
+				43F5F7BE1CB50AD3007BFB0C /* launch.jpg */,
 				43F5F7B61CB50151007BFB0C /* routine.jpg */,
 				43F5F7B81CB5020F007BFB0C /* prop.jpg */,
 				43F5F7B21CB4FEE6007BFB0C /* sleight.jpg */,
@@ -1047,6 +1050,7 @@
 				43C2068B1CB10CF300CEF992 /* CLListCell.xib in Resources */,
 				432346641C94094D00200833 /* CLOneLabelDisplayCell.xib in Resources */,
 				432345451C94045000200833 /* Assets.xcassets in Resources */,
+				43F5F7BF1CB50AD3007BFB0C /* launch.jpg in Resources */,
 				43F5F7621CB3922B007BFB0C /* CLShowInfoCell.xib in Resources */,
 				4323462D1C94054300200833 /* CLQuickStringCell.xib in Resources */,
 				432346351C94054300200833 /* CLTagField.xib in Resources */,

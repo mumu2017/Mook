@@ -17,28 +17,68 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="MOOK" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hyU-5t-bmQ">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launch.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="JUp-ok-h0z">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                            </imageView>
+                            <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="MOOK" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hyU-5t-bmQ">
                                 <rect key="frame" x="279" y="242" width="42" height="21"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" weight="black" pointSize="24"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="做一个更好的魔术师" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yDs-f5-k0U">
+                                <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" red="0.12637259066104889" green="0.12639245390892029" blue="0.12636536359786987" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="hyU-5t-bmQ" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="MBg-lt-iMU"/>
+                            <constraint firstAttribute="trailing" secondItem="yDs-f5-k0U" secondAttribute="trailing" constant="8" id="13g-EJ-ikB"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="JUp-ok-h0z" secondAttribute="bottom" id="7aj-YL-0na"/>
+                            <constraint firstItem="JUp-ok-h0z" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="B6H-au-eZZ"/>
+                            <constraint firstAttribute="trailing" secondItem="JUp-ok-h0z" secondAttribute="trailing" id="Hma-PZ-jGa"/>
+                            <constraint firstItem="hyU-5t-bmQ" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" constant="-10" id="MBg-lt-iMU"/>
+                            <constraint firstItem="JUp-ok-h0z" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="f9D-cm-WkU"/>
+                            <constraint firstItem="yDs-f5-k0U" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" constant="8" id="rIg-An-sVE"/>
                             <constraint firstItem="hyU-5t-bmQ" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="sTs-fZ-Zdf"/>
+                            <constraint firstItem="yDs-f5-k0U" firstAttribute="top" secondItem="hyU-5t-bmQ" secondAttribute="bottom" constant="40" id="xQK-lP-MJQ"/>
                         </constraints>
                         <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="JUp-ok-h0z"/>
+                                <exclude reference="yDs-f5-k0U"/>
+                            </mask>
                             <mask key="constraints">
+                                <exclude reference="B6H-au-eZZ"/>
+                                <exclude reference="Hma-PZ-jGa"/>
+                                <exclude reference="f9D-cm-WkU"/>
                                 <exclude reference="MBg-lt-iMU"/>
                                 <exclude reference="sTs-fZ-Zdf"/>
+                                <exclude reference="13g-EJ-ikB"/>
+                                <exclude reference="rIg-An-sVE"/>
+                                <exclude reference="xQK-lP-MJQ"/>
+                                <exclude reference="7aj-YL-0na"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="JUp-ok-h0z"/>
+                                <include reference="yDs-f5-k0U"/>
+                            </mask>
                             <mask key="constraints">
+                                <include reference="B6H-au-eZZ"/>
+                                <include reference="Hma-PZ-jGa"/>
+                                <include reference="f9D-cm-WkU"/>
                                 <include reference="MBg-lt-iMU"/>
                                 <include reference="sTs-fZ-Zdf"/>
+                                <include reference="13g-EJ-ikB"/>
+                                <include reference="rIg-An-sVE"/>
+                                <include reference="xQK-lP-MJQ"/>
+                                <include reference="7aj-YL-0na"/>
                             </mask>
                         </variation>
                     </view>
@@ -50,4 +90,7 @@
             <point key="canvasLocation" x="52.5" y="375"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="launch.jpg" width="2500" height="1874"/>
+    </resources>
 </document>
