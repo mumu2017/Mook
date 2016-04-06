@@ -28,8 +28,9 @@
     
     // make a placeholder label
     CGFloat placeholderW = self.frame.size.width - 5;
-    CGRect placeholderFrame = CGRectMake(5, 10, placeholderW, 15);
+    CGRect placeholderFrame = CGRectMake(5, 10, placeholderW, 16);
     UILabel *placeholder = [[UILabel alloc] initWithFrame:placeholderFrame];
+    placeholder.numberOfLines = 0;
     // set the text attributes
     placeholder.backgroundColor = [UIColor clearColor];
     placeholder.textColor = [UIColor colorWithWhite:0.7 alpha:1.0];

@@ -284,7 +284,19 @@
     self.editTextView.inputAccessoryView = self.toolBar;
     self.editTextView.delegate = self;
     self.editTextView.tintColor = kMenuBackgroundColor;
-    [self.editTextView addPlaceHolderWithText:@"写点儿什么吧..." andFont:kFontSys16];
+    
+    if (self.editingContentType == kEditingContentTypeShow) {
+        
+        [self.editTextView addPlaceHolderWithText:@"请输入演出说明,任何内容都可以" andFont:kFontSys16];
+        
+    } else if (self.editingContentType == kEditingContentTypeLines) {
+        
+        [self.editTextView addPlaceHolderWithText:@"写点儿好玩儿的台词吧..." andFont:kFontSys16];
+        
+    } else {
+        [self.editTextView addPlaceHolderWithText:@"提示:左右滑动屏幕可切换编辑内容" andFont:kFontSys16];
+    }
+
     
     if ([self.editTextView hasText]) {
         [self.editTextView hidePlaceHolder];
