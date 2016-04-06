@@ -76,6 +76,7 @@ typedef enum {
 #define kSavePhotoKey       @"savePhoto"
 #define kSaveVideoKey       @"saveVideo"
 #define kPasswordKey        @"password"
+#define kNotFirstTimeLaunchKey        @"notFirstTimeLaunchKey"
 #define kPasswordReminderKey     @"passwordReminderKey"
 #define kTouchIDKey        @"touchIDKey"
 #define kCheckIfShouldPasswordKey        @"checkIfShouldPasswordKey"

@@ -256,6 +256,10 @@
         if (indexPath.row == 0) {
             [self displayMailComposerSheet];
         }
+    } else if (indexPath.section == 5) {
+        if (indexPath.row == 2) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"showIntroView" object:nil];
+        }
     }
 }
 
@@ -341,18 +345,9 @@
     
     // Set up recipients
     NSArray *toRecipients = [NSArray arrayWithObject:@"chenlin7715@163.com"];
-//    NSArray *ccRecipients = [NSArray arrayWithObjects:@"second@example.com", @"third@example.com", nil];
-//    NSArray *bccRecipients = [NSArray arrayWithObject:@"fourth@example.com"];
     
     [picker setToRecipients:toRecipients];
-//    [picker setCcRecipients:ccRecipients];
-//    [picker setBccRecipients:bccRecipients];
-    
-    // Attach an image to the email
-//    NSString *path = [[NSBundle mainBundle] pathForResource:@"rainy" ofType:@"jpg"];
-//    NSData *myData = [NSData dataWithContentsOfFile:path];
-//    [picker addAttachmentData:myData mimeType:@"image/jpeg" fileName:@"rainy"];
-//    
+
     // Fill out the email body text
     NSString *emailBody = @"反馈信息:\n";
     [picker setMessageBody:emailBody isHTML:NO];

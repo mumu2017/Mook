@@ -516,6 +516,9 @@
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="RHZ-35-6qK" kind="show" id="anj-4X-jfJ"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" rowHeight="50" id="e4J-Xa-Ado">
                                         <rect key="frame" x="0.0" y="863.5" width="414" height="50"/>
@@ -548,6 +551,9 @@
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="YZU-XZ-fhE" kind="show" id="1TX-U9-sSz"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" rowHeight="50" id="AWk-h8-Wm4">
                                         <rect key="frame" x="0.0" y="913.5" width="414" height="50"/>
@@ -612,6 +618,9 @@
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="mB1-s2-IP1" kind="show" id="jdF-pr-5Ti"/>
+                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -664,7 +673,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U7M-Z4-Fxb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-10461" y="-2565.75"/>
+            <point key="canvasLocation" x="-10791" y="-2241.75"/>
         </scene>
         <!--ShowVC-->
         <scene sceneID="Fb8-1g-cc9">
@@ -857,6 +866,63 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="esC-JT-ETa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-7870.5" y="-3977.25"/>
+        </scene>
+        <!--功能介绍-->
+        <scene sceneID="118-c3-30g">
+            <objects>
+                <viewController id="YZU-XZ-fhE" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="dil-2e-Qc1"/>
+                        <viewControllerLayoutGuide type="bottom" id="2jW-L8-Pzu"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Vu2-EO-gyC">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="功能介绍" id="BsQ-a3-10X"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="opx-uw-sQC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-10672.5" y="-3042.75"/>
+        </scene>
+        <!--关于-->
+        <scene sceneID="K8Y-mi-iIX">
+            <objects>
+                <viewController id="mB1-s2-IP1" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="pmG-Tz-bYr"/>
+                        <viewControllerLayoutGuide type="bottom" id="cEi-AN-jDf"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="3T5-6J-s14">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="关于" id="Sa4-jt-Hx3"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AwH-Rw-s36" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-10834.5" y="-2670.75"/>
+        </scene>
+        <!--What is Magic?-->
+        <scene sceneID="IU7-2d-6II">
+            <objects>
+                <viewController id="RHZ-35-6qK" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="9gB-9d-zI3"/>
+                        <viewControllerLayoutGuide type="bottom" id="qzu-aZ-gmy"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Ocf-ik-KDw">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="What is Magic?" id="U3s-9E-4a1"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jV9-Ek-uuJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-10479" y="-2767.5"/>
         </scene>
         <!--编辑-->
         <scene sceneID="RVv-Er-Zgq">
@@ -2190,7 +2256,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jop-mO-eym" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-11211" y="-2281.5"/>
+            <point key="canvasLocation" x="-11445" y="-2257.5"/>
         </scene>
     </scenes>
     <resources>
