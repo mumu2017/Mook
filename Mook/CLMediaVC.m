@@ -20,6 +20,7 @@
 #import "CLSleightObjModel.h"
 #import "CLPropObjModel.h"
 #import "CLLinesObjModel.h"
+#import "CLTableBackView.h"
 
 @interface CLMediaVC ()<MWPhotoBrowserDelegate>
 @property (nonatomic, strong) NSMutableArray *allMedia;
@@ -27,6 +28,7 @@
 
 @property (nonatomic, strong) NSMutableArray *photos;
 @property (nonatomic, strong) NSMutableArray *thumbs;
+@property (nonatomic, strong) CLTableBackView *tableBackView;
 
 @end
 
@@ -37,6 +39,13 @@
         _allMedia = [CLDataSaveTool allMedia];
     }
     return _allMedia;
+}
+
+- (CLTableBackView *)tableBackView {
+    if (!_tableBackView) {
+        _tableBackView = [CLTableBackView tableBackView];
+    }
+    return _tableBackView;
 }
 
 - (NSMutableArray *)dataList {
@@ -112,10 +121,12 @@ static NSString * const reuseIdentifier = @"Cell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.collectionView.backgroundView = self.tableBackView;
+
     // Uncomment the following line to preserve selection between presentations
     // self.clearsSelectionOnViewWillAppear = NO;
     
-//    self.collectionView.backgroundColor = [UIColor flatBlackColorDark];
+    self.collectionView.backgroundColor = kMenuBackgroundColor;
     [self.collectionView registerNib:[UINib nibWithNibName:@"CLMediaCollectionCell" bundle: nil] forCellWithReuseIdentifier:reuseIdentifier];
     // Do any additional setup after loading the view.
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(update:) name:kUpdateDataNotification
@@ -154,7 +165,9 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
 
-    return self.allMedia.count;
+    NSInteger number = self.allMedia.count;
+    self.tableBackView.hidden = !(number == 0);
+    return number;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {

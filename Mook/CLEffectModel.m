@@ -81,5 +81,12 @@
     return fileExists;
 }
 
+- (NSString *)effect {
+    if (_effect == nil) {
+        _effect = @"";
+    }
+    return _effect;
+}
+
 
 @end

@@ -51,6 +51,7 @@
     return _tags;
 }
 
+
 - (CLEffectModel *)effectModel {
     if (!_effectModel) {
         _effectModel = [CLEffectModel effectModel];
@@ -117,6 +118,27 @@
     }
     
     return [effect contentStringWithDate:[NSString getDateString:self.date]];
+}
+
+- (NSString *)duration {
+    if (_duration == nil) {
+        _duration = @"无时长信息";
+    }
+    return _duration;
+}
+
+- (NSString *)place {
+    if (_place == nil) {
+        _place = @"无场地信息";
+    }
+    return _place;
+}
+
+- (NSString *)audianceCount {
+    if (_audianceCount == nil) {
+        _audianceCount = @"无观众信息";
+    }
+    return _audianceCount;
 }
 
 @end
