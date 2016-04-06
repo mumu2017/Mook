@@ -393,26 +393,35 @@ typedef enum {
     }];
     
     UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        UITextField *nameTF = alertController.textFields.firstObject;
         
-        self.passwordReminder = nameTF.text;
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            
+            UITextField *nameTF = alertController.textFields.firstObject;
+            
+            self.passwordReminder = nameTF.text;
+            
+            
+            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+            [defaults setObject:self.passwordReminder forKey:kPasswordReminderKey];
+            [defaults synchronize];
+            
+            self.resultNoticeLabel.hidden = NO;
+            self.resultNoticeLabel.text = @"密码提示设置成功";
+            
+            [[NSNotificationCenter defaultCenter] removeObserver:self name:UITextFieldTextDidChangeNotification object:nil];
+            
+        });
 
-        
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        [defaults setObject:self.passwordReminder forKey:kPasswordReminderKey];
-        [defaults synchronize];
-        
-        self.resultNoticeLabel.hidden = NO;
-        self.resultNoticeLabel.text = @"密码提示设置成功";
-        
-        [[NSNotificationCenter defaultCenter] removeObserver:self name:UITextFieldTextDidChangeNotification object:nil];
-        
     }];
     
     
     UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-        [[NSNotificationCenter defaultCenter] removeObserver:self name:UITextFieldTextDidChangeNotification object:nil];
         
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:UITextFieldTextDidChangeNotification object:nil];
+            
+        });
     }];
     
     [alertController addAction:okAction];

@@ -146,9 +146,14 @@
     
     UIAlertAction* add = [UIAlertAction actionWithTitle:@"添加道具" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
-        if ([self.delegate respondsToSelector:@selector(propInputVCAddProp:)]) {
-            [self.delegate propInputVCAddProp:self];
-        }
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            
+            if ([self.delegate respondsToSelector:@selector(propInputVCAddProp:)]) {
+                [self.delegate propInputVCAddProp:self];
+            }
+            
+        });
+
     }];
     
     UIAlertAction* cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
@@ -166,9 +171,14 @@
     
     UIAlertAction* delete = [UIAlertAction actionWithTitle:@"删除道具" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
         
-        if ([self.delegate respondsToSelector:@selector(propInputVCDeleteProp:)]) {
-            [self.delegate propInputVCDeleteProp:self];
-        }
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            
+            if ([self.delegate respondsToSelector:@selector(propInputVCDeleteProp:)]) {
+                [self.delegate propInputVCDeleteProp:self];
+            }
+            
+        });
+
     }];
     
     UIAlertAction* cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {

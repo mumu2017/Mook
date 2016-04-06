@@ -84,7 +84,14 @@ static NSString * const reuseIdentifier = @"Cell";
     if (noti.object == self) {  //如果是自己发出的更新通知,则不刷新.
         return;
     }
-
+//
+//    self.allTags = [CLDataSaveTool allTags];
+//    self.showModelList = [CLDataSaveTool allShows];
+//    self.routineModelList = [CLDataSaveTool allRoutines];
+//    self.ideaObjModelList = [CLDataSaveTool allIdeas];
+//    self.sleightObjModelList = [CLDataSaveTool allSleights];
+//    self.propObjModelList = [CLDataSaveTool allProps];
+//    self.linesObjModelList = [CLDataSaveTool allLines];
     [self.collectionView reloadData];
 }
 
@@ -288,7 +295,6 @@ static NSString * const reuseIdentifier = @"Cell";
         
     } else if ([destVC isKindOfClass:[CLTagListVC class]]) {
         CLTagListVC *vc = (CLTagListVC *)destVC;
-        vc.hidesBottomBarWhenPushed = YES;
         
     }
 }

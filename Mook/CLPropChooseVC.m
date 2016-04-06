@@ -41,6 +41,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.title = kDefaultTitleProp;
     self.tableView.backgroundView = self.tableBackView;
     self.tableBackView.hidden = (self.propObjModelList.count != 0);
     

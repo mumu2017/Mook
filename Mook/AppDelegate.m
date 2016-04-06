@@ -145,6 +145,32 @@
 
 #pragma mark - Update Data
 
+- (void)reloadData {
+    self.allItems = nil;
+    
+    self.allTags = nil;
+    self.allTagsShow = nil;
+    self.allTagsIdea = nil;
+    self.allTagsRoutine = nil;
+    self.allTagsSleight = nil;
+    self.allTagsProp = nil;
+    self.allTagsLines = nil;
+    
+    self.showModelList = nil;
+    self.routineModelList = nil;
+    self.ideaObjModelList = nil;
+    self.sleightObjModelList = nil;
+    self.propObjModelList = nil;
+    self.linesObjModelList = nil;
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:kUpdateDataNotification object:nil];
+
+    });
+
+}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
@@ -182,27 +208,6 @@
     
     // 已经在info.plist文件中设置了statusBarStyle属性为lightContent
     //    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-    
-    //    static dispatch_once_t onceToken;
-    //    dispatch_once(&onceToken, ^{
-    //        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    //        [defaults setBool:NO forKey:kUsePasswordKey];
-    //        [defaults setBool:NO forKey:kSavePhotoKey];
-    //        [defaults setBool:NO forKey:kSaveVideoKey];
-    //        [defaults setObject:@"" forKey:kPasswordKey];
-    //        [defaults setBool:NO forKey:kCheckIfShouldPasswordKey];
-    //
-    //        [defaults synchronize];
-    //
-    //    });
-    
-    //    NSDictionary *userDefaultsDefaults = [NSDictionary dictionaryWithObjectsAndKeys:
-    //                                          [NSNumber numberWithBool:NO], kUsePasswordKey,
-    //                                          kSavePhotoKey, @"AnotherKey",
-    //                                          [NSNumber numberWithInt:0], @"NumberKey",
-    //                                          nil];
-    //    [[NSUserDefaults standardUserDefaults] registerDefaults:userDefaultsDefaults];
-    
     
     BOOL usePassword = [[NSUserDefaults standardUserDefaults] boolForKey:kUsePasswordKey];
     [[NSUserDefaults standardUserDefaults] setBool:usePassword forKey:kCheckIfShouldPasswordKey];

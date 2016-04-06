@@ -161,6 +161,7 @@ typedef enum {
 #define kQuickStringSegue   @"quickStringSegue"
 #define kEditingSegue   @"editingSegue"
 #define kPropInputSegue @"propInputSegue"
+#define kBackUpInfoSegue    @"backUpInfoSegue"
 
 #define kMookToNewShowSegue      @"mookToNewShowSegue"
 #define kMookToNewRoutineSegue      @"mookToNewRoutineSegue"

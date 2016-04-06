@@ -539,9 +539,13 @@
     
     UIAlertAction* add = [UIAlertAction actionWithTitle:@"添加准备" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
 
-        if ([self.delegate respondsToSelector:@selector(editingVCAddPrep:)]) {
-            [self.delegate editingVCAddPrep:self];
-        }
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            
+            if ([self.delegate respondsToSelector:@selector(editingVCAddPrep:)]) {
+                [self.delegate editingVCAddPrep:self];
+            }
+        });
+        
     }];
     
     UIAlertAction* cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
@@ -560,9 +564,14 @@
     
     UIAlertAction* add = [UIAlertAction actionWithTitle:@"添加表演" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
-        if ([self.delegate respondsToSelector:@selector(editingVCAddPerform:)]) {
-            [self.delegate editingVCAddPerform:self];
-        }
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            
+            if ([self.delegate respondsToSelector:@selector(editingVCAddPerform:)]) {
+                [self.delegate editingVCAddPerform:self];
+            }
+        });
+        
+       
     }];
     
     UIAlertAction* cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
@@ -581,9 +590,13 @@
     
     UIAlertAction* add = [UIAlertAction actionWithTitle:@"添加注意" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
-        if ([self.delegate respondsToSelector:@selector(editingVCAddNotes:)]) {
-            [self.delegate editingVCAddNotes:self];
-        }
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            
+            if ([self.delegate respondsToSelector:@selector(editingVCAddNotes:)]) {
+                [self.delegate editingVCAddNotes:self];
+            }
+        });
+        
     }];
     
     UIAlertAction* cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
@@ -608,9 +621,14 @@
     
     UIAlertAction* delete = [UIAlertAction actionWithTitle:deleteMessage style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
         
-        if ([self.delegate respondsToSelector:@selector(editingVCDeletePrep:)]) {
-            [self.delegate editingVCDeletePrep:self];
-        }
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            
+            if ([self.delegate respondsToSelector:@selector(editingVCDeletePrep:)]) {
+                [self.delegate editingVCDeletePrep:self];
+            }
+        });
+        
+        
     }];
     
     UIAlertAction* cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
@@ -629,9 +647,14 @@
     
     UIAlertAction* delete = [UIAlertAction actionWithTitle:@"删除表演" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
         
-        if ([self.delegate respondsToSelector:@selector(editingVCDeletePerform:)]) {
-            [self.delegate editingVCDeletePerform:self];
-        }
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            
+            if ([self.delegate respondsToSelector:@selector(editingVCDeletePerform:)]) {
+                [self.delegate editingVCDeletePerform:self];
+            }
+        });
+        
+        
     }];
     
     UIAlertAction* cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
@@ -651,9 +674,13 @@
     
     UIAlertAction* delete = [UIAlertAction actionWithTitle:@"删除注意" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
         
-        if ([self.delegate respondsToSelector:@selector(editingVCDeleteNotes:)]) {
-            [self.delegate editingVCDeleteNotes:self];
-        }
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            
+            if ([self.delegate respondsToSelector:@selector(editingVCDeleteNotes:)]) {
+                [self.delegate editingVCDeleteNotes:self];
+            }
+        });
+       
     }];
     
     UIAlertAction* cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
@@ -703,13 +730,22 @@
         
         UIAlertAction* takeVideo = [UIAlertAction actionWithTitle:@"拍摄视频" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             
-            [self pickVideoFromCamera];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                
+                [self pickVideoFromCamera];
+            });
+            
+            
             
         }];
         
         UIAlertAction* pickVideo = [UIAlertAction actionWithTitle:@"相册视频" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             
-            [self pickVideoFromAlbum];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                
+                [self pickVideoFromAlbum];
+
+            });
             
         }];
         
@@ -720,12 +756,21 @@
     UIAlertAction* takePhoto = [UIAlertAction actionWithTitle:@"拍摄照片" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         //        prepCell.prepFrame.model.image = image;
         
-        [self pickImageFromCamera];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            
+            [self pickImageFromCamera];
+            
+        });
         
     }];
     
     UIAlertAction* pickPhoto = [UIAlertAction actionWithTitle:@"相册图片" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
-        [self pickImageFromAlbum];
+        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            
+            [self pickImageFromAlbum];
+            
+        });
         
     }];
     
@@ -754,11 +799,16 @@
 
     UIAlertAction* deletePhoto = [UIAlertAction actionWithTitle:@"删除图片" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
         
-        [self.imageName deleteNamedImageFromDocument];
-        [CLDataSaveTool deleteImageByName:self.imageName];
-        self.imageName = nil;
-        self.toolBar.imageName = nil;
-        [self.mediaView setImageWithName:nil];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            
+            [self.imageName deleteNamedImageFromDocument];
+            [CLDataSaveTool deleteImageByName:self.imageName];
+            self.imageName = nil;
+            self.toolBar.imageName = nil;
+            [self.mediaView setImageWithName:nil];
+            
+        });
+        
     }];
     
     UIAlertAction* cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
@@ -784,11 +834,16 @@
     
     UIAlertAction* deletePhoto = [UIAlertAction actionWithTitle:@"删除视频" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
 
-        [self.videoName deleteNamedVideoFromDocument];
-        [CLDataSaveTool deleteVideoByName:self.videoName];
-        self.videoName = nil;
-        self.toolBar.videoName = nil;
-        [self.mediaView setVideoWithName:nil];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            
+            [self.videoName deleteNamedVideoFromDocument];
+            [CLDataSaveTool deleteVideoByName:self.videoName];
+            self.videoName = nil;
+            self.toolBar.videoName = nil;
+            [self.mediaView setVideoWithName:nil];
+            
+        });
+        
         
     }];
     

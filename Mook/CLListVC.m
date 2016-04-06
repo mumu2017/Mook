@@ -129,6 +129,7 @@
     if (noti.object == self) {  //如果是自己发出的更新通知,则不刷新.
         return;
     }
+    
     [self.tableView reloadData];
 }
 
@@ -293,13 +294,6 @@
             break;
     }
     
-//    CLListCell *cell = [tableView dequeueReusableCellWithIdentifier:kListCellID forIndexPath:indexPath];
-//    [cell setTitle:title content:content];
-//    cell.iconView.image = image;
-//    cell.backgroundColor = [UIColor flatBlackColorDark];
-//    
-//    return cell;
-    
     if (image != nil) { // 如果返回图片名称,则表示模型中有图片或多媒体
         CLListImageCell *cell = [tableView dequeueReusableCellWithIdentifier:kListImageCellID forIndexPath:indexPath];
         cell.iconView.image = image;
@@ -363,11 +357,7 @@
                     
                     [self.tableView deleteRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationLeft];
                     
-                    dispatch_async(dispatch_get_global_queue(0, 0), ^{
-            
-                        [CLDataSaveTool deleteIdea:model];
-                    });
-
+                    [CLDataSaveTool deleteIdea:model];
                     
                 } else if ([modelUnknown isKindOfClass:[CLShowModel class]]) {
                     CLShowModel *model = (CLShowModel *)modelUnknown;
@@ -381,10 +371,7 @@
                     
                     [self.tableView deleteRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationLeft];
                     
-                    dispatch_async(dispatch_get_global_queue(0, 0), ^{
-                        
-                        [CLDataSaveTool deleteShow:model];
-                    });
+                    [CLDataSaveTool deleteShow:model];
                     
                 } else if ([modelUnknown isKindOfClass:[CLRoutineModel class]]) {
                     CLRoutineModel *model = (CLRoutineModel *)modelUnknown;
@@ -398,10 +385,7 @@
                     
                     [self.tableView deleteRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationLeft];
                     
-                    dispatch_async(dispatch_get_global_queue(0, 0), ^{
-            
-                        [CLDataSaveTool deleteRoutine:model];
-                    });
+                    [CLDataSaveTool deleteRoutine:model];
                     
                 } else if ([modelUnknown isKindOfClass:[CLSleightObjModel class]]) {
                     CLSleightObjModel *model = (CLSleightObjModel *)modelUnknown;
@@ -415,10 +399,7 @@
                     
                     [self.tableView deleteRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationLeft];
                     
-                    dispatch_async(dispatch_get_global_queue(0, 0), ^{
-           
-                        [CLDataSaveTool deleteSleight:model];
-                    });
+                    [CLDataSaveTool deleteSleight:model];
 
                 } else if ([modelUnknown isKindOfClass:[CLPropObjModel class]]) {
                     CLPropObjModel *model = (CLPropObjModel *)modelUnknown;
@@ -432,10 +413,7 @@
                     
                     [self.tableView deleteRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationLeft];
                     
-                    dispatch_async(dispatch_get_global_queue(0, 0), ^{
-                        
-                        [CLDataSaveTool deleteProp:model];
-                    });
+                    [CLDataSaveTool deleteProp:model];
                     
                 } else if ([modelUnknown isKindOfClass:[CLLinesObjModel class]]) {
                     CLLinesObjModel *model = (CLLinesObjModel *)modelUnknown;
@@ -449,10 +427,8 @@
                     
                     [self.tableView deleteRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationLeft];
                     
-                    dispatch_async(dispatch_get_global_queue(0, 0), ^{
           
-                        [CLDataSaveTool updateLines:model];
-                    });
+                    [CLDataSaveTool deleteLines:model];
 
                 }
                 
@@ -464,21 +440,18 @@
             {
                 CLIdeaObjModel *model = self.ideaObjModelList[path.row];
                
-                if (self.tag.length > 0 && self.ideaObjModelList != [(AppDelegate *)[[UIApplication sharedApplication] delegate] ideaObjModelList]) {
+                if (self.tag.length > 0 && kDataListIdea) {
                     [self.ideaObjModelList removeObject:model];
                 }
                 
-                [[(AppDelegate *)[[UIApplication sharedApplication] delegate] ideaObjModelList] removeObject:model];
+                [kDataListIdea removeObject:model];
                 [kDataListAll removeObject:model];
                 
                 [self.tableView deleteRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationLeft];
                 
                 self.tableBackView.hidden = !(self.ideaObjModelList.count == 0);
                 
-                dispatch_async(dispatch_get_global_queue(0, 0), ^{
-                    
-                    [CLDataSaveTool deleteIdea:model];
-                });
+                [CLDataSaveTool deleteIdea:model];
                 break;
             }
             case kListTypeShow:
@@ -494,10 +467,7 @@
                 
                 [self.tableView deleteRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationLeft];
                 
-                dispatch_async(dispatch_get_global_queue(0, 0), ^{
-                    
-                    [CLDataSaveTool deleteShow:model];
-                });
+                [CLDataSaveTool deleteShow:model];
                 
                 break;
             }
@@ -515,10 +485,7 @@
                 
                 [self.tableView deleteRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationLeft];
                 
-                dispatch_async(dispatch_get_global_queue(0, 0), ^{
-                    
-                    [CLDataSaveTool deleteRoutine:model];
-                });
+                [CLDataSaveTool deleteRoutine:model];
 
                 break;
             }
@@ -532,10 +499,8 @@
                 
                 [self.tableView deleteRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationLeft];
                 
-                dispatch_async(dispatch_get_global_queue(0, 0), ^{
-                    
-                    [CLDataSaveTool deleteSleight:model];
-                });
+                
+                [CLDataSaveTool deleteSleight:model];
                 
                 break;
             }
@@ -555,10 +520,7 @@
                 
                 self.tableBackView.hidden = !(self.propObjModelList.count == 0);
                 
-                dispatch_async(dispatch_get_global_queue(0, 0), ^{
-
-                    [CLDataSaveTool deleteProp:model];
-                });
+                [CLDataSaveTool deleteProp:model];
 
                 
                 break;
@@ -577,10 +539,7 @@
                 
                 self.tableBackView.hidden = !(self.linesObjModelList.count == 0);
                 
-                dispatch_async(dispatch_get_global_queue(0, 0), ^{
-
-                    [CLDataSaveTool updateLines:model];
-                });
+                [CLDataSaveTool deleteLines:model];
 
                 
                 break;

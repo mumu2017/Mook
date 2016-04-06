@@ -32,7 +32,6 @@
 		432345B31C9404FB00200833 /* CLQuickStringVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4323458D1C9404FB00200833 /* CLQuickStringVC.m */; };
 		432345B61C9404FB00200833 /* CLSettingNavVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 432345931C9404FB00200833 /* CLSettingNavVC.m */; };
 		432345B71C9404FB00200833 /* CLSettingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 432345951C9404FB00200833 /* CLSettingVC.m */; };
-		432345B81C9404FB00200833 /* CLShowListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 432345971C9404FB00200833 /* CLShowListVC.m */; };
 		432345B91C9404FB00200833 /* CLShowVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 432345991C9404FB00200833 /* CLShowVC.m */; };
 		432345BC1C9404FB00200833 /* CLTagChooseNavVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4323459F1C9404FB00200833 /* CLTagChooseNavVC.m */; };
 		432345BD1C9404FB00200833 /* CLTagChooseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 432345A11C9404FB00200833 /* CLTagChooseVC.m */; };
@@ -188,8 +187,6 @@
 		432345931C9404FB00200833 /* CLSettingNavVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLSettingNavVC.m; sourceTree = "<group>"; };
 		432345941C9404FB00200833 /* CLSettingVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLSettingVC.h; sourceTree = "<group>"; };
 		432345951C9404FB00200833 /* CLSettingVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLSettingVC.m; sourceTree = "<group>"; };
-		432345961C9404FB00200833 /* CLShowListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLShowListVC.h; sourceTree = "<group>"; };
-		432345971C9404FB00200833 /* CLShowListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLShowListVC.m; sourceTree = "<group>"; };
 		432345981C9404FB00200833 /* CLShowVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLShowVC.h; sourceTree = "<group>"; };
 		432345991C9404FB00200833 /* CLShowVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLShowVC.m; sourceTree = "<group>"; };
 		4323459E1C9404FB00200833 /* CLTagChooseNavVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLTagChooseNavVC.h; sourceTree = "<group>"; };
@@ -360,6 +357,9 @@
 		43F5F7A21CB4978C007BFB0C /* WJTouchID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJTouchID.m; sourceTree = "<group>"; };
 		43F5F7A41CB4A2C2007BFB0C /* CLPropChooseVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLPropChooseVC.h; sourceTree = "<group>"; };
 		43F5F7A51CB4A2C2007BFB0C /* CLPropChooseVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLPropChooseVC.m; sourceTree = "<group>"; };
+		43F5F7A81CB4B03F007BFB0C /* libz.1.1.3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.1.3.tbd; path = usr/lib/libz.1.1.3.tbd; sourceTree = SDKROOT; };
+		43F5F7A91CB4B03F007BFB0C /* libz.1.2.5.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.2.5.tbd; path = usr/lib/libz.1.2.5.tbd; sourceTree = SDKROOT; };
+		43F5F7AA1CB4B03F007BFB0C /* libz.1.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.tbd; path = usr/lib/libz.1.tbd; sourceTree = SDKROOT; };
 		5207E880A1B2E72EF9075B94 /* Pods_Mook.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Mook.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0417F5619A3E977F1F0B558 /* Pods-Mook.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mook.release.xcconfig"; path = "Pods/Target Support Files/Pods-Mook/Pods-Mook.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -542,8 +542,6 @@
 				432345811C9404FB00200833 /* CLNewShowVC.m */,
 				43DF3AC01CAA478500712D81 /* CLPropListVC.h */,
 				43DF3AC11CAA478500712D81 /* CLPropListVC.m */,
-				432345961C9404FB00200833 /* CLShowListVC.h */,
-				432345971C9404FB00200833 /* CLShowListVC.m */,
 				43EEE7D71CAD0B5E00F0BCCF /* CLRoutineChooseVC.h */,
 				43EEE7D81CAD0B5E00F0BCCF /* CLRoutineChooseVC.m */,
 			);
@@ -946,6 +944,9 @@
 		867DD05412560E63BB6BCE80 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				43F5F7A81CB4B03F007BFB0C /* libz.1.1.3.tbd */,
+				43F5F7A91CB4B03F007BFB0C /* libz.1.2.5.tbd */,
+				43F5F7AA1CB4B03F007BFB0C /* libz.1.tbd */,
 				43F5F76B1CB3E447007BFB0C /* libz.tbd */,
 				43E0F7071C9EB2A2005CAD97 /* libsqlite3.0.tbd */,
 				5207E880A1B2E72EF9075B94 /* Pods_Mook.framework */,
@@ -1144,7 +1145,6 @@
 				432346731C9409A400200833 /* XLBarPagerTabStripViewController.m in Sources */,
 				432345AD1C9404FB00200833 /* CLNewShowVC.m in Sources */,
 				43E0F73F1CA10D27005CAD97 /* NSObject+MJIvar.m in Sources */,
-				432345B81C9404FB00200833 /* CLShowListVC.m in Sources */,
 				432346621C94094D00200833 /* CLMediaView.m in Sources */,
 				43F5F7651CB3A4EE007BFB0C /* NSAttributedString+Tools.m in Sources */,
 				432345DE1C94051A00200833 /* CLInfoModel.m in Sources */,

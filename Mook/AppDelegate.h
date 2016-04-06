@@ -32,5 +32,7 @@
 
 @property (nonatomic, assign) BOOL shouldInputPassword;
 
+- (void)reloadData;
+
 @end
 

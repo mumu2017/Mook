@@ -15,7 +15,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <sections>
-                            <tableViewSection headerTitle="备份" id="Kd3-Be-FE9">
+                            <tableViewSection headerTitle="备份与恢复" id="Kd3-Be-FE9">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" rowHeight="50" id="KMe-Sv-8sj">
                                         <rect key="frame" x="0.0" y="113.5" width="414" height="50"/>
@@ -24,7 +24,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="381" height="49.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="导出备份" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r4A-C4-fxh">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="创建备份" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r4A-C4-fxh">
                                                     <rect key="frame" x="15" y="14" width="136" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -45,6 +45,38 @@
                                                 <mask key="constraints">
                                                     <include reference="2wj-Mo-f5y"/>
                                                     <include reference="KiG-fn-yRm"/>
+                                                </mask>
+                                            </variation>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" rowHeight="50" id="3Oa-X8-9Hj">
+                                        <rect key="frame" x="0.0" y="163.5" width="414" height="50"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3Oa-X8-9Hj" id="vvs-yp-AV5">
+                                            <rect key="frame" x="0.0" y="0.0" width="381" height="49.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="备份说明" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5r1-mp-7gD">
+                                                    <rect key="frame" x="15" y="14" width="136" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="5r1-mp-7gD" firstAttribute="centerY" secondItem="vvs-yp-AV5" secondAttribute="centerY" id="kvW-Lp-H2n"/>
+                                                <constraint firstItem="5r1-mp-7gD" firstAttribute="leading" secondItem="vvs-yp-AV5" secondAttribute="leadingMargin" constant="7" id="lSk-Va-a5H"/>
+                                            </constraints>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="lSk-Va-a5H"/>
+                                                    <exclude reference="kvW-Lp-H2n"/>
+                                                </mask>
+                                            </variation>
+                                            <variation key="heightClass=regular-widthClass=compact">
+                                                <mask key="constraints">
+                                                    <include reference="lSk-Va-a5H"/>
+                                                    <include reference="kvW-Lp-H2n"/>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
@@ -77,6 +109,38 @@
                                                 <mask key="constraints">
                                                     <include reference="Y8z-dS-cdb"/>
                                                     <include reference="xzk-AS-0hd"/>
+                                                </mask>
+                                            </variation>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" rowHeight="50" id="dBw-uR-m30">
+                                        <rect key="frame" x="0.0" y="163.5" width="414" height="50"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dBw-uR-m30" id="5g3-sY-Wja">
+                                            <rect key="frame" x="0.0" y="0.0" width="381" height="49.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="删除备份" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ieh-2X-T7C">
+                                                    <rect key="frame" x="15" y="14" width="136" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="ieh-2X-T7C" firstAttribute="leading" secondItem="5g3-sY-Wja" secondAttribute="leadingMargin" constant="7" id="TJ8-MD-dks"/>
+                                                <constraint firstItem="ieh-2X-T7C" firstAttribute="centerY" secondItem="5g3-sY-Wja" secondAttribute="centerY" id="j2M-qS-OiO"/>
+                                            </constraints>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="TJ8-MD-dks"/>
+                                                    <exclude reference="j2M-qS-OiO"/>
+                                                </mask>
+                                            </variation>
+                                            <variation key="heightClass=regular-widthClass=compact">
+                                                <mask key="constraints">
+                                                    <include reference="TJ8-MD-dks"/>
+                                                    <include reference="j2M-qS-OiO"/>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
@@ -569,11 +633,12 @@
                         <outlet property="saveVideoSwitch" destination="B3v-Ka-xlU" id="cuL-aW-fxy"/>
                         <outlet property="touchIDSwitch" destination="N07-Hv-Lyu" id="WdO-gF-a5M"/>
                         <segue destination="TsA-fJ-Mw6" kind="presentation" identifier="settingToPasswordSegue" id="1Qk-f9-IET"/>
+                        <segue destination="Sky-BU-DUe" kind="show" identifier="backUpInfoSegue" id="ma8-KO-Tp6"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3J1-rc-oat" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-11281.5" y="-3156"/>
+            <point key="canvasLocation" x="-11454" y="-3137.25"/>
         </scene>
         <!--快捷短语-->
         <scene sceneID="8l0-Ni-6ad">
@@ -673,6 +738,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tJM-Cg-WPZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-8955" y="-3379.5"/>
+        </scene>
+        <!--备份说明-->
+        <scene sceneID="zEt-bs-n44">
+            <objects>
+                <viewController id="Sky-BU-DUe" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="o1d-QA-P8S"/>
+                        <viewControllerLayoutGuide type="bottom" id="dIc-w7-t7B"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="VnK-4z-Zfi">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="备份说明" id="dT4-EL-hwG"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3Od-e3-x4b" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-10703.25" y="-3302.625"/>
         </scene>
         <!--New EntryVC-->
         <scene sceneID="kYp-5b-vxu">
@@ -2128,8 +2212,8 @@
         <segue reference="F7W-G1-xVl"/>
         <segue reference="cZz-JI-sNE"/>
         <segue reference="1Xs-aM-XCd"/>
+        <segue reference="Hnt-4N-2dA"/>
         <segue reference="4tP-b3-hII"/>
-        <segue reference="V1s-2Y-tHH"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
 </document>

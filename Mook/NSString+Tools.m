@@ -167,15 +167,10 @@
 
 + (NSString *)backUpPath { // 备份文件路径
     
-    NSError *error;
-
-    // 不再使用Document文件夹,因为它将会暴露在Itunes中
-    NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0]; // Get documents folder
     
-    NSString *backUpPath = [documentsDirectory stringByAppendingPathComponent:@"/backup.zip"];
-    
-    if (![[NSFileManager defaultManager] fileExistsAtPath:backUpPath])
-        [[NSFileManager defaultManager] createDirectoryAtPath:backUpPath withIntermediateDirectories:NO attributes:nil error:&error]; //Create folder
+    NSString *backUpPath = [documentsDirectory stringByAppendingPathComponent:@"backup.zip"];
     
     return backUpPath;
 }
@@ -183,16 +178,16 @@
 + (NSString *)mookPath {
     NSError *error;
     // 因为UIFileSharing的关系, 将Private的文件储存在Library中
-//    
-//    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
-//    
-//    NSString *libraryPath = [paths objectAtIndex:0];
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
+    
+    NSString *libraryPath = [paths objectAtIndex:0];
     
     // 使用Document文件夹,因为它将会暴露在Itunes中
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths objectAtIndex:0]; // Get documents folder
+//    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+//    NSString *documentsDirectory = [paths objectAtIndex:0]; // Get documents folder
     
-    NSString *mookPath = [documentsDirectory stringByAppendingPathComponent:@"/Mook"];
+    NSString *mookPath = [libraryPath stringByAppendingPathComponent:@"/Mook"];
     
     if (![[NSFileManager defaultManager] fileExistsAtPath:mookPath])
         [[NSFileManager defaultManager] createDirectoryAtPath:mookPath withIntermediateDirectories:NO attributes:nil error:&error]; //Create folder
