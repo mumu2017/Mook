@@ -15,6 +15,7 @@
 @property (weak, nonatomic) IBOutlet UISwitch *passwordSwitch;
 @property (weak, nonatomic) IBOutlet UISwitch *savePhotoSwitch;
 @property (weak, nonatomic) IBOutlet UISwitch *saveVideoSwitch;
+@property (weak, nonatomic) IBOutlet UISwitch *touchIDSwitch;
 
 @end
 
@@ -36,6 +37,8 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
     self.passwordSwitch.on = [defaults boolForKey:kUsePasswordKey];
+    self.touchIDSwitch.on = [defaults boolForKey:kTouchIDKey];
+
     self.savePhotoSwitch.on = [defaults boolForKey:kSavePhotoKey];
     self.saveVideoSwitch.on = [defaults boolForKey:kSaveVideoKey];
 }
@@ -80,7 +83,7 @@
             
         case 1:
             if ([[NSUserDefaults standardUserDefaults] boolForKey:kUsePasswordKey]) {
-                number = 2;
+                number = 3;
             } else {
                 number = 1;
             }
@@ -191,6 +194,15 @@
     [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationNone];
     
     
+}
+
+- (IBAction)touchIDSwitchChanged:(UISwitch *)controlSwitch {
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    [defaults setBool:controlSwitch.isOn forKey:kTouchIDKey];
+    
+    [defaults synchronize];
 }
 
 - (IBAction)savePhotoSwitchChanged:(UISwitch *)controlSwitch {

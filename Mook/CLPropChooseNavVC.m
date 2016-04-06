@@ -7,9 +7,9 @@
 //
 
 #import "CLPropChooseNavVC.h"
-#import "CLPropListVC.h"
+#import "CLPropChooseVC.h"
 
-@interface CLPropChooseNavVC ()<CLPropListVCDelegate>
+@interface CLPropChooseNavVC ()<CLPropChooseVCDelegate>
 
 @end
 
@@ -19,13 +19,14 @@
     [super viewDidLoad];
     
     UIViewController *rootViewController = [[self viewControllers] firstObject];
-    if ([rootViewController isKindOfClass:[CLPropListVC class]]) {
-        CLPropListVC *vc = (CLPropListVC *)rootViewController;
+    if ([rootViewController isKindOfClass:[CLPropChooseVC class]]) {
+        CLPropChooseVC *vc = (CLPropChooseVC *)rootViewController;
         vc.delegate = self;
     }
 }
 
-- (void)propListVC:(CLPropListVC *)propListVC didSelectProp:(CLPropObjModel *)prop {
+- (void)propChooseVC:(CLPropChooseVC *)propChooseVC didSelectProp:(CLPropObjModel *)prop {
+    
     if ([self.navDelegate respondsToSelector:@selector(propChooseNavVC:didSelectProp:)]) {
         [self.navDelegate propChooseNavVC:self didSelectProp:prop];
     }

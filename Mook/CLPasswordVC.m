@@ -7,13 +7,15 @@
 //
 
 #import "CLPasswordVC.h"
+#import "WJTouchID.h"
+
 typedef enum {
     kInputOldPasswordMode = 1,
     kInputNewPasswordFirstTimeMode,
     kInputNewPasswordSecondTimeMode
 } CreatNewPasswordMode;
 
-@interface CLPasswordVC ()
+@interface CLPasswordVC ()<WJTouchIDDelegate>
 
 
 @property (weak, nonatomic) IBOutlet UILabel *inputNoticeLabel;
@@ -40,6 +42,7 @@ typedef enum {
 @property (weak, nonatomic) IBOutlet UIButton *btnDelete;
 
 @property (nonatomic, assign) BOOL passwordMatched;
+@property (nonatomic, assign) BOOL isUsingTouchID;
 
 @property (nonatomic, copy) NSString *passwordReminder;
 
@@ -50,6 +53,11 @@ typedef enum {
 @implementation CLPasswordVC
 
 @synthesize password = _password;
+
+- (BOOL)isUsingTouchID {
+    
+    return [[NSUserDefaults standardUserDefaults] boolForKey:kTouchIDKey];
+}
 
 - (NSString *)password {
     if (!_password) {
@@ -306,27 +314,8 @@ typedef enum {
     
     if (self.isCreatingNewPassword  || self.isChangingPassword) {
         
-        if (self.passwordReminder.length > 0) {
-            [self.reminderButton setTitle:@"修改密码提示" forState:UIControlStateNormal];
-            [self.reminderButton setTitle:@"修改密码提示" forState:UIControlStateHighlighted];
-        } else {
-            [self.reminderButton setTitle:@"添加密码提示" forState:UIControlStateNormal];
-            [self.reminderButton setTitle:@"添加密码提示" forState:UIControlStateHighlighted];
-        }
-        
-        [self.reminderButton addTarget:self action:@selector(addPasswordReminder) forControlEvents:UIControlEventTouchUpInside];
-    } else {
-        
-        [self.reminderButton setTitle:@"显示密码提示" forState:UIControlStateNormal];
-        [self.reminderButton setTitle:@"显示密码提示" forState:UIControlStateHighlighted];
-        [self.reminderButton addTarget:self action:@selector(showPasswordReminder) forControlEvents:UIControlEventTouchUpInside];
-    }
-    
-    
-    if (self.isCreatingNewPassword || self.isChangingPassword) {
-
         self.cancelButton.hidden = NO;
-
+        
         if (self.creatNewPasswordMode == kInputOldPasswordMode) {
             
             self.inputNoticeLabel.text = @"请输入旧密码";
@@ -338,10 +327,46 @@ typedef enum {
             self.inputNoticeLabel.text = @"请再次输入新密码";
             
         }
+
+        
+        if (self.passwordReminder.length > 0) {
+            [self.reminderButton setTitle:@"修改密码提示" forState:UIControlStateNormal];
+            [self.reminderButton setTitle:@"修改密码提示" forState:UIControlStateHighlighted];
+        } else {
+            [self.reminderButton setTitle:@"添加密码提示" forState:UIControlStateNormal];
+            [self.reminderButton setTitle:@"添加密码提示" forState:UIControlStateHighlighted];
+        }
+        
+        [self.reminderButton addTarget:self action:@selector(addPasswordReminder) forControlEvents:UIControlEventTouchUpInside];
+        
+        [self.cancelButton setTitle:@"取消" forState:UIControlStateNormal];
+        [self.cancelButton setTitle:@"取消" forState:UIControlStateHighlighted];
+        [self.cancelButton addTarget:self action:@selector(cancelButtonClicked) forControlEvents:UIControlEventTouchUpInside];
+        
     } else {
- 
+        
+        if (!self.isUsingTouchID) {
+            self.cancelButton.hidden = YES;
+        }
+        
         self.inputNoticeLabel.text = @"请输入密码";
-        self.cancelButton.hidden = YES;
+        
+        [self.reminderButton setTitle:@"密码提示" forState:UIControlStateNormal];
+        [self.reminderButton setTitle:@"密码提示" forState:UIControlStateHighlighted];
+        [self.reminderButton addTarget:self action:@selector(showPasswordReminder) forControlEvents:UIControlEventTouchUpInside];
+        
+        [self.cancelButton setTitle:@"TouchID" forState:UIControlStateNormal];
+        [self.cancelButton setTitle:@"TouchID" forState:UIControlStateHighlighted];
+        [self.cancelButton addTarget:self action:@selector(StartWJTouchID) forControlEvents:UIControlEventTouchUpInside];
+    }
+
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    if (!self.isCreatingNewPassword && !self.isChangingPassword) {
+        [self StartWJTouchID];
     }
 }
 
@@ -411,7 +436,7 @@ typedef enum {
 }
 
 
-- (IBAction)cancelButtonClicked:(id)sender {
+- (void)cancelButtonClicked {
     if (self.isCreatingNewPassword) {
         [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"cancelPasswordCreation" object:nil]];
     } else if (self.isChangingPassword) {
@@ -419,5 +444,229 @@ typedef enum {
 
     }
 
+}
+
+- (void)StartWJTouchID {
+    
+    if (self.isUsingTouchID) {
+        [[WJTouchID touchID] startWJTouchIDWithMessage:WJNotice(@"请核对指纹信息", @"Please check the fingerprint") fallbackTitle:WJNotice(@"输入密码", @"Input Password") delegate:self];
+    }
+
+}
+/**
+ *  TouchID验证成功
+ *
+ *  Authentication Successul  Authorize Success
+ */
+- (void) WJTouchIDAuthorizeSuccess {
+    self.resultNoticeLabel.hidden = NO;
+    self.resultNoticeLabel.text = WJNotice(@"TouchID验证成功", @"Authorize Success");
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"passwordMatch" object:nil]];
+    });
+
+}
+
+/**
+ *  TouchID验证失败
+ *
+ *  Authentication Failure
+ */
+- (void) WJTouchIDAuthorizeFailure {
+    self.resultNoticeLabel.hidden = NO;
+    
+    self.resultNoticeLabel.text = WJNotice(@"TouchID验证失败", @"Authorize Failure");
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        
+        self.resultNoticeLabel.hidden = YES;
+
+    });
+    
+}
+/**
+ *  取消TouchID验证 (用户点击了取消)
+ *
+ *  Authentication was canceled by user (e.g. tapped Cancel button).
+ */
+- (void) WJTouchIDAuthorizeErrorUserCancel {
+    
+    self.resultNoticeLabel.hidden = NO;
+    
+    self.resultNoticeLabel.text = WJNotice(@"取消TouchID验证 (用户点击了取消)", @"Authorize Error User Cancel");
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        
+        self.resultNoticeLabel.hidden = YES;
+        
+    });
+    
+}
+
+/**
+ *  在TouchID对话框中点击输入密码按钮
+ *
+ *  User tapped the fallback button
+ */
+- (void) WJTouchIDAuthorizeErrorUserFallback {
+    
+    self.resultNoticeLabel.hidden = NO;
+    
+    self.resultNoticeLabel.text = WJNotice(@"在TouchID对话框中点击输入密码按钮", @"Authorize Error User Fallback ");
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        
+        self.resultNoticeLabel.hidden = YES;
+        
+    });
+
+}
+
+/**
+ *  在验证的TouchID的过程中被系统取消 例如突然来电话、按了Home键、锁屏...
+ *
+ *  Authentication was canceled by system (e.g. another application went to foreground).
+ */
+- (void) WJTouchIDAuthorizeErrorSystemCancel {
+    
+    self.resultNoticeLabel.hidden = NO;
+    
+    self.resultNoticeLabel.text = WJNotice(@"在验证的TouchID的过程中被系统取消 ", @"Authorize Error System Cancel");
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        
+        self.resultNoticeLabel.hidden = YES;
+        
+    });
+
+}
+
+/**
+ *  无法启用TouchID,设备没有设置密码
+ *
+ *  Authentication could not start, because passcode is not set on the device.
+ */
+- (void) WJTouchIDAuthorizeErrorPasscodeNotSet {
+    
+    self.resultNoticeLabel.hidden = NO;
+    
+    self.resultNoticeLabel.text = WJNotice(@"无法启用TouchID,设备没有设置密码", @"Authorize Error Passcode Not Set");
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        
+        self.resultNoticeLabel.hidden = YES;
+        
+    });
+    
+}
+
+/**
+ *  设备没有录入TouchID,无法启用TouchID
+ *
+ *  Authentication could not start, because Touch ID has no enrolled fingers
+ */
+- (void) WJTouchIDAuthorizeErrorTouchIDNotEnrolled {
+    
+    self.resultNoticeLabel.hidden = NO;
+    
+    self.resultNoticeLabel.text = WJNotice(@"设备没有录入TouchID,无法启用TouchID", @"Authorize Error TouchID Not Enrolled");
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        
+        self.resultNoticeLabel.hidden = YES;
+        
+    });
+}
+
+/**
+ *  该设备的TouchID无效
+ *
+ *  Authentication could not start, because Touch ID is not available on the device.
+ */
+- (void) WJTouchIDAuthorizeErrorTouchIDNotAvailable {
+    
+    self.resultNoticeLabel.hidden = NO;
+    
+    self.resultNoticeLabel.text = WJNotice(@"该设备的TouchID无效", @"Authorize Error TouchID Not Available");
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        
+        self.resultNoticeLabel.hidden = YES;
+        
+    });
+}
+
+/**
+ *  多次连续使用Touch ID失败，Touch ID被锁，需要用户输入密码解锁
+ *
+ *  Authentication was not successful, because there were too many failed Touch ID attempts and Touch ID is now locked. Passcode is required to unlock Touch ID, e.g. evaluating LAPolicyDeviceOwnerAuthenticationWithBiometrics will ask for passcode as a prerequisite.
+ *
+ */
+- (void) WJTouchIDAuthorizeLAErrorTouchIDLockout {
+    
+    self.resultNoticeLabel.hidden = NO;
+    
+    self.resultNoticeLabel.text = WJNotice(@"多次连续使用Touch ID失败，Touch ID被锁，需要用户输入密码解锁", @"Authorize LAError TouchID Lockout");
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        
+        self.resultNoticeLabel.hidden = YES;
+        
+    });
+}
+
+/**
+ *  当前软件被挂起取消了授权(如突然来了电话,应用进入前台)
+ *
+ *  Authentication was canceled by application (e.g. invalidate was called while authentication was inprogress).
+ *
+ */
+- (void) WJTouchIDAuthorizeLAErrorAppCancel {
+    
+    self.resultNoticeLabel.hidden = NO;
+    
+    self.resultNoticeLabel.text = WJNotice(@"当前软件被挂起取消了授权", @"Authorize LAError AppCancel");
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        
+        self.resultNoticeLabel.hidden = YES;
+        
+    });
+}
+
+/**
+ *  当前软件被挂起取消了授权 (授权过程中,LAContext对象被释)
+ *
+ *  LAContext passed to this call has been previously invalidated.
+ */
+- (void) WJTouchIDAuthorizeLAErrorInvalidContext {
+    
+    self.resultNoticeLabel.hidden = NO;
+    
+    self.resultNoticeLabel.text = WJNotice(@"当前软件被挂起取消了授权", @"Authorize LAError Invalid Context");
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        
+        self.resultNoticeLabel.hidden = YES;
+        
+    });
+}
+/**
+ *  当前设备不支持指纹识别
+ *
+ *  The current device does not support fingerprint identification
+ */
+-(void)WJTouchIDIsNotSupport {
+    
+    self.resultNoticeLabel.hidden = NO;
+    
+    self.resultNoticeLabel.text = WJNotice(@"当前设备不支持指纹识别", @"The Current Device Does Not Support");
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        
+        self.resultNoticeLabel.hidden = YES;
+        
+    });
 }
 @end

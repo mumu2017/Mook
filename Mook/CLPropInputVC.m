@@ -68,7 +68,7 @@
     self.quantityTextField.delegate = self;
     self.propDetailTextField.delegate = self;
 
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cancelSelection) name:@"cancelSelection" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cancelSelection) name:@"cancelPropSelection" object:nil];
 }
 
 - (void)dealloc {
@@ -136,22 +136,8 @@
 }
 
 - (void)selectProp {
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"道具" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
-    
-    UIAlertAction* addProp = [UIAlertAction actionWithTitle:@"从我的道具中选择" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
-        [self performSegueWithIdentifier:kNewRoutineChoosePropSegue sender:nil];
-        
-    }];
-    
-    UIAlertAction* cancel = [UIAlertAction actionWithTitle:@"取消"
-                                                     style:UIAlertActionStyleCancel
-                                                   handler:^(UIAlertAction * action) {}];
-    
-    [alert addAction:addProp];
-    [alert addAction:cancel];
-    
-    [self presentViewController:alert animated:YES completion:nil];
+    [self performSegueWithIdentifier:kNewRoutineChoosePropSegue sender:nil];
 }
 
 - (void)addProp {

@@ -130,6 +130,8 @@
 		43F5F7621CB3922B007BFB0C /* CLShowInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43F5F7601CB3922B007BFB0C /* CLShowInfoCell.xib */; };
 		43F5F7651CB3A4EE007BFB0C /* NSAttributedString+Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = 43F5F7641CB3A4EE007BFB0C /* NSAttributedString+Tools.m */; };
 		43F5F7681CB3BD63007BFB0C /* CLQuickStringNavVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 43F5F7671CB3BD63007BFB0C /* CLQuickStringNavVC.m */; };
+		43F5F7A31CB4978C007BFB0C /* WJTouchID.m in Sources */ = {isa = PBXBuildFile; fileRef = 43F5F7A21CB4978C007BFB0C /* WJTouchID.m */; };
+		43F5F7A61CB4A2C2007BFB0C /* CLPropChooseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 43F5F7A51CB4A2C2007BFB0C /* CLPropChooseVC.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -354,6 +356,10 @@
 		43F5F7661CB3BD63007BFB0C /* CLQuickStringNavVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLQuickStringNavVC.h; sourceTree = "<group>"; };
 		43F5F7671CB3BD63007BFB0C /* CLQuickStringNavVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLQuickStringNavVC.m; sourceTree = "<group>"; };
 		43F5F76B1CB3E447007BFB0C /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		43F5F7A11CB4978C007BFB0C /* WJTouchID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJTouchID.h; sourceTree = "<group>"; };
+		43F5F7A21CB4978C007BFB0C /* WJTouchID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJTouchID.m; sourceTree = "<group>"; };
+		43F5F7A41CB4A2C2007BFB0C /* CLPropChooseVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLPropChooseVC.h; sourceTree = "<group>"; };
+		43F5F7A51CB4A2C2007BFB0C /* CLPropChooseVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLPropChooseVC.m; sourceTree = "<group>"; };
 		5207E880A1B2E72EF9075B94 /* Pods_Mook.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Mook.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0417F5619A3E977F1F0B558 /* Pods-Mook.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mook.release.xcconfig"; path = "Pods/Target Support Files/Pods-Mook/Pods-Mook.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -767,7 +773,7 @@
 		43E0F71B1CA0F141005CAD97 /* Libs */ = {
 			isa = PBXGroup;
 			children = (
-				43F5F76E1CB3E90B007BFB0C /* SSZipArchive */,
+				43F5F76E1CB3E90B007BFB0C /* WJTouchID */,
 				430DFBDF1CA3F3470054DF6B /* Other */,
 				43E0F7411CA10D30005CAD97 /* MJ */,
 				432346821C94298600200833 /* Category */,
@@ -801,6 +807,8 @@
 				432345871C9404FB00200833 /* CLPropInputVC.m */,
 				432345841C9404FB00200833 /* CLPropChooseNavVC.h */,
 				432345851C9404FB00200833 /* CLPropChooseNavVC.m */,
+				43F5F7A41CB4A2C2007BFB0C /* CLPropChooseVC.h */,
+				43F5F7A51CB4A2C2007BFB0C /* CLPropChooseVC.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -926,11 +934,13 @@
 			name = QuickString;
 			sourceTree = "<group>";
 		};
-		43F5F76E1CB3E90B007BFB0C /* SSZipArchive */ = {
+		43F5F76E1CB3E90B007BFB0C /* WJTouchID */ = {
 			isa = PBXGroup;
 			children = (
+				43F5F7A11CB4978C007BFB0C /* WJTouchID.h */,
+				43F5F7A21CB4978C007BFB0C /* WJTouchID.m */,
 			);
-			name = SSZipArchive;
+			name = WJTouchID;
 			sourceTree = "<group>";
 		};
 		867DD05412560E63BB6BCE80 /* Frameworks */ = {
@@ -1147,6 +1157,7 @@
 				432346551C9408F100200833 /* CLToolBar.m in Sources */,
 				43C206921CB12BED00CEF992 /* CLMediaCollectionCell.m in Sources */,
 				432346801C9409BB00200833 /* XLButtonBarViewCell.m in Sources */,
+				43F5F7A31CB4978C007BFB0C /* WJTouchID.m in Sources */,
 				43F5F7571CB390BC007BFB0C /* CLLibraryNavVC.m in Sources */,
 				432345DD1C94051A00200833 /* CLIdeaObjModel.m in Sources */,
 				432345641C9404A800200833 /* UIImage+Tools.m in Sources */,
@@ -1158,6 +1169,7 @@
 				43885F6E1CA4F9BE00269CE1 /* CLListVC.m in Sources */,
 				4323468F1C96B42A00200833 /* CLNewEntryTextCell.m in Sources */,
 				43A281181CB224BC009C2785 /* CLMookTabBarController.m in Sources */,
+				43F5F7A61CB4A2C2007BFB0C /* CLPropChooseVC.m in Sources */,
 				4323464D1C9405EA00200833 /* main.m in Sources */,
 				430DFBC91CA252DD0054DF6B /* CLNewEntryNavVC.m in Sources */,
 				43EEE7D61CACD3ED00F0BCCF /* CLNewShowNavVC.m in Sources */,

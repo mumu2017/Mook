@@ -77,6 +77,7 @@ typedef enum {
 #define kSaveVideoKey       @"saveVideo"
 #define kPasswordKey        @"password"
 #define kPasswordReminderKey     @"passwordReminderKey"
+#define kTouchIDKey        @"touchIDKey"
 #define kCheckIfShouldPasswordKey        @"checkIfShouldPasswordKey"
 
 #pragma mark -  NSCoding Key
