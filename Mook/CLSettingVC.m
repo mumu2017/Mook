@@ -123,7 +123,7 @@
             break;
             
         case 5:
-            number = 4;
+            number = 3;
             break;
             
         default:
@@ -257,7 +257,7 @@
             [self displayMailComposerSheet];
         }
     } else if (indexPath.section == 5) {
-        if (indexPath.row == 2) {
+        if (indexPath.row == 1) {
             [[NSNotificationCenter defaultCenter] postNotificationName:@"showIntroView" object:nil];
         }
     }

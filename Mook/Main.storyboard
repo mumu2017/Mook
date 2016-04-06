@@ -520,41 +520,6 @@
                                             <segue destination="RHZ-35-6qK" kind="show" id="anj-4X-jfJ"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" rowHeight="50" id="e4J-Xa-Ado">
-                                        <rect key="frame" x="0.0" y="863.5" width="414" height="50"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="e4J-Xa-Ado" id="3dg-oO-NcO">
-                                            <rect key="frame" x="0.0" y="0.0" width="381" height="49.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="功能介绍" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bN2-hQ-J3L">
-                                                    <rect key="frame" x="15" y="14" width="136" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="bN2-hQ-J3L" firstAttribute="centerY" secondItem="3dg-oO-NcO" secondAttribute="centerY" id="WCR-Ti-0Mi"/>
-                                                <constraint firstItem="bN2-hQ-J3L" firstAttribute="leading" secondItem="3dg-oO-NcO" secondAttribute="leadingMargin" constant="7" id="Zrg-yt-aet"/>
-                                            </constraints>
-                                            <variation key="default">
-                                                <mask key="constraints">
-                                                    <exclude reference="WCR-Ti-0Mi"/>
-                                                    <exclude reference="Zrg-yt-aet"/>
-                                                </mask>
-                                            </variation>
-                                            <variation key="heightClass=regular-widthClass=compact">
-                                                <mask key="constraints">
-                                                    <include reference="WCR-Ti-0Mi"/>
-                                                    <include reference="Zrg-yt-aet"/>
-                                                </mask>
-                                            </variation>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="YZU-XZ-fhE" kind="show" id="1TX-U9-sSz"/>
-                                        </connections>
-                                    </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" rowHeight="50" id="AWk-h8-Wm4">
                                         <rect key="frame" x="0.0" y="913.5" width="414" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
@@ -866,25 +831,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="esC-JT-ETa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-7870.5" y="-3977.25"/>
-        </scene>
-        <!--功能介绍-->
-        <scene sceneID="118-c3-30g">
-            <objects>
-                <viewController id="YZU-XZ-fhE" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="dil-2e-Qc1"/>
-                        <viewControllerLayoutGuide type="bottom" id="2jW-L8-Pzu"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Vu2-EO-gyC">
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="功能介绍" id="BsQ-a3-10X"/>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="opx-uw-sQC" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-10672.5" y="-3042.75"/>
         </scene>
         <!--关于-->
         <scene sceneID="K8Y-mi-iIX">
@@ -1711,7 +1657,7 @@
                             <constraint firstItem="QeN-9D-Ybc" firstAttribute="top" secondItem="AaD-Ml-RGd" secondAttribute="bottom" id="Ld9-ul-tXP"/>
                             <constraint firstItem="suX-i3-Gto" firstAttribute="leading" secondItem="cOP-yo-h4Y" secondAttribute="leading" id="OhP-y2-KLh"/>
                             <constraint firstAttribute="trailing" secondItem="suX-i3-Gto" secondAttribute="trailing" id="ZCX-gp-1BR"/>
-                            <constraint firstItem="uxZ-hu-npP" firstAttribute="leading" secondItem="cOP-yo-h4Y" secondAttribute="leading" constant="5" id="e7p-xE-GLO"/>
+                            <constraint firstItem="uxZ-hu-npP" firstAttribute="leading" secondItem="cOP-yo-h4Y" secondAttribute="leading" constant="10" id="e7p-xE-GLO"/>
                             <constraint firstItem="AaD-Ml-RGd" firstAttribute="leading" secondItem="cOP-yo-h4Y" secondAttribute="leading" id="ssl-D7-ffA"/>
                             <constraint firstAttribute="trailing" secondItem="6em-WN-JPk" secondAttribute="trailing" id="tfM-yM-Y3h"/>
                             <constraint firstItem="FbZ-IJ-DRf" firstAttribute="top" secondItem="PXX-9I-8eG" secondAttribute="bottom" constant="30" id="up0-9r-axK"/>
