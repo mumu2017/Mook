@@ -120,7 +120,7 @@
                 break;
                 
             case kEditingContentTypeLines:
-                _entryTitle = @"编辑梗标题";
+                _entryTitle = @"编辑台词标题";
                 break;
                 
             default:
@@ -680,7 +680,7 @@
                         } else if (self.editingContentType == kEditingContentTypeProp) {
                             effectTitle = @"道具描述";
                         } else if (self.editingContentType == kEditingContentTypeLines) {
-                            effectTitle = @"梗内容";
+                            effectTitle = @"台词内容";
                         }
                         cell.textLabel.text = effectTitle;
                         return cell;

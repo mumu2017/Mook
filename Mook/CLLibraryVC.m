@@ -151,7 +151,7 @@ static NSString * const reuseIdentifier = @"Cell";
             break;
             
         case 5:
-            title = @"梗";
+            title = @"台词";
             count = [NSString stringWithFormat:@"%ld", (unsigned long)self.linesObjModelList.count];
             iconName = @"lines.jpg";
             break;

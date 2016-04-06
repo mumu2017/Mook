@@ -44,7 +44,7 @@
             break;
         case kEditingContentTypeLines:
             
-            title = @"梗标题";
+            title = @"台词标题";
             
             break;
         default:

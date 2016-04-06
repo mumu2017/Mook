@@ -630,7 +630,7 @@
                 sectionTitle = @"道具描述";
 
             } else if (self.contentType == kContentTypeLines) {
-                sectionTitle = @"梗内容";
+                sectionTitle = @"台词内容";
 
             }
         } else if (section == self.propSection && self.propSection != self.effectSection) {

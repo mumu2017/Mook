@@ -428,7 +428,7 @@ typedef enum {
 #define kDefaultTitleIdea   @"灵感"
 #define kDefaultTitleSleight   @"技巧"
 #define kDefaultTitleProp   @"道具"
-#define kDefaultTitleLines   @"梗"
+#define kDefaultTitleLines   @"台词"
 #define kDefaultTitleTag   @"标签"
 
 #define kNewRoutineInfoText    @"新建流程"

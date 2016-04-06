@@ -94,12 +94,9 @@
 		43A2811F1CB2276A009C2785 /* CLLibraryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A2811D1CB2276A009C2785 /* CLLibraryCell.m */; };
 		43A281201CB2276A009C2785 /* CLLibraryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43A2811E1CB2276A009C2785 /* CLLibraryCell.xib */; };
 		43A281241CB2299B009C2785 /* CLLibraryVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A281231CB2299B009C2785 /* CLLibraryVC.m */; };
-		43A2812A1CB2324C009C2785 /* prop.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 43A281261CB2324C009C2785 /* prop.jpg */; };
-		43A2812B1CB2324C009C2785 /* show.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 43A281271CB2324C009C2785 /* show.jpg */; };
-		43A2812C1CB2324C009C2785 /* sleight.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 43A281281CB2324C009C2785 /* sleight.jpg */; };
 		43A2812D1CB2324C009C2785 /* lines.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 43A281291CB2324C009C2785 /* lines.jpg */; };
 		43A2812F1CB2336C009C2785 /* idea.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 43A2812E1CB2336C009C2785 /* idea.jpg */; };
-		43A281331CB23486009C2785 /* routine.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 43A281321CB23486009C2785 /* routine.jpg */; };
+		43A281331CB23486009C2785 /* show.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 43A281321CB23486009C2785 /* show.jpg */; };
 		43C2068A1CB10CF300CEF992 /* CLListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 43C206881CB10CF300CEF992 /* CLListCell.m */; };
 		43C2068B1CB10CF300CEF992 /* CLListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43C206891CB10CF300CEF992 /* CLListCell.xib */; };
 		43C2068E1CB12A6400CEF992 /* CLMediaVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 43C2068D1CB12A6400CEF992 /* CLMediaVC.m */; };
@@ -122,7 +119,6 @@
 		43EEE7DE1CAD328500F0BCCF /* CLRoutineImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43EEE7DC1CAD328500F0BCCF /* CLRoutineImageCell.xib */; };
 		43EEE7E21CAD329B00F0BCCF /* CLRoutineTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 43EEE7E01CAD329B00F0BCCF /* CLRoutineTextCell.m */; };
 		43EEE7E31CAD329B00F0BCCF /* CLRoutineTextCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43EEE7E11CAD329B00F0BCCF /* CLRoutineTextCell.xib */; };
-		43F5F7541CB2B61F007BFB0C /* tag.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 43F5F7531CB2B61F007BFB0C /* tag.jpg */; };
 		43F5F7571CB390BC007BFB0C /* CLLibraryNavVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 43F5F7561CB390BC007BFB0C /* CLLibraryNavVC.m */; };
 		43F5F75A1CB390EB007BFB0C /* CLMediaNavVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 43F5F7591CB390EB007BFB0C /* CLMediaNavVC.m */; };
 		43F5F7611CB3922B007BFB0C /* CLShowInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 43F5F75F1CB3922B007BFB0C /* CLShowInfoCell.m */; };
@@ -131,6 +127,10 @@
 		43F5F7681CB3BD63007BFB0C /* CLQuickStringNavVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 43F5F7671CB3BD63007BFB0C /* CLQuickStringNavVC.m */; };
 		43F5F7A31CB4978C007BFB0C /* WJTouchID.m in Sources */ = {isa = PBXBuildFile; fileRef = 43F5F7A21CB4978C007BFB0C /* WJTouchID.m */; };
 		43F5F7A61CB4A2C2007BFB0C /* CLPropChooseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 43F5F7A51CB4A2C2007BFB0C /* CLPropChooseVC.m */; };
+		43F5F7B31CB4FEE6007BFB0C /* sleight.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 43F5F7B21CB4FEE6007BFB0C /* sleight.jpg */; };
+		43F5F7B51CB50039007BFB0C /* tag.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 43F5F7B41CB50039007BFB0C /* tag.jpg */; };
+		43F5F7B71CB50151007BFB0C /* routine.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 43F5F7B61CB50151007BFB0C /* routine.jpg */; };
+		43F5F7B91CB5020F007BFB0C /* prop.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 43F5F7B81CB5020F007BFB0C /* prop.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -294,12 +294,9 @@
 		43A2811E1CB2276A009C2785 /* CLLibraryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CLLibraryCell.xib; sourceTree = "<group>"; };
 		43A281221CB2299B009C2785 /* CLLibraryVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLLibraryVC.h; sourceTree = "<group>"; };
 		43A281231CB2299B009C2785 /* CLLibraryVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLLibraryVC.m; sourceTree = "<group>"; };
-		43A281261CB2324C009C2785 /* prop.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = prop.jpg; sourceTree = "<group>"; };
-		43A281271CB2324C009C2785 /* show.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = show.jpg; sourceTree = "<group>"; };
-		43A281281CB2324C009C2785 /* sleight.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sleight.jpg; sourceTree = "<group>"; };
 		43A281291CB2324C009C2785 /* lines.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = lines.jpg; sourceTree = "<group>"; };
 		43A2812E1CB2336C009C2785 /* idea.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = idea.jpg; sourceTree = "<group>"; };
-		43A281321CB23486009C2785 /* routine.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = routine.jpg; sourceTree = "<group>"; };
+		43A281321CB23486009C2785 /* show.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = show.jpg; sourceTree = "<group>"; };
 		43C206871CB10CF300CEF992 /* CLListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLListCell.h; sourceTree = "<group>"; };
 		43C206881CB10CF300CEF992 /* CLListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLListCell.m; sourceTree = "<group>"; };
 		43C206891CB10CF300CEF992 /* CLListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CLListCell.xib; sourceTree = "<group>"; };
@@ -340,7 +337,6 @@
 		43EEE7DF1CAD329B00F0BCCF /* CLRoutineTextCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLRoutineTextCell.h; sourceTree = "<group>"; };
 		43EEE7E01CAD329B00F0BCCF /* CLRoutineTextCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLRoutineTextCell.m; sourceTree = "<group>"; };
 		43EEE7E11CAD329B00F0BCCF /* CLRoutineTextCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CLRoutineTextCell.xib; sourceTree = "<group>"; };
-		43F5F7531CB2B61F007BFB0C /* tag.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = tag.jpg; sourceTree = "<group>"; };
 		43F5F7551CB390BC007BFB0C /* CLLibraryNavVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLLibraryNavVC.h; sourceTree = "<group>"; };
 		43F5F7561CB390BC007BFB0C /* CLLibraryNavVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLLibraryNavVC.m; sourceTree = "<group>"; };
 		43F5F7581CB390EB007BFB0C /* CLMediaNavVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLMediaNavVC.h; sourceTree = "<group>"; };
@@ -360,6 +356,10 @@
 		43F5F7A81CB4B03F007BFB0C /* libz.1.1.3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.1.3.tbd; path = usr/lib/libz.1.1.3.tbd; sourceTree = SDKROOT; };
 		43F5F7A91CB4B03F007BFB0C /* libz.1.2.5.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.2.5.tbd; path = usr/lib/libz.1.2.5.tbd; sourceTree = SDKROOT; };
 		43F5F7AA1CB4B03F007BFB0C /* libz.1.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.tbd; path = usr/lib/libz.1.tbd; sourceTree = SDKROOT; };
+		43F5F7B21CB4FEE6007BFB0C /* sleight.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sleight.jpg; sourceTree = "<group>"; };
+		43F5F7B41CB50039007BFB0C /* tag.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = tag.jpg; sourceTree = "<group>"; };
+		43F5F7B61CB50151007BFB0C /* routine.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = routine.jpg; sourceTree = "<group>"; };
+		43F5F7B81CB5020F007BFB0C /* prop.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = prop.jpg; sourceTree = "<group>"; };
 		5207E880A1B2E72EF9075B94 /* Pods_Mook.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Mook.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0417F5619A3E977F1F0B558 /* Pods-Mook.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mook.release.xcconfig"; path = "Pods/Target Support Files/Pods-Mook/Pods-Mook.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -596,13 +596,13 @@
 		43A281251CB230FE009C2785 /* jpgs */ = {
 			isa = PBXGroup;
 			children = (
-				43F5F7531CB2B61F007BFB0C /* tag.jpg */,
-				43A281261CB2324C009C2785 /* prop.jpg */,
-				43A281271CB2324C009C2785 /* show.jpg */,
-				43A281281CB2324C009C2785 /* sleight.jpg */,
+				43F5F7B61CB50151007BFB0C /* routine.jpg */,
+				43F5F7B81CB5020F007BFB0C /* prop.jpg */,
+				43F5F7B21CB4FEE6007BFB0C /* sleight.jpg */,
+				43F5F7B41CB50039007BFB0C /* tag.jpg */,
 				43A281291CB2324C009C2785 /* lines.jpg */,
 				43A2812E1CB2336C009C2785 /* idea.jpg */,
-				43A281321CB23486009C2785 /* routine.jpg */,
+				43A281321CB23486009C2785 /* show.jpg */,
 			);
 			name = jpgs;
 			sourceTree = "<group>";
@@ -1028,30 +1028,30 @@
 				432346901C96B42A00200833 /* CLNewEntryTextCell.xib in Resources */,
 				43EEE7DE1CAD328500F0BCCF /* CLRoutineImageCell.xib in Resources */,
 				4323468B1C96B0DA00200833 /* CLNewEntryImageCell.xib in Resources */,
+				43F5F7B91CB5020F007BFB0C /* prop.jpg in Resources */,
 				4323461F1C94054300200833 /* CLListImageCell.xib in Resources */,
+				43F5F7B31CB4FEE6007BFB0C /* sleight.jpg in Resources */,
 				432346951C96B4C200200833 /* CLTextInputCell.xib in Resources */,
 				43A281201CB2276A009C2785 /* CLLibraryCell.xib in Resources */,
 				4323462B1C94054300200833 /* CLQuickInputBar.xib in Resources */,
 				43C206931CB12BED00CEF992 /* CLMediaCollectionCell.xib in Resources */,
 				43A2812F1CB2336C009C2785 /* idea.jpg in Resources */,
 				432346561C9408F100200833 /* CLToolBar.xib in Resources */,
-				43A281331CB23486009C2785 /* routine.jpg in Resources */,
+				43F5F7B71CB50151007BFB0C /* routine.jpg in Resources */,
+				43A281331CB23486009C2785 /* show.jpg in Resources */,
 				432346311C94054300200833 /* CLTableBackView.xib in Resources */,
 				432346661C94094D00200833 /* CLOneLabelImageDisplayCell.xib in Resources */,
 				4323464F1C9405F900200833 /* menu.plist in Resources */,
 				432346481C9405A900200833 /* LaunchScreen.storyboard in Resources */,
 				43EEE7E31CAD329B00F0BCCF /* CLRoutineTextCell.xib in Resources */,
-				43A2812C1CB2324C009C2785 /* sleight.jpg in Resources */,
 				43C2068B1CB10CF300CEF992 /* CLListCell.xib in Resources */,
 				432346641C94094D00200833 /* CLOneLabelDisplayCell.xib in Resources */,
-				43F5F7541CB2B61F007BFB0C /* tag.jpg in Resources */,
-				43A2812B1CB2324C009C2785 /* show.jpg in Resources */,
 				432345451C94045000200833 /* Assets.xcassets in Resources */,
-				43A2812A1CB2324C009C2785 /* prop.jpg in Resources */,
 				43F5F7621CB3922B007BFB0C /* CLShowInfoCell.xib in Resources */,
 				4323462D1C94054300200833 /* CLQuickStringCell.xib in Resources */,
 				432346351C94054300200833 /* CLTagField.xib in Resources */,
 				432346211C94054300200833 /* CLListTextCell.xib in Resources */,
+				43F5F7B51CB50039007BFB0C /* tag.jpg in Resources */,
 				432346511C94060300200833 /* quickInput.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

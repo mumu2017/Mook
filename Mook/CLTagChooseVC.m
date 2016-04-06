@@ -125,7 +125,7 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     
-    NSArray *titleArr = @[@"灵感", @"流程", @"技巧", @"道具", @"梗", @"演出"];
+    NSArray *titleArr = @[@"灵感", @"流程", @"技巧", @"道具", @"台词", @"演出"];
     
     // editingContentType从0-4与数组一一对应,所以可以用下标取title;
     return titleArr[self.editingContentType];

@@ -746,7 +746,7 @@
 
 - (void)addNewEntry {
     
-    JGActionSheetSection *section1 = [JGActionSheetSection sectionWithTitle:nil message:nil buttonTitles:@[@"新建灵感" , @"新建演出", @"新建流程", @"新建技巧", @"新建道具", @"新建梗"] buttonStyle:JGActionSheetButtonStyleDefault];
+    JGActionSheetSection *section1 = [JGActionSheetSection sectionWithTitle:nil message:nil buttonTitles:@[@"新建灵感" , @"新建演出", @"新建流程", @"新建技巧", @"新建道具", @"新建台词"] buttonStyle:JGActionSheetButtonStyleDefault];
     JGActionSheetSection *cancelSection = [JGActionSheetSection sectionWithTitle:nil message:nil buttonTitles:@[@"取消"] buttonStyle:JGActionSheetButtonStyleCancel];
     
     NSArray *sections = @[section1, cancelSection];

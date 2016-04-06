@@ -48,7 +48,7 @@ static NSString * const sampleDescription4 = @"Nam libero tempore, cum soluta no
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(inputPassword) name:UIApplicationWillEnterForegroundNotification object:nil];
     
     if (self.isNotFirstTimeLaunch) {
-        
+        // 如果不是第一次打开, 那就不用显示欢迎界面
     } else {
         [self showIntroWithCrossDissolve];
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kNotFirstTimeLaunchKey];

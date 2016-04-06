@@ -276,7 +276,7 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     
-    NSArray *titleArr = @[@"灵感", @"演出", @"流程", @"技巧", @"道具", @"梗"];
+    NSArray *titleArr = @[@"灵感", @"演出", @"流程", @"技巧", @"道具", @"台词"];
 
     return titleArr[section];
 }
