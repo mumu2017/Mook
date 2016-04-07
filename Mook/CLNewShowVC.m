@@ -40,6 +40,7 @@
 @property (nonatomic, strong) NSMutableArray *allTagsShow;
 
 @property (nonatomic, strong) NSMutableArray <CLRoutineModel*> *routineModelList;
+@property (nonatomic, assign) BOOL newEntryCancelled;
 
 @end
 
@@ -87,6 +88,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.newEntryCancelled = NO; //加载视图时, 自动设置取消状态为否定
+    // 如果是导航控制器是CLNewEntryNavVC, 说明是新建条目,所以提供取消按钮
+    if ([self.navigationController isKindOfClass:[CLNewShowNavVC class]]) {
+        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelNewCreation)];
+    } else {
+        self.navigationItem.leftBarButtonItem = nil;
+    }
+    
     [self setTableViewStatus];
     
     [self.tableView setEditing:YES];
@@ -98,6 +107,21 @@
 - (void)updateData {
     NSIndexPath *path = [NSIndexPath indexPathForRow:0 inSection:1];
     [self.tableView reloadRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationAutomatic];
+    
+}
+
+- (void)cancelNewCreation {
+
+    if ([kDataListShow containsObject:self.showModel]) {
+        [kDataListShow removeObject:self.showModel];
+    }
+    
+    if ([kDataListAll containsObject:self.showModel]) {
+        [kDataListAll removeObject:self.showModel];
+    }
+    
+    self.newEntryCancelled = YES;
+    [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
     
 }
 
@@ -137,6 +161,10 @@
 
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
+    
+    if (self.newEntryCancelled) {
+        return;
+    }
     
     if (self.presentedViewController == nil && [self.navigationController.topViewController isKindOfClass:[CLEdtingManageVC class]] == NO) {
         

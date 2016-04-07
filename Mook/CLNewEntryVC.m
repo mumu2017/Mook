@@ -65,6 +65,7 @@
 @property (nonatomic, copy) NSString *deleteMessage;
 
 @property (nonatomic, assign) NSInteger prepSection;
+@property (nonatomic, assign) BOOL newEntryCancelled;
 
 @end
 
@@ -384,11 +385,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-////    self.isShowingViewFirstTime = YES;
-//    if (self.isCreatingNewEntry) {
-//        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelNewCreation)];
-//    }
-    
+    self.newEntryCancelled = NO; //加载视图时, 自动设置取消状态为否定
+    // 如果是导航控制器是CLNewEntryNavVC, 说明是新建条目,所以提供取消按钮
+    if ([self.navigationController isKindOfClass:[CLNewEntryNavVC class]]) {
+        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelNewCreation)];
+    } else {
+        self.navigationItem.leftBarButtonItem = nil;
+    }
+
     
     [self setTableViewStatus];
     
@@ -406,7 +410,67 @@
 }
 
 - (void)cancelNewCreation {
-    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"cancelNewCreation" object:nil]];
+    
+    switch (self.editingContentType) {
+        case kEditingContentTypeRoutine:
+            
+            if ([kDataListRoutine containsObject:self.routineModel]) {
+                [kDataListRoutine removeObject:self.routineModel];
+            }
+            
+            if ([kDataListAll containsObject:self.routineModel]) {
+                [kDataListAll removeObject:self.routineModel];
+            }
+            
+            break;
+            
+        case kEditingContentTypeIdea:
+            if ([kDataListIdea containsObject:self.ideaObjModel]) {
+                [kDataListIdea removeObject:self.ideaObjModel];
+            }
+            
+            if ([kDataListAll containsObject:self.ideaObjModel]) {
+                [kDataListAll removeObject:self.ideaObjModel];
+            }
+            break;
+            
+        case kEditingContentTypeSleight:
+            if ([kDataListSleight containsObject:self.sleightObjModel]) {
+                [kDataListSleight removeObject:self.sleightObjModel];
+            }
+            
+            if ([kDataListAll containsObject:self.sleightObjModel]) {
+                [kDataListAll removeObject:self.sleightObjModel];
+            }
+            break;
+            
+        case kEditingContentTypeProp:
+            if ([kDataListProp containsObject:self.propObjModel]) {
+                [kDataListProp removeObject:self.propObjModel];
+            }
+            
+            if ([kDataListAll containsObject:self.propObjModel]) {
+                [kDataListAll removeObject:self.propObjModel];
+            }
+            break;
+            
+        case kEditingContentTypeLines:
+            if ([kDataListLines containsObject:self.linesObjModel]) {
+                [kDataListLines removeObject:self.linesObjModel];
+            }
+            
+            if ([kDataListAll containsObject:self.linesObjModel]) {
+                [kDataListAll removeObject:self.linesObjModel];
+            }
+            break;
+            
+        default:
+            break;
+    }
+    
+    self.newEntryCancelled = YES;
+    [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+
 }
 
 - (void)cancelTagSelection {
@@ -449,25 +513,15 @@
 // 隐藏MBProgreeHUD
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
-    //    self.navigationController.navigationBar.barTintColor = kHeaderViewColor;
-    //    self.navigationController.navigationBar.translucent = NO;
-//    if (self.isShowingViewFirstTime) {
-//        self.isShowingViewFirstTime = NO;
-//    } else {
-//        [self.tableView reloadData];
-//    }
-    
-    //    [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
-    //    if (self.isCreatingNewEntry) {
-    //        self.isCreatingNewEntry = NO;
-    //        [self performSegueWithIdentifier:kEditingSegue sender:[NSIndexPath indexPathForRow:0 inSection:0]];
-    //    }
 }
 
 
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
+    
+    if (self.newEntryCancelled) { // 如果已经取消了新建项目, 则直接退出, 不再保存数据
+        return;
+    }
     
     self.infoModel.name = self.titleTF.text;
     if (self.presentedViewController == nil && [self.navigationController.topViewController isKindOfClass:[CLEdtingManageVC class]] == NO) {

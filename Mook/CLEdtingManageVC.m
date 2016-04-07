@@ -333,11 +333,8 @@
 
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
-    
-    if (self.presentedViewController == nil) {
         
-        [[NSNotificationCenter defaultCenter] postNotificationName:kUpdateEntryVCNotification object:self];
-    }
+    [[NSNotificationCenter defaultCenter] postNotificationName:kUpdateEntryVCNotification object:self];
 }
 
 #pragma mark - XLPagerTabStripViewControllerDataSource
