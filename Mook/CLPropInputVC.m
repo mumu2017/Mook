@@ -25,7 +25,10 @@
 
 @property (nonatomic, weak) IBOutlet UITextField *propDetailTextField;
 
+@property (nonatomic, assign) BOOL didMakeChange;
+
 - (IBAction)doneButtonClicked:(id)sender;
+
 
 @end
 
@@ -93,8 +96,18 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
+    self.didMakeChange = NO;
     if ([self.propNameTextField isFirstResponder] == NO) {
         [self.propNameTextField becomeFirstResponder];
+    }
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear: animated];
+    
+    if (self.didMakeChange) {
+        // 别忘了道具编辑页面和演出编辑页面
+        [[NSNotificationCenter defaultCenter] postNotificationName:kDidMakeChangeNotification object:nil];
     }
 }
 
@@ -244,21 +257,11 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-// 销毁本veiwController时保存数据
-- (void)viewWillDisappear:(BOOL)animated {
-    
-    [super viewWillDisappear:animated];
-    
-    if ([self.delegate respondsToSelector:@selector(propInputVC:saveProp:)]) {
-        
-        [self.delegate propInputVC:self saveProp:self.propModel];
-    }
-}
-
 
 #pragma mark - textField 代理方法
 - (void)textFieldDidEndEditing:(UITextField *)textField {
     
+    self.didMakeChange = YES;
     if (textField == self.propNameTextField) {
         self.propModel.prop = textField.text;
     } else if (textField == self.quantityTextField) {

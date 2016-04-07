@@ -400,6 +400,8 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cancelTagSelection) name:@"cancelTagSelection" object:nil];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(saveEntryData) name:kDidMakeChangeNotification object:nil];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateData) name:kUpdateEntryVCNotification object:nil];
 
 }
@@ -515,6 +517,32 @@
     [super viewWillAppear:animated];
 }
 
+- (void)saveEntryData {
+    if (self.editingContentType == kEditingContentTypeRoutine) {
+        
+        dispatch_async(dispatch_get_global_queue(0, 0), ^{
+            [CLDataSaveTool updateRoutine:self.routineModel];
+        });
+        
+    } else if (self.editingContentType == kEditingContentTypeIdea) {
+        dispatch_async(dispatch_get_global_queue(0, 0), ^{
+            [CLDataSaveTool updateIdea:self.ideaObjModel];
+        });
+    } else if (self.editingContentType == kEditingContentTypeSleight) {
+        dispatch_async(dispatch_get_global_queue(0, 0), ^{
+            [CLDataSaveTool updateSleight:self.sleightObjModel];
+        });
+    } else if (self.editingContentType == kEditingContentTypeProp) {
+        dispatch_async(dispatch_get_global_queue(0, 0), ^{
+            [CLDataSaveTool updateProp:self.propObjModel];
+        });
+    } else if (self.editingContentType == kEditingContentTypeLines) {
+        dispatch_async(dispatch_get_global_queue(0, 0), ^{
+            [CLDataSaveTool updateLines:self.linesObjModel];
+        });
+    }
+
+}
 
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
@@ -526,39 +554,9 @@
     self.infoModel.name = self.titleTF.text;
     if (self.presentedViewController == nil && [self.navigationController.topViewController isKindOfClass:[CLEdtingManageVC class]] == NO) {
 
-        NSString *notification = nil;
-
-        if (self.editingContentType == kEditingContentTypeRoutine) {
-            notification = kUpdateRoutinesNotification;
-            
-            dispatch_async(dispatch_get_global_queue(0, 0), ^{
-                [CLDataSaveTool updateRoutine:self.routineModel];
-            });
-            
-        } else if (self.editingContentType == kEditingContentTypeIdea) {
-            notification = kUpdateIdeasNotification;
-            dispatch_async(dispatch_get_global_queue(0, 0), ^{
-                [CLDataSaveTool updateIdea:self.ideaObjModel];
-            });
-        } else if (self.editingContentType == kEditingContentTypeSleight) {
-            notification = kUpdateSleightsNotification;
-            dispatch_async(dispatch_get_global_queue(0, 0), ^{
-                [CLDataSaveTool updateSleight:self.sleightObjModel];
-            });
-        } else if (self.editingContentType == kEditingContentTypeProp) {
-            notification = kUpdatePropsNotification;
-            dispatch_async(dispatch_get_global_queue(0, 0), ^{
-                [CLDataSaveTool updateProp:self.propObjModel];
-            });
-        } else if (self.editingContentType == kEditingContentTypeLines) {
-            notification = kUpdateLinesNotification;
-            dispatch_async(dispatch_get_global_queue(0, 0), ^{
-                [CLDataSaveTool updateLines:self.linesObjModel];
-            });
-        }
+        [self saveEntryData];
         
         [[NSNotificationCenter defaultCenter] postNotificationName:kUpdateDataNotification object:self];
-        [[NSNotificationCenter defaultCenter] postNotificationName:notification object:self];
     }
     
 }

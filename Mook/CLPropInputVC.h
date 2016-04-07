@@ -12,13 +12,13 @@
 @protocol CLPropInputVCDelegate <NSObject>
 
 @optional
-- (void)propInputVC:(CLPropInputVC *)propInputVC saveProp:(CLPropModel *)propModel;
 
 - (void) propInputVCAddProp:(CLPropInputVC *)propInputVC;
 
 - (void) propInputVCDeleteProp:(CLPropInputVC *)propInputVC;
 
 @end
+
 @interface CLPropInputVC : UITableViewController
 
 @property (nonatomic, strong) CLPropModel *propModel;

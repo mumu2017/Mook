@@ -449,6 +449,8 @@ typedef enum {
 
 #pragma mark - Notifications
 
+#define kDidMakeChangeNotification  @"didMakeChangeNotification"
+
 #define kUpdateDataNotification @"updateDataNotification"
 #define kUpdateEntryVCNotification  @"UpdateEntryVCNotification"
 #define kUpdateShowsNotification @"UpdateShowsNotification"

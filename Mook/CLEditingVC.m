@@ -40,6 +40,8 @@
 @property (nonatomic, assign) BOOL isWithVideo;
 @property (nonatomic, assign) BOOL isWithImage;
 
+@property (nonatomic, assign) BOOL didMakeChange;
+
 @property (nonatomic, strong) NSMutableArray *propObjModelList;
 @property (nonatomic, strong) NSMutableArray *linesObjModelList;
 @property (nonatomic, strong) NSMutableArray *sleightObjModelList;
@@ -328,6 +330,7 @@
 - (void)viewWillAppear:(BOOL)animated {
 
     [super viewWillAppear:animated];
+    self.didMakeChange = NO;
     
     if ([self.editTextView isFirstResponder] == NO) {
         [self.editTextView becomeFirstResponder];
@@ -336,6 +339,15 @@
         
     if ([self.toolBar.imageButton backgroundImageForState:UIControlStateNormal] == nil) {
         [self setToolBarImage];
+    }
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear: animated];
+    
+    if (self.didMakeChange) {
+        // 别忘了道具编辑页面和演出编辑页面
+        [[NSNotificationCenter defaultCenter] postNotificationName:kDidMakeChangeNotification object:nil];
     }
 }
 
@@ -793,6 +805,9 @@
         
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             
+            // 如果发生了编辑改变, 则将发生编辑的状态设置为YES
+            self.didMakeChange = YES;
+            
             [self.imageName deleteNamedImageFromDocument];
             [CLDataSaveTool deleteImageByName:self.imageName];
             self.imageName = nil;
@@ -827,6 +842,9 @@
     UIAlertAction* deletePhoto = [UIAlertAction actionWithTitle:NSLocalizedString(@"删除视频", nil) style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
 
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            
+            // 如果发生了编辑改变, 则将发生编辑的状态设置为YES
+            self.didMakeChange = YES;
             
             [self.videoName deleteNamedVideoFromDocument];
             [CLDataSaveTool deleteVideoByName:self.videoName];
@@ -983,6 +1001,9 @@
 
 - (void) saveImage:(UIImage *)image {
     
+    // 如果发生了编辑改变, 则将发生编辑的状态设置为YES
+    self.didMakeChange = YES;
+    
     NSString *imageName = [kTimestamp stringByAppendingString:@".jpg"];
     NSString *type;
     switch (self.editingContentType) {
@@ -1045,6 +1066,9 @@
 
 #pragma mark 设置cell视频
 - (void)saveVideo:(NSURL *)videoURL {
+    
+    // 如果发生了编辑改变, 则将发生编辑的状态设置为YES
+    self.didMakeChange = YES;
     
     NSString *videoName = [kTimestamp stringByAppendingString:@".mp4"];
     
@@ -1115,6 +1139,9 @@
 
 #pragma mark - textView 代理方法
 - (void)textViewDidChange:(UITextView *)textView {
+    
+    // 如果发生了编辑改变, 则将发生编辑的状态设置为YES
+    self.didMakeChange = YES;
     
     if (textView == self.editTextView) {
         if (!textView.hasText) {
