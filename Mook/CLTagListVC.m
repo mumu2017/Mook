@@ -137,7 +137,7 @@
         case 0:
             
             if (self.allTagsIdea.count == 0) {
-                tag = @"无标签";
+                tag = NSLocalizedString(@"无标签", nil);;
                 tagCount = @"";
                 cell.accessoryType = UITableViewCellAccessoryNone;
                 cell.rightUtilityButtons = nil;
@@ -159,7 +159,7 @@
         case 1:
             
             if (self.allTagsShow.count == 0) {
-                tag = @"无标签";
+                tag = NSLocalizedString(@"无标签", nil);;
                 tagCount = @"";
                 cell.accessoryType = UITableViewCellAccessoryNone;
                 cell.rightUtilityButtons = nil;
@@ -182,7 +182,7 @@
         case 2:
             
             if (self.allTagsRoutine.count == 0) {
-                tag = @"无标签";
+                tag = NSLocalizedString(@"无标签", nil);;
                 tagCount = @"";
                 cell.accessoryType = UITableViewCellAccessoryNone;
                 cell.rightUtilityButtons = nil;
@@ -203,7 +203,7 @@
             
         case 3:
             if (self.allTagsSleight.count == 0) {
-                tag = @"无标签";
+                tag = NSLocalizedString(@"无标签", nil);;
                 tagCount = @"";
                 cell.accessoryType = UITableViewCellAccessoryNone;
                 cell.rightUtilityButtons = nil;
@@ -224,7 +224,7 @@
             break;
         case 4:
             if (self.allTagsProp.count == 0) {
-                tag = @"无标签";
+                tag = NSLocalizedString(@"无标签", nil);;
                 tagCount = @"";
                 cell.accessoryType = UITableViewCellAccessoryNone;
                 cell.rightUtilityButtons = nil;
@@ -245,7 +245,7 @@
             break;
         case 5:
             if (self.allTagsLines.count == 0) {
-                tag = @"无标签";
+                tag = NSLocalizedString(@"无标签", nil);;
                 tagCount = @"";
                 cell.accessoryType = UITableViewCellAccessoryNone;
                 cell.rightUtilityButtons = nil;
@@ -276,7 +276,7 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     
-    NSArray *titleArr = @[@"灵感", @"演出", @"流程", @"技巧", @"道具", @"台词"];
+    NSArray *titleArr = @[NSLocalizedString(@"灵感", nil), NSLocalizedString(@"演出", nil), NSLocalizedString(@"流程", nil), NSLocalizedString(@"技巧", nil), NSLocalizedString(@"道具", nil), NSLocalizedString(@"台词", nil)];
 
     return titleArr[section];
 }
@@ -309,7 +309,7 @@
 
 - (NSArray *)rightButtons {
     NSMutableArray *rightUtilityButtons = [NSMutableArray new];
-    [rightUtilityButtons sw_addUtilityButtonWithColor:[UIColor redColor] title:@"删除"];
+    [rightUtilityButtons sw_addUtilityButtonWithColor:[UIColor redColor] title:NSLocalizedString(@"删除", nil)];
     
     return rightUtilityButtons;
 }

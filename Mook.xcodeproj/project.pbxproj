@@ -102,7 +102,6 @@
 		43C2068E1CB12A6400CEF992 /* CLMediaVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 43C2068D1CB12A6400CEF992 /* CLMediaVC.m */; };
 		43C206921CB12BED00CEF992 /* CLMediaCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 43C206901CB12BED00CEF992 /* CLMediaCollectionCell.m */; };
 		43C206931CB12BED00CEF992 /* CLMediaCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43C206911CB12BED00CEF992 /* CLMediaCollectionCell.xib */; };
-		43DF3AC21CAA478500712D81 /* CLPropListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 43DF3AC11CAA478500712D81 /* CLPropListVC.m */; };
 		43DF3AC81CAA78A100712D81 /* UIImage+WaterMark.m in Sources */ = {isa = PBXBuildFile; fileRef = 43DF3AC71CAA78A100712D81 /* UIImage+WaterMark.m */; };
 		43E0F7081C9EB2A2005CAD97 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 43E0F7071C9EB2A2005CAD97 /* libsqlite3.0.tbd */; };
 		43E0F7291CA0FC6E005CAD97 /* CLDataSaveTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E0F7281CA0FC6E005CAD97 /* CLDataSaveTool.m */; };
@@ -132,6 +131,7 @@
 		43F5F7B71CB50151007BFB0C /* routine.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 43F5F7B61CB50151007BFB0C /* routine.jpg */; };
 		43F5F7B91CB5020F007BFB0C /* prop.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 43F5F7B81CB5020F007BFB0C /* prop.jpg */; };
 		43F5F7BF1CB50AD3007BFB0C /* launch.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 43F5F7BE1CB50AD3007BFB0C /* launch.jpg */; };
+		43F5F7C91CB5FE93007BFB0C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43F5F7C81CB5FE93007BFB0C /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -306,8 +306,6 @@
 		43C2068F1CB12BED00CEF992 /* CLMediaCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLMediaCollectionCell.h; sourceTree = "<group>"; };
 		43C206901CB12BED00CEF992 /* CLMediaCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLMediaCollectionCell.m; sourceTree = "<group>"; };
 		43C206911CB12BED00CEF992 /* CLMediaCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CLMediaCollectionCell.xib; sourceTree = "<group>"; };
-		43DF3AC01CAA478500712D81 /* CLPropListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLPropListVC.h; sourceTree = "<group>"; };
-		43DF3AC11CAA478500712D81 /* CLPropListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLPropListVC.m; sourceTree = "<group>"; };
 		43DF3AC61CAA78A100712D81 /* UIImage+WaterMark.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+WaterMark.h"; sourceTree = "<group>"; };
 		43DF3AC71CAA78A100712D81 /* UIImage+WaterMark.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+WaterMark.m"; sourceTree = "<group>"; };
 		43E0F7071C9EB2A2005CAD97 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
@@ -362,6 +360,7 @@
 		43F5F7B61CB50151007BFB0C /* routine.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = routine.jpg; sourceTree = "<group>"; };
 		43F5F7B81CB5020F007BFB0C /* prop.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = prop.jpg; sourceTree = "<group>"; };
 		43F5F7BE1CB50AD3007BFB0C /* launch.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = launch.jpg; sourceTree = "<group>"; };
+		43F5F7C81CB5FE93007BFB0C /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		5207E880A1B2E72EF9075B94 /* Pods_Mook.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Mook.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0417F5619A3E977F1F0B558 /* Pods-Mook.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mook.release.xcconfig"; path = "Pods/Target Support Files/Pods-Mook/Pods-Mook.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -414,7 +413,9 @@
 			isa = PBXGroup;
 			children = (
 				432346471C9405A900200833 /* Main.storyboard */,
+				432346461C9405A900200833 /* LaunchScreen.storyboard */,
 				4323454F1C9404A800200833 /* Constants.h */,
+				43F5F7C81CB5FE93007BFB0C /* Localizable.strings */,
 				432345521C9404A800200833 /* PrefixHeader.pch */,
 				4323453B1C94045000200833 /* AppDelegate.h */,
 				4323453C1C94045000200833 /* AppDelegate.m */,
@@ -426,7 +427,6 @@
 				432345EA1C94052F00200833 /* Views */,
 				4323456C1C9404C700200833 /* Others */,
 				432345441C94045000200833 /* Assets.xcassets */,
-				432346461C9405A900200833 /* LaunchScreen.storyboard */,
 				4323464A1C9405CF00200833 /* Info.plist */,
 				4323464E1C9405F900200833 /* menu.plist */,
 				432346501C94060300200833 /* quickInput.plist */,
@@ -542,8 +542,6 @@
 				43EEE7D51CACD3ED00F0BCCF /* CLNewShowNavVC.m */,
 				432345801C9404FB00200833 /* CLNewShowVC.h */,
 				432345811C9404FB00200833 /* CLNewShowVC.m */,
-				43DF3AC01CAA478500712D81 /* CLPropListVC.h */,
-				43DF3AC11CAA478500712D81 /* CLPropListVC.m */,
 				43EEE7D71CAD0B5E00F0BCCF /* CLRoutineChooseVC.h */,
 				43EEE7D81CAD0B5E00F0BCCF /* CLRoutineChooseVC.m */,
 			);
@@ -1000,6 +998,7 @@
 				TargetAttributes = {
 					432345341C94045000200833 = {
 						CreatedOnToolsVersion = 7.2.1;
+						DevelopmentTeam = 5F6SU7K647;
 					};
 				};
 			};
@@ -1039,6 +1038,7 @@
 				4323462B1C94054300200833 /* CLQuickInputBar.xib in Resources */,
 				43C206931CB12BED00CEF992 /* CLMediaCollectionCell.xib in Resources */,
 				43A2812F1CB2336C009C2785 /* idea.jpg in Resources */,
+				43F5F7C91CB5FE93007BFB0C /* Localizable.strings in Resources */,
 				432346561C9408F100200833 /* CLToolBar.xib in Resources */,
 				43F5F7B71CB50151007BFB0C /* routine.jpg in Resources */,
 				43A281331CB23486009C2785 /* show.jpg in Resources */,
@@ -1183,7 +1183,6 @@
 				4323467F1C9409BB00200833 /* XLButtonBarView.m in Sources */,
 				4323456A1C9404A800200833 /* UITextView+Tools.m in Sources */,
 				432345B61C9404FB00200833 /* CLSettingNavVC.m in Sources */,
-				43DF3AC21CAA478500712D81 /* CLPropListVC.m in Sources */,
 				432345A51C9404FB00200833 /* CLEdtingManageVC.m in Sources */,
 				432345AF1C9404FB00200833 /* CLPropChooseNavVC.m in Sources */,
 				43F5F75A1CB390EB007BFB0C /* CLMediaNavVC.m in Sources */,
@@ -1298,12 +1297,15 @@
 			baseConfigurationReference = 41EFA00EF9667E60B4BC3CCB /* Pods-Mook.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-2";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = /Users/jackchen/MyProjects/Mook/Mook/PrefixHeader.pch;
 				INFOPLIST_FILE = Mook/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.chenlin.project.Mook;
+				PRODUCT_BUNDLE_IDENTIFIER = com.linchen.project.Mook;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -1312,12 +1314,15 @@
 			baseConfigurationReference = F0417F5619A3E977F1F0B558 /* Pods-Mook.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-2";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = /Users/jackchen/MyProjects/Mook/Mook/PrefixHeader.pch;
 				INFOPLIST_FILE = Mook/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.chenlin.project.Mook;
+				PRODUCT_BUNDLE_IDENTIFIER = com.linchen.project.Mook;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

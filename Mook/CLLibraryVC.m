@@ -121,43 +121,43 @@ static NSString * const reuseIdentifier = @"Cell";
     switch (indexPath.row) {
             
         case 0:
-            title = @"灵感";
+            title = NSLocalizedString(@"灵感", nil);
             count = [NSString stringWithFormat:@"%ld", (unsigned long)self.ideaObjModelList.count];
             iconName = @"idea.jpg";
             break;
             
         case 1:
-            title = @"演出";
+            title = NSLocalizedString(@"演出", nil);
             count = [NSString stringWithFormat:@"%ld", (unsigned long)self.showModelList.count];
             iconName = @"show.jpg";
             break;
             
         case 2:
-            title = @"流程";
+            title = NSLocalizedString(@"流程", nil);
             count = [NSString stringWithFormat:@"%ld", (unsigned long)self.routineModelList.count];
             iconName = @"routine.jpg";
             break;
             
         case 3:
-            title = @"技巧";
+            title = NSLocalizedString(@"技巧", nil);
             count = [NSString stringWithFormat:@"%ld", (unsigned long)self.sleightObjModelList.count];
             iconName = @"sleight.jpg";
             break;
             
         case 4:
-            title = @"道具";
+            title = NSLocalizedString(@"道具", nil);
             count = [NSString stringWithFormat:@"%ld", (unsigned long)self.propObjModelList.count];
             iconName = @"prop.jpg";
             break;
             
         case 5:
-            title = @"台词";
+            title = NSLocalizedString(@"台词", nil);
             count = [NSString stringWithFormat:@"%ld", (unsigned long)self.linesObjModelList.count];
             iconName = @"lines.jpg";
             break;
 
         case 6:
-            title = @"标签";
+            title = NSLocalizedString(@"标签", nil);
             count = [NSString stringWithFormat:@"%ld", (unsigned long)self.linesObjModelList.count];
             iconName = @"tag.jpg";
             break;

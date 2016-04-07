@@ -91,7 +91,9 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 
-    return self.routineModelList.count;
+    NSInteger number = self.routineModelList.count;
+    self.tableBackView.hidden = !(number == 0);
+    return number;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -141,7 +143,7 @@
     cell.accessoryType = UITableViewCellAccessoryCheckmark;
     
     cell.selectedBackgroundView = [[UIView alloc] initWithFrame:cell.frame];
-    cell.selectedBackgroundView.backgroundColor = kMenuBackgroundColor;
+    cell.selectedBackgroundView.backgroundColor = [UIColor flatSkyBlueColor];
 
     cell.layer.borderColor = [UIColor whiteColor].CGColor;
     cell.layer.borderWidth = 1.0;

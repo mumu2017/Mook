@@ -199,7 +199,7 @@
     if (self.infoModel.isWithName) {
         title = self.infoModel.name;
     } else {
-        title = @"请编辑标题";
+        title = NSLocalizedString(@"请编辑标题", nil);
     }
     
     return [NSString titleString:title withDate:self.date];
@@ -455,7 +455,7 @@
             if (model.isWithProp) {
                 prop = [index stringByAppendingString:model.prop];
             } else {
-                prop = [index stringByAppendingString:@"新建道具"];
+                prop = [index stringByAppendingString:NSLocalizedString(@"新建道具", nil)];
             }
             
             if (model.isWithQuantity) {
@@ -545,13 +545,7 @@
         
         CLPerformModel *model = self.performModelList[indexPath.row];
         
-        NSString *perform;
-        if (model.isWithPerform) {
-            perform = [NSString stringWithFormat:@"第%ld步 :  %@", (long)indexPath.row+1, model.perform];
-        } else {
-            perform = [NSString stringWithFormat:@"第%ld步 :  ", (long)indexPath.row+1];
-        }
-        
+        NSString *perform = model.perform;
         if (model.isWithVideo) {
             
             CLOneLabelImageDisplayCell * cell = [self.tableView dequeueReusableCellWithIdentifier:kOneLabelImageDisplayCell];
@@ -619,34 +613,34 @@
             sectionTitle = nil;
         } else if (section == self.effectSection && self.effectSection != self.infoSection) {
             if (self.contentType == kContentTypeRoutine) {
-                sectionTitle = @"效果描述";
+                sectionTitle = NSLocalizedString(@"效果描述", nil);
             } else if (self.contentType == kContentTypeIdea) {
-                sectionTitle = @"灵感内容";
+                sectionTitle = NSLocalizedString(@"灵感内容", nil);
 
             } else if (self.contentType == kContentTypeSleight) {
-                sectionTitle = @"技巧描述";
+                sectionTitle = NSLocalizedString(@"技巧描述", nil);
 
             } else if (self.contentType == kContentTypeProp) {
-                sectionTitle = @"道具描述";
+                sectionTitle = NSLocalizedString(@"道具描述", nil);
 
             } else if (self.contentType == kContentTypeLines) {
-                sectionTitle = @"台词内容";
+                sectionTitle = NSLocalizedString(@"台词内容", nil);
 
             }
         } else if (section == self.propSection && self.propSection != self.effectSection) {
             if (self.contentType == kContentTypeRoutine) {
-                sectionTitle = @"道具清单";
+                sectionTitle = NSLocalizedString(@"道具清单", nil);
             } else {
-                sectionTitle = @"细节描述";
+                sectionTitle = NSLocalizedString(@"细节描述", nil);
             }
         } else if (section == self.prepSection && self.prepSection != self.propSection) {
             if (self.contentType == kContentTypeRoutine) {
-                sectionTitle = @"事前准备";
+                sectionTitle = NSLocalizedString(@"事前准备", nil);
             }
         } else if (section == self.performSection && self.performSection != self.prepSection) {
-            sectionTitle = @"表演细节";
+            sectionTitle = NSLocalizedString(@"表演细节", nil);
         } else if (section == self.notesSection && self.notesSection != self.performSection) {
-            sectionTitle = @"注意事项";
+            sectionTitle = NSLocalizedString(@"注意事项", nil);
         }
         
         label.text = sectionTitle;
@@ -943,7 +937,7 @@
 
         }
         
-        vc.title = @"编辑";
+        vc.title = NSLocalizedString(@"编辑", nil);
     }
 }
 

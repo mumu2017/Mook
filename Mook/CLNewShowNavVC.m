@@ -23,6 +23,7 @@
         
         CLNewShowVC *vc  = (CLNewShowVC *)rootViewController;
         vc.showModel = self.showModel;
+        vc.title = kNewShowInfoText;
     }
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dismissSelfWhenModallyPresented) name:kDismissNewShowNavVCNotification object:nil];

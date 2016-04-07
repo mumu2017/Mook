@@ -89,7 +89,6 @@
     
     [self setTableViewStatus];
     
-    self.title = self.showModel.name;
     [self.tableView setEditing:YES];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cancelTagSelection) name:@"cancelTagSelection" object:nil];
@@ -143,11 +142,8 @@
         
         [[NSNotificationCenter defaultCenter] postNotificationName:kUpdateDataNotification object:self];
         
-        dispatch_async(dispatch_get_global_queue(0, 0), ^{
-            [CLDataSaveTool updateShow:self.showModel];
-        });
+        [CLDataSaveTool updateShow:self.showModel];
     }
-    
 }
 
 #pragma mark - Table view data source
@@ -183,32 +179,32 @@
 
         if (indexPath.row == 0) {
             
-            cell.titleLabel.text = @"演出标题";
-            cell.inputTextField.placeholder = @"编辑演出标题";
+            cell.titleLabel.text = NSLocalizedString(@"演出标题", nil);
+            cell.inputTextField.placeholder = NSLocalizedString(@"编辑演出标题", nil);
             cell.inputTextField.text = self.showModel.name;
             cell.inputTextField.tag = kTagShowName;
 //            self.titleTF = cell.inputTextField;
             cell.inputTextField.delegate = self;
         } else if (indexPath.row == 1) {
             
-            cell.titleLabel.text = @"演出时长";
-            cell.inputTextField.placeholder = @"演出时长(分钟)";
+            cell.titleLabel.text = NSLocalizedString(@"演出时长", nil);
+            cell.inputTextField.placeholder = NSLocalizedString(@"演出时长(分钟)", nil);
             cell.inputTextField.text = self.showModel.duration;
             cell.inputTextField.tag = kTagShowDuration;
             //            self.titleTF = cell.inputTextField;
             cell.inputTextField.delegate = self;
         } else if (indexPath.row == 2) {
             
-            cell.titleLabel.text = @"演出场地";
-            cell.inputTextField.placeholder = @"编辑演出场地";
+            cell.titleLabel.text = NSLocalizedString(@"演出场地", nil);
+            cell.inputTextField.placeholder = NSLocalizedString(@"编辑演出场地", nil);
             cell.inputTextField.text = self.showModel.place;
             cell.inputTextField.tag = kTagShowPlace;
             //            self.titleTF = cell.inputTextField;
             cell.inputTextField.delegate = self;
         } else if (indexPath.row == 3) {
             
-            cell.titleLabel.text = @"观众数量";
-            cell.inputTextField.placeholder = @"最佳观众数量";
+            cell.titleLabel.text = NSLocalizedString(@"观众数量", nil);
+            cell.inputTextField.placeholder = NSLocalizedString(@"最佳观众数量", nil);
             cell.inputTextField.text = self.showModel.audianceCount;
             cell.inputTextField.tag = kTagShowAudiance;
             //            self.titleTF = cell.inputTextField;
@@ -250,7 +246,7 @@
                 
                 cell.textLabel.font = kBoldFontSys16;
                 cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-                cell.textLabel.text = @"演出说明";
+                cell.textLabel.text = NSLocalizedString(@"演出说明", nil);
                 return cell;
             }
         }
@@ -261,7 +257,7 @@
                 cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ID];
             }
             
-            cell.textLabel.text = @"添加流程";
+            cell.textLabel.text = NSLocalizedString(@"添加流程", nil);
             cell.textLabel.font = kBoldFontSys16;
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             return cell;
@@ -428,8 +424,6 @@
     } else {
         [self.navigationController popViewControllerAnimated:YES];
     }
-    
-    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - textField 代理方法

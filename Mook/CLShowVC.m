@@ -139,7 +139,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    self.title = @"演出";
+    self.title = NSLocalizedString(@"演出", nil);
     self.tableView.estimatedRowHeight = 44;
     
     self.tableView.tableFooterView = [UIView new];
@@ -175,6 +175,7 @@
 
 - (void) update {
     // 重新刷新所有数据
+    self.routineModelList = nil;
     [self.tableView reloadData];
 //    // 设置图片数组为nil, 这样在懒加载的时候就可以重新刷新图片
 //    self.photos = nil;
@@ -230,7 +231,7 @@
             if (self.showModel.name.length > 0) {
                 title = self.showModel.name;
             } else {
-                title = @"请编辑标题";
+                title = NSLocalizedString(@"请编辑标题", nil);
             }
             
             NSAttributedString *titleString = [NSString titleString:title withDate:self.showModel.date];
@@ -246,13 +247,13 @@
             
             NSString *title, *content;
             if (indexPath.row == 0) {
-                title = @"演出时长";
+                title = NSLocalizedString(@"演出时长", nil);
                 content = self.showModel.duration;
             } else if (indexPath.row == 1) {
-                title = @"演出场地";
+                title = NSLocalizedString(@"演出场地", nil);
                 content = self.showModel.place;
             } else if (indexPath.row == 2) {
-                title = @"观众数量";
+                title = NSLocalizedString(@"观众数量", nil);
                 content = self.showModel.audianceCount;
             }
             cell.titleLabel.text = title;
@@ -266,7 +267,7 @@
                 
                 CLOneLabelImageDisplayCell * cell = [self.tableView dequeueReusableCellWithIdentifier:kOneLabelImageDisplayCell];
                 
-                cell.contentLabel.attributedText = [[NSString attributedStringWithFirstPart:@"演出说明\n" secondPart:self.showModel.effectModel.effect firstPartFont:kBoldFontSys17 firstPartColor:[UIColor blackColor] secondPardFont:kFontSys17 secondPartColor:[UIColor blackColor]] styledString];
+                cell.contentLabel.attributedText = [[NSString attributedStringWithFirstPart:NSLocalizedString(@"演出说明\n", nil) secondPart:self.showModel.effectModel.effect firstPartFont:kBoldFontSys17 firstPartColor:[UIColor blackColor] secondPardFont:kFontSys17 secondPartColor:[UIColor blackColor]] styledString];
                 
                 [cell.imageButton addTarget:self action:@selector(showPhotoBrowser:) forControlEvents:UIControlEventTouchUpInside];
                 
@@ -279,7 +280,7 @@
                 
                 CLOneLabelImageDisplayCell * cell = [self.tableView dequeueReusableCellWithIdentifier:kOneLabelImageDisplayCell];
                 
-                cell.contentLabel.attributedText = [[NSString attributedStringWithFirstPart:@"演出说明\n" secondPart:self.showModel.effectModel.effect firstPartFont:kBoldFontSys17 firstPartColor:[UIColor blackColor] secondPardFont:kFontSys17 secondPartColor:[UIColor blackColor]] styledString];
+                cell.contentLabel.attributedText = [[NSString attributedStringWithFirstPart:NSLocalizedString(@"演出说明\n", nil) secondPart:self.showModel.effectModel.effect firstPartFont:kBoldFontSys17 firstPartColor:[UIColor blackColor] secondPardFont:kFontSys17 secondPartColor:[UIColor blackColor]] styledString];
                 
                 [cell.imageButton addTarget:self action:@selector(showPhotoBrowser:) forControlEvents:UIControlEventTouchUpInside];
                 
@@ -292,7 +293,7 @@
             } else {
                 CLOneLabelDisplayCell *cell = [self.tableView dequeueReusableCellWithIdentifier:kOneLabelDisplayCell forIndexPath:indexPath];
                 
-                cell.contentLabel.attributedText = [[NSString attributedStringWithFirstPart:@"演出说明\n" secondPart:self.showModel.effectModel.effect firstPartFont:kBoldFontSys17 firstPartColor:[UIColor blackColor] secondPardFont:kFontSys17 secondPartColor:[UIColor blackColor]] styledString];
+                cell.contentLabel.attributedText = [[NSString attributedStringWithFirstPart:NSLocalizedString(@"演出说明\n", nil) secondPart:self.showModel.effectModel.effect firstPartFont:kBoldFontSys17 firstPartColor:[UIColor blackColor] secondPardFont:kFontSys17 secondPartColor:[UIColor blackColor]] styledString];
                 
                 self.tag = -1;
                 
@@ -310,10 +311,10 @@
                 
                 CLRoutineImageCell * cell = [self.tableView dequeueReusableCellWithIdentifier:kRoutineImageCell];
                 
-                NSString *count = [NSString stringWithFormat:@"流程 %ld  ", indexPath.row+1];
+                NSString *count = [NSString stringWithFormat:NSLocalizedString(@"流程 %ld  ", nil), indexPath.row+1];
                 cell.titleLabel.text = [count stringByAppendingString:[model getTitle]];
                 
-                cell.effectLabel.attributedText = [[NSString attributedStringWithFirstPart:@"效果  " secondPart:model.effectModel.effect firstPartFont:kBoldFontSys17 firstPartColor:[UIColor blackColor] secondPardFont:kFontSys17 secondPartColor:[UIColor blackColor]] styledString];
+                cell.effectLabel.attributedText = [[NSString attributedStringWithFirstPart:NSLocalizedString(@"效果  ", nil) secondPart:model.effectModel.effect firstPartFont:kBoldFontSys17 firstPartColor:[UIColor blackColor] secondPardFont:kFontSys17 secondPartColor:[UIColor blackColor]] styledString];
                 
                 cell.infoButton.tag = indexPath.row;
                 [cell.infoButton addTarget:self action:@selector(showRoutineDetail:) forControlEvents:UIControlEventTouchUpInside];
@@ -332,10 +333,10 @@
                 
                 CLRoutineImageCell * cell = [self.tableView dequeueReusableCellWithIdentifier:kRoutineImageCell];
                 
-                NSString *count = [NSString stringWithFormat:@"流程 %ld  ", indexPath.row+1];
+                NSString *count = [NSString stringWithFormat:NSLocalizedString(@"流程 %ld  ", nil), indexPath.row+1];
                 cell.titleLabel.text = [count stringByAppendingString:[model getTitle]];
 
-                cell.effectLabel.attributedText = [[NSString attributedStringWithFirstPart:@"效果  " secondPart:model.effectModel.effect firstPartFont:kBoldFontSys17 firstPartColor:[UIColor blackColor] secondPardFont:kFontSys17 secondPartColor:[UIColor blackColor]] styledString];
+                cell.effectLabel.attributedText = [[NSString attributedStringWithFirstPart:NSLocalizedString(@"效果  ", nil) secondPart:model.effectModel.effect firstPartFont:kBoldFontSys17 firstPartColor:[UIColor blackColor] secondPardFont:kFontSys17 secondPartColor:[UIColor blackColor]] styledString];
                 
                 cell.infoButton.tag = indexPath.row;
                 [cell.infoButton addTarget:self action:@selector(showRoutineDetail:) forControlEvents:UIControlEventTouchUpInside];
@@ -353,10 +354,10 @@
             } else {
                 CLRoutineTextCell *cell = [self.tableView dequeueReusableCellWithIdentifier:kRoutineTextCell forIndexPath:indexPath];
                 
-                NSString *count = [NSString stringWithFormat:@"流程 %ld  ", indexPath.row+1];
+                NSString *count = [NSString stringWithFormat:NSLocalizedString(@"流程 %ld  ", nil), indexPath.row+1];
                 cell.titleLabel.text = [count stringByAppendingString:[model getTitle]];
 
-                cell.effectLabel.attributedText = [[NSString attributedStringWithFirstPart:@"效果  " secondPart:model.effectModel.effect firstPartFont:kBoldFontSys17 firstPartColor:[UIColor blackColor] secondPardFont:kFontSys17 secondPartColor:[UIColor blackColor]] styledString];
+                cell.effectLabel.attributedText = [[NSString attributedStringWithFirstPart:NSLocalizedString(@"效果  ", nil) secondPart:model.effectModel.effect firstPartFont:kBoldFontSys17 firstPartColor:[UIColor blackColor] secondPardFont:kFontSys17 secondPartColor:[UIColor blackColor]] styledString];
                 cell.infoButton.tag = indexPath.row;
                 [cell.infoButton addTarget:self action:@selector(showRoutineDetail:) forControlEvents:UIControlEventTouchUpInside];
 
@@ -399,59 +400,11 @@
     } else if ([destVC isKindOfClass:[CLNewShowVC class]]) {
         CLNewShowVC *vc = (CLNewShowVC *)destVC;
         vc.showModel = self.showModel;
+        vc.title = NSLocalizedString(@"编辑", nil);
     }
  
 }
 
-//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-//    
-//    if ([tableView.dataSource tableView:tableView numberOfRowsInSection:section] == 0) {
-//        return nil;
-//        
-//    } else {
-//        
-//        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenW, kLabelHeight)];
-//        view.backgroundColor = [UIColor lightGrayColor];
-//        view.layer.borderColor = [UIColor colorWithRed:221/255.0 green:221/255.0 blue:221/255.0 alpha:1].CGColor;
-//        view.layer.borderWidth = 0.5;
-//        
-//        view.alpha = 0.95;
-//        
-//        UILabel *label = [[UILabel alloc] init];
-//        [view addSubview:label];
-//        
-//        label.frame = CGRectMake(kPadding, 0, kContentW, kLabelHeight);
-//        label.textAlignment =NSTextAlignmentCenter;
-//        label.backgroundColor = [UIColor clearColor];
-//        label.textColor = [UIColor whiteColor];
-//        label.font = kFontSys12;
-//        
-//        NSString *sectionTitle;
-//        if (section == 0) {
-//            sectionTitle = @"演出名称";
-//        } else if (section == 1) {
-//            sectionTitle = @"演出信息";
-//        } else if (section == 2) {
-//            sectionTitle = @"演出说明";
-//        } else if (section == 3) {
-//            sectionTitle = @"演出流程";
-//        }
-//        
-//        label.text = sectionTitle;
-//        
-//        return view;
-//    }
-//}
-
-
-//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-//    
-//    if ([self.tableView.dataSource tableView:self.tableView numberOfRowsInSection:section] == 0) {
-//        return 0;
-//    }
-//    
-//    return kLabelHeight;
-//}
 
 - (void)showPhotoBrowser:(UIButton *)button {
     
@@ -508,7 +461,7 @@
 //}
 
 - (void)photoBrowser:(MWPhotoBrowser *)photoBrowser didDisplayPhotoAtIndex:(NSUInteger)index {
-    NSLog(@"Did start viewing photo at index %lu", (unsigned long)index);
+//    NSLog(@"Did start viewing photo at index %lu", (unsigned long)index);
 }
 
 //- (BOOL)photoBrowser:(MWPhotoBrowser *)photoBrowser isPhotoSelectedAtIndex:(NSUInteger)index {
@@ -526,7 +479,7 @@
 
 - (void)photoBrowserDidFinishModalPresentation:(MWPhotoBrowser *)photoBrowser {
     // If we subscribe to this method we must dismiss the view controller ourselves
-    NSLog(@"Did finish modal presentation");
+//    NSLog(@"Did finish modal presentation");
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

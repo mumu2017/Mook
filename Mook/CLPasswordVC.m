@@ -115,13 +115,13 @@ typedef enum {
     
     if (_creatNewPasswordMode == kInputOldPasswordMode) {
         
-        self.inputNoticeLabel.text = @"请输入旧密码";
+        self.inputNoticeLabel.text = NSLocalizedString(@"请输入旧密码", nil);
     } else if (_creatNewPasswordMode == kInputNewPasswordFirstTimeMode) {
         
-        self.inputNoticeLabel.text = @"请输入新密码";
+        self.inputNoticeLabel.text = NSLocalizedString(@"请输入新密码", nil);
 
     } else if (_creatNewPasswordMode == kInputNewPasswordSecondTimeMode) {
-        self.inputNoticeLabel.text = @"请再次输入新密码";
+        self.inputNoticeLabel.text = NSLocalizedString(@"请再次输入新密码", nil);
 
     }
     
@@ -234,7 +234,7 @@ typedef enum {
         } else {
             self.typedPassword = @"";
             self.resultNoticeLabel.hidden = NO;
-            self.resultNoticeLabel.text = @"密码错误!";
+            self.resultNoticeLabel.text = NSLocalizedString(@"密码错误!", nil);
         }
     });
 }
@@ -254,7 +254,7 @@ typedef enum {
         if (self.passwordMatched) {
             
             self.resultNoticeLabel.hidden = NO;
-            self.resultNoticeLabel.text = @"密码设置成功!";
+            self.resultNoticeLabel.text = NSLocalizedString(@"密码设置成功!", nil);
             
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"newPasswordCreated" object:nil]];
@@ -263,7 +263,7 @@ typedef enum {
         } else {
             self.typedPassword = @"";
             self.resultNoticeLabel.hidden = NO;
-            self.resultNoticeLabel.text = @"密码不匹配,请重新设置!";
+            self.resultNoticeLabel.text = NSLocalizedString(@"密码不匹配,请重新设置!", nil);
             
             if (self.isCreatingNewPassword) {
                 self.creatNewPasswordMode = kInputNewPasswordFirstTimeMode;
@@ -286,7 +286,7 @@ typedef enum {
         } else {
             self.typedPassword = @"";
             self.resultNoticeLabel.hidden = NO;
-            self.resultNoticeLabel.text = @"密码错误!";
+            self.resultNoticeLabel.text = NSLocalizedString(@"密码错误!", nil);
         }
     });
 }
@@ -318,29 +318,29 @@ typedef enum {
         
         if (self.creatNewPasswordMode == kInputOldPasswordMode) {
             
-            self.inputNoticeLabel.text = @"请输入旧密码";
+            self.inputNoticeLabel.text = NSLocalizedString(@"请输入旧密码", nil);
         } else if (self.creatNewPasswordMode == kInputNewPasswordFirstTimeMode) {
             
-            self.inputNoticeLabel.text = @"请输入新密码";
+            self.inputNoticeLabel.text = NSLocalizedString(@"请输入新密码", nil);
             
         } else if (self.creatNewPasswordMode == kInputNewPasswordSecondTimeMode) {
-            self.inputNoticeLabel.text = @"请再次输入新密码";
+            self.inputNoticeLabel.text = NSLocalizedString(@"请再次输入新密码", nil);
             
         }
 
         
         if (self.passwordReminder.length > 0) {
-            [self.reminderButton setTitle:@"修改密码提示" forState:UIControlStateNormal];
-            [self.reminderButton setTitle:@"修改密码提示" forState:UIControlStateHighlighted];
+            [self.reminderButton setTitle:NSLocalizedString(@"修改密码提示", nil) forState:UIControlStateNormal];
+            [self.reminderButton setTitle:NSLocalizedString(@"修改密码提示", nil) forState:UIControlStateHighlighted];
         } else {
-            [self.reminderButton setTitle:@"添加密码提示" forState:UIControlStateNormal];
-            [self.reminderButton setTitle:@"添加密码提示" forState:UIControlStateHighlighted];
+            [self.reminderButton setTitle:NSLocalizedString(@"添加密码提示", nil) forState:UIControlStateNormal];
+            [self.reminderButton setTitle:NSLocalizedString(@"添加密码提示", nil) forState:UIControlStateHighlighted];
         }
         
         [self.reminderButton addTarget:self action:@selector(addPasswordReminder) forControlEvents:UIControlEventTouchUpInside];
         
-        [self.cancelButton setTitle:@"取消" forState:UIControlStateNormal];
-        [self.cancelButton setTitle:@"取消" forState:UIControlStateHighlighted];
+        [self.cancelButton setTitle:NSLocalizedString(@"取消", nil) forState:UIControlStateNormal];
+        [self.cancelButton setTitle:NSLocalizedString(@"取消", nil) forState:UIControlStateHighlighted];
         [self.cancelButton addTarget:self action:@selector(cancelButtonClicked) forControlEvents:UIControlEventTouchUpInside];
         
     } else {
@@ -349,14 +349,14 @@ typedef enum {
             self.cancelButton.hidden = YES;
         }
         
-        self.inputNoticeLabel.text = @"请输入密码";
+        self.inputNoticeLabel.text = NSLocalizedString(@"请输入密码", nil);
         
-        [self.reminderButton setTitle:@"密码提示" forState:UIControlStateNormal];
-        [self.reminderButton setTitle:@"密码提示" forState:UIControlStateHighlighted];
+        [self.reminderButton setTitle:NSLocalizedString(@"密码提示", nil) forState:UIControlStateNormal];
+        [self.reminderButton setTitle:NSLocalizedString(@"密码提示", nil) forState:UIControlStateHighlighted];
         [self.reminderButton addTarget:self action:@selector(showPasswordReminder) forControlEvents:UIControlEventTouchUpInside];
         
-        [self.cancelButton setTitle:@"TouchID" forState:UIControlStateNormal];
-        [self.cancelButton setTitle:@"TouchID" forState:UIControlStateHighlighted];
+        [self.cancelButton setTitle:NSLocalizedString(@"TouchID", nil) forState:UIControlStateNormal];
+        [self.cancelButton setTitle:NSLocalizedString(@"TouchID", nil) forState:UIControlStateHighlighted];
         [self.cancelButton addTarget:self action:@selector(StartWJTouchID) forControlEvents:UIControlEventTouchUpInside];
     }
 
@@ -375,19 +375,19 @@ typedef enum {
     self.resultNoticeLabel.hidden = NO;
     
     if (self.passwordReminder.length != 0) {
-        self.resultNoticeLabel.text = [NSString stringWithFormat:@"密码提示\n%@",self.passwordReminder];
+        self.resultNoticeLabel.text = [NSString stringWithFormat:NSLocalizedString(@"密码提示\n%@", nil),self.passwordReminder];
     } else {
-        self.resultNoticeLabel.text = [NSString stringWithFormat:@"无密码提示"];
+        self.resultNoticeLabel.text = [NSString stringWithFormat:NSLocalizedString(@"无密码提示", nil)];
     }
 
 }
 
 - (void)addPasswordReminder {
     
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"添加密码提示" message:nil preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"添加密码提示", nil) message:nil preferredStyle:UIAlertControllerStyleAlert];
     
     [alertController addTextFieldWithConfigurationHandler:^(UITextField *textField){
-        textField.placeholder = @"密码提示";
+        textField.placeholder = NSLocalizedString(@"密码提示", nil);
         textField.clearButtonMode = UITextFieldViewModeWhileEditing;
         
         textField.text = self.passwordReminder;
@@ -398,7 +398,7 @@ typedef enum {
         
     }];
     
-    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"确定", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             
@@ -412,7 +412,7 @@ typedef enum {
             [defaults synchronize];
             
             self.resultNoticeLabel.hidden = NO;
-            self.resultNoticeLabel.text = @"密码提示设置成功";
+            self.resultNoticeLabel.text = NSLocalizedString(@"密码提示设置成功", nil);
             
             [[NSNotificationCenter defaultCenter] removeObserver:self name:UITextFieldTextDidChangeNotification object:nil];
             
@@ -421,7 +421,7 @@ typedef enum {
     }];
     
     
-    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:NSLocalizedString(@"取消", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
         
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             

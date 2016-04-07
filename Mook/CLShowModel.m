@@ -122,21 +122,21 @@
 
 - (NSString *)duration {
     if (_duration == nil) {
-        _duration = @"无时长信息";
+        _duration = NSLocalizedString(@"无时长信息", nil);
     }
     return _duration;
 }
 
 - (NSString *)place {
     if (_place == nil) {
-        _place = @"无场地信息";
+        _place = NSLocalizedString(@"无场地信息", nil);
     }
     return _place;
 }
 
 - (NSString *)audianceCount {
     if (_audianceCount == nil) {
-        _audianceCount = @"无观众信息";
+        _audianceCount = NSLocalizedString(@"无观众信息", nil);
     }
     return _audianceCount;
 }

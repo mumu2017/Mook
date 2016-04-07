@@ -142,7 +142,7 @@
             [self.navigationController.view addSubview:HUD];
             
             HUD.delegate = self;
-            HUD.labelText = @"正在生成备份文件";
+            HUD.labelText = NSLocalizedString(@"正在生成备份文件", nil);
 
             [HUD showAnimated:YES whileExecutingBlock:^{
                 
@@ -154,10 +154,10 @@
             } onQueue:dispatch_get_main_queue() completionBlock:^{
                 
                 if (self.isCreatBackUp) {
-                    HUD.labelText = @"已成功生成备份文件";
+                    HUD.labelText = NSLocalizedString(@"已成功生成备份文件", nil);
                     [self.tableView reloadData]; // 生成后刷新表格, 显示"恢复备份"
                 } else {
-                    HUD.labelText = @"生成备份文件失败";
+                    HUD.labelText = NSLocalizedString(@"生成备份文件失败", nil);
                 }
                 // Configure for text only and offset down
                 HUD.mode = MBProgressHUDModeText;
@@ -177,7 +177,7 @@
         } else if (indexPath.row == 2) { // 如果有第三行则表示备份文件存在,可以恢复
 
             MBProgressHUD *HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
-            HUD.labelText = @"正在加载恢复备份";
+            HUD.labelText = NSLocalizedString(@"正在加载恢复备份", nil);
             [self.navigationController.view addSubview:HUD];
             [HUD setMode:MBProgressHUDModeDeterminate];   //圆盘的扇形进度显示
             HUD.taskInProgress = YES;
@@ -197,7 +197,7 @@
                 NSLog(@"finish unzipping");
 
                 if (succeeded) {
-                    HUD.labelText = @"已成功恢复备份文件";
+                    HUD.labelText = NSLocalizedString(@"已成功恢复备份文件", nil);
                     
 #warning 关于数据刷新的问题(主页几个VC)
                     //  提醒用户退出应用?
@@ -205,7 +205,7 @@
                     
                     
                 } else {
-                    HUD.labelText = @"恢复备份文件失败";
+                    HUD.labelText = NSLocalizedString(@"恢复备份文件失败", nil);
                 }
                 
                 // Configure for text only and offset down
@@ -239,11 +239,11 @@
                 
                 if (fileDeleted) {
                     
-                    HUD.labelText = @"已删除备份文件";
+                    HUD.labelText = NSLocalizedString(@"已删除备份文件", nil);
                     [self.tableView reloadData];
 
                 } else {
-                    HUD.labelText = @"删除备份文件失败";
+                    HUD.labelText = NSLocalizedString(@"删除备份文件失败", nil);
                 }
                 
                 [HUD show:YES];
@@ -254,7 +254,30 @@
         }
     } else if (indexPath.section == 4) {
         if (indexPath.row == 0) {
-            [self displayMailComposerSheet];
+            
+            if ([MFMailComposeViewController canSendMail])
+                // The device can send email.
+            {
+                [self displayMailComposerSheet];
+            }
+            else
+                // The device can not send email.
+            {
+                MBProgressHUD *HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
+                [self.navigationController.view addSubview:HUD];
+                HUD.mode = MBProgressHUDModeText;
+                HUD.removeFromSuperViewOnHide = YES;
+                // Configure for text only and offset down
+                HUD.margin = 10.f;
+                HUD.yOffset = 150.f;
+                HUD.delegate = self;
+                
+                HUD.labelText = NSLocalizedString(@"当前无法发送邮件", nil);
+            
+                [HUD show:YES];
+                [HUD hide:YES afterDelay:2.0];
+
+            }
         }
     } else if (indexPath.section == 5) {
         if (indexPath.row == 1) {
@@ -266,10 +289,11 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     id destVC = segue.destinationViewController;
+    UIViewController *vc = (UIViewController *)destVC;
+    vc.hidesBottomBarWhenPushed = YES;
     
     if ([destVC isKindOfClass:[CLPasswordVC class]]) {
         CLPasswordVC *vc = (CLPasswordVC *)destVC;
-        vc.hidesBottomBarWhenPushed = YES;
         
         if ([sender isKindOfClass:[UISwitch class]]) {
             vc.isCreatingNewPassword = YES;
@@ -349,7 +373,7 @@
     [picker setToRecipients:toRecipients];
 
     // Fill out the email body text
-    NSString *emailBody = @"反馈信息:\n";
+    NSString *emailBody = NSLocalizedString(@"反馈信息:\n", nil);
     [picker setMessageBody:emailBody isHTML:NO];
     
     [self presentViewController:picker animated:YES completion:NULL];
@@ -379,27 +403,27 @@
     switch (result)
     {
         case MFMailComposeResultCancelled:
-            HUD.labelText = @"邮件已取消";
+            HUD.labelText = NSLocalizedString(@"邮件已取消", nil);
 
 //            HUD.labelText = @"Mail sending canceled";
             break;
         case MFMailComposeResultSaved:
-            HUD.labelText = @"邮件已保存";
+            HUD.labelText = NSLocalizedString(@"邮件已保存", nil);
 
 //            HUD.labelText = @"Mail saved";
             break;
         case MFMailComposeResultSent:
-            HUD.labelText = @"邮件已发送";
+            HUD.labelText = NSLocalizedString(@"邮件已发送", nil);
 
 //            HUD.labelText = @"Mail sent";
             break;
         case MFMailComposeResultFailed:
-            HUD.labelText = @"邮件发送失败";
+            HUD.labelText = NSLocalizedString(@"邮件发送失败", nil);
 
 //            HUD.labelText = @"Mail sending failed";
             break;
         default:
-            HUD.labelText = @"邮件未能发送";
+            HUD.labelText = NSLocalizedString(@"邮件未能发送", nil);
 
 //            HUD.labelText = @"Mail not sent";
             break;

@@ -422,20 +422,21 @@ typedef enum {
 #define kTypeProp    @"prop"
 #define kTypeLines    @"lines"
 
-#define kDefaultTitleAll   @"全部"
-#define kDefaultTitleShow @"演出"
-#define kDefaultTitleRoutine   @"流程"
-#define kDefaultTitleIdea   @"灵感"
-#define kDefaultTitleSleight   @"技巧"
-#define kDefaultTitleProp   @"道具"
-#define kDefaultTitleLines   @"台词"
-#define kDefaultTitleTag   @"标签"
+#define kDefaultTitleAll   NSLocalizedString(@"全部", nil)
+#define kDefaultTitleShow  NSLocalizedString(@"演出", nil)
+#define kDefaultTitleRoutine   NSLocalizedString(@"流程", nil)
+#define kDefaultTitleIdea   NSLocalizedString(@"灵感", nil)
+#define kDefaultTitleSleight   NSLocalizedString(@"技巧", nil)
+#define kDefaultTitleProp   NSLocalizedString(@"道具", nil)
+#define kDefaultTitleLines   NSLocalizedString(@"台词", nil)
+#define kDefaultTitleTag   NSLocalizedString(@"标签", nil)
 
-#define kNewRoutineInfoText    @"新建流程"
-#define kNewIdeaInfoText    @"新建灵感"
-#define kNewSleightInfoText    @"新建手法"
-#define kNewPropInfoText    @"新建道具"
-#define kNewLinesInfoText   @"新建台词"
+#define kNewShowInfoText    NSLocalizedString(@"新建演出", nil)
+#define kNewRoutineInfoText    NSLocalizedString(@"新建流程", nil)
+#define kNewIdeaInfoText    NSLocalizedString(@"新建灵感", nil)
+#define kNewSleightInfoText    NSLocalizedString(@"新建手法", nil)
+#define kNewPropInfoText    NSLocalizedString(@"新建道具", nil)
+#define kNewLinesInfoText   NSLocalizedString(@"新建台词", nil)
 
 #define kIconNameAll       @"iconNameAll"
 #define kIconNameIdea       @"iconNameIdea"

@@ -104,23 +104,23 @@
     if (_entryTitle == nil) {
         switch (self.editingContentType) {
             case kEditingContentTypeRoutine:
-                _entryTitle = @"编辑流程名称";
+                _entryTitle = NSLocalizedString(@"编辑流程名称", nil);
                 break;
                 
             case kEditingContentTypeIdea:
-                _entryTitle = @"编辑灵感标题";
+                _entryTitle = NSLocalizedString(@"编辑灵感标题", nil);
                 break;
                 
             case kEditingContentTypeSleight:
-                _entryTitle = @"编辑技巧名称";
+                _entryTitle = NSLocalizedString(@"编辑技巧名称", nil);
                 break;
                 
             case kEditingContentTypeProp:
-                _entryTitle = @"编辑道具名称";
+                _entryTitle = NSLocalizedString(@"编辑道具名称", nil);
                 break;
                 
             case kEditingContentTypeLines:
-                _entryTitle = @"编辑台词标题";
+                _entryTitle = NSLocalizedString(@"编辑台词标题", nil);
                 break;
                 
             default:
@@ -672,15 +672,15 @@
                         NSString *effectTitle;
                         
                         if (self.editingContentType == kEditingContentTypeIdea) {
-                            effectTitle = @"灵感描述";
+                            effectTitle = NSLocalizedString(@"灵感描述", nil);
                         } else if (self.editingContentType == kEditingContentTypeRoutine) {
-                            effectTitle = @"效果描述";
+                            effectTitle = NSLocalizedString(@"效果描述", nil);
                         } else if (self.editingContentType == kEditingContentTypeSleight) {
-                            effectTitle = @"技巧描述";
+                            effectTitle = NSLocalizedString(@"技巧描述", nil);
                         } else if (self.editingContentType == kEditingContentTypeProp) {
-                            effectTitle = @"道具描述";
+                            effectTitle = NSLocalizedString(@"道具描述", nil);
                         } else if (self.editingContentType == kEditingContentTypeLines) {
-                            effectTitle = @"台词内容";
+                            effectTitle = NSLocalizedString(@"台词内容", nil);
                         }
                         cell.textLabel.text = effectTitle;
                         return cell;
@@ -698,7 +698,7 @@
                             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ID];
                         }
                         
-                        cell.textLabel.text = @"添加道具";
+                        cell.textLabel.text = NSLocalizedString(@"添加道具", nil);
                         cell.textLabel.font = kBoldFontSys16;
                         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                         return cell;
@@ -723,7 +723,7 @@
                             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ID];
                         }
                         
-                        cell.textLabel.text = @"添加细节";
+                        cell.textLabel.text = NSLocalizedString(@"添加细节", nil);
                         cell.textLabel.font = kBoldFontSys16;
                         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                         return cell;
@@ -769,7 +769,7 @@
                         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ID];
                     }
                     
-                    cell.textLabel.text = @"添加准备";
+                    cell.textLabel.text = NSLocalizedString(@"添加准备", nil);
                     cell.textLabel.font = kBoldFontSys16;
                     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                     return cell;
@@ -812,7 +812,7 @@
                         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ID];
                     }
                     
-                    cell.textLabel.text = @"添加表演";
+                    cell.textLabel.text = NSLocalizedString(@"添加表演", nil);
                     cell.textLabel.font = kBoldFontSys16;
                     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                     return cell;
@@ -846,32 +846,6 @@
                     
                     
                 }
-                
-                //            if (model.isWithPerform == NO && model.isWithLines == NO && model.isWithSecret == NO) {
-                //                //                cell.contentLabel.textAlignment = NSTextAlignmentCenter;
-                //                cell.contentLabel.text = @"点我编辑";
-                //            } else {
-                //                if (model.isWithPerform) {
-                //
-                //                    //                    cell.contentLabel.textAlignment = NSTextAlignmentLeft;
-                //                    cell.contentLabel.text = [NSString stringWithFormat:@"表演: %@", model.perform];
-                //                } else {
-                //                    //                    cell.contentLabel.textAlignment = NSTextAlignmentLeft;
-                //                    cell.contentLabel.text = @"表演: ";
-                //
-                //                }
-                //
-                //                if (model.isWithLines) {
-                //                    cell.detailLabelOne.text = [NSString stringWithFormat:@"台词: %@", model.lines];
-                //                }
-                //
-                //                if (model.isWithSecret) {
-                //                    cell.detailLabelTwo.text = [NSString stringWithFormat:@"秘密: %@", model.secret];
-                //                }
-                //
-                //            }
-                //
-                //            return cell;
             }
         case 5:
             {
@@ -882,7 +856,7 @@
                         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ID];
                     }
                     
-                    cell.textLabel.text = @"添加注意";
+                    cell.textLabel.text = NSLocalizedString(@"添加注意", nil);
                     cell.textLabel.font = kBoldFontSys16;
                     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                     return cell;
@@ -911,72 +885,6 @@
     }
     return nil;
 }
-//
-//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-//    
-//    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenW, 25)];
-//    view.backgroundColor = [UIColor clearColor];
-//    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, kScreenW-15, 20)];
-//    label.font = kFontSys12;
-//    label.backgroundColor = [UIColor clearColor];
-//    label.textColor = [UIColor darkGrayColor];
-//    [view addSubview:label];
-//    
-//    NSString *title;
-//    
-//    switch (section) {
-//        case 1:
-//            
-//            if (self.editingContentType == kEditingContentTypeRoutine) {
-//                title = @"效果";
-//            } else if (self.editingContentType == kEditingContentTypeLines) {
-//                title = @"台词";
-//            } else {
-//                title = @"描述";
-//            }
-//            
-//            break;
-//            
-//        case 2:
-//            if (self.editingContentType == kEditingContentTypeRoutine) {
-//                title = @"道具";
-//            } else {
-//                title = @"细节";
-//            }
-//            
-//            break;
-//            
-//        case 3:
-//            title = @"准备";
-//            
-//            break;
-//            
-//        case 4:
-//            title = @"表演";
-//            break;
-//            
-//        case 5:
-//            title = @"注意";
-//            break;
-//            
-//        default:
-//            break;
-//    }
-//    
-//    
-//    label.text = title;
-//    
-//    return view;
-//}
-//
-//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-//    
-//    if (section == 0) {
-//        return 10;
-//    }
-//    
-//    return 25;
-//}
 
 #pragma mark - tableView 编辑方法
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {

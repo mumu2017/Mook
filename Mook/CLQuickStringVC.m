@@ -109,7 +109,7 @@
 - (NSArray *)rightButtons
 {
     NSMutableArray *rightUtilityButtons = [NSMutableArray new];
-    [rightUtilityButtons sw_addUtilityButtonWithColor:[UIColor redColor] title:@"删除"];
+    [rightUtilityButtons sw_addUtilityButtonWithColor:[UIColor redColor] title:NSLocalizedString(@"删除", nil)];
     
     return rightUtilityButtons;
 }
@@ -175,10 +175,10 @@
 
 - (void)addNewQuickString {
     
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"添加便捷短语" message:@"请输入短语内容" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"添加便捷短语", nil) message:NSLocalizedString(@"请输入短语内容", nil) preferredStyle:UIAlertControllerStyleAlert];
     
     [alertController addTextFieldWithConfigurationHandler:^(UITextField *textField){
-        textField.placeholder = @"便捷短语";
+        textField.placeholder = NSLocalizedString(@"便捷短语", nil);
         textField.clearButtonMode = UITextFieldViewModeWhileEditing;
         
         textField.font = kFontSys16;
@@ -188,7 +188,7 @@
         
     }];
     
-    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"确定", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             
@@ -214,7 +214,7 @@
     }];
     
     
-    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:NSLocalizedString(@"取消", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
         
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             
@@ -236,12 +236,12 @@
 
 - (void)editStringWithIndexPath:(NSIndexPath *)path {
     
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"编辑便捷短语" message:@"请输入短语内容" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"编辑便捷短语", nil) message:NSLocalizedString(@"请输入短语内容", nil) preferredStyle:UIAlertControllerStyleAlert];
     
     NSString *quickString = self.quickStringList[path.row];
     
     [alertController addTextFieldWithConfigurationHandler:^(UITextField *textField){
-        textField.placeholder = @"便捷短语";
+        textField.placeholder = NSLocalizedString(@"便捷短语", nil);
         textField.clearButtonMode = UITextFieldViewModeWhileEditing;
         
         textField.font = kFontSys16;
@@ -252,7 +252,7 @@
         
     }];
     
-    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"确定", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             UITextField *nameTF = alertController.textFields.firstObject;
@@ -269,7 +269,7 @@
     }];
     
     
-    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:NSLocalizedString(@"取消", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
         
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [[NSNotificationCenter defaultCenter] removeObserver:self name:UITextFieldTextDidChangeNotification object:nil];

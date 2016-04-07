@@ -32,7 +32,7 @@
         self.iconView.image = nil;
     }
     
-    self.titleLabel.text = @"流程";
+    self.titleLabel.text = NSLocalizedString(@"流程", nil);
     self.contentLabel.text = @"2016/04/03";
     
 }

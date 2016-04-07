@@ -215,26 +215,6 @@
 }
 
 #pragma mark - setter
-//- (void)setEditingContentType:(EditingContentType)editingContentType {
-//    
-//    _editingContentType = editingContentType;
-//    
-//    if (editingContentType == kEditingContentTypeRoutine) {
-//        if (self.editingModel == kEditingModeEffect) {
-//            self.title = @"效果";
-//        }
-//    } else if (editingContentType == kEditingContentTypeLines) {
-//        if (self.editingModel == kEditingModeEffect) {
-//            self.title = @"台词";
-//        }
-//    } else {
-//        if (self.editingModel == kEditingModeEffect) {
-//            self.title = @"描述";
-//        } else if (self.editingModel == kEditingModePrep) {
-//            self.title = @"细节";
-//        }
-//    }
-//}
 
 - (void)setEditingModel:(EditingMode)editingModel {
     _editingModel = editingModel;
@@ -287,14 +267,14 @@
     
     if (self.editingContentType == kEditingContentTypeShow) {
         
-        [self.editTextView addPlaceHolderWithText:@"请输入演出说明,任何内容都可以" andFont:kFontSys16];
+        [self.editTextView addPlaceHolderWithText:NSLocalizedString(@"请输入演出说明,任何内容都可以", nil) andFont:kFontSys16];
         
     } else if (self.editingContentType == kEditingContentTypeLines) {
         
-        [self.editTextView addPlaceHolderWithText:@"写点儿好玩儿的台词吧..." andFont:kFontSys16];
+        [self.editTextView addPlaceHolderWithText:NSLocalizedString(@"写点儿好玩儿的台词吧...", nil) andFont:kFontSys16];
         
     } else {
-        [self.editTextView addPlaceHolderWithText:@"提示:左右滑动屏幕可切换编辑内容" andFont:kFontSys16];
+        [self.editTextView addPlaceHolderWithText:NSLocalizedString(@"提示:左右滑动屏幕可切换编辑内容", nil) andFont:kFontSys16];
     }
 
     
@@ -439,27 +419,27 @@
     
     if (self.editingContentType == kEditingContentTypeRoutine) {
         if (self.editingModel == kEditingModeEffect) {
-            title = @"效果";
+            title = NSLocalizedString(@"效果", nil);
             
         } else if (self.editingModel == kEditingModePrep) {
-            title = @"准备";
+            title = NSLocalizedString(@"准备", nil);
         } else if (self.editingModel == kEditingModePerform) {
-            title = @"表演";
+            title = NSLocalizedString(@"表演", nil);
 
         } else if (self.editingModel == kEditingModeNotes) {
-            title = @"注意";
+            title = NSLocalizedString(@"注意", nil);
         }
         
         
     } else if (self.editingContentType == kEditingContentTypeLines) {
         if (self.editingModel == kEditingModeEffect) {
-            title = @"台词";
+            title = NSLocalizedString(@"台词", nil);
         }
     } else {
         if (self.editingModel == kEditingModeEffect) {
-            title = @"描述";
+            title = NSLocalizedString(@"描述", nil);
         } else if (self.editingModel == kEditingModePrep) {
-            title = @"细节";
+            title = NSLocalizedString(@"细节", nil);
         }
     }
     
@@ -549,7 +529,7 @@
     
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     
-    UIAlertAction* add = [UIAlertAction actionWithTitle:@"添加准备" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction* add = [UIAlertAction actionWithTitle:NSLocalizedString(@"添加准备", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
 
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             
@@ -560,7 +540,7 @@
         
     }];
     
-    UIAlertAction* cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
+    UIAlertAction* cancel = [UIAlertAction actionWithTitle:NSLocalizedString(@"取消", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
     }];
     
     [alert addAction:add];
@@ -574,7 +554,7 @@
     
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     
-    UIAlertAction* add = [UIAlertAction actionWithTitle:@"添加表演" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction* add = [UIAlertAction actionWithTitle:NSLocalizedString(@"添加表演", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             
@@ -586,7 +566,7 @@
        
     }];
     
-    UIAlertAction* cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
+    UIAlertAction* cancel = [UIAlertAction actionWithTitle:NSLocalizedString(@"取消", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
     }];
     
     [alert addAction:add];
@@ -600,7 +580,7 @@
     
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     
-    UIAlertAction* add = [UIAlertAction actionWithTitle:@"添加注意" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction* add = [UIAlertAction actionWithTitle:NSLocalizedString(@"添加注意", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             
@@ -611,7 +591,7 @@
         
     }];
     
-    UIAlertAction* cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
+    UIAlertAction* cancel = [UIAlertAction actionWithTitle:NSLocalizedString(@"取消", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
     }];
     
     [alert addAction:add];
@@ -626,9 +606,9 @@
     
     NSString *deleteMessage;
     if (self.editingContentType == kEditingContentTypeRoutine) {
-        deleteMessage = @"删除准备";
+        deleteMessage = NSLocalizedString(@"删除准备", nil);
     } else {
-        deleteMessage = @"删除细节";
+        deleteMessage = NSLocalizedString(@"删除细节", nil);
     }
     
     UIAlertAction* delete = [UIAlertAction actionWithTitle:deleteMessage style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
@@ -643,7 +623,7 @@
         
     }];
     
-    UIAlertAction* cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
+    UIAlertAction* cancel = [UIAlertAction actionWithTitle:NSLocalizedString(@"取消", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
     }];
     
     [alert addAction:delete];
@@ -657,7 +637,7 @@
     
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     
-    UIAlertAction* delete = [UIAlertAction actionWithTitle:@"删除表演" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction* delete = [UIAlertAction actionWithTitle:NSLocalizedString(@"删除表演", nil) style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
         
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             
@@ -669,7 +649,7 @@
         
     }];
     
-    UIAlertAction* cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
+    UIAlertAction* cancel = [UIAlertAction actionWithTitle:NSLocalizedString(@"取消", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
     }];
     
     [alert addAction:delete];
@@ -684,7 +664,7 @@
     
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     
-    UIAlertAction* delete = [UIAlertAction actionWithTitle:@"删除注意" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction* delete = [UIAlertAction actionWithTitle:NSLocalizedString(@"删除注意", nil) style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
         
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             
@@ -695,7 +675,7 @@
        
     }];
     
-    UIAlertAction* cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
+    UIAlertAction* cancel = [UIAlertAction actionWithTitle:NSLocalizedString(@"取消", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
     }];
     
     [alert addAction:delete];
@@ -740,7 +720,7 @@
     
     if (self.editingModel == kEditingModeEffect || self.editingModel == kEditingModePrep || self.editingModel == kEditingModePerform) {
         
-        UIAlertAction* takeVideo = [UIAlertAction actionWithTitle:@"拍摄视频" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        UIAlertAction* takeVideo = [UIAlertAction actionWithTitle:NSLocalizedString(@"拍摄视频", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 
@@ -751,7 +731,7 @@
             
         }];
         
-        UIAlertAction* pickVideo = [UIAlertAction actionWithTitle:@"相册视频" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        UIAlertAction* pickVideo = [UIAlertAction actionWithTitle:NSLocalizedString(@"相册视频", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 
@@ -765,7 +745,7 @@
         [alert addAction:pickVideo];
     }
   
-    UIAlertAction* takePhoto = [UIAlertAction actionWithTitle:@"拍摄照片" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction* takePhoto = [UIAlertAction actionWithTitle:NSLocalizedString(@"拍摄照片", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         //        prepCell.prepFrame.model.image = image;
         
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -776,7 +756,7 @@
         
     }];
     
-    UIAlertAction* pickPhoto = [UIAlertAction actionWithTitle:@"相册图片" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+    UIAlertAction* pickPhoto = [UIAlertAction actionWithTitle:NSLocalizedString(@"相册图片", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
         
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             
@@ -786,7 +766,7 @@
         
     }];
     
-    UIAlertAction* cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
+    UIAlertAction* cancel = [UIAlertAction actionWithTitle:NSLocalizedString(@"取消", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
         
     }];
     
@@ -809,7 +789,7 @@
         self.mediaView.alpha = 1.0f;
     }];
 
-    UIAlertAction* deletePhoto = [UIAlertAction actionWithTitle:@"删除图片" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction* deletePhoto = [UIAlertAction actionWithTitle:NSLocalizedString(@"删除图片", nil) style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
         
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             
@@ -823,7 +803,7 @@
         
     }];
     
-    UIAlertAction* cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
+    UIAlertAction* cancel = [UIAlertAction actionWithTitle:NSLocalizedString(@"取消", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
     }];
     
     [alert addAction:deletePhoto];
@@ -844,7 +824,7 @@
         self.mediaView.alpha = 1.0f;
     }];
     
-    UIAlertAction* deletePhoto = [UIAlertAction actionWithTitle:@"删除视频" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction* deletePhoto = [UIAlertAction actionWithTitle:NSLocalizedString(@"删除视频", nil) style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
 
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             
@@ -859,7 +839,7 @@
         
     }];
     
-    UIAlertAction* cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
+    UIAlertAction* cancel = [UIAlertAction actionWithTitle:NSLocalizedString(@"取消", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
 
     }];
     

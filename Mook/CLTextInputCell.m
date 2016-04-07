@@ -24,27 +24,27 @@
     switch (editingContentType) {
         case kEditingContentTypeRoutine:
             
-            title = @"流程标题";
+            title = NSLocalizedString(@"流程标题", nil);
             
             break;
         case kEditingContentTypeIdea:
             
-            title = @"灵感标题";
+            title = NSLocalizedString(@"灵感标题", nil);
             
             break;
         case kEditingContentTypeSleight:
             
-            title = @"技巧标题";
+            title = NSLocalizedString(@"技巧标题", nil);
             
             break;
         case kEditingContentTypeProp:
             
-            title = @"道具标题";
+            title = NSLocalizedString(@"道具标题", nil);
             
             break;
         case kEditingContentTypeLines:
             
-            title = @"台词标题";
+            title = NSLocalizedString(@"台词标题", nil);
             
             break;
         default:

@@ -328,7 +328,7 @@
 {
     NSMutableArray *rightUtilityButtons = [NSMutableArray new];
 
-    [rightUtilityButtons sw_addUtilityButtonWithColor:[UIColor redColor] title:@"删除"];
+    [rightUtilityButtons sw_addUtilityButtonWithColor:[UIColor redColor] title:NSLocalizedString(@"删除", nil)];
 
     return rightUtilityButtons;
 }
@@ -747,8 +747,8 @@
 
 - (void)addNewEntry {
     
-    JGActionSheetSection *section1 = [JGActionSheetSection sectionWithTitle:nil message:nil buttonTitles:@[@"新建灵感" , @"新建演出", @"新建流程", @"新建技巧", @"新建道具", @"新建台词"] buttonStyle:JGActionSheetButtonStyleDefault];
-    JGActionSheetSection *cancelSection = [JGActionSheetSection sectionWithTitle:nil message:nil buttonTitles:@[@"取消"] buttonStyle:JGActionSheetButtonStyleCancel];
+    JGActionSheetSection *section1 = [JGActionSheetSection sectionWithTitle:nil message:nil buttonTitles:@[NSLocalizedString(@"新建灵感", nil), NSLocalizedString(@"新建演出", nil), NSLocalizedString(@"新建流程", nil), NSLocalizedString(@"新建技巧", nil), NSLocalizedString(@"新建道具", nil), NSLocalizedString(@"新建台词", nil)] buttonStyle:JGActionSheetButtonStyleDefault];
+    JGActionSheetSection *cancelSection = [JGActionSheetSection sectionWithTitle:nil message:nil buttonTitles:@[NSLocalizedString(@"取消", nil)] buttonStyle:JGActionSheetButtonStyleCancel];
     
     NSArray *sections = @[section1, cancelSection];
     
