@@ -458,6 +458,9 @@ typedef enum {
 #define kIFlyAppID  @"56c1951a"
 
 #define kUpdateDataNotification @"updateDataNotification"
+
+#define kUpdateMookNotification @"updateMookNotification"
+
 #define kUpdateEntryVCNotification  @"UpdateEntryVCNotification"
 #define kUpdateShowsNotification @"UpdateShowsNotification"
 #define kUpdateRoutinesNotification  @"UpdateRoutinesNotification"

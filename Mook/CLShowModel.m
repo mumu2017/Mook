@@ -36,9 +36,7 @@
 
 - (NSDate *)date {
     
-    if (_date == nil) {
-        _date = [NSDate date]; // get today date
-    }
+    if (_date == nil)  _date = [NSDate date];
     
     return _date;
 }
@@ -99,10 +97,28 @@
 
 - (UIImage *)getThumbnail {
     UIImage *image;
-    NSArray *array = [self getRountineModelList];
-    for (CLRoutineModel *model in array) {
-        image = [model getThumbnail];
+    
+    // 先从effeceModel中找图片或视频首帧
+    if (self.effectModel.isWithImage) {
+        
+        image = [self.effectModel.image getNamedImageThumbnail];
+        
+    } else if (self.effectModel.isWithVideo) {
+        
+        image = [self.effectModel.video getNamedVideoThumbnail];
+        
     }
+    
+    if (image == nil) {
+        NSArray *array = [self getRountineModelList];
+        for (CLRoutineModel *model in array) {
+            image = [model getThumbnail];
+            if (image) {
+                break;
+            }
+        }
+    }
+    
     return image;
 }
 

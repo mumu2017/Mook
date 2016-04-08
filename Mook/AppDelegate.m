@@ -164,9 +164,9 @@
     self.propObjModelList = nil;
     self.linesObjModelList = nil;
     
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         
-        [[NSNotificationCenter defaultCenter] postNotificationName:kUpdateDataNotification object:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kUpdateMookNotification object:nil];
 
     });
 
@@ -211,16 +211,18 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
     
 
-    //设置sdk的log等级，log保存在下面设置的工作路径中
-    [IFlySetting setLogFile:LVL_ALL];
-    
-    //打开输出在console的log开关
-    [IFlySetting showLogcat:YES];
-    
-    //设置sdk的工作路径
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
-    NSString *cachePath = [paths objectAtIndex:0];
-    [IFlySetting setLogFilePath:cachePath];
+    // 正式发布不要打开Log
+//    //设置sdk的log等级，log保存在下面设置的工作路径中
+//    [IFlySetting setLogFile:LVL_ALL];
+//    
+//    //打开输出在console的log开关
+//    [IFlySetting showLogcat:YES];
+//    
+//    //设置sdk的工作路径
+//    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+//    NSString *cachePath = [paths objectAtIndex:0];
+//    [IFlySetting setLogFilePath:cachePath];
+//
     
     //创建语音配置,appid必须要传入，仅执行一次则可
     NSString *initString = [[NSString alloc] initWithFormat:@"appid=%@",kIFlyAppID];

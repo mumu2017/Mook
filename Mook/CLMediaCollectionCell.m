@@ -28,7 +28,7 @@
         self.iconView.image = [UIImage imageNamed:@"PlayButtonOverlayLarge"];
         
     } else if ([name containsString:@"jpg"]) {
-        self.imageView.image = [name getNamedImage];
+        self.imageView.image = [name getNamedImageThumbnail];
         self.iconView.image = nil;
     }
     

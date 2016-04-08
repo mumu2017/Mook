@@ -115,8 +115,8 @@
                                                bundle:nil]
          forCellReuseIdentifier:kListTextCellID];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(update:) name:kUpdateDataNotification
- object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(update:) name:kUpdateDataNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateMook) name:kUpdateMookNotification object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -130,7 +130,47 @@
     if (noti.object == self) {  //如果是自己发出的更新通知,则不刷新.
         return;
     }
+        
+    [self.tableView reloadData];
+}
+
+- (void)updateMook {
+
+    if (self.tag.length > 0) return; // 如果有tag, 则不刷新为所有分类记录
     
+    switch (self.listType) {
+        case kListTypeAll:
+            _allItems = kDataListAll;
+
+            break;
+        case kListTypeIdea:
+            _ideaObjModelList = kDataListIdea;
+
+            break;
+        case kListTypeRoutine:
+            _routineModelList = kDataListRoutine;
+
+            break;
+        case kListTypeShow:
+            _showModelList = kDataListShow;
+
+            break;
+        case kListTypeSleight:
+            _sleightObjModelList = kDataListSleight;
+
+            break;
+        case kListTypeProp:
+            _propObjModelList = kDataListProp;
+
+            break;
+            
+        case kListTypeLines:
+            _linesObjModelList = kDataListLines;
+
+            break;
+        default:
+            break;
+    }
     [self.tableView reloadData];
 }
 
@@ -295,7 +335,7 @@
             break;
     }
     
-    if (image != nil) { // 如果返回图片名称,则表示模型中有图片或多媒体
+    if (image != nil) { // 如果返回图片,则表示模型中有图片或多媒体
         CLListImageCell *cell = [tableView dequeueReusableCellWithIdentifier:kListImageCellID forIndexPath:indexPath];
         cell.iconView.image = image;
         cell.iconName = iconName;

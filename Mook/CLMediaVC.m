@@ -189,6 +189,7 @@ static NSString * const reuseIdentifier = @"Cell";
             CLShowModel *model = [CLDataSaveTool showByName:modelName];
             title = kDefaultTitleShow;
             content = [NSString getDateString:model.date];
+            
         } else if ([type isEqualToString:kTypeRoutine]) {
             CLRoutineModel *model = [CLDataSaveTool routineByName:modelName];
             title = kDefaultTitleRoutine;
@@ -218,7 +219,7 @@ static NSString * const reuseIdentifier = @"Cell";
 //定义每个UICollectionView 的大小
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return CGSizeMake((self.view.frame.size.width-2)/2, (self.view.frame.size.width-2)/2);
+    return CGSizeMake((self.view.frame.size.width-4)/3, (self.view.frame.size.width-4)/3);
 }
 //定义每个UICollectionView 的 margin
 -(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section

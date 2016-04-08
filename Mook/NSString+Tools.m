@@ -248,7 +248,20 @@
     NSURL *videoURL = [NSURL fileURLWithPath:videoPath];
     UIImage *videoFrame = [UIImage thumbnailImageForVideo:videoURL atTime:0];
     
-    [UIImageJPEGRepresentation(videoFrame, 0.5) writeToFile:framePath atomically:YES];
+    CGFloat longside;
+    if (videoFrame.size.width > videoFrame.size.height) {
+        longside = videoFrame.size.width;
+    } else {
+        longside = videoFrame.size.height;
+    }
+    
+    if (longside > 480) { // 如果长边比480大, 那么久压缩图片尺寸
+        UIImage *scaledImage = [UIImage imageWithImage:videoFrame scaledToNewSize:CGSizeMake(360, 360)]; // 360会是短边的距离,按照4:3的常规图像比例, 长边应该是360 / 3 * 4 = 1920
+        [UIImageJPEGRepresentation(scaledImage, 0.5) writeToFile:framePath atomically:YES];
+        
+    } else {
+        [UIImageJPEGRepresentation(videoFrame, 0.5) writeToFile:framePath atomically:YES];
+    }
 }
 
 - (void)saveNamedImageThumbnailImageToCache {
@@ -292,8 +305,6 @@
             [UIImageJPEGRepresentation(image, 0.5) writeToFile:imagePath atomically:YES];
         }
         
-        
-        
         // 存储缩略图文件
         NSString *thumbnailPath = [[NSString thumbnailPath] stringByAppendingPathComponent:self];
         UIImage *thumbnail0 = [UIImage imageWithImage:image scaledToNewSize:CGSizeMake(210, 210)];
@@ -314,7 +325,21 @@
     // 存储视频首帧图片到缓存
     NSString *framePath = [[NSString framePath] stringByAppendingPathComponent:self];
     UIImage *videoFrame = [UIImage thumbnailImageForVideo:videoURL atTime:0];
-    [UIImageJPEGRepresentation(videoFrame, 0.5) writeToFile:framePath atomically:YES];
+    
+    CGFloat longside;
+    if (videoFrame.size.width > videoFrame.size.height) {
+        longside = videoFrame.size.width;
+    } else {
+        longside = videoFrame.size.height;
+    }
+    
+    if (longside > 480) { // 如果长边比480大, 那么久压缩图片尺寸
+        UIImage *scaledImage = [UIImage imageWithImage:videoFrame scaledToNewSize:CGSizeMake(360, 360)]; // 360会是短边的距离,按照4:3的常规图像比例, 长边应该是360 / 3 * 4 = 1920
+        [UIImageJPEGRepresentation(scaledImage, 0.5) writeToFile:framePath atomically:YES];
+        
+    } else {
+        [UIImageJPEGRepresentation(videoFrame, 0.5) writeToFile:framePath atomically:YES];
+    }
     
     // 存储缩略图文件到缓存
     NSString *thumbnailPath = [[NSString thumbnailPath] stringByAppendingPathComponent:self];

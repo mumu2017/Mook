@@ -253,8 +253,7 @@
                             HUD.labelText = NSLocalizedString(@"已成功恢复备份文件", nil);
                             
 #warning 关于数据刷新的问题(主页几个VC)
-                            //  提醒用户退出应用?
-                            //                    [(AppDelegate *)[[UIApplication sharedApplication] delegate] reloadData];
+                            [(AppDelegate *)[[UIApplication sharedApplication] delegate] reloadData];
                             
                             
                         } else {
