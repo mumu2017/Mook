@@ -162,7 +162,7 @@
 }
 
 + (UIImage*)imageWithImage:(UIImage*)image
-              scaledToSize:(CGSize)newSize
+              scaledToNewSize:(CGSize)newSize
 {
     // 只于是正方形的newSize;
     CGFloat originW = image.size.width;

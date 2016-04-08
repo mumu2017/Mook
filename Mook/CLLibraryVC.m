@@ -293,7 +293,7 @@ static NSString * const reuseIdentifier = @"Cell";
         }
         
     } else if ([destVC isKindOfClass:[CLTagListVC class]]) {
-        CLTagListVC *vc = (CLTagListVC *)destVC;
+//        CLTagListVC *vc = (CLTagListVC *)destVC;
         
     }
 }

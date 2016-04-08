@@ -248,26 +248,26 @@
     NSURL *videoURL = [NSURL fileURLWithPath:videoPath];
     UIImage *videoFrame = [UIImage thumbnailImageForVideo:videoURL atTime:0];
     
-    [UIImageJPEGRepresentation(videoFrame, 1.0) writeToFile:framePath atomically:YES];
+    [UIImageJPEGRepresentation(videoFrame, 0.5) writeToFile:framePath atomically:YES];
 }
 
 - (void)saveNamedImageThumbnailImageToCache {
     // 存储缩略图文件
     NSString *thumbnailPath = [[NSString thumbnailPath] stringByAppendingPathComponent:self];
-    UIImage *thumbnail0 = [UIImage imageWithImage:[self getNamedImage] scaledToSize:CGSizeMake(210, 210)];
+    UIImage *thumbnail0 = [UIImage imageWithImage:[self getNamedImage] scaledToNewSize:CGSizeMake(210, 210)];
     UIImage *thumbnail = [thumbnail0 imageByCroppingImageToSize:CGSizeMake(210, 210)];
 
-    [UIImageJPEGRepresentation(thumbnail, 1.0) writeToFile:thumbnailPath atomically:YES];
+    [UIImageJPEGRepresentation(thumbnail, 0.5) writeToFile:thumbnailPath atomically:YES];
 }
 
 - (void)saveNamedVideoThumbnailImageToCache {
     
     // 存储缩略图文件
     NSString *thumbnailPath = [[NSString thumbnailPath] stringByAppendingPathComponent:self];
-    UIImage *thumbnail0 = [UIImage imageWithImage:[self getNamedVideoFrame] scaledToSize:CGSizeMake(210, 210)];
+    UIImage *thumbnail0 = [UIImage imageWithImage:[self getNamedVideoFrame] scaledToNewSize:CGSizeMake(210, 210)];
     UIImage *baseImage = [thumbnail0 imageByCroppingImageToSize:CGSizeMake(210, 210)];
     UIImage *thumbnail = [baseImage imageWaterMarkWithImage:[UIImage imageNamed:@"iconVideoCamera"] imageRect:CGRectMake(20, 156, 44, 44) alpha:1]; // 146 = 210 - 44 - 10 也就是水印距离底部20pix
-    [UIImageJPEGRepresentation(thumbnail, 1.0) writeToFile:thumbnailPath atomically:YES];
+    [UIImageJPEGRepresentation(thumbnail, 0.5) writeToFile:thumbnailPath atomically:YES];
 }
 
 - (void)saveNamedImageToDocument:(UIImage *)image {
@@ -276,14 +276,30 @@
         
         // 存储原图文件
         NSString *imagePath = [[NSString imagePath] stringByAppendingPathComponent:self];
-        [UIImageJPEGRepresentation(image, 0.5) writeToFile:imagePath atomically:YES];
+        
+        CGFloat longside;
+        if (image.size.width > image.size.height) {
+            longside = image.size.width;
+        } else {
+            longside = image.size.height;
+        }
+        
+        if (longside > 1920) { // 如果长边比1920大, 那么久压缩图片尺寸
+            UIImage *scaledImage = [UIImage imageWithImage:image scaledToNewSize:CGSizeMake(1440, 1440)]; // 1440会是短边的距离,按照4:3的常规图像比例, 长边应该是1440 / 3 * 4 = 1920
+            [UIImageJPEGRepresentation(scaledImage, 0.5) writeToFile:imagePath atomically:YES];
+
+        } else {
+            [UIImageJPEGRepresentation(image, 0.5) writeToFile:imagePath atomically:YES];
+        }
+        
+        
         
         // 存储缩略图文件
         NSString *thumbnailPath = [[NSString thumbnailPath] stringByAppendingPathComponent:self];
-        UIImage *thumbnail0 = [UIImage imageWithImage:image scaledToSize:CGSizeMake(210, 210)];
+        UIImage *thumbnail0 = [UIImage imageWithImage:image scaledToNewSize:CGSizeMake(210, 210)];
         UIImage *thumbnail = [thumbnail0 imageByCroppingImageToSize:CGSizeMake(210, 210)];
         
-        [UIImageJPEGRepresentation(thumbnail, 1.0) writeToFile:thumbnailPath atomically:YES];
+        [UIImageJPEGRepresentation(thumbnail, 0.5) writeToFile:thumbnailPath atomically:YES];
     });
 }
 
@@ -298,14 +314,14 @@
     // 存储视频首帧图片到缓存
     NSString *framePath = [[NSString framePath] stringByAppendingPathComponent:self];
     UIImage *videoFrame = [UIImage thumbnailImageForVideo:videoURL atTime:0];
-    [UIImageJPEGRepresentation(videoFrame, 1.0) writeToFile:framePath atomically:YES];
+    [UIImageJPEGRepresentation(videoFrame, 0.5) writeToFile:framePath atomically:YES];
     
     // 存储缩略图文件到缓存
     NSString *thumbnailPath = [[NSString thumbnailPath] stringByAppendingPathComponent:self];
-    UIImage *thumbnail0 = [UIImage imageWithImage:videoFrame scaledToSize:CGSizeMake(210, 210)];
+    UIImage *thumbnail0 = [UIImage imageWithImage:videoFrame scaledToNewSize:CGSizeMake(210, 210)];
     UIImage *baseImage = [thumbnail0 imageByCroppingImageToSize:CGSizeMake(210, 210)];
     UIImage *thumbnail = [baseImage imageWaterMarkWithImage:[UIImage imageNamed:@"iconVideoCamera"] imageRect:CGRectMake(20, 156, 44, 44) alpha:1]; // 146 = 210 - 44 - 10 也就是水印距离底部20pix
-    [UIImageJPEGRepresentation(thumbnail, 1.0) writeToFile:thumbnailPath atomically:YES];
+    [UIImageJPEGRepresentation(thumbnail, 0.5) writeToFile:thumbnailPath atomically:YES];
 
     // 清除掉tmp文件夹中的临时视频文件
     [NSString clearTmpDirectory];

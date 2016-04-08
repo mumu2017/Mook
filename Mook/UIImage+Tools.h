@@ -11,7 +11,7 @@
 @interface UIImage (Tools)
 
 + (UIImage*)imageWithImage:(UIImage*)image
-              scaledToSize:(CGSize)newSize;
+              scaledToNewSize:(CGSize)newSize;
 // 将图片的白色部分变为透明
 + (UIImage*) processImage :(UIImage*) image;
 - (UIImage *)removeWhite;
