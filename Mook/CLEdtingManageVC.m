@@ -327,11 +327,9 @@
     self.isProgressiveIndicator = YES;
     self.isElasticIndicatorLimit = YES;
     
-    // 注册讯飞语音的appID
-    NSString *initString = [NSString stringWithFormat:@"%@=%@", [IFlySpeechConstant APPID], kIFlyAppID];
-    [IFlySpeechUtility createUtility:initString];
+    CGFloat posY = 100;
+    _popUpView = [[PopupView alloc] initWithFrame:CGRectMake(100, posY, 0, 0) withParentView:self.view];
     
-    _popUpView = [[PopupView alloc] initWithFrame:CGRectMake(100, 64, 0, 0) withParentView:self.view];
     //demo录音文件保存路径
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
     NSString *cachePath = [paths objectAtIndex:0];

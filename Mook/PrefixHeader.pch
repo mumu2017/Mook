@@ -23,7 +23,6 @@
 #import "UIImage+Tools.h"
 #import "UIImageView+Tools.h"
 #import "SWTableViewCell.h"
-#import "UINavigationBar+Awesome.h"
 #import "NSDate+MJ.h"
 #import <ChameleonFramework/Chameleon.h>
 

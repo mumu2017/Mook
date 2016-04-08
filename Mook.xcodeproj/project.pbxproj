@@ -26,6 +26,7 @@
 		43068C001CB74EF600BA1A57 /* libz.1.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 43F5F7AA1CB4B03F007BFB0C /* libz.1.tbd */; };
 		43068C011CB74EF600BA1A57 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 43F5F76B1CB3E447007BFB0C /* libz.tbd */; };
 		43068C041CB7546400BA1A57 /* ISRDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 43068C031CB7546400BA1A57 /* ISRDataHelper.m */; };
+		43068C081CB7B9D000BA1A57 /* UINavigationBar+Awesome.m in Sources */ = {isa = PBXBuildFile; fileRef = 43068C071CB7B9D000BA1A57 /* UINavigationBar+Awesome.m */; };
 		430DFBC91CA252DD0054DF6B /* CLNewEntryNavVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 430DFBC81CA252DD0054DF6B /* CLNewEntryNavVC.m */; };
 		430DFBCC1CA393CC0054DF6B /* NSDate+MJ.m in Sources */ = {isa = PBXBuildFile; fileRef = 430DFBCB1CA393CC0054DF6B /* NSDate+MJ.m */; };
 		431BCEE01CA8F81C0085D20F /* JGActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 431BCEDF1CA8F81C0085D20F /* JGActionSheet.m */; };
@@ -171,14 +172,14 @@
 		43068BFC1CB74E5900BA1A57 /* IATConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IATConfig.m; sourceTree = "<group>"; };
 		43068C021CB7546400BA1A57 /* ISRDataHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ISRDataHelper.h; sourceTree = "<group>"; };
 		43068C031CB7546400BA1A57 /* ISRDataHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ISRDataHelper.m; sourceTree = "<group>"; };
+		43068C061CB7B9D000BA1A57 /* UINavigationBar+Awesome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+Awesome.h"; sourceTree = "<group>"; };
+		43068C071CB7B9D000BA1A57 /* UINavigationBar+Awesome.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+Awesome.m"; sourceTree = "<group>"; };
 		430DFBC71CA252DD0054DF6B /* CLNewEntryNavVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLNewEntryNavVC.h; sourceTree = "<group>"; };
 		430DFBC81CA252DD0054DF6B /* CLNewEntryNavVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLNewEntryNavVC.m; sourceTree = "<group>"; };
 		430DFBCA1CA393CC0054DF6B /* NSDate+MJ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+MJ.h"; sourceTree = "<group>"; };
 		430DFBCB1CA393CC0054DF6B /* NSDate+MJ.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+MJ.m"; sourceTree = "<group>"; };
 		431BCEDE1CA8F81C0085D20F /* JGActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JGActionSheet.h; sourceTree = "<group>"; };
 		431BCEDF1CA8F81C0085D20F /* JGActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JGActionSheet.m; sourceTree = "<group>"; };
-		431BCEE11CA968480085D20F /* UINavigationBar+Awesome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+Awesome.h"; sourceTree = "<group>"; };
-		431BCEE21CA968480085D20F /* UINavigationBar+Awesome.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+Awesome.m"; sourceTree = "<group>"; };
 		432345351C94045000200833 /* Mook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4323453B1C94045000200833 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		4323453C1C94045000200833 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -442,10 +443,10 @@
 		430DFBDF1CA3F3470054DF6B /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				43068C061CB7B9D000BA1A57 /* UINavigationBar+Awesome.h */,
+				43068C071CB7B9D000BA1A57 /* UINavigationBar+Awesome.m */,
 				43DF3AC61CAA78A100712D81 /* UIImage+WaterMark.h */,
 				43DF3AC71CAA78A100712D81 /* UIImage+WaterMark.m */,
-				431BCEE11CA968480085D20F /* UINavigationBar+Awesome.h */,
-				431BCEE21CA968480085D20F /* UINavigationBar+Awesome.m */,
 				431BCEDE1CA8F81C0085D20F /* JGActionSheet.h */,
 				431BCEDF1CA8F81C0085D20F /* JGActionSheet.m */,
 			);
@@ -1264,6 +1265,7 @@
 				432345A51C9404FB00200833 /* CLEdtingManageVC.m in Sources */,
 				432345AF1C9404FB00200833 /* CLPropChooseNavVC.m in Sources */,
 				43F5F75A1CB390EB007BFB0C /* CLMediaNavVC.m in Sources */,
+				43068C081CB7B9D000BA1A57 /* UINavigationBar+Awesome.m in Sources */,
 				432346941C96B4C200200833 /* CLTextInputCell.m in Sources */,
 				432346761C9409A400200833 /* XLSegmentedPagerTabStripViewController.m in Sources */,
 				432346741C9409A400200833 /* XLButtonBarPagerTabStripViewController.m in Sources */,

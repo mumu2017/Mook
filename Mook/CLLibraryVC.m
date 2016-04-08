@@ -75,29 +75,28 @@ static NSString * const reuseIdentifier = @"Cell";
     // Register cell classes
     [self.collectionView registerNib:[UINib nibWithNibName:@"CLLibraryCell" bundle: nil] forCellWithReuseIdentifier:reuseIdentifier];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(update:) name:kUpdateDataNotification
-                                               object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(update:) name:kUpdateDataNotification
+//                                               object:nil];
 }
 
-- (void) update:(NSNotification *)noti {
-    
-    if (noti.object == self) {  //如果是自己发出的更新通知,则不刷新.
-        return;
-    }
-//
-//    self.allTags = [CLDataSaveTool allTags];
-//    self.showModelList = [CLDataSaveTool allShows];
-//    self.routineModelList = [CLDataSaveTool allRoutines];
-//    self.ideaObjModelList = [CLDataSaveTool allIdeas];
-//    self.sleightObjModelList = [CLDataSaveTool allSleights];
-//    self.propObjModelList = [CLDataSaveTool allProps];
-//    self.linesObjModelList = [CLDataSaveTool allLines];
+// 不知道为什么, 只能通过willAppear时刷新collectionView的方式来解决删除数据不更新记录数量的bug
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     [self.collectionView reloadData];
 }
 
-- (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
+//- (void) update:(NSNotification *)noti {
+//    
+//    if (noti.object == self) {  //如果是自己发出的更新通知,则不刷新.
+//        return;
+//    }
+//
+//    [self.collectionView reloadData];
+//}
+
+//- (void)dealloc {
+//    [[NSNotificationCenter defaultCenter] removeObserver:self];
+//}
 
 
 #pragma mark <UICollectionViewDataSource>

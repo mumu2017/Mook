@@ -124,7 +124,7 @@
         [_parentView addSubview:self];
     }
     
-    [UIView animateWithDuration:3.0
+    [UIView animateWithDuration:1.5
                           delay:0.0
                         options:UIViewAnimationOptionCurveEaseIn
                      animations:^{
