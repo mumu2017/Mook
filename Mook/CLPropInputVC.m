@@ -45,8 +45,8 @@
 - (CLToolBar *)toolBar {
     if (!_toolBar) {
         _toolBar = [CLToolBar toolBar];
-        [_toolBar.imageButton setImage:kToolBarFavorImage forState:UIControlStateNormal];
-        [_toolBar.imageButton setImage:kToolBarFavorImageHighlighted forState:UIControlStateHighlighted];
+        [_toolBar.imageButton setImage:kToolBarPropImage forState:UIControlStateNormal];
+        [_toolBar.imageButton setImage:kToolBarPropImageHighlighted forState:UIControlStateHighlighted];
         [_toolBar.previousButton setImage:kToolBarUpImage forState:UIControlStateNormal];
         [_toolBar.previousButton setImage:kToolBarUpImageHighlighted forState:UIControlStateHighlighted];
         [_toolBar.nextButton setImage:kToolBarDownImage forState:UIControlStateNormal];
@@ -290,7 +290,12 @@
     
     [self dismissViewControllerAnimated:YES completion:^{
         
-        self.propNameTextField.text = prop.infoModel.name;
+        if (prop.infoModel.isWithName) {
+            self.propNameTextField.text = prop.infoModel.name;
+        } else {
+            self.propNameTextField.text = kDefaultTitleProp;
+
+        }
 
         UIView *view = [UIResponder currentFirstResponder];
         

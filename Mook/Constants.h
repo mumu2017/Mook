@@ -484,8 +484,8 @@ typedef enum {
 #define kToolBarMinusImage  [UIImage imageNamed:@"toolBarMinus"]
 #define kToolBarMinusImageHighlighted   [UIImage imageNamed:@"toolBarMinusHighlighted"]
 
-#define kToolBarFavorImage  [UIImage imageNamed:@"toolBarFavor"]
-#define kToolBarFavorImageHighlighted   [UIImage imageNamed:@"toolBarFavorHighlighted"]
+#define kToolBarPropImage  [UIImage imageNamed:@"toolBarProp"]
+#define kToolBarPropImageHighlighted   [UIImage imageNamed:@"toolBarPropHighlighted"]
 
 #define kToolBarWriteImage  [UIImage imageNamed:@"toolBarWrite"]
 #define kToolBarApproveImageHighlighted   [UIImage imageNamed:@"toolBarWriteHighlighted"]

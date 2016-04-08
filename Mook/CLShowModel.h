@@ -34,4 +34,9 @@
 
 - (NSString *)getTitle;
 - (NSAttributedString *)getContent;
+
+- (NSString *)getEffectText;
+- (NSString *)getDurationText;
+- (NSString *)getPlaceText;
+- (NSString *)getAudianceCountText;
 @end

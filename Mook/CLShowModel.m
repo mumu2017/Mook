@@ -120,25 +120,39 @@
     return [effect contentStringWithDate:[NSString getDateString:self.date]];
 }
 
-- (NSString *)duration {
-    if (_duration == nil) {
-        _duration = NSLocalizedString(@"无时长信息", nil);
+- (NSString *)getDurationText {
+    if (_duration.length == 0) {
+        return NSLocalizedString(@"无时长信息", nil);
     }
     return _duration;
 }
 
-- (NSString *)place {
-    if (_place == nil) {
-        _place = NSLocalizedString(@"无场地信息", nil);
+- (NSString *)getPlaceText {
+    if (_place.length == 0) {
+        return NSLocalizedString(@"无场地信息", nil);
     }
     return _place;
 }
 
-- (NSString *)audianceCount {
-    if (_audianceCount == nil) {
-        _audianceCount = NSLocalizedString(@"无观众信息", nil);
+- (NSString *)getAudianceCountText {
+    if (_audianceCount.length == 0) {
+        return NSLocalizedString(@"无观众信息", nil);
     }
     return _audianceCount;
+}
+
+- (NSString *)getEffectText {
+    
+    NSString *effect;
+    
+    if (self.effectModel.isWithEffect) {
+        effect = self.effectModel.effect;
+        
+    } else {
+        effect = NSLocalizedString(@"无演出说明", nil);
+    }
+    
+    return effect;
 }
 
 @end

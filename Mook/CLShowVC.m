@@ -248,13 +248,13 @@
             NSString *title, *content;
             if (indexPath.row == 0) {
                 title = NSLocalizedString(@"演出时长", nil);
-                content = self.showModel.duration;
+                content = [self.showModel getDurationText];
             } else if (indexPath.row == 1) {
                 title = NSLocalizedString(@"演出场地", nil);
-                content = self.showModel.place;
+                content = [self.showModel getPlaceText];
             } else if (indexPath.row == 2) {
                 title = NSLocalizedString(@"观众数量", nil);
-                content = self.showModel.audianceCount;
+                content = [self.showModel getAudianceCountText];
             }
             cell.titleLabel.text = title;
             cell.contentLabel.text = content;
@@ -267,7 +267,7 @@
                 
                 CLOneLabelImageDisplayCell * cell = [self.tableView dequeueReusableCellWithIdentifier:kOneLabelImageDisplayCell];
                 
-                cell.contentLabel.attributedText = [[NSString attributedStringWithFirstPart:NSLocalizedString(@"演出说明\n", nil) secondPart:self.showModel.effectModel.effect firstPartFont:kBoldFontSys17 firstPartColor:[UIColor blackColor] secondPardFont:kFontSys17 secondPartColor:[UIColor blackColor]] styledString];
+                cell.contentLabel.attributedText = [[NSString attributedStringWithFirstPart:NSLocalizedString(@"演出说明\n", nil) secondPart:[self.showModel getEffectText] firstPartFont:kBoldFontSys17 firstPartColor:[UIColor blackColor] secondPardFont:kFontSys17 secondPartColor:[UIColor blackColor]] styledString];
                 
                 [cell.imageButton addTarget:self action:@selector(showPhotoBrowser:) forControlEvents:UIControlEventTouchUpInside];
                 
@@ -280,7 +280,7 @@
                 
                 CLOneLabelImageDisplayCell * cell = [self.tableView dequeueReusableCellWithIdentifier:kOneLabelImageDisplayCell];
                 
-                cell.contentLabel.attributedText = [[NSString attributedStringWithFirstPart:NSLocalizedString(@"演出说明\n", nil) secondPart:self.showModel.effectModel.effect firstPartFont:kBoldFontSys17 firstPartColor:[UIColor blackColor] secondPardFont:kFontSys17 secondPartColor:[UIColor blackColor]] styledString];
+                cell.contentLabel.attributedText = [[NSString attributedStringWithFirstPart:NSLocalizedString(@"演出说明\n", nil) secondPart:[self.showModel getEffectText] firstPartFont:kBoldFontSys17 firstPartColor:[UIColor blackColor] secondPardFont:kFontSys17 secondPartColor:[UIColor blackColor]] styledString];
                 
                 [cell.imageButton addTarget:self action:@selector(showPhotoBrowser:) forControlEvents:UIControlEventTouchUpInside];
                 
@@ -293,7 +293,7 @@
             } else {
                 CLOneLabelDisplayCell *cell = [self.tableView dequeueReusableCellWithIdentifier:kOneLabelDisplayCell forIndexPath:indexPath];
                 
-                cell.contentLabel.attributedText = [[NSString attributedStringWithFirstPart:NSLocalizedString(@"演出说明\n", nil) secondPart:self.showModel.effectModel.effect firstPartFont:kBoldFontSys17 firstPartColor:[UIColor blackColor] secondPardFont:kFontSys17 secondPartColor:[UIColor blackColor]] styledString];
+                cell.contentLabel.attributedText = [[NSString attributedStringWithFirstPart:NSLocalizedString(@"演出说明\n", nil) secondPart:[self.showModel getEffectText] firstPartFont:kBoldFontSys17 firstPartColor:[UIColor blackColor] secondPardFont:kFontSys17 secondPartColor:[UIColor blackColor]] styledString];
                 
                 self.tag = -1;
                 
