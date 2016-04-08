@@ -76,6 +76,7 @@ typedef enum {
 #define kSavePhotoKey       @"savePhoto"
 #define kSaveVideoKey       @"saveVideo"
 #define kPasswordKey        @"password"
+#define kVoiceLanguageKey   @"voiceLanguageKey"
 #define kNotFirstTimeLaunchKey        @"notFirstTimeLaunchKey"
 #define kPasswordReminderKey     @"passwordReminderKey"
 #define kTouchIDKey        @"touchIDKey"
@@ -446,6 +447,10 @@ typedef enum {
 #define kIconNameProp       @"iconNameProp"
 #define kIconNameLines      @"iconNameLines"
 #define kIconNameTag        @"iconNameTag"
+
+#define kVoiceChinese       @"chinese"
+#define kVoiceGuangdong       @"guangdong"
+#define kVoiceEnglish       @"english"
 
 #pragma mark - Notifications
 

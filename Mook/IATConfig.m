@@ -42,8 +42,32 @@
     _vadBos = @"3000";
     _dot = @"1";
     _sampleRate = @"16000";
-    _language = CHINESE;
-    _accent = PUTONGHUA;
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *voiceLanguage = [defaults stringForKey:kVoiceLanguageKey];
+    
+    if (voiceLanguage == nil) {
+        _language = CHINESE;
+        _accent = PUTONGHUA;
+
+        [defaults setObject:kVoiceChinese forKey:kVoiceLanguageKey];
+        [defaults synchronize];
+
+    } else if ([voiceLanguage isEqualToString:kVoiceChinese]) {
+        
+        _language = CHINESE;
+        _accent = PUTONGHUA;
+        
+    } else if ([voiceLanguage isEqualToString:kVoiceGuangdong]) {
+        
+        _language = CHINESE;
+        _accent = YUEYU;
+        
+
+    } else if ([voiceLanguage isEqualToString:kVoiceEnglish]) {
+        _language = ENGLISH;
+    }
+
     _haveView = NO;//默认是不dai界面的
     _accentNickName = [[NSArray alloc] initWithObjects:@"粤语",@"普通话",@"河南话",@"英文", nil];
     

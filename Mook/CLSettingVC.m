@@ -8,10 +8,11 @@
 
 #import "CLSettingVC.h"
 #import "CLPasswordVC.h"
-//#import "Objective-Zip.h"
 #import "CLDataSaveTool.h"
 #import "ZipArchive.h"
 #import "MBProgressHUD.h"
+
+#import "IATConfig.h"
 
 #import <MessageUI/MFMailComposeViewController.h>
 
@@ -21,12 +22,28 @@
 @property (weak, nonatomic) IBOutlet UISwitch *savePhotoSwitch;
 @property (weak, nonatomic) IBOutlet UISwitch *saveVideoSwitch;
 @property (weak, nonatomic) IBOutlet UISwitch *touchIDSwitch;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *languageControl;
 
 @property (nonatomic, assign) BOOL isCreatBackUp;
 @property (nonatomic, assign) BOOL backUpExists;
+@property (nonatomic, copy) NSString *voiceLanguage;
+
 @end
 
 @implementation CLSettingVC
+
+- (NSString *)voiceLanguage {
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    _voiceLanguage = [defaults stringForKey:kVoiceLanguageKey];
+    if (_voiceLanguage == nil) {
+        _voiceLanguage = kVoiceChinese;
+        [defaults setObject:_voiceLanguage forKey:kVoiceLanguageKey];
+        [defaults synchronize];
+    }
+    
+    return _voiceLanguage;
+}
 
 - (BOOL)backUpExists {
     
@@ -57,6 +74,15 @@
 
     self.savePhotoSwitch.on = [defaults boolForKey:kSavePhotoKey];
     self.saveVideoSwitch.on = [defaults boolForKey:kSaveVideoKey];
+    
+    if ([self.voiceLanguage isEqualToString:kVoiceChinese]) {
+        self.languageControl.selectedSegmentIndex = 0;
+    } else if ([self.voiceLanguage isEqualToString:kVoiceGuangdong]) {
+        self.languageControl.selectedSegmentIndex = 1;
+    }  else if ([self.voiceLanguage isEqualToString:kVoiceEnglish]) {
+        self.languageControl.selectedSegmentIndex = 2;
+    }
+    NSLog(@"%@", self.voiceLanguage);
 }
 
 - (void)newPasswordCreated {
@@ -111,7 +137,7 @@
             break;
             
         case 2:
-            number = 1;
+            number = 2;
             break;
             
         case 3:
@@ -137,38 +163,57 @@
         
         if (indexPath.row == 0) {
             
-            // The hud will dispable all input on the view (use the higest view possible in the view hierarchy)
-            MBProgressHUD *HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
-            [self.navigationController.view addSubview:HUD];
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"生成备份", nil) message:NSLocalizedString(@"提示: 生成备份文件后, 请尽快通过iTunes将备份文件导出到您的PC或者Mac中. 为了节省您的存储空间, Mook推荐您在导出备份后删除备份文件. 确定要生成备份文件吗?", nil) preferredStyle:UIAlertControllerStyleAlert];
             
-            HUD.delegate = self;
-            HUD.labelText = NSLocalizedString(@"正在生成备份文件", nil);
+            UIAlertAction* loadBackUp = [UIAlertAction actionWithTitle:NSLocalizedString(@"确定", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    
+                    // The hud will dispable all input on the view (use the higest view possible in the view hierarchy)
+                    MBProgressHUD *HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
+                    [self.navigationController.view addSubview:HUD];
+                    
+                    HUD.delegate = self;
+                    HUD.labelText = NSLocalizedString(@"正在生成备份文件", nil);
+                    
+                    [HUD showAnimated:YES whileExecutingBlock:^{
+                        
+                        // Create
+                        NSString *backUpName = [NSString backUpPath];
+                        NSString *mookPath = [NSString mookPath];
+                        self.isCreatBackUp = [SSZipArchive createZipFileAtPath:backUpName withContentsOfDirectory:mookPath keepParentDirectory:YES];
+                        
+                    } onQueue:dispatch_get_main_queue() completionBlock:^{
+                        
+                        if (self.isCreatBackUp) {
+                            HUD.labelText = NSLocalizedString(@"已成功生成备份文件", nil);
+                            [self.tableView reloadData]; // 生成后刷新表格, 显示"恢复备份"
+                        } else {
+                            HUD.labelText = NSLocalizedString(@"生成备份文件失败", nil);
+                        }
+                        // Configure for text only and offset down
+                        HUD.mode = MBProgressHUDModeText;
+                        HUD.margin = 10.f;
+                        HUD.yOffset = 150.f;
+                        HUD.removeFromSuperViewOnHide = YES;
+                        [HUD show:YES];
+                        
+                        
+                        [HUD hide:YES afterDelay:1];
+                    }];
 
-            [HUD showAnimated:YES whileExecutingBlock:^{
-                
-                // Create
-                NSString *backUpName = [NSString backUpPath];
-                NSString *mookPath = [NSString mookPath];
-                self.isCreatBackUp = [SSZipArchive createZipFileAtPath:backUpName withContentsOfDirectory:mookPath keepParentDirectory:YES];
-                
-            } onQueue:dispatch_get_main_queue() completionBlock:^{
-                
-                if (self.isCreatBackUp) {
-                    HUD.labelText = NSLocalizedString(@"已成功生成备份文件", nil);
-                    [self.tableView reloadData]; // 生成后刷新表格, 显示"恢复备份"
-                } else {
-                    HUD.labelText = NSLocalizedString(@"生成备份文件失败", nil);
-                }
-                // Configure for text only and offset down
-                HUD.mode = MBProgressHUDModeText;
-                HUD.margin = 10.f;
-                HUD.yOffset = 150.f;
-                HUD.removeFromSuperViewOnHide = YES;
-                [HUD show:YES];
-                
-                
-                [HUD hide:YES afterDelay:1];
+                    
+                });
+                    
             }];
+            
+            UIAlertAction* cancel = [UIAlertAction actionWithTitle:NSLocalizedString(@"取消", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
+            }];
+            
+            [alert addAction:loadBackUp];
+            [alert addAction:cancel];
+            
+            [self presentViewController:alert animated:YES completion:nil];
             
         } else if (indexPath.row == 1) {
             
@@ -176,80 +221,118 @@
             
         } else if (indexPath.row == 2) { // 如果有第三行则表示备份文件存在,可以恢复
 
-            MBProgressHUD *HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
-            HUD.labelText = NSLocalizedString(@"正在加载恢复备份", nil);
-            [self.navigationController.view addSubview:HUD];
-            [HUD setMode:MBProgressHUDModeDeterminate];   //圆盘的扇形进度显示
-            HUD.taskInProgress = YES;
-            [HUD show:YES];
-            // Unzip
-            NSString *backUpName = [NSString backUpPath];
-            NSArray *paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
-            NSString *libraryPath = [paths objectAtIndex:0];
+            // 恢复备份
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"恢复备份", nil) message:NSLocalizedString(@"注意: 恢复备份后, 您当前的Mook数据将被永久性地替换为备份数据. 确定要恢复备份吗?", nil) preferredStyle:UIAlertControllerStyleAlert];
             
-            [SSZipArchive unzipFileAtPath:backUpName toDestination:libraryPath overwrite:YES password:nil progressHandler:^(NSString *entry, unz_file_info zipInfo, long entryNumber, long total) {
+            UIAlertAction* loadBackUp = [UIAlertAction actionWithTitle:NSLocalizedString(@"确定", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                 
-                CGFloat progress = entryNumber / total;
-                HUD.progress = progress;
-                   //显示
-                NSLog(@"%ld / %ld", entryNumber, total);
-            } completionHandler:^(NSString *path, BOOL succeeded, NSError *error) {
-                NSLog(@"finish unzipping");
-
-                if (succeeded) {
-                    HUD.labelText = NSLocalizedString(@"已成功恢复备份文件", nil);
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                     
+                    
+                    MBProgressHUD *HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
+                    HUD.labelText = NSLocalizedString(@"正在加载恢复备份", nil);
+                    [self.navigationController.view addSubview:HUD];
+                    [HUD setMode:MBProgressHUDModeDeterminate];   //圆盘的扇形进度显示
+                    HUD.taskInProgress = YES;
+                    [HUD show:YES];
+                    // Unzip
+                    NSString *backUpName = [NSString backUpPath];
+                    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
+                    NSString *libraryPath = [paths objectAtIndex:0];
+                    
+                    [SSZipArchive unzipFileAtPath:backUpName toDestination:libraryPath overwrite:YES password:nil progressHandler:^(NSString *entry, unz_file_info zipInfo, long entryNumber, long total) {
+                        
+                        CGFloat progress = entryNumber / total;
+                        HUD.progress = progress;
+                        //显示
+                        NSLog(@"%ld / %ld", entryNumber, total);
+                    } completionHandler:^(NSString *path, BOOL succeeded, NSError *error) {
+                        NSLog(@"finish unzipping");
+                        
+                        if (succeeded) {
+                            HUD.labelText = NSLocalizedString(@"已成功恢复备份文件", nil);
+                            
 #warning 关于数据刷新的问题(主页几个VC)
-                    //  提醒用户退出应用?
-//                    [(AppDelegate *)[[UIApplication sharedApplication] delegate] reloadData];
-                    
-                    
-                } else {
-                    HUD.labelText = NSLocalizedString(@"恢复备份文件失败", nil);
-                }
+                            //  提醒用户退出应用?
+                            //                    [(AppDelegate *)[[UIApplication sharedApplication] delegate] reloadData];
+                            
+                            
+                        } else {
+                            HUD.labelText = NSLocalizedString(@"恢复备份文件失败", nil);
+                        }
+                        
+                        // Configure for text only and offset down
+                        HUD.mode = MBProgressHUDModeText;
+                        HUD.margin = 10.f;
+                        HUD.yOffset = 150.f;
+                        HUD.removeFromSuperViewOnHide = YES;
+                        [HUD show:YES];
+                        
+                        
+                        [HUD hide:YES afterDelay:1];
+                    }];
+                });
                 
-                // Configure for text only and offset down
-                HUD.mode = MBProgressHUDModeText;
-                HUD.margin = 10.f;
-                HUD.yOffset = 150.f;
-                HUD.removeFromSuperViewOnHide = YES;
-                [HUD show:YES];
-                
-                
-                [HUD hide:YES afterDelay:1];
             }];
-
+            
+            UIAlertAction* cancel = [UIAlertAction actionWithTitle:NSLocalizedString(@"取消", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
+            }];
+            
+            [alert addAction:loadBackUp];
+            [alert addAction:cancel];
+            
+            [self presentViewController:alert animated:YES completion:nil];
+    
             
         }  else if (indexPath.row == 3) { // 删除备份文件
             
-            NSFileManager* fileManager=[NSFileManager defaultManager];
-            NSString *backUpPath = [NSString backUpPath];
+            // 恢复备份
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"删除备份文件", nil) message:NSLocalizedString(@"确定要删除备份文件吗?", nil) preferredStyle:UIAlertControllerStyleAlert];
             
-            if (self.backUpExists) {
-                BOOL fileDeleted= [fileManager removeItemAtPath:backUpPath error:nil];
+            UIAlertAction* loadBackUp = [UIAlertAction actionWithTitle:NSLocalizedString(@"确定", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                 
-                MBProgressHUD *HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
-                [self.navigationController.view addSubview:HUD];
-                HUD.mode = MBProgressHUDModeText;
-                HUD.removeFromSuperViewOnHide = YES;
-                // Configure for text only and offset down
-                HUD.margin = 10.f;
-                HUD.yOffset = 150.f;
-                HUD.delegate = self;
-                
-                if (fileDeleted) {
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                     
-                    HUD.labelText = NSLocalizedString(@"已删除备份文件", nil);
-                    [self.tableView reloadData];
-
-                } else {
-                    HUD.labelText = NSLocalizedString(@"删除备份文件失败", nil);
-                }
+                    
+                    NSFileManager* fileManager=[NSFileManager defaultManager];
+                    NSString *backUpPath = [NSString backUpPath];
+                    
+                    if (self.backUpExists) {
+                        BOOL fileDeleted= [fileManager removeItemAtPath:backUpPath error:nil];
+                        
+                        MBProgressHUD *HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
+                        [self.navigationController.view addSubview:HUD];
+                        HUD.mode = MBProgressHUDModeText;
+                        HUD.removeFromSuperViewOnHide = YES;
+                        // Configure for text only and offset down
+                        HUD.margin = 10.f;
+                        HUD.yOffset = 150.f;
+                        HUD.delegate = self;
+                        
+                        if (fileDeleted) {
+                            
+                            HUD.labelText = NSLocalizedString(@"已删除备份文件", nil);
+                            [self.tableView reloadData];
+                            
+                        } else {
+                            HUD.labelText = NSLocalizedString(@"删除备份文件失败", nil);
+                        }
+                        
+                        [HUD show:YES];
+                        
+                        [HUD hide:YES afterDelay:1];
+                    }
+                });
                 
-                [HUD show:YES];
-                
-                [HUD hide:YES afterDelay:1];
-            }
+            }];
+            
+            UIAlertAction* cancel = [UIAlertAction actionWithTitle:NSLocalizedString(@"取消", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
+            }];
+            
+            [alert addAction:loadBackUp];
+            [alert addAction:cancel];
+            
+            [self presentViewController:alert animated:YES completion:nil];
             
         }
     } else if (indexPath.section == 4) {
@@ -352,6 +435,33 @@
     [defaults synchronize];
 }
 
+- (IBAction)languageControlChanged:(UISegmentedControl *)languageControl {
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    IATConfig *instance = [IATConfig sharedInstance];
+
+    if (languageControl.selectedSegmentIndex == 0) {
+        
+        [defaults setObject:kVoiceChinese forKey:kVoiceLanguageKey];
+        instance.language = [IFlySpeechConstant LANGUAGE_CHINESE];
+        instance.accent = [IFlySpeechConstant ACCENT_MANDARIN];
+        
+    } else if (languageControl.selectedSegmentIndex == 1) {
+        
+        [defaults setObject:kVoiceGuangdong forKey:kVoiceLanguageKey];
+        
+        instance.language = [IFlySpeechConstant LANGUAGE_CHINESE];
+        instance.accent = [IFlySpeechConstant ACCENT_CANTONESE];
+        
+    } else if (languageControl.selectedSegmentIndex == 2) {
+        
+        [defaults setObject:kVoiceEnglish forKey:kVoiceLanguageKey];
+        instance.language = [IFlySpeechConstant LANGUAGE_ENGLISH];
+    }
+    
+    [defaults synchronize];
+    NSLog(@"now what");
+}
 
 #pragma mark - Compose Mail/SMS
 

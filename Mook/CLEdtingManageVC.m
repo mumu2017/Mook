@@ -27,7 +27,6 @@
 
 #import "CLMediaView.h"
 
-
 #import "IATConfig.h"
 #import "PopupView.h"
 #import "ISRDataHelper.h"
@@ -49,10 +48,23 @@
 
 @property (nonatomic, copy) NSString *content;
 @property (nonatomic, assign) NSInteger currentIdentifierTag;
+@property (nonatomic, copy) NSString *voiceLanguage;
 
 @end
 
 @implementation CLEdtingManageVC
+
+- (NSString *)voiceLanguage {
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    _voiceLanguage = [defaults stringForKey:kVoiceLanguageKey];
+    if (_voiceLanguage == nil) {
+        _voiceLanguage = kVoiceChinese;
+        [defaults setObject:_voiceLanguage forKey:kVoiceLanguageKey];
+    }
+    
+    return _voiceLanguage;
+}
 
 - (CLMediaView *)mediaView {
     if (!_mediaView) {

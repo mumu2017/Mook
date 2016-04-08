@@ -158,7 +158,7 @@ static NSString * const reuseIdentifier = @"Cell";
 
         case 6:
             title = NSLocalizedString(@"标签", nil);
-            count = [NSString stringWithFormat:@"%ld", (unsigned long)self.linesObjModelList.count];
+            count = [NSString stringWithFormat:@"%ld", (unsigned long)self.allTags.count];
             iconName = @"tag.jpg";
             break;
 
