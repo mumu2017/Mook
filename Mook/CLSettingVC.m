@@ -149,7 +149,7 @@
             break;
             
         case 5:
-            number = 3;
+            number = 4;
             break;
             
         default:

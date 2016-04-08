@@ -1004,9 +1004,9 @@
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dbt-JU-1f8">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <string key="text">这是一个魔术爱好者的作品. 希望它能够帮助魔术师与爱好者们进行魔术知识管理.
+                                <mutableString key="text">这是一个魔术爱好者的作品. 希望它能够帮助魔术师与爱好者们进行魔术知识管理.
 让我们一起,把魔术变得更好.
-
+ Mook使用了讯飞语音提供的语音识别服务.
 Mook使用了以下开源库:
 FMDB
 SWTableViewCell
@@ -1021,12 +1021,13 @@ MBProgressHUD WJTouchID JGActionSheet
 
 Mook 1.0.0            By Chen Lin
 
-Copyright © 2016. All rights reserved.</string>
+Copyright © 2016. All rights reserved.</mutableString>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                <variation key="heightClass=regular-widthClass=compact">
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                    <rect key="frame" x="16" y="110" width="288" height="467"/>
                                 </variation>
                             </textView>
                         </subviews>

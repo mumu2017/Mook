@@ -802,7 +802,7 @@
                             CLNewEntryTextCell *cell = [tableView dequeueReusableCellWithIdentifier:kNewEntryTextCellID];
                             
                             cell.contentLabel.text = model.prep;
-                            NSLog(@"%@", model.prep);
+//                            NSLog(@"%@", model.prep);
                             return cell;
                         }
                         

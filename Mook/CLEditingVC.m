@@ -1165,7 +1165,18 @@
 #pragma mark - textView 代理方法
 - (void)textViewDidChange:(UITextView *)textView {
     
-    [self updateTextView:textView];
+    // 如果发生了编辑改变, 则将发生编辑的状态设置为YES
+    self.didMakeChange = YES;
+    
+    if (textView == self.editTextView) {
+        if (!textView.hasText) {
+            [textView showPlaceHolder];
+        } else {
+            [textView hidePlaceHolder];
+        }
+        
+        [self saveText:textView];
+    }
 }
 
 - (void)updateTextView:(UITextView *)textView {
@@ -1184,6 +1195,7 @@
 }
 
 - (void)saveText:(UITextView *)textView {
+
     switch (self.editingModel) {
         case kEditingModeEffect:
             self.effectModel.effect = textView.text;

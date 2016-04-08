@@ -647,7 +647,9 @@
 
 - (void)editingVCCancelAudioRecognition:(CLEditingVC *)editingVC {
     
-    [self cancelVoiceRecognition];
+    if ([self.iFlySpeechRecognizer isListening]) {
+        [self stopVoiceRecognition];
+    }
     
 }
 
@@ -684,16 +686,15 @@
     }else{
         [_popUpView showText: @"启动识别服务失败，请稍后重试"];//可能是上次请求未结束，暂不支持多路并发
     }
-    
 }
 
 /**
- 取消听写
+ 停止听写
  *****/
-- (void)cancelVoiceRecognition {
+- (void)stopVoiceRecognition {
     self.isCanceled = YES;
     
-    [_iFlySpeechRecognizer cancel];
+    [_iFlySpeechRecognizer stopListening];
     
     if ([self.editDelegate respondsToSelector:@selector(editingManageVC:didFinishWithAudioRecognizeResult:currentIdentifierTag:)]) {
         [self.editDelegate editingManageVC:self didFinishWithAudioRecognizeResult:self.content currentIdentifierTag:self.currentIdentifierTag];
@@ -759,10 +760,10 @@
  ****/
 - (void) onVolumeChanged: (int)volume
 {
-    if (self.isCanceled) {
-        [_popUpView removeFromSuperview];
-        return;
-    }
+//    if (self.isCanceled) {
+//        [_popUpView removeFromSuperview];
+//        return;
+//    }
     
     NSString * vol = [NSString stringWithFormat:@"语音识别中\n音量：%d",volume];
     [_popUpView showText: vol];
