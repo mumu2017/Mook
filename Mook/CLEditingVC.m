@@ -7,6 +7,7 @@
 //
 
 #import "CLEditingVC.h"
+#import "CLEdtingManageVC.h"
 #import "CLQuickStringNavVC.h"
 #import "CLDataSaveTool.h"
 #import "CLToolBar.h"
@@ -27,7 +28,11 @@
 #import <MobileCoreServices/MobileCoreServices.h> // needed for video types
 #import "XLPagerTabStripViewController.h"
 
-@interface CLEditingVC ()<CLToolBarDelegate, CLQuickStringNavDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIPickerViewDataSource, UIPickerViewDelegate, XLPagerTabStripChildItem>
+#import "IATConfig.h"
+#import "PopupView.h"
+#import "ISRDataHelper.h"
+
+@interface CLEditingVC ()<CLToolBarDelegate, CLQuickStringNavDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIPickerViewDataSource, UIPickerViewDelegate, XLPagerTabStripChildItem, CLEdtingManageVCDelegate>
 
 @property (nonatomic, strong) UIPickerView *pickerView;
 
@@ -225,23 +230,23 @@
         case kEditingModeEffect:
             self.toolBar.addButton.hidden = YES;
             self.toolBar.deleteButton.hidden = YES;
-            [self.toolBar.previousButton setImage:kToolBarApproveImage forState:UIControlStateNormal];
+            [self.toolBar.previousButton setImage:kToolBarWriteImage forState:UIControlStateNormal];
             [self.toolBar.previousButton setImage:kToolBarApproveImageHighlighted forState:UIControlStateHighlighted];
             break;
             
         case kEditingModePrep:
-            [self.toolBar.previousButton setImage:kToolBarApproveImage forState:UIControlStateNormal];
+            [self.toolBar.previousButton setImage:kToolBarWriteImage forState:UIControlStateNormal];
             [self.toolBar.previousButton setImage:kToolBarApproveImageHighlighted forState:UIControlStateHighlighted];
             break;
             
         case kEditingModePerform:
-            [self.toolBar.previousButton setImage:kToolBarApproveImage forState:UIControlStateNormal];
+            [self.toolBar.previousButton setImage:kToolBarWriteImage forState:UIControlStateNormal];
             [self.toolBar.previousButton setImage:kToolBarApproveImageHighlighted forState:UIControlStateHighlighted];
             break;
             
         case kEditingModeNotes:
             self.toolBar.imageButton.hidden = YES;
-            [self.toolBar.previousButton setImage:kToolBarApproveImage forState:UIControlStateNormal];
+            [self.toolBar.previousButton setImage:kToolBarWriteImage forState:UIControlStateNormal];
             [self.toolBar.previousButton setImage:kToolBarApproveImageHighlighted forState:UIControlStateHighlighted];
             break;
             
@@ -257,8 +262,12 @@
     
     [self setDisplayData];
     [self setTextView];
-    
     [self registerForNotifications];
+
+    if (self.manageVC != nil) {
+        self.manageVC.editDelegate = self;
+    }
+    
 }
 
 - (void)setTextView {
@@ -343,11 +352,16 @@
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
+    
     [super viewWillDisappear: animated];
     
     if (self.didMakeChange) {
         // 别忘了道具编辑页面和演出编辑页面
         [[NSNotificationCenter defaultCenter] postNotificationName:kDidMakeChangeNotification object:nil];
+    }
+    
+    if ([self.delegate respondsToSelector:@selector(editingVCCancelAudioRecognition:)]) {
+        [self.delegate editingVCCancelAudioRecognition:self];
     }
 }
 
@@ -411,6 +425,7 @@
 
 
 - (void)dealloc {
+
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
@@ -490,11 +505,13 @@
 
     } else if (button == toolBar.previousButton) {
         
-        [self.view endEditing:YES];
+        [self performSegueWithIdentifier:kQuickStringSegue sender:nil];
         
     } else if (button == toolBar.nextButton) {
 
-        [self performSegueWithIdentifier:kQuickStringSegue sender:nil];
+        if ([self.delegate respondsToSelector:@selector(editingVC:startAudioRecognitionWithContent:andIdentifierTag:)]) {
+            [self.delegate editingVC:self startAudioRecognitionWithContent:self.editTextView.text andIdentifierTag:self.identifierTag];
+        }
         
     } else if (button == toolBar.addButton) {
         
@@ -536,6 +553,14 @@
     }
 }
 
+- (void)editingManageVC:(CLEdtingManageVC *)edtingManageVC didFinishWithAudioRecognizeResult:(NSString *)result currentIdentifierTag:(NSInteger)identifierTag {
+    
+    if (self.identifierTag == identifierTag) { // 如果和editingManageVC中的currentIden
+        self.editTextView.text = result;
+        [self updateTextView:self.editTextView];
+    }
+
+}
 
 - (void)addPrep {
     
@@ -1140,6 +1165,10 @@
 #pragma mark - textView 代理方法
 - (void)textViewDidChange:(UITextView *)textView {
     
+    [self updateTextView:textView];
+}
+
+- (void)updateTextView:(UITextView *)textView {
     // 如果发生了编辑改变, 则将发生编辑的状态设置为YES
     self.didMakeChange = YES;
     
@@ -1179,6 +1208,5 @@
     }
 
 }
-
 
 @end

@@ -27,10 +27,15 @@
 
 #import "CLMediaView.h"
 
+
+#import "IATConfig.h"
+#import "PopupView.h"
+#import "ISRDataHelper.h"
+
 #define kEffectCount   1
 #define kEffectIndex    0
 
-@interface CLEdtingManageVC ()<CLEditingVCDelegate, CLPropInputVCDelegate>
+@interface CLEdtingManageVC ()<CLEditingVCDelegate, CLPropInputVCDelegate, IFlySpeechRecognizerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIProgressView *progressView;
 @property (weak, nonatomic) IBOutlet UIProgressView *topProgressView;
@@ -41,6 +46,9 @@
 @property (nonatomic, assign) NSUInteger indexInPrepModelList;
 @property (nonatomic, assign) NSUInteger indexInPerformModelList;
 @property (nonatomic, assign) NSUInteger indexInNotesModelList;
+
+@property (nonatomic, copy) NSString *content;
+@property (nonatomic, assign) NSInteger currentIdentifierTag;
 
 @end
 
@@ -306,8 +314,26 @@
     [self mediaView];
     self.isProgressiveIndicator = YES;
     self.isElasticIndicatorLimit = YES;
+    
+    // 注册讯飞语音的appID
+    NSString *initString = [NSString stringWithFormat:@"%@=%@", [IFlySpeechConstant APPID], kIFlyAppID];
+    [IFlySpeechUtility createUtility:initString];
+    
+    _popUpView = [[PopupView alloc] initWithFrame:CGRectMake(100, 64, 0, 0) withParentView:self.view];
+    //demo录音文件保存路径
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+    NSString *cachePath = [paths objectAtIndex:0];
+    _pcmFilePath = [[NSString alloc] initWithFormat:@"%@",[cachePath stringByAppendingPathComponent:@"asr.pcm"]];
 }
 
+- (void)dealloc {
+    
+    [_iFlySpeechRecognizer cancel]; //取消识别
+    [_iFlySpeechRecognizer setDelegate:nil];
+    [_iFlySpeechRecognizer setParameter:@"" forKey:[IFlySpeechConstant PARAMS]];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -315,20 +341,7 @@
     [self moveToViewControllerAtIndex:self.selectedVCIndex];
     [self updateProgress];
     
-//    [self.pagerTabStripChildViewControllers enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-//        NSAssert([obj conformsToProtocol:@protocol(XLPagerTabStripChildItem)], @"child view controller must conform to XLPagerTabStripChildItem");
-//        
-//        if (idx == self.selectedVCIndex) {
-//            
-//
-//            UIViewController<XLPagerTabStripChildItem> * childViewController = (UIViewController<XLPagerTabStripChildItem> *)obj;
-//            
-//            self.navigationItem.title = [childViewController titleForPagerTabStripViewController:self];
-//            [self updateProgress];
-//        }
-//    }];
-//    
-    
+    [self initRecognizer];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
@@ -355,7 +368,10 @@
                 vc.editingContentType = self.editingContentType;
                 vc.timeStamp = self.routineModel.timeStamp;
                 vc.delegate = self;
+                vc.identifierTag = i;
                 vc.mediaView = self.mediaView;
+                vc.manageVC = self;
+                
                 [childVCArray addObject:vc];
             } else if (i > 0 && i <= self.routineModel.propModelList.count) {
                 CLPropInputVC *vc = [sb instantiateViewControllerWithIdentifier:@"propInputVC"];
@@ -371,6 +387,8 @@
                 vc.editingContentType = self.editingContentType;
                 vc.timeStamp = self.routineModel.timeStamp;
 
+                vc.manageVC = self;
+                vc.identifierTag = i;
                 vc.delegate = self;
                 vc.mediaView = self.mediaView;
 
@@ -384,6 +402,8 @@
                 vc.editingContentType = self.editingContentType;
                 vc.timeStamp = self.routineModel.timeStamp;
 
+                vc.manageVC = self;
+                vc.identifierTag = i;
                 vc.delegate = self;
                 vc.mediaView = self.mediaView;
 
@@ -393,6 +413,9 @@
                 vc.notesModel = self.routineModel.notesModelLsit[i-self.routineModel.propModelList.count-self.routineModel.prepModelList.count-self.routineModel.performModelList.count-1];
                 vc.editingModel = kEditingModeNotes;
                 vc.editingContentType = self.editingContentType;
+                
+                vc.manageVC = self;
+                vc.identifierTag = i;
                 vc.delegate = self;
                 vc.mediaView = self.mediaView;
 
@@ -401,6 +424,9 @@
             
         } else {
             CLEditingVC *vc = [sb instantiateViewControllerWithIdentifier:@"editingVC"];
+            
+            vc.manageVC = self;
+            vc.identifierTag = i;
             vc.delegate = self;
             vc.editingContentType = self.editingContentType;
             vc.mediaView = self.mediaView;
@@ -470,24 +496,6 @@
 
 
 #pragma mark - XLPagerTabStripViewControllerDelegate
-
-//-(void)pagerTabStripViewController:(XLPagerTabStripViewController *)pagerTabStripViewController
-//          updateIndicatorFromIndex:(NSInteger)fromIndex
-//                           toIndex:(NSInteger)toIndex
-//{
-//    
-//    [self.pagerTabStripChildViewControllers enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-//        NSAssert([obj conformsToProtocol:@protocol(XLPagerTabStripChildItem)], @"child view controller must conform to XLPagerTabStripChildItem");
-//        
-//        if (idx == toIndex) {
-//            UIViewController<XLPagerTabStripChildItem> * childViewController = (UIViewController<XLPagerTabStripChildItem> *)obj;
-//            
-//            self.navigationItem.title = [childViewController titleForPagerTabStripViewController:self];
-//            [self updateProgress];
-//        }
-//    }];
-//    
-//}
 
 -(void)pagerTabStripViewController:(XLPagerTabStripViewController *)pagerTabStripViewController
           updateIndicatorFromIndex:(NSInteger)fromIndex
@@ -615,5 +623,226 @@
 - (IBAction)doneButtonClicked:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
 }
+
+#pragma mark - 讯飞语音
+
+- (void)editingVC:(CLEditingVC *)editingVC startAudioRecognitionWithContent:(NSString *)content andIdentifierTag:(NSInteger)identifierTag{
+    
+    self.content = content;
+    self.currentIdentifierTag = identifierTag;
+    [self startVoiceRecognition];
+}
+
+- (void)editingVCCancelAudioRecognition:(CLEditingVC *)editingVC {
+    
+    [self cancelVoiceRecognition];
+    
+}
+
+/**
+ 启动听写
+ *****/
+- (void)startVoiceRecognition {
+    
+    self.isCanceled = NO;
+    
+    if(_iFlySpeechRecognizer == nil)
+    {
+        [self initRecognizer];
+    }
+    
+    [_iFlySpeechRecognizer cancel];
+    
+    //设置音频来源为麦克风
+    [_iFlySpeechRecognizer setParameter:IFLY_AUDIO_SOURCE_MIC forKey:@"audio_source"];
+    
+    //设置听写结果格式为json
+    [_iFlySpeechRecognizer setParameter:@"json" forKey:[IFlySpeechConstant RESULT_TYPE]];
+    
+    //保存录音文件，保存在sdk工作路径中，如未设置工作路径，则默认保存在library/cache下
+    [_iFlySpeechRecognizer setParameter:@"asr.pcm" forKey:[IFlySpeechConstant ASR_AUDIO_PATH]];
+    
+    [_iFlySpeechRecognizer setDelegate:self];
+    
+    BOOL ret = [_iFlySpeechRecognizer startListening];
+    
+    if (ret) {
+
+        
+    }else{
+        [_popUpView showText: @"启动识别服务失败，请稍后重试"];//可能是上次请求未结束，暂不支持多路并发
+    }
+    
+}
+
+/**
+ 取消听写
+ *****/
+- (void)cancelVoiceRecognition {
+    self.isCanceled = YES;
+    
+    [_iFlySpeechRecognizer cancel];
+    
+    if ([self.editDelegate respondsToSelector:@selector(editingManageVC:didFinishWithAudioRecognizeResult:currentIdentifierTag:)]) {
+        [self.editDelegate editingManageVC:self didFinishWithAudioRecognizeResult:self.content currentIdentifierTag:self.currentIdentifierTag];
+    }
+    
+//    [_popUpView removeFromSuperview];
+}
+
+
+/**
+ 设置识别参数
+ ****/
+-(void)initRecognizer
+{
+    NSLog(@"%s",__func__);
+    
+    //单例模式，无UI的实例
+    if (_iFlySpeechRecognizer == nil) {
+        
+        _iFlySpeechRecognizer = [IFlySpeechRecognizer sharedInstance];
+        
+        [_iFlySpeechRecognizer setParameter:@"" forKey:[IFlySpeechConstant PARAMS]];
+        
+        //设置听写模式
+        [_iFlySpeechRecognizer setParameter:@"iat" forKey:[IFlySpeechConstant IFLY_DOMAIN]];
+    }
+    _iFlySpeechRecognizer.delegate = self;
+    
+    if (_iFlySpeechRecognizer != nil) {
+        IATConfig *instance = [IATConfig sharedInstance];
+        
+        //设置最长录音时间
+        [_iFlySpeechRecognizer setParameter:instance.speechTimeout forKey:[IFlySpeechConstant SPEECH_TIMEOUT]];
+        //设置后端点
+        [_iFlySpeechRecognizer setParameter:instance.vadEos forKey:[IFlySpeechConstant VAD_EOS]];
+        //设置前端点
+        [_iFlySpeechRecognizer setParameter:instance.vadBos forKey:[IFlySpeechConstant VAD_BOS]];
+        //网络等待时间
+        [_iFlySpeechRecognizer setParameter:@"20000" forKey:[IFlySpeechConstant NET_TIMEOUT]];
+        
+        //设置采样率，推荐使用16K
+        [_iFlySpeechRecognizer setParameter:instance.sampleRate forKey:[IFlySpeechConstant SAMPLE_RATE]];
+        
+        if ([instance.language isEqualToString:[IATConfig chinese]]) {
+            //设置语言
+            [_iFlySpeechRecognizer setParameter:instance.language forKey:[IFlySpeechConstant LANGUAGE]];
+            //设置方言
+            [_iFlySpeechRecognizer setParameter:instance.accent forKey:[IFlySpeechConstant ACCENT]];
+        }else if ([instance.language isEqualToString:[IATConfig english]]) {
+            [_iFlySpeechRecognizer setParameter:instance.language forKey:[IFlySpeechConstant LANGUAGE]];
+        }
+        //设置是否返回标点符号
+        [_iFlySpeechRecognizer setParameter:instance.dot forKey:[IFlySpeechConstant ASR_PTT]];
+        
+    }
+}
+
+#pragma mark - IFlySpeechRecognizerDelegate
+
+/**
+ 音量回调函数
+ volume 0－30
+ ****/
+- (void) onVolumeChanged: (int)volume
+{
+    if (self.isCanceled) {
+        [_popUpView removeFromSuperview];
+        return;
+    }
+    
+    NSString * vol = [NSString stringWithFormat:@"语音识别中\n音量：%d",volume];
+    [_popUpView showText: vol];
+}
+
+
+
+/**
+ 开始识别回调
+ ****/
+- (void) onBeginOfSpeech
+{
+    NSLog(@"onBeginOfSpeech");
+    [_popUpView showText: @"正在录音"];
+}
+
+/**
+ 停止录音回调
+ ****/
+- (void) onEndOfSpeech
+{
+    NSLog(@"onEndOfSpeech");
+    
+    [_popUpView showText: @"停止录音"];
+}
+
+
+/**
+ 听写结束回调（注：无论听写是否正确都会回调）
+ error.errorCode =
+ 0     听写正确
+ other 听写出错
+ ****/
+- (void) onError:(IFlySpeechError *) error
+{
+    NSLog(@"%s",__func__);
+    
+    if ([IATConfig sharedInstance].haveView == NO ) {
+        NSString *text ;
+        
+        if (self.isCanceled) {
+            text = @"识别停止";
+            
+        } else if (error.errorCode == 0 ) {
+            if (_result.length == 0) {
+                text = @"无识别结果";
+            }else {
+                text = @"识别成功";
+            }
+        }else {
+            text = [NSString stringWithFormat:@"发生错误：%d %@", error.errorCode,error.errorDesc];
+            NSLog(@"%@",text);
+        }
+        
+        [_popUpView showText: text];
+        
+    }else {
+        [_popUpView showText:@"识别结束"];
+        NSLog(@"errorCode:%d",[error errorCode]);
+    }
+
+    
+}
+
+/**
+ 无界面，听写结果回调
+ results：听写结果
+ isLast：表示最后一次
+ ****/
+- (void) onResults:(NSArray *) results isLast:(BOOL)isLast
+{
+    
+    NSMutableString *resultString = [[NSMutableString alloc] init];
+    NSDictionary *dic = results[0];
+    for (NSString *key in dic) {
+        [resultString appendFormat:@"%@",key];
+    }
+    _result =[NSString stringWithFormat:@"%@%@", self.content,resultString];
+    NSString * resultFromJson =  [ISRDataHelper stringFromJson:resultString];
+    self.content = [NSString stringWithFormat:@"%@%@", self.content,resultFromJson];
+    
+    if (isLast){
+        NSLog(@"听写结果(json)：%@测试",  self.result);
+    }
+    NSLog(@"_result=%@",_result);
+    NSLog(@"resultFromJson=%@",resultFromJson);
+//    NSLog(@"isLast=%d,_textView.text=%@",isLast,_editTextView.text);
+    
+    if ([self.editDelegate respondsToSelector:@selector(editingManageVC:didFinishWithAudioRecognizeResult:currentIdentifierTag:)]) {
+        [self.editDelegate editingManageVC:self didFinishWithAudioRecognizeResult:self.content currentIdentifierTag:self.currentIdentifierTag];
+    }
+}
+
 
 @end

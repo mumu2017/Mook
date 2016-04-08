@@ -7,11 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+
 #import "CLNewEntryVC.h"
 
-@class CLToolBar, CLEditingVC, XLPagerTabStripViewController;
+@class CLToolBar, CLEditingVC, XLPagerTabStripViewController, CLEdtingManageVC;
 @class CLEffectModel, CLPropModel, CLPrepModel, CLPerformModel, CLNotesModel;
-@class CLMediaView;
+@class CLMediaView, PopupView;
 
 @protocol CLEditingVCDelegate <NSObject>
 
@@ -26,6 +27,10 @@
 - (void) editingVCDeleteNotes:(CLEditingVC *)editingVC;
 
 - (void) editingVCDidSwitchPerformContent:(CLEditingVC *)editingVC;
+
+- (void) editingVC:(CLEditingVC *)editingVC startAudioRecognitionWithContent:(NSString *)content  andIdentifierTag:(NSInteger)identifierTag;
+
+- (void) editingVCCancelAudioRecognition:(CLEditingVC *)editingVC;
 
 @end
 
@@ -47,6 +52,8 @@
 @property (nonatomic, assign) EditingMode editingModel;
 
 @property (nonatomic, strong) CLToolBar *toolBar;
+@property (nonatomic, strong) CLEdtingManageVC *manageVC;
+@property (nonatomic, assign) NSInteger identifierTag;
 
 @property (nonatomic, weak) id<CLEditingVCDelegate> delegate;
 

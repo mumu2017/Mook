@@ -8,9 +8,18 @@
 
 #import "XLPagerTabStripViewController.h"
 #import "CLNewEntryVC.h"
+#import "iflyMSC/iflyMSC.h"
 
 @class CLRoutineModel, CLIdeaObjModel, CLSleightObjModel, CLPropObjModel, CLLinesObjModel, CLShowModel;
 @class CLEffectModel, CLPropModel, CLPrepModel, CLPerformModel, CLNotesModel;
+@class CLEdtingManageVC, PopupView;
+
+@protocol CLEdtingManageVCDelegate <NSObject>
+
+@optional
+- (void)editingManageVC:(CLEdtingManageVC *)edtingManageVC didFinishWithAudioRecognizeResult:(NSString *)result currentIdentifierTag:(NSInteger)identifierTag;
+
+@end
 
 @interface CLEdtingManageVC : XLPagerTabStripViewController
 
@@ -31,5 +40,15 @@
 
 @property (nonatomic, assign) NSUInteger childVCCount;
 @property (nonatomic, assign) NSUInteger selectedVCIndex;
+
+#pragma mark - 讯飞语音识别
+@property (nonatomic, strong) NSString *pcmFilePath;//音频文件路径
+@property (nonatomic, strong) IFlySpeechRecognizer *iFlySpeechRecognizer;//不带界面的识别对象
+@property (nonatomic, strong) PopupView *popUpView;
+
+@property (nonatomic, strong) NSString * result;
+@property (nonatomic, assign) BOOL isCanceled;
+
+@property (nonatomic, weak) id<CLEdtingManageVCDelegate> editDelegate;
 
 @end

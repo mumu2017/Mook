@@ -450,6 +450,7 @@ typedef enum {
 #pragma mark - Notifications
 
 #define kDidMakeChangeNotification  @"didMakeChangeNotification"
+#define kIFlyAppID  @"56c1951a"
 
 #define kUpdateDataNotification @"updateDataNotification"
 #define kUpdateEntryVCNotification  @"UpdateEntryVCNotification"
@@ -486,8 +487,8 @@ typedef enum {
 #define kToolBarFavorImage  [UIImage imageNamed:@"toolBarFavor"]
 #define kToolBarFavorImageHighlighted   [UIImage imageNamed:@"toolBarFavorHighlighted"]
 
-#define kToolBarApproveImage  [UIImage imageNamed:@"toolBarApprove"]
-#define kToolBarApproveImageHighlighted   [UIImage imageNamed:@"toolBarApproveHighlighted"]
+#define kToolBarWriteImage  [UIImage imageNamed:@"toolBarWrite"]
+#define kToolBarApproveImageHighlighted   [UIImage imageNamed:@"toolBarWriteHighlighted"]
 
 
 #define kToolBarUpImage   [UIImage imageNamed:@"toolBarUp"]

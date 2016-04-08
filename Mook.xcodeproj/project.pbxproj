@@ -8,6 +8,24 @@
 
 /* Begin PBXBuildFile section */
 		000DF63334356F18B88B6DE8 /* Pods_Mook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5207E880A1B2E72EF9075B94 /* Pods_Mook.framework */; };
+		43068BE31CB7456200BA1A57 /* iflyMSC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43068BE21CB7456200BA1A57 /* iflyMSC.framework */; };
+		43068BE51CB7459900BA1A57 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43068BE41CB7459900BA1A57 /* AVFoundation.framework */; };
+		43068BE71CB745A400BA1A57 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43068BE61CB745A400BA1A57 /* SystemConfiguration.framework */; };
+		43068BE91CB745AF00BA1A57 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43068BE81CB745AF00BA1A57 /* Foundation.framework */; };
+		43068BEB1CB745DC00BA1A57 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43068BEA1CB745DC00BA1A57 /* AudioToolbox.framework */; };
+		43068BED1CB745E500BA1A57 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43068BEC1CB745E500BA1A57 /* UIKit.framework */; };
+		43068BEF1CB745F800BA1A57 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43068BEE1CB745F800BA1A57 /* CoreLocation.framework */; };
+		43068BF11CB7460200BA1A57 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43068BF01CB7460200BA1A57 /* AddressBook.framework */; };
+		43068BF31CB7460C00BA1A57 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43068BF21CB7460C00BA1A57 /* QuartzCore.framework */; };
+		43068BF51CB7461700BA1A57 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43068BF41CB7461700BA1A57 /* CoreGraphics.framework */; };
+		43068BF71CB746A600BA1A57 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43068BF61CB746A600BA1A57 /* CoreTelephony.framework */; };
+		43068BFA1CB74DEB00BA1A57 /* PopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 43068BF91CB74DEB00BA1A57 /* PopupView.m */; };
+		43068BFD1CB74E5900BA1A57 /* IATConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 43068BFC1CB74E5900BA1A57 /* IATConfig.m */; };
+		43068BFE1CB74EF600BA1A57 /* libz.1.1.3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 43F5F7A81CB4B03F007BFB0C /* libz.1.1.3.tbd */; };
+		43068BFF1CB74EF600BA1A57 /* libz.1.2.5.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 43F5F7A91CB4B03F007BFB0C /* libz.1.2.5.tbd */; };
+		43068C001CB74EF600BA1A57 /* libz.1.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 43F5F7AA1CB4B03F007BFB0C /* libz.1.tbd */; };
+		43068C011CB74EF600BA1A57 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 43F5F76B1CB3E447007BFB0C /* libz.tbd */; };
+		43068C041CB7546400BA1A57 /* ISRDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 43068C031CB7546400BA1A57 /* ISRDataHelper.m */; };
 		430DFBC91CA252DD0054DF6B /* CLNewEntryNavVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 430DFBC81CA252DD0054DF6B /* CLNewEntryNavVC.m */; };
 		430DFBCC1CA393CC0054DF6B /* NSDate+MJ.m in Sources */ = {isa = PBXBuildFile; fileRef = 430DFBCB1CA393CC0054DF6B /* NSDate+MJ.m */; };
 		431BCEE01CA8F81C0085D20F /* JGActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 431BCEDF1CA8F81C0085D20F /* JGActionSheet.m */; };
@@ -136,6 +154,23 @@
 
 /* Begin PBXFileReference section */
 		41EFA00EF9667E60B4BC3CCB /* Pods-Mook.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mook.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Mook/Pods-Mook.debug.xcconfig"; sourceTree = "<group>"; };
+		43068BE21CB7456200BA1A57 /* iflyMSC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = iflyMSC.framework; sourceTree = "<group>"; };
+		43068BE41CB7459900BA1A57 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		43068BE61CB745A400BA1A57 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		43068BE81CB745AF00BA1A57 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		43068BEA1CB745DC00BA1A57 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		43068BEC1CB745E500BA1A57 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		43068BEE1CB745F800BA1A57 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		43068BF01CB7460200BA1A57 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		43068BF21CB7460C00BA1A57 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		43068BF41CB7461700BA1A57 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		43068BF61CB746A600BA1A57 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		43068BF81CB74DEB00BA1A57 /* PopupView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopupView.h; sourceTree = "<group>"; };
+		43068BF91CB74DEB00BA1A57 /* PopupView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopupView.m; sourceTree = "<group>"; };
+		43068BFB1CB74E5900BA1A57 /* IATConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IATConfig.h; sourceTree = "<group>"; };
+		43068BFC1CB74E5900BA1A57 /* IATConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IATConfig.m; sourceTree = "<group>"; };
+		43068C021CB7546400BA1A57 /* ISRDataHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ISRDataHelper.h; sourceTree = "<group>"; };
+		43068C031CB7546400BA1A57 /* ISRDataHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ISRDataHelper.m; sourceTree = "<group>"; };
 		430DFBC71CA252DD0054DF6B /* CLNewEntryNavVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLNewEntryNavVC.h; sourceTree = "<group>"; };
 		430DFBC81CA252DD0054DF6B /* CLNewEntryNavVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLNewEntryNavVC.m; sourceTree = "<group>"; };
 		430DFBCA1CA393CC0054DF6B /* NSDate+MJ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+MJ.h"; sourceTree = "<group>"; };
@@ -370,6 +405,21 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				43068BFE1CB74EF600BA1A57 /* libz.1.1.3.tbd in Frameworks */,
+				43068BFF1CB74EF600BA1A57 /* libz.1.2.5.tbd in Frameworks */,
+				43068C001CB74EF600BA1A57 /* libz.1.tbd in Frameworks */,
+				43068C011CB74EF600BA1A57 /* libz.tbd in Frameworks */,
+				43068BF71CB746A600BA1A57 /* CoreTelephony.framework in Frameworks */,
+				43068BF51CB7461700BA1A57 /* CoreGraphics.framework in Frameworks */,
+				43068BF31CB7460C00BA1A57 /* QuartzCore.framework in Frameworks */,
+				43068BF11CB7460200BA1A57 /* AddressBook.framework in Frameworks */,
+				43068BEF1CB745F800BA1A57 /* CoreLocation.framework in Frameworks */,
+				43068BED1CB745E500BA1A57 /* UIKit.framework in Frameworks */,
+				43068BEB1CB745DC00BA1A57 /* AudioToolbox.framework in Frameworks */,
+				43068BE91CB745AF00BA1A57 /* Foundation.framework in Frameworks */,
+				43068BE71CB745A400BA1A57 /* SystemConfiguration.framework in Frameworks */,
+				43068BE51CB7459900BA1A57 /* AVFoundation.framework in Frameworks */,
+				43068BE31CB7456200BA1A57 /* iflyMSC.framework in Frameworks */,
 				43E0F7081C9EB2A2005CAD97 /* libsqlite3.0.tbd in Frameworks */,
 				000DF63334356F18B88B6DE8 /* Pods_Mook.framework in Frameworks */,
 			);
@@ -378,6 +428,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		43068C051CB75D3700BA1A57 /* 语音识别helper */ = {
+			isa = PBXGroup;
+			children = (
+				43068C021CB7546400BA1A57 /* ISRDataHelper.h */,
+				43068C031CB7546400BA1A57 /* ISRDataHelper.m */,
+				43068BFB1CB74E5900BA1A57 /* IATConfig.h */,
+				43068BFC1CB74E5900BA1A57 /* IATConfig.m */,
+			);
+			name = "语音识别helper";
+			sourceTree = "<group>";
+		};
 		430DFBDF1CA3F3470054DF6B /* Other */ = {
 			isa = PBXGroup;
 			children = (
@@ -463,6 +524,8 @@
 		432345EA1C94052F00200833 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				43068BF81CB74DEB00BA1A57 /* PopupView.h */,
+				43068BF91CB74DEB00BA1A57 /* PopupView.m */,
 				432346091C94054300200833 /* CLTableBackView.h */,
 				4323460A1C94054300200833 /* CLTableBackView.m */,
 				4323460B1C94054300200833 /* CLTableBackView.xib */,
@@ -808,6 +871,7 @@
 				432345851C9404FB00200833 /* CLPropChooseNavVC.m */,
 				43F5F7A41CB4A2C2007BFB0C /* CLPropChooseVC.h */,
 				43F5F7A51CB4A2C2007BFB0C /* CLPropChooseVC.m */,
+				43068C051CB75D3700BA1A57 /* 语音识别helper */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -945,11 +1009,22 @@
 		867DD05412560E63BB6BCE80 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				43068BF61CB746A600BA1A57 /* CoreTelephony.framework */,
+				43068BF41CB7461700BA1A57 /* CoreGraphics.framework */,
+				43068BF21CB7460C00BA1A57 /* QuartzCore.framework */,
+				43068BF01CB7460200BA1A57 /* AddressBook.framework */,
+				43068BEE1CB745F800BA1A57 /* CoreLocation.framework */,
+				43068BEC1CB745E500BA1A57 /* UIKit.framework */,
+				43068BEA1CB745DC00BA1A57 /* AudioToolbox.framework */,
+				43068BE81CB745AF00BA1A57 /* Foundation.framework */,
+				43068BE61CB745A400BA1A57 /* SystemConfiguration.framework */,
+				43068BE41CB7459900BA1A57 /* AVFoundation.framework */,
 				43F5F7A81CB4B03F007BFB0C /* libz.1.1.3.tbd */,
 				43F5F7A91CB4B03F007BFB0C /* libz.1.2.5.tbd */,
 				43F5F7AA1CB4B03F007BFB0C /* libz.1.tbd */,
 				43F5F76B1CB3E447007BFB0C /* libz.tbd */,
 				43E0F7071C9EB2A2005CAD97 /* libsqlite3.0.tbd */,
+				43068BE21CB7456200BA1A57 /* iflyMSC.framework */,
 				5207E880A1B2E72EF9075B94 /* Pods_Mook.framework */,
 			);
 			name = Frameworks;
@@ -1124,10 +1199,12 @@
 				4323462A1C94054300200833 /* CLQuickInputBar.m in Sources */,
 				432345AE1C9404FB00200833 /* CLPasswordVC.m in Sources */,
 				4323453D1C94045000200833 /* AppDelegate.m in Sources */,
+				43068BFD1CB74E5900BA1A57 /* IATConfig.m in Sources */,
 				43E0F73C1CA10D27005CAD97 /* MJIvar.m in Sources */,
 				43DF3AC81CAA78A100712D81 /* UIImage+WaterMark.m in Sources */,
 				43C2068E1CB12A6400CEF992 /* CLMediaVC.m in Sources */,
 				4323461E1C94054300200833 /* CLListImageCell.m in Sources */,
+				43068BFA1CB74DEB00BA1A57 /* PopupView.m in Sources */,
 				432345E51C94051A00200833 /* CLPropObjModel.m in Sources */,
 				432345651C9404A800200833 /* UIImageView+Tools.m in Sources */,
 				43885F791CA6A8AC00269CE1 /* CLHomeNavVC.m in Sources */,
@@ -1173,6 +1250,7 @@
 				43885F6E1CA4F9BE00269CE1 /* CLListVC.m in Sources */,
 				4323468F1C96B42A00200833 /* CLNewEntryTextCell.m in Sources */,
 				43A281181CB224BC009C2785 /* CLMookTabBarController.m in Sources */,
+				43068C041CB7546400BA1A57 /* ISRDataHelper.m in Sources */,
 				43F5F7A61CB4A2C2007BFB0C /* CLPropChooseVC.m in Sources */,
 				4323464D1C9405EA00200833 /* main.m in Sources */,
 				430DFBC91CA252DD0054DF6B /* CLNewEntryNavVC.m in Sources */,
@@ -1299,6 +1377,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-2";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = /Users/jackchen/MyProjects/Mook/Mook/PrefixHeader.pch;
 				INFOPLIST_FILE = Mook/Info.plist;
@@ -1316,6 +1399,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-2";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = /Users/jackchen/MyProjects/Mook/Mook/PrefixHeader.pch;
 				INFOPLIST_FILE = Mook/Info.plist;
