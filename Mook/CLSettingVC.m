@@ -362,7 +362,7 @@
             }
         }
     } else if (indexPath.section == 5) {
-        if (indexPath.row == 1) {
+        if (indexPath.row == 2) {
             [[NSNotificationCenter defaultCenter] postNotificationName:@"showIntroView" object:nil];
         }
     }
