@@ -257,7 +257,7 @@
     }
     
     if (longside > 480) { // 如果长边比480大, 那么久压缩图片尺寸
-        UIImage *scaledImage = [UIImage imageWithImage:videoFrame scaledToNewSize:CGSizeMake(360, 360)]; // 360会是短边的距离,按照4:3的常规图像比例, 长边应该是360 / 3 * 4 = 1920
+        UIImage *scaledImage = [UIImage imageWithImage:videoFrame scaledToNewSize:CGSizeMake(360, 360)]; // 360会是短边的距离,按照4:3的常规图像比例, 长边应该是360 / 3 * 4 = 480
         [UIImageJPEGRepresentation(scaledImage, 0.5) writeToFile:framePath atomically:YES];
         
     } else {
@@ -298,8 +298,8 @@
             longside = image.size.height;
         }
         
-        if (longside > 1920) { // 如果长边比1920大, 那么久压缩图片尺寸
-            UIImage *scaledImage = [UIImage imageWithImage:image scaledToNewSize:CGSizeMake(1440, 1440)]; // 1440会是短边的距离,按照4:3的常规图像比例, 长边应该是1440 / 3 * 4 = 1920
+        if (longside > 1440) { // 如果长边比1440大, 那么久压缩图片尺寸
+            UIImage *scaledImage = [UIImage imageWithImage:image scaledToNewSize:CGSizeMake(1080, 1080)]; // 1080会是短边的距离,按照4:3的常规图像比例, 长边应该是1080 / 3 * 4 = 1440
             [UIImageJPEGRepresentation(scaledImage, 0.5) writeToFile:imagePath atomically:YES];
 
         } else {
@@ -335,7 +335,7 @@
     }
     
     if (longside > 480) { // 如果长边比480大, 那么久压缩图片尺寸
-        UIImage *scaledImage = [UIImage imageWithImage:videoFrame scaledToNewSize:CGSizeMake(360, 360)]; // 360会是短边的距离,按照4:3的常规图像比例, 长边应该是360 / 3 * 4 = 1920
+        UIImage *scaledImage = [UIImage imageWithImage:videoFrame scaledToNewSize:CGSizeMake(360, 360)]; // 360会是短边的距离,按照4:3的常规图像比例, 长边应该是360 / 3 * 4 = 480
         [UIImageJPEGRepresentation(scaledImage, 0.5) writeToFile:framePath atomically:YES];
         
     } else {
