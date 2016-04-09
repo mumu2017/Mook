@@ -52,35 +52,89 @@
     if (!_dataList) {
         _dataList = [NSMutableArray array];
         
-        NSString *type, *modelName;
+        NSString *type, *modelName, *mediaName, *mediaType;
         for (NSDictionary *dict in self.allMedia) {
             type = [dict objectForKey:@"model_type"];
             modelName = [dict objectForKey:@"model_time_stamp"];
             
+            mediaName = [dict objectForKey:@"name"];
+            mediaType = [dict objectForKey:@"type"];
+            
             if ([type isEqualToString:kTypeIdea]) {
                 CLIdeaObjModel *model = [CLDataSaveTool ideaByName:modelName];
-                [_dataList addObject:model];
+                if (model == nil) { // 如果模型为空, 则说明不再媒体表中的媒体所属的模型已经从t_mook表中删除掉了, 所以需要删除该媒体文件和数据表条目
+                    if ([mediaType isEqualToString:@"video"]) {
+                        [mediaName deleteNamedVideoFromDocument];
+                    } else if ([mediaType isEqualToString:@"image"]) {
+                        [mediaName deleteNamedImageFromDocument];
+                    }
+                } else {
+                    [_dataList addObject:model];
+                }
 
             }  else if ([type isEqualToString:kTypeShow]) {
                 CLShowModel *model = [CLDataSaveTool showByName:modelName];
-//                [_dataList addObject:model];
+
+                if (model == nil) { // 如果模型为空, 则说明不再媒体表中的媒体所属的模型已经从t_mook表中删除掉了, 所以需要删除该媒体文件和数据表条目
+                    //                    [self.allMedia removeObject:dict];
+                    if ([mediaType isEqualToString:@"video"]) {
+                        [mediaName deleteNamedVideoFromDocument];
+                    } else if ([mediaType isEqualToString:@"image"]) {
+                        [mediaName deleteNamedImageFromDocument];
+                    }
+                } else {
+                    [_dataList addObject:model];
+                }
                 
             }  else if ([type isEqualToString:kTypeRoutine]) {
                 CLRoutineModel *model = [CLDataSaveTool routineByName:modelName];
-                [_dataList addObject:model];
 
+                if (model == nil) { // 如果模型为空, 则说明不再媒体表中的媒体所属的模型已经从t_mook表中删除掉了, 所以需要删除该媒体文件和数据表条目
+                    //                    [self.allMedia removeObject:dict];
+                    if ([mediaType isEqualToString:@"video"]) {
+                        [mediaName deleteNamedVideoFromDocument];
+                    } else if ([mediaType isEqualToString:@"image"]) {
+                        [mediaName deleteNamedImageFromDocument];
+                    }
+                } else {
+                    [_dataList addObject:model];
+                }
             } else if ([type isEqualToString:kTypeSleight]) {
                 CLSleightObjModel *model = [CLDataSaveTool sleightByName:modelName];
-                [_dataList addObject:model];
-
+                if (model == nil) { // 如果模型为空, 则说明不再媒体表中的媒体所属的模型已经从t_mook表中删除掉了, 所以需要删除该媒体文件和数据表条目
+                    //                    [self.allMedia removeObject:dict];
+                    if ([mediaType isEqualToString:@"video"]) {
+                        [mediaName deleteNamedVideoFromDocument];
+                    } else if ([mediaType isEqualToString:@"image"]) {
+                        [mediaName deleteNamedImageFromDocument];
+                    }
+                } else {
+                    [_dataList addObject:model];
+                }
             } else if ([type isEqualToString:kTypeProp]) {
                 CLPropObjModel *model = [CLDataSaveTool propByName:modelName];
-                [_dataList addObject:model];
-
+                if (model == nil) { // 如果模型为空, 则说明不再媒体表中的媒体所属的模型已经从t_mook表中删除掉了, 所以需要删除该媒体文件和数据表条目
+                    //                    [self.allMedia removeObject:dict];
+                    if ([mediaType isEqualToString:@"video"]) {
+                        [mediaName deleteNamedVideoFromDocument];
+                    } else if ([mediaType isEqualToString:@"image"]) {
+                        [mediaName deleteNamedImageFromDocument];
+                    }
+                } else {
+                    [_dataList addObject:model];
+                }
             } else if ([type isEqualToString:kTypeLines]) {
                 CLLinesObjModel *model = [CLDataSaveTool linesByName:modelName];
-                [_dataList addObject:model];
-
+                if (model == nil) { // 如果模型为空, 则说明不再媒体表中的媒体所属的模型已经从t_mook表中删除掉了, 所以需要删除该媒体文件和数据表条目
+                    //                    [self.allMedia removeObject:dict];
+                    if ([mediaType isEqualToString:@"video"]) {
+                        [mediaName deleteNamedVideoFromDocument];
+                    } else if ([mediaType isEqualToString:@"image"]) {
+                        [mediaName deleteNamedImageFromDocument];
+                    }
+                } else {
+                    [_dataList addObject:model];
+                }
             }
             
         }

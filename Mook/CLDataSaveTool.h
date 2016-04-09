@@ -73,7 +73,9 @@
 + (void)updateVideoByName:(NSString *)name withContent:(NSString *)content;
 + (void)updateImageByName:(NSString *)name withContent:(NSString *)content;
 
-+ (void)deleteVideoByName:(NSString *)name;
-+ (void)deleteImageByName:(NSString *)name;
++ (void)deleteMediaByName:(NSString *)name;
+
+//+ (void)deleteVideoByName:(NSString *)name;
+//+ (void)deleteImageByName:(NSString *)name;
 
 @end

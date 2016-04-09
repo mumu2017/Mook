@@ -20,13 +20,13 @@
     if (self.isWithImage) {
 
         [self.image deleteNamedImageFromDocument];
-        [CLDataSaveTool deleteImageByName:self.image];
+//        [CLDataSaveTool deleteImageByName:self.image];
         self.image = nil;
     }
     
     if (self.isWithVideo) {
         [self.video deleteNamedVideoFromDocument];
-        [CLDataSaveTool deleteVideoByName:self.video];
+//        [CLDataSaveTool deleteVideoByName:self.video];
         self.video = nil;
     }
 }

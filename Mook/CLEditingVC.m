@@ -834,7 +834,7 @@
             self.didMakeChange = YES;
             
             [self.imageName deleteNamedImageFromDocument];
-            [CLDataSaveTool deleteImageByName:self.imageName];
+            [CLDataSaveTool deleteMediaByName:self.imageName];
             self.imageName = nil;
             self.toolBar.imageName = nil;
             [self.mediaView setImageWithName:nil];
@@ -872,7 +872,7 @@
             self.didMakeChange = YES;
             
             [self.videoName deleteNamedVideoFromDocument];
-            [CLDataSaveTool deleteVideoByName:self.videoName];
+            [CLDataSaveTool deleteMediaByName:self.videoName];
             self.videoName = nil;
             self.toolBar.videoName = nil;
             [self.mediaView setVideoWithName:nil];

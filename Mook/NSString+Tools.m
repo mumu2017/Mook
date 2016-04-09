@@ -367,7 +367,7 @@
 - (void)deleteNamedVideoFromDocument {
     
     // 从数据库媒体表中删除视频条目
-    [CLDataSaveTool deleteVideoByName:self];
+    [CLDataSaveTool deleteMediaByName:self];
     
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         
@@ -388,6 +388,7 @@
                 
                 // 如果视频删除成功,则删除缩略图和首帧图
                 NSString *thumbnailPath = [[NSString thumbnailPath] stringByAppendingPathComponent:self];
+                
                 // 判定图片是否存在
                 BOOL fileExists=[[NSFileManager defaultManager] fileExistsAtPath:thumbnailPath];
                 if (!fileExists) {
@@ -430,7 +431,8 @@
 - (void)deleteNamedImageFromDocument {
     
     // 从数据库媒体表中删除图片条目
-    [CLDataSaveTool deleteImageByName:self];
+    [CLDataSaveTool deleteMediaByName:self];
+    
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         
         NSFileManager* fileManager=[NSFileManager defaultManager];

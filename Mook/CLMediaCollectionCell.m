@@ -31,10 +31,6 @@
         self.imageView.image = [name getNamedImageThumbnail];
         self.iconView.image = nil;
     }
-    
-    self.titleLabel.text = NSLocalizedString(@"流程", nil);
-    self.contentLabel.text = @"2016/04/03";
-    
 }
 
 @end
