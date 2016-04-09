@@ -10,6 +10,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import "NSDate+MJ.h"
 #import "UIImage+WaterMark.h"
+#import "CLDataSaveTool.h"
 
 @implementation NSString (Tools)
 
@@ -365,6 +366,9 @@
 #pragma mark - 删除多媒体文件
 - (void)deleteNamedVideoFromDocument {
     
+    // 从数据库媒体表中删除视频条目
+    [CLDataSaveTool deleteVideoByName:self];
+    
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         
         NSFileManager* fileManager=[NSFileManager defaultManager];
@@ -425,6 +429,8 @@
 
 - (void)deleteNamedImageFromDocument {
     
+    // 从数据库媒体表中删除图片条目
+    [CLDataSaveTool deleteImageByName:self];
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         
         NSFileManager* fileManager=[NSFileManager defaultManager];

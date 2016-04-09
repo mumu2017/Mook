@@ -199,13 +199,16 @@ static FMDatabase *_db;
 }
 
 + (CLShowModel *)showByName:(NSString *)name {
+    
     FMResultSet *set = [_db executeQuery:@"select * from t_mook where type=? and time_stamp=?;",kTypeShow, name];
+    
     while ([set next]) {
         NSData *data = [set dataForColumn:@"dict"];
         NSDictionary *dict = [NSKeyedUnarchiver unarchiveObjectWithData:data];
         CLShowModel *model = [CLShowModel objectWithKeyValues:dict];
         return model;
     }
+    
     return nil;
 }
 
@@ -270,7 +273,7 @@ static FMDatabase *_db;
     NSString *timeStamp = showModel.timeStamp;
     NSData *data = [NSKeyedArchiver archivedDataWithRootObject:dict];
     
-    FMResultSet *set = [_db executeQuery:@"select * from t_mook where time_stamp=?", timeStamp];
+    FMResultSet *set = [_db executeQuery:@"select * from t_mook where type=? and time_stamp=?", kTypeShow, timeStamp];
     
     // 如果[set next]不为空,则表示查询到至少一个结果.所以更新数据.
     if ([set next]) {
@@ -296,7 +299,7 @@ static FMDatabase *_db;
     
     NSString *timeStamp = showModel.timeStamp;
     
-    BOOL flag = [_db executeUpdate:@"delete from t_mook where time_stamp=?", timeStamp];
+    BOOL flag = [_db executeUpdate:@"delete from t_mook where type=? and time_stamp=?", kTypeShow, timeStamp];
     if (flag) {
         NSLog(@"删除Show成功");
     }else{
@@ -567,6 +570,7 @@ static FMDatabase *_db;
         NSString *modelName = [set stringForColumn:@"model_time_stamp"];
         NSString *modelType = [set stringForColumn:@"model_type"];
         NSDictionary *dict = @{@"type":type, @"name":name, @"content":content, @"model_time_stamp":modelName, @"model_type":modelType};
+        
         [arrM insertObject:dict atIndex:0];
     }
     

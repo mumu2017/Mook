@@ -56,13 +56,14 @@
         for (NSDictionary *dict in self.allMedia) {
             type = [dict objectForKey:@"model_type"];
             modelName = [dict objectForKey:@"model_time_stamp"];
+            
             if ([type isEqualToString:kTypeIdea]) {
                 CLIdeaObjModel *model = [CLDataSaveTool ideaByName:modelName];
                 [_dataList addObject:model];
 
             }  else if ([type isEqualToString:kTypeShow]) {
                 CLShowModel *model = [CLDataSaveTool showByName:modelName];
-                [_dataList addObject:model];
+//                [_dataList addObject:model];
                 
             }  else if ([type isEqualToString:kTypeRoutine]) {
                 CLRoutineModel *model = [CLDataSaveTool routineByName:modelName];
@@ -93,7 +94,7 @@
         NSString *type, *name, *content;
         MWPhoto *photo;
         
-        for (NSDictionary *dict in self.allMedia) {
+        for (NSDictionary *dict in self.allMedia) { // allMedia中已经从最近到最早排序了
             name = [dict objectForKey:@"name"];
             type = [dict objectForKey:@"type"];
             content = [dict objectForKey:@"content"];
@@ -105,6 +106,7 @@
                 photo.caption = content;
                 
                 [_photos addObject:photo];
+
             } else if ([type isEqualToString:@"image"]) {
                 photo = [MWPhoto photoWithImage:[name getNamedImage]];
                 photo.caption = content;
