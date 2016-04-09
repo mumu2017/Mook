@@ -778,39 +778,39 @@
             
         }];
         
+        UIAlertAction* takePhoto = [UIAlertAction actionWithTitle:NSLocalizedString(@"拍摄照片", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            //        prepCell.prepFrame.model.image = image;
+            
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                
+                [self pickImageFromCamera];
+                
+            });
+            
+        }];
+        
+        UIAlertAction* pickPhoto = [UIAlertAction actionWithTitle:NSLocalizedString(@"相册图片", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+            
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                
+                [self pickImageFromAlbum];
+                
+            });
+            
+        }];
+        
+        UIAlertAction* cancel = [UIAlertAction actionWithTitle:NSLocalizedString(@"取消", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
+            
+        }];
+        
         [alert addAction:takeVideo];
+        [alert addAction:takePhoto];
         [alert addAction:pickVideo];
+        [alert addAction:pickPhoto];
+        [alert addAction:cancel];
+
     }
   
-    UIAlertAction* takePhoto = [UIAlertAction actionWithTitle:NSLocalizedString(@"拍摄照片", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        //        prepCell.prepFrame.model.image = image;
-        
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            
-            [self pickImageFromCamera];
-            
-        });
-        
-    }];
-    
-    UIAlertAction* pickPhoto = [UIAlertAction actionWithTitle:NSLocalizedString(@"相册图片", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
-        
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            
-            [self pickImageFromAlbum];
-            
-        });
-        
-    }];
-    
-    UIAlertAction* cancel = [UIAlertAction actionWithTitle:NSLocalizedString(@"取消", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
-        
-    }];
-    
-
-    [alert addAction:takePhoto];
-    [alert addAction:pickPhoto];
-    [alert addAction:cancel];
     
     [self presentViewController:alert animated:YES completion:nil];
 }
