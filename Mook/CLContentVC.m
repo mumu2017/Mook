@@ -682,28 +682,6 @@
         [photos addObject:photo];
     }
     
-    for (CLPerformModel *model in self.performModelList) {
-        if (model.isWithImage) {
-            
-            // Photos
-            photo = [MWPhoto photoWithImage:[model.image getNamedImage]];
-            photo.caption = model.perform;
-            [photos addObject:photo];
-        }
-    }
-    
-    
-    for (CLPerformModel *model in self.performModelList) {
-        if (model.isWithVideo) {
-            // Photos
-            NSString *path = [[NSString videoPath] stringByAppendingPathComponent:model.video];
-            photo = [MWPhoto photoWithImage:[model.video getNamedVideoFrame]];
-            photo.videoURL = [NSURL fileURLWithPath:path];
-            photo.caption = model.perform;
-            
-            [photos addObject:photo];
-        }
-    }
     
     for (CLPrepModel *model in self.prepModelList) {
         if (model.isWithImage) {
@@ -727,6 +705,30 @@
             [photos addObject:photo];
         }
     }
+    
+    for (CLPerformModel *model in self.performModelList) {
+        if (model.isWithImage) {
+            
+            // Photos
+            photo = [MWPhoto photoWithImage:[model.image getNamedImage]];
+            photo.caption = model.perform;
+            [photos addObject:photo];
+        }
+    }
+    
+    
+    for (CLPerformModel *model in self.performModelList) {
+        if (model.isWithVideo) {
+            // Photos
+            NSString *path = [[NSString videoPath] stringByAppendingPathComponent:model.video];
+            photo = [MWPhoto photoWithImage:[model.video getNamedVideoFrame]];
+            photo.videoURL = [NSURL fileURLWithPath:path];
+            photo.caption = model.perform;
+            
+            [photos addObject:photo];
+        }
+    }
+
     return photos;
 }
 
@@ -747,19 +749,6 @@
         
     }
     
-    for (CLPerformModel *model in self.performModelList) {
-        if (model.isWithImage) {
-            thumb = [MWPhoto photoWithImage:[model.image getNamedImageThumbnail]];
-            [thumbs addObject:thumb];
-        }
-    }
-    
-    for (CLPerformModel *model in self.performModelList) {
-        if (model.isWithVideo) {
-            thumb = [MWPhoto photoWithImage:[model.video getNamedVideoThumbnail]];
-            [thumbs addObject:thumb];
-        }
-    }
     
     for (CLPrepModel *model in self.prepModelList) {
         if (model.isWithImage) {
@@ -769,13 +758,28 @@
             
         }
     }
-
+    
     for (CLPrepModel *model in self.prepModelList) {
         if (model.isWithVideo) {
             thumb = [MWPhoto photoWithImage:[model.video getNamedVideoThumbnail]];
             [thumbs addObject:thumb];
         }
     }
+    
+    for (CLPerformModel *model in self.performModelList) {
+        if (model.isWithImage) {
+            thumb = [MWPhoto photoWithImage:[model.image getNamedImageThumbnail]];
+            [thumbs addObject:thumb];
+        }
+    }
+    
+    for (CLPerformModel *model in self.performModelList) {
+        if (model.isWithVideo) {
+            thumb = [MWPhoto photoWithImage:[model.video getNamedVideoThumbnail]];
+            [thumbs addObject:thumb];
+        }
+    }
+
     return thumbs;
 }
 
