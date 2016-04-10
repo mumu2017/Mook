@@ -917,7 +917,7 @@
     id destVC = segue.destinationViewController;
     if ([destVC isKindOfClass:[CLNewEntryVC class]]) {
         CLNewEntryVC *vc = (CLNewEntryVC *)destVC;
-        
+        vc.dataPath = self.dataPath;
         
         if (self.contentType == kContentTypeIdea) {
             vc.editingContentType = kEditingContentTypeIdea;

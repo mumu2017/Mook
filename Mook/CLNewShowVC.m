@@ -9,6 +9,7 @@
 #import "CLNewShowVC.h"
 #import "CLShowModel.h"
 #import "CLDataSaveTool.h"
+#import "CLListVC.h"
 
 #import "CLNewShowNavVC.h"
 #import "CLEdtingManageVC.h"
@@ -41,7 +42,7 @@
 
 @property (nonatomic, strong) NSMutableArray <CLRoutineModel*> *routineModelList;
 @property (nonatomic, assign) BOOL newEntryCancelled;
-
+@property (nonatomic, assign) BOOL currentEntryDelteted;
 @end
 
 @implementation CLNewShowVC
@@ -135,6 +136,11 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.currentEntryDelteted = NO;
+}
+
 - (void)setTableViewStatus {
     
     self.tableView.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0);
@@ -162,10 +168,14 @@
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
     
-    if (self.newEntryCancelled) {
+    if (self.currentEntryDelteted) { // 如果已经删除了当前内容, 直接退出
         return;
     }
     
+    if (self.newEntryCancelled) {
+        return;
+    }
+        
     if (self.presentedViewController == nil && [self.navigationController.topViewController isKindOfClass:[CLEdtingManageVC class]] == NO) {
         
         [[NSNotificationCenter defaultCenter] postNotificationName:kUpdateDataNotification object:self];
@@ -178,7 +188,16 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     
-    return 3;
+    NSInteger number = 0;
+    // 如果是导航控制器是CLNewEntryNavVC, 说明是新建条目,所以提供取消按钮
+    if ([self.navigationController isKindOfClass:[CLNewShowNavVC class]]) {
+        // 可以取消, 所以不需要删除行
+        number = 3;
+    } else {
+        number = 4;    // 是编辑的情况, 添加删除行
+    }
+    
+    return number;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -191,6 +210,8 @@
         number = 1;
     } else if (section == 2) {
         number = self.routineModelList.count + 1;
+    } else if (section == 3) {
+        number = 1; // 删除行
     }
     
     return number;
@@ -272,8 +293,12 @@
                     cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ID];
                 }
                 
+                cell.backgroundColor = [UIColor whiteColor];
+                cell.textLabel.textAlignment = NSTextAlignmentLeft;
                 cell.textLabel.font = kBoldFontSys16;
+                cell.textLabel.textColor = [UIColor blackColor];
                 cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                cell.selectionStyle = UITableViewCellSelectionStyleDefault;
                 cell.textLabel.text = NSLocalizedString(@"演出说明", nil);
                 return cell;
             }
@@ -286,8 +311,12 @@
             }
             
             cell.textLabel.text = NSLocalizedString(@"添加流程", nil);
+            cell.backgroundColor = [UIColor whiteColor];
+            cell.textLabel.textAlignment = NSTextAlignmentLeft;
             cell.textLabel.font = kBoldFontSys16;
+            cell.textLabel.textColor = [UIColor blackColor];
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            cell.selectionStyle = UITableViewCellSelectionStyleDefault;
             return cell;
         } else {
             CLRoutineModel *model = self.routineModelList[indexPath.row - 1];
@@ -307,6 +336,22 @@
                 return cell;
             }
         }
+    } else if (indexPath.section == 3) {
+        
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
+        if (cell == nil) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ID];
+        }
+        
+        cell.backgroundColor = [UIColor redColor];
+        cell.textLabel.text = NSLocalizedString(@"删除", nil);
+        cell.textLabel.font = kBoldFontSys16;
+        cell.textLabel.textAlignment = NSTextAlignmentCenter;
+        cell.textLabel.textColor = [UIColor whiteColor];
+        cell.accessoryType = UITableViewCellAccessoryNone;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        return cell;
+
     }
     return nil;
 }
@@ -398,7 +443,42 @@
         [self performSegueWithIdentifier:kSegueNewShowToEditingSegue sender:nil];
     } else if (indexPath.section == 2 && indexPath.row == 0) {
         [self performSegueWithIdentifier:kSegueNewShowToRoutineChoose sender:nil];
+    } else if (indexPath.section == 3 && indexPath.row == 0) {
+        [self deleteCurrentShow];
     }
+}
+
+- (void)deleteCurrentShow {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"删除内容", nil) message:NSLocalizedString(@"提示: 删除内容后将无法恢复,确定要删除当前内容吗?", nil) preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* delete = [UIAlertAction actionWithTitle:NSLocalizedString(@"确定", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            NSLog(@"delete current entry");
+            
+            self.currentEntryDelteted = YES;
+            [[NSNotificationCenter defaultCenter] postNotificationName:kDeleteEntryNotification object:self.showModel];
+            
+        });
+        
+        //This for loop iterates through all the view controllers in navigation stack.
+        for (UIViewController* viewController in self.navigationController.viewControllers) {
+            
+            if ([viewController isKindOfClass:[CLListVC class]] ) {
+                
+                CLListVC *vc = (CLListVC*)viewController;
+                [self.navigationController popToViewController:vc animated:YES];
+            }
+        }
+    }];
+    
+    UIAlertAction* cancel = [UIAlertAction actionWithTitle:NSLocalizedString(@"取消", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
+    }];
+    
+    [alert addAction:delete];
+    [alert addAction:cancel];
+    
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 #pragma mark - segue 方法

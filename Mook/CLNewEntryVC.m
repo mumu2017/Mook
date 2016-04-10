@@ -8,7 +8,7 @@
 
 #import "CLNewEntryVC.h"
 #import "CLNewEntryNavVC.h"
-
+#import "CLListVC.h"
 #import "CLDataSaveTool.h"
 
 #import "CLTagChooseNavVC.h"
@@ -66,6 +66,7 @@
 
 @property (nonatomic, assign) NSInteger prepSection;
 @property (nonatomic, assign) BOOL newEntryCancelled;
+@property (nonatomic, assign) BOOL currentEntryDelteted;
 
 @end
 
@@ -413,59 +414,27 @@
 
 - (void)cancelNewCreation {
     
+    
     switch (self.editingContentType) {
         case kEditingContentTypeRoutine:
-            
-            if ([kDataListRoutine containsObject:self.routineModel]) {
-                [kDataListRoutine removeObject:self.routineModel];
-            }
-            
-            if ([kDataListAll containsObject:self.routineModel]) {
-                [kDataListAll removeObject:self.routineModel];
-            }
-            
+            [[NSNotificationCenter defaultCenter] postNotificationName:kCancelEntryNotification object:self.routineModel];
             break;
-            
         case kEditingContentTypeIdea:
-            if ([kDataListIdea containsObject:self.ideaObjModel]) {
-                [kDataListIdea removeObject:self.ideaObjModel];
-            }
+            [[NSNotificationCenter defaultCenter] postNotificationName:kCancelEntryNotification object:self.ideaObjModel];
             
-            if ([kDataListAll containsObject:self.ideaObjModel]) {
-                [kDataListAll removeObject:self.ideaObjModel];
-            }
             break;
-            
         case kEditingContentTypeSleight:
-            if ([kDataListSleight containsObject:self.sleightObjModel]) {
-                [kDataListSleight removeObject:self.sleightObjModel];
-            }
+            [[NSNotificationCenter defaultCenter] postNotificationName:kCancelEntryNotification object:self.sleightObjModel];
             
-            if ([kDataListAll containsObject:self.sleightObjModel]) {
-                [kDataListAll removeObject:self.sleightObjModel];
-            }
             break;
-            
         case kEditingContentTypeProp:
-            if ([kDataListProp containsObject:self.propObjModel]) {
-                [kDataListProp removeObject:self.propObjModel];
-            }
+            [[NSNotificationCenter defaultCenter] postNotificationName:kCancelEntryNotification object:self.propObjModel];
             
-            if ([kDataListAll containsObject:self.propObjModel]) {
-                [kDataListAll removeObject:self.propObjModel];
-            }
             break;
-            
         case kEditingContentTypeLines:
-            if ([kDataListLines containsObject:self.linesObjModel]) {
-                [kDataListLines removeObject:self.linesObjModel];
-            }
+            [[NSNotificationCenter defaultCenter] postNotificationName:kCancelEntryNotification object:self.linesObjModel];
             
-            if ([kDataListAll containsObject:self.linesObjModel]) {
-                [kDataListAll removeObject:self.linesObjModel];
-            }
             break;
-            
         default:
             break;
     }
@@ -515,6 +484,7 @@
 // 隐藏MBProgreeHUD
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    self.currentEntryDelteted = NO;
 }
 
 - (void)saveEntryData {
@@ -547,18 +517,22 @@
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
     
+    if (self.currentEntryDelteted) { // 如果已经删除了当前内容, 直接退出
+        return;
+    }
+    
     if (self.newEntryCancelled) { // 如果已经取消了新建项目, 则直接退出, 不再保存数据
         return;
     }
     
     self.infoModel.name = self.titleTF.text;
     if (self.presentedViewController == nil && [self.navigationController.topViewController isKindOfClass:[CLEdtingManageVC class]] == NO) {
-
-        [self saveEntryData];
         
-        [[NSNotificationCenter defaultCenter] postNotificationName:kUpdateDataNotification object:self];
+        [self saveEntryData];
     }
     
+    [[NSNotificationCenter defaultCenter] postNotificationName:kUpdateDataNotification object:self];
+
 }
 #pragma mark - Table view data source
 
@@ -590,6 +564,15 @@
         default:
             break;
     }
+    
+    
+    // 如果是导航控制器是CLNewEntryNavVC, 说明是新建条目,所以提供取消按钮
+    if ([self.navigationController isKindOfClass:[CLNewEntryNavVC class]]) {
+        // 可以取消, 所以不需要删除行
+    } else {
+        number += 1;    // 是编辑的情况, 添加删除行
+    }
+    
     return number;
 }
 
@@ -608,8 +591,10 @@
             break;
             
         case 2:
-            
-            if (self.editingContentType == kEditingContentTypeRoutine) {
+            if (self.editingContentType == kEditingContentTypeLines) {
+                number = 1;  // 删除行
+                
+            } else if (self.editingContentType == kEditingContentTypeRoutine) {
                 
                 if (self.propModelList.count == 1 && !self.propModelList[0].isWithProp && !self.propModelList[0].isWithDetail && !self.propModelList[0].isWithQuantity) {
                     number = 1;
@@ -617,7 +602,7 @@
                     number = self.propModelList.count + 1;
                 }
                 
-            } else {
+            } else if (self.editingContentType == kEditingContentTypeSleight || self.editingContentType == kEditingContentTypeProp || self.editingContentType == kEditingContentTypeIdea)  {
                 // 如果只有一个模型,而且模型中没有内容,则不显示该行cell,只显示添加模型的cell
                 if (self.prepModelList.count == 1 && !self.prepModelList[0].isWithPrep && !self.prepModelList[0].isWithImage && !self.prepModelList[0].isWithVideo) {
                     number = 1;
@@ -630,28 +615,51 @@
             break;
             
         case 3:
-            if (self.prepModelList.count == 1 && !self.prepModelList[0].isWithPrep && !self.prepModelList[0].isWithImage && !self.prepModelList[0].isWithVideo) {
-                number = 1;
-            } else {
-                number = self.prepModelList.count + 1;
+            
+            if (self.editingContentType == kEditingContentTypeSleight || self.editingContentType == kEditingContentTypeProp || self.editingContentType == kEditingContentTypeIdea) {
+                
+                number = 1;  // 删除行
+                
+            } else if (self.editingContentType == kEditingContentTypeRoutine) {
+                
+                if (self.prepModelList.count == 1 && !self.prepModelList[0].isWithPrep && !self.prepModelList[0].isWithImage && !self.prepModelList[0].isWithVideo) {
+                    number = 1;
+                } else {
+                    number = self.prepModelList.count + 1;
+                }
             }
+            
+            
             break;
             
         case 4:
-            if (self.performModelList.count == 1 && !self.performModelList[0].isWithPerform && !self.performModelList[0].isWithImage && !self.performModelList[0].isWithVideo) {
-                number = 1;
-            } else {
-                number = self.performModelList.count + 1;
+            
+            if (self.editingContentType == kEditingContentTypeRoutine) {
+                if (self.performModelList.count == 1 && !self.performModelList[0].isWithPerform && !self.performModelList[0].isWithImage && !self.performModelList[0].isWithVideo) {
+                    number = 1;
+                } else {
+                    number = self.performModelList.count + 1;
+                }
             }
             
             break;
             
         case 5:
-            if (self.notesModelList.count == 1 && !self.notesModelList[0].isWithNotes) {
-                number = 1;
-            } else {
-                number = self.notesModelList.count + 1;
+            if (self.editingContentType == kEditingContentTypeRoutine) {
+                if (self.notesModelList.count == 1 && !self.notesModelList[0].isWithNotes) {
+                    number = 1;
+                } else {
+                    number = self.notesModelList.count + 1;
+                }
             }
+            
+            break;
+            
+        case 6:
+            if (self.editingContentType == kEditingContentTypeRoutine) {
+                number = 1; // 删除行
+            }
+            
             break;
             
         default:
@@ -718,8 +726,12 @@
                             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ID];
                         }
                         
+                        cell.backgroundColor = [UIColor whiteColor];
+                        cell.textLabel.textAlignment = NSTextAlignmentLeft;
                         cell.textLabel.font = kBoldFontSys16;
+                        cell.textLabel.textColor = [UIColor blackColor];
                         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                        cell.selectionStyle = UITableViewCellSelectionStyleDefault;
 
                         NSString *effectTitle;
                         
@@ -741,7 +753,22 @@
             }
         case 2:
             {
-                if (self.editingContentType == kEditingContentTypeRoutine) {
+                if (self.editingContentType == kEditingContentTypeLines) {
+                    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
+                    if (cell == nil) {
+                        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ID];
+                    }
+                    
+                    cell.backgroundColor = [UIColor redColor];
+                    cell.textLabel.text = NSLocalizedString(@"删除", nil);
+                    cell.textLabel.font = kBoldFontSys16;
+                    cell.textLabel.textAlignment = NSTextAlignmentCenter;
+                    cell.textLabel.textColor = [UIColor whiteColor];
+                    cell.accessoryType = UITableViewCellAccessoryNone;
+                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                    return cell;
+                    
+                } else if (self.editingContentType == kEditingContentTypeRoutine) {
                     
                     if (indexPath.row == 0) {
                         
@@ -751,8 +778,13 @@
                         }
                         
                         cell.textLabel.text = NSLocalizedString(@"添加道具", nil);
+                        cell.backgroundColor = [UIColor whiteColor];
+                        cell.textLabel.textAlignment = NSTextAlignmentLeft;
                         cell.textLabel.font = kBoldFontSys16;
+                        cell.textLabel.textColor = [UIColor blackColor];
                         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                        cell.selectionStyle = UITableViewCellSelectionStyleDefault;
+
                         return cell;
                         
                     } else {
@@ -776,8 +808,13 @@
                         }
                         
                         cell.textLabel.text = NSLocalizedString(@"添加细节", nil);
+                        cell.backgroundColor = [UIColor whiteColor];
+                        cell.textLabel.textAlignment = NSTextAlignmentLeft;
                         cell.textLabel.font = kBoldFontSys16;
+                        cell.textLabel.textColor = [UIColor blackColor];
                         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                        cell.selectionStyle = UITableViewCellSelectionStyleDefault;
+
                         return cell;
                         
                     } else {
@@ -814,46 +851,70 @@
             }
         case 3:
             {
-                if (indexPath.row == 0) {
+                if (self.editingContentType == kEditingContentTypeIdea || self.editingContentType == kEditingContentTypeSleight || self.editingContentType == kEditingContentTypeProp) {
                     
                     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
                     if (cell == nil) {
                         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ID];
                     }
                     
-                    cell.textLabel.text = NSLocalizedString(@"添加准备", nil);
+                    cell.backgroundColor = [UIColor redColor];
+                    cell.textLabel.text = NSLocalizedString(@"删除", nil);
                     cell.textLabel.font = kBoldFontSys16;
-                    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                    cell.textLabel.textAlignment = NSTextAlignmentCenter;
+                    cell.textLabel.textColor = [UIColor whiteColor];
+                    cell.accessoryType = UITableViewCellAccessoryNone;
+                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
                     return cell;
                     
-                } else {
+                } else if (self.editingContentType == kEditingContentTypeRoutine) {
                     
-                    CLPrepModel *model = self.prepModelList[indexPath.row - 1];
-                    
-                    if (model.isWithImage || model.isWithVideo) {
+                    if (indexPath.row == 0) {
                         
-                        CLNewEntryImageCell *cell = [tableView dequeueReusableCellWithIdentifier:kNewEntryImageCellID];
-                        
-                        if (model.isWithImage) {
-                            [cell.iconView setImage:[model.image getNamedImageThumbnail]];
-                        } else if (model.isWithVideo) {
-                            [cell.iconView setImage:[model.video getNamedVideoThumbnail]];
-                            
+                        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
+                        if (cell == nil) {
+                            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ID];
                         }
-                        cell.contentLabel.text = model.prep;
                         
+                        cell.textLabel.text = NSLocalizedString(@"添加准备", nil);
+                        cell.backgroundColor = [UIColor whiteColor];
+                        cell.textLabel.textAlignment = NSTextAlignmentLeft;
+                        cell.textLabel.font = kBoldFontSys16;
+                        cell.textLabel.textColor = [UIColor blackColor];
+                        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                        cell.selectionStyle = UITableViewCellSelectionStyleDefault;
+
                         return cell;
+                        
                     } else {
-                        CLNewEntryTextCell *cell = [tableView dequeueReusableCellWithIdentifier:kNewEntryTextCellID];
                         
-                        cell.contentLabel.text = model.prep;
+                        CLPrepModel *model = self.prepModelList[indexPath.row - 1];
                         
-                        return cell;
+                        if (model.isWithImage || model.isWithVideo) {
+                            
+                            CLNewEntryImageCell *cell = [tableView dequeueReusableCellWithIdentifier:kNewEntryImageCellID];
+                            
+                            if (model.isWithImage) {
+                                [cell.iconView setImage:[model.image getNamedImageThumbnail]];
+                            } else if (model.isWithVideo) {
+                                [cell.iconView setImage:[model.video getNamedVideoThumbnail]];
+                                
+                            }
+                            cell.contentLabel.text = model.prep;
+                            
+                            return cell;
+                        } else {
+                            CLNewEntryTextCell *cell = [tableView dequeueReusableCellWithIdentifier:kNewEntryTextCellID];
+                            
+                            cell.contentLabel.text = model.prep;
+                            
+                            return cell;
+                        }
+                        
+                        
                     }
-                    
-                    
                 }
-                
             }
         case 4:
             {
@@ -865,8 +926,13 @@
                     }
                     
                     cell.textLabel.text = NSLocalizedString(@"添加表演", nil);
+                    cell.backgroundColor = [UIColor whiteColor];
+                    cell.textLabel.textAlignment = NSTextAlignmentLeft;
                     cell.textLabel.font = kBoldFontSys16;
+                    cell.textLabel.textColor = [UIColor blackColor];
                     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                    cell.selectionStyle = UITableViewCellSelectionStyleDefault;
+
                     return cell;
                     
                 } else {
@@ -909,8 +975,13 @@
                     }
                     
                     cell.textLabel.text = NSLocalizedString(@"添加注意", nil);
+                    cell.backgroundColor = [UIColor whiteColor];
+                    cell.textLabel.textAlignment = NSTextAlignmentLeft;
                     cell.textLabel.font = kBoldFontSys16;
+                    cell.textLabel.textColor = [UIColor blackColor];
                     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                    cell.selectionStyle = UITableViewCellSelectionStyleDefault;
+
                     return cell;
                     
                 } else {
@@ -927,12 +998,31 @@
                 
             }
             
+        case 6:
+            {
+                if (self.editingContentType == kEditingContentTypeRoutine) {
+                    
+                    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
+                    if (cell == nil) {
+                        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ID];
+                    }
+                    
+                    cell.backgroundColor = [UIColor redColor];
+                    cell.textLabel.text = NSLocalizedString(@"删除", nil);
+                    cell.textLabel.font = kBoldFontSys16;
+                    cell.textLabel.textAlignment = NSTextAlignmentCenter;
+                    cell.textLabel.textColor = [UIColor whiteColor];
+                    cell.accessoryType = UITableViewCellAccessoryNone;
+                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
+                    return cell;
+                    
+                }
+            }
+            
         default:
             break;
         }
-            
-            
-            return nil;
             
     }
     return nil;
@@ -1130,7 +1220,12 @@
             }            break;
             
         case kEditingContentTypeLines:
-            return;
+            break;
+            
+        case kEditingContentTypeShow:
+            break;
+        default:
+            break;
     }
 }
 
@@ -1202,6 +1297,67 @@
     [self performSegueWithIdentifier:kEditingSegue sender:path];
 }
 
+- (void) deleteCurrentEntry {
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"删除内容", nil) message:NSLocalizedString(@"提示: 删除内容后将无法恢复,确定要删除当前内容吗?", nil) preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* delete = [UIAlertAction actionWithTitle:NSLocalizedString(@"确定", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            NSLog(@"delete current entry");
+            [self sendDeleteNotification];
+            
+        });
+    }];
+    
+    UIAlertAction* cancel = [UIAlertAction actionWithTitle:NSLocalizedString(@"取消", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
+    }];
+    
+    [alert addAction:delete];
+    [alert addAction:cancel];
+    
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
+- (void)sendDeleteNotification {
+    
+    self.currentEntryDelteted = YES;
+    
+    switch (self.editingContentType) {
+        case kEditingContentTypeRoutine:
+            [[NSNotificationCenter defaultCenter] postNotificationName:kDeleteEntryNotification object:self.routineModel];
+            break;
+        case kEditingContentTypeIdea:
+            [[NSNotificationCenter defaultCenter] postNotificationName:kDeleteEntryNotification object:self.ideaObjModel];
+
+            break;
+        case kEditingContentTypeSleight:
+            [[NSNotificationCenter defaultCenter] postNotificationName:kDeleteEntryNotification object:self.sleightObjModel];
+
+            break;
+        case kEditingContentTypeProp:
+            [[NSNotificationCenter defaultCenter] postNotificationName:kDeleteEntryNotification object:self.propObjModel];
+
+            break;
+        case kEditingContentTypeLines:
+            [[NSNotificationCenter defaultCenter] postNotificationName:kDeleteEntryNotification object:self.linesObjModel];
+
+            break;
+        default:
+            break;
+    }
+    
+    //This for loop iterates through all the view controllers in navigation stack.
+    for (UIViewController* viewController in self.navigationController.viewControllers) {
+
+        if ([viewController isKindOfClass:[CLListVC class]] ) {
+        
+            CLListVC *vc = (CLListVC*)viewController;
+            [self.navigationController popToViewController:vc animated:YES];
+        }
+    }
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if (indexPath.section == 0) return;
@@ -1211,7 +1367,10 @@
     if (indexPath.section == 2) {
         
         if (indexPath.row == 0) { // 当选中第一行时
-            if (self.editingContentType == kEditingContentTypeRoutine) {
+            if (self.editingContentType == kEditingContentTypeLines) {
+                [self deleteCurrentEntry];
+                
+            } else if (self.editingContentType == kEditingContentTypeRoutine) {
                 if (self.propModelList.count == 1 && !self.propModelList[0].isWithProp && !self.propModelList[0].isWithDetail && !self.propModelList[0].isWithQuantity) {
                     [self performSegueWithIdentifier:kEditingSegue sender:indexPath];
                 } else {
@@ -1235,14 +1394,22 @@
     if (indexPath.section == 3) {
         
         if (indexPath.row == 0) {
-            if (self.prepModelList.count == 1) {
-                CLPrepModel *model = self.prepModelList[0];
-                if (!model.isWithPrep && !model.isWithImage && !model.isWithVideo) {
-                    [self performSegueWithIdentifier:kEditingSegue sender:indexPath];
+            
+            if (self.editingContentType == kEditingContentTypeSleight || self.editingContentType == kEditingContentTypeProp || self.editingContentType == kEditingContentTypeIdea) {
+                [self deleteCurrentEntry];
+                
+            } else if (self.editingContentType == kEditingContentTypeRoutine) {
+                
+                if (self.prepModelList.count == 1) {
+                    CLPrepModel *model = self.prepModelList[0];
+                    if (!model.isWithPrep && !model.isWithImage && !model.isWithVideo) {
+                        [self performSegueWithIdentifier:kEditingSegue sender:indexPath];
+                    }
+                } else {
+                    [self addPrep];
                 }
-            } else {
-                [self addPrep];
             }
+            
         } else {
             [self performSegueWithIdentifier:kEditingSegue sender:indexPath];
         }
@@ -1274,6 +1441,14 @@
 
         }
         
+    }
+    
+    if (indexPath.section == 6) {
+        if (indexPath.row == 0) {
+            if (self.editingContentType == kEditingContentTypeRoutine) {
+                [self deleteCurrentEntry];
+            }
+        }
     }
     
 }

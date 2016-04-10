@@ -460,6 +460,8 @@ typedef enum {
 #define kUpdateDataNotification @"updateDataNotification"
 
 #define kUpdateMookNotification @"updateMookNotification"
+#define kDeleteEntryNotification    @"deleteCurrentEntryNotification"
+#define kCancelEntryNotification    @"cancelCurrentEntryNotification"
 
 #define kUpdateEntryVCNotification  @"UpdateEntryVCNotification"
 #define kUpdateShowsNotification @"UpdateShowsNotification"
