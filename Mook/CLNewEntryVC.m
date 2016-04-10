@@ -58,8 +58,6 @@
 @property (nonatomic, strong) NSMutableArray <CLPerformModel*> *performModelList;
 @property (nonatomic, strong) NSMutableArray <CLNotesModel*> *notesModelList;
 
-@property (nonatomic, strong) UITextField *titleTF;
-
 @property (nonatomic, copy) NSString *entryTitle;
 
 @property (nonatomic, copy) NSString *deleteMessage;
@@ -414,6 +412,7 @@
 
 - (void)cancelNewCreation {
     
+    self.newEntryCancelled = YES;
     
     switch (self.editingContentType) {
         case kEditingContentTypeRoutine:
@@ -439,7 +438,6 @@
             break;
     }
     
-    self.newEntryCancelled = YES;
     [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
 
 }
@@ -525,14 +523,12 @@
         return;
     }
     
-    self.infoModel.name = self.titleTF.text;
+    // 不删除也不取消, 则需要保存数据
     if (self.presentedViewController == nil && [self.navigationController.topViewController isKindOfClass:[CLEdtingManageVC class]] == NO) {
-        
-        [self saveEntryData];
-    }
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:kUpdateDataNotification object:self];
 
+        [self saveEntryData];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kUpdateDataNotification object:self];
+    }
 }
 #pragma mark - Table view data source
 
@@ -687,7 +683,6 @@
                     cell.inputTextField.placeholder = self.entryTitle;
                     cell.inputTextField.text = self.infoModel.name;
                     cell.inputTextField.tag = 1;
-                    self.titleTF = cell.inputTextField;
                     cell.inputTextField.delegate = self;
                 }
                 return cell;

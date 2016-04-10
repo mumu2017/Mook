@@ -113,15 +113,10 @@
 
 - (void)cancelNewCreation {
 
-    if ([kDataListShow containsObject:self.showModel]) {
-        [kDataListShow removeObject:self.showModel];
-    }
-    
-    if ([kDataListAll containsObject:self.showModel]) {
-        [kDataListAll removeObject:self.showModel];
-    }
-    
     self.newEntryCancelled = YES;
+
+   [[NSNotificationCenter defaultCenter] postNotificationName:kCancelEntryNotification object:self.showModel];
+
     [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
     
 }
@@ -175,12 +170,14 @@
     if (self.newEntryCancelled) {
         return;
     }
-        
+    
+    // 不删除也不取消, 则需要保存数据
+
     if (self.presentedViewController == nil && [self.navigationController.topViewController isKindOfClass:[CLEdtingManageVC class]] == NO) {
         
-        [[NSNotificationCenter defaultCenter] postNotificationName:kUpdateDataNotification object:self];
-        
         [CLDataSaveTool updateShow:self.showModel];
+
+        [[NSNotificationCenter defaultCenter] postNotificationName:kUpdateDataNotification object:self];
     }
 }
 

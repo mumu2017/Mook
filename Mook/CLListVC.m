@@ -98,7 +98,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-//    self.tableView.backgroundColor = kMenuBackgroundColor;
     self.tableView.backgroundView = self.tableBackView;
     self.tableView.rowHeight = kListCellHeight;
     self.tableView.tableFooterView = [UIView new];
