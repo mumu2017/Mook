@@ -25,7 +25,5 @@
 
 @property (nonatomic, copy) NSAttributedString *titleString;
 @property (nonatomic, strong) NSDate *date;
-@property (nonatomic, strong) NSIndexPath *dataPath;
-//@property (nonatomic, strong) NSMutableArray *assets;
 
 @end

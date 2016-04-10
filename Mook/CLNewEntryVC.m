@@ -1551,16 +1551,6 @@
     } else {
         [self.navigationController popViewControllerAnimated:YES];
     }
-//    
-//    if (self.isCreatingNewEntry) {
-//        
-//        [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"saveNewCreation" object:nil]];
-//        
-//    } else {
-//        
-//        [self.navigationController popViewControllerAnimated:YES];
-//        
-//    }
 }
 
 #pragma mark - textField 代理方法

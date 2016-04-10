@@ -790,7 +790,6 @@
         
         if ([sender isKindOfClass:[NSIndexPath class]]) {
             NSIndexPath *indexPath = (NSIndexPath *)sender;
-            vc.dataPath = indexPath;
 
             switch (self.listType) {
                 case kListTypeAll:
@@ -903,7 +902,6 @@
         CLShowVC *vc = (CLShowVC *)destVC;
         if ([sender isKindOfClass:[NSIndexPath class]]) {
             NSIndexPath *indexPath = (NSIndexPath *)sender;
-            vc.dataPath = indexPath;
             CLShowModel *model;
             
             if (self.listType == kListTypeAll) {

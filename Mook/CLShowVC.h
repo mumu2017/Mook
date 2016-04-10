@@ -14,6 +14,5 @@
 @property (nonatomic, strong) CLShowModel *showModel;
 
 @property (nonatomic, strong) NSDate *date;
-@property (nonatomic, strong) NSIndexPath *dataPath;
 
 @end

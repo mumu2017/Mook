@@ -20,8 +20,6 @@
 @property (nonatomic, strong) CLPropObjModel *propObjModel;
 @property (nonatomic, strong) CLLinesObjModel *linesObjModel;
 
-@property (nonatomic, strong) NSIndexPath *dataPath;
-
 @end
 
 

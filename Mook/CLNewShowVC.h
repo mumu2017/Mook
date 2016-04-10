@@ -13,6 +13,5 @@
 @interface CLNewShowVC : UITableViewController
 
 @property (nonatomic, strong) CLShowModel *showModel;
-@property (nonatomic, strong) NSIndexPath *dataPath;
 
 @end
