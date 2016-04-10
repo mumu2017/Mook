@@ -12,9 +12,7 @@
 
 // 表演信息
 @property (nonatomic, copy) NSString *perform;
-
 // 配图
-
 @property (nonatomic, copy) NSString *image;
 
 @property (nonatomic, copy) NSString *video;

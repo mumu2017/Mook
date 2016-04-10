@@ -617,10 +617,10 @@
 			children = (
 				43E0F70D1CA0F0BB005CAD97 /* Tags(标签) */,
 				43A2811B1CB22754009C2785 /* Views */,
-				43A281221CB2299B009C2785 /* CLLibraryVC.h */,
-				43A281231CB2299B009C2785 /* CLLibraryVC.m */,
 				43F5F7551CB390BC007BFB0C /* CLLibraryNavVC.h */,
 				43F5F7561CB390BC007BFB0C /* CLLibraryNavVC.m */,
+				43A281221CB2299B009C2785 /* CLLibraryVC.h */,
+				43A281231CB2299B009C2785 /* CLLibraryVC.m */,
 			);
 			name = "Library分类";
 			sourceTree = "<group>";
@@ -724,18 +724,18 @@
 		43E0F7061C9EB080005CAD97 /* 主要模型 */ = {
 			isa = PBXGroup;
 			children = (
+				432345D81C94051A00200833 /* CLShowModel.h */,
+				432345D91C94051A00200833 /* CLShowModel.m */,
 				432345D61C94051A00200833 /* CLRoutineModel.h */,
 				432345D71C94051A00200833 /* CLRoutineModel.m */,
 				432345C21C94051A00200833 /* CLIdeaObjModel.h */,
 				432345C31C94051A00200833 /* CLIdeaObjModel.m */,
-				432345C61C94051A00200833 /* CLLinesObjModel.h */,
-				432345C71C94051A00200833 /* CLLinesObjModel.m */,
-				432345D21C94051A00200833 /* CLPropObjModel.h */,
-				432345D31C94051A00200833 /* CLPropObjModel.m */,
-				432345D81C94051A00200833 /* CLShowModel.h */,
-				432345D91C94051A00200833 /* CLShowModel.m */,
 				432345DA1C94051A00200833 /* CLSleightObjModel.h */,
 				432345DB1C94051A00200833 /* CLSleightObjModel.m */,
+				432345D21C94051A00200833 /* CLPropObjModel.h */,
+				432345D31C94051A00200833 /* CLPropObjModel.m */,
+				432345C61C94051A00200833 /* CLLinesObjModel.h */,
+				432345C71C94051A00200833 /* CLLinesObjModel.m */,
 			);
 			name = "主要模型";
 			sourceTree = "<group>";

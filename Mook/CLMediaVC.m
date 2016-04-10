@@ -178,9 +178,6 @@ static NSString * const reuseIdentifier = @"Cell";
     [super viewDidLoad];
     
     self.collectionView.backgroundView = self.tableBackView;
-
-    // Uncomment the following line to preserve selection between presentations
-    // self.clearsSelectionOnViewWillAppear = NO;
     
 //    self.collectionView.backgroundColor = kMenuBackgroundColor;
     [self.collectionView registerNib:[UINib nibWithNibName:@"CLMediaCollectionCell" bundle: nil] forCellWithReuseIdentifier:reuseIdentifier];
@@ -275,7 +272,7 @@ static NSString * const reuseIdentifier = @"Cell";
 //定义每个UICollectionView 的大小
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return CGSizeMake((self.view.frame.size.width-4)/3, (self.view.frame.size.width-4)/3);
+    return CGSizeMake((self.view.frame.size.width-2)/3, (self.view.frame.size.width-2)/3);
 }
 //定义每个UICollectionView 的 margin
 -(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section

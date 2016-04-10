@@ -12,7 +12,6 @@
 
 // 表演信息
 @property (nonatomic, copy) NSString *prep;
-
 // image的保存路径
 @property (nonatomic, copy) NSString *image;
 

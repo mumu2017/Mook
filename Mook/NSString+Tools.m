@@ -298,8 +298,8 @@
             longside = image.size.height;
         }
         
-        if (longside > 1440) { // 如果长边比1440大, 那么久压缩图片尺寸
-            UIImage *scaledImage = [UIImage imageWithImage:image scaledToNewSize:CGSizeMake(1080, 1080)]; // 1080会是短边的距离,按照4:3的常规图像比例, 长边应该是1080 / 3 * 4 = 1440
+        if (longside > 1280) { // 如果长边比1280大, 那么久压缩图片尺寸
+            UIImage *scaledImage = [UIImage imageWithImage:image scaledToNewSize:CGSizeMake(960, 960)]; // 960会是短边的距离,按照4:3的常规图像比例, 长边应该是960 / 3 * 4 = 1280
             [UIImageJPEGRepresentation(scaledImage, 0.5) writeToFile:imagePath atomically:YES];
 
         } else {
