@@ -145,7 +145,7 @@
     self.tableView.tableFooterView = [UIView new];
     self.tableView.allowsSelection = NO;
 
-    self.tableView.backgroundColor = [UIColor whiteColor];
+    self.tableView.backgroundColor = kCellBgColor;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 
     [self.tableView registerNib:[UINib nibWithNibName:@"CLOneLabelImageDisplayCell"
@@ -375,6 +375,32 @@
     return nil;
 }
 
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    
+    if ([tableView.dataSource tableView:tableView numberOfRowsInSection:section] == 0) {
+        return nil;
+    } else {
+        
+        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenW, kLabelHeight)];
+        view.backgroundColor = [UIColor clearColor];
+        UILabel *label = [[UILabel alloc] init];
+        [view addSubview:label];
+        label.frame = CGRectMake(20.0, 0, kScreenW-40.0, kLabelHeight);
+        label.textAlignment =NSTextAlignmentLeft;
+        label.backgroundColor = [UIColor clearColor];
+        label.textColor = [UIColor blackColor];
+        label.alpha = 0.99;
+        label.font = kBoldFontSys17;
+        
+        
+        return view;
+    }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    
+    return 10.0f;
+}
 
 - (void)showRoutineDetail:(UIButton *)button {
     

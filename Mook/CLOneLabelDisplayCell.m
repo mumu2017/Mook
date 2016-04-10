@@ -12,6 +12,7 @@
 
 - (void)awakeFromNib {
     // Initialization code
+    self.backgroundColor = kCellBgColor;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

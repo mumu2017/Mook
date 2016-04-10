@@ -12,6 +12,7 @@
 
 - (void)awakeFromNib {
     // Initialization code
+    self.backgroundColor = kCellBgColor;
     self.infoButton.tintColor = kMenuBackgroundColor;
 }
 

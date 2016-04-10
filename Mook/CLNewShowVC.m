@@ -290,7 +290,6 @@
                     cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ID];
                 }
                 
-                cell.backgroundColor = [UIColor whiteColor];
                 cell.textLabel.textAlignment = NSTextAlignmentLeft;
                 cell.textLabel.font = kBoldFontSys16;
                 cell.textLabel.textColor = [UIColor blackColor];
@@ -308,7 +307,6 @@
             }
             
             cell.textLabel.text = NSLocalizedString(@"添加流程", nil);
-            cell.backgroundColor = [UIColor whiteColor];
             cell.textLabel.textAlignment = NSTextAlignmentLeft;
             cell.textLabel.font = kBoldFontSys16;
             cell.textLabel.textColor = [UIColor blackColor];
@@ -340,11 +338,10 @@
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ID];
         }
         
-        cell.backgroundColor = [UIColor redColor];
         cell.textLabel.text = NSLocalizedString(@"删除", nil);
         cell.textLabel.font = kBoldFontSys16;
         cell.textLabel.textAlignment = NSTextAlignmentCenter;
-        cell.textLabel.textColor = [UIColor whiteColor];
+        cell.textLabel.textColor = [UIColor redColor];
         cell.accessoryType = UITableViewCellAccessoryNone;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
@@ -443,6 +440,8 @@
     } else if (indexPath.section == 3 && indexPath.row == 0) {
         [self deleteCurrentShow];
     }
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
 }
 
 - (void)deleteCurrentShow {

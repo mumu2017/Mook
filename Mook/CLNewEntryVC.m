@@ -717,7 +717,6 @@
                             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ID];
                         }
                         
-                        cell.backgroundColor = [UIColor whiteColor];
                         cell.textLabel.textAlignment = NSTextAlignmentLeft;
                         cell.textLabel.font = kBoldFontSys16;
                         cell.textLabel.textColor = [UIColor blackColor];
@@ -750,11 +749,10 @@
                         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ID];
                     }
                     
-                    cell.backgroundColor = [UIColor redColor];
                     cell.textLabel.text = NSLocalizedString(@"删除", nil);
                     cell.textLabel.font = kBoldFontSys16;
                     cell.textLabel.textAlignment = NSTextAlignmentCenter;
-                    cell.textLabel.textColor = [UIColor whiteColor];
+                    cell.textLabel.textColor = [UIColor redColor];
                     cell.accessoryType = UITableViewCellAccessoryNone;
                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
                     return cell;
@@ -769,7 +767,6 @@
                         }
                         
                         cell.textLabel.text = NSLocalizedString(@"添加道具", nil);
-                        cell.backgroundColor = [UIColor whiteColor];
                         cell.textLabel.textAlignment = NSTextAlignmentLeft;
                         cell.textLabel.font = kBoldFontSys16;
                         cell.textLabel.textColor = [UIColor blackColor];
@@ -799,7 +796,6 @@
                         }
                         
                         cell.textLabel.text = NSLocalizedString(@"添加细节", nil);
-                        cell.backgroundColor = [UIColor whiteColor];
                         cell.textLabel.textAlignment = NSTextAlignmentLeft;
                         cell.textLabel.font = kBoldFontSys16;
                         cell.textLabel.textColor = [UIColor blackColor];
@@ -849,11 +845,10 @@
                         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ID];
                     }
                     
-                    cell.backgroundColor = [UIColor redColor];
                     cell.textLabel.text = NSLocalizedString(@"删除", nil);
                     cell.textLabel.font = kBoldFontSys16;
                     cell.textLabel.textAlignment = NSTextAlignmentCenter;
-                    cell.textLabel.textColor = [UIColor whiteColor];
+                    cell.textLabel.textColor = [UIColor redColor];
                     cell.accessoryType = UITableViewCellAccessoryNone;
                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
 
@@ -869,7 +864,6 @@
                         }
                         
                         cell.textLabel.text = NSLocalizedString(@"添加准备", nil);
-                        cell.backgroundColor = [UIColor whiteColor];
                         cell.textLabel.textAlignment = NSTextAlignmentLeft;
                         cell.textLabel.font = kBoldFontSys16;
                         cell.textLabel.textColor = [UIColor blackColor];
@@ -917,7 +911,6 @@
                     }
                     
                     cell.textLabel.text = NSLocalizedString(@"添加表演", nil);
-                    cell.backgroundColor = [UIColor whiteColor];
                     cell.textLabel.textAlignment = NSTextAlignmentLeft;
                     cell.textLabel.font = kBoldFontSys16;
                     cell.textLabel.textColor = [UIColor blackColor];
@@ -966,7 +959,6 @@
                     }
                     
                     cell.textLabel.text = NSLocalizedString(@"添加注意", nil);
-                    cell.backgroundColor = [UIColor whiteColor];
                     cell.textLabel.textAlignment = NSTextAlignmentLeft;
                     cell.textLabel.font = kBoldFontSys16;
                     cell.textLabel.textColor = [UIColor blackColor];
@@ -998,11 +990,10 @@
                         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ID];
                     }
                     
-                    cell.backgroundColor = [UIColor redColor];
                     cell.textLabel.text = NSLocalizedString(@"删除", nil);
                     cell.textLabel.font = kBoldFontSys16;
                     cell.textLabel.textAlignment = NSTextAlignmentCenter;
-                    cell.textLabel.textColor = [UIColor whiteColor];
+                    cell.textLabel.textColor = [UIColor redColor];
                     cell.accessoryType = UITableViewCellAccessoryNone;
                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
 
@@ -1442,6 +1433,8 @@
         }
     }
     
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+
 }
 
 

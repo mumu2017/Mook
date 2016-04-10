@@ -34,7 +34,7 @@
 }
 
 - (void)awakeFromNib {
-
+    self.backgroundColor = kCellBgColor;
     self.iconView.clipsToBounds = YES;
 }
 

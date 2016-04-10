@@ -391,7 +391,11 @@ typedef enum {
 
 
 //#define kCellBgColor     [UIColor colorWithRed:249/255.0 green:249/255.0 blue:249/255.0 alpha:1.0]
-#define kCellBgColor     [UIColor colorWithRed:255.0/255.0 green:255.0/255.0 blue:255.0/255.0 alpha:1.0]
+//#define kCellBgColor     [UIColor colorWithRed:255.0/255.0 green:255.0/255.0 blue:255.0/255.0 alpha:1.0]
+
+// contentVC的背景色
+#define kCellBgColor     [UIColor colorWithRed:247/255.0 green:247/255.0 blue:247/255.0 alpha:1]
+
 
 #define kSeperatorBgColor     [UIColor colorWithRed:221/255.0 green:221/255.0 blue:221/255.0 alpha:1]
 #define kDisplayBgColor     [UIColor colorWithRed:239/255.0 green:239/255.0 blue:239/255.0 alpha:1.0]

@@ -14,17 +14,17 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="300" translatesAutoresizingMaskIntoConstraints="NO" id="DgF-zz-TLt">
-                        <rect key="frame" x="15" y="8" width="290" height="28"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="300" translatesAutoresizingMaskIntoConstraints="NO" id="DgF-zz-TLt">
+                        <rect key="frame" x="20" y="15" width="280" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="DgF-zz-TLt" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="1BE-rV-h1M"/>
-                    <constraint firstItem="DgF-zz-TLt" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="5On-Wy-ach"/>
+                    <constraint firstItem="DgF-zz-TLt" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="1BE-rV-h1M"/>
+                    <constraint firstItem="DgF-zz-TLt" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="5On-Wy-ach"/>
                     <constraint firstAttribute="bottom" secondItem="DgF-zz-TLt" secondAttribute="bottom" constant="7" id="Fob-9J-h2u"/>
-                    <constraint firstAttribute="trailing" secondItem="DgF-zz-TLt" secondAttribute="trailing" constant="15" id="tj5-vZ-7g7"/>
+                    <constraint firstAttribute="trailing" secondItem="DgF-zz-TLt" secondAttribute="trailing" constant="20" id="tj5-vZ-7g7"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

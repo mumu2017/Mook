@@ -290,7 +290,7 @@
     [super viewDidLoad];
     
     [self setContentTitle];
-    self.tableView.backgroundColor = [UIColor whiteColor];
+    self.tableView.backgroundColor = kCellBgColor;
     self.tableView.estimatedRowHeight = 44;
     self.tableView.allowsSelection = NO;
     
@@ -450,23 +450,38 @@
             
             CLPropModel *model = self.propModelList[indexPath.row];
             NSString *prop, *index;
-            index = [NSString stringWithFormat:@"%ld.  ", (unsigned long)(indexPath.row+1)];
+//            index = [NSString stringWithFormat:@"%ld.", (unsigned long)(indexPath.row+1)];
             
             if (model.isWithProp) {
-                prop = [index stringByAppendingString:model.prop];
+//                prop = [index stringByAppendingString:model.prop];
+                prop = model.prop;
             } else {
-                prop = [index stringByAppendingString:NSLocalizedString(@"新建道具", nil)];
+//                prop = [index stringByAppendingString:NSLocalizedString(@"新建道具", nil)];
+                prop = NSLocalizedString(@"新建道具", nil);
             }
             
             if (model.isWithQuantity) {
-                prop = [prop stringByAppendingString:[NSString stringWithFormat:@" x %@", model.quantity]];
+                prop = [prop stringByAppendingString:[NSString stringWithFormat:@" ( x %@ )", model.quantity]];
             }
+
             
             if (model.isWithDetail) {
-                prop = [prop stringByAppendingString:[NSString stringWithFormat:@"\n   %@", model.propDetail]];
+                NSString *detail = [NSString stringWithFormat:@"  ( %@ )", model.propDetail];
+                 cell.contentLabel.attributedText = [[NSString attributedStringWithFirstPart:prop secondPart:detail firstPartFont:kFontSys17 firstPartColor:[UIColor blackColor] secondPardFont:kFontSys17 secondPartColor:[UIColor darkGrayColor]] styledString];
+            } else {
+                cell.contentLabel.text = prop;
             }
             
-            cell.contentLabel.attributedText = [prop styledString];
+           
+            
+            
+            
+//
+//            if (model.isWithDetail) {
+//                prop = [prop stringByAppendingString:[NSString stringWithFormat:@"\n%@", model.propDetail]];
+//            }
+//            
+//            cell.contentLabel.attributedText = [prop styledString];
             
             return cell;
         } else {
@@ -544,8 +559,8 @@
     } else if (indexPath.section == self.performSection && self.performSection != self.prepSection) {
         
         CLPerformModel *model = self.performModelList[indexPath.row];
-        
         NSString *perform = model.perform;
+        
         if (model.isWithVideo) {
             
             CLOneLabelImageDisplayCell * cell = [self.tableView dequeueReusableCellWithIdentifier:kOneLabelImageDisplayCell];
@@ -598,15 +613,15 @@
     } else {
         
         UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenW, kLabelHeight)];
-        view.backgroundColor = [UIColor whiteColor];
+        view.backgroundColor = [UIColor clearColor];
         UILabel *label = [[UILabel alloc] init];
         [view addSubview:label];
-        label.frame = CGRectMake(kPadding, 0, kContentW, kLabelHeight);
-        label.textAlignment =NSTextAlignmentCenter;
+        label.frame = CGRectMake(20.0, 0, kScreenW-40.0, kLabelHeight);
+        label.textAlignment =NSTextAlignmentLeft;
         label.backgroundColor = [UIColor clearColor];
         label.textColor = [UIColor blackColor];
         label.alpha = 0.99;
-        label.font = kBoldFontSys16;
+        label.font = kBoldFontSys17;
         
         NSString *sectionTitle;
         if (section == self.infoSection) {

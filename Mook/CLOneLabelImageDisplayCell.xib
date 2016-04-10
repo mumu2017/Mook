@@ -15,36 +15,36 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="305.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="sfasfdsaf aadfsa dsaf" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="300" translatesAutoresizingMaskIntoConstraints="NO" id="52L-a3-j0n">
-                        <rect key="frame" x="15" y="20" width="290" height="20.5"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="sfasfdsaf aadfsa dsaf" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="300" translatesAutoresizingMaskIntoConstraints="NO" id="52L-a3-j0n">
+                        <rect key="frame" x="20" y="15" width="280" height="25.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tag.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="7uW-vK-QWX">
-                        <rect key="frame" x="10" y="60.5" width="300" height="225"/>
+                        <rect key="frame" x="0.0" y="60.5" width="320" height="240"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="width" relation="greaterThanOrEqual" secondItem="7uW-vK-QWX" secondAttribute="height" multiplier="4:3" id="KSV-hq-1P5"/>
                         </constraints>
                     </imageView>
                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5n5-MU-jWV">
-                        <rect key="frame" x="10" y="60.5" width="300" height="225"/>
+                        <rect key="frame" x="0.0" y="60.5" width="320" height="240"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </button>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 <constraints>
                     <constraint firstItem="5n5-MU-jWV" firstAttribute="height" secondItem="7uW-vK-QWX" secondAttribute="height" id="2pj-eV-8Jf"/>
-                    <constraint firstAttribute="bottom" secondItem="7uW-vK-QWX" secondAttribute="bottom" constant="20" id="8ev-Wq-Y4U"/>
-                    <constraint firstItem="52L-a3-j0n" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="EQG-hb-vzN"/>
+                    <constraint firstAttribute="bottom" secondItem="7uW-vK-QWX" secondAttribute="bottom" constant="5" id="8ev-Wq-Y4U"/>
+                    <constraint firstItem="52L-a3-j0n" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="EQG-hb-vzN"/>
                     <constraint firstItem="5n5-MU-jWV" firstAttribute="width" secondItem="7uW-vK-QWX" secondAttribute="width" id="FvG-bH-7DM"/>
-                    <constraint firstItem="52L-a3-j0n" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="VC8-Ud-ddk"/>
+                    <constraint firstAttribute="trailing" secondItem="52L-a3-j0n" secondAttribute="trailing" constant="20" id="NqH-k1-eKF"/>
                     <constraint firstItem="5n5-MU-jWV" firstAttribute="centerY" secondItem="7uW-vK-QWX" secondAttribute="centerY" id="aXg-8M-8CN"/>
-                    <constraint firstAttribute="trailing" secondItem="7uW-vK-QWX" secondAttribute="trailing" constant="10" id="euN-gc-Swo"/>
-                    <constraint firstItem="7uW-vK-QWX" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="jFG-Qm-mod"/>
+                    <constraint firstAttribute="trailing" secondItem="7uW-vK-QWX" secondAttribute="trailing" id="euN-gc-Swo"/>
+                    <constraint firstItem="7uW-vK-QWX" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="jFG-Qm-mod"/>
                     <constraint firstItem="5n5-MU-jWV" firstAttribute="centerX" secondItem="7uW-vK-QWX" secondAttribute="centerX" id="jW5-wu-mwQ"/>
-                    <constraint firstItem="52L-a3-j0n" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="20" id="jm4-z4-u9G"/>
+                    <constraint firstItem="52L-a3-j0n" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="jm4-z4-u9G"/>
                     <constraint firstItem="7uW-vK-QWX" firstAttribute="top" secondItem="52L-a3-j0n" secondAttribute="bottom" constant="20" id="uoz-sL-z0W"/>
                 </constraints>
             </tableViewCellContentView>
@@ -57,6 +57,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="tag.jpg" width="1920" height="1396"/>
+        <image name="tag.jpg" width="1440" height="1047"/>
     </resources>
 </document>
