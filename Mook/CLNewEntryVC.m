@@ -487,27 +487,23 @@
 
 - (void)saveEntryData {
     if (self.editingContentType == kEditingContentTypeRoutine) {
-        
-        dispatch_async(dispatch_get_global_queue(0, 0), ^{
-            [CLDataSaveTool updateRoutine:self.routineModel];
-        });
+    
+        [CLDataSaveTool updateRoutine:self.routineModel];
         
     } else if (self.editingContentType == kEditingContentTypeIdea) {
-        dispatch_async(dispatch_get_global_queue(0, 0), ^{
-            [CLDataSaveTool updateIdea:self.ideaObjModel];
-        });
+        [CLDataSaveTool updateIdea:self.ideaObjModel];
+        
     } else if (self.editingContentType == kEditingContentTypeSleight) {
-        dispatch_async(dispatch_get_global_queue(0, 0), ^{
-            [CLDataSaveTool updateSleight:self.sleightObjModel];
-        });
+        
+        [CLDataSaveTool updateSleight:self.sleightObjModel];
+
     } else if (self.editingContentType == kEditingContentTypeProp) {
-        dispatch_async(dispatch_get_global_queue(0, 0), ^{
-            [CLDataSaveTool updateProp:self.propObjModel];
-        });
+
+        [CLDataSaveTool updateProp:self.propObjModel];
+
     } else if (self.editingContentType == kEditingContentTypeLines) {
-        dispatch_async(dispatch_get_global_queue(0, 0), ^{
-            [CLDataSaveTool updateLines:self.linesObjModel];
-        });
+
+        [CLDataSaveTool updateLines:self.linesObjModel];
     }
 
 }
