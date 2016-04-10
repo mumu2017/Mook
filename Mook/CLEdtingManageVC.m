@@ -640,7 +640,12 @@
     
     self.content = content;
     self.currentIdentifierTag = identifierTag;
-    [self startVoiceRecognition];
+    
+    if ([self.iFlySpeechRecognizer isListening]) {
+        [self stopVoiceRecognition];
+    } else {
+        [self startVoiceRecognition];
+    }
 }
 
 - (void)editingVCCancelAudioRecognition:(CLEditingVC *)editingVC {

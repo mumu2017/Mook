@@ -432,6 +432,8 @@
 		43068C051CB75D3700BA1A57 /* 语音识别helper */ = {
 			isa = PBXGroup;
 			children = (
+				43068BF81CB74DEB00BA1A57 /* PopupView.h */,
+				43068BF91CB74DEB00BA1A57 /* PopupView.m */,
 				43068C021CB7546400BA1A57 /* ISRDataHelper.h */,
 				43068C031CB7546400BA1A57 /* ISRDataHelper.m */,
 				43068BFB1CB74E5900BA1A57 /* IATConfig.h */,
@@ -525,8 +527,6 @@
 		432345EA1C94052F00200833 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				43068BF81CB74DEB00BA1A57 /* PopupView.h */,
-				43068BF91CB74DEB00BA1A57 /* PopupView.m */,
 				432346091C94054300200833 /* CLTableBackView.h */,
 				4323460A1C94054300200833 /* CLTableBackView.m */,
 				4323460B1C94054300200833 /* CLTableBackView.xib */,
