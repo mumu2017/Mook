@@ -15,7 +15,6 @@
     // Initialization code
     [self.contentView addSubview:self.imageView];
     [self.contentView addSubview:self.titleLabel];
-    [self.contentView addSubview:self.contentLabel];
     [self.contentView addSubview:self.iconView];
 }
 

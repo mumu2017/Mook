@@ -14,6 +14,7 @@
 #import "CLContentVC.h"
 #import "CLShowVC.h"
 
+#import "CLInfoModel.h"
 #import "CLShowModel.h"
 #import "CLIdeaObjModel.h"
 #import "CLRoutineModel.h"
@@ -229,40 +230,70 @@ static NSString * const reuseIdentifier = @"Cell";
     NSDictionary *dict = self.allMedia[indexPath.row];
     cell.name = [dict objectForKey:@"name"];
     
-    NSString *type, *modelName, *title, *content;
+    NSString *type, *modelName, *title;
 
         type = [dict objectForKey:@"model_type"];
         modelName = [dict objectForKey:@"model_time_stamp"];
         if ([type isEqualToString:kTypeIdea]) {
             CLIdeaObjModel *model = [CLDataSaveTool ideaByName:modelName];
-            title = kDefaultTitleIdea;
-            content = [NSString getDateString:model.date];
+            if (model.infoModel.isWithName) {
+                title = model.infoModel.name;
+
+            } else {
+                title = kDefaultTitleIdea;
+
+            }
             
         } else if ([type isEqualToString:kTypeShow]) {
             CLShowModel *model = [CLDataSaveTool showByName:modelName];
-            title = kDefaultTitleShow;
-            content = [NSString getDateString:model.date];
+            if (model.name.length > 0) {
+                title = model.name;
+
+            } else {
+                title = kDefaultTitleShow;
+
+            }
             
         } else if ([type isEqualToString:kTypeRoutine]) {
             CLRoutineModel *model = [CLDataSaveTool routineByName:modelName];
-            title = kDefaultTitleRoutine;
-            content = [NSString getDateString:model.date];
+            if (model.infoModel.isWithName) {
+                title = model.infoModel.name;
+                
+            } else {
+                title = kDefaultTitleRoutine;
+                
+            }
         } else if ([type isEqualToString:kTypeSleight]) {
             CLSleightObjModel *model = [CLDataSaveTool sleightByName:modelName];
-            title = kDefaultTitleSleight;
-            content = [NSString getDateString:model.date];
+            if (model.infoModel.isWithName) {
+                title = model.infoModel.name;
+                
+            } else {
+                title = kDefaultTitleSleight;
+                
+            }
+                
         } else if ([type isEqualToString:kTypeProp]) {
             CLPropObjModel *model = [CLDataSaveTool propByName:modelName];
-            title = kDefaultTitleProp;
-            content = [NSString getDateString:model.date];
+            if (model.infoModel.isWithName) {
+                title = model.infoModel.name;
+                
+            } else {
+                title = kDefaultTitleProp;
+                
+            }
         } else if ([type isEqualToString:kTypeLines]) {
             CLLinesObjModel *model = [CLDataSaveTool linesByName:modelName];
-            title = kDefaultTitleLines;
-            content = [NSString getDateString:model.date];
+            if (model.infoModel.isWithName) {
+                title = model.infoModel.name;
+                
+            } else {
+                title = kDefaultTitleLines;
+                
+            }
         }
     
     cell.titleLabel.text = title;
-    cell.contentLabel.text = content;
     // Configure the cell
     
     return cell;

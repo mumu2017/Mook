@@ -8,25 +8,19 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="CLMediaCollectionCell">
-            <rect key="frame" x="0.0" y="0.0" width="155" height="155"/>
+            <rect key="frame" x="0.0" y="0.0" width="105" height="105"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="155" height="155"/>
+                <rect key="frame" x="0.0" y="0.0" width="105" height="105"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jd3-gK-xIX">
-                        <rect key="frame" x="0.0" y="0.0" width="155" height="155"/>
+                        <rect key="frame" x="0.0" y="0.0" width="105" height="105"/>
                     </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nVZ-RP-NHx">
-                        <rect key="frame" x="0.0" y="0.0" width="155" height="155"/>
+                        <rect key="frame" x="0.0" y="0.0" width="105" height="105"/>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="流程" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gX9-YH-eGR">
-                        <rect key="frame" x="8" y="117.5" width="139" height="17"/>
-                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
-                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2016/04/03" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vx5-RL-3Qg">
-                        <rect key="frame" x="8" y="136.5" width="139" height="14.5"/>
+                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="流程" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gX9-YH-eGR">
+                        <rect key="frame" x="5" y="83" width="95" height="17"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
@@ -38,21 +32,17 @@
                 <constraint firstItem="nVZ-RP-NHx" firstAttribute="centerY" secondItem="jd3-gK-xIX" secondAttribute="centerY" id="7Fb-US-sa8"/>
                 <constraint firstAttribute="bottom" secondItem="jd3-gK-xIX" secondAttribute="bottom" id="ABT-X5-UBD"/>
                 <constraint firstItem="jd3-gK-xIX" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="C0D-9L-64g"/>
-                <constraint firstAttribute="bottom" secondItem="vx5-RL-3Qg" secondAttribute="bottom" constant="4" id="Jh4-pr-PME"/>
-                <constraint firstItem="vx5-RL-3Qg" firstAttribute="top" secondItem="gX9-YH-eGR" secondAttribute="bottom" constant="2" id="Jwg-fa-p5B"/>
                 <constraint firstItem="jd3-gK-xIX" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="Mu4-j2-vMP"/>
                 <constraint firstAttribute="trailing" secondItem="jd3-gK-xIX" secondAttribute="trailing" id="Onh-uU-emH"/>
-                <constraint firstAttribute="trailing" secondItem="vx5-RL-3Qg" secondAttribute="trailing" constant="8" id="RxT-9u-PS9"/>
-                <constraint firstItem="gX9-YH-eGR" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="8" id="XAV-td-ife"/>
-                <constraint firstItem="vx5-RL-3Qg" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="8" id="bYd-Ar-M7S"/>
-                <constraint firstAttribute="trailing" secondItem="gX9-YH-eGR" secondAttribute="trailing" constant="8" id="dQW-IO-9bf"/>
+                <constraint firstItem="gX9-YH-eGR" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="5" id="XAV-td-ife"/>
+                <constraint firstAttribute="bottom" secondItem="gX9-YH-eGR" secondAttribute="bottom" constant="5" id="alq-Y4-4Ea"/>
+                <constraint firstAttribute="trailing" secondItem="gX9-YH-eGR" secondAttribute="trailing" constant="5" id="dQW-IO-9bf"/>
                 <constraint firstItem="nVZ-RP-NHx" firstAttribute="height" secondItem="jd3-gK-xIX" secondAttribute="height" id="iYh-i1-kwy"/>
                 <constraint firstItem="nVZ-RP-NHx" firstAttribute="width" secondItem="jd3-gK-xIX" secondAttribute="width" id="lZ7-f1-cHd"/>
                 <constraint firstItem="nVZ-RP-NHx" firstAttribute="centerX" secondItem="jd3-gK-xIX" secondAttribute="centerX" id="lhj-mW-acd"/>
             </constraints>
             <size key="customSize" width="92" height="90"/>
             <connections>
-                <outlet property="contentLabel" destination="vx5-RL-3Qg" id="Y2C-sK-lpC"/>
                 <outlet property="iconView" destination="nVZ-RP-NHx" id="hq7-8G-zrQ"/>
                 <outlet property="imageView" destination="jd3-gK-xIX" id="Wc5-r8-eed"/>
                 <outlet property="titleLabel" destination="gX9-YH-eGR" id="uNi-Fg-eXN"/>
