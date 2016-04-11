@@ -1,15 +1,14 @@
 //
-//  CLContentVC.m
+//  CLImportContentVC.m
 //  Mook
 //
-//  Created by 陈林 on 16/3/25.
+//  Created by 陈林 on 16/4/11.
 //  Copyright © 2016年 Chen Lin. All rights reserved.
 //
 
-#import "CLContentVC.h"
-#import "CLNewEntryVC.h"
+#import "CLImportContentVC.h"
 
-#import "CLDataExportTool.h"
+#import "CLDataImportTool.h"
 
 #import "CLShowModel.h"
 #import "CLIdeaObjModel.h"
@@ -28,12 +27,8 @@
 #import "CLOneLabelDisplayCell.h"
 #import "CLOneLabelImageDisplayCell.h"
 
-#import "QuartzCore/QuartzCore.h"
-#import <AVFoundation/AVFoundation.h>
 
-#import "MBProgressHUD.h"
-
-@interface CLContentVC ()<UIDocumentInteractionControllerDelegate, MBProgressHUDDelegate>
+@interface CLImportContentVC ()
 
 // section属性(需要根据model内容进行设置)
 @property (nonatomic, assign) NSInteger infoSection;
@@ -51,33 +46,11 @@
 @property (nonatomic, strong) NSMutableArray *performModelList;
 @property (nonatomic, strong) NSMutableArray *notesModelList;
 
-
 @property (nonatomic, copy) NSAttributedString *titleString;
-
-@property (nonatomic, strong) NSMutableArray *photos;
-@property (nonatomic, strong) NSMutableArray *thumbs;
-
-@property (nonatomic, strong) UIDocumentInteractionController *documentInteractionController;
-@property (nonatomic, copy) NSString *exportPath;
-
 
 @end
 
-@implementation CLContentVC
-
-- (NSMutableArray *)photos {
-    if (!_photos) {
-        _photos = [self loadPhotos];
-    }
-    return _photos;
-}
-
-- (NSMutableArray *)thumbs {
-    if (!_thumbs) {
-        _thumbs = [self loadThumbs];
-    }
-    return _thumbs;
-}
+@implementation CLImportContentVC
 
 #pragma mark - 便于显示内容的模型单元
 - (CLInfoModel *)infoModel {
@@ -202,7 +175,7 @@
             }
         }
     }
-
+    
     return self.effectSection + cnt;
 }
 
@@ -232,7 +205,7 @@
             }
         }
     }
-
+    
     return self.prepSection + cnt;
 }
 
@@ -247,13 +220,14 @@
             }
         }
     }
-
+    
     return self.performSection + cnt;
 }
 
-#pragma mark - 控制器方法
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     
     [self setContentTitle];
     self.tableView.backgroundColor = kCellBgColor;
@@ -273,97 +247,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(update) name:kUpdateDataNotification
                                                object:nil];
     
-    [self setToolBarStatus];
-    
 }
-
-- (void)setToolBarStatus {
-    
-    self.navigationController.toolbar.tintColor = kMenuBackgroundColor;
-    
-    // 用了下面两行代码之后, toolBar上方的黑边就去掉了
-    self.extendedLayoutIncludesOpaqueBars = YES;
-    self.edgesForExtendedLayout = UIRectEdgeBottom;
-    
-    UIBarButtonItem *grid = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"iconGrid"] style:UIBarButtonItemStyleDone target:self action:@selector(showGrid)];
-    UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-    UIBarButtonItem *action = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(exportCurrentEntry)];
-    self.toolbarItems = @[grid, flexibleSpace, action];
-}
-
-- (void)exportCurrentEntry {
-    
-    // The hud will dispable all input on the view (use the higest view possible in the view hierarchy)
-    MBProgressHUD *HUD = [[MBProgressHUD alloc] initWithView:self.tabBarController.view];
-    [self.tabBarController.view addSubview:HUD];
-
-    HUD.delegate = self;
-    
-    [HUD showAnimated:YES whileExecutingBlock:^{
-        
-        switch (self.contentType) {
-            case kContentTypeIdea:
-                self.exportPath = [CLDataExportTool makeDataPackageWithIdea:self.ideaObjModel];
-                break;
-                
-            case kContentTypeRoutine:
-                self.exportPath = [CLDataExportTool makeDataPackageWithRoutine:self.routineModel];
-                
-                break;
-                
-            case kContentTypeSleight:
-                self.exportPath = [CLDataExportTool makeDataPackageWithSleight:self.sleightObjModel];
-                
-                break;
-                
-            case kContentTypeProp:
-                self.exportPath = [CLDataExportTool makeDataPackageWithProp:self.propObjModel];
-                
-                break;
-                
-            case kContentTypeLines:
-                self.exportPath = [CLDataExportTool makeDataPackageWithLines:self.linesObjModel];
-                
-                break;
-                
-            default:
-                break;
-        }
-
-    } onQueue:dispatch_get_main_queue() completionBlock:^{
-        
-        NSURL *dataUrl;
-        if (self.exportPath != nil) {
-            dataUrl = [NSURL fileURLWithPath:self.exportPath];
-        }
-        
-        CGRect navRect = self.view.frame;
-        self.documentInteractionController =[UIDocumentInteractionController interactionControllerWithURL:dataUrl];
-        self.documentInteractionController.delegate = self;
-        
-        [self.documentInteractionController presentOptionsMenuFromRect:navRect inView:self.view animated:YES];
-    }];
-
-}
-
-#pragma mark - UIDocumentInteractionControllerDelegate
-
-//===================================================================
-- (UIViewController *)documentInteractionControllerViewControllerForPreview:(UIDocumentInteractionController *)controller
-{
-    return self;
-}
-
-- (UIView *)documentInteractionControllerViewForPreview:(UIDocumentInteractionController *)controller
-{
-    return self.view;
-}
-
-- (CGRect)documentInteractionControllerRectForPreview:(UIDocumentInteractionController *)controller
-{
-    return self.view.frame;
-}
-
 
 - (void)setContentTitle {
     switch (self.contentType) {
@@ -373,22 +257,22 @@
             
         case kContentTypeRoutine:
             self.navigationItem.title = kDefaultTitleRoutine;
-
+            
             break;
             
         case kContentTypeSleight:
             self.navigationItem.title = kDefaultTitleSleight;
-
+            
             break;
             
         case kContentTypeProp:
             self.navigationItem.title = kDefaultTitleProp;
-
+            
             break;
             
         case kContentTypeLines:
             self.navigationItem.title = kDefaultTitleLines;
-
+            
             break;
             
         default:
@@ -396,38 +280,80 @@
     }
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
+
+
+- (IBAction)cancelImport:(id)sender {
     
-    [self.navigationController setToolbarHidden:NO];
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
+    switch (self.contentType) {
+        case kContentTypeIdea:
+            [CLDataImportTool cancelImportIdea:self.ideaObjModel];
+            break;
+            
+        case kContentTypeRoutine:
+            [CLDataImportTool cancelImportRoutine:self.routineModel];
+            
+            break;
+            
+        case kContentTypeSleight:
+            [CLDataImportTool cancelImportSleight:self.sleightObjModel];
+            break;
+            
+        case kContentTypeProp:
+            [CLDataImportTool cancelImportProp:self.propObjModel];
+            break;
+            
+        case kContentTypeLines:
+            [CLDataImportTool cancelImportLines:self.linesObjModel];
+            
+            break;
+            
+        default:
+            break;
+    }
     
-    [self.navigationController setToolbarHidden:YES];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"dismissImportContentVC" object:nil];
+
 }
 
-- (void) update {
-    // 重新刷新所有数据
-    [self.tableView reloadData];
-    // 设置图片数组为nil, 这样在懒加载的时候就可以重新刷新图片
-    self.photos = nil;
-    self.thumbs = nil;
-}
+- (IBAction)importData:(id)sender {
+    switch (self.contentType) {
+        case kContentTypeIdea:
+            [CLDataImportTool importIdea:self.ideaObjModel];
+            break;
+            
+        case kContentTypeRoutine:
+            [CLDataImportTool importRoutine:self.routineModel];
+            break;
+            
+        case kContentTypeSleight:
+            [CLDataImportTool importSleight:self.sleightObjModel];
+            break;
+            
+        case kContentTypeProp:
+            [CLDataImportTool importProp:self.propObjModel];
+            break;
+            
+        case kContentTypeLines:
+            [CLDataImportTool importLines:self.linesObjModel];
+            break;
+            
+        default:
+            break;
+    }
+    
+    [(AppDelegate *)[[UIApplication sharedApplication] delegate] reloadData];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"dismissImportContentVC" object:nil];
 
-- (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
 
+}
 
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-
+    
     if (self.contentType == kContentTypeRoutine) {
         return  self.notesSection + 1;
-
+        
     } else if (self.contentType == kContentTypeLines) {
         
         return self.effectSection + 1;
@@ -462,12 +388,12 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-
+    
     // 标题buff
     if (indexPath.section == self.infoSection) {
         
         CLOneLabelDisplayCell *cell = [self.tableView dequeueReusableCellWithIdentifier:kOneLabelDisplayCell forIndexPath:indexPath];
-  
+        
         cell.contentLabel.attributedText = self.titleString;
         cell.contentLabel.textAlignment = NSTextAlignmentCenter;
         
@@ -481,8 +407,7 @@
             CLOneLabelImageDisplayCell * cell = [self.tableView dequeueReusableCellWithIdentifier:kOneLabelImageDisplayCell];
             
             cell.contentLabel.attributedText = [self.effectModel.effect styledString];
-            [cell.imageButton addTarget:self action:@selector(showPhotoBrowser:) forControlEvents:UIControlEventTouchUpInside];
-            cell.imageButton.tag = 0; // effectModel肯定是第一张图片或视频,所以作为图片数组中的Index,tag = 0;
+
             [cell setImageWithVideoName:self.effectModel.video];
             
             return cell;
@@ -491,8 +416,7 @@
             CLOneLabelImageDisplayCell * cell = [self.tableView dequeueReusableCellWithIdentifier:kOneLabelImageDisplayCell];
             
             cell.contentLabel.attributedText = [self.effectModel.effect styledString];
-            [cell.imageButton addTarget:self action:@selector(showPhotoBrowser:) forControlEvents:UIControlEventTouchUpInside];
-            cell.imageButton.tag = 0;
+
             [cell setImageWithName:self.effectModel.image];
             
             return cell;
@@ -516,31 +440,20 @@
             if (model.isWithProp) {
                 prop = model.prop;
             } else {
-
+                
                 prop = NSLocalizedString(@"新建道具", nil);
             }
             
             if (model.isWithQuantity) {
                 prop = [prop stringByAppendingString:[NSString stringWithFormat:@" ( x %@ )", model.quantity]];
             }
-
+            
             if (model.isWithDetail) {
                 NSString *detail = [NSString stringWithFormat:@"  ( %@ )", model.propDetail];
-                 cell.contentLabel.attributedText = [[NSString attributedStringWithFirstPart:prop secondPart:detail firstPartFont:kFontSys17 firstPartColor:[UIColor blackColor] secondPardFont:kFontSys17 secondPartColor:[UIColor darkGrayColor]] styledString];
+                cell.contentLabel.attributedText = [[NSString attributedStringWithFirstPart:prop secondPart:detail firstPartFont:kFontSys17 firstPartColor:[UIColor blackColor] secondPardFont:kFontSys17 secondPartColor:[UIColor darkGrayColor]] styledString];
             } else {
                 cell.contentLabel.text = prop;
             }
-            
-           
-            
-            
-            
-//
-//            if (model.isWithDetail) {
-//                prop = [prop stringByAppendingString:[NSString stringWithFormat:@"\n%@", model.propDetail]];
-//            }
-//            
-//            cell.contentLabel.attributedText = [prop styledString];
             
             return cell;
         } else {
@@ -551,18 +464,16 @@
                 CLOneLabelImageDisplayCell * cell = [self.tableView dequeueReusableCellWithIdentifier:kOneLabelImageDisplayCell];
                 
                 cell.contentLabel.attributedText = [model.prep styledString];
-                [cell.imageButton addTarget:self action:@selector(showPhotoBrowser:) forControlEvents:UIControlEventTouchUpInside];
-                cell.imageButton.tag = [self getButtonTagWithPrepModel:model];
+
                 [cell setImageWithVideoName:model.video];
                 
                 return cell;
-
+                
             } else if (model.isWithImage) {
                 CLOneLabelImageDisplayCell * cell = [self.tableView dequeueReusableCellWithIdentifier:kOneLabelImageDisplayCell];
                 
                 cell.contentLabel.attributedText = [model.prep styledString];
-                [cell.imageButton addTarget:self action:@selector(showPhotoBrowser:) forControlEvents:UIControlEventTouchUpInside];
-                cell.imageButton.tag = [self getButtonTagWithPrepModel:model];
+
                 [cell setImageWithName:model.image];
                 
                 return cell;
@@ -574,7 +485,7 @@
                 
                 return cell;
             }
-
+            
         }
         
         // 准备部分
@@ -588,8 +499,7 @@
                 CLOneLabelImageDisplayCell * cell = [self.tableView dequeueReusableCellWithIdentifier:kOneLabelImageDisplayCell];
                 
                 cell.contentLabel.attributedText = [model.prep styledString];
-                [cell.imageButton addTarget:self action:@selector(showPhotoBrowser:) forControlEvents:UIControlEventTouchUpInside];
-                cell.imageButton.tag = [self getButtonTagWithPrepModel:model];
+
                 [cell setImageWithVideoName:model.video];
                 
                 return cell;
@@ -599,8 +509,7 @@
                 CLOneLabelImageDisplayCell * cell = [self.tableView dequeueReusableCellWithIdentifier:kOneLabelImageDisplayCell];
                 
                 cell.contentLabel.attributedText = [model.prep styledString];
-                [cell.imageButton addTarget:self action:@selector(showPhotoBrowser:) forControlEvents:UIControlEventTouchUpInside];
-                cell.imageButton.tag = [self getButtonTagWithPrepModel:model];
+
                 [cell setImageWithName:model.image];
                 
                 return cell;
@@ -625,8 +534,7 @@
             CLOneLabelImageDisplayCell * cell = [self.tableView dequeueReusableCellWithIdentifier:kOneLabelImageDisplayCell];
             
             cell.contentLabel.attributedText = [perform styledString];
-            [cell.imageButton addTarget:self action:@selector(showPhotoBrowser:) forControlEvents:UIControlEventTouchUpInside];
-            cell.imageButton.tag = [self getButtonTagWithPerformModel:model];
+
             [cell setImageWithVideoName:model.video];
             
             return cell;
@@ -635,8 +543,7 @@
             CLOneLabelImageDisplayCell * cell = [self.tableView dequeueReusableCellWithIdentifier:kOneLabelImageDisplayCell];
             
             cell.contentLabel.attributedText = [perform styledString];
-            [cell.imageButton addTarget:self action:@selector(showPhotoBrowser:) forControlEvents:UIControlEventTouchUpInside];
-            cell.imageButton.tag = [self getButtonTagWithPerformModel:model];
+
             [cell setImageWithName:model.image];
             
             return cell;
@@ -690,16 +597,16 @@
                 sectionTitle = NSLocalizedString(@"效果描述", nil);
             } else if (self.contentType == kContentTypeIdea) {
                 sectionTitle = NSLocalizedString(@"灵感内容", nil);
-
+                
             } else if (self.contentType == kContentTypeSleight) {
                 sectionTitle = NSLocalizedString(@"技巧描述", nil);
-
+                
             } else if (self.contentType == kContentTypeProp) {
                 sectionTitle = NSLocalizedString(@"道具描述", nil);
-
+                
             } else if (self.contentType == kContentTypeLines) {
                 sectionTitle = NSLocalizedString(@"台词内容", nil);
-
+                
             }
         } else if (section == self.propSection && self.propSection != self.effectSection) {
             if (self.contentType == kContentTypeRoutine) {
@@ -732,315 +639,5 @@
     return kLabelHeight;
 }
 
-#pragma mark - PhotoBrowser方法
-// 遍历模型,加载图片
-- (NSMutableArray *)loadPhotos {
-    
-    NSMutableArray *photos = [NSMutableArray array];
-    MWPhoto *photo;
-    
-    if (self.effectModel.isWithImage) {
-        // Photos
-        photo = [MWPhoto photoWithImage:[self.effectModel.image getNamedImage]];
-        photo.caption = self.effectModel.effect;
-        [photos addObject:photo];
-        
-    } else if (self.effectModel.isWithVideo) {
-        
-        // Photos
-        NSString *path = [[NSString videoPath] stringByAppendingPathComponent:self.effectModel.video];
-        photo = [MWPhoto photoWithImage:[self.effectModel.video getNamedVideoFrame]];
-        photo.videoURL = [NSURL fileURLWithPath:path];
-        photo.caption = self.effectModel.effect;
-        
-        [photos addObject:photo];
-    }
-    
-    
-    for (CLPrepModel *model in self.prepModelList) {
-        if (model.isWithImage) {
-            // Photos
-            photo = [MWPhoto photoWithImage:[model.image getNamedImage]];
-            photo.caption = model.prep;
-            [photos addObject:photo];
-            
-        }
-    }
-    
-    
-    for (CLPrepModel *model in self.prepModelList) {
-        if (model.isWithVideo) {
-            // Photos
-            NSString *path = [[NSString videoPath] stringByAppendingPathComponent:model.video];
-            photo = [MWPhoto photoWithImage:[model.video getNamedVideoFrame]];
-            photo.videoURL = [NSURL fileURLWithPath:path];
-            photo.caption = model.prep;
-            
-            [photos addObject:photo];
-        }
-    }
-    
-    for (CLPerformModel *model in self.performModelList) {
-        if (model.isWithImage) {
-            
-            // Photos
-            photo = [MWPhoto photoWithImage:[model.image getNamedImage]];
-            photo.caption = model.perform;
-            [photos addObject:photo];
-        }
-    }
-    
-    
-    for (CLPerformModel *model in self.performModelList) {
-        if (model.isWithVideo) {
-            // Photos
-            NSString *path = [[NSString videoPath] stringByAppendingPathComponent:model.video];
-            photo = [MWPhoto photoWithImage:[model.video getNamedVideoFrame]];
-            photo.videoURL = [NSURL fileURLWithPath:path];
-            photo.caption = model.perform;
-            
-            [photos addObject:photo];
-        }
-    }
-
-    return photos;
-}
-
-- (NSMutableArray *)loadThumbs {
-
-    NSMutableArray *thumbs = [NSMutableArray array];
-    
-    MWPhoto *thumb;
-    if (self.effectModel.isWithImage) {
-        
-        thumb = [MWPhoto photoWithImage:[self.effectModel.image getNamedImageThumbnail]];
-        [thumbs addObject:thumb];
-        
-    } else if (self.effectModel.isWithVideo) {
-        
-        thumb = [MWPhoto photoWithImage:[self.effectModel.video getNamedVideoThumbnail]];
-        [thumbs addObject:thumb];
-        
-    }
-    
-    
-    for (CLPrepModel *model in self.prepModelList) {
-        if (model.isWithImage) {
-            // Photos
-            thumb = [MWPhoto photoWithImage:[model.image getNamedImageThumbnail]];
-            [thumbs addObject:thumb];
-            
-        }
-    }
-    
-    for (CLPrepModel *model in self.prepModelList) {
-        if (model.isWithVideo) {
-            thumb = [MWPhoto photoWithImage:[model.video getNamedVideoThumbnail]];
-            [thumbs addObject:thumb];
-        }
-    }
-    
-    for (CLPerformModel *model in self.performModelList) {
-        if (model.isWithImage) {
-            thumb = [MWPhoto photoWithImage:[model.image getNamedImageThumbnail]];
-            [thumbs addObject:thumb];
-        }
-    }
-    
-    for (CLPerformModel *model in self.performModelList) {
-        if (model.isWithVideo) {
-            thumb = [MWPhoto photoWithImage:[model.video getNamedVideoThumbnail]];
-            [thumbs addObject:thumb];
-        }
-    }
-
-    return thumbs;
-}
-
-- (NSInteger)getButtonTagWithPrepModel:(CLPrepModel *)prepModel {
-    NSInteger tag = 0;
-    
-    if (!self.effectModel.isWithImage && !self.effectModel.isWithVideo) {
-        tag = -1;   // 如果effectModel中没有多媒体, 则tag要减一,这样真正的第一张图片出现时就可以从0开始
-    }
-    
-    for (CLPrepModel *model in self.prepModelList) {
-        if (model == prepModel) {
-            tag += 1;
-            return tag;
-        } else {
-            if (model.isWithImage || model.isWithVideo) {
-                tag += 1;
-                
-            }
-        }
-    }
-    
-    return tag;
-}
-
-- (NSInteger)getButtonTagWithPerformModel:(CLPerformModel *)performModel {
-    
-    NSInteger tag = 0;
-    
-    if (!self.effectModel.isWithImage && !self.effectModel.isWithVideo) {
-        tag = -1;   // 如果effectModel中没有多媒体, 则tag要减一,这样真正的第一张图片出现时就可以从0开始
-    }
-    
-    for (CLPrepModel *model in self.prepModelList) {
-        
-        if (model.isWithImage || model.isWithVideo) {
-            tag += 1;
-        }
-    }
-    
-    for (CLPerformModel *model in self.performModelList) {
-        if (model == performModel) {
-            tag += 1;
-            return tag;
-        } else {
-            if (model.isWithImage || model.isWithVideo) {
-                tag += 1;
-            }
-        }
-    }
-    
-    return tag;
-}
-
-- (void)showPhotoBrowser:(UIButton *)button {
-    
-    BOOL displayActionButton = YES;
-    BOOL displaySelectionButtons = NO;
-    BOOL displayNavArrows = NO;
-    BOOL enableGrid = YES;
-    BOOL startOnGrid = NO;
-    BOOL autoPlayOnAppear = NO;
-    
-    // Create browser
-    MWPhotoBrowser *browser = [[MWPhotoBrowser alloc] initWithDelegate:self];
-    
-    browser.displayActionButton = displayActionButton;
-    browser.displayNavArrows = displayNavArrows;
-    browser.displaySelectionButtons = displaySelectionButtons;
-    browser.alwaysShowControls = displaySelectionButtons;
-    browser.zoomPhotosToFill = YES;
-    browser.enableGrid = enableGrid;
-    browser.startOnGrid = startOnGrid;
-    browser.enableSwipeToDismiss = NO;
-    browser.autoPlayOnAppear = autoPlayOnAppear;
-    [browser setCurrentPhotoIndex:button.tag];
-    // Show
-    [self.navigationController pushViewController:browser animated:YES];
-}
-
-- (void)showGrid {
-    BOOL displayActionButton = YES;
-    BOOL displaySelectionButtons = NO;
-    BOOL displayNavArrows = NO;
-    BOOL enableGrid = YES;
-    BOOL startOnGrid = YES;
-    BOOL autoPlayOnAppear = NO;
-    
-    // Create browser
-    MWPhotoBrowser *browser = [[MWPhotoBrowser alloc] initWithDelegate:self];
-    
-    browser.displayActionButton = displayActionButton;
-    browser.displayNavArrows = displayNavArrows;
-    browser.displaySelectionButtons = displaySelectionButtons;
-    browser.alwaysShowControls = displaySelectionButtons;
-    browser.zoomPhotosToFill = YES;
-    browser.enableGrid = enableGrid;
-    browser.startOnGrid = startOnGrid;
-    browser.enableSwipeToDismiss = NO;
-    browser.autoPlayOnAppear = autoPlayOnAppear;
-    [browser setCurrentPhotoIndex:0];
-    // Show
-    [self.navigationController pushViewController:browser animated:YES];
-}
-
-#pragma mark - MWPhotoBrowserDelegate
-
-- (NSUInteger)numberOfPhotosInPhotoBrowser:(MWPhotoBrowser *)photoBrowser {
-    return self.photos.count;
-}
-
-- (id <MWPhoto>)photoBrowser:(MWPhotoBrowser *)photoBrowser photoAtIndex:(NSUInteger)index {
-    if (index < self.photos.count)
-        return [self.photos objectAtIndex:index];
-    return nil;
-}
-
-- (id <MWPhoto>)photoBrowser:(MWPhotoBrowser *)photoBrowser thumbPhotoAtIndex:(NSUInteger)index {
-    if (index < self.thumbs.count)
-        return [self.thumbs objectAtIndex:index];
-    return nil;
-}
-
-//- (MWCaptionView *)photoBrowser:(MWPhotoBrowser *)photoBrowser captionViewForPhotoAtIndex:(NSUInteger)index {
-//    MWPhoto *photo = [self.photos objectAtIndex:index];
-//    MWCaptionView *captionView = [[MWCaptionView alloc] initWithPhoto:photo];
-//    return [captionView autorelease];
-//}
-
-//- (void)photoBrowser:(MWPhotoBrowser *)photoBrowser actionButtonPressedForPhotoAtIndex:(NSUInteger)index {
-//    NSLog(@"ACTION!");
-//}
-
-- (void)photoBrowser:(MWPhotoBrowser *)photoBrowser didDisplayPhotoAtIndex:(NSUInteger)index {
-    NSLog(@"Did start viewing photo at index %lu", (unsigned long)index);
-}
-
-//- (BOOL)photoBrowser:(MWPhotoBrowser *)photoBrowser isPhotoSelectedAtIndex:(NSUInteger)index {
-//    return [[_selections objectAtIndex:index] boolValue];
-//}
-
-//- (NSString *)photoBrowser:(MWPhotoBrowser *)photoBrowser titleForPhotoAtIndex:(NSUInteger)index {
-//    return [NSString stringWithFormat:@"Photo %lu", (unsigned long)index+1];
-//}
-//
-//- (void)photoBrowser:(MWPhotoBrowser *)photoBrowser photoAtIndex:(NSUInteger)index selectedChanged:(BOOL)selected {
-//    [_selections replaceObjectAtIndex:index withObject:[NSNumber numberWithBool:selected]];
-//    NSLog(@"Photo at index %lu selected %@", (unsigned long)index, selected ? @"YES" : @"NO");
-//}
-
-- (void)photoBrowserDidFinishModalPresentation:(MWPhotoBrowser *)photoBrowser {
-    // If we subscribe to this method we must dismiss the view controller ourselves
-    NSLog(@"Did finish modal presentation");
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
-
-
-#pragma mark - segue 方法
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    id destVC = segue.destinationViewController;
-    if ([destVC isKindOfClass:[CLNewEntryVC class]]) {
-        CLNewEntryVC *vc = (CLNewEntryVC *)destVC;
-        
-        if (self.contentType == kContentTypeIdea) {
-            vc.editingContentType = kEditingContentTypeIdea;
-            vc.ideaObjModel = self.ideaObjModel;
-
-        } else if (self.contentType == kContentTypeRoutine) {
-            vc.editingContentType = kEditingContentTypeRoutine;
-            vc.routineModel = self.routineModel;
-
-        } else if (self.contentType == kContentTypeSleight) {
-            vc.editingContentType = kEditingContentTypeSleight;
-            vc.sleightObjModel = self.sleightObjModel;
-
-        } else if (self.contentType == kContentTypeProp) {
-            vc.editingContentType = kEditingContentTypeProp;
-            vc.propObjModel = self.propObjModel;
-
-        } else if (self.contentType == kContentTypeLines) {
-            vc.editingContentType = kEditingContentTypeLines;
-            vc.linesObjModel = self.linesObjModel;
-
-        }
-        
-        vc.title = NSLocalizedString(@"编辑", nil);
-    }
-}
 
 @end

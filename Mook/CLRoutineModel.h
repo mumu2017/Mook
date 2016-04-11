@@ -36,6 +36,7 @@
 - (NSAttributedString *)getContent;
 - (UIImage *)getImage;
 - (UIImage *)getThumbnail;
-//- (BOOL)isWithMedia;
+
+- (BOOL)makDataPackage;
 
 @end

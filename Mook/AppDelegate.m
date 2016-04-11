@@ -14,8 +14,19 @@
 #import "CLPropObjModel.h"
 #import "CLLinesObjModel.h"
 
+#import "CLEffectModel.h"
+#import "CLPrepModel.h"
+#import "CLPerformModel.h"
+
+#import "CLDataImportTool.h"
 #import "CLDataSaveTool.h"
 #import "iflyMSC/IFlyMSC.h"
+#import "ZipArchive.h"
+#import "NSObject+MJKeyValue.h"
+
+#import "CLMookTabBarController.h"
+#import "CLImportContentNavVC.h"
+#import "CLImportContentVC.h"
 
 @interface AppDelegate ()
 
@@ -167,16 +178,12 @@
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         
         [[NSNotificationCenter defaultCenter] postNotificationName:kUpdateMookNotification object:nil];
-
+        
     });
-
+    
 }
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
-    
-    self.shouldInputPassword = [[NSUserDefaults standardUserDefaults] boolForKey:kUsePasswordKey];
-    
+- (void)setAppUI {
     self.window.tintColor = kMenuBackgroundColor;
     
     [[UISwitch appearance] setOnTintColor:kMenuBackgroundColor];
@@ -205,31 +212,90 @@
     
     // 已经在info.plist文件中设置了statusBarStyle属性为lightContent
     //    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-    
-    BOOL usePassword = [[NSUserDefaults standardUserDefaults] boolForKey:kUsePasswordKey];
-    [[NSUserDefaults standardUserDefaults] setBool:usePassword forKey:kCheckIfShouldPasswordKey];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    
+}
 
-    // 正式发布不要打开Log
-//    //设置sdk的log等级，log保存在下面设置的工作路径中
-//    [IFlySetting setLogFile:LVL_ALL];
-//    
-//    //打开输出在console的log开关
-//    [IFlySetting showLogcat:YES];
-//    
-//    //设置sdk的工作路径
-//    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
-//    NSString *cachePath = [paths objectAtIndex:0];
-//    [IFlySetting setLogFilePath:cachePath];
-//
-    
+- (void)registerIFlyVoiceRecognition {
     //创建语音配置,appid必须要传入，仅执行一次则可
     NSString *initString = [[NSString alloc] initWithFormat:@"appid=%@",kIFlyAppID];
     
     //所有服务启动前，需要确保执行createUtility
     [IFlySpeechUtility createUtility:initString];
 
+}
+
+- (void)checkPasswordInfo {
+    self.shouldInputPassword = [[NSUserDefaults standardUserDefaults] boolForKey:kUsePasswordKey];
+    
+    BOOL usePassword = [[NSUserDefaults standardUserDefaults] boolForKey:kUsePasswordKey];
+    [[NSUserDefaults standardUserDefaults] setBool:usePassword forKey:kCheckIfShouldPasswordKey];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+
+}
+
+
+//- application:handleOpenURL:
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString *,id> *)options {
+    
+    NSLog(@"option: %@", options);
+    
+    
+    CLMookTabBarController *rootController = (CLMookTabBarController *)[[(AppDelegate *)[[UIApplication sharedApplication]delegate] window] rootViewController];
+    
+    // 第一步: 获取模型字典
+    NSDictionary *dict = [CLDataImportTool getDataFromURL:url];
+    
+    // 第二部: 从字典中取出模型
+    NSString *modelType = [dict objectForKey:@"type"];
+    NSDictionary *modelDict = [dict objectForKey:@"model"];
+    
+    if ([modelType isEqualToString:kTypeRoutine]) {
+        
+        CLRoutineModel *model = [CLRoutineModel objectWithKeyValues:modelDict];
+        [CLDataImportTool prepareDataWithRoutine:model];
+        
+        [rootController performSegueWithIdentifier:kSegueImportContent sender:model];
+        
+    } else if ([modelType isEqualToString:kTypeIdea]) {
+        
+        CLIdeaObjModel *model = [CLIdeaObjModel objectWithKeyValues:modelDict];
+        [CLDataImportTool prepareDataWithIdea:model];
+
+        [rootController performSegueWithIdentifier:kSegueImportContent sender:model];
+        
+    } else if ([modelType isEqualToString:kTypeSleight]) {
+        
+        CLSleightObjModel *model = [CLSleightObjModel objectWithKeyValues:modelDict];
+        [CLDataImportTool prepareDataWithSleight:model];
+
+        [rootController performSegueWithIdentifier:kSegueImportContent sender:model];
+    } else if ([modelType isEqualToString:kTypeProp]) {
+        
+        CLPropObjModel *model = [CLPropObjModel objectWithKeyValues:modelDict];
+        [CLDataImportTool prepareDataWithProp:model];
+
+        [rootController performSegueWithIdentifier:kSegueImportContent sender:model];
+        
+    } else if ([modelType isEqualToString:kTypeLines]) {
+        
+        CLLinesObjModel *model = [CLLinesObjModel objectWithKeyValues:modelDict];
+        [CLDataImportTool prepareDataWithLines:model];
+
+        [rootController performSegueWithIdentifier:kSegueImportContent sender:model];
+    }
+    
+    return YES;
+
+}
+
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    // Override point for customization after application launch.
+    
+    [self setAppUI];
+    [self checkPasswordInfo];
+    [self registerIFlyVoiceRecognition];
+    
     return YES;
     
 }

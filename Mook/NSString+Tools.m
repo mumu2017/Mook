@@ -138,33 +138,33 @@
     return _created_at;
 }
 
-#pragma mark - 获取多媒体文件路径
+#pragma mark - 分享单个模型时压缩相关数据存放的临时文件路径
 
-- (NSString *)applicationHiddenDocumentsDirectory {
-    // NSString *path = [[self applicationDocumentsDirectory] stringByAppendingPathComponent:@".data"];
-    NSString *libraryPath = [NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) lastObject];
-    NSString *path = [libraryPath stringByAppendingPathComponent:@"Private Documents"];
++ (NSString *)tempUnzipPath {
+    NSError *error;
+    NSString *tempUnzipPath = [NSTemporaryDirectory() stringByAppendingPathComponent:@"/mookShare"];
     
-    BOOL isDirectory = NO;
-    if ([[NSFileManager defaultManager] fileExistsAtPath:path isDirectory:&isDirectory]) {
-        if (isDirectory)
-            return path;
-        else {
-            // Handle error. ".data" is a file which should not be there...
-            [NSException raise:@".data exists, and is a file" format:@"Path: %@", path];
-            // NSError *error = nil;
-            // if (![[NSFileManager defaultManager] removeItemAtPath:path error:&error]) {
-            //     [NSException raise:@"could not remove file" format:@"Path: %@", path];
-            // }
-        }
-    }
-    NSError *error = nil;
-    if (![[NSFileManager defaultManager] createDirectoryAtPath:path withIntermediateDirectories:YES attributes:nil error:&error]) {
-        // Handle error.
-        [NSException raise:@"Failed creating directory" format:@"[%@], %@", path, error];
-    }
-    return path;
+    if (![[NSFileManager defaultManager] fileExistsAtPath:tempUnzipPath])
+        [[NSFileManager defaultManager] createDirectoryAtPath:tempUnzipPath withIntermediateDirectories:NO attributes:nil error:&error]; //Create folder
+    
+    return tempUnzipPath;
 }
+
++ (NSString *)tempSharePath {
+
+    NSString *tempSharePath = [NSTemporaryDirectory() stringByAppendingPathComponent:@"mookShare.data"];
+
+    return tempSharePath;
+}
+
++ (NSString *)tempZipPath {
+    
+    NSString *tempZipPath = [NSTemporaryDirectory() stringByAppendingPathComponent:@"share.mook"];
+    
+    return tempZipPath;
+}
+
+#pragma mark - 获取多媒体文件路径
 
 + (NSString *)backUpPath { // 备份文件路径
     

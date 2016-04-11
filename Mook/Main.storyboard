@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="KLC-cp-jDe">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="KLC-cp-jDe">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -759,7 +759,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="F4y-CL-jqN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-8761.5" y="-5100"/>
+            <point key="canvasLocation" x="-7843.5" y="-5100"/>
         </scene>
         <!--标签-->
         <scene sceneID="G1z-3q-w5P">
@@ -981,7 +981,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="esC-JT-ETa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-7870.5" y="-3977.25"/>
+            <point key="canvasLocation" x="-6952.5" y="-3977.25"/>
         </scene>
         <!--关于-->
         <scene sceneID="K8Y-mi-iIX">
@@ -2123,7 +2123,7 @@ Copyright © 2016. All rights reserved.</string>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xbC-se-cnW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-9649.5" y="-4419"/>
+            <point key="canvasLocation" x="-8731.5" y="-4419"/>
         </scene>
         <!--分类-->
         <scene sceneID="XoG-aB-tGy">
@@ -2162,7 +2162,7 @@ Copyright © 2016. All rights reserved.</string>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rWZ-80-Ajl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-10437" y="-4461"/>
+            <point key="canvasLocation" x="-9519" y="-4461"/>
         </scene>
         <!--Mook Tab Bar Controller-->
         <scene sceneID="BUU-3J-dNb">
@@ -2179,6 +2179,7 @@ Copyright © 2016. All rights reserved.</string>
                         <segue destination="Q9D-A1-sVC" kind="relationship" relationship="viewControllers" id="s68-Em-xc7"/>
                         <segue destination="0aN-7l-1wA" kind="relationship" relationship="viewControllers" id="OYb-RK-8kL"/>
                         <segue destination="TsA-fJ-Mw6" kind="presentation" identifier="mookToPasswordSegue" id="SC9-Mu-JaP"/>
+                        <segue destination="JRa-iv-CFM" kind="presentation" identifier="importContentSegue" id="M7U-bR-kMk"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uq2-ld-y6u" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2243,7 +2244,7 @@ Copyright © 2016. All rights reserved.</string>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KS0-5c-WtB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-9600" y="-5118.75"/>
+            <point key="canvasLocation" x="-8682" y="-5118.75"/>
         </scene>
         <!--设置-->
         <scene sceneID="Bll-BA-05a">
@@ -2411,7 +2412,7 @@ Copyright © 2016. All rights reserved.</string>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Oj4-s8-u1x" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-8541" y="-3984"/>
+            <point key="canvasLocation" x="-7623" y="-3984"/>
         </scene>
         <!--笔记-->
         <scene sceneID="7HN-8R-7kn">
@@ -2471,6 +2472,35 @@ Copyright © 2016. All rights reserved.</string>
             </objects>
             <point key="canvasLocation" x="-10513.5" y="-3765"/>
         </scene>
+        <!--导入-->
+        <scene sceneID="nEQ-JI-S1H">
+            <objects>
+                <tableViewController id="dAn-ex-Itj" customClass="CLImportContentVC" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="Hga-fM-zdH">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <connections>
+                            <outlet property="dataSource" destination="dAn-ex-Itj" id="H1m-g2-9Hy"/>
+                            <outlet property="delegate" destination="dAn-ex-Itj" id="JQ9-il-rpI"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="导入" id="I8N-8V-IS7">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="hB0-Xd-R7T">
+                            <connections>
+                                <action selector="cancelImport:" destination="dAn-ex-Itj" id="C4i-iJ-EFf"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="导入" id="uSH-LY-M2B">
+                            <connections>
+                                <action selector="importData:" destination="dAn-ex-Itj" id="CXs-8Q-6qf"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="c9k-8l-LxL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-10992" y="-4491"/>
+        </scene>
         <!--分类-->
         <scene sceneID="ENp-8f-x2r">
             <objects>
@@ -2488,7 +2518,7 @@ Copyright © 2016. All rights reserved.</string>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NRt-qZ-mya" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-11292" y="-4455.75"/>
+            <point key="canvasLocation" x="-10374" y="-4455.75"/>
         </scene>
         <!--多媒体-->
         <scene sceneID="C5G-wl-0Wc">
@@ -2528,6 +2558,24 @@ Copyright © 2016. All rights reserved.</string>
             </objects>
             <point key="canvasLocation" x="-11445" y="-2257.5"/>
         </scene>
+        <!--Import Content NavVC-->
+        <scene sceneID="dyx-Hb-Grw">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="JRa-iv-CFM" customClass="CLImportContentNavVC" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="VVs-uc-emf">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="dAn-ex-Itj" kind="relationship" relationship="rootViewController" id="Uz1-W8-5M0"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dhP-jU-AQC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-11412" y="-4350.75"/>
+        </scene>
     </scenes>
     <resources>
         <image name="iconlibraryFill" width="22" height="22"/>
@@ -2541,15 +2589,15 @@ Copyright © 2016. All rights reserved.</string>
         <image name="passwordDelete" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="OTr-op-fb5"/>
-        <segue reference="aHE-KK-7rw"/>
-        <segue reference="6Pb-2m-Pgc"/>
-        <segue reference="4tP-b3-hII"/>
         <segue reference="NHr-0K-Qxl"/>
+        <segue reference="6Pb-2m-Pgc"/>
+        <segue reference="o5B-DS-QsI"/>
+        <segue reference="SC9-Mu-JaP"/>
+        <segue reference="Hnt-4N-2dA"/>
+        <segue reference="aHE-KK-7rw"/>
+        <segue reference="4tP-b3-hII"/>
         <segue reference="F7W-G1-xVl"/>
         <segue reference="cZz-JI-sNE"/>
-        <segue reference="Hnt-4N-2dA"/>
-        <segue reference="1Xs-aM-XCd"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
 </document>

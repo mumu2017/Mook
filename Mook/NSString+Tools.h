@@ -13,6 +13,10 @@
 // 随着学习的深入,我们每个人都会建立一大套属于自己的分类库!
 @interface NSString (Tools)
 
++ (NSString *)tempSharePath;
++ (NSString *)tempZipPath;
++ (NSString *)tempUnzipPath;
+
 + (NSString *)backUpPath;
 
 + (NSString *)mookPath;

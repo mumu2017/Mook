@@ -18,7 +18,6 @@
 - (void)encodeWithCoder:(NSCoder *)coder
 {
     [coder encodeObject:self.name forKey:kInfoNameKey];
-//    [coder encodeObject:self.tags forKey:kInfoTagsKey];
 }
 
 - (instancetype)initWithCoder:(NSCoder *)coder
@@ -26,7 +25,6 @@
     self = [super init];
     if (self) {
         self.name = [coder decodeObjectForKey:kInfoNameKey];
-//        self.tags = [coder decodeObjectForKey:kInfoTagsKey];
     }
     return self;
 }

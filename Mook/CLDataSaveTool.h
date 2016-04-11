@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-@class CLRoutineModel, CLShowModel, CLIdeaObjModel, CLSleightObjModel, CLPropObjModel, CLLinesObjModel;
+@class CLRoutineModel, CLShowModel, CLIdeaObjModel, CLSleightObjModel, CLPropObjModel, CLLinesObjModel, CLEffectModel;
 
 @interface CLDataSaveTool : NSObject
 
@@ -75,6 +75,7 @@
 
 + (void)deleteMediaByName:(NSString *)name;
 
++ (void)deleteMediaInEffectModel:(CLEffectModel *)effectModel prepModelList:(NSMutableArray *)prepModelList performModelList:(NSMutableArray *)performModelList;
 //+ (void)deleteVideoByName:(NSString *)name;
 //+ (void)deleteImageByName:(NSString *)name;
 

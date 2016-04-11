@@ -8,6 +8,13 @@
 
 #import "CLMookTabBarController.h"
 #import "EAIntroView.h"
+#import "CLImportContentNavVC.h"
+
+#import "CLIdeaObjModel.h"
+#import "CLRoutineModel.h"
+#import "CLSleightObjModel.h"
+#import "CLPropObjModel.h"
+#import "CLLinesObjModel.h"
 
 @interface CLMookTabBarController ()<EAIntroDelegate>
 
@@ -117,14 +124,50 @@
     self.isLaunched = NO;
 }
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)modelUnknown {
+    
+    id destVC = segue.destinationViewController;
+    
+    if ([destVC isKindOfClass:[CLImportContentNavVC class]]) {
+        CLImportContentNavVC *vc = (CLImportContentNavVC *)destVC;
+        vc.hidesBottomBarWhenPushed = YES;
+
+        if ([modelUnknown isKindOfClass:[CLIdeaObjModel class]]) {
+            CLIdeaObjModel *model = (CLIdeaObjModel *)modelUnknown;
+            vc.contentType = kContentTypeIdea;
+            vc.ideaObjModel = model;
+            vc.date = model.date;
+            
+        } else if ([modelUnknown isKindOfClass:[CLRoutineModel class]]) {
+            CLRoutineModel *model = (CLRoutineModel *)modelUnknown;
+            vc.contentType = kContentTypeRoutine;
+            vc.routineModel = model;
+            vc.date = model.date;
+            
+        } else if ([modelUnknown isKindOfClass:[CLSleightObjModel class]]) {
+            CLSleightObjModel *model = (CLSleightObjModel *)modelUnknown;
+            vc.contentType = kContentTypeSleight;
+            vc.sleightObjModel = model;
+            vc.date = model.date;
+            
+        } else if ([modelUnknown isKindOfClass:[CLPropObjModel class]]) {
+            CLPropObjModel *model = (CLPropObjModel *)modelUnknown;
+            vc.contentType = kContentTypeProp;
+            vc.propObjModel = model;
+            vc.date = model.date;
+            
+        } else if ([modelUnknown isKindOfClass:[CLLinesObjModel class]]) {
+            CLLinesObjModel *model = (CLLinesObjModel *)modelUnknown;
+            vc.contentType = kContentTypeLines;
+            vc.linesObjModel = model;
+            vc.date = model.date;
+        }
+    }
 }
-*/
+
 
 @end
