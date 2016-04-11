@@ -196,12 +196,12 @@
     [[UINavigationBar appearance] setBarTintColor:kMenuBackgroundColor];
     
     
-    [[UITabBar appearance] setTintColor:[UIColor flatSkyBlueColor]];
+    [[UITabBar appearance] setTintColor:[UIColor flatSkyBlueColorDark]];
     
     // 设置导航栏没有边线
-    [[UINavigationBar appearance] setBackgroundImage:[[UIImage alloc] init]
-                                      forBarPosition:UIBarPositionAny
-                                          barMetrics:UIBarMetricsDefault];
+//    [[UINavigationBar appearance] setBackgroundImage:[[UIImage alloc] init]
+//                                      forBarPosition:UIBarPositionAny
+//                                          barMetrics:UIBarMetricsDefault];
     
     [[UINavigationBar appearance] setShadowImage:[[UIImage alloc] init]];
     [[UINavigationBar appearance] setTranslucent:NO];
@@ -236,9 +236,6 @@
 
 //- application:handleOpenURL:
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString *,id> *)options {
-    
-    NSLog(@"option: %@", options);
-    
     
     CLMookTabBarController *rootController = (CLMookTabBarController *)[[(AppDelegate *)[[UIApplication sharedApplication]delegate] window] rootViewController];
     

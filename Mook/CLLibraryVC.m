@@ -71,7 +71,7 @@ static NSString * const reuseIdentifier = @"Cell";
     
     // Uncomment the following line to preserve selection between presentations
     // self.clearsSelectionOnViewWillAppear = NO;
-    self.collectionView.backgroundColor = [UIColor flatBlackColorDark];
+    self.collectionView.backgroundColor = [UIColor flatWhiteColor];
     // Register cell classes
     [self.collectionView registerNib:[UINib nibWithNibName:@"CLLibraryCell" bundle: nil] forCellWithReuseIdentifier:reuseIdentifier];
     

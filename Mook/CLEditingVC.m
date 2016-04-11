@@ -32,12 +32,9 @@
 #import "PopupView.h"
 #import "ISRDataHelper.h"
 
-@interface CLEditingVC ()<CLToolBarDelegate, CLQuickStringNavDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIPickerViewDataSource, UIPickerViewDelegate, XLPagerTabStripChildItem, CLEdtingManageVCDelegate>
+@interface CLEditingVC ()<CLToolBarDelegate, CLQuickStringNavDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, XLPagerTabStripChildItem, CLEdtingManageVCDelegate>
 
 @property (nonatomic, strong) UIPickerView *pickerView;
-
-@property (nonatomic, assign) NSInteger indexOfSelectedQuickString;
-@property (nonatomic, assign) BOOL slectedStringUsed;
 
 @property (nonatomic, copy) NSString *imageName;
 @property (nonatomic, copy) NSString *videoName;
@@ -51,7 +48,6 @@
 @property (nonatomic, strong) NSMutableArray *linesObjModelList;
 @property (nonatomic, strong) NSMutableArray *sleightObjModelList;
 
-@property (nonatomic, strong) NSMutableArray <NSString*> *quickStringList;
 
 @property (nonatomic, assign) CGFloat videoDuration;
 
@@ -78,22 +74,6 @@
     }
     
     return _videoDuration;
-}
-
-- (NSMutableArray *)quickStringList {
-    if (!_quickStringList) {
-        if ([[NSUserDefaults standardUserDefaults] objectForKey:kQuickStringKey] == nil) {
-            _quickStringList = [NSMutableArray array];
-            
-            [[NSUserDefaults standardUserDefaults] setObject:_quickStringList forKey:kQuickStringKey];
-            [[NSUserDefaults standardUserDefaults] synchronize];
-        } else {
-            NSArray *array = [[NSUserDefaults standardUserDefaults] objectForKey:kQuickStringKey];
-            _quickStringList = [array mutableCopy];
-        }
-        
-    }
-    return _quickStringList;
 }
 
 - (NSMutableArray *)propObjModelList {
@@ -150,60 +130,6 @@
     return _toolBar;
 }
 
-- (UIPickerView *)pickerView {
-    if (!_pickerView) {
-        _pickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 0, kScreenW, 250)];
-        
-        _pickerView.backgroundColor = kDisplayBgColor;
-        _pickerView.dataSource = self;
-        _pickerView.delegate = self;
-    }
-    
-    return _pickerView;
-}
-
-#pragma mark - pickerView datasource
-- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
-    
-    return 1;
-}
-
-- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
-    
-    return self.quickStringList.count;
-}
-
-#pragma mark - pickerView delegate
-- (CGFloat)pickerView:(UIPickerView *)pickerView widthForComponent:(NSInteger)component {
-   
-    return kContentW;
-}
-
-//- (CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component {
-//    return 36;
-//}
-
-- (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view{
-    UILabel* textLabel = (UILabel*)view;
-    
-    if (!textLabel){
-        textLabel = [[UILabel alloc] init];
-        textLabel.numberOfLines = 0;
-        textLabel.textAlignment = NSTextAlignmentCenter;
-    }
-
-    textLabel.text = self.quickStringList[row];
-
-    return textLabel;
-}
-
-- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
-    
-    self.indexOfSelectedQuickString = row;
-    self.slectedStringUsed = NO;
-            
-}
-
 - (void)quickStringNavVC:(CLQuickStringNavVC *)quickStringNavVC didSelectQuickString:(NSString *)quickString {
     
     NSString *text = self.editTextView.text;
@@ -228,6 +154,14 @@
     
     switch (editingModel) {
         case kEditingModeEffect:
+            
+            if (self.editingContentType == kEditingContentTypeLines) {
+                self.toolBar.imageButton.hidden = YES;
+            } else {
+                self.toolBar.imageButton.hidden = NO;
+
+            }
+            
             self.toolBar.addButton.hidden = YES;
             self.toolBar.deleteButton.hidden = YES;
             [self.toolBar.previousButton setImage:kToolBarWriteImage forState:UIControlStateNormal];

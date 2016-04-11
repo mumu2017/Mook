@@ -99,6 +99,7 @@
     [super viewDidLoad];
     
     self.tableView.backgroundView = self.tableBackView;
+    self.tableView.backgroundColor = [UIColor flatWhiteColor];
     self.tableView.rowHeight = kListCellHeight;
     self.tableView.tableFooterView = [UIView new];
     

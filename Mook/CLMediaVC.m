@@ -179,8 +179,8 @@ static NSString * const reuseIdentifier = @"Cell";
     [super viewDidLoad];
     
     self.collectionView.backgroundView = self.tableBackView;
-    
-//    self.collectionView.backgroundColor = kMenuBackgroundColor;
+    self.collectionView.alwaysBounceVertical = YES;
+    self.collectionView.backgroundColor = [UIColor flatWhiteColor];
     [self.collectionView registerNib:[UINib nibWithNibName:@"CLMediaCollectionCell" bundle: nil] forCellWithReuseIdentifier:reuseIdentifier];
     // Do any additional setup after loading the view.
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(update:) name:kUpdateDataNotification
