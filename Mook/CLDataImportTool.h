@@ -13,7 +13,7 @@
 
 + (NSDictionary *)getDataFromURL:(NSURL *)url;
 
-// 拷贝导入压缩包中的多媒体到library中的多媒体文件中
+// 拷贝导入压缩包中的多媒体到library中的多媒体文件中, 为呈现信息做准备
 + (void)prepareDataWithRoutine:(CLRoutineModel *)routineModel;
 + (void)prepareDataWithIdea:(CLIdeaObjModel *)ideaObjModel;
 + (void)prepareDataWithSleight:(CLSleightObjModel *)sleightObjModel;
@@ -27,15 +27,14 @@
 + (void)cancelImportProp:(CLPropObjModel *)propObjModel;
 + (void)cancelImportLines:(CLLinesObjModel *)linesObjModel;
 
-// 如果用户选择不导入文件, 那就删除掉多媒体
+// 导入文件
 + (void)importRoutine:(CLRoutineModel *)routineModel;
 + (void)importIdea:(CLIdeaObjModel *)ideaObjModel;
 + (void)importSleight:(CLSleightObjModel *)sleightObjModel;
 + (void)importProp:(CLPropObjModel *)propObjModel;
 + (void)importLines:(CLLinesObjModel *)linesObjModel;
 
-
-// 单项多媒体拷贝
+// 单项多媒体拷贝到library多媒体文件夹中和数据库Media表中
 + (NSString *)copyTempUnzipImageToMook:(NSString *)imageName modelTimeStamp:(NSString *)timeStamp content:(NSString *)content type:(NSString *)type;
 + (NSString *)copyTempUnzipVideoToMook:(NSString *)videoName modelTimeStamp:(NSString *)timeStamp content:(NSString *)content type:(NSString *)type;
 

@@ -170,8 +170,8 @@
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                     
                     // The hud will dispable all input on the view (use the higest view possible in the view hierarchy)
-                    MBProgressHUD *HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
-                    [self.navigationController.view addSubview:HUD];
+                    MBProgressHUD *HUD = [[MBProgressHUD alloc] initWithView:self.tabBarController.view];
+                    [self.tabBarController.view addSubview:HUD];
                     
                     HUD.delegate = self;
                     HUD.labelText = NSLocalizedString(@"正在生成备份文件", nil);
@@ -229,9 +229,9 @@
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                     
                     
-                    MBProgressHUD *HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
+                    MBProgressHUD *HUD = [[MBProgressHUD alloc] initWithView:self.tabBarController.view];
                     HUD.labelText = NSLocalizedString(@"正在加载恢复备份", nil);
-                    [self.navigationController.view addSubview:HUD];
+                    [self.tabBarController.view addSubview:HUD];
                     [HUD setMode:MBProgressHUDModeDeterminate];   //圆盘的扇形进度显示
                     HUD.taskInProgress = YES;
                     [HUD show:YES];
@@ -299,8 +299,8 @@
                     if (self.backUpExists) {
                         BOOL fileDeleted= [fileManager removeItemAtPath:backUpPath error:nil];
                         
-                        MBProgressHUD *HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
-                        [self.navigationController.view addSubview:HUD];
+                        MBProgressHUD *HUD = [[MBProgressHUD alloc] initWithView:self.tabBarController.view];
+                        [self.tabBarController.view addSubview:HUD];
                         HUD.mode = MBProgressHUDModeText;
                         HUD.removeFromSuperViewOnHide = YES;
                         // Configure for text only and offset down
@@ -345,8 +345,8 @@
             else
                 // The device can not send email.
             {
-                MBProgressHUD *HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
-                [self.navigationController.view addSubview:HUD];
+                MBProgressHUD *HUD = [[MBProgressHUD alloc] initWithView:self.tabBarController.view];
+                [self.tabBarController.view addSubview:HUD];
                 HUD.mode = MBProgressHUDModeText;
                 HUD.removeFromSuperViewOnHide = YES;
                 // Configure for text only and offset down
@@ -499,8 +499,8 @@
           didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error
 {
     
-    MBProgressHUD *HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
-    [self.navigationController.view addSubview:HUD];
+    MBProgressHUD *HUD = [[MBProgressHUD alloc] initWithView:self.tabBarController.view];
+    [self.tabBarController.view addSubview:HUD];
     HUD.mode = MBProgressHUDModeText;
     HUD.removeFromSuperViewOnHide = YES;
     // Configure for text only and offset down
