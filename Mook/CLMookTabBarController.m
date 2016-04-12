@@ -57,8 +57,6 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(importStart:) name:@"importStart" object:nil];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(importFinish) name:@"dismissImportContentVC" object:nil];
-//
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(inputPassword) name:UIApplicationDidFinishLaunchingNotification object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(inputPassword) name:UIApplicationWillEnterForegroundNotification object:nil];
     
@@ -75,6 +73,17 @@
 - (void)importStart:(NSNotification *)noti {
     self.isImportingData = YES;
     self.model = noti.object;
+
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:kUsePasswordKey]) {
+        
+        // 如果需要输入密码, 那么不需要做任何操作, 密码填写正确后会在block中进行segue跳转
+    } else {    // 如果不需要输入密码, 则直接进行跳转
+        
+        if (self.model) {
+            [self performSegueWithIdentifier:kSegueImportContent sender:self.model];
+            self.isImportingData = NO;
+        }
+    }
 }
 
 - (void)importFinish {
@@ -240,7 +249,7 @@
         if (self.isImportingData) {
             if (self.model) {
                 [self performSegueWithIdentifier:kSegueImportContent sender:self.model];
-                
+                self.isImportingData = NO;
             }
         }
     }];
@@ -264,11 +273,11 @@
         [self performSegueWithIdentifier:kMookToPasswordSegue sender:nil];
         self.isLaunched = NO;
     }
+
 }
 
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)modelUnknown {
     
     id destVC = segue.destinationViewController;
