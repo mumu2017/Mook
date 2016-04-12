@@ -9,7 +9,9 @@
 #import "CLMookTabBarController.h"
 #import "EAIntroView.h"
 #import "CLImportContentNavVC.h"
+#import "CLDataSaveTool.h"
 
+#import "CLShowModel.h"
 #import "CLIdeaObjModel.h"
 #import "CLRoutineModel.h"
 #import "CLSleightObjModel.h"
@@ -24,6 +26,8 @@
 @property (nonatomic, strong) EAIntroView *introView;
 
 @property (nonatomic, assign) BOOL isNotFirstTimeLaunch;
+@property (nonatomic, assign) BOOL isImportingData;
+@property (nonatomic, strong) NSObject *model;
 
 @end
 
@@ -43,9 +47,18 @@
     
     self.isLaunched = [[NSUserDefaults standardUserDefaults] boolForKey:kUsePasswordKey];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deleteEntry:) name:kDeleteEntryNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cancelEntry:) name:kCancelEntryNotification object:nil];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(passwordMatch) name:@"passwordMatch" object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showIntroWithCrossDissolve) name:@"showIntroView" object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(importStart:) name:@"importStart" object:nil];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(importFinish) name:@"dismissImportContentVC" object:nil];
+//
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(inputPassword) name:UIApplicationDidFinishLaunchingNotification object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(inputPassword) name:UIApplicationWillEnterForegroundNotification object:nil];
     
@@ -59,6 +72,123 @@
     
 }
 
+- (void)importStart:(NSNotification *)noti {
+    self.isImportingData = YES;
+    self.model = noti.object;
+}
+
+- (void)importFinish {
+    self.isImportingData = NO;
+    self.model = nil;
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)cancelEntry:(NSNotification *)noti {
+    if (noti.object == nil) {
+        NSLog(@"error : cancel object == nil");
+        return;
+    } else {
+        id modelUnknown = noti.object;
+        if ([modelUnknown isKindOfClass:[CLIdeaObjModel class]]) {
+            CLIdeaObjModel *model = (CLIdeaObjModel *)modelUnknown;
+            
+            [kDataListIdea removeObject:model];
+            [kDataListAll removeObject:model];
+            
+        } else if ([modelUnknown isKindOfClass:[CLShowModel class]]) {
+            CLShowModel *model = (CLShowModel *)modelUnknown;
+            
+            [kDataListShow removeObject:model];
+            [kDataListAll removeObject:model];
+            
+        } else if ([modelUnknown isKindOfClass:[CLRoutineModel class]]) {
+            CLRoutineModel *model = (CLRoutineModel *)modelUnknown;
+            
+            [kDataListRoutine removeObject:model];
+            [kDataListAll removeObject:model];
+            
+        } else if ([modelUnknown isKindOfClass:[CLSleightObjModel class]]) {
+            CLSleightObjModel *model = (CLSleightObjModel *)modelUnknown;
+            
+            [kDataListSleight removeObject:model];
+            [kDataListAll removeObject:model];
+            
+        } else if ([modelUnknown isKindOfClass:[CLPropObjModel class]]) {
+            CLPropObjModel *model = (CLPropObjModel *)modelUnknown;
+            
+            [kDataListProp removeObject:model];
+            [kDataListAll removeObject:model];
+            
+        } else if ([modelUnknown isKindOfClass:[CLLinesObjModel class]]) {
+            CLLinesObjModel *model = (CLLinesObjModel *)modelUnknown;
+            
+            [kDataListLines removeObject:model];
+            [kDataListAll removeObject:model];
+            
+        }
+        
+        NSLog(@"cancel entry sucess!");
+    }
+    
+}
+
+- (void)deleteEntry:(NSNotification *)noti {
+    if (noti.object == nil) {
+        NSLog(@"error : delete object == nil");
+        return;
+    } else {
+        id modelUnknown = noti.object;
+        if ([modelUnknown isKindOfClass:[CLIdeaObjModel class]]) {
+            CLIdeaObjModel *model = (CLIdeaObjModel *)modelUnknown;
+            
+            [CLDataSaveTool deleteIdea:model];
+            
+            [kDataListIdea removeObject:model];
+            [kDataListAll removeObject:model];
+            
+        } else if ([modelUnknown isKindOfClass:[CLShowModel class]]) {
+            CLShowModel *model = (CLShowModel *)modelUnknown;
+            
+            [CLDataSaveTool deleteShow:model];
+            
+            [kDataListShow removeObject:model];
+            [kDataListAll removeObject:model];
+            
+        } else if ([modelUnknown isKindOfClass:[CLRoutineModel class]]) {
+            CLRoutineModel *model = (CLRoutineModel *)modelUnknown;
+            
+            [CLDataSaveTool deleteRoutine:model];
+            
+            [kDataListRoutine removeObject:model];
+            [kDataListAll removeObject:model];
+            
+        } else if ([modelUnknown isKindOfClass:[CLSleightObjModel class]]) {
+            CLSleightObjModel *model = (CLSleightObjModel *)modelUnknown;
+            
+            [kDataListSleight removeObject:model];
+            [kDataListAll removeObject:model];
+            
+        } else if ([modelUnknown isKindOfClass:[CLPropObjModel class]]) {
+            CLPropObjModel *model = (CLPropObjModel *)modelUnknown;
+            
+            [CLDataSaveTool deleteProp:model];
+            
+            [kDataListProp removeObject:model];
+            [kDataListAll removeObject:model];
+            
+        } else if ([modelUnknown isKindOfClass:[CLLinesObjModel class]]) {
+            CLLinesObjModel *model = (CLLinesObjModel *)modelUnknown;
+            
+            [CLDataSaveTool deleteLines:model];
+            
+            [kDataListLines removeObject:model];
+            [kDataListAll removeObject:model];
+            
+        }
+        
+        NSLog(@"delete entry sucess!");
+    }
+}
 
 - (void)showIntroWithCrossDissolve {
     
@@ -106,7 +236,14 @@
 
 - (void)passwordMatch {
     
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self dismissViewControllerAnimated:YES completion:^{
+        if (self.isImportingData) {
+            if (self.model) {
+                [self performSegueWithIdentifier:kSegueImportContent sender:self.model];
+                
+            }
+        }
+    }];
     
 }
 
@@ -114,16 +251,20 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+
+}
+
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
     if (self.isLaunched) {
+        
         [self performSegueWithIdentifier:kMookToPasswordSegue sender:nil];
+        self.isLaunched = NO;
     }
-    
-    self.isLaunched = NO;
 }
-
 
 #pragma mark - Navigation
 

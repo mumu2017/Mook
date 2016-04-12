@@ -16,6 +16,20 @@
     [self.contentView addSubview:self.imageView];
     [self.contentView addSubview:self.titleLabel];
     [self.contentView addSubview:self.iconView];
+    
+//    if (!UIAccessibilityIsReduceTransparencyEnabled()) {
+//        self.contentView.backgroundColor = [UIColor clearColor];
+//        
+//        UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleExtraLight];
+//        UIVisualEffectView *blurEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
+//        blurEffectView.frame = self.contentView.bounds;
+//        blurEffectView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+//        
+//        [self.contentView addSubview:blurEffectView];
+//    }
+//    else {
+//        self.contentView.backgroundColor = [UIColor blackColor];
+//    }
 }
 
 - (void)setName:(NSString *)name {

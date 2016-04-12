@@ -7,7 +7,7 @@
 //
 
 #import "CLHomeNavVC.h"
-#import "CLListVC.h"
+//#import "CLAllItemsListVC.h"
 
 @interface CLHomeNavVC ()
 
@@ -20,16 +20,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    self.navigationBar.barTintColor = [UIColor flatSkyBlueColorDark];
+//    self.navigationBar.barTintColor = [UIColor flatSkyBlueColorDark];
     
     // Do any additional setup after loading the view.
-    UIViewController *rootViewController = [[self viewControllers] firstObject];
-    
-    if ([rootViewController isKindOfClass:[CLListVC class]]) {
-        
-        CLListVC *vc  = (CLListVC *)rootViewController;
-        vc.listType = kListTypeAll;
-    }
 
 }
 

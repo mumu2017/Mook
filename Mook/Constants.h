@@ -46,7 +46,7 @@ typedef enum {
     kEditingModeNotes,
 } EditingMode;
 
-
+#define kAppDelegate   (AppDelegate *)[[UIApplication sharedApplication] delegate]
 #define kDataListAll   [(AppDelegate *)[[UIApplication sharedApplication] delegate] allItems]
 #define kDataListIdea   [(AppDelegate *)[[UIApplication sharedApplication] delegate] ideaObjModelList]
 #define kDataListShow   [(AppDelegate *)[[UIApplication sharedApplication] delegate] showModelList]
@@ -143,6 +143,10 @@ typedef enum {
 // segue
 
 #define kSegueImportContent @"importContentSegue"
+#define kSegueHomeToNewShowSegue    @"homeToNewShowSegue"
+#define kSegueHomeToContentSegue    @"homeToContentSegue"
+#define kSegueHomeToShowSegue   @"homeToShowSegue"
+#define kSegueHomeToNewEntrySegue   @"homeToNewEntrySegue"
 
 #define kSegueHomeToList    @"homeToListSegue"
 #define kSeguekHomeToTagList @"kHomeToTagListSegue"

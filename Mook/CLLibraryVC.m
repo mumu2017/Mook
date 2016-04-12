@@ -71,7 +71,7 @@ static NSString * const reuseIdentifier = @"Cell";
     
     // Uncomment the following line to preserve selection between presentations
     // self.clearsSelectionOnViewWillAppear = NO;
-    self.collectionView.backgroundColor = [UIColor flatWhiteColor];
+    self.collectionView.backgroundColor = [UIColor flatBlackColorDark];
     // Register cell classes
     [self.collectionView registerNib:[UINib nibWithNibName:@"CLLibraryCell" bundle: nil] forCellWithReuseIdentifier:reuseIdentifier];
     
@@ -82,8 +82,19 @@ static NSString * const reuseIdentifier = @"Cell";
 // 不知道为什么, 只能通过willAppear时刷新collectionView的方式来解决删除数据不更新记录数量的bug
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
+//    self.navigationController.hidesBarsOnSwipe = YES;
+
     [self.collectionView reloadData];
 }
+//
+//- (void)viewWillDisappear:(BOOL)animated {
+//
+////    self.navigationController.hidesBarsOnSwipe = NO;
+////    self.navigationController.navigationBar.hidden = NO;
+//
+//    [super viewWillDisappear:animated];
+//}
 
 //- (void) update:(NSNotification *)noti {
 //    

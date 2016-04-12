@@ -9,6 +9,7 @@
 #import "CLListVC.h"
 
 #import "CLDataSaveTool.h"
+#import "CLDataExportTool.h"
 #import "CLNewEntryNavVC.h"
 #import "CLNewShowNavVC.h"
 #import "CLContentVC.h"
@@ -33,29 +34,24 @@
 //#import "CLNotesModel.h"
 
 #import "JGActionSheet.h"
-
+#import "MBProgressHUD.h"
 #import "CLTableBackView.h"
 
 
-@interface CLListVC ()<SWTableViewCellDelegate>
-
-
-@property (nonatomic, strong) NSMutableArray *allItems;
+@interface CLListVC ()<SWTableViewCellDelegate, MBProgressHUDDelegate, UIDocumentInteractionControllerDelegate>
 
 @property (nonatomic, strong) NSMutableArray *tagList;
 
 @property (nonatomic, strong) CLTableBackView *tableBackView;
 @property (nonatomic, assign) EditingContentType editingContentType;
+@property (nonatomic, strong) UIDocumentInteractionController *documentInteractionController;
+@property (nonatomic, copy) NSString *exportPath;
 
 @end
 
 @implementation CLListVC
 
 #pragma mark - 模型数组懒加载
-- (NSMutableArray *)allItems {
-    if (!_allItems)  _allItems = kDataListAll;
-    return _allItems;
-}
 
 -(NSMutableArray *)ideaObjModelList {
     if (!_ideaObjModelList) _ideaObjModelList = kDataListIdea;
@@ -115,28 +111,20 @@
                                                bundle:nil]
          forCellReuseIdentifier:kListTextCellID];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(update:) name:kUpdateDataNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deleteEntry:) name:kDeleteEntryNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cancelEntry:) name:kCancelEntryNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateMook) name:kUpdateMookNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeEntryIfWithTag:) name:kDeleteEntryNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeEntryIfWithTag:) name:kCancelEntryNotification object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
+    [self.tableView reloadData];
+
     [self.navigationController setToolbarHidden:YES];
 }
 
-- (void) update:(NSNotification *)noti {
+- (void)removeEntryIfWithTag:(NSNotification *)noti {
+    if (self.tag == nil) return;
     
-    if (noti.object == self) {  //如果是自己发出的更新通知,则不刷新.
-        return;
-    }
-        
-    [self.tableView reloadData];
-}
-
-- (void)cancelEntry:(NSNotification *)noti {
     if (noti.object == nil) {
         NSLog(@"error : cancel object == nil");
         return;
@@ -145,194 +133,49 @@
         if ([modelUnknown isKindOfClass:[CLIdeaObjModel class]]) {
             CLIdeaObjModel *model = (CLIdeaObjModel *)modelUnknown;
             
-            if (self.tag.length > 0 && self.ideaObjModelList != kDataListIdea) {
+            if (self.ideaObjModelList != kDataListIdea) {
                 [self.ideaObjModelList removeObject:model];
             }
             
-            [kDataListIdea removeObject:model];
-            [kDataListAll removeObject:model];
-            
         } else if ([modelUnknown isKindOfClass:[CLShowModel class]]) {
             CLShowModel *model = (CLShowModel *)modelUnknown;
-            
-            [kDataListShow removeObject:model];
-            [kDataListAll removeObject:model];
-            
+
             if (self.showModelList != kDataListShow) {
                 [self.showModelList removeObject:model];
             }
             
         } else if ([modelUnknown isKindOfClass:[CLRoutineModel class]]) {
             CLRoutineModel *model = (CLRoutineModel *)modelUnknown;
-            
-            [kDataListRoutine removeObject:model];
-            [kDataListAll removeObject:model];
-            
+
             if (self.routineModelList != kDataListRoutine) {
                 [self.routineModelList removeObject:model];
             }
             
         } else if ([modelUnknown isKindOfClass:[CLSleightObjModel class]]) {
             CLSleightObjModel *model = (CLSleightObjModel *)modelUnknown;
-                        
-            [kDataListSleight removeObject:model];
-            [kDataListAll removeObject:model];
-            
-            if (self.tag.length > 0 && self.sleightObjModelList != kDataListSleight) {
+
+            if (self.sleightObjModelList != kDataListSleight) {
                 [self.sleightObjModelList removeObject:model];
             }
             
         } else if ([modelUnknown isKindOfClass:[CLPropObjModel class]]) {
             CLPropObjModel *model = (CLPropObjModel *)modelUnknown;
             
-            if (self.tag.length > 0 && self.propObjModelList != kDataListProp) {
+            if (self.propObjModelList != kDataListProp) {
                 [self.propObjModelList removeObject:model];
             }
-            
-            [kDataListProp removeObject:model];
-            [kDataListAll removeObject:model];
-            
+
         } else if ([modelUnknown isKindOfClass:[CLLinesObjModel class]]) {
             CLLinesObjModel *model = (CLLinesObjModel *)modelUnknown;
             
-            if (self.tag.length > 0 && self.linesObjModelList != kDataListLines) {
+            if (self.linesObjModelList != kDataListLines) {
                 [self.linesObjModelList removeObject:model];
             }
-            
-            [kDataListLines removeObject:model];
-            [kDataListAll removeObject:model];
-            
         }
         
         NSLog(@"cancel entry sucess!");
-        [self.tableView reloadData];
     }
 
-}
-
-- (void)deleteEntry:(NSNotification *)noti {
-    if (noti.object == nil) {
-        NSLog(@"error : delete object == nil");
-        return;
-    } else {
-        id modelUnknown = noti.object;
-        if ([modelUnknown isKindOfClass:[CLIdeaObjModel class]]) {
-            CLIdeaObjModel *model = (CLIdeaObjModel *)modelUnknown;
-            
-            if (self.tag.length > 0 && self.ideaObjModelList != kDataListIdea) {
-                [self.ideaObjModelList removeObject:model];
-            }
-            
-            [CLDataSaveTool deleteIdea:model];
-            
-            [kDataListIdea removeObject:model];
-            [kDataListAll removeObject:model];
-            
-        } else if ([modelUnknown isKindOfClass:[CLShowModel class]]) {
-            CLShowModel *model = (CLShowModel *)modelUnknown;
-            
-            [CLDataSaveTool deleteShow:model];
-            
-            [kDataListShow removeObject:model];
-            [kDataListAll removeObject:model];
-            
-            if (self.showModelList != kDataListShow) {
-                [self.showModelList removeObject:model];
-            }
-            
-        } else if ([modelUnknown isKindOfClass:[CLRoutineModel class]]) {
-            CLRoutineModel *model = (CLRoutineModel *)modelUnknown;
-            
-            [CLDataSaveTool deleteRoutine:model];
-            
-            [kDataListRoutine removeObject:model];
-            [kDataListAll removeObject:model];
-            
-            if (self.routineModelList != kDataListRoutine) {
-                [self.routineModelList removeObject:model];
-            }
-            
-        } else if ([modelUnknown isKindOfClass:[CLSleightObjModel class]]) {
-            CLSleightObjModel *model = (CLSleightObjModel *)modelUnknown;
-            
-            [CLDataSaveTool deleteSleight:model];
-            
-            [kDataListSleight removeObject:model];
-            [kDataListAll removeObject:model];
-            
-            if (self.tag.length > 0 && self.sleightObjModelList != kDataListSleight) {
-                [self.sleightObjModelList removeObject:model];
-            }
-            
-        } else if ([modelUnknown isKindOfClass:[CLPropObjModel class]]) {
-            CLPropObjModel *model = (CLPropObjModel *)modelUnknown;
-            
-            if (self.tag.length > 0 && self.propObjModelList != kDataListProp) {
-                [self.propObjModelList removeObject:model];
-            }
-            
-            [CLDataSaveTool deleteProp:model];
-            
-            [kDataListProp removeObject:model];
-            [kDataListAll removeObject:model];
-            
-        } else if ([modelUnknown isKindOfClass:[CLLinesObjModel class]]) {
-            CLLinesObjModel *model = (CLLinesObjModel *)modelUnknown;
-            
-            if (self.tag.length > 0 && self.linesObjModelList != kDataListLines) {
-                [self.linesObjModelList removeObject:model];
-            }
-            
-            [CLDataSaveTool deleteLines:model];
-            
-            [kDataListLines removeObject:model];
-            [kDataListAll removeObject:model];
-            
-        }
-        
-        NSLog(@"delete entry sucess!");
-        [self.tableView reloadData];
-    }
-}
-
-- (void)updateMook {
-
-    if (self.tag.length > 0) return; // 如果有tag, 则不刷新为所有分类记录
-    
-    switch (self.listType) {
-        case kListTypeAll:
-            _allItems = kDataListAll;
-
-            break;
-        case kListTypeIdea:
-            _ideaObjModelList = kDataListIdea;
-
-            break;
-        case kListTypeRoutine:
-            _routineModelList = kDataListRoutine;
-
-            break;
-        case kListTypeShow:
-            _showModelList = kDataListShow;
-
-            break;
-        case kListTypeSleight:
-            _sleightObjModelList = kDataListSleight;
-
-            break;
-        case kListTypeProp:
-            _propObjModelList = kDataListProp;
-
-            break;
-            
-        case kListTypeLines:
-            _linesObjModelList = kDataListLines;
-
-            break;
-        default:
-            break;
-    }
-    [self.tableView reloadData];
 }
 
 - (void)dealloc {
@@ -351,7 +194,7 @@
     NSInteger number;
     switch (self.listType) {
         case kListTypeAll:
-            number = self.allItems.count;
+            number = 0;
             break;
             
         case kListTypeIdea:
@@ -394,47 +237,8 @@
     
     switch (self.listType) {
         case kListTypeAll:
-        {
-            id modelUnknown = self.allItems[indexPath.row];
-            if ([modelUnknown isKindOfClass:[CLIdeaObjModel class]]) {
-                CLIdeaObjModel *model = (CLIdeaObjModel *)modelUnknown;
-                image = [model getThumbnail];
-                iconName = kIconNameIdea;
-                title = [model getTitle];
-                content = [model getContent];
-            } else if ([modelUnknown isKindOfClass:[CLShowModel class]]) {
-                CLShowModel *model = (CLShowModel *)modelUnknown;
-                image = [model getThumbnail];
-                iconName = kIconNameShow;
-                title = [model getTitle];
-                content = [model getContent];
-            } else if ([modelUnknown isKindOfClass:[CLRoutineModel class]]) {
-                CLRoutineModel *model = (CLRoutineModel *)modelUnknown;
-                image = [model getThumbnail];
-                iconName = kIconNameRoutine;
-                title = [model getTitle];
-                content = [model getContent];
-            } else if ([modelUnknown isKindOfClass:[CLSleightObjModel class]]) {
-                CLSleightObjModel *model = (CLSleightObjModel *)modelUnknown;
-                image = [model getThumbnail];
-                iconName = kIconNameSleight;
-                title = [model getTitle];
-                content = [model getContent];
-            } else if ([modelUnknown isKindOfClass:[CLPropObjModel class]]) {
-                CLPropObjModel *model = (CLPropObjModel *)modelUnknown;
-                image = [model getThumbnail];
-                iconName = kIconNameProp;
-                title = [model getTitle];
-                content = [model getContent];
-            } else if ([modelUnknown isKindOfClass:[CLLinesObjModel class]]) {
-                CLLinesObjModel *model = (CLLinesObjModel *)modelUnknown;
-                iconName = kIconNameLines;
-                title = [model getTitle];
-                content = [model getContent];
-            }
-            
             break;
-        }
+        
         case kListTypeIdea:
         {
             CLIdeaObjModel *model = self.ideaObjModelList[indexPath.row];
@@ -529,6 +333,8 @@
 {
     NSMutableArray *rightUtilityButtons = [NSMutableArray new];
 
+//    [rightUtilityButtons sw_addUtilityButtonWithColor:[UIColor flatSkyBlueColor] title:NSLocalizedString(@"导出", nil)];
+    [rightUtilityButtons sw_addUtilityButtonWithColor:[UIColor flatGrayColorDark] icon:[UIImage imageNamed:@"iconAction"]];
     [rightUtilityButtons sw_addUtilityButtonWithColor:[UIColor redColor] title:NSLocalizedString(@"删除", nil)];
 
     return rightUtilityButtons;
@@ -543,6 +349,8 @@
     NSIndexPath *path = [self.tableView indexPathForCell:cell];
     
     if (index == 0) {
+        [self exportEntryWithIndexPath:path];
+    } else if (index == 1) {
         
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:NSLocalizedString(@"提示: 删除内容后将无法恢复,确定要删除当前内容吗?", nil) preferredStyle:UIAlertControllerStyleActionSheet];
         
@@ -565,106 +373,14 @@
         
     }
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:kUpdateDataNotification object:self];
-    
     [cell hideUtilityButtonsAnimated:YES];
 }
 
 - (void) deleteEntryWithIndexPath:(NSIndexPath *)path {
     switch (self.listType) {
         case kListTypeAll:
-        {
-            id modelUnknown = self.allItems[path.row];
-            if ([modelUnknown isKindOfClass:[CLIdeaObjModel class]]) {
-                CLIdeaObjModel *model = (CLIdeaObjModel *)modelUnknown;
-                
-                if (self.tag.length > 0 && self.ideaObjModelList != kDataListIdea) {
-                    [self.ideaObjModelList removeObject:model];
-                }
-                
-                [CLDataSaveTool deleteIdea:model];
-                
-                [kDataListIdea removeObject:model];
-                [kDataListAll removeObject:model];
-                
-                [self.tableView deleteRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationLeft];
-                
-                
-            } else if ([modelUnknown isKindOfClass:[CLShowModel class]]) {
-                CLShowModel *model = (CLShowModel *)modelUnknown;
-                
-                [CLDataSaveTool deleteShow:model];
-                
-                [kDataListShow removeObject:model];
-                [kDataListAll removeObject:model];
-                
-                if (self.showModelList != kDataListShow) {
-                    [self.showModelList removeObject:model];
-                }
-                
-                [self.tableView deleteRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationLeft];
-                
-            } else if ([modelUnknown isKindOfClass:[CLRoutineModel class]]) {
-                CLRoutineModel *model = (CLRoutineModel *)modelUnknown;
-                
-                [CLDataSaveTool deleteRoutine:model];
-                
-                [kDataListRoutine removeObject:model];
-                [kDataListAll removeObject:model];
-                
-                if (self.routineModelList != kDataListRoutine) {
-                    [self.routineModelList removeObject:model];
-                }
-                
-                [self.tableView deleteRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationLeft];
-                
-            } else if ([modelUnknown isKindOfClass:[CLSleightObjModel class]]) {
-                CLSleightObjModel *model = (CLSleightObjModel *)modelUnknown;
-                
-                [CLDataSaveTool deleteSleight:model];
-                
-                [kDataListSleight removeObject:model];
-                [kDataListAll removeObject:model];
-                
-                if (self.tag.length > 0 && self.sleightObjModelList != kDataListSleight) {
-                    [self.sleightObjModelList removeObject:model];
-                }
-                
-                [self.tableView deleteRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationLeft];
-                
-                
-            } else if ([modelUnknown isKindOfClass:[CLPropObjModel class]]) {
-                CLPropObjModel *model = (CLPropObjModel *)modelUnknown;
-                
-                if (self.tag.length > 0 && self.propObjModelList != kDataListProp) {
-                    [self.propObjModelList removeObject:model];
-                }
-                
-                [CLDataSaveTool deleteProp:model];
-                
-                [kDataListProp removeObject:model];
-                [kDataListAll removeObject:model];
-                [self.tableView deleteRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationLeft];
-                
-            } else if ([modelUnknown isKindOfClass:[CLLinesObjModel class]]) {
-                CLLinesObjModel *model = (CLLinesObjModel *)modelUnknown;
-                
-                if (self.tag.length > 0 && self.linesObjModelList != kDataListLines) {
-                    [self.linesObjModelList removeObject:model];
-                }
-                
-                [CLDataSaveTool deleteLines:model];
-                
-                [kDataListLines removeObject:model];
-                [kDataListAll removeObject:model];
-                [self.tableView deleteRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationLeft];
-                
-            }
-            
-            self.tableBackView.hidden = !(self.allItems.count == 0);
-            
             break;
-        }
+        
         case kListTypeIdea:
         {
             CLIdeaObjModel *model = self.ideaObjModelList[path.row];
@@ -773,8 +489,101 @@
         default:
             break;
     }
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:kUpdateDataNotification object:self];
 
 }
+
+- (void)exportEntryWithIndexPath:(NSIndexPath *)indexPath {
+    
+    // The hud will dispable all input on the view (use the higest view possible in the view hierarchy)
+    MBProgressHUD *HUD = [[MBProgressHUD alloc] initWithView:self.tabBarController.view];
+    [self.tabBarController.view addSubview:HUD];
+    
+    HUD.delegate = self;
+    
+    [HUD showAnimated:YES whileExecutingBlock:^{
+ 
+        switch (self.listType) {
+            case kListTypeAll:
+                break;
+                
+            case kListTypeIdea:
+            {
+                CLIdeaObjModel *ideaObjModel = self.ideaObjModelList[indexPath.row];
+                
+                self.exportPath = [CLDataExportTool makeDataPackageWithIdea:ideaObjModel];
+                break;
+            }
+            case kListTypeShow:
+                break;
+                
+            case kListTypeRoutine:
+            {
+                CLRoutineModel *routineModel = self.routineModelList[indexPath.row];
+                self.exportPath = [CLDataExportTool makeDataPackageWithRoutine:routineModel];
+                break;
+            }
+            case kListTypeSleight:
+            {
+                CLSleightObjModel *sleightObjModel = self.sleightObjModelList[indexPath.row];
+                self.exportPath = [CLDataExportTool makeDataPackageWithSleight:sleightObjModel];
+
+                break;
+            }
+                
+            case kListTypeProp:
+            {
+                CLPropObjModel *propObjModel = self.propObjModelList[indexPath.row];
+                self.exportPath = [CLDataExportTool makeDataPackageWithProp:propObjModel];
+
+                break;
+            }
+            case kListTypeLines:
+            {
+                CLLinesObjModel *linesObjModel = self.linesObjModelList[indexPath.row];
+                self.exportPath = [CLDataExportTool makeDataPackageWithLines:linesObjModel];
+                break;
+            }
+                
+            default:
+                break;
+        }
+        
+    } onQueue:dispatch_get_main_queue() completionBlock:^{
+        
+        NSURL *dataUrl;
+        if (self.exportPath != nil) {
+            dataUrl = [NSURL fileURLWithPath:self.exportPath];
+        }
+        
+        CGRect navRect = self.view.frame;
+        self.documentInteractionController =[UIDocumentInteractionController interactionControllerWithURL:dataUrl];
+        self.documentInteractionController.delegate = self;
+        
+        [self.documentInteractionController presentOptionsMenuFromRect:navRect inView:self.view animated:YES];
+    }];
+    
+}
+
+#pragma mark - UIDocumentInteractionControllerDelegate
+
+//===================================================================
+- (UIViewController *)documentInteractionControllerViewControllerForPreview:(UIDocumentInteractionController *)controller
+{
+    return self;
+}
+
+- (UIView *)documentInteractionControllerViewForPreview:(UIDocumentInteractionController *)controller
+{
+    return self.view;
+}
+
+- (CGRect)documentInteractionControllerRectForPreview:(UIDocumentInteractionController *)controller
+{
+    return self.view.frame;
+}
+
 
 #pragma mark 选中cell跳转
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -782,15 +591,6 @@
     if (self.listType == kListTypeShow) {
 
         [self performSegueWithIdentifier:kSegueListToShow sender:indexPath];
-        
-    } else if (self.listType == kListTypeAll) {
-        id modelUnknown = self.allItems[indexPath.row];
-        if ([modelUnknown isKindOfClass:[CLShowModel class]]) {
-            [self performSegueWithIdentifier:kSegueListToShow sender:indexPath];
-        } else {
-            
-            [self performSegueWithIdentifier:kSegueListToContent sender:indexPath];
-        }
         
     } else {
         
@@ -812,41 +612,8 @@
 
             switch (self.listType) {
                 case kListTypeAll:
-                {
-                    id modelUnknown = self.allItems[indexPath.row];
-                    if ([modelUnknown isKindOfClass:[CLIdeaObjModel class]]) {
-                        CLIdeaObjModel *model = (CLIdeaObjModel *)modelUnknown;
-                        vc.contentType = kContentTypeIdea;
-                        vc.ideaObjModel = model;
-                        vc.date = model.date;
-                        
-                    } else if ([modelUnknown isKindOfClass:[CLRoutineModel class]]) {
-                        CLRoutineModel *model = (CLRoutineModel *)modelUnknown;
-                        vc.contentType = kContentTypeRoutine;
-                        vc.routineModel = model;
-                        vc.date = model.date;
-                        
-                    } else if ([modelUnknown isKindOfClass:[CLSleightObjModel class]]) {
-                        CLSleightObjModel *model = (CLSleightObjModel *)modelUnknown;
-                        vc.contentType = kContentTypeSleight;
-                        vc.sleightObjModel = model;
-                        vc.date = model.date;
-                        
-                    } else if ([modelUnknown isKindOfClass:[CLPropObjModel class]]) {
-                        CLPropObjModel *model = (CLPropObjModel *)modelUnknown;
-                        vc.contentType = kContentTypeProp;
-                        vc.propObjModel = model;
-                        vc.date = model.date;
-                        
-                    } else if ([modelUnknown isKindOfClass:[CLLinesObjModel class]]) {
-                        CLLinesObjModel *model = (CLLinesObjModel *)modelUnknown;
-                        vc.contentType = kContentTypeLines;
-                        vc.linesObjModel = model;
-                        vc.date = model.date;
-                    }
-                    
                     break;
-                }
+                    
                 case kListTypeIdea:
                 {
                     CLIdeaObjModel *model = self.ideaObjModelList[indexPath.row];
@@ -923,12 +690,7 @@
             NSIndexPath *indexPath = (NSIndexPath *)sender;
             CLShowModel *model;
             
-            if (self.listType == kListTypeAll) {
-                id modelUnknown = self.allItems[indexPath.row];
-                if ([modelUnknown isKindOfClass:[CLShowModel class]]) {
-                    model = (CLShowModel *)modelUnknown;
-                }
-            } else if (self.listType == kListTypeShow) {
+            if (self.listType == kListTypeShow) {
                 model = self.showModelList[indexPath.row];
             }
             
@@ -943,7 +705,7 @@
     
     switch (self.listType) {
         case kListTypeAll:
-            [self addNewEntry];
+            
             break;
             
         case kListTypeIdea:
@@ -974,51 +736,6 @@
             break;
     }
 
-}
-
-- (void)addNewEntry {
-    
-    JGActionSheetSection *section1 = [JGActionSheetSection sectionWithTitle:nil message:nil buttonTitles:@[NSLocalizedString(@"新建灵感", nil), NSLocalizedString(@"新建演出", nil), NSLocalizedString(@"新建流程", nil), NSLocalizedString(@"新建技巧", nil), NSLocalizedString(@"新建道具", nil), NSLocalizedString(@"新建台词", nil)] buttonStyle:JGActionSheetButtonStyleDefault];
-    JGActionSheetSection *cancelSection = [JGActionSheetSection sectionWithTitle:nil message:nil buttonTitles:@[NSLocalizedString(@"取消", nil)] buttonStyle:JGActionSheetButtonStyleCancel];
-    
-    NSArray *sections = @[section1, cancelSection];
-    
-    JGActionSheet *sheet = [JGActionSheet actionSheetWithSections:sections];
-    sheet.backgroundColor = [UIColor colorWithWhite:0.1 alpha:0.9];
-    
-    [sheet setButtonPressedBlock:^(JGActionSheet *sheet, NSIndexPath *indexPath) {
-        
-        if (indexPath.section == 0) {
-            switch (indexPath.row) {
-                case 0:
-                    [self addNewIdea];
-                    break;
-                case 1:
-                    [self addNewShow];
-                    break;
-                    
-                case 2:
-                    [self addNewRoutine];
-                    break;
-                case 3:
-                    [self addNewSleight];
-                    break;
-                case 4:
-                    [self addNewProp];
-                    break;
-                case 5:
-                    [self addNewLines];
-                    break;
-                default:
-                    break;
-            }
-            
-        }
-        
-        [sheet dismissAnimated:YES];
-    }];
-    
-    [sheet showInView:self.tabBarController.view animated:YES];
 }
 
 - (void)addNewIdea {

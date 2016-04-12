@@ -113,6 +113,7 @@
 		439519B01CBBB60300505E5B /* CLDataImportTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 439519AF1CBBB60300505E5B /* CLDataImportTool.m */; };
 		439519B31CBBF45D00505E5B /* CLImportContentVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 439519B21CBBF45D00505E5B /* CLImportContentVC.m */; };
 		439519B61CBBF46F00505E5B /* CLImportContentNavVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 439519B51CBBF46F00505E5B /* CLImportContentNavVC.m */; };
+		439519B91CBCC14000505E5B /* CLAllItemsListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 439519B81CBCC14000505E5B /* CLAllItemsListVC.m */; };
 		43A281181CB224BC009C2785 /* CLMookTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A281171CB224BC009C2785 /* CLMookTabBarController.m */; };
 		43A2811F1CB2276A009C2785 /* CLLibraryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A2811D1CB2276A009C2785 /* CLLibraryCell.m */; };
 		43A281201CB2276A009C2785 /* CLLibraryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43A2811E1CB2276A009C2785 /* CLLibraryCell.xib */; };
@@ -336,6 +337,8 @@
 		439519B21CBBF45D00505E5B /* CLImportContentVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLImportContentVC.m; sourceTree = "<group>"; };
 		439519B41CBBF46F00505E5B /* CLImportContentNavVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLImportContentNavVC.h; sourceTree = "<group>"; };
 		439519B51CBBF46F00505E5B /* CLImportContentNavVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLImportContentNavVC.m; sourceTree = "<group>"; };
+		439519B71CBCC14000505E5B /* CLAllItemsListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLAllItemsListVC.h; sourceTree = "<group>"; };
+		439519B81CBCC14000505E5B /* CLAllItemsListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLAllItemsListVC.m; sourceTree = "<group>"; };
 		43A281161CB224BC009C2785 /* CLMookTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLMookTabBarController.h; sourceTree = "<group>"; };
 		43A281171CB224BC009C2785 /* CLMookTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLMookTabBarController.m; sourceTree = "<group>"; };
 		43A2811C1CB2276A009C2785 /* CLLibraryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLLibraryCell.h; sourceTree = "<group>"; };
@@ -633,6 +636,8 @@
 				43F5F7561CB390BC007BFB0C /* CLLibraryNavVC.m */,
 				43A281221CB2299B009C2785 /* CLLibraryVC.h */,
 				43A281231CB2299B009C2785 /* CLLibraryVC.m */,
+				43885F6C1CA4F9BE00269CE1 /* CLListVC.h */,
+				43885F6D1CA4F9BE00269CE1 /* CLListVC.m */,
 			);
 			name = "Library分类";
 			sourceTree = "<group>";
@@ -702,8 +707,8 @@
 			children = (
 				43885F771CA6A8AC00269CE1 /* CLHomeNavVC.h */,
 				43885F781CA6A8AC00269CE1 /* CLHomeNavVC.m */,
-				43885F6C1CA4F9BE00269CE1 /* CLListVC.h */,
-				43885F6D1CA4F9BE00269CE1 /* CLListVC.m */,
+				439519B71CBCC14000505E5B /* CLAllItemsListVC.h */,
+				439519B81CBCC14000505E5B /* CLAllItemsListVC.m */,
 				43E0F7141CA0F10E005CAD97 /* Views */,
 			);
 			name = "List笔记";
@@ -1251,6 +1256,7 @@
 				432346731C9409A400200833 /* XLBarPagerTabStripViewController.m in Sources */,
 				432345AD1C9404FB00200833 /* CLNewShowVC.m in Sources */,
 				43E0F73F1CA10D27005CAD97 /* NSObject+MJIvar.m in Sources */,
+				439519B91CBCC14000505E5B /* CLAllItemsListVC.m in Sources */,
 				432346621C94094D00200833 /* CLMediaView.m in Sources */,
 				43F5F7651CB3A4EE007BFB0C /* NSAttributedString+Tools.m in Sources */,
 				432345DE1C94051A00200833 /* CLInfoModel.m in Sources */,

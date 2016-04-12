@@ -118,6 +118,11 @@
     routineModel.date = [NSDate date];
     routineModel.timeStamp = kTimestamp;
     
+    // 重设标签
+    NSString *tag = NSLocalizedString(@"导入", nil);
+    routineModel.tags = [NSMutableArray arrayWithObject:tag];
+    [CLDataSaveTool addTag:tag type:kTypeRoutine];
+    
     if (routineModel.effectModel.image.length > 0) {
         
         routineModel.effectModel.image = [CLDataImportTool copyTempUnzipImageToMook:routineModel.effectModel.image modelTimeStamp:routineModel.timeStamp content:routineModel.effectModel.effect type:kTypeRoutine];
@@ -160,6 +165,11 @@
     ideaObjModel.date = [NSDate date];
     ideaObjModel.timeStamp = kTimestamp;
     
+    // 重设标签
+    NSString *tag = NSLocalizedString(@"导入", nil);
+    ideaObjModel.tags = [NSMutableArray arrayWithObject:tag];
+    [CLDataSaveTool addTag:tag type:kTypeIdea];
+    
     if (ideaObjModel.effectModel.image.length > 0) {
         
         ideaObjModel.effectModel.image = [CLDataImportTool copyTempUnzipImageToMook:ideaObjModel.effectModel.image modelTimeStamp:ideaObjModel.timeStamp content:ideaObjModel.effectModel.effect type:kTypeIdea];
@@ -187,6 +197,11 @@
     
     sleightObjModel.date = [NSDate date];
     sleightObjModel.timeStamp = kTimestamp;
+    
+    // 重设标签
+    NSString *tag = NSLocalizedString(@"导入", nil);
+    sleightObjModel.tags = [NSMutableArray arrayWithObject:tag];
+    [CLDataSaveTool addTag:tag type:kTypeSleight];
     
     if (sleightObjModel.effectModel.image.length > 0) {
         
@@ -216,6 +231,11 @@
     propObjModel.date = [NSDate date];
     propObjModel.timeStamp = kTimestamp;
     
+    // 重设标签
+    NSString *tag = NSLocalizedString(@"导入", nil);
+    propObjModel.tags = [NSMutableArray arrayWithObject:tag];
+    [CLDataSaveTool addTag:tag type:kTypeProp];
+    
     if (propObjModel.effectModel.image.length > 0) {
         
         propObjModel.effectModel.image = [CLDataImportTool copyTempUnzipImageToMook:propObjModel.effectModel.image modelTimeStamp:propObjModel.timeStamp content:propObjModel.effectModel.effect type:kTypeProp];
@@ -243,7 +263,13 @@
  
     linesObjModel.date = [NSDate date];
     linesObjModel.timeStamp = kTimestamp;
+    
+    // 重设标签
+    NSString *tag = NSLocalizedString(@"导入", nil);
+    linesObjModel.tags = [NSMutableArray arrayWithObject:tag];
+    [CLDataSaveTool addTag:tag type:kTypeLines];
 }
+
 
 + (NSString *)copyTempUnzipImageToMook:(NSString *)imageName modelTimeStamp:(NSString *)timeStamp content:(NSString *)content type:(NSString *)type {
     

@@ -540,11 +540,22 @@ static FMDatabase *_db;
 
 + (void)addTag:(NSString *)tag type:(NSString *)type {
 
-    BOOL flag = [_db executeUpdate:@"insert into t_tag (tag, type) values(?,?)", tag, type];
-    if (flag) {
-        NSLog(@"插入成功");
-    }else{
-        NSLog(@"插入失败");
+    FMResultSet *set = [_db executeQuery:@"select * from t_tag where type=? and tag=?", type, tag];
+    
+    // 如果[set next]不为空,则表示查询到至少一个结果.所以更新数据.
+    if ([set next]) {
+        
+        NSLog(@"tag alreadey exists");
+        
+    } else {    // 如果为空,则表示没有查询到任何符合条件的结果,所以插入数据.
+        
+        BOOL flag = [_db executeUpdate:@"insert into t_tag (tag, type) values(?,?)", tag, type];
+        if (flag) {
+            NSLog(@"插入成功");
+        }else{
+            NSLog(@"插入失败");
+        }
+
     }
 
 }

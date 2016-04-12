@@ -7,7 +7,7 @@
 //
 
 #import "CLImportContentVC.h"
-
+#import "CLMookTabBarController.h"
 #import "CLDataImportTool.h"
 
 #import "CLShowModel.h"
@@ -250,34 +250,9 @@
 }
 
 - (void)setContentTitle {
-    switch (self.contentType) {
-        case kContentTypeIdea:
-            self.navigationItem.title = kDefaultTitleIdea;
-            break;
-            
-        case kContentTypeRoutine:
-            self.navigationItem.title = kDefaultTitleRoutine;
-            
-            break;
-            
-        case kContentTypeSleight:
-            self.navigationItem.title = kDefaultTitleSleight;
-            
-            break;
-            
-        case kContentTypeProp:
-            self.navigationItem.title = kDefaultTitleProp;
-            
-            break;
-            
-        case kContentTypeLines:
-            self.navigationItem.title = kDefaultTitleLines;
-            
-            break;
-            
-        default:
-            break;
-    }
+   
+    self.navigationItem.title = @"导入预览";
+
 }
 
 
@@ -310,7 +285,7 @@
         default:
             break;
     }
-    
+
     [[NSNotificationCenter defaultCenter] postNotificationName:@"dismissImportContentVC" object:nil];
 
 }
@@ -340,8 +315,7 @@
         default:
             break;
     }
-    
-    [(AppDelegate *)[[UIApplication sharedApplication] delegate] reloadData];
+
     [[NSNotificationCenter defaultCenter] postNotificationName:@"dismissImportContentVC" object:nil];
 
 
