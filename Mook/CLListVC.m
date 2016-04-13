@@ -349,31 +349,37 @@
     NSIndexPath *path = [self.tableView indexPathForCell:cell];
     
     if (index == 0) {
-        [self exportEntryWithIndexPath:path];
+        [self exportWithIndexPath:path];
     } else if (index == 1) {
         
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:NSLocalizedString(@"提示: 删除内容后将无法恢复,确定要删除当前内容吗?", nil) preferredStyle:UIAlertControllerStyleActionSheet];
-        
-        UIAlertAction* delete = [UIAlertAction actionWithTitle:NSLocalizedString(@"确定", nil) style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-            
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                
-                [self deleteEntryWithIndexPath:path];
-
-            });
-        }];
-        
-        UIAlertAction* cancel = [UIAlertAction actionWithTitle:NSLocalizedString(@"取消", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
-        }];
-        
-        [alert addAction:delete];
-        [alert addAction:cancel];
-        
-        [self presentViewController:alert animated:YES completion:nil];
-        
+        [self delete:path];
     }
     
     [cell hideUtilityButtonsAnimated:YES];
+}
+
+- (void)delete:(NSIndexPath *)path {
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:NSLocalizedString(@"提示: 删除内容后将无法恢复,确定要删除当前内容吗?", nil) preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    UIAlertAction* delete = [UIAlertAction actionWithTitle:NSLocalizedString(@"确定", nil) style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            
+            [self deleteEntryWithIndexPath:path];
+            
+        });
+    }];
+    
+    UIAlertAction* cancel = [UIAlertAction actionWithTitle:NSLocalizedString(@"取消", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
+    }];
+    
+    [alert addAction:delete];
+    [alert addAction:cancel];
+    
+    [self presentViewController:alert animated:YES completion:nil];
+    
+
 }
 
 - (void) deleteEntryWithIndexPath:(NSIndexPath *)path {
@@ -494,7 +500,87 @@
 
 }
 
-- (void)exportEntryWithIndexPath:(NSIndexPath *)indexPath {
+// 导出笔记 (选择是否密码导出)
+- (void)exportWithIndexPath:(NSIndexPath *)indexPath {
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"导出笔记" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    UIAlertAction* exportWithPassword = [UIAlertAction actionWithTitle:@"密码导出" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        [self passwordExportWithIndexPath:indexPath];
+        
+    }];
+    
+    UIAlertAction* exportWithoutPassword = [UIAlertAction actionWithTitle:@"直接导出" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        [self exportEntryWithIndexPath:indexPath importPassword:@""];
+        
+    }];
+    
+    UIAlertAction* cancel = [UIAlertAction actionWithTitle:NSLocalizedString(@"取消", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
+    }];
+    
+    [alert addAction:exportWithPassword];
+    [alert addAction:exportWithoutPassword];
+    [alert addAction:cancel];
+    
+    [self presentViewController:alert animated:YES completion:nil];
+    
+}
+
+// 密码导出
+- (void)passwordExportWithIndexPath:(NSIndexPath *)indexPath {
+    
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"设置导出密码", nil) message:NSLocalizedString(@"请输入笔记密码", nil) preferredStyle:UIAlertControllerStyleAlert];
+    
+    [alertController addTextFieldWithConfigurationHandler:^(UITextField *textField){
+        textField.placeholder = NSLocalizedString(@"导出密码", nil);
+        textField.clearButtonMode = UITextFieldViewModeWhileEditing;
+        textField.keyboardType = UIKeyboardTypeNumberPad;
+        textField.font = kFontSys16;
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(alertTextFieldDidChange:) name:UITextFieldTextDidChangeNotification object:textField];
+        
+    }];
+    
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"导出", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        
+        UITextField *passwordTF = alertController.textFields.firstObject;
+        
+        NSString *exportPassword = passwordTF.text;
+        
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:UITextFieldTextDidChangeNotification object:nil];
+        
+        [self exportEntryWithIndexPath:indexPath importPassword:exportPassword];
+        
+    }];
+    
+    
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:NSLocalizedString(@"取消", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    
+    [alertController addAction:okAction];
+    [alertController addAction:cancel];
+    
+    [self presentViewController:alertController animated:YES completion:^{
+        UITextField *passwordTF = alertController.textFields.firstObject;
+        UIAlertAction *okAction = alertController.actions.firstObject;
+        okAction.enabled = passwordTF.text.length > 0;
+    }];
+    
+}
+
+- (void)alertTextFieldDidChange:(NSNotification *)notification{
+    UIAlertController *alertController = (UIAlertController *)self.presentedViewController;
+    if (alertController) {
+        UITextField *nameTF = alertController.textFields.firstObject;
+        UIAlertAction *okAction = alertController.actions.firstObject;
+        okAction.enabled = nameTF.text.length > 0;
+    }
+}
+
+- (void)exportEntryWithIndexPath:(NSIndexPath *)indexPath importPassword:(NSString *)importPassword {
     
     // The hud will dispable all input on the view (use the higest view possible in the view hierarchy)
     MBProgressHUD *HUD = [[MBProgressHUD alloc] initWithView:self.tabBarController.view];
@@ -503,7 +589,7 @@
     HUD.delegate = self;
     
     [HUD showAnimated:YES whileExecutingBlock:^{
- 
+        
         switch (self.listType) {
             case kListTypeAll:
                 break;
@@ -512,7 +598,7 @@
             {
                 CLIdeaObjModel *ideaObjModel = self.ideaObjModelList[indexPath.row];
                 
-                self.exportPath = [CLDataExportTool makeDataPackageWithIdea:ideaObjModel];
+                self.exportPath = [CLDataExportTool makeDataPackageWithIdea:ideaObjModel passWord:importPassword];
                 break;
             }
             case kListTypeShow:
@@ -521,28 +607,28 @@
             case kListTypeRoutine:
             {
                 CLRoutineModel *routineModel = self.routineModelList[indexPath.row];
-                self.exportPath = [CLDataExportTool makeDataPackageWithRoutine:routineModel];
+                self.exportPath = [CLDataExportTool makeDataPackageWithRoutine:routineModel passWord:importPassword];
                 break;
             }
             case kListTypeSleight:
             {
                 CLSleightObjModel *sleightObjModel = self.sleightObjModelList[indexPath.row];
-                self.exportPath = [CLDataExportTool makeDataPackageWithSleight:sleightObjModel];
-
+                self.exportPath = [CLDataExportTool makeDataPackageWithSleight:sleightObjModel passWord:importPassword];
+                
                 break;
             }
                 
             case kListTypeProp:
             {
                 CLPropObjModel *propObjModel = self.propObjModelList[indexPath.row];
-                self.exportPath = [CLDataExportTool makeDataPackageWithProp:propObjModel];
-
+                self.exportPath = [CLDataExportTool makeDataPackageWithProp:propObjModel passWord:importPassword];
+                
                 break;
             }
             case kListTypeLines:
             {
                 CLLinesObjModel *linesObjModel = self.linesObjModelList[indexPath.row];
-                self.exportPath = [CLDataExportTool makeDataPackageWithLines:linesObjModel];
+                self.exportPath = [CLDataExportTool makeDataPackageWithLines:linesObjModel passWord:importPassword];
                 break;
             }
                 
@@ -565,6 +651,7 @@
     }];
     
 }
+
 
 #pragma mark - UIDocumentInteractionControllerDelegate
 

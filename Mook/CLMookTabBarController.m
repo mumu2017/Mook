@@ -28,7 +28,7 @@
 @property (nonatomic, assign) BOOL isNotFirstTimeLaunch;
 @property (nonatomic, assign) BOOL isImportingData;
 @property (nonatomic, strong) NSObject *model;
-
+@property (nonatomic, copy) NSString *importPassword;
 @end
 
 @implementation CLMookTabBarController
@@ -74,6 +74,8 @@
     self.isImportingData = YES;
     self.model = noti.object;
 
+    self.importPassword = [noti.userInfo objectForKey:@"passWord"];
+    
     if ([[NSUserDefaults standardUserDefaults] boolForKey:kUsePasswordKey]) {
         
         // 如果需要输入密码, 那么不需要做任何操作, 密码填写正确后会在block中进行segue跳转
@@ -285,7 +287,8 @@
     if ([destVC isKindOfClass:[CLImportContentNavVC class]]) {
         CLImportContentNavVC *vc = (CLImportContentNavVC *)destVC;
         vc.hidesBottomBarWhenPushed = YES;
-
+        vc.importPassword = self.importPassword;
+        
         if ([modelUnknown isKindOfClass:[CLIdeaObjModel class]]) {
             CLIdeaObjModel *model = (CLIdeaObjModel *)modelUnknown;
             vc.contentType = kContentTypeIdea;

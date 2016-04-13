@@ -34,6 +34,7 @@
         vc.propObjModel = self.propObjModel;
         vc.linesObjModel = self.linesObjModel;
         vc.date = self.date;
+        vc.importPassword = self.importPassword;
         
     }
 

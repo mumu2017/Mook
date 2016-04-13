@@ -12,10 +12,14 @@
 @interface CLDataExportTool : NSObject
 
 // 生成压缩包,以便导出
-+ (NSString *)makeDataPackageWithRoutine:(CLRoutineModel *)routineModel;
-+ (NSString *)makeDataPackageWithIdea:(CLIdeaObjModel *)ideaObjModel;
-+ (NSString *)makeDataPackageWithSleight:(CLSleightObjModel *)sleightObjModel;
-+ (NSString *)makeDataPackageWithProp:(CLPropObjModel *)propObjModel;
-+ (NSString *)makeDataPackageWithLines:(CLLinesObjModel *)linesObjModel;
++ (NSString *)makeDataPackageWithRoutine:(CLRoutineModel *)routineModel passWord:(NSString *)passWord;
++ (NSString *)makeDataPackageWithIdea:(CLIdeaObjModel *)ideaObjModel passWord:(NSString *)passWord;
+
++ (NSString *)makeDataPackageWithSleight:(CLSleightObjModel *)sleightObjModel passWord:(NSString *)passWord;
+
++ (NSString *)makeDataPackageWithProp:(CLPropObjModel *)propObjModel passWord:(NSString *)passWord;
+
++ (NSString *)makeDataPackageWithLines:(CLLinesObjModel *)linesObjModel passWord:(NSString *)passWord;
+
 
 @end

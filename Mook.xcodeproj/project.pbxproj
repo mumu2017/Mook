@@ -114,6 +114,8 @@
 		439519B31CBBF45D00505E5B /* CLImportContentVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 439519B21CBBF45D00505E5B /* CLImportContentVC.m */; };
 		439519B61CBBF46F00505E5B /* CLImportContentNavVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 439519B51CBBF46F00505E5B /* CLImportContentNavVC.m */; };
 		439519B91CBCC14000505E5B /* CLAllItemsListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 439519B81CBCC14000505E5B /* CLAllItemsListVC.m */; };
+		439519BC1CBD26B900505E5B /* CLImportPasswordInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 439519BB1CBD26B900505E5B /* CLImportPasswordInputView.m */; };
+		439519BE1CBD26C600505E5B /* CLImportPasswordInputView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 439519BD1CBD26C600505E5B /* CLImportPasswordInputView.xib */; };
 		43A281181CB224BC009C2785 /* CLMookTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A281171CB224BC009C2785 /* CLMookTabBarController.m */; };
 		43A2811F1CB2276A009C2785 /* CLLibraryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A2811D1CB2276A009C2785 /* CLLibraryCell.m */; };
 		43A281201CB2276A009C2785 /* CLLibraryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43A2811E1CB2276A009C2785 /* CLLibraryCell.xib */; };
@@ -339,6 +341,9 @@
 		439519B51CBBF46F00505E5B /* CLImportContentNavVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLImportContentNavVC.m; sourceTree = "<group>"; };
 		439519B71CBCC14000505E5B /* CLAllItemsListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLAllItemsListVC.h; sourceTree = "<group>"; };
 		439519B81CBCC14000505E5B /* CLAllItemsListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLAllItemsListVC.m; sourceTree = "<group>"; };
+		439519BA1CBD26B900505E5B /* CLImportPasswordInputView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLImportPasswordInputView.h; sourceTree = "<group>"; };
+		439519BB1CBD26B900505E5B /* CLImportPasswordInputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLImportPasswordInputView.m; sourceTree = "<group>"; };
+		439519BD1CBD26C600505E5B /* CLImportPasswordInputView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CLImportPasswordInputView.xib; sourceTree = "<group>"; };
 		43A281161CB224BC009C2785 /* CLMookTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLMookTabBarController.h; sourceTree = "<group>"; };
 		43A281171CB224BC009C2785 /* CLMookTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLMookTabBarController.m; sourceTree = "<group>"; };
 		43A2811C1CB2276A009C2785 /* CLLibraryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLLibraryCell.h; sourceTree = "<group>"; };
@@ -698,6 +703,9 @@
 				439519B21CBBF45D00505E5B /* CLImportContentVC.m */,
 				439519B41CBBF46F00505E5B /* CLImportContentNavVC.h */,
 				439519B51CBBF46F00505E5B /* CLImportContentNavVC.m */,
+				439519BA1CBD26B900505E5B /* CLImportPasswordInputView.h */,
+				439519BB1CBD26B900505E5B /* CLImportPasswordInputView.m */,
+				439519BD1CBD26C600505E5B /* CLImportPasswordInputView.xib */,
 			);
 			name = Home;
 			sourceTree = "<group>";
@@ -1153,6 +1161,7 @@
 				432345451C94045000200833 /* Assets.xcassets in Resources */,
 				43F5F7BF1CB50AD3007BFB0C /* launch.jpg in Resources */,
 				43F5F7621CB3922B007BFB0C /* CLShowInfoCell.xib in Resources */,
+				439519BE1CBD26C600505E5B /* CLImportPasswordInputView.xib in Resources */,
 				4323462D1C94054300200833 /* CLQuickStringCell.xib in Resources */,
 				432346351C94054300200833 /* CLTagField.xib in Resources */,
 				432346211C94054300200833 /* CLListTextCell.xib in Resources */,
@@ -1226,6 +1235,7 @@
 				43A2811F1CB2276A009C2785 /* CLLibraryCell.m in Sources */,
 				4323462A1C94054300200833 /* CLQuickInputBar.m in Sources */,
 				439519B61CBBF46F00505E5B /* CLImportContentNavVC.m in Sources */,
+				439519BC1CBD26B900505E5B /* CLImportPasswordInputView.m in Sources */,
 				432345AE1C9404FB00200833 /* CLPasswordVC.m in Sources */,
 				4323453D1C94045000200833 /* AppDelegate.m in Sources */,
 				43068BFD1CB74E5900BA1A57 /* IATConfig.m in Sources */,

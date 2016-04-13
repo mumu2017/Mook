@@ -131,6 +131,7 @@
     
     // 第二部: 从字典中取出模型
     NSString *modelType = [dict objectForKey:@"type"];
+    NSString *passWord = [dict objectForKey:@"passWord"];
     NSDictionary *modelDict = [dict objectForKey:@"model"];
     
     if ([modelType isEqualToString:kTypeRoutine]) {
@@ -140,7 +141,8 @@
         
         if (model != nil) {
 
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"importStart" object:model];
+            NSDictionary *dict = @{@"passWord":passWord};
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"importStart" object:model userInfo:dict];
 
             return YES;
         }
@@ -153,7 +155,9 @@
         
         if (model != nil) {
 
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"importStart" object:model];
+            NSDictionary *dict = @{@"passWord":passWord};
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"importStart" object:model userInfo:dict];
+            
             return YES;
         }
     } else if ([modelType isEqualToString:kTypeSleight]) {
@@ -163,7 +167,9 @@
         
         if (model != nil) {
 
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"importStart" object:model];
+            NSDictionary *dict = @{@"passWord":passWord};
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"importStart" object:model userInfo:dict];
+            
             return YES;
         }
     } else if ([modelType isEqualToString:kTypeProp]) {
@@ -172,8 +178,10 @@
         [CLDataImportTool prepareDataWithProp:model];
         
         if (model != nil) {
+            
+            NSDictionary *dict = @{@"passWord":passWord};
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"importStart" object:model userInfo:dict];
 
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"importStart" object:model];
             return YES;
         }
     } else if ([modelType isEqualToString:kTypeLines]) {
@@ -182,8 +190,10 @@
         [CLDataImportTool prepareDataWithLines:model];
         
         if (model != nil) {
-
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"importStart" object:model];
+            
+            NSDictionary *dict = @{@"passWord":passWord};
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"importStart" object:model userInfo:dict];
+            
             return YES;
         }
     }

@@ -287,81 +287,8 @@
     
     UIBarButtonItem *grid = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"iconGrid"] style:UIBarButtonItemStyleDone target:self action:@selector(showGrid)];
     UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-    UIBarButtonItem *action = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(exportCurrentEntry)];
+    UIBarButtonItem *action = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(export)];
     self.toolbarItems = @[grid, flexibleSpace, action];
-}
-
-- (void)exportCurrentEntry {
-    
-    // The hud will dispable all input on the view (use the higest view possible in the view hierarchy)
-    MBProgressHUD *HUD = [[MBProgressHUD alloc] initWithView:self.tabBarController.view];
-    [self.tabBarController.view addSubview:HUD];
-
-    HUD.delegate = self;
-    
-    [HUD showAnimated:YES whileExecutingBlock:^{
-        
-        switch (self.contentType) {
-            case kContentTypeIdea:
-                self.exportPath = [CLDataExportTool makeDataPackageWithIdea:self.ideaObjModel];
-                break;
-                
-            case kContentTypeRoutine:
-                self.exportPath = [CLDataExportTool makeDataPackageWithRoutine:self.routineModel];
-                
-                break;
-                
-            case kContentTypeSleight:
-                self.exportPath = [CLDataExportTool makeDataPackageWithSleight:self.sleightObjModel];
-                
-                break;
-                
-            case kContentTypeProp:
-                self.exportPath = [CLDataExportTool makeDataPackageWithProp:self.propObjModel];
-                
-                break;
-                
-            case kContentTypeLines:
-                self.exportPath = [CLDataExportTool makeDataPackageWithLines:self.linesObjModel];
-                
-                break;
-                
-            default:
-                break;
-        }
-
-    } onQueue:dispatch_get_main_queue() completionBlock:^{
-        
-        NSURL *dataUrl;
-        if (self.exportPath != nil) {
-            dataUrl = [NSURL fileURLWithPath:self.exportPath];
-        }
-        
-        CGRect navRect = self.view.frame;
-        self.documentInteractionController =[UIDocumentInteractionController interactionControllerWithURL:dataUrl];
-        self.documentInteractionController.delegate = self;
-        
-        [self.documentInteractionController presentOptionsMenuFromRect:navRect inView:self.view animated:YES];
-    }];
-
-}
-
-#pragma mark - UIDocumentInteractionControllerDelegate
-
-//===================================================================
-- (UIViewController *)documentInteractionControllerViewControllerForPreview:(UIDocumentInteractionController *)controller
-{
-    return self;
-}
-
-- (UIView *)documentInteractionControllerViewForPreview:(UIDocumentInteractionController *)controller
-{
-    return self.view;
-}
-
-- (CGRect)documentInteractionControllerRectForPreview:(UIDocumentInteractionController *)controller
-{
-    return self.view.frame;
 }
 
 
@@ -1042,5 +969,161 @@
         vc.title = NSLocalizedString(@"编辑", nil);
     }
 }
+
+#pragma mark - 导出笔记
+// 导出笔记 (选择是否密码导出)
+- (void)export {
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"导出笔记" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    UIAlertAction* exportWithPassword = [UIAlertAction actionWithTitle:@"密码导出" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        [self passwordExport];
+        
+    }];
+    
+    UIAlertAction* exportWithoutPassword = [UIAlertAction actionWithTitle:@"直接导出" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        [self exportCurrentEntryWithPassword:@""];
+        
+    }];
+    
+    UIAlertAction* cancel = [UIAlertAction actionWithTitle:NSLocalizedString(@"取消", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
+    }];
+    
+    [alert addAction:exportWithPassword];
+    [alert addAction:exportWithoutPassword];
+    [alert addAction:cancel];
+    
+    [self presentViewController:alert animated:YES completion:nil];
+    
+}
+
+// 密码导出
+- (void)passwordExport {
+    
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"设置导出密码", nil) message:NSLocalizedString(@"请输入笔记密码", nil) preferredStyle:UIAlertControllerStyleAlert];
+    
+    [alertController addTextFieldWithConfigurationHandler:^(UITextField *textField){
+        textField.placeholder = NSLocalizedString(@"导出密码", nil);
+        textField.clearButtonMode = UITextFieldViewModeWhileEditing;
+        textField.keyboardType = UIKeyboardTypeNumberPad;
+        textField.font = kFontSys16;
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(alertTextFieldDidChange:) name:UITextFieldTextDidChangeNotification object:textField];
+        
+    }];
+    
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"导出", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        
+        UITextField *passwordTF = alertController.textFields.firstObject;
+        
+        NSString *exportPassword = passwordTF.text;
+        
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:UITextFieldTextDidChangeNotification object:nil];
+        
+        [self exportCurrentEntryWithPassword:exportPassword];
+        
+    }];
+    
+    
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:NSLocalizedString(@"取消", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    
+    [alertController addAction:okAction];
+    [alertController addAction:cancel];
+    
+    [self presentViewController:alertController animated:YES completion:^{
+        UITextField *passwordTF = alertController.textFields.firstObject;
+        UIAlertAction *okAction = alertController.actions.firstObject;
+        okAction.enabled = passwordTF.text.length > 0;
+    }];
+    
+}
+
+- (void)alertTextFieldDidChange:(NSNotification *)notification{
+    UIAlertController *alertController = (UIAlertController *)self.presentedViewController;
+    if (alertController) {
+        UITextField *nameTF = alertController.textFields.firstObject;
+        UIAlertAction *okAction = alertController.actions.firstObject;
+        okAction.enabled = nameTF.text.length > 0;
+    }
+}
+
+
+- (void)exportCurrentEntryWithPassword:(NSString *)importPassword {
+    
+    // The hud will dispable all input on the view (use the higest view possible in the view hierarchy)
+    MBProgressHUD *HUD = [[MBProgressHUD alloc] initWithView:self.tabBarController.view];
+    [self.tabBarController.view addSubview:HUD];
+    
+    HUD.delegate = self;
+    
+    [HUD showAnimated:YES whileExecutingBlock:^{
+        
+        switch (self.contentType) {
+            case kContentTypeIdea:
+                self.exportPath = [CLDataExportTool makeDataPackageWithIdea:self.ideaObjModel passWord:importPassword];
+                break;
+                
+            case kContentTypeRoutine:
+                self.exportPath = [CLDataExportTool makeDataPackageWithRoutine:self.routineModel passWord:importPassword];
+                
+                break;
+                
+            case kContentTypeSleight:
+                self.exportPath = [CLDataExportTool makeDataPackageWithSleight:self.sleightObjModel passWord:importPassword];
+                
+                break;
+                
+            case kContentTypeProp:
+                self.exportPath = [CLDataExportTool makeDataPackageWithProp:self.propObjModel passWord:importPassword];
+                
+                break;
+                
+            case kContentTypeLines:
+                self.exportPath = [CLDataExportTool makeDataPackageWithLines:self.linesObjModel passWord:importPassword];
+                
+                break;
+                
+            default:
+                break;
+        }
+        
+    } onQueue:dispatch_get_main_queue() completionBlock:^{
+        
+        NSURL *dataUrl;
+        if (self.exportPath != nil) {
+            dataUrl = [NSURL fileURLWithPath:self.exportPath];
+        }
+        
+        CGRect navRect = self.view.frame;
+        self.documentInteractionController =[UIDocumentInteractionController interactionControllerWithURL:dataUrl];
+        self.documentInteractionController.delegate = self;
+        
+        [self.documentInteractionController presentOptionsMenuFromRect:navRect inView:self.view animated:YES];
+    }];
+    
+}
+
+#pragma mark - UIDocumentInteractionControllerDelegate
+
+//===================================================================
+- (UIViewController *)documentInteractionControllerViewControllerForPreview:(UIDocumentInteractionController *)controller
+{
+    return self;
+}
+
+- (UIView *)documentInteractionControllerViewForPreview:(UIDocumentInteractionController *)controller
+{
+    return self.view;
+}
+
+- (CGRect)documentInteractionControllerRectForPreview:(UIDocumentInteractionController *)controller
+{
+    return self.view.frame;
+}
+
 
 @end

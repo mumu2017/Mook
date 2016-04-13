@@ -27,10 +27,13 @@
 
 @implementation CLDataExportTool
 
-+ (NSString *)makeDataPackageWithRoutine:(CLRoutineModel *)routineModel {
++ (NSString *)makeDataPackageWithRoutine:(CLRoutineModel *)routineModel  passWord:(NSString *)passWord {
     
+    if (passWord == nil) {
+        passWord = @"";
+    }
     NSDictionary *modelDict = [routineModel keyValues];
-    NSDictionary *dict = @{@"type":kTypeRoutine, @"model":modelDict};
+    NSDictionary *dict = @{@"type":kTypeRoutine, @"model":modelDict, @"passWord":passWord};
     
     NSData *data = [NSKeyedArchiver archivedDataWithRootObject:dict];
     [data writeToFile:[NSString tempSharePath] atomically:YES];
@@ -85,10 +88,13 @@
     return nil;
 }
 
-+ (NSString *)makeDataPackageWithIdea:(CLIdeaObjModel *)ideaObjModel {
++ (NSString *)makeDataPackageWithIdea:(CLIdeaObjModel *)ideaObjModel passWord:(NSString *)passWord {
     
+    if (passWord == nil) {
+        passWord = @"";
+    }
     NSDictionary *modelDict = [ideaObjModel keyValues];  // 模型转字典
-    NSDictionary *dict = @{@"type":kTypeIdea, @"model":modelDict};   // 加入模型类型标识
+    NSDictionary *dict = @{@"type":kTypeIdea, @"model":modelDict, @"passWord":passWord};   // 加入模型类型标识
 
     NSData *data = [NSKeyedArchiver archivedDataWithRootObject:dict];
     [data writeToFile:[NSString tempSharePath] atomically:YES];
@@ -134,10 +140,13 @@
     return nil; // 如果压缩不成功, 返回nil
 }
 
-+ (NSString *)makeDataPackageWithSleight:(CLSleightObjModel *)sleightObjModel {
++ (NSString *)makeDataPackageWithSleight:(CLSleightObjModel *)sleightObjModel  passWord:(NSString *)passWord {
     
+    if (passWord == nil) {
+        passWord = @"";
+    }
     NSDictionary *modelDict = [sleightObjModel keyValues];  // 模型转字典
-    NSDictionary *dict = @{@"type":kTypeSleight, @"model":modelDict};   // 加入模型类型标识
+    NSDictionary *dict = @{@"type":kTypeSleight, @"model":modelDict, @"passWord":passWord};   // 加入模型类型标识
 
     NSData *data = [NSKeyedArchiver archivedDataWithRootObject:dict];
     [data writeToFile:[NSString tempSharePath] atomically:YES];
@@ -183,10 +192,14 @@
     return nil; // 如果压缩不成功, 返回nil
 }
 
-+ (NSString *)makeDataPackageWithProp:(CLPropObjModel *)propObjModel {
++ (NSString *)makeDataPackageWithProp:(CLPropObjModel *)propObjModel  passWord:(NSString *)passWord {
+    
+    if (passWord == nil) {
+        passWord = @"";
+    }
     
     NSDictionary *modelDict = [propObjModel keyValues];  // 模型转字典
-    NSDictionary *dict = @{@"type":kTypeProp, @"model":modelDict};   // 加入模型类型标识
+    NSDictionary *dict = @{@"type":kTypeProp, @"model":modelDict, @"passWord":passWord};   // 加入模型类型标识
 
     NSData *data = [NSKeyedArchiver archivedDataWithRootObject:dict];
     [data writeToFile:[NSString tempSharePath] atomically:YES];
@@ -232,10 +245,14 @@
     return nil; // 如果压缩不成功, 返回nil
 }
 
-+ (NSString *)makeDataPackageWithLines:(CLLinesObjModel *)linesObjModel {
++ (NSString *)makeDataPackageWithLines:(CLLinesObjModel *)linesObjModel  passWord:(NSString *)passWord {
+    
+    if (passWord == nil) {
+        passWord = @"";
+    }
     
     NSDictionary *modelDict = [linesObjModel keyValues];  // 模型转字典
-    NSDictionary *dict = @{@"type":kTypeLines, @"model":modelDict};   // 加入模型类型标识
+    NSDictionary *dict = @{@"type":kTypeLines, @"model":modelDict, @"passWord":passWord};   // 加入模型类型标识
 
     NSData *data = [NSKeyedArchiver archivedDataWithRootObject:dict];
     [data writeToFile:[NSString tempSharePath] atomically:YES];

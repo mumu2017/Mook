@@ -26,9 +26,9 @@
 
 #import "CLOneLabelDisplayCell.h"
 #import "CLOneLabelImageDisplayCell.h"
-
-
-@interface CLImportContentVC ()
+#import "CLImportPasswordInputView.h"
+#import "MBProgressHUD.h"
+@interface CLImportContentVC ()<CLImportPasswordInputViewDelegate, UITextFieldDelegate, MBProgressHUDDelegate>
 
 // section属性(需要根据model内容进行设置)
 @property (nonatomic, assign) NSInteger infoSection;
@@ -47,10 +47,26 @@
 @property (nonatomic, strong) NSMutableArray *notesModelList;
 
 @property (nonatomic, copy) NSAttributedString *titleString;
+@property (nonatomic, assign) BOOL unlocked; // 输入密码后解锁
+@property (nonatomic, strong) CLImportPasswordInputView *importPasswordInputView;
+@property (nonatomic, strong) UITextField *passwordTF;
+@property (nonatomic, copy) NSString *passwordString;
+
 
 @end
 
 @implementation CLImportContentVC
+
+- (CLImportPasswordInputView *)importPasswordInputView {
+    if (!_importPasswordInputView) {
+        _importPasswordInputView = [CLImportPasswordInputView importPasswordInputView];
+        _importPasswordInputView.delegate = self;
+        self.passwordTF = _importPasswordInputView.passwordTF;
+        self.passwordTF.placeholder = @"请输入解锁密码";
+        self.passwordTF.delegate = self;
+    }
+    return _importPasswordInputView;
+}
 
 #pragma mark - 便于显示内容的模型单元
 - (CLInfoModel *)infoModel {
@@ -228,6 +244,22 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.tableView.backgroundView = self.importPasswordInputView;
+
+    // 设置解锁状态
+    if (self.importPassword == nil || self.importPassword.length == 0) {
+        self.unlocked = YES;    // 如果没有密码, 则设定为已解锁
+    } else {
+        self.unlocked = NO;     // 如果有密码, 则设定为未解锁
+    }
+
+    // 根据解锁状态设置导航栏按钮状态
+    self.navigationItem.leftBarButtonItem.enabled = self.unlocked;
+    self.navigationItem.rightBarButtonItem.enabled = self.unlocked;
+    
+    self.importPasswordInputView.hidden = self.unlocked;
+    
+
     
     [self setContentTitle];
     self.tableView.backgroundColor = kCellBgColor;
@@ -244,18 +276,47 @@
                                                bundle:nil]
          forCellReuseIdentifier:kOneLabelDisplayCell];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(update) name:kUpdateDataNotification
-                                               object:nil];
-    
 }
 
 - (void)setContentTitle {
    
-    self.navigationItem.title = @"导入预览";
+    self.navigationItem.title = @"预览";
 
 }
 
 
+#pragma mark - 导入笔记
+
+
+- (IBAction)importData:(id)sender {
+    
+    switch (self.contentType) {
+        case kContentTypeIdea:
+            [CLDataImportTool importIdea:self.ideaObjModel];
+            break;
+            
+        case kContentTypeRoutine:
+            [CLDataImportTool importRoutine:self.routineModel];
+            break;
+            
+        case kContentTypeSleight:
+            [CLDataImportTool importSleight:self.sleightObjModel];
+            break;
+            
+        case kContentTypeProp:
+            [CLDataImportTool importProp:self.propObjModel];
+            break;
+            
+        case kContentTypeLines:
+            [CLDataImportTool importLines:self.linesObjModel];
+            break;
+            
+        default:
+            break;
+    }
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"dismissImportContentVC" object:nil];
+}
 
 - (IBAction)cancelImport:(id)sender {
     
@@ -290,40 +351,22 @@
 
 }
 
-- (IBAction)importData:(id)sender {
-    switch (self.contentType) {
-        case kContentTypeIdea:
-            [CLDataImportTool importIdea:self.ideaObjModel];
-            break;
-            
-        case kContentTypeRoutine:
-            [CLDataImportTool importRoutine:self.routineModel];
-            break;
-            
-        case kContentTypeSleight:
-            [CLDataImportTool importSleight:self.sleightObjModel];
-            break;
-            
-        case kContentTypeProp:
-            [CLDataImportTool importProp:self.propObjModel];
-            break;
-            
-        case kContentTypeLines:
-            [CLDataImportTool importLines:self.linesObjModel];
-            break;
-            
-        default:
-            break;
-    }
-
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"dismissImportContentVC" object:nil];
-
-
-}
 
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    
+    if (self.unlocked == NO) {
+        self.importPasswordInputView.hidden = NO;
+        
+        return 0;
+        
+    } else {
+        
+        self.importPasswordInputView.hidden = YES;
+        self.navigationItem.leftBarButtonItem.enabled = self.unlocked;
+        self.navigationItem.rightBarButtonItem.enabled = self.unlocked;
+    }
     
     if (self.contentType == kContentTypeRoutine) {
         return  self.notesSection + 1;
@@ -613,5 +656,65 @@
     return kLabelHeight;
 }
 
+#pragma mark - textField 代理方法
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+    
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    
+    self.passwordString = textField.text;
+}
+
+#pragma mark - CLImportPasswordInputViewDelegate 方法
+
+- (void)importPasswordInputViewdidClickUnlockButton:(CLImportPasswordInputView *)view {
+    
+    [self.view endEditing:YES];
+    
+    // The hud will dispable all input on the view (use the higest view possible in the view hierarchy)
+    MBProgressHUD *HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
+    [self.navigationController.view addSubview:HUD];
+    // Configure for text only and offset down
+    HUD.mode = MBProgressHUDModeText;
+    HUD.margin = 10.f;
+    HUD.yOffset = 150.f;
+    HUD.removeFromSuperViewOnHide = YES;
+    [HUD show:YES];
+    HUD.delegate = self;
+    
+    if ([self.passwordString isEqualToString:self.importPassword]) {
+        self.unlocked = YES;
+        
+        HUD.labelText = NSLocalizedString(@"解锁成功", nil);
+
+        [self.tableView reloadData];
+    } else {
+        HUD.labelText = NSLocalizedString(@"解锁失败", nil);
+
+    }
+    
+    [HUD hide:YES afterDelay:2];
+}
+
+- (void)importPasswordInputViewdidClickCancelButton:(CLImportPasswordInputView *)view {
+    
+    // The hud will dispable all input on the view (use the higest view possible in the view hierarchy)
+    MBProgressHUD *HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
+    [self.navigationController.view addSubview:HUD];
+    // Configure for text only and offset down
+    HUD.mode = MBProgressHUDModeText;
+    HUD.margin = 10.f;
+    HUD.yOffset = 150.f;
+    HUD.removeFromSuperViewOnHide = YES;
+    [HUD show:YES];
+    HUD.delegate = self;
+        
+    HUD.labelText = NSLocalizedString(@"解锁取消", nil);
+    
+    [HUD hide:YES afterDelay:2];
+    [self cancelImport:nil];
+
+}
 
 @end
