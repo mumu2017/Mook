@@ -18,7 +18,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.navigationBar.barTintColor = [UIColor flatSkyBlueColor];
     // Do any additional setup after loading the view.
     UIViewController *rootViewController = [[self viewControllers] firstObject];
     

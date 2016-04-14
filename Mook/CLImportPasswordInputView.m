@@ -29,6 +29,8 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     
+    self.passwordTF.tintColor = kMenuBackgroundColor;
+    [self.passwordTF adjustCursor];
     self.noticeLabel.text = @"当前笔记有密码锁定, 请输入密码解锁.";
     self.noticeLabel.font = kFontSys14;
     self.passwordTF.placeholder = NSLocalizedString(@"请输入笔记密码", nil);

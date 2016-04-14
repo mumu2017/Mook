@@ -51,7 +51,6 @@
 @property (nonatomic, strong) NSMutableArray *performModelList;
 @property (nonatomic, strong) NSMutableArray *notesModelList;
 
-
 @property (nonatomic, copy) NSAttributedString *titleString;
 
 @property (nonatomic, strong) NSMutableArray *photos;
@@ -458,17 +457,6 @@
                 cell.contentLabel.text = prop;
             }
             
-           
-            
-            
-            
-//
-//            if (model.isWithDetail) {
-//                prop = [prop stringByAppendingString:[NSString stringWithFormat:@"\n%@", model.propDetail]];
-//            }
-//            
-//            cell.contentLabel.attributedText = [prop styledString];
-            
             return cell;
         } else {
             CLPrepModel *model = self.prepModelList[indexPath.row];
@@ -842,7 +830,7 @@
     BOOL displayNavArrows = NO;
     BOOL enableGrid = YES;
     BOOL startOnGrid = NO;
-    BOOL autoPlayOnAppear = NO;
+    BOOL autoPlayOnAppear = YES;
     
     // Create browser
     MWPhotoBrowser *browser = [[MWPhotoBrowser alloc] initWithDelegate:self];
@@ -850,11 +838,11 @@
     browser.displayActionButton = displayActionButton;
     browser.displayNavArrows = displayNavArrows;
     browser.displaySelectionButtons = displaySelectionButtons;
-    browser.alwaysShowControls = displaySelectionButtons;
+    browser.alwaysShowControls = NO;
     browser.zoomPhotosToFill = YES;
     browser.enableGrid = enableGrid;
     browser.startOnGrid = startOnGrid;
-    browser.enableSwipeToDismiss = NO;
+    browser.enableSwipeToDismiss = NO ;
     browser.autoPlayOnAppear = autoPlayOnAppear;
     [browser setCurrentPhotoIndex:button.tag];
     // Show

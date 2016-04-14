@@ -120,6 +120,11 @@
     
     // 重设标签
     NSString *tag = NSLocalizedString(@"导入", nil);
+    
+    if ([routineModel.infoModel.name containsString:[NSString stringWithFormat:@"(%@)", tag]] == NO) {
+        routineModel.infoModel.name = [NSString stringWithFormat:@"%@(%@)", routineModel.infoModel.name, tag];
+    }
+    
     routineModel.tags = [NSMutableArray arrayWithObject:tag];
     [CLDataSaveTool addTag:tag type:kTypeRoutine];
     
@@ -167,6 +172,11 @@
     
     // 重设标签
     NSString *tag = NSLocalizedString(@"导入", nil);
+    
+    if ([ideaObjModel.infoModel.name containsString:[NSString stringWithFormat:@"(%@)", tag]] == NO) {
+        ideaObjModel.infoModel.name = [NSString stringWithFormat:@"%@(%@)", ideaObjModel.infoModel.name, tag];
+    }
+    
     ideaObjModel.tags = [NSMutableArray arrayWithObject:tag];
     [CLDataSaveTool addTag:tag type:kTypeIdea];
     
@@ -200,6 +210,11 @@
     
     // 重设标签
     NSString *tag = NSLocalizedString(@"导入", nil);
+    
+    if ([sleightObjModel.infoModel.name containsString:[NSString stringWithFormat:@"(%@)", tag]] == NO) {
+        sleightObjModel.infoModel.name = [NSString stringWithFormat:@"%@(%@)", sleightObjModel.infoModel.name, tag];
+    }
+    
     sleightObjModel.tags = [NSMutableArray arrayWithObject:tag];
     [CLDataSaveTool addTag:tag type:kTypeSleight];
     
@@ -233,6 +248,11 @@
     
     // 重设标签
     NSString *tag = NSLocalizedString(@"导入", nil);
+    
+    if ([propObjModel.infoModel.name containsString:[NSString stringWithFormat:@"(%@)", tag]] == NO) {
+        propObjModel.infoModel.name = [NSString stringWithFormat:@"%@(%@)", propObjModel.infoModel.name, tag];
+    }
+    
     propObjModel.tags = [NSMutableArray arrayWithObject:tag];
     [CLDataSaveTool addTag:tag type:kTypeProp];
     
@@ -266,6 +286,11 @@
     
     // 重设标签
     NSString *tag = NSLocalizedString(@"导入", nil);
+    if ([linesObjModel.infoModel.name containsString:[NSString stringWithFormat:@"(%@)", tag]] == NO) {
+        linesObjModel.infoModel.name = [NSString stringWithFormat:@"%@(%@)", linesObjModel.infoModel.name, tag];
+    }
+
+
     linesObjModel.tags = [NSMutableArray arrayWithObject:tag];
     [CLDataSaveTool addTag:tag type:kTypeLines];
 }
