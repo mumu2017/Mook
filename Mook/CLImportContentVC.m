@@ -49,6 +49,9 @@
 @property (nonatomic, strong) NSMutableArray *notesModelList;
 
 @property (nonatomic, copy) NSAttributedString *titleString;
+@property (nonatomic, strong) NSDate *date;
+@property (nonatomic, strong) NSMutableArray *tags;
+
 @property (nonatomic, assign) BOOL unlocked; // 输入密码后解锁
 @property (nonatomic, strong) CLImportPasswordInputView *importPasswordInputView;
 @property (nonatomic, strong) UITextField *passwordTF;
@@ -166,6 +169,48 @@
     return _notesModelList;
 }
 
+- (NSMutableArray *)tags {
+    if (!_tags) {
+        if (self.contentType == kContentTypeIdea) {
+            _tags = self.ideaObjModel.tags;
+            
+        } else if (self.contentType == kContentTypeRoutine) {
+            _tags = self.routineModel.tags;
+            
+        } else if (self.contentType == kContentTypeSleight) {
+            _tags = self.sleightObjModel.tags;
+            
+        } else if (self.contentType == kContentTypeProp) {
+            _tags = self.propObjModel.tags;
+            
+        } else if (self.contentType == kContentTypeLines) {
+            _tags = self.linesObjModel.tags;
+        }
+    }
+    return _tags;
+}
+
+- (NSDate *)date {
+    if (!_date) {
+        if (self.contentType == kContentTypeIdea) {
+            _date = self.ideaObjModel.date;
+            
+        } else if (self.contentType == kContentTypeRoutine) {
+            _date = self.routineModel.date;
+            
+        } else if (self.contentType == kContentTypeSleight) {
+            _date = self.sleightObjModel.date;
+            
+        } else if (self.contentType == kContentTypeProp) {
+            _date = self.propObjModel.date;
+            
+        } else if (self.contentType == kContentTypeLines) {
+            _date = self.linesObjModel.date;
+        }
+    }
+    return _date;
+}
+
 - (NSAttributedString *)titleString {
     
     NSString *title;
@@ -175,7 +220,7 @@
         title = NSLocalizedString(@"请编辑标题", nil);
     }
     
-    return [NSString titleString:title withDate:self.date];
+    return [NSString titleString:title withDate:self.date tags:self.tags];
 }
 
 #pragma mark - section计算方法

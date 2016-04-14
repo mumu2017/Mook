@@ -24,8 +24,8 @@
 - (NSAttributedString *)styledString {
 
     NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
-    [style setLineSpacing:5];
-    [style setParagraphSpacing:10];
+    [style setLineSpacing:6];
+    [style setParagraphSpacing:12];
     NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:self];
     [attrString addAttribute:NSParagraphStyleAttributeName
                        value:style
@@ -64,20 +64,37 @@
 }
 
 // 获取ContentVC中的标题文本格式
-+ (NSAttributedString *)titleString:(NSString *)title withDate:(NSDate *)dateInfo {
++ (NSAttributedString *)titleString:(NSString *)title withDate:(NSDate *)dateInfo tags:(NSArray *)tags {
     title = [NSString stringWithFormat:@"\n%@", title];
     NSString *dateString = [self getDateString:dateInfo];
     NSMutableAttributedString * datePart = [[NSMutableAttributedString alloc] initWithString:dateString];
     NSDictionary * firstAttributes = @{ NSFontAttributeName:kFontSys12,NSForegroundColorAttributeName:[UIColor darkGrayColor],};
     [datePart setAttributes:firstAttributes range:NSMakeRange(0,datePart.length)];
+    
     NSMutableAttributedString * contentPart = [[NSMutableAttributedString alloc] initWithString:title];
     NSDictionary * secondAttributes = @{NSFontAttributeName:kBoldFontSys24,NSForegroundColorAttributeName:[UIColor blackColor],};
     [contentPart setAttributes:secondAttributes range:NSMakeRange(0,contentPart.length)];
     [datePart appendAttributedString:contentPart];
     
+    NSString *tagString;
+
+#warning 多语言
+    if (tags.count == 0) {
+        tagString = @"\n无标签";
+    } else {
+        tagString = @"\n标签:";
+        for (NSString *tag in tags) {
+            tagString = [tagString stringByAppendingString:[NSString stringWithFormat:@" %@", tag]];
+        }
+    }
+    
+    NSMutableAttributedString * tagPart = [[NSMutableAttributedString alloc] initWithString:tagString];
+    NSDictionary * tagAttributes = @{NSFontAttributeName:kFontSys12,NSForegroundColorAttributeName:[UIColor darkGrayColor],};
+    [tagPart setAttributes:tagAttributes range:NSMakeRange(0,tagPart.length)];
+    [datePart appendAttributedString:tagPart];
     
     NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
-    [style setLineSpacing:4];
+    [style setLineSpacing:8];
 
     [datePart addAttribute:NSParagraphStyleAttributeName
                        value:style

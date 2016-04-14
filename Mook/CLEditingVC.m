@@ -130,6 +130,7 @@
     return _toolBar;
 }
 
+#pragma mark - 选择快捷输入短语代理方法
 - (void)quickStringNavVC:(CLQuickStringNavVC *)quickStringNavVC didSelectQuickString:(NSString *)quickString {
     
     NSString *text = self.editTextView.text;

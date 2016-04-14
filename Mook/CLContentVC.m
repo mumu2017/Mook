@@ -43,6 +43,9 @@
 @property (nonatomic, assign) NSInteger performSection;
 @property (nonatomic, assign) NSInteger notesSection;
 
+@property (nonatomic, strong) NSDate *date;
+@property (nonatomic, strong) NSMutableArray *tags;
+
 // 便于显示内容的模型单元
 @property (nonatomic, strong) CLInfoModel *infoModel;
 @property (nonatomic, strong) CLEffectModel *effectModel;
@@ -158,6 +161,49 @@
     return _notesModelList;
 }
 
+
+- (NSMutableArray *)tags {
+    if (!_tags) {
+        if (self.contentType == kContentTypeIdea) {
+            _tags = self.ideaObjModel.tags;
+            
+        } else if (self.contentType == kContentTypeRoutine) {
+            _tags = self.routineModel.tags;
+            
+        } else if (self.contentType == kContentTypeSleight) {
+            _tags = self.sleightObjModel.tags;
+            
+        } else if (self.contentType == kContentTypeProp) {
+            _tags = self.propObjModel.tags;
+            
+        } else if (self.contentType == kContentTypeLines) {
+            _tags = self.linesObjModel.tags;
+        }
+    }
+    return _tags;
+}
+
+- (NSDate *)date {
+    if (!_date) {
+        if (self.contentType == kContentTypeIdea) {
+            _date = self.ideaObjModel.date;
+            
+        } else if (self.contentType == kContentTypeRoutine) {
+            _date = self.routineModel.date;
+            
+        } else if (self.contentType == kContentTypeSleight) {
+            _date = self.sleightObjModel.date;
+            
+        } else if (self.contentType == kContentTypeProp) {
+            _date = self.propObjModel.date;
+            
+        } else if (self.contentType == kContentTypeLines) {
+            _date = self.linesObjModel.date;
+        }
+    }
+    return _date;
+}
+
 - (NSAttributedString *)titleString {
     
     NSString *title;
@@ -167,7 +213,7 @@
         title = NSLocalizedString(@"请编辑标题", nil);
     }
     
-    return [NSString titleString:title withDate:self.date];
+    return [NSString titleString:title withDate:self.date tags:self.tags];
 }
 
 #pragma mark - section计算方法

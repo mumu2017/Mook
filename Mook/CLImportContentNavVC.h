@@ -20,7 +20,6 @@
 @property (nonatomic, strong) CLPropObjModel *propObjModel;
 @property (nonatomic, strong) CLLinesObjModel *linesObjModel;
 
-@property (nonatomic, strong) NSDate *date;
 @property (nonatomic, copy) NSString *importPassword;
 
 @end

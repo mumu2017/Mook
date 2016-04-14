@@ -234,7 +234,7 @@
                 title = NSLocalizedString(@"请编辑标题", nil);
             }
             
-            NSAttributedString *titleString = [NSString titleString:title withDate:self.showModel.date];
+            NSAttributedString *titleString = [NSString titleString:title withDate:self.showModel.date tags:self.showModel.tags];
 
             cell.contentLabel.attributedText = titleString;
             cell.contentLabel.textAlignment = NSTextAlignmentCenter;
@@ -420,7 +420,6 @@
             CLRoutineModel *model = self.routineModelList[btn.tag];
             vc.contentType = kContentTypeRoutine;
             vc.routineModel = model;
-            vc.date = model.date;
             
         }
     } else if ([destVC isKindOfClass:[CLNewShowVC class]]) {

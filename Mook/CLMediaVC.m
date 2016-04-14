@@ -455,31 +455,26 @@ static NSString * const reuseIdentifier = @"Cell";
             CLIdeaObjModel *model = (CLIdeaObjModel *)modelUnknown;
             vc.contentType = kContentTypeIdea;
             vc.ideaObjModel = model;
-            vc.date = model.date;
             
         } else if ([modelUnknown isKindOfClass:[CLRoutineModel class]]) {
             CLRoutineModel *model = (CLRoutineModel *)modelUnknown;
             vc.contentType = kContentTypeRoutine;
             vc.routineModel = model;
-            vc.date = model.date;
             
         } else if ([modelUnknown isKindOfClass:[CLSleightObjModel class]]) {
             CLSleightObjModel *model = (CLSleightObjModel *)modelUnknown;
             vc.contentType = kContentTypeSleight;
             vc.sleightObjModel = model;
-            vc.date = model.date;
             
         } else if ([modelUnknown isKindOfClass:[CLPropObjModel class]]) {
             CLPropObjModel *model = (CLPropObjModel *)modelUnknown;
             vc.contentType = kContentTypeProp;
             vc.propObjModel = model;
-            vc.date = model.date;
             
         } else if ([modelUnknown isKindOfClass:[CLLinesObjModel class]]) {
             CLLinesObjModel *model = (CLLinesObjModel *)modelUnknown;
             vc.contentType = kContentTypeLines;
             vc.linesObjModel = model;
-            vc.date = model.date;
         }
         
     } else if ([destVC isKindOfClass:[CLShowVC class]]) {

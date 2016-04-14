@@ -706,7 +706,6 @@
                     CLIdeaObjModel *model = self.ideaObjModelList[indexPath.row];
                     vc.contentType = kContentTypeIdea;
                     vc.ideaObjModel = model;
-                    vc.date = model.date;
                     break;
                 }
 
@@ -715,7 +714,6 @@
                     CLRoutineModel *model = self.routineModelList[indexPath.row];
                     vc.contentType = kContentTypeRoutine;
                     vc.routineModel = model;
-                    vc.date = model.date;
                     break;
                 }
                 case kListTypeSleight:
@@ -723,7 +721,6 @@
                     CLSleightObjModel *model = self.sleightObjModelList[indexPath.row];
                     vc.contentType = kContentTypeSleight;
                     vc.sleightObjModel = model;
-                    vc.date = model.date;
                     break;
                 }
                     
@@ -733,7 +730,6 @@
                     CLPropObjModel *model = self.propObjModelList[indexPath.row];
                     vc.contentType = kContentTypeProp;
                     vc.propObjModel = model;
-                    vc.date = model.date;
                     break;
                 }
                 case kListTypeLines:
@@ -741,7 +737,6 @@
                     CLLinesObjModel *model = self.linesObjModelList[indexPath.row];
                     vc.contentType = kContentTypeLines;
                     vc.linesObjModel = model;
-                    vc.date = model.date;
                     break;
                 }
 
