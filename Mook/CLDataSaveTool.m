@@ -267,8 +267,9 @@ static FMDatabase *_db;
     return nil;
 }
 
-+ (void)updateShow:(CLShowModel *)showModel;
++ (BOOL)updateShow:(CLShowModel *)showModel;
 {
+    BOOL flag;
     NSDictionary *dict = [showModel keyValues];
     NSString *timeStamp = showModel.timeStamp;
     NSData *data = [NSKeyedArchiver archivedDataWithRootObject:dict];
@@ -278,7 +279,7 @@ static FMDatabase *_db;
     // 如果[set next]不为空,则表示查询到至少一个结果.所以更新数据.
     if ([set next]) {
         
-        BOOL flag = [_db executeUpdate:@"update t_mook set dict=? where time_stamp=?", data, timeStamp];
+        flag = [_db executeUpdate:@"update t_mook set dict=? where time_stamp=?", data, timeStamp];
         if (flag) {
             NSLog(@"更新Show成功");
         }else{
@@ -286,13 +287,15 @@ static FMDatabase *_db;
         }
         
     } else {    // 如果为空,则表示没有查询到任何符合条件的结果,所以插入数据.
-        BOOL flag = [_db executeUpdate:@"insert into t_mook (type, time_stamp, dict) values(?,?,?)", kTypeShow, timeStamp, data];
+        flag = [_db executeUpdate:@"insert into t_mook (type, time_stamp, dict) values(?,?,?)", kTypeShow, timeStamp, data];
         if (flag) {
             NSLog(@"插入Show成功");
         }else{
             NSLog(@"插入Show失败");
         }
     }
+    
+    return flag;
 }
 
 + (void)deleteShow:(CLShowModel *)showModel {

@@ -169,7 +169,11 @@
     CLMookTabBarController* rootVC = (CLMookTabBarController*)self.window.rootViewController;
     [rootVC dismissViewControllerAnimated:NO completion:nil];
     
+    // 保存用户偏好数据
     [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    // 清空临时文件
+    [NSString clearTmpDirectory];
     
 }
 

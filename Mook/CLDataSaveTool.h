@@ -28,22 +28,22 @@
 + (CLLinesObjModel *)linesByName:(NSString *)name;
 
 + (BOOL)updateRoutine:(CLRoutineModel *)routineModel;
-+ (BOOL)deleteRoutine:(CLRoutineModel *)routineModel;
++ (void)deleteRoutine:(CLRoutineModel *)routineModel;
 
 + (BOOL)updateShow:(CLShowModel *)showModel;
-+ (BOOL)deleteShow:(CLShowModel *)showModel;
++ (void)deleteShow:(CLShowModel *)showModel;
 
 + (BOOL)updateIdea:(CLIdeaObjModel *)ideaObjModel;
-+ (BOOL)deleteIdea:(CLIdeaObjModel *)ideaObjModel;
++ (void)deleteIdea:(CLIdeaObjModel *)ideaObjModel;
 
 + (BOOL)updateSleight:(CLSleightObjModel *)sleightObjModel;
-+ (BOOL)deleteSleight:(CLSleightObjModel *)sleightObjModel;
++ (void)deleteSleight:(CLSleightObjModel *)sleightObjModel;
 
 + (BOOL)updateProp:(CLPropObjModel *)propObjModel;
-+ (BOOL)deleteProp:(CLPropObjModel *)propObjModel;
++ (void)deleteProp:(CLPropObjModel *)propObjModel;
 
 + (BOOL)updateLines:(CLLinesObjModel *)linesObjModel;
-+ (BOOL)deleteLines:(CLLinesObjModel *)linesObjModel;
++ (void)deleteLines:(CLLinesObjModel *)linesObjModel;
 
 #pragma mark - 标签方法
 + (NSMutableArray *)allTags;
