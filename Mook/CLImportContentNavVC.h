@@ -11,15 +11,6 @@
 
 @interface CLImportContentNavVC : UINavigationController
 
-@property (nonatomic, assign) ContentType contentType;
-
-@property (nonatomic, strong) CLIdeaObjModel *ideaObjModel;
-@property (nonatomic, strong) CLShowModel *showModel;
-@property (nonatomic, strong) CLRoutineModel *routineModel;
-@property (nonatomic, strong) CLSleightObjModel *sleightObjModel;
-@property (nonatomic, strong) CLPropObjModel *propObjModel;
-@property (nonatomic, strong) CLLinesObjModel *linesObjModel;
-
-@property (nonatomic, copy) NSString *importPassword;
+@property (nonatomic, strong) NSDictionary *importDict;
 
 @end

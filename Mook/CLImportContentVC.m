@@ -9,6 +9,7 @@
 #import "CLImportContentVC.h"
 #import "CLMookTabBarController.h"
 #import "CLDataImportTool.h"
+#import "NSObject+MJKeyValue.h"
 
 #import "CLShowModel.h"
 #import "CLIdeaObjModel.h"
@@ -31,6 +32,16 @@
 
 #import "MWPhotoBrowser.h"
 @interface CLImportContentVC ()<CLImportPasswordInputViewDelegate, UITextFieldDelegate, MBProgressHUDDelegate, MWPhotoBrowserDelegate>
+
+@property (nonatomic, assign) ContentType contentType;
+
+@property (nonatomic, strong) CLIdeaObjModel *ideaObjModel;
+@property (nonatomic, strong) CLRoutineModel *routineModel;
+@property (nonatomic, strong) CLSleightObjModel *sleightObjModel;
+@property (nonatomic, strong) CLPropObjModel *propObjModel;
+@property (nonatomic, strong) CLLinesObjModel *linesObjModel;
+
+@property (nonatomic, copy) NSString *importPassword;
 
 // section属性(需要根据model内容进行设置)
 @property (nonatomic, assign) NSInteger infoSection;
@@ -63,6 +74,115 @@
 @end
 
 @implementation CLImportContentVC
+
+- (void)setImportDict:(NSDictionary *)importDict {
+    
+    _importDict = importDict;
+    
+    // 从字典中取出模型
+    NSString *modelType = [importDict objectForKey:@"type"];
+    NSDictionary *modelDict = [importDict objectForKey:@"model"];
+    self.importPassword = [importDict objectForKey:@"passWord"];
+    
+    if (modelDict == nil) { // 如果模型字典为空,则说明导入文件有问题,无法导入.
+        
+        MBProgressHUD *HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
+        [self.navigationController.view addSubview:HUD];
+        // Configure for text only and offset down
+        HUD.mode = MBProgressHUDModeText;
+        HUD.margin = 10.f;
+        HUD.yOffset = 150.f;
+        HUD.removeFromSuperViewOnHide = YES;
+        [HUD show:YES];
+        HUD.delegate = self;
+        HUD.labelText = NSLocalizedString(@"预览失败", nil);
+        
+        [HUD hide:YES afterDelay:2];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"dismissImportContentVC" object:nil];
+        
+    } else { // 如果模型字典不为空, 则执行数据读取
+        
+        if ([modelType isEqualToString:kTypeRoutine]) {
+            
+            CLRoutineModel *model = [CLRoutineModel objectWithKeyValues:modelDict];
+            
+            if (model != nil) { // 如果模型不为空, 则执行数据读取
+                self.contentType = kContentTypeRoutine;
+                self.routineModel = model;
+                [CLDataImportTool prepareDataWithRoutine:model];
+                
+            } else { // 如果模型为空, 则退出预览
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"dismissImportContentVC" object:nil];
+
+            }
+            
+            
+        } else if ([modelType isEqualToString:kTypeIdea]) {
+            
+            CLIdeaObjModel *model = [CLIdeaObjModel objectWithKeyValues:modelDict];
+            
+            if (model != nil) {
+                
+                self.contentType = kContentTypeIdea;
+                self.ideaObjModel = model;
+                [CLDataImportTool prepareDataWithIdea:model];
+                
+            } else { // 如果模型为空, 则退出预览
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"dismissImportContentVC" object:nil];
+                
+            }
+        } else if ([modelType isEqualToString:kTypeSleight]) {
+            
+            CLSleightObjModel *model = [CLSleightObjModel objectWithKeyValues:modelDict];
+            
+            if (model != nil) {
+                
+                self.contentType = kContentTypeSleight;
+                self.sleightObjModel = model;
+                [CLDataImportTool prepareDataWithSleight:model];
+                
+            } else { // 如果模型为空, 则退出预览
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"dismissImportContentVC" object:nil];
+                
+            }
+        } else if ([modelType isEqualToString:kTypeProp]) {
+            
+            CLPropObjModel *model = [CLPropObjModel objectWithKeyValues:modelDict];
+            
+            if (model != nil) {
+                
+                self.contentType = kContentTypeProp;
+                self.propObjModel = model;
+                [CLDataImportTool prepareDataWithProp:model];
+                
+            } else { // 如果模型为空, 则退出预览
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"dismissImportContentVC" object:nil];
+                
+            }
+        } else if ([modelType isEqualToString:kTypeLines]) {
+            
+            CLLinesObjModel *model = [CLLinesObjModel objectWithKeyValues:modelDict];
+            
+            if (model != nil) {
+                
+                self.contentType = kContentTypeLines;
+                self.linesObjModel = model;
+                [CLDataImportTool prepareDataWithLines:model];
+                
+            } else { // 如果模型为空, 则退出预览
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"dismissImportContentVC" object:nil];
+                
+            }
+        }
+
+    }
+}
 
 - (CLImportPasswordInputView *)importPasswordInputView {
     if (!_importPasswordInputView) {
@@ -431,7 +551,6 @@
     }
 
     [[NSNotificationCenter defaultCenter] postNotificationName:@"dismissImportContentVC" object:nil];
-
 }
 
 
@@ -763,8 +882,7 @@
 - (void)importPasswordInputViewdidClickUnlockButton:(CLImportPasswordInputView *)view {
     
     [self.view endEditing:YES];
-    
-    // The hud will dispable all input on the view (use the higest view possible in the view hierarchy)
+ 
     MBProgressHUD *HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
     [self.navigationController.view addSubview:HUD];
     // Configure for text only and offset down

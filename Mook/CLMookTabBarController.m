@@ -27,8 +27,8 @@
 
 @property (nonatomic, assign) BOOL isNotFirstTimeLaunch;
 @property (nonatomic, assign) BOOL isImportingData;
-@property (nonatomic, strong) NSObject *model;
-@property (nonatomic, copy) NSString *importPassword;
+@property (nonatomic, strong) NSDictionary *importDict;
+
 @end
 
 @implementation CLMookTabBarController
@@ -72,17 +72,15 @@
 
 - (void)importStart:(NSNotification *)noti {
     self.isImportingData = YES;
-    self.model = noti.object;
-
-    self.importPassword = [noti.userInfo objectForKey:@"passWord"];
+    self.importDict = noti.userInfo;
     
     if ([[NSUserDefaults standardUserDefaults] boolForKey:kUsePasswordKey]) {
         
         // 如果需要输入密码, 那么不需要做任何操作, 密码填写正确后会在block中进行segue跳转
     } else {    // 如果不需要输入密码, 则直接进行跳转
         
-        if (self.model) {
-            [self performSegueWithIdentifier:kSegueImportContent sender:self.model];
+        if (self.importDict) {
+            [self performSegueWithIdentifier:kSegueImportContent sender:self.importDict];
             self.isImportingData = NO;
         }
     }
@@ -90,7 +88,7 @@
 
 - (void)importFinish {
     self.isImportingData = NO;
-    self.model = nil;
+    self.importDict = nil;
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -249,8 +247,8 @@
     
     [self dismissViewControllerAnimated:YES completion:^{
         if (self.isImportingData) {
-            if (self.model) {
-                [self performSegueWithIdentifier:kSegueImportContent sender:self.model];
+            if (self.importDict) {
+                [self performSegueWithIdentifier:kSegueImportContent sender:self.importDict];
                 self.isImportingData = NO;
             }
         }
@@ -287,33 +285,8 @@
     if ([destVC isKindOfClass:[CLImportContentNavVC class]]) {
         CLImportContentNavVC *vc = (CLImportContentNavVC *)destVC;
         vc.hidesBottomBarWhenPushed = YES;
-        vc.importPassword = self.importPassword;
+        vc.importDict = self.importDict;
         
-        if ([modelUnknown isKindOfClass:[CLIdeaObjModel class]]) {
-            CLIdeaObjModel *model = (CLIdeaObjModel *)modelUnknown;
-            vc.contentType = kContentTypeIdea;
-            vc.ideaObjModel = model;
-            
-        } else if ([modelUnknown isKindOfClass:[CLRoutineModel class]]) {
-            CLRoutineModel *model = (CLRoutineModel *)modelUnknown;
-            vc.contentType = kContentTypeRoutine;
-            vc.routineModel = model;
-            
-        } else if ([modelUnknown isKindOfClass:[CLSleightObjModel class]]) {
-            CLSleightObjModel *model = (CLSleightObjModel *)modelUnknown;
-            vc.contentType = kContentTypeSleight;
-            vc.sleightObjModel = model;
-            
-        } else if ([modelUnknown isKindOfClass:[CLPropObjModel class]]) {
-            CLPropObjModel *model = (CLPropObjModel *)modelUnknown;
-            vc.contentType = kContentTypeProp;
-            vc.propObjModel = model;
-            
-        } else if ([modelUnknown isKindOfClass:[CLLinesObjModel class]]) {
-            CLLinesObjModel *model = (CLLinesObjModel *)modelUnknown;
-            vc.contentType = kContentTypeLines;
-            vc.linesObjModel = model;
-        }
     }
 }
 

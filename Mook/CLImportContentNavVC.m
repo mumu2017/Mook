@@ -24,15 +24,7 @@
     if ([rootViewController isKindOfClass:[CLImportContentVC class]]) {
         
         CLImportContentVC *vc  = (CLImportContentVC *)rootViewController;
-        
-        vc.contentType = self.contentType;
-        
-        vc.routineModel = self.routineModel;
-        vc.ideaObjModel = self.ideaObjModel;
-        vc.sleightObjModel = self.sleightObjModel;
-        vc.propObjModel = self.propObjModel;
-        vc.linesObjModel = self.linesObjModel;
-        vc.importPassword = self.importPassword;
+        vc.importDict = self.importDict;
         
     }
 

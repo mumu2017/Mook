@@ -21,9 +21,9 @@
 #import "CLDataImportTool.h"
 #import "CLDataSaveTool.h"
 #import "iflyMSC/IFlyMSC.h"
-#import "NSObject+MJKeyValue.h"
+#import "MBProgressHUD.h"
 
-@interface AppDelegate ()
+@interface AppDelegate ()<MBProgressHUDDelegate>
 
 @end
 
@@ -129,73 +129,26 @@
     // 第一步: 获取模型字典
     NSDictionary *dict = [CLDataImportTool getDataFromURL:url];
     
-    // 第二部: 从字典中取出模型
-    NSString *modelType = [dict objectForKey:@"type"];
-    NSString *passWord = [dict objectForKey:@"passWord"];
-    NSDictionary *modelDict = [dict objectForKey:@"model"];
+    if (dict != nil) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"importStart" object:nil userInfo:dict];
+        
+        return YES;
+        
+    } else {
+        
+        MBProgressHUD *HUD = [[MBProgressHUD alloc] initWithView:self.window];
+        [self.window addSubview:HUD];
+        // Configure for text only and offset down
+        HUD.mode = MBProgressHUDModeText;
+        HUD.margin = 10.f;
+        HUD.yOffset = 150.f;
+        HUD.removeFromSuperViewOnHide = YES;
+        [HUD show:YES];
+        HUD.delegate = self;
     
-    if ([modelType isEqualToString:kTypeRoutine]) {
-
-        CLRoutineModel *model = [CLRoutineModel objectWithKeyValues:modelDict];
-        [CLDataImportTool prepareDataWithRoutine:model];
-        
-        if (model != nil) {
-
-            NSDictionary *dict = @{@"passWord":passWord};
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"importStart" object:model userInfo:dict];
-
-            return YES;
-        }
-        
-
-    } else if ([modelType isEqualToString:kTypeIdea]) {
-        
-        CLIdeaObjModel *model = [CLIdeaObjModel objectWithKeyValues:modelDict];
-        [CLDataImportTool prepareDataWithIdea:model];
-        
-        if (model != nil) {
-
-            NSDictionary *dict = @{@"passWord":passWord};
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"importStart" object:model userInfo:dict];
+        HUD.labelText = NSLocalizedString(@"无法打开文件", nil);
             
-            return YES;
-        }
-    } else if ([modelType isEqualToString:kTypeSleight]) {
-        
-        CLSleightObjModel *model = [CLSleightObjModel objectWithKeyValues:modelDict];
-        [CLDataImportTool prepareDataWithSleight:model];
-        
-        if (model != nil) {
-
-            NSDictionary *dict = @{@"passWord":passWord};
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"importStart" object:model userInfo:dict];
-            
-            return YES;
-        }
-    } else if ([modelType isEqualToString:kTypeProp]) {
-        
-        CLPropObjModel *model = [CLPropObjModel objectWithKeyValues:modelDict];
-        [CLDataImportTool prepareDataWithProp:model];
-        
-        if (model != nil) {
-            
-            NSDictionary *dict = @{@"passWord":passWord};
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"importStart" object:model userInfo:dict];
-
-            return YES;
-        }
-    } else if ([modelType isEqualToString:kTypeLines]) {
-        
-        CLLinesObjModel *model = [CLLinesObjModel objectWithKeyValues:modelDict];
-        [CLDataImportTool prepareDataWithLines:model];
-        
-        if (model != nil) {
-            
-            NSDictionary *dict = @{@"passWord":passWord};
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"importStart" object:model userInfo:dict];
-            
-            return YES;
-        }
+        [HUD hide:YES afterDelay:3.0];
     }
     
     return NO;
