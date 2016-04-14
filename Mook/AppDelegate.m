@@ -22,6 +22,8 @@
 #import "CLDataSaveTool.h"
 #import "iflyMSC/IFlyMSC.h"
 
+#import "CLMookTabBarController.h"
+
 @interface AppDelegate ()<MBProgressHUDDelegate>
 
 @end
@@ -123,7 +125,7 @@
 }
 
 // 处理外部导入的数据
-- (BOOL)handleURL:(NSURL *)url {
+- (BOOL)handleURL:(NSURL *)url {    // url是Document/Inbox文件夹下面的路径
 
     // 第一步: 获取模型字典
     NSDictionary *dict = [CLDataImportTool getDataFromURL:url];
@@ -162,6 +164,11 @@
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    
+    // 退到后台后,就dismiss所有的Modal ViewController
+    CLMookTabBarController* rootVC = (CLMookTabBarController*)self.window.rootViewController;
+    [rootVC dismissViewControllerAnimated:NO completion:nil];
+    
     [[NSUserDefaults standardUserDefaults] synchronize];
     
 }

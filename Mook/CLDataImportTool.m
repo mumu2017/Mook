@@ -33,13 +33,12 @@
 
 // 打开URL的数据,并做好准备
 + (NSDictionary *)getDataFromURL:(NSURL *)url {
-    NSData *urlData = [NSData dataWithContentsOfURL:url];
-    [urlData writeToFile:[NSString tempZipPath] atomically:YES];
+    // 因为文件以及在Document的Inbox文件夹中,所以不用再次拷贝
     
     if (url != nil) {
         NSLog(@"url is here!");
         
-        BOOL flag = [SSZipArchive unzipFileAtPath:[NSString tempZipPath] toDestination:[NSString tempUnzipPath]];
+        BOOL flag = [SSZipArchive unzipFileAtPath:[url path] toDestination:[NSString tempUnzipPath]];
         if (flag) {
             NSLog(@"unzip sucess");
             

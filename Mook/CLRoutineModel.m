@@ -25,57 +25,6 @@
     return [[self alloc] init];
 }
 
-- (BOOL)makDataPackage {
-    
-    NSDictionary *dict = [self keyValues];
-    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:dict];
-    [data writeToFile:[NSString tempSharePath] atomically:YES];
-    
-    NSMutableArray *pathArrM = [NSMutableArray array];
-    [pathArrM addObject:[NSString tempSharePath]]; // 加入模型data路径
- 
-    NSString *mediaPath;
-
-    if (self.effectModel.isWithImage) {
-        mediaPath = [[NSString imagePath] stringByAppendingPathComponent:self.effectModel.image];
-        if (mediaPath != nil) [pathArrM addObject:mediaPath];
-        
-    } else if (self.effectModel.isWithVideo) {
-        
-        mediaPath = [[NSString videoPath] stringByAppendingPathComponent:self.effectModel.video];
-        if (mediaPath != nil) [pathArrM addObject:mediaPath];
-
-    }
-
-    for (CLPerformModel *model in self.performModelList) {
-        if (model.isWithImage) {
-            mediaPath = [[NSString imagePath] stringByAppendingPathComponent:model.image];
-            if (mediaPath != nil) [pathArrM addObject:mediaPath];
-
-        } else if (model.isWithVideo) {
-            mediaPath = [[NSString videoPath] stringByAppendingPathComponent:model.video];
-            if (mediaPath != nil) [pathArrM addObject:mediaPath];
-
-        }
-    }
-
-    for (CLPrepModel *model in self.prepModelList) {
-        if (model.isWithImage) {
-            mediaPath = [[NSString imagePath] stringByAppendingPathComponent:model.image];
-            if (mediaPath != nil) [pathArrM addObject:mediaPath];
-
-        } else if (model.isWithVideo) {
-            mediaPath = [[NSString videoPath] stringByAppendingPathComponent:model.video];
-            if (mediaPath != nil) [pathArrM addObject:mediaPath];
-
-        }
-    }
-
-    BOOL success = [SSZipArchive createZipFileAtPath:[NSString tempZipPath] withFilesAtPaths:pathArrM];
-    
-    return success;
-}
-
 - (instancetype)init {
     self = [super init];
     

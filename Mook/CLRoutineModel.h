@@ -37,6 +37,4 @@
 - (UIImage *)getImage;
 - (UIImage *)getThumbnail;
 
-- (BOOL)makDataPackage;
-
 @end
