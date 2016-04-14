@@ -308,72 +308,74 @@ static FMDatabase *_db;
 }
 
 #pragma mark - 存储数据
-+ (void)updateRoutine:(CLRoutineModel *)routineModel {
++ (BOOL)updateRoutine:(CLRoutineModel *)routineModel {
     
     NSDictionary *dict = [routineModel keyValues];
     NSString *timeStamp = routineModel.timeStamp;
     NSString *type = routineModel.type;
     NSData *data = [NSKeyedArchiver archivedDataWithRootObject:dict];
     
-    [self updateData:data withType:type timeStamp:timeStamp];
+    BOOL flag = [self updateData:data withType:type timeStamp:timeStamp];
+    return flag;
 }
 
-+ (void)updateIdea:(CLIdeaObjModel *)ideaObjModel {
++ (BOOL)updateIdea:(CLIdeaObjModel *)ideaObjModel {
     
     NSDictionary *dict = [ideaObjModel keyValues];
     NSString *timeStamp = ideaObjModel.timeStamp;
     NSString *type = ideaObjModel.type;
     NSData *data = [NSKeyedArchiver archivedDataWithRootObject:dict];
     
-    [self updateData:data withType:type timeStamp:timeStamp];
-
+    BOOL flag = [self updateData:data withType:type timeStamp:timeStamp];
+    return flag;
 }
 
-+ (void)updateSleight:(CLSleightObjModel *)sleightObjModel {
++ (BOOL)updateSleight:(CLSleightObjModel *)sleightObjModel {
     
     NSDictionary *dict = [sleightObjModel keyValues];
     NSString *timeStamp = sleightObjModel.timeStamp;
     NSString *type = sleightObjModel.type;
     NSData *data = [NSKeyedArchiver archivedDataWithRootObject:dict];
     
-    [self updateData:data withType:type timeStamp:timeStamp];
-    
+    BOOL flag = [self updateData:data withType:type timeStamp:timeStamp];
+    return flag;
 }
 
 
-+ (void)updateProp:(CLPropObjModel *)propObjModel {
++ (BOOL)updateProp:(CLPropObjModel *)propObjModel {
     
     NSDictionary *dict = [propObjModel keyValues];
     NSString *timeStamp = propObjModel.timeStamp;
     NSString *type = propObjModel.type;
     NSData *data = [NSKeyedArchiver archivedDataWithRootObject:dict];
     
-    [self updateData:data withType:type timeStamp:timeStamp];
-    
+    BOOL flag = [self updateData:data withType:type timeStamp:timeStamp];
+    return flag;
 }
 
 
-+ (void)updateLines:(CLLinesObjModel *)linesObjModel {
++ (BOOL)updateLines:(CLLinesObjModel *)linesObjModel {
     
     NSDictionary *dict = [linesObjModel keyValues];
     NSString *timeStamp = linesObjModel.timeStamp;
     NSString *type = linesObjModel.type;
     NSData *data = [NSKeyedArchiver archivedDataWithRootObject:dict];
     
-    [self updateData:data withType:type timeStamp:timeStamp];
-    
+    BOOL flag = [self updateData:data withType:type timeStamp:timeStamp];
+    return flag;
 }
 
 
 
-+ (void)updateData:(NSData *)data withType:(NSString *)type timeStamp:(NSString *)timeStamp {
++ (BOOL)updateData:(NSData *)data withType:(NSString *)type timeStamp:(NSString *)timeStamp {
     
+    BOOL flag;
+
     FMResultSet *set = [_db executeQuery:@"select * from t_mook where type=? and time_stamp=?", type, timeStamp];
-    
     // 如果[set next]不为空,则表示查询到至少一个结果.所以更新数据.
     if ([set next]) {
         
-        BOOL flag = [_db executeUpdate:@"update t_mook set dict=? where time_stamp=?", data, timeStamp];
+        flag = [_db executeUpdate:@"update t_mook set dict=? where time_stamp=?", data, timeStamp];
         if (flag) {
             NSLog(@"更新成功");
         }else{
@@ -381,13 +383,15 @@ static FMDatabase *_db;
         }
         
     } else {    // 如果为空,则表示没有查询到任何符合条件的结果,所以插入数据.
-        BOOL flag = [_db executeUpdate:@"insert into t_mook (type, time_stamp, dict) values(?,?,?)",type, timeStamp, data];
+        flag = [_db executeUpdate:@"insert into t_mook (type, time_stamp, dict) values(?,?,?)",type, timeStamp, data];
         if (flag) {
             NSLog(@"插入成功");
         }else{
             NSLog(@"插入失败");
         }
     }
+    
+    return flag;
 }
 
 #pragma mark - 删除数据

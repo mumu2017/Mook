@@ -27,23 +27,23 @@
 + (CLPropObjModel *)propByName:(NSString *)name;
 + (CLLinesObjModel *)linesByName:(NSString *)name;
 
-+ (void)updateRoutine:(CLRoutineModel *)routineModel;
-+ (void)deleteRoutine:(CLRoutineModel *)routineModel;
++ (BOOL)updateRoutine:(CLRoutineModel *)routineModel;
++ (BOOL)deleteRoutine:(CLRoutineModel *)routineModel;
 
-+ (void)updateShow:(CLShowModel *)showModel;
-+ (void)deleteShow:(CLShowModel *)showModel;
++ (BOOL)updateShow:(CLShowModel *)showModel;
++ (BOOL)deleteShow:(CLShowModel *)showModel;
 
-+ (void)updateIdea:(CLIdeaObjModel *)ideaObjModel;
-+ (void)deleteIdea:(CLIdeaObjModel *)ideaObjModel;
++ (BOOL)updateIdea:(CLIdeaObjModel *)ideaObjModel;
++ (BOOL)deleteIdea:(CLIdeaObjModel *)ideaObjModel;
 
-+ (void)updateSleight:(CLSleightObjModel *)sleightObjModel;
-+ (void)deleteSleight:(CLSleightObjModel *)sleightObjModel;
++ (BOOL)updateSleight:(CLSleightObjModel *)sleightObjModel;
++ (BOOL)deleteSleight:(CLSleightObjModel *)sleightObjModel;
 
-+ (void)updateProp:(CLPropObjModel *)propObjModel;
-+ (void)deleteProp:(CLPropObjModel *)propObjModel;
++ (BOOL)updateProp:(CLPropObjModel *)propObjModel;
++ (BOOL)deleteProp:(CLPropObjModel *)propObjModel;
 
-+ (void)updateLines:(CLLinesObjModel *)linesObjModel;
-+ (void)deleteLines:(CLLinesObjModel *)linesObjModel;
++ (BOOL)updateLines:(CLLinesObjModel *)linesObjModel;
++ (BOOL)deleteLines:(CLLinesObjModel *)linesObjModel;
 
 #pragma mark - 标签方法
 + (NSMutableArray *)allTags;

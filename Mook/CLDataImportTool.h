@@ -28,11 +28,11 @@
 + (void)cancelImportLines:(CLLinesObjModel *)linesObjModel;
 
 // 导入文件
-+ (void)importRoutine:(CLRoutineModel *)routineModel;
-+ (void)importIdea:(CLIdeaObjModel *)ideaObjModel;
-+ (void)importSleight:(CLSleightObjModel *)sleightObjModel;
-+ (void)importProp:(CLPropObjModel *)propObjModel;
-+ (void)importLines:(CLLinesObjModel *)linesObjModel;
++ (BOOL)importRoutine:(CLRoutineModel *)routineModel;
++ (BOOL)importIdea:(CLIdeaObjModel *)ideaObjModel;
++ (BOOL)importSleight:(CLSleightObjModel *)sleightObjModel;
++ (BOOL)importProp:(CLPropObjModel *)propObjModel;
++ (BOOL)importLines:(CLLinesObjModel *)linesObjModel;
 
 // 单项多媒体拷贝到library多媒体文件夹中和数据库Media表中
 + (NSString *)copyTempUnzipImageToMook:(NSString *)imageName modelTimeStamp:(NSString *)timeStamp content:(NSString *)content type:(NSString *)type;

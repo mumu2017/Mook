@@ -468,44 +468,80 @@
 
 - (IBAction)importData:(id)sender {
     
+    BOOL flag;
+    NSString *title;
+    
     switch (self.contentType) {
         case kContentTypeIdea:
-            [CLDataImportTool importIdea:self.ideaObjModel];
-            [kDataListAll insertObject:self.ideaObjModel atIndex:0];
-            [kDataListAll insertObject:self.ideaObjModel atIndex:0];
-            break;
-            
-        case kContentTypeRoutine:
-            [CLDataImportTool importRoutine:self.routineModel];
-            [kDataListAll insertObject:self.routineModel atIndex:0];
-            [kDataListRoutine insertObject:self.routineModel atIndex:0];
+            flag = [CLDataImportTool importIdea:self.ideaObjModel];
+            if (flag) {
+                [kDataListAll insertObject:self.ideaObjModel atIndex:0];
+                [kDataListIdea insertObject:self.ideaObjModel atIndex:0];
+                title = NSLocalizedString(@"导入成功", nil);
+            } else {
+                title = NSLocalizedString(@"导入失败", nil);
+            }
 
             break;
             
+        case kContentTypeRoutine:
+            flag = [CLDataImportTool importRoutine:self.routineModel];
+
+            if (flag) {
+                [kDataListAll insertObject:self.routineModel atIndex:0];
+                [kDataListRoutine insertObject:self.routineModel atIndex:0];
+                title = NSLocalizedString(@"导入成功", nil);
+            } else {
+                title = NSLocalizedString(@"导入失败", nil);
+            }
+            
+            break;
+            
         case kContentTypeSleight:
-            [CLDataImportTool importSleight:self.sleightObjModel];
-            [kDataListAll insertObject:self.sleightObjModel atIndex:0];
-            [kDataListSleight insertObject:self.sleightObjModel atIndex:0];
+            flag = [CLDataImportTool importSleight:self.sleightObjModel];
+            
+            if (flag) {
+                [kDataListAll insertObject:self.sleightObjModel atIndex:0];
+                [kDataListSleight insertObject:self.sleightObjModel atIndex:0];
+                title = NSLocalizedString(@"导入成功", nil);
+            } else {
+                title = NSLocalizedString(@"导入失败", nil);
+            }
 
             break;
             
         case kContentTypeProp:
-            [CLDataImportTool importProp:self.propObjModel];
-            [kDataListAll insertObject:self.propObjModel atIndex:0];
-            [kDataListProp insertObject:self.propObjModel atIndex:0];
+            flag = [CLDataImportTool importProp:self.propObjModel];
+            
+            if (flag) {
+                [kDataListAll insertObject:self.propObjModel atIndex:0];
+                [kDataListProp insertObject:self.propObjModel atIndex:0];
+                title = NSLocalizedString(@"导入成功", nil);
+            } else {
+                title = NSLocalizedString(@"导入失败", nil);
+            }
 
             break;
             
         case kContentTypeLines:
-            [CLDataImportTool importLines:self.linesObjModel];
-            [kDataListAll insertObject:self.linesObjModel atIndex:0];
-            [kDataListLines insertObject:self.linesObjModel atIndex:0];
+            flag = [CLDataImportTool importLines:self.linesObjModel];
+            
+            if (flag) {
+                [kDataListAll insertObject:self.linesObjModel atIndex:0];
+                [kDataListLines insertObject:self.linesObjModel atIndex:0];
+                title = NSLocalizedString(@"导入成功", nil);
+            } else {
+                title = NSLocalizedString(@"导入失败", nil);
+            }
+
             break;
             
         default:
             break;
     }
     
+    [MBProgressHUD showGlobalProgressHUDWithTitle:title hideAfterDelay:2.0];
+
     [[NSNotificationCenter defaultCenter] postNotificationName:@"dismissImportContentVC" object:nil];
 }
 
@@ -537,6 +573,8 @@
         default:
             break;
     }
+    
+    [MBProgressHUD showGlobalProgressHUDWithTitle:NSLocalizedString(@"导入取消", nil) hideAfterDelay:2.0];
 
     [[NSNotificationCenter defaultCenter] postNotificationName:@"dismissImportContentVC" object:nil];
 }

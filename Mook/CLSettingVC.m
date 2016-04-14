@@ -309,18 +309,14 @@
     } else if (indexPath.section == 4) {
         if (indexPath.row == 0) {
             
-            if ([MFMailComposeViewController canSendMail])
-                // The device can send email.
-            {
+            // 检测设备能否发送邮件
+            if ([MFMailComposeViewController canSendMail]) {
                 [self displayMailComposerSheet];
-            }
-            else
-                // The device can not send email.
-            {
+            } else {
                 [MBProgressHUD showGlobalProgressHUDWithTitle:NSLocalizedString(@"当前无法发送邮件", nil) hideAfterDelay:1.5];
-
             }
         }
+        
     } else if (indexPath.section == 5) {
         if (indexPath.row == 2) {
             [[NSNotificationCenter defaultCenter] postNotificationName:@"showIntroView" object:nil];
@@ -348,7 +344,7 @@
 }
 
 
-#pragma mark -设置 方法
+#pragma mark - 开关操作方法
 
 - (IBAction)passwordSwitchChanged:(UISwitch *)controlSwitch {
     
@@ -394,6 +390,7 @@
     [defaults synchronize];
 }
 
+#pragma mark 更改语音识别语言
 - (IBAction)languageControlChanged:(UISegmentedControl *)languageControl {
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];

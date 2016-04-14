@@ -60,30 +60,30 @@
 }
 
 
-+ (void)importRoutine:(CLRoutineModel *)routineModel {
++ (BOOL)importRoutine:(CLRoutineModel *)routineModel {
     
-    [CLDataSaveTool updateRoutine:routineModel];
+   return [CLDataSaveTool updateRoutine:routineModel];
 }
 
-+ (void)importIdea:(CLIdeaObjModel *)ideaObjModel {
++ (BOOL)importIdea:(CLIdeaObjModel *)ideaObjModel {
     
-    [CLDataSaveTool updateIdea:ideaObjModel];
+    return [CLDataSaveTool updateIdea:ideaObjModel];
 
 }
 
-+ (void)importSleight:(CLSleightObjModel *)sleightObjModel {
++ (BOOL)importSleight:(CLSleightObjModel *)sleightObjModel {
     
-    [CLDataSaveTool updateSleight:sleightObjModel];
+    return [CLDataSaveTool updateSleight:sleightObjModel];
 }
 
-+ (void)importProp:(CLPropObjModel *)propObjModel {
++ (BOOL)importProp:(CLPropObjModel *)propObjModel {
     
-    [CLDataSaveTool updateProp:propObjModel];
+    return [CLDataSaveTool updateProp:propObjModel];
 }
 
-+ (void)importLines:(CLLinesObjModel *)linesObjModel {
++ (BOOL)importLines:(CLLinesObjModel *)linesObjModel {
     
-    [CLDataSaveTool updateLines:linesObjModel];
+    return [CLDataSaveTool updateLines:linesObjModel];
 }
 
 + (void)cancelImportRoutine:(CLRoutineModel *)routineModel {
