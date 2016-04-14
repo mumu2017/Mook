@@ -21,7 +21,6 @@
 #import "CLDataImportTool.h"
 #import "CLDataSaveTool.h"
 #import "iflyMSC/IFlyMSC.h"
-#import "MBProgressHUD.h"
 
 @interface AppDelegate ()<MBProgressHUDDelegate>
 
@@ -136,19 +135,8 @@
         
     } else {
         
-        MBProgressHUD *HUD = [[MBProgressHUD alloc] initWithView:self.window];
-        [self.window addSubview:HUD];
-        // Configure for text only and offset down
-        HUD.mode = MBProgressHUDModeText;
-        HUD.margin = 10.f;
-        HUD.yOffset = 150.f;
-        HUD.removeFromSuperViewOnHide = YES;
-        [HUD show:YES];
-        HUD.delegate = self;
-    
-        HUD.labelText = NSLocalizedString(@"无法打开文件", nil);
-            
-        [HUD hide:YES afterDelay:3.0];
+        [MBProgressHUD showGlobalProgressHUDWithTitle:NSLocalizedString(@"无法打开文件", nil) hideAfterDelay:2.5];
+
     }
     
     return NO;

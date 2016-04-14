@@ -34,7 +34,6 @@
 //#import "CLNotesModel.h"
 
 #import "JGActionSheet.h"
-#import "MBProgressHUD.h"
 #import "CLTableBackView.h"
 
 @interface CLAllItemsListVC ()<SWTableViewCellDelegate, MBProgressHUDDelegate, UIDocumentInteractionControllerDelegate>
@@ -434,16 +433,8 @@
             
             [self.documentInteractionController presentOptionsMenuFromRect:navRect inView:self.view animated:YES];
         } else {
-    
-            // Configure for text only and offset down
-            HUD.mode = MBProgressHUDModeText;
-            HUD.margin = 10.f;
-            HUD.yOffset = 150.f;
-            HUD.labelText = NSLocalizedString(@"导出失败", nil);
-            HUD.removeFromSuperViewOnHide = YES;
-            [HUD show:YES];
-            
-            [HUD hide:YES afterDelay:1];
+            [MBProgressHUD showGlobalProgressHUDWithTitle:NSLocalizedString(@"导出失败", nil) hideAfterDelay:2.0];
+
         }
 
     }];

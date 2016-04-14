@@ -10,7 +10,6 @@
 #import "CLPasswordVC.h"
 #import "CLDataSaveTool.h"
 #import "ZipArchive.h"
-#import "MBProgressHUD.h"
 
 #import "IATConfig.h"
 
@@ -169,37 +168,30 @@
                 
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                     
-                    // The hud will dispable all input on the view (use the higest view possible in the view hierarchy)
-                    MBProgressHUD *HUD = [[MBProgressHUD alloc] initWithView:self.tabBarController.view];
-                    [self.tabBarController.view addSubview:HUD];
+                    UIWindow *window = [[UIApplication sharedApplication] delegate].window;
+                    MBProgressHUD *HUD = [[MBProgressHUD alloc] initWithView:window];
+                    [window addSubview:HUD];
                     
                     HUD.delegate = self;
                     HUD.labelText = NSLocalizedString(@"正在生成备份文件", nil);
                     
                     [HUD showAnimated:YES whileExecutingBlock:^{
                         
-                        // Create
+                        // Create zip
                         NSString *backUpName = [NSString backUpPath];
                         NSString *mookPath = [NSString mookPath];
                         self.isCreatBackUp = [SSZipArchive createZipFileAtPath:backUpName withContentsOfDirectory:mookPath keepParentDirectory:YES];
                         
-                    } onQueue:dispatch_get_main_queue() completionBlock:^{
+                    } onQueue:dispatch_get_global_queue(0, 0) completionBlock:^{
                         
                         if (self.isCreatBackUp) {
-                            HUD.labelText = NSLocalizedString(@"已成功生成备份文件", nil);
+                            [MBProgressHUD showGlobalProgressHUDWithTitle:NSLocalizedString(@"已成功生成备份文件", nil) hideAfterDelay:1.5];
                             [self.tableView reloadData]; // 生成后刷新表格, 显示"恢复备份"
                         } else {
-                            HUD.labelText = NSLocalizedString(@"生成备份文件失败", nil);
+                            [MBProgressHUD showGlobalProgressHUDWithTitle:NSLocalizedString(@"生成备份文件失败", nil) hideAfterDelay:1.5];
+
                         }
-                        // Configure for text only and offset down
-                        HUD.mode = MBProgressHUDModeText;
-                        HUD.margin = 10.f;
-                        HUD.yOffset = 150.f;
-                        HUD.removeFromSuperViewOnHide = YES;
-                        [HUD show:YES];
-                        
-                        
-                        [HUD hide:YES afterDelay:1];
+
                     }];
 
                     
@@ -228,13 +220,15 @@
                 
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                     
-                    
-                    MBProgressHUD *HUD = [[MBProgressHUD alloc] initWithView:self.tabBarController.view];
+                    UIWindow *window = [[UIApplication sharedApplication] delegate].window;
+
+                    MBProgressHUD *HUD = [[MBProgressHUD alloc] initWithView:window];
                     HUD.labelText = NSLocalizedString(@"正在加载恢复备份", nil);
-                    [self.tabBarController.view addSubview:HUD];
+                    [window addSubview:HUD];
                     [HUD setMode:MBProgressHUDModeDeterminate];   //圆盘的扇形进度显示
                     HUD.taskInProgress = YES;
                     [HUD show:YES];
+                    
                     // Unzip
                     NSString *backUpName = [NSString backUpPath];
                     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
@@ -244,31 +238,18 @@
                         
                         CGFloat progress = entryNumber / total;
                         HUD.progress = progress;
-                        //显示
-                        NSLog(@"%ld / %ld", entryNumber, total);
+
                     } completionHandler:^(NSString *path, BOOL succeeded, NSError *error) {
-                        NSLog(@"finish unzipping");
                         
                         if (succeeded) {
-                            HUD.labelText = NSLocalizedString(@"已成功恢复备份文件", nil);
-                            
-#warning 关于数据刷新的问题(主页几个VC)
+                            [MBProgressHUD showGlobalProgressHUDWithTitle:NSLocalizedString(@"已成功恢复备份文件", nil) hideAfterDelay:1.5];
                             [(AppDelegate *)[[UIApplication sharedApplication] delegate] reloadData];
                             
-                            
                         } else {
-                            HUD.labelText = NSLocalizedString(@"恢复备份文件失败", nil);
+                            [MBProgressHUD showGlobalProgressHUDWithTitle:NSLocalizedString(@"恢复备份文件失败", nil) hideAfterDelay:1.5];
+
                         }
-                        
-                        // Configure for text only and offset down
-                        HUD.mode = MBProgressHUDModeText;
-                        HUD.margin = 10.f;
-                        HUD.yOffset = 150.f;
-                        HUD.removeFromSuperViewOnHide = YES;
-                        [HUD show:YES];
-                        
-                        
-                        [HUD hide:YES afterDelay:1];
+       
                     }];
                 });
                 
@@ -298,28 +279,19 @@
                     
                     if (self.backUpExists) {
                         BOOL fileDeleted= [fileManager removeItemAtPath:backUpPath error:nil];
-                        
-                        MBProgressHUD *HUD = [[MBProgressHUD alloc] initWithView:self.tabBarController.view];
-                        [self.tabBarController.view addSubview:HUD];
-                        HUD.mode = MBProgressHUDModeText;
-                        HUD.removeFromSuperViewOnHide = YES;
-                        // Configure for text only and offset down
-                        HUD.margin = 10.f;
-                        HUD.yOffset = 150.f;
-                        HUD.delegate = self;
-                        
+
+                        NSString *title;
                         if (fileDeleted) {
                             
-                            HUD.labelText = NSLocalizedString(@"已删除备份文件", nil);
+                            title = NSLocalizedString(@"已删除备份文件", nil);
                             [self.tableView reloadData];
                             
                         } else {
-                            HUD.labelText = NSLocalizedString(@"删除备份文件失败", nil);
+                            title = NSLocalizedString(@"删除备份文件失败", nil);
                         }
                         
-                        [HUD show:YES];
-                        
-                        [HUD hide:YES afterDelay:1];
+                        [MBProgressHUD showGlobalProgressHUDWithTitle:title hideAfterDelay:1.5];
+
                     }
                 });
                 
@@ -345,19 +317,7 @@
             else
                 // The device can not send email.
             {
-                MBProgressHUD *HUD = [[MBProgressHUD alloc] initWithView:self.tabBarController.view];
-                [self.tabBarController.view addSubview:HUD];
-                HUD.mode = MBProgressHUDModeText;
-                HUD.removeFromSuperViewOnHide = YES;
-                // Configure for text only and offset down
-                HUD.margin = 10.f;
-                HUD.yOffset = 150.f;
-                HUD.delegate = self;
-                
-                HUD.labelText = NSLocalizedString(@"当前无法发送邮件", nil);
-            
-                [HUD show:YES];
-                [HUD hide:YES afterDelay:2.0];
+                [MBProgressHUD showGlobalProgressHUDWithTitle:NSLocalizedString(@"当前无法发送邮件", nil) hideAfterDelay:1.5];
 
             }
         }
@@ -499,46 +459,40 @@
           didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error
 {
     
-    MBProgressHUD *HUD = [[MBProgressHUD alloc] initWithView:self.tabBarController.view];
-    [self.tabBarController.view addSubview:HUD];
-    HUD.mode = MBProgressHUDModeText;
-    HUD.removeFromSuperViewOnHide = YES;
-    // Configure for text only and offset down
-    HUD.margin = 10.f;
-    HUD.yOffset = 150.f;
-    HUD.delegate = self;
+ 
+    NSString *title;
     
     // Notifies users about errors associated with the interface
     switch (result)
     {
         case MFMailComposeResultCancelled:
-            HUD.labelText = NSLocalizedString(@"邮件已取消", nil);
+            title = NSLocalizedString(@"邮件已取消", nil);
 
 //            HUD.labelText = @"Mail sending canceled";
             break;
         case MFMailComposeResultSaved:
-            HUD.labelText = NSLocalizedString(@"邮件已保存", nil);
+            title = NSLocalizedString(@"邮件已保存", nil);
 
 //            HUD.labelText = @"Mail saved";
             break;
         case MFMailComposeResultSent:
-            HUD.labelText = NSLocalizedString(@"邮件已发送", nil);
+            title = NSLocalizedString(@"邮件已发送", nil);
 
 //            HUD.labelText = @"Mail sent";
             break;
         case MFMailComposeResultFailed:
-            HUD.labelText = NSLocalizedString(@"邮件发送失败", nil);
+            title = NSLocalizedString(@"邮件发送失败", nil);
 
 //            HUD.labelText = @"Mail sending failed";
             break;
         default:
-            HUD.labelText = NSLocalizedString(@"邮件未能发送", nil);
+            title = NSLocalizedString(@"邮件未能发送", nil);
 
 //            HUD.labelText = @"Mail not sent";
             break;
     }
-    [HUD show:YES];
-    [HUD hide:YES afterDelay:2.0];
+
+    [MBProgressHUD showGlobalProgressHUDWithTitle:title hideAfterDelay:1.5];
     
     [self dismissViewControllerAnimated:YES completion:NULL];
 }

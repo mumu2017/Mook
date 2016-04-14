@@ -116,6 +116,7 @@
 		439519B91CBCC14000505E5B /* CLAllItemsListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 439519B81CBCC14000505E5B /* CLAllItemsListVC.m */; };
 		439519BC1CBD26B900505E5B /* CLImportPasswordInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 439519BB1CBD26B900505E5B /* CLImportPasswordInputView.m */; };
 		439519BE1CBD26C600505E5B /* CLImportPasswordInputView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 439519BD1CBD26C600505E5B /* CLImportPasswordInputView.xib */; };
+		439519C11CBF610700505E5B /* MBProgressHUD+Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = 439519C01CBF610700505E5B /* MBProgressHUD+Tools.m */; };
 		43A281181CB224BC009C2785 /* CLMookTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A281171CB224BC009C2785 /* CLMookTabBarController.m */; };
 		43A2811F1CB2276A009C2785 /* CLLibraryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A2811D1CB2276A009C2785 /* CLLibraryCell.m */; };
 		43A281201CB2276A009C2785 /* CLLibraryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43A2811E1CB2276A009C2785 /* CLLibraryCell.xib */; };
@@ -344,6 +345,8 @@
 		439519BA1CBD26B900505E5B /* CLImportPasswordInputView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLImportPasswordInputView.h; sourceTree = "<group>"; };
 		439519BB1CBD26B900505E5B /* CLImportPasswordInputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLImportPasswordInputView.m; sourceTree = "<group>"; };
 		439519BD1CBD26C600505E5B /* CLImportPasswordInputView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CLImportPasswordInputView.xib; sourceTree = "<group>"; };
+		439519BF1CBF610700505E5B /* MBProgressHUD+Tools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD+Tools.h"; sourceTree = "<group>"; };
+		439519C01CBF610700505E5B /* MBProgressHUD+Tools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MBProgressHUD+Tools.m"; sourceTree = "<group>"; };
 		43A281161CB224BC009C2785 /* CLMookTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLMookTabBarController.h; sourceTree = "<group>"; };
 		43A281171CB224BC009C2785 /* CLMookTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLMookTabBarController.m; sourceTree = "<group>"; };
 		43A2811C1CB2276A009C2785 /* CLLibraryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLLibraryCell.h; sourceTree = "<group>"; };
@@ -594,6 +597,8 @@
 				432345601C9404A800200833 /* UITextView+Tools.m */,
 				432345611C9404A800200833 /* UIView+Tools.h */,
 				432345621C9404A800200833 /* UIView+Tools.m */,
+				439519BF1CBF610700505E5B /* MBProgressHUD+Tools.h */,
+				439519C01CBF610700505E5B /* MBProgressHUD+Tools.m */,
 			);
 			name = Category;
 			sourceTree = "<group>";
@@ -1318,6 +1323,7 @@
 				43A281241CB2299B009C2785 /* CLLibraryVC.m in Sources */,
 				4323456B1C9404A800200833 /* UIView+Tools.m in Sources */,
 				432345E21C94051A00200833 /* CLPerformModel.m in Sources */,
+				439519C11CBF610700505E5B /* MBProgressHUD+Tools.m in Sources */,
 				432345AC1C9404FB00200833 /* CLNewEntryVC.m in Sources */,
 				432345DC1C94051A00200833 /* CLEffectModel.m in Sources */,
 				43E0F73E1CA10D27005CAD97 /* NSObject+MJCoding.m in Sources */,

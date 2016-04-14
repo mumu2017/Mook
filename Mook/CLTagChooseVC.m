@@ -134,7 +134,6 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if (self.tagChooseList.count == 0) {
-#warning 提示用户,还没有添加标签
         return;
     }
     

@@ -27,7 +27,6 @@
 + (CLPropObjModel *)propByName:(NSString *)name;
 + (CLLinesObjModel *)linesByName:(NSString *)name;
 
-
 + (void)updateRoutine:(CLRoutineModel *)routineModel;
 + (void)deleteRoutine:(CLRoutineModel *)routineModel;
 

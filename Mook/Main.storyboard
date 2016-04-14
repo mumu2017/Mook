@@ -384,9 +384,6 @@
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="ZJ7-nM-2ht">
                                                     <rect key="frame" x="251" y="10" width="51" height="31"/>
                                                     <color key="onTintColor" red="0.15101002159999999" green="0.56891876460000002" blue="0.43715286250000002" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="306" y="10" width="51" height="31"/>
-                                                    </variation>
                                                     <connections>
                                                         <action selector="savePhotoSwitchChanged:" destination="AtO-R1-G3G" eventType="valueChanged" id="I2l-BZ-f4s"/>
                                                     </connections>
@@ -432,9 +429,6 @@
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="B3v-Ka-xlU">
                                                     <rect key="frame" x="251" y="10" width="51" height="31"/>
                                                     <color key="onTintColor" red="0.15101002159999999" green="0.56891876460000002" blue="0.43715286250000002" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="306" y="10" width="51" height="31"/>
-                                                    </variation>
                                                     <connections>
                                                         <action selector="saveVideoSwitchChanged:" destination="AtO-R1-G3G" eventType="valueChanged" id="JSA-Vd-ciZ"/>
                                                     </connections>
@@ -2623,7 +2617,7 @@ Copyright © 2016. All rights reserved.</string>
     <inferredMetricsTieBreakers>
         <segue reference="aHE-KK-7rw"/>
         <segue reference="Vbh-5V-rgl"/>
-        <segue reference="SC9-Mu-JaP"/>
+        <segue reference="1Xs-aM-XCd"/>
         <segue reference="Hnt-4N-2dA"/>
         <segue reference="uIl-vl-NsX"/>
         <segue reference="6Pb-2m-Pgc"/>

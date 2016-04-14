@@ -28,7 +28,6 @@
 #import "CLOneLabelDisplayCell.h"
 #import "CLOneLabelImageDisplayCell.h"
 #import "CLImportPasswordInputView.h"
-#import "MBProgressHUD.h"
 
 #import "MWPhotoBrowser.h"
 @interface CLImportContentVC ()<CLImportPasswordInputViewDelegate, UITextFieldDelegate, MBProgressHUDDelegate, MWPhotoBrowserDelegate>
@@ -86,18 +85,7 @@
     
     if (modelDict == nil) { // 如果模型字典为空,则说明导入文件有问题,无法导入.
         
-        MBProgressHUD *HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
-        [self.navigationController.view addSubview:HUD];
-        // Configure for text only and offset down
-        HUD.mode = MBProgressHUDModeText;
-        HUD.margin = 10.f;
-        HUD.yOffset = 150.f;
-        HUD.removeFromSuperViewOnHide = YES;
-        [HUD show:YES];
-        HUD.delegate = self;
-        HUD.labelText = NSLocalizedString(@"预览失败", nil);
-        
-        [HUD hide:YES afterDelay:2];
+        [MBProgressHUD showGlobalProgressHUDWithTitle:NSLocalizedString(@"预览失败", nil) hideAfterDelay:2.0];
         
         [[NSNotificationCenter defaultCenter] postNotificationName:@"dismissImportContentVC" object:nil];
         
@@ -882,47 +870,23 @@
 - (void)importPasswordInputViewdidClickUnlockButton:(CLImportPasswordInputView *)view {
     
     [self.view endEditing:YES];
- 
-    MBProgressHUD *HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
-    [self.navigationController.view addSubview:HUD];
-    // Configure for text only and offset down
-    HUD.mode = MBProgressHUDModeText;
-    HUD.margin = 10.f;
-    HUD.yOffset = 150.f;
-    HUD.removeFromSuperViewOnHide = YES;
-    [HUD show:YES];
-    HUD.delegate = self;
-    
+
     if ([self.passwordString isEqualToString:self.importPassword]) {
         self.unlocked = YES;
         
-        HUD.labelText = NSLocalizedString(@"解锁成功", nil);
+        [MBProgressHUD showGlobalProgressHUDWithTitle:NSLocalizedString(@"解锁成功", nil) hideAfterDelay:2.0];
 
         [self.tableView reloadData];
     } else {
-        HUD.labelText = NSLocalizedString(@"解锁失败", nil);
+        [MBProgressHUD showGlobalProgressHUDWithTitle:NSLocalizedString(@"解锁失败", nil) hideAfterDelay:2.0];
 
     }
-    
-    [HUD hide:YES afterDelay:2];
 }
 
 - (void)importPasswordInputViewdidClickCancelButton:(CLImportPasswordInputView *)view {
     
-    // The hud will dispable all input on the view (use the higest view possible in the view hierarchy)
-    MBProgressHUD *HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
-    [self.navigationController.view addSubview:HUD];
-    // Configure for text only and offset down
-    HUD.mode = MBProgressHUDModeText;
-    HUD.margin = 10.f;
-    HUD.yOffset = 150.f;
-    HUD.removeFromSuperViewOnHide = YES;
-    [HUD show:YES];
-    HUD.delegate = self;
-        
-    HUD.labelText = NSLocalizedString(@"解锁取消", nil);
-    
-    [HUD hide:YES afterDelay:2];
+    [MBProgressHUD showGlobalProgressHUDWithTitle:NSLocalizedString(@"解锁取消", nil) hideAfterDelay:2.0];
+
     [self cancelImport:nil];
 
 }

@@ -25,5 +25,7 @@
 #import "SWTableViewCell.h"
 #import "NSDate+MJ.h"
 #import <ChameleonFramework/Chameleon.h>
+#import "MBProgressHUD.h"
+#import "MBProgressHUD+Tools.h"
 
 #endif /* PrefixHeader_pch */

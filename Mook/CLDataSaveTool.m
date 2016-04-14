@@ -256,7 +256,7 @@ static FMDatabase *_db;
     return nil;
 }
 
-+ (CLLinesObjModel *)linesModelByName:(NSString *)name {
++ (CLLinesObjModel *)linesByName:(NSString *)name {
     FMResultSet *set = [_db executeQuery:@"select * from t_mook where type=? and time_stamp=?;",kTypeLines, name];
     while ([set next]) {
         NSData *data = [set dataForColumn:@"dict"];
