@@ -424,16 +424,28 @@
         
     } onQueue:dispatch_get_main_queue() completionBlock:^{
         
-        NSURL *dataUrl;
         if (self.exportPath != nil) {
+            NSURL *dataUrl;
             dataUrl = [NSURL fileURLWithPath:self.exportPath];
+            
+            CGRect navRect = self.view.frame;
+            self.documentInteractionController =[UIDocumentInteractionController interactionControllerWithURL:dataUrl];
+            self.documentInteractionController.delegate = self;
+            
+            [self.documentInteractionController presentOptionsMenuFromRect:navRect inView:self.view animated:YES];
+        } else {
+    
+            // Configure for text only and offset down
+            HUD.mode = MBProgressHUDModeText;
+            HUD.margin = 10.f;
+            HUD.yOffset = 150.f;
+            HUD.labelText = NSLocalizedString(@"导出失败", nil);
+            HUD.removeFromSuperViewOnHide = YES;
+            [HUD show:YES];
+            
+            [HUD hide:YES afterDelay:1];
         }
-        
-        CGRect navRect = self.view.frame;
-        self.documentInteractionController =[UIDocumentInteractionController interactionControllerWithURL:dataUrl];
-        self.documentInteractionController.delegate = self;
-        
-        [self.documentInteractionController presentOptionsMenuFromRect:navRect inView:self.view animated:YES];
+
     }];
     
 }

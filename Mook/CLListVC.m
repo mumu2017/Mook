@@ -333,8 +333,10 @@
 {
     NSMutableArray *rightUtilityButtons = [NSMutableArray new];
 
-//    [rightUtilityButtons sw_addUtilityButtonWithColor:[UIColor flatSkyBlueColor] title:NSLocalizedString(@"导出", nil)];
-    [rightUtilityButtons sw_addUtilityButtonWithColor:[UIColor flatGrayColorDark] icon:[UIImage imageNamed:@"iconAction"]];
+    if (self.listType != kListTypeShow) {
+        [rightUtilityButtons sw_addUtilityButtonWithColor:[UIColor flatGrayColorDark] icon:[UIImage imageNamed:@"iconAction"]];
+    }
+  
     [rightUtilityButtons sw_addUtilityButtonWithColor:[UIColor redColor] title:NSLocalizedString(@"删除", nil)];
 
     return rightUtilityButtons;
@@ -349,7 +351,16 @@
     NSIndexPath *path = [self.tableView indexPathForCell:cell];
     
     if (index == 0) {
-        [self exportWithIndexPath:path];
+        
+        if (self.listType == kListTypeShow) {
+            // 演讲不可导出,所以只有删除按钮
+            [self delete:path];
+        } else {
+            // 如果不是演讲, 则可导出
+            [self exportWithIndexPath:path];
+
+        }
+        
     } else if (index == 1) {
         
         [self delete:path];
@@ -638,16 +649,27 @@
         
     } onQueue:dispatch_get_main_queue() completionBlock:^{
         
-        NSURL *dataUrl;
         if (self.exportPath != nil) {
+            NSURL *dataUrl;
             dataUrl = [NSURL fileURLWithPath:self.exportPath];
+            
+            CGRect navRect = self.view.frame;
+            self.documentInteractionController =[UIDocumentInteractionController interactionControllerWithURL:dataUrl];
+            self.documentInteractionController.delegate = self;
+            
+            [self.documentInteractionController presentOptionsMenuFromRect:navRect inView:self.view animated:YES];
+        } else {
+            
+            // Configure for text only and offset down
+            HUD.mode = MBProgressHUDModeText;
+            HUD.margin = 10.f;
+            HUD.yOffset = 150.f;
+            HUD.labelText = NSLocalizedString(@"导出失败", nil);
+            HUD.removeFromSuperViewOnHide = YES;
+            [HUD show:YES];
+            
+            [HUD hide:YES afterDelay:1];
         }
-        
-        CGRect navRect = self.view.frame;
-        self.documentInteractionController =[UIDocumentInteractionController interactionControllerWithURL:dataUrl];
-        self.documentInteractionController.delegate = self;
-        
-        [self.documentInteractionController presentOptionsMenuFromRect:navRect inView:self.view animated:YES];
     }];
     
 }
