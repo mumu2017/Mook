@@ -49,13 +49,24 @@
             BOOL flag1 = [[NSFileManager defaultManager] removeItemAtURL:url error:NULL];
             if (flag1) {
                 NSLog(@"INBOX CLEANED");
+            } else {
+                // 如果删除不成功,再尝试删除一次
+                [[NSFileManager defaultManager] removeItemAtURL:url error:NULL];
             }
+            
             return dict;
             
         } else {
             NSLog(@"unzip failed");
             // 解压后删除Inbox中的文件
-            [[NSFileManager defaultManager] removeItemAtURL:url error:NULL];
+            BOOL flag1 = [[NSFileManager defaultManager] removeItemAtURL:url error:NULL];
+            if (flag1) {
+                NSLog(@"INBOX CLEANED");
+            } else {
+                // 如果删除不成功,再尝试删除一次
+                [[NSFileManager defaultManager] removeItemAtURL:url error:NULL];
+            }
+            
             return nil;
         }
         
