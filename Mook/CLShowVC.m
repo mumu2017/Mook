@@ -399,7 +399,9 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     
-    return 10.0f;
+    if (section == 0) return 15.0f;
+    
+    return 0;
 }
 
 - (void)showRoutineDetail:(UIButton *)button {

@@ -737,10 +737,10 @@
         <scene sceneID="Fb8-1g-cc9">
             <objects>
                 <tableViewController id="kvn-wA-MVn" customClass="CLShowVC" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="oRD-l1-TmS">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="oRD-l1-TmS">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <connections>
                             <outlet property="dataSource" destination="kvn-wA-MVn" id="neu-jk-OPR"/>
                             <outlet property="delegate" destination="kvn-wA-MVn" id="A9X-wh-Ac8"/>
@@ -2191,6 +2191,7 @@ Copyright © 2016. All rights reserved.</string>
             <objects>
                 <tableViewController id="qMI-jb-8zk" customClass="CLAllItemsListVC" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="R31-5R-By1">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <connections>
@@ -2620,17 +2621,17 @@ Copyright © 2016. All rights reserved.</string>
         <image name="passwordDelete" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="aHE-KK-7rw"/>
+        <segue reference="Vbh-5V-rgl"/>
         <segue reference="SC9-Mu-JaP"/>
         <segue reference="Hnt-4N-2dA"/>
-        <segue reference="Vbh-5V-rgl"/>
-        <segue reference="rYJ-EA-bEa"/>
-        <segue reference="UDK-lE-GYM"/>
-        <segue reference="bs2-Rb-eFp"/>
-        <segue reference="K6b-qL-31m"/>
-        <segue reference="4tP-b3-hII"/>
-        <segue reference="gRW-Xa-tMF"/>
+        <segue reference="uIl-vl-NsX"/>
+        <segue reference="6Pb-2m-Pgc"/>
+        <segue reference="tPt-rP-iQC"/>
+        <segue reference="NHr-0K-Qxl"/>
         <segue reference="cZz-JI-sNE"/>
         <segue reference="F7W-G1-xVl"/>
+        <segue reference="G4h-Vz-pXE"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
 </document>
