@@ -137,6 +137,7 @@ typedef enum {
 }
 
 - (void)setTypedPassword:(NSString *)typedPassword {
+
     _typedPassword = typedPassword;
     
     switch (typedPassword.length) {
@@ -181,10 +182,15 @@ typedef enum {
 }
 
 - (IBAction)buttonClicked:(UIButton *)button {
+    
     NSInteger tag = button.tag;
-    if (tag >= 0 && tag <= 9) {
+    
+    if (tag >= 0 && tag <= 9) { //0到9输入密码
+        if (self.typedPassword.length == 4) return; // 如果已经有4位密码了,则直接返回(将密码控制在4位数)
+
         [self typedPasswordWithNumber:[NSString stringWithFormat:@"%d", (int)tag]];
-    } else {
+        
+    } else { // 还剩一个删除按钮
         [self deleteNumber];
     }
 }
@@ -250,6 +256,7 @@ typedef enum {
 }
 
 - (void)checkNewPassword {
+    
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         if (self.passwordMatched) {
             
@@ -292,6 +299,7 @@ typedef enum {
 }
 
 - (void)deleteNumber {
+    
     if (self.typedPassword.length > 0) {
         self.typedPassword = [self.typedPassword substringToIndex:[self.typedPassword length] - 1];
     }
@@ -405,7 +413,6 @@ typedef enum {
             UITextField *nameTF = alertController.textFields.firstObject;
             
             self.passwordReminder = nameTF.text;
-            
             
             NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
             [defaults setObject:self.passwordReminder forKey:kPasswordReminderKey];

@@ -15,7 +15,7 @@
 
 #import <MessageUI/MFMailComposeViewController.h>
 
-@interface CLSettingVC ()<MBProgressHUDDelegate, MFMailComposeViewControllerDelegate>
+@interface CLSettingVC ()<MBProgressHUDDelegate, MFMailComposeViewControllerDelegate, UIDocumentInteractionControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UISwitch *passwordSwitch;
 @property (weak, nonatomic) IBOutlet UISwitch *savePhotoSwitch;
@@ -26,6 +26,8 @@
 @property (nonatomic, assign) BOOL isCreatBackUp;
 @property (nonatomic, assign) BOOL backUpExists;
 @property (nonatomic, copy) NSString *voiceLanguage;
+
+@property (nonatomic, strong) UIDocumentInteractionController *documentInteractionController;
 
 @end
 
@@ -121,7 +123,7 @@
         case 0:
             
             if (self.backUpExists) {
-                number = 4;
+                number = 5;
             } else {
                 number = 2;
             }
@@ -162,148 +164,21 @@
         
         if (indexPath.row == 0) {
             
-            UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"生成备份", nil) message:NSLocalizedString(@"提示: 生成备份文件后, 请尽快通过iTunes将备份文件导出到您的PC或者Mac中. 为了节省您的存储空间, Mook推荐您在导出备份后删除备份文件. 确定要生成备份文件吗?", nil) preferredStyle:UIAlertControllerStyleAlert];
-            
-            UIAlertAction* loadBackUp = [UIAlertAction actionWithTitle:NSLocalizedString(@"确定", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    
-                    UIWindow *window = [[UIApplication sharedApplication] delegate].window;
-                    MBProgressHUD *HUD = [[MBProgressHUD alloc] initWithView:window];
-                    [window addSubview:HUD];
-                    
-                    HUD.delegate = self;
-                    HUD.labelText = NSLocalizedString(@"正在生成备份文件", nil);
-                    
-                    [HUD showAnimated:YES whileExecutingBlock:^{
-                        
-                        // Create zip
-                        NSString *backUpName = [NSString backUpPath];
-                        NSString *mookPath = [NSString mookPath];
-                        self.isCreatBackUp = [SSZipArchive createZipFileAtPath:backUpName withContentsOfDirectory:mookPath keepParentDirectory:YES];
-                        
-                    } onQueue:dispatch_get_global_queue(0, 0) completionBlock:^{
-                        
-                        if (self.isCreatBackUp) {
-                            [MBProgressHUD showGlobalProgressHUDWithTitle:NSLocalizedString(@"已成功生成备份文件", nil) hideAfterDelay:1.5];
-                            [self.tableView reloadData]; // 生成后刷新表格, 显示"恢复备份"
-                        } else {
-                            [MBProgressHUD showGlobalProgressHUDWithTitle:NSLocalizedString(@"生成备份文件失败", nil) hideAfterDelay:1.5];
-
-                        }
-
-                    }];
-
-                    
-                });
-                    
-            }];
-            
-            UIAlertAction* cancel = [UIAlertAction actionWithTitle:NSLocalizedString(@"取消", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
-            }];
-            
-            [alert addAction:loadBackUp];
-            [alert addAction:cancel];
-            
-            [self presentViewController:alert animated:YES completion:nil];
-            
+            [self creatBackUp];
+           
         } else if (indexPath.row == 1) {
             
             [self performSegueWithIdentifier:kBackUpInfoSegue sender:nil];
             
         } else if (indexPath.row == 2) { // 如果有第三行则表示备份文件存在,可以恢复
 
-            // 恢复备份
-            UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"恢复备份", nil) message:NSLocalizedString(@"注意: 恢复备份后, 您当前的Mook数据将被永久性地替换为备份数据. 确定要恢复备份吗?", nil) preferredStyle:UIAlertControllerStyleAlert];
+            [self restoreBackUp];
+        } else if (indexPath.row == 3) { // 导出备份文件
             
-            UIAlertAction* loadBackUp = [UIAlertAction actionWithTitle:NSLocalizedString(@"确定", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    
-                    UIWindow *window = [[UIApplication sharedApplication] delegate].window;
-
-                    MBProgressHUD *HUD = [[MBProgressHUD alloc] initWithView:window];
-                    HUD.labelText = NSLocalizedString(@"正在加载恢复备份", nil);
-                    [window addSubview:HUD];
-                    [HUD setMode:MBProgressHUDModeDeterminate];   //圆盘的扇形进度显示
-                    HUD.taskInProgress = YES;
-                    [HUD show:YES];
-                    
-                    // Unzip
-                    NSString *backUpName = [NSString backUpPath];
-                    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
-                    NSString *libraryPath = [paths objectAtIndex:0];
-                    
-                    [SSZipArchive unzipFileAtPath:backUpName toDestination:libraryPath overwrite:YES password:nil progressHandler:^(NSString *entry, unz_file_info zipInfo, long entryNumber, long total) {
-                        
-                        CGFloat progress = entryNumber / total;
-                        HUD.progress = progress;
-
-                    } completionHandler:^(NSString *path, BOOL succeeded, NSError *error) {
-                        
-                        if (succeeded) {
-                            [MBProgressHUD showGlobalProgressHUDWithTitle:NSLocalizedString(@"已成功恢复备份文件", nil) hideAfterDelay:1.5];
-                            [(AppDelegate *)[[UIApplication sharedApplication] delegate] reloadData];
-                            
-                        } else {
-                            [MBProgressHUD showGlobalProgressHUDWithTitle:NSLocalizedString(@"恢复备份文件失败", nil) hideAfterDelay:1.5];
-
-                        }
-       
-                    }];
-                });
-                
-            }];
+            [self exportBackUp];
             
-            UIAlertAction* cancel = [UIAlertAction actionWithTitle:NSLocalizedString(@"取消", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
-            }];
-            
-            [alert addAction:loadBackUp];
-            [alert addAction:cancel];
-            
-            [self presentViewController:alert animated:YES completion:nil];
-    
-            
-        }  else if (indexPath.row == 3) { // 删除备份文件
-            
-            // 恢复备份
-            UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"删除备份文件", nil) message:NSLocalizedString(@"确定要删除备份文件吗?", nil) preferredStyle:UIAlertControllerStyleAlert];
-            
-            UIAlertAction* loadBackUp = [UIAlertAction actionWithTitle:NSLocalizedString(@"确定", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    
-                    
-                    NSFileManager* fileManager=[NSFileManager defaultManager];
-                    NSString *backUpPath = [NSString backUpPath];
-                    
-                    if (self.backUpExists) {
-                        BOOL fileDeleted= [fileManager removeItemAtPath:backUpPath error:nil];
-
-                        NSString *title;
-                        if (fileDeleted) {
-                            
-                            title = NSLocalizedString(@"已删除备份文件", nil);
-                            [self.tableView reloadData];
-                            
-                        } else {
-                            title = NSLocalizedString(@"删除备份文件失败", nil);
-                        }
-                        
-                        [MBProgressHUD showGlobalProgressHUDWithTitle:title hideAfterDelay:1.5];
-
-                    }
-                });
-                
-            }];
-            
-            UIAlertAction* cancel = [UIAlertAction actionWithTitle:NSLocalizedString(@"取消", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
-            }];
-            
-            [alert addAction:loadBackUp];
-            [alert addAction:cancel];
-            
-            [self presentViewController:alert animated:YES completion:nil];
+        } else if (indexPath.row == 4) { // 删除备份文件
+            [self deleteBackUp];
             
         }
     } else if (indexPath.section == 4) {
@@ -328,7 +203,184 @@
 
 }
 
+- (void)creatBackUp {
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"生成备份", nil) message:NSLocalizedString(@"提示: 生成备份文件后, 请尽快通过iTunes将备份文件导出到您的PC或者Mac中. 为了节省您的存储空间, Mook推荐您在导出备份后删除备份文件. 确定要生成备份文件吗?", nil) preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* loadBackUp = [UIAlertAction actionWithTitle:NSLocalizedString(@"确定", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            
+            UIWindow *window = [[UIApplication sharedApplication] delegate].window;
+            MBProgressHUD *HUD = [[MBProgressHUD alloc] initWithView:window];
+            [window addSubview:HUD];
+            
+            HUD.delegate = self;
+            HUD.labelText = NSLocalizedString(@"正在生成备份文件", nil);
+            
+            [HUD showAnimated:YES whileExecutingBlock:^{
+                
+                // Create zip
+                NSString *backUpName = [NSString backUpPath];
+                NSString *mookPath = [NSString mookPath];
+                self.isCreatBackUp = [SSZipArchive createZipFileAtPath:backUpName withContentsOfDirectory:mookPath keepParentDirectory:YES];
+                
+            } onQueue:dispatch_get_global_queue(0, 0) completionBlock:^{
+                
+                if (self.isCreatBackUp) {
+                    [MBProgressHUD showGlobalProgressHUDWithTitle:NSLocalizedString(@"已成功生成备份文件", nil) hideAfterDelay:1.5];
+                    [self.tableView reloadData]; // 生成后刷新表格, 显示"恢复备份"
+                } else {
+                    [MBProgressHUD showGlobalProgressHUDWithTitle:NSLocalizedString(@"生成备份文件失败", nil) hideAfterDelay:1.5];
+                    
+                }
+                
+            }];
+            
+            
+        });
+        
+    }];
+    
+    UIAlertAction* cancel = [UIAlertAction actionWithTitle:NSLocalizedString(@"取消", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
+    }];
+    
+    [alert addAction:loadBackUp];
+    [alert addAction:cancel];
+    
+    [self presentViewController:alert animated:YES completion:nil];
+}
 
+- (void)restoreBackUp {
+    
+    // 恢复备份
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"恢复备份", nil) message:NSLocalizedString(@"注意: 恢复备份后, 您当前的Mook数据将被永久性地替换为备份数据. 确定要恢复备份吗?", nil) preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* loadBackUp = [UIAlertAction actionWithTitle:NSLocalizedString(@"确定", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            
+            UIWindow *window = [[UIApplication sharedApplication] delegate].window;
+            
+            MBProgressHUD *HUD = [[MBProgressHUD alloc] initWithView:window];
+            HUD.labelText = NSLocalizedString(@"正在加载恢复备份", nil);
+            [window addSubview:HUD];
+            [HUD setMode:MBProgressHUDModeDeterminate];   //圆盘的扇形进度显示
+            HUD.taskInProgress = YES;
+            [HUD show:YES];
+            
+            // Unzip
+            NSString *backUpName = [NSString backUpPath];
+            NSArray *paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
+            NSString *libraryPath = [paths objectAtIndex:0];
+            
+            [SSZipArchive unzipFileAtPath:backUpName toDestination:libraryPath overwrite:YES password:nil progressHandler:^(NSString *entry, unz_file_info zipInfo, long entryNumber, long total) {
+                
+                CGFloat progress = entryNumber / total;
+                HUD.progress = progress;
+                
+            } completionHandler:^(NSString *path, BOOL succeeded, NSError *error) {
+                
+                if (succeeded) {
+                    [MBProgressHUD showGlobalProgressHUDWithTitle:NSLocalizedString(@"已成功恢复备份文件", nil) hideAfterDelay:1.5];
+                    [(AppDelegate *)[[UIApplication sharedApplication] delegate] reloadData];
+                    
+                } else {
+                    [MBProgressHUD showGlobalProgressHUDWithTitle:NSLocalizedString(@"恢复备份文件失败", nil) hideAfterDelay:1.5];
+                    
+                }
+                
+            }];
+        });
+        
+    }];
+    
+    UIAlertAction* cancel = [UIAlertAction actionWithTitle:NSLocalizedString(@"取消", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
+    }];
+    
+    [alert addAction:loadBackUp];
+    [alert addAction:cancel];
+    
+    [self presentViewController:alert animated:YES completion:nil];
+
+}
+
+- (void)deleteBackUp {
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"删除备份文件", nil) message:NSLocalizedString(@"确定要删除备份文件吗?", nil) preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* loadBackUp = [UIAlertAction actionWithTitle:NSLocalizedString(@"确定", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            
+            
+            NSFileManager* fileManager=[NSFileManager defaultManager];
+            NSString *backUpPath = [NSString backUpPath];
+            
+            if (self.backUpExists) {
+                BOOL fileDeleted= [fileManager removeItemAtPath:backUpPath error:nil];
+                
+                NSString *title;
+                if (fileDeleted) {
+                    
+                    title = NSLocalizedString(@"已删除备份文件", nil);
+                    [self.tableView reloadData];
+                    
+                } else {
+                    title = NSLocalizedString(@"删除备份文件失败", nil);
+                }
+                
+                [MBProgressHUD showGlobalProgressHUDWithTitle:title hideAfterDelay:1.5];
+                
+            }
+        });
+        
+    }];
+    
+    UIAlertAction* cancel = [UIAlertAction actionWithTitle:NSLocalizedString(@"取消", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
+    }];
+    
+    [alert addAction:loadBackUp];
+    [alert addAction:cancel];
+    
+    [self presentViewController:alert animated:YES completion:nil];
+    
+
+}
+
+- (void)exportBackUp {
+
+    NSURL *dataUrl;
+    dataUrl = [NSURL fileURLWithPath:[NSString backUpPath]];
+    
+    CGRect navRect = self.view.frame;
+    self.documentInteractionController =[UIDocumentInteractionController interactionControllerWithURL:dataUrl];
+    self.documentInteractionController.delegate = self;
+    
+    [self.documentInteractionController presentOptionsMenuFromRect:navRect inView:self.view animated:YES];
+}
+
+#pragma mark - UIDocumentInteractionControllerDelegate
+
+//===================================================================
+- (UIViewController *)documentInteractionControllerViewControllerForPreview:(UIDocumentInteractionController *)controller
+{
+    return self;
+}
+
+- (UIView *)documentInteractionControllerViewForPreview:(UIDocumentInteractionController *)controller
+{
+    return self.view;
+}
+
+- (CGRect)documentInteractionControllerRectForPreview:(UIDocumentInteractionController *)controller
+{
+    return self.view.frame;
+}
+
+
+
+#pragma mark - 跳转Segue
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     id destVC = segue.destinationViewController;
     UIViewController *vc = (UIViewController *)destVC;

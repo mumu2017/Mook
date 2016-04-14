@@ -20,11 +20,11 @@
     }
 }
 
-- (IBAction)cancelButtonClicked:(id)sender {
-    if ([self.delegate respondsToSelector:@selector(importPasswordInputViewdidClickCancelButton:)]) {
-        [self.delegate importPasswordInputViewdidClickCancelButton:self];
-    }
-}
+//- (IBAction)cancelButtonClicked:(id)sender {
+//    if ([self.delegate respondsToSelector:@selector(importPasswordInputViewdidClickCancelButton:)]) {
+//        [self.delegate importPasswordInputViewdidClickCancelButton:self];
+//    }
+//}
 
 - (void)awakeFromNib {
     [super awakeFromNib];

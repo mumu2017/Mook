@@ -426,12 +426,9 @@
     }
 
     // 根据解锁状态设置导航栏按钮状态
-    self.navigationItem.leftBarButtonItem.enabled = self.unlocked;
     self.navigationItem.rightBarButtonItem.enabled = self.unlocked;
     
     self.importPasswordInputView.hidden = self.unlocked;
-    
-
     
     [self setContentTitle];
     self.tableView.backgroundColor = kCellBgColor;
@@ -593,7 +590,7 @@
     } else {
         
         self.importPasswordInputView.hidden = YES;
-        self.navigationItem.leftBarButtonItem.enabled = self.unlocked;
+
         self.navigationItem.rightBarButtonItem.enabled = self.unlocked;
     }
     
@@ -922,13 +919,13 @@
     }
 }
 
-- (void)importPasswordInputViewdidClickCancelButton:(CLImportPasswordInputView *)view {
-    
-    [MBProgressHUD showGlobalProgressHUDWithTitle:NSLocalizedString(@"解锁取消", nil) hideAfterDelay:2.0];
-
-    [self cancelImport:nil];
-
-}
+//- (void)importPasswordInputViewdidClickCancelButton:(CLImportPasswordInputView *)view {
+//    
+//    [MBProgressHUD showGlobalProgressHUDWithTitle:NSLocalizedString(@"解锁取消", nil) hideAfterDelay:2.0];
+//
+//    [self cancelImport:nil];
+//
+//}
 
 #pragma mark - PhotoBrowser方法
 // 遍历模型,加载图片

@@ -12,6 +12,8 @@
 
 + (void)showGlobalProgressHUDWithTitle:(NSString *)title hideAfterDelay:(NSTimeInterval)delay;
 
+
 + (void)dismissGlobalHUD;
+
 
 @end

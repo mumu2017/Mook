@@ -1051,7 +1051,7 @@
             [self.effectModel deleteMedia];
             self.effectModel.effect = nil;
             NSIndexPath *path = [NSIndexPath indexPathForRow:0 inSection:indexPath.section];
-            [self.tableView reloadRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationAutomatic];
+            [self.tableView reloadRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationFade];
             
         } else {
             
@@ -1073,8 +1073,9 @@
                     break;
                     
                 case 4:
-                    [self.performModelList removeObjectAtIndex:indexPath.row-1];
                     [self.performModelList[indexPath.row-1] deleteMedia];
+                    [self.performModelList removeObjectAtIndex:indexPath.row-1];
+
                     break;
                     
                 case 5:
@@ -1084,8 +1085,10 @@
                 default:
                     break;
             }
+            NSIndexSet *set = [NSIndexSet indexSetWithIndex:indexPath.section];
+            [self.tableView reloadSections:set withRowAnimation:UITableViewRowAnimationFade];
             
-            [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+//            [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
 
         }
     }
@@ -1351,6 +1354,7 @@
         
         if (indexPath.row == 0) { // 当选中第一行时
             if (self.editingContentType == kEditingContentTypeLines) {
+                // 如果是台词编辑, section == 2时就是删除cell
                 [self deleteCurrentEntry];
                 
             } else if (self.editingContentType == kEditingContentTypeRoutine) {
@@ -1379,15 +1383,13 @@
         if (indexPath.row == 0) {
             
             if (self.editingContentType == kEditingContentTypeSleight || self.editingContentType == kEditingContentTypeProp || self.editingContentType == kEditingContentTypeIdea) {
+                // 如果是灵感/技巧/道具, 该行是删除cell
                 [self deleteCurrentEntry];
                 
             } else if (self.editingContentType == kEditingContentTypeRoutine) {
                 
-                if (self.prepModelList.count == 1) {
-                    CLPrepModel *model = self.prepModelList[0];
-                    if (!model.isWithPrep && !model.isWithImage && !model.isWithVideo) {
-                        [self performSegueWithIdentifier:kEditingSegue sender:indexPath];
-                    }
+                if (self.prepModelList.count == 1 && !self.prepModelList[0].isWithPrep && !self.prepModelList[0].isWithImage && !self.prepModelList[0].isWithVideo) {
+                    [self performSegueWithIdentifier:kEditingSegue sender:indexPath];
                 } else {
                     [self addPrep];
                 }

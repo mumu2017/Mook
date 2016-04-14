@@ -13,7 +13,7 @@
 
 @optional
 - (void) importPasswordInputViewdidClickUnlockButton:(CLImportPasswordInputView *)view;
-- (void) importPasswordInputViewdidClickCancelButton:(CLImportPasswordInputView *)view;
+//- (void) importPasswordInputViewdidClickCancelButton:(CLImportPasswordInputView *)view;
 
 @end
 
