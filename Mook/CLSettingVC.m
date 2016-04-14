@@ -223,7 +223,7 @@
                 // Create zip
                 NSString *backUpName = [NSString backUpPath];
                 NSString *mookPath = [NSString mookPath];
-                self.isCreatBackUp = [SSZipArchive createZipFileAtPath:backUpName withContentsOfDirectory:mookPath keepParentDirectory:YES];
+                self.isCreatBackUp = [SSZipArchive createZipFileAtPath:backUpName withContentsOfDirectory:mookPath keepParentDirectory:YES withPassword:kZipPassword];
                 
             } onQueue:dispatch_get_global_queue(0, 0) completionBlock:^{
                 
@@ -274,7 +274,7 @@
             NSArray *paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
             NSString *libraryPath = [paths objectAtIndex:0];
             
-            [SSZipArchive unzipFileAtPath:backUpName toDestination:libraryPath overwrite:YES password:nil progressHandler:^(NSString *entry, unz_file_info zipInfo, long entryNumber, long total) {
+            [SSZipArchive unzipFileAtPath:backUpName toDestination:libraryPath overwrite:YES password:kZipPassword progressHandler:^(NSString *entry, unz_file_info zipInfo, long entryNumber, long total) {
                 
                 CGFloat progress = entryNumber / total;
                 HUD.progress = progress;

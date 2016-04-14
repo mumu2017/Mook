@@ -83,37 +83,6 @@ typedef enum {
 #define kCheckIfShouldPasswordKey        @"checkIfShouldPasswordKey"
 
 #pragma mark -  NSCoding Key
-//
-//#define kShowNameKey        @"kShowNameKey"
-//#define kShowDurationKey    @"kShowDurationKey"
-//#define kShowOpenerKey      @"kShowOpenerKey"
-//#define kShowMiddleKey      @"kShowMiddleKey"
-//#define kShowEndingKey      @"kShowEndingKey"
-//
-//#define kIdeaInfoModelKey       @"kIdeaInfoModelKey"
-//#define kIdeaPrepModelListKey @"kIdeaPrepModelListKey"
-//#define kIdeaEffectModelKey  @"kIdeaEffectModelKey"
-//#define kSleightInfoModelKey    @"kSleightInfoModelKey"
-//#define kSleightEffectModelKey  @"kSleightEffectModelKey"
-//#define kSleightPrepModelListKey @"kSleightPrepModelListKey"
-//
-//#define kLinesInfoModelKey      @"kLinesInfoModelKey"
-//#define kLinesEffectModelKey    @"kLinesEffectModelKey"
-//
-//#define kPropInfoModelKey    @"kPropInfoModelKey"
-//#define kPropEffectModelKey  @"kPropEffectModelKey"
-//#define kPropPrepModelListKey @"kPropPrepModelListKey"
-//
-//#define kRoutineModelListKey    @"kRoutineModelListKey"
-//#define kDateKey         @"kDateKey"
-//#define kTagListKey         @"kTagListKey"
-//
-//#define kInfoModelKey           @"kInfoModelKey"
-//#define kEffectModelKey         @"kEffectModelKey"
-//#define kPropModelListKey       @"kPropModelListKey"
-//#define kPrepModelListKey       @"kPrepModelListKey"
-//#define kPerformModelListKey    @"kPerformModelListKey"
-//#define kNotesModelListKey      @"kNotesModelListKey"
 
 #define kNotesKey       @"kNotesKey"
 
@@ -256,7 +225,6 @@ typedef enum {
 #define kBoldFontSys18  [UIFont boldSystemFontOfSize:18]
 #define kBoldFontSys24  [UIFont boldSystemFontOfSize:24]
 
-
 #define kFont14Dict     @{NSFontAttributeName : kFontSys14}
 #define kFont16Dict     @{NSFontAttributeName : kFontSys16}
 #define kSizeForText    CGSizeMake(kContentW, MAXFLOAT)
@@ -378,11 +346,8 @@ typedef enum {
 #define kNewEntryTextCellID     @"newEntryTextCellID"
 
 #define kTagCell             @"tagCell"
+
 #pragma mark - Colors
-// 颜色相关
-//#define kDisplayBgColor     [UIColor colorWithWhite:0.9 alpha:1.0]
-//#define kDisplayBgColor         [UIColor colorWithRed:204/255.0 green:204/255.0 blue:204/255.0 alpha:1.0]
-//#define kDisplayBgColor     [UIColor colorWithRed:247/255.0 green:247/255.0 blue:247/255.0 alpha:1.0] //默认uitableview grouped 背景颜色
 
 #define kSwipeCellButtonColor   [UIColor colorWithRed:3/255.0 green:146/255.0 blue:207/255.0 alpha:1.0]
 
@@ -390,14 +355,6 @@ typedef enum {
 
 #define kTintColor          [UIColor colorWithContrastingBlackOrWhiteColorOn:kMenuBackgroundColor isFlat:YES]    // FlatColor
 #define kMenuBackgroundColor    [UIColor flatBlackColorDark]
-//#define kTintColor     [UIColor colorWithRed:248/255.0 green:128/255.0 blue:4/255.0 alpha:1.0] //黄色
-//#define kMenuBackgroundColor    [UIColor colorWithRed:26/255.0 green:29/255.0 blue:33/255.0 alpha:1.0]
-
-//#define kTintColor  [UIColor colorWithRed:26/255.0 green:29/255.0 blue:33/255.0 alpha:1.0]
-
-
-//#define kCellBgColor     [UIColor colorWithRed:249/255.0 green:249/255.0 blue:249/255.0 alpha:1.0]
-//#define kCellBgColor     [UIColor colorWithRed:255.0/255.0 green:255.0/255.0 blue:255.0/255.0 alpha:1.0]
 
 // contentVC的背景色
 #define kCellBgColor     [UIColor colorWithRed:247/255.0 green:247/255.0 blue:247/255.0 alpha:1]
@@ -407,25 +364,17 @@ typedef enum {
 #define kDisplayBgColor     [UIColor colorWithRed:239/255.0 green:239/255.0 blue:239/255.0 alpha:1.0]
 
 #define kToolBarBgColor     [UIColor colorWithRed:185/255.0 green:185/255.0 blue:185/255.0 alpha:1.0]
-//#define kBarColor     [UIColor colorWithRed:0/255.0 green:128/255.0 blue:255/255.0 alpha:1.0]
-//#define kBarColor     [UIColor colorWithRed:0/255.0 green:102/255.0 blue:204/255.0 alpha:1.0]
-//#define kBarColor     [UIColor colorWithRed:0/255.0 green:115/255.0 blue:230/255.0 alpha:1.0]
+
 #define kBarColor     [UIColor colorWithRed:3/255.0 green:146/255.0 blue:207/255.0 alpha:1.0]   // # 0392CF
 
-//#define kHeaderViewColor     [UIColor colorWithRed:79/255.0 green:91/255.0 blue:102/255.0 alpha:1.0]
-//#define kHeaderViewColor     [UIColor colorWithRed:101/255.0 green:115/255.0 blue:126/255.0 alpha:1.0]
-//#define kHeaderViewColor     [UIColor colorWithRed:45/255.0 green:45/255.0 blue:49/255.0 alpha:1.0]
 #define kHeaderViewColor     [UIColor colorWithRed:35/255.0 green:141/255.0 blue:203/255.0 alpha:1.0]
 
 #define kMenuButtomColor    [UIColor clearColor]
-//#define kMenuBackgroundColor    [UIColor colorWithRed:51/255.0 green:51/255.0 blue:51/255.0 alpha:1.0]
-//#define kMenuBackgroundColor    [UIColor colorWithRed:43/255.0 green:59/255.0 blue:78/255.0 alpha:1.0]
-
-
-//#define kMenuBackgroundColor    kBarColor
 
 #pragma mark - NSStrings
-// NSString
+
+#define kZipPassword    @"mookpassword"
+
 #define kTypeShow    @"show"
 #define kTypeRoutine    @"routine"
 #define kTypeIdea    @"idea"

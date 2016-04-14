@@ -80,7 +80,7 @@
     
     NSString *title = [NSString stringWithFormat:@"%@.mook", [routineModel getTitle]];
     NSString *zipPath = [NSTemporaryDirectory() stringByAppendingPathComponent:title];
-    BOOL success = [SSZipArchive createZipFileAtPath:zipPath withFilesAtPaths:pathArrM];
+    BOOL success = [SSZipArchive createZipFileAtPath:zipPath withFilesAtPaths:pathArrM withPassword:kZipPassword];
     if (success) {
         return zipPath;
     }
@@ -132,7 +132,7 @@
     NSString *title = [NSString stringWithFormat:@"%@.mook", [ideaObjModel getTitle]];
     NSString *zipPath = [NSTemporaryDirectory() stringByAppendingPathComponent:title];
     // 压缩所有模型数据
-    BOOL success = [SSZipArchive createZipFileAtPath:zipPath withFilesAtPaths:pathArrM];
+    BOOL success = [SSZipArchive createZipFileAtPath:zipPath withFilesAtPaths:pathArrM withPassword:kZipPassword];
     if (success) {  // 如果压缩成功, 返回压缩文件路径
         return zipPath;
     }
@@ -184,7 +184,7 @@
     NSString *title = [NSString stringWithFormat:@"%@.mook", [sleightObjModel getTitle]];
     NSString *zipPath = [NSTemporaryDirectory() stringByAppendingPathComponent:title];
     // 压缩所有模型数据
-    BOOL success = [SSZipArchive createZipFileAtPath:zipPath withFilesAtPaths:pathArrM];
+    BOOL success = [SSZipArchive createZipFileAtPath:zipPath withFilesAtPaths:pathArrM withPassword:kZipPassword];
     if (success) {  // 如果压缩成功, 返回压缩文件路径
         return zipPath;
     }
@@ -237,7 +237,7 @@
     NSString *title = [NSString stringWithFormat:@"%@.mook", [propObjModel getTitle]];
     NSString *zipPath = [NSTemporaryDirectory() stringByAppendingPathComponent:title];
     // 压缩所有模型数据
-    BOOL success = [SSZipArchive createZipFileAtPath:zipPath withFilesAtPaths:pathArrM];
+    BOOL success = [SSZipArchive createZipFileAtPath:zipPath withFilesAtPaths:pathArrM withPassword:kZipPassword];
     if (success) {  // 如果压缩成功, 返回压缩文件路径
         return zipPath;
     }
@@ -264,7 +264,7 @@
     NSString *title = [NSString stringWithFormat:@"%@.mook", [linesObjModel getTitle]];
     NSString *zipPath = [NSTemporaryDirectory() stringByAppendingPathComponent:title];
     // 压缩所有模型数据
-    BOOL success = [SSZipArchive createZipFileAtPath:zipPath withFilesAtPaths:pathArrM];
+    BOOL success = [SSZipArchive createZipFileAtPath:zipPath withFilesAtPaths:pathArrM withPassword:kZipPassword];
     if (success) {  // 如果压缩成功, 返回压缩文件路径
         return zipPath;
     }

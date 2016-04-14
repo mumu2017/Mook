@@ -17,19 +17,6 @@
     [self.contentView addSubview:self.titleLabel];
     [self.contentView addSubview:self.iconView];
     
-//    if (!UIAccessibilityIsReduceTransparencyEnabled()) {
-//        self.contentView.backgroundColor = [UIColor clearColor];
-//        
-//        UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleExtraLight];
-//        UIVisualEffectView *blurEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
-//        blurEffectView.frame = self.contentView.bounds;
-//        blurEffectView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-//        
-//        [self.contentView addSubview:blurEffectView];
-//    }
-//    else {
-//        self.contentView.backgroundColor = [UIColor blackColor];
-//    }
 }
 
 - (void)setName:(NSString *)name {
@@ -38,7 +25,7 @@
     if ([name containsString:@"mp4"]) {
         
         self.imageView.image = [name getNamedVideoFrame];
-        self.iconView.image = [UIImage imageNamed:@"PlayButtonOverlayLarge"];
+        self.iconView.image = [UIImage imageNamed:@"PlayButtonOverlaySmall"];
         
     } else if ([name containsString:@"jpg"]) {
         self.imageView.image = [name getNamedImageThumbnail];

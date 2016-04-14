@@ -38,7 +38,9 @@
     if (url != nil) {
         NSLog(@"url is here!");
         
-        BOOL flag = [SSZipArchive unzipFileAtPath:[url path] toDestination:[NSString tempUnzipPath]];
+        NSError *err;
+        BOOL flag = [SSZipArchive unzipFileAtPath:[url path] toDestination:[NSString tempUnzipPath] overwrite:YES password:kZipPassword error:&err];
+        
         if (flag) {
             NSLog(@"unzip sucess");
             
