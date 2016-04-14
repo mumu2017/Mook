@@ -117,6 +117,8 @@
 		439519BC1CBD26B900505E5B /* CLImportPasswordInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 439519BB1CBD26B900505E5B /* CLImportPasswordInputView.m */; };
 		439519BE1CBD26C600505E5B /* CLImportPasswordInputView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 439519BD1CBD26C600505E5B /* CLImportPasswordInputView.xib */; };
 		439519C11CBF610700505E5B /* MBProgressHUD+Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = 439519C01CBF610700505E5B /* MBProgressHUD+Tools.m */; };
+		439519C41CBF886C00505E5B /* FCFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 439519C31CBF886C00505E5B /* FCFileManager.m */; };
+		439519C71CBF888900505E5B /* CLDataSizeTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 439519C61CBF888900505E5B /* CLDataSizeTool.m */; };
 		43A281181CB224BC009C2785 /* CLMookTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A281171CB224BC009C2785 /* CLMookTabBarController.m */; };
 		43A2811F1CB2276A009C2785 /* CLLibraryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A2811D1CB2276A009C2785 /* CLLibraryCell.m */; };
 		43A281201CB2276A009C2785 /* CLLibraryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43A2811E1CB2276A009C2785 /* CLLibraryCell.xib */; };
@@ -347,6 +349,10 @@
 		439519BD1CBD26C600505E5B /* CLImportPasswordInputView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CLImportPasswordInputView.xib; sourceTree = "<group>"; };
 		439519BF1CBF610700505E5B /* MBProgressHUD+Tools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD+Tools.h"; sourceTree = "<group>"; };
 		439519C01CBF610700505E5B /* MBProgressHUD+Tools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MBProgressHUD+Tools.m"; sourceTree = "<group>"; };
+		439519C21CBF886C00505E5B /* FCFileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FCFileManager.h; sourceTree = "<group>"; };
+		439519C31CBF886C00505E5B /* FCFileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FCFileManager.m; sourceTree = "<group>"; };
+		439519C51CBF888900505E5B /* CLDataSizeTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLDataSizeTool.h; sourceTree = "<group>"; };
+		439519C61CBF888900505E5B /* CLDataSizeTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLDataSizeTool.m; sourceTree = "<group>"; };
 		43A281161CB224BC009C2785 /* CLMookTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLMookTabBarController.h; sourceTree = "<group>"; };
 		43A281171CB224BC009C2785 /* CLMookTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLMookTabBarController.m; sourceTree = "<group>"; };
 		43A2811C1CB2276A009C2785 /* CLLibraryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLLibraryCell.h; sourceTree = "<group>"; };
@@ -468,6 +474,8 @@
 		430DFBDF1CA3F3470054DF6B /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				439519C21CBF886C00505E5B /* FCFileManager.h */,
+				439519C31CBF886C00505E5B /* FCFileManager.m */,
 				43068C061CB7B9D000BA1A57 /* UINavigationBar+Awesome.h */,
 				43068C071CB7B9D000BA1A57 /* UINavigationBar+Awesome.m */,
 				43DF3AC61CAA78A100712D81 /* UIImage+WaterMark.h */,
@@ -965,6 +973,8 @@
 				439519AC1CBBB5F500505E5B /* CLDataExportTool.m */,
 				439519AE1CBBB60300505E5B /* CLDataImportTool.h */,
 				439519AF1CBBB60300505E5B /* CLDataImportTool.m */,
+				439519C51CBF888900505E5B /* CLDataSizeTool.h */,
+				439519C61CBF888900505E5B /* CLDataSizeTool.m */,
 			);
 			name = "Tools(业务类)";
 			sourceTree = "<group>";
@@ -1243,6 +1253,7 @@
 				439519BC1CBD26B900505E5B /* CLImportPasswordInputView.m in Sources */,
 				432345AE1C9404FB00200833 /* CLPasswordVC.m in Sources */,
 				4323453D1C94045000200833 /* AppDelegate.m in Sources */,
+				439519C71CBF888900505E5B /* CLDataSizeTool.m in Sources */,
 				43068BFD1CB74E5900BA1A57 /* IATConfig.m in Sources */,
 				43E0F73C1CA10D27005CAD97 /* MJIvar.m in Sources */,
 				43DF3AC81CAA78A100712D81 /* UIImage+WaterMark.m in Sources */,
@@ -1307,6 +1318,7 @@
 				4323467F1C9409BB00200833 /* XLButtonBarView.m in Sources */,
 				4323456A1C9404A800200833 /* UITextView+Tools.m in Sources */,
 				432345B61C9404FB00200833 /* CLSettingNavVC.m in Sources */,
+				439519C41CBF886C00505E5B /* FCFileManager.m in Sources */,
 				432345A51C9404FB00200833 /* CLEdtingManageVC.m in Sources */,
 				432345AF1C9404FB00200833 /* CLPropChooseNavVC.m in Sources */,
 				43F5F75A1CB390EB007BFB0C /* CLMediaNavVC.m in Sources */,

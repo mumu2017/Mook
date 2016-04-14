@@ -322,6 +322,10 @@
             [[NSNotificationCenter defaultCenter] postNotificationName:@"showIntroView" object:nil];
         }
     }
+    
+    // 自动取消选择
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+
 }
 
 

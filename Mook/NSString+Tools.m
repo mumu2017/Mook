@@ -188,7 +188,7 @@
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0]; // Get documents folder
     
-    NSString *backUpPath = [documentsDirectory stringByAppendingPathComponent:@"backup.zip"];
+    NSString *backUpPath = [documentsDirectory stringByAppendingPathComponent:@"backup.mook"];
     
     return backUpPath;
 }
