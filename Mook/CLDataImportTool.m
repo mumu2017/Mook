@@ -45,11 +45,17 @@
             NSData *data = [NSData dataWithContentsOfFile:[[NSString tempUnzipPath] stringByAppendingPathComponent:@"mookShare.data"]];
             NSDictionary *dict = [NSKeyedUnarchiver unarchiveObjectWithData:data];
             
-            NSLog(@"dict contains: %@", dict);
+            // 解压后删除Inbox中的文件
+            BOOL flag1 = [[NSFileManager defaultManager] removeItemAtURL:url error:NULL];
+            if (flag1) {
+                NSLog(@"INBOX CLEANED");
+            }
             return dict;
             
         } else {
             NSLog(@"unzip failed");
+            // 解压后删除Inbox中的文件
+            [[NSFileManager defaultManager] removeItemAtURL:url error:NULL];
             return nil;
         }
         
