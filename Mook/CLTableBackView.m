@@ -14,6 +14,11 @@
     return [[[NSBundle mainBundle] loadNibNamed:@"CLTableBackView" owner:nil options:nil] lastObject];
 }
 
+- (void)awakeFromNib {
+    [super awakeFromNib];
+    
+    self.contentLabel.text = @"您还没有添加任何内容";
+}
 
 
 @end

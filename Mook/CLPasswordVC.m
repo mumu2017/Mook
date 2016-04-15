@@ -363,8 +363,8 @@ typedef enum {
         [self.reminderButton setTitle:NSLocalizedString(@"密码提示", nil) forState:UIControlStateHighlighted];
         [self.reminderButton addTarget:self action:@selector(showPasswordReminder) forControlEvents:UIControlEventTouchUpInside];
         
-        [self.cancelButton setTitle:NSLocalizedString(@"TouchID", nil) forState:UIControlStateNormal];
-        [self.cancelButton setTitle:NSLocalizedString(@"TouchID", nil) forState:UIControlStateHighlighted];
+        [self.cancelButton setTitle:NSLocalizedString(@"指纹验证", nil) forState:UIControlStateNormal];
+        [self.cancelButton setTitle:NSLocalizedString(@"指纹验证", nil) forState:UIControlStateHighlighted];
         [self.cancelButton addTarget:self action:@selector(StartWJTouchID) forControlEvents:UIControlEventTouchUpInside];
     }
 
@@ -554,7 +554,7 @@ typedef enum {
     
     self.resultNoticeLabel.hidden = NO;
     
-    self.resultNoticeLabel.text = WJNotice(@"在验证的TouchID的过程中被系统取消 ", @"Authorize Error System Cancel");
+    self.resultNoticeLabel.text = WJNotice(@"在验证的TouchID的过程中被系统取消", @"Authorize Error System Cancel");
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         

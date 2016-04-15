@@ -203,7 +203,7 @@
     
     NSString *sampleDescription1 = NSLocalizedString(@"随时随地记录灵感,让创作无处不在", nil);
     NSString *sampleDescription2 = NSLocalizedString(@"私人订制魔术库,触手可及", nil);
-    NSString *sampleDescription3 = NSLocalizedString(@"视频,图片,文字...魔术记录从未如此简单", nil);
+    NSString *sampleDescription3 = NSLocalizedString(@"视频,图片,语音...魔术记录从未如此简单", nil);
     NSString *sampleDescription4 = NSLocalizedString(@"从今天起,做一个更好的魔术师", nil);
     
     EAIntroPage *page1 = [EAIntroPage page];
@@ -213,7 +213,7 @@
     page1.titleIconView = nil;
     
     EAIntroPage *page2 = [EAIntroPage page];
-    page2.title = NSLocalizedString(@"您的私人魔术库", nil);
+    page2.title = NSLocalizedString(@"您的私人魔术图书馆", nil);
     page2.desc = sampleDescription2;
     page2.bgImage = [UIImage imageNamed:@"prop.jpg"];
     page2.titleIconView = nil;

@@ -212,7 +212,7 @@
     self.editTextView.tintColor = kMenuBackgroundColor;
     
     if (self.editingContentType == kEditingContentTypeShow) {
-        
+#warning 添加随机小功能提示
         [self.editTextView addPlaceHolderWithText:NSLocalizedString(@"请输入演出说明,任何内容都可以", nil) andFont:kFontSys16];
         
     } else if (self.editingContentType == kEditingContentTypeLines) {
@@ -332,14 +332,6 @@
     UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbSize.height + 3, 0.0);
     self.editTextView.contentInset = contentInsets;
     self.editTextView.scrollIndicatorInsets = contentInsets;
-    
-    // If active text field is hidden by keyboard, scroll it so it's visible
-    // Your app might not need or want this behavior.
-//    CGRect aRect = self.view.frame;
-//    aRect.size.height -= kbSize.height;
-//    if (!CGRectContainsPoint(aRect, activeField.frame.origin) ) {
-//        [self.scrollView scrollRectToVisible:activeField.frame animated:YES];
-//    }
 }
 
 // Called when the UIKeyboardWillHideNotification is sent

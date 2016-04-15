@@ -201,10 +201,6 @@
     
     NSString *libraryPath = [paths objectAtIndex:0];
     
-    // 使用Document文件夹,因为它将会暴露在Itunes中
-//    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-//    NSString *documentsDirectory = [paths objectAtIndex:0]; // Get documents folder
-    
     NSString *mookPath = [libraryPath stringByAppendingPathComponent:@"/Mook"];
     
     if (![[NSFileManager defaultManager] fileExistsAtPath:mookPath])

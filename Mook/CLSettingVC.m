@@ -83,7 +83,7 @@
     }  else if ([self.voiceLanguage isEqualToString:kVoiceEnglish]) {
         self.languageControl.selectedSegmentIndex = 2;
     }
-    NSLog(@"%@", self.voiceLanguage);
+//    NSLog(@"%@", self.voiceLanguage);
 }
 
 - (void)newPasswordCreated {
@@ -205,7 +205,7 @@
 
 - (void)creatBackUp {
     
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"生成备份", nil) message:NSLocalizedString(@"提示: 生成备份文件后, 请尽快通过iTunes将备份文件导出到您的PC或者Mac中. 为了节省您的存储空间, Mook推荐您在导出备份后删除备份文件. 确定要生成备份文件吗?", nil) preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"生成备份", nil) message:NSLocalizedString(@"提示: 生成备份文件后, 请尽快将备份文件导出保存. 为了节省您的存储空间, Mook推荐您在导出备份后删除备份文件. 确定要生成备份文件吗?", nil) preferredStyle:UIAlertControllerStyleAlert];
     
     UIAlertAction* loadBackUp = [UIAlertAction actionWithTitle:NSLocalizedString(@"确定", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
@@ -263,7 +263,7 @@
             UIWindow *window = [[UIApplication sharedApplication] delegate].window;
             
             MBProgressHUD *HUD = [[MBProgressHUD alloc] initWithView:window];
-            HUD.labelText = NSLocalizedString(@"正在加载恢复备份", nil);
+            HUD.labelText = NSLocalizedString(@"正在恢复备份", nil);
             [window addSubview:HUD];
             [HUD setMode:MBProgressHUDModeDeterminate];   //圆盘的扇形进度显示
             HUD.taskInProgress = YES;
@@ -487,7 +487,7 @@
     MFMailComposeViewController *picker = [[MFMailComposeViewController alloc] init];
     picker.mailComposeDelegate = self;
     
-    [picker setSubject:@"Mook feedback"];
+    [picker setSubject:@"Mook反馈"];
     
     // Set up recipients
     NSArray *toRecipients = [NSArray arrayWithObject:@"chenlin7715@163.com"];
