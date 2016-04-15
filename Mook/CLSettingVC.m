@@ -112,7 +112,7 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 6;
+    return 7;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -138,11 +138,10 @@
             break;
             
         case 2:
-            number = 2;
+            number = 1;
             break;
-            
         case 3:
-            number = 2;
+            number = 1;
             break;
             
         case 4:
@@ -150,6 +149,10 @@
             break;
             
         case 5:
+            number = 2;
+            break;
+            
+        case 6:
             number = 4;
             break;
             
@@ -181,7 +184,7 @@
             [self deleteBackUp];
             
         }
-    } else if (indexPath.section == 4) {
+    } else if (indexPath.section == 5) {
         if (indexPath.row == 0) {
             
             // 检测设备能否发送邮件
@@ -192,7 +195,7 @@
             }
         }
         
-    } else if (indexPath.section == 5) {
+    } else if (indexPath.section == 6) {
         if (indexPath.row == 2) {
             [[NSNotificationCenter defaultCenter] postNotificationName:@"showIntroView" object:nil];
         }

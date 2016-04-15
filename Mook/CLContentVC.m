@@ -1006,15 +1006,15 @@
 // 导出笔记 (选择是否密码导出)
 - (void)export {
     
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"导出笔记" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"导出笔记", nil) message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     
-    UIAlertAction* exportWithPassword = [UIAlertAction actionWithTitle:@"密码导出" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction* exportWithPassword = [UIAlertAction actionWithTitle:NSLocalizedString(@"密码导出", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
         [self passwordExport];
         
     }];
     
-    UIAlertAction* exportWithoutPassword = [UIAlertAction actionWithTitle:@"直接导出" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction* exportWithoutPassword = [UIAlertAction actionWithTitle:NSLocalizedString(@"直接导出", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
         [self exportCurrentEntryWithPassword:@""];
         

@@ -35,6 +35,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 <constraints>
                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="GVT-dg-TSj" secondAttribute="bottom" constant="20" id="7r1-i2-J24"/>
                     <constraint firstItem="GVT-dg-TSj" firstAttribute="top" secondItem="fnt-ab-bEj" secondAttribute="bottom" constant="20" id="8sH-W1-gGm"/>

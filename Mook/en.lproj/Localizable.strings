@@ -6,6 +6,8 @@
 
 */
 
+"详细信息" = "Details";
+
 // 模型类
 
 //showModel
@@ -56,8 +58,9 @@
 "解锁失败" = "Unlock failed";
 
 //CLImportPasswordInputView
-"当前笔记有密码锁定, 请输入密码解锁." = "The current file is locked, please enter the password to unlock.";
+"当前笔记有密码锁定, 请输入密码解锁." = "The current file is locked, please enter the password.";
 "请输入笔记密码" = "Please enter the password";
+"解锁" = "Unlock";
 
 // List笔记
 "删除" = "Delete";
@@ -176,7 +179,7 @@
 "流程 %ld  " = "Routine %ld  ";
 "效果  " = "Effect  ";
 "编辑" = "Edit";
-
+"查看流程" = "Details";
 
 // Editing编辑
 // CLNewShowVC

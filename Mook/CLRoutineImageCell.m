@@ -29,6 +29,9 @@
 
 - (void)awakeFromNib {
     
+    [self.infoButton setTitle:NSLocalizedString(@"查看流程", nil) forState:UIControlStateNormal];
+    [self.infoButton setTitle:NSLocalizedString(@"查看流程", nil) forState:UIControlStateHighlighted];
+
     self.backgroundColor = kCellBgColor;
     self.iconView.clipsToBounds = YES;
     self.infoButton.tintColor = kMenuBackgroundColor;

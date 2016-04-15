@@ -38,6 +38,7 @@
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lines.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="T8U-Qy-jw3">
                         <rect key="frame" x="0.0" y="125.5" width="320" height="240"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="width" relation="greaterThanOrEqual" secondItem="T8U-Qy-jw3" secondAttribute="height" multiplier="4:3" id="ioB-oI-6hF"/>
                         </constraints>
@@ -47,7 +48,7 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </button>
                 </subviews>
-                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="T8U-Qy-jw3" secondAttribute="trailing" id="1vr-wx-rM8"/>
                     <constraint firstAttribute="trailingMargin" secondItem="jQx-38-Fm0" secondAttribute="trailing" constant="80" id="Cyc-BM-S70"/>

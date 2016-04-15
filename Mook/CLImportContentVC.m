@@ -178,7 +178,7 @@
         _importPasswordInputView = [CLImportPasswordInputView importPasswordInputView];
         _importPasswordInputView.delegate = self;
         self.passwordTF = _importPasswordInputView.passwordTF;
-        self.passwordTF.placeholder = @"请输入解锁密码";
+        self.passwordTF.placeholder = NSLocalizedString(@"请输入解锁密码", nil);
         self.passwordTF.delegate = self;
     }
     return _importPasswordInputView;
@@ -449,7 +449,7 @@
 
 - (void)setContentTitle {
    
-    self.navigationItem.title = @"预览";
+    self.navigationItem.title = NSLocalizedString(@"预览", nil);
 }
 
 - (void)viewWillAppear:(BOOL)animated {
