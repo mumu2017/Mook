@@ -471,7 +471,7 @@ typedef enum {
 - (void)StartWJTouchID {
     
     if (self.isUsingTouchID) {
-        [[WJTouchID touchID] startWJTouchIDWithMessage:WJNotice(@"请核对指纹信息", @"Please check the fingerprint") fallbackTitle:WJNotice(@"输入密码", @"Input Password") delegate:self];
+        [[WJTouchID touchID] startWJTouchIDWithMessage:WJNotice(@"请核对指纹信息", @"Please check the fingerprint") fallbackTitle:WJNotice(@"输入密码", @"Enter Password") delegate:self];
     }
 
 }

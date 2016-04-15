@@ -521,27 +521,22 @@
         case MFMailComposeResultCancelled:
             title = NSLocalizedString(@"邮件已取消", nil);
 
-//            HUD.labelText = @"Mail sending canceled";
             break;
         case MFMailComposeResultSaved:
             title = NSLocalizedString(@"邮件已保存", nil);
 
-//            HUD.labelText = @"Mail saved";
             break;
         case MFMailComposeResultSent:
             title = NSLocalizedString(@"邮件已发送", nil);
 
-//            HUD.labelText = @"Mail sent";
             break;
         case MFMailComposeResultFailed:
             title = NSLocalizedString(@"邮件发送失败", nil);
 
-//            HUD.labelText = @"Mail sending failed";
             break;
         default:
             title = NSLocalizedString(@"邮件未能发送", nil);
 
-//            HUD.labelText = @"Mail not sent";
             break;
     }
 

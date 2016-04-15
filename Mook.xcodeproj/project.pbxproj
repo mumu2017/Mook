@@ -76,7 +76,6 @@
 		432346301C94054300200833 /* CLTableBackView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4323460A1C94054300200833 /* CLTableBackView.m */; };
 		432346311C94054300200833 /* CLTableBackView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4323460B1C94054300200833 /* CLTableBackView.xib */; };
 		432346341C94054300200833 /* CLTagField.m in Sources */ = {isa = PBXBuildFile; fileRef = 432346101C94054300200833 /* CLTagField.m */; };
-		432346351C94054300200833 /* CLTagField.xib in Resources */ = {isa = PBXBuildFile; fileRef = 432346111C94054300200833 /* CLTagField.xib */; };
 		432346441C94055700200833 /* SMTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 432346401C94055700200833 /* SMTag.m */; };
 		432346451C94055700200833 /* SMTagField.m in Sources */ = {isa = PBXBuildFile; fileRef = 432346421C94055700200833 /* SMTagField.m */; };
 		4323464D1C9405EA00200833 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4323464C1C9405EA00200833 /* main.m */; };
@@ -116,6 +115,7 @@
 		439519C81CC0903800505E5B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 439519CA1CC0903800505E5B /* Main.storyboard */; };
 		439519CB1CC0904A00505E5B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 439519CD1CC0904A00505E5B /* LaunchScreen.storyboard */; };
 		439519D91CC0911000505E5B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 439519DB1CC0911000505E5B /* Localizable.strings */; };
+		439519EB1CC0EEB900505E5B /* CLTagField.xib in Resources */ = {isa = PBXBuildFile; fileRef = 439519ED1CC0EEB900505E5B /* CLTagField.xib */; };
 		43A281181CB224BC009C2785 /* CLMookTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A281171CB224BC009C2785 /* CLMookTabBarController.m */; };
 		43A2811F1CB2276A009C2785 /* CLLibraryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A2811D1CB2276A009C2785 /* CLLibraryCell.m */; };
 		43A281201CB2276A009C2785 /* CLLibraryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43A2811E1CB2276A009C2785 /* CLLibraryCell.xib */; };
@@ -276,7 +276,6 @@
 		4323460B1C94054300200833 /* CLTableBackView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CLTableBackView.xib; sourceTree = "<group>"; };
 		4323460F1C94054300200833 /* CLTagField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLTagField.h; sourceTree = "<group>"; };
 		432346101C94054300200833 /* CLTagField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLTagField.m; sourceTree = "<group>"; };
-		432346111C94054300200833 /* CLTagField.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CLTagField.xib; sourceTree = "<group>"; };
 		4323463F1C94055700200833 /* SMTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMTag.h; sourceTree = "<group>"; };
 		432346401C94055700200833 /* SMTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMTag.m; sourceTree = "<group>"; };
 		432346411C94055700200833 /* SMTagField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMTagField.h; sourceTree = "<group>"; };
@@ -357,6 +356,10 @@
 		439519E81CC0A62C00505E5B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		439519E91CC0A62F00505E5B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		439519EA1CC0A63100505E5B /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		439519EC1CC0EEB900505E5B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/CLTagField.xib; sourceTree = "<group>"; };
+		439519EF1CC0EEBB00505E5B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CLTagField.strings; sourceTree = "<group>"; };
+		439519F11CC0EEBF00505E5B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/CLTagField.strings"; sourceTree = "<group>"; };
+		439519F31CC0EEC100505E5B /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/CLTagField.strings"; sourceTree = "<group>"; };
 		43A281161CB224BC009C2785 /* CLMookTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLMookTabBarController.h; sourceTree = "<group>"; };
 		43A281171CB224BC009C2785 /* CLMookTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLMookTabBarController.m; sourceTree = "<group>"; };
 		43A2811C1CB2276A009C2785 /* CLLibraryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLLibraryCell.h; sourceTree = "<group>"; };
@@ -556,7 +559,7 @@
 				432346421C94055700200833 /* SMTagField.m */,
 				4323460F1C94054300200833 /* CLTagField.h */,
 				432346101C94054300200833 /* CLTagField.m */,
-				432346111C94054300200833 /* CLTagField.xib */,
+				439519ED1CC0EEB900505E5B /* CLTagField.xib */,
 			);
 			name = Tag;
 			sourceTree = "<group>";
@@ -1160,7 +1163,7 @@
 				43F5F7621CB3922B007BFB0C /* CLShowInfoCell.xib in Resources */,
 				439519BE1CBD26C600505E5B /* CLImportPasswordInputView.xib in Resources */,
 				4323462D1C94054300200833 /* CLQuickStringCell.xib in Resources */,
-				432346351C94054300200833 /* CLTagField.xib in Resources */,
+				439519EB1CC0EEB900505E5B /* CLTagField.xib in Resources */,
 				432346211C94054300200833 /* CLListTextCell.xib in Resources */,
 				43F5F7B51CB50039007BFB0C /* tag.jpg in Resources */,
 			);
@@ -1372,6 +1375,17 @@
 				439519EA1CC0A63100505E5B /* zh-Hant */,
 			);
 			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		439519ED1CC0EEB900505E5B /* CLTagField.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				439519EC1CC0EEB900505E5B /* Base */,
+				439519EF1CC0EEBB00505E5B /* en */,
+				439519F11CC0EEBF00505E5B /* zh-Hans */,
+				439519F31CC0EEC100505E5B /* zh-Hant */,
+			);
+			name = CLTagField.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

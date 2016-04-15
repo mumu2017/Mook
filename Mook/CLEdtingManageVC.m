@@ -687,7 +687,7 @@
 
         
     }else{
-        [_popUpView showText: @"启动识别服务失败，请稍后重试"];//可能是上次请求未结束，暂不支持多路并发
+        [_popUpView showText: NSLocalizedString(@"启动识别服务失败，请稍后重试", nil)];//可能是上次请求未结束，暂不支持多路并发
     }
 }
 
@@ -768,7 +768,7 @@
 //        return;
 //    }
     
-    NSString * vol = [NSString stringWithFormat:@"语音识别中\n音量：%d",volume];
+    NSString * vol = [NSString stringWithFormat:NSLocalizedString(@"语音识别中\n音量：%d", nil),volume];
     [_popUpView showText: vol];
 }
 
@@ -780,7 +780,7 @@
 - (void) onBeginOfSpeech
 {
     NSLog(@"onBeginOfSpeech");
-    [_popUpView showText: @"正在录音"];
+    [_popUpView showText: NSLocalizedString(@"正在录音", nil)];
 }
 
 /**
@@ -790,7 +790,7 @@
 {
     NSLog(@"onEndOfSpeech");
     
-    [_popUpView showText: @"停止录音"];
+    [_popUpView showText: NSLocalizedString(@"停止录音", nil)];
 }
 
 
@@ -808,23 +808,23 @@
         NSString *text ;
         
         if (self.isCanceled) {
-            text = @"识别停止";
+            text = NSLocalizedString(@"识别停止", nil);
             
         } else if (error.errorCode == 0 ) {
             if (_result.length == 0) {
-                text = @"无识别结果";
+                text = NSLocalizedString(@"无识别结果", nil);
             }else {
-                text = @"识别成功";
+                text = NSLocalizedString(@"识别成功", nil);
             }
         }else {
-            text = [NSString stringWithFormat:@"发生错误：%d %@", error.errorCode,error.errorDesc];
+            text = [NSString stringWithFormat:NSLocalizedString(@"发生错误：%d %@", nil), error.errorCode,error.errorDesc];
             NSLog(@"%@",text);
         }
         
         [_popUpView showText: text];
         
     }else {
-        [_popUpView showText:@"识别结束"];
+        [_popUpView showText:NSLocalizedString(@"识别结束", nil)];
         NSLog(@"errorCode:%d",[error errorCode]);
     }
 

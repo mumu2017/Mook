@@ -80,9 +80,9 @@
 
 #warning 多语言
     if (tags.count == 0) {
-        tagString = @"\n无标签";
+        tagString = NSLocalizedString(@"\n无标签", nil);
     } else {
-        tagString = @"\n标签:";
+        tagString = NSLocalizedString(@"\n标签:", nil);
         for (NSString *tag in tags) {
             tagString = [tagString stringByAppendingString:[NSString stringWithFormat:@" %@", tag]];
         }
@@ -126,15 +126,15 @@
             NSDateComponents *cmp = [date deltaWithNow];
             
             if (cmp.hour >= 1) {
-                return [NSString stringWithFormat:@"%ld小时之前",cmp.hour];
+                return [NSString stringWithFormat:NSLocalizedString(@"%ld小时之前", nil),cmp.hour];
             }else if (cmp.minute > 1){
-                return [NSString stringWithFormat:@"%ld分钟之前",cmp.minute];
+                return [NSString stringWithFormat:NSLocalizedString(@"%ld分钟之前", nil),cmp.minute];
             }else{
-                return @"刚刚";
+                return NSLocalizedString(@"刚刚", nil);
             }
             
         }else if ([date isYesterday]){ // 昨天
-            fmt.dateFormat = @"昨天 HH:mm";
+            fmt.dateFormat = NSLocalizedString(@"昨天 HH:mm", nil);
             return  [fmt stringFromDate:date];
             
         }else{ // 前天
