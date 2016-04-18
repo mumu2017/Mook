@@ -85,7 +85,7 @@
     
     if (modelDict == nil) { // 如果模型字典为空,则说明导入文件有问题,无法导入.
         
-        [MBProgressHUD showGlobalProgressHUDWithTitle:NSLocalizedString(@"预览失败", nil) hideAfterDelay:2.0];
+        [MBProgressHUD showGlobalProgressHUDWithTitle:NSLocalizedString(@"预览失败", nil) hideAfterDelay:1.5];
         
         [[NSNotificationCenter defaultCenter] postNotificationName:@"dismissImportContentVC" object:nil];
         
@@ -102,7 +102,7 @@
                 
             } else { // 如果模型为空, 则退出预览
                 
-                [MBProgressHUD showGlobalProgressHUDWithTitle:NSLocalizedString(@"预览失败", nil) hideAfterDelay:2.0];
+                [MBProgressHUD showGlobalProgressHUDWithTitle:NSLocalizedString(@"预览失败", nil) hideAfterDelay:1.5];
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"dismissImportContentVC" object:nil];
 
             }
@@ -119,7 +119,7 @@
                 [CLDataImportTool prepareDataWithIdea:model];
                 
             } else { // 如果模型为空, 则退出预览
-                [MBProgressHUD showGlobalProgressHUDWithTitle:NSLocalizedString(@"预览失败", nil) hideAfterDelay:2.0];
+                [MBProgressHUD showGlobalProgressHUDWithTitle:NSLocalizedString(@"预览失败", nil) hideAfterDelay:1.5];
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"dismissImportContentVC" object:nil];
                 
             }
@@ -134,7 +134,7 @@
                 [CLDataImportTool prepareDataWithSleight:model];
                 
             } else { // 如果模型为空, 则退出预览
-                [MBProgressHUD showGlobalProgressHUDWithTitle:NSLocalizedString(@"预览失败", nil) hideAfterDelay:2.0];
+                [MBProgressHUD showGlobalProgressHUDWithTitle:NSLocalizedString(@"预览失败", nil) hideAfterDelay:1.5];
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"dismissImportContentVC" object:nil];
                 
             }
@@ -149,7 +149,7 @@
                 [CLDataImportTool prepareDataWithProp:model];
                 
             } else { // 如果模型为空, 则退出预览
-                [MBProgressHUD showGlobalProgressHUDWithTitle:NSLocalizedString(@"预览失败", nil) hideAfterDelay:2.0];
+                [MBProgressHUD showGlobalProgressHUDWithTitle:NSLocalizedString(@"预览失败", nil) hideAfterDelay:1.5];
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"dismissImportContentVC" object:nil];
                 
             }
@@ -164,7 +164,7 @@
                 [CLDataImportTool prepareDataWithLines:model];
                 
             } else { // 如果模型为空, 则退出预览
-                [MBProgressHUD showGlobalProgressHUDWithTitle:NSLocalizedString(@"预览失败", nil) hideAfterDelay:2.0];
+                [MBProgressHUD showGlobalProgressHUDWithTitle:NSLocalizedString(@"预览失败", nil) hideAfterDelay:1.5];
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"dismissImportContentVC" object:nil];
                 
             }
