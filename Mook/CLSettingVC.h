@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "iflyMSC/iflyMSC.h"
 
 @class CLSettingVC;
 

@@ -78,7 +78,6 @@
     
     NSString *tagString;
 
-#warning 多语言
     if (tags.count == 0) {
         tagString = NSLocalizedString(@"\n无标签", nil);
     } else {

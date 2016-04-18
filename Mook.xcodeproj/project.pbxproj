@@ -116,6 +116,9 @@
 		439519CB1CC0904A00505E5B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 439519CD1CC0904A00505E5B /* LaunchScreen.storyboard */; };
 		439519D91CC0911000505E5B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 439519DB1CC0911000505E5B /* Localizable.strings */; };
 		439519EB1CC0EEB900505E5B /* CLTagField.xib in Resources */ = {isa = PBXBuildFile; fileRef = 439519ED1CC0EEB900505E5B /* CLTagField.xib */; };
+		439519F71CC4C65300505E5B /* Setting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 439519F61CC4C65300505E5B /* Setting.storyboard */; };
+		439519FC1CC51F6200505E5B /* CLBackUpVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 439519FB1CC51F6200505E5B /* CLBackUpVC.m */; };
+		439519FF1CC5271C00505E5B /* CLLanguageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 439519FE1CC5271C00505E5B /* CLLanguageVC.m */; };
 		43A281181CB224BC009C2785 /* CLMookTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A281171CB224BC009C2785 /* CLMookTabBarController.m */; };
 		43A2811F1CB2276A009C2785 /* CLLibraryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A2811D1CB2276A009C2785 /* CLLibraryCell.m */; };
 		43A281201CB2276A009C2785 /* CLLibraryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43A2811E1CB2276A009C2785 /* CLLibraryCell.xib */; };
@@ -360,6 +363,11 @@
 		439519EF1CC0EEBB00505E5B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CLTagField.strings; sourceTree = "<group>"; };
 		439519F11CC0EEBF00505E5B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/CLTagField.strings"; sourceTree = "<group>"; };
 		439519F31CC0EEC100505E5B /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/CLTagField.strings"; sourceTree = "<group>"; };
+		439519F61CC4C65300505E5B /* Setting.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Setting.storyboard; sourceTree = "<group>"; };
+		439519FA1CC51F6200505E5B /* CLBackUpVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLBackUpVC.h; sourceTree = "<group>"; };
+		439519FB1CC51F6200505E5B /* CLBackUpVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLBackUpVC.m; sourceTree = "<group>"; };
+		439519FD1CC5271C00505E5B /* CLLanguageVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLLanguageVC.h; sourceTree = "<group>"; };
+		439519FE1CC5271C00505E5B /* CLLanguageVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLLanguageVC.m; sourceTree = "<group>"; };
 		43A281161CB224BC009C2785 /* CLMookTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLMookTabBarController.h; sourceTree = "<group>"; };
 		43A281171CB224BC009C2785 /* CLMookTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLMookTabBarController.m; sourceTree = "<group>"; };
 		43A2811C1CB2276A009C2785 /* CLLibraryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLLibraryCell.h; sourceTree = "<group>"; };
@@ -514,6 +522,7 @@
 			isa = PBXGroup;
 			children = (
 				439519CA1CC0903800505E5B /* Main.storyboard */,
+				439519F61CC4C65300505E5B /* Setting.storyboard */,
 				439519CD1CC0904A00505E5B /* LaunchScreen.storyboard */,
 				439519DB1CC0911000505E5B /* Localizable.strings */,
 				4323454F1C9404A800200833 /* Constants.h */,
@@ -627,6 +636,24 @@
 				43EEE7D81CAD0B5E00F0BCCF /* CLRoutineChooseVC.m */,
 			);
 			name = "演出页面";
+			sourceTree = "<group>";
+		};
+		439519F81CC51F0D00505E5B /* BackUp */ = {
+			isa = PBXGroup;
+			children = (
+				439519FA1CC51F6200505E5B /* CLBackUpVC.h */,
+				439519FB1CC51F6200505E5B /* CLBackUpVC.m */,
+			);
+			name = BackUp;
+			sourceTree = "<group>";
+		};
+		439519F91CC51F1600505E5B /* Language */ = {
+			isa = PBXGroup;
+			children = (
+				439519FD1CC5271C00505E5B /* CLLanguageVC.h */,
+				439519FE1CC5271C00505E5B /* CLLanguageVC.m */,
+			);
+			name = Language;
 			sourceTree = "<group>";
 		};
 		43A281191CB2269C009C2785 /* Library分类 */ = {
@@ -834,6 +861,8 @@
 		43E0F7181CA0F12A005CAD97 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				439519F91CC51F1600505E5B /* Language */,
+				439519F81CC51F0D00505E5B /* BackUp */,
 				432345921C9404FB00200833 /* CLSettingNavVC.h */,
 				432345931C9404FB00200833 /* CLSettingNavVC.m */,
 				432345941C9404FB00200833 /* CLSettingVC.h */,
@@ -1162,6 +1191,7 @@
 				43F5F7BF1CB50AD3007BFB0C /* launch.jpg in Resources */,
 				43F5F7621CB3922B007BFB0C /* CLShowInfoCell.xib in Resources */,
 				439519BE1CBD26C600505E5B /* CLImportPasswordInputView.xib in Resources */,
+				439519F71CC4C65300505E5B /* Setting.storyboard in Resources */,
 				4323462D1C94054300200833 /* CLQuickStringCell.xib in Resources */,
 				439519EB1CC0EEB900505E5B /* CLTagField.xib in Resources */,
 				432346211C94054300200833 /* CLListTextCell.xib in Resources */,
@@ -1230,6 +1260,7 @@
 				432345E71C94051A00200833 /* CLRoutineModel.m in Sources */,
 				439519B31CBBF45D00505E5B /* CLImportContentVC.m in Sources */,
 				439519B01CBBB60300505E5B /* CLDataImportTool.m in Sources */,
+				439519FF1CC5271C00505E5B /* CLLanguageVC.m in Sources */,
 				432345BC1C9404FB00200833 /* CLTagChooseNavVC.m in Sources */,
 				43A2811F1CB2276A009C2785 /* CLLibraryCell.m in Sources */,
 				439519B61CBBF46F00505E5B /* CLImportContentNavVC.m in Sources */,
@@ -1245,6 +1276,7 @@
 				43068BFA1CB74DEB00BA1A57 /* PopupView.m in Sources */,
 				432345E51C94051A00200833 /* CLPropObjModel.m in Sources */,
 				432345651C9404A800200833 /* UIImageView+Tools.m in Sources */,
+				439519FC1CC51F6200505E5B /* CLBackUpVC.m in Sources */,
 				43885F791CA6A8AC00269CE1 /* CLHomeNavVC.m in Sources */,
 				4323468A1C96B0DA00200833 /* CLNewEntryImageCell.m in Sources */,
 				43E0F73B1CA10D27005CAD97 /* MJFoundation.m in Sources */,
