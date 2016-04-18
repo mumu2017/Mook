@@ -656,6 +656,15 @@
 			name = Language;
 			sourceTree = "<group>";
 		};
+		43951A001CC530B200505E5B /* Password */ = {
+			isa = PBXGroup;
+			children = (
+				432345821C9404FB00200833 /* CLPasswordVC.h */,
+				432345831C9404FB00200833 /* CLPasswordVC.m */,
+			);
+			name = Password;
+			sourceTree = "<group>";
+		};
 		43A281191CB2269C009C2785 /* Library分类 */ = {
 			isa = PBXGroup;
 			children = (
@@ -861,14 +870,13 @@
 		43E0F7181CA0F12A005CAD97 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				439519F91CC51F1600505E5B /* Language */,
-				439519F81CC51F0D00505E5B /* BackUp */,
 				432345921C9404FB00200833 /* CLSettingNavVC.h */,
 				432345931C9404FB00200833 /* CLSettingNavVC.m */,
 				432345941C9404FB00200833 /* CLSettingVC.h */,
 				432345951C9404FB00200833 /* CLSettingVC.m */,
-				432345821C9404FB00200833 /* CLPasswordVC.h */,
-				432345831C9404FB00200833 /* CLPasswordVC.m */,
+				43951A001CC530B200505E5B /* Password */,
+				439519F91CC51F1600505E5B /* Language */,
+				439519F81CC51F0D00505E5B /* BackUp */,
 				43F5F76D1CB3E45D007BFB0C /* QuickString */,
 			);
 			name = Controllers;

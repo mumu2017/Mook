@@ -19,11 +19,29 @@
 @property (weak, nonatomic) IBOutlet UISwitch *saveVideoSwitch;
 @property (weak, nonatomic) IBOutlet UISwitch *touchIDSwitch;
 @property (weak, nonatomic) IBOutlet UILabel *languageLabel;
+@property (weak, nonatomic) IBOutlet UILabel *quickStringCntLabel;
 @property (nonatomic, copy) NSString *voiceLanguage;
 
+@property (nonatomic, strong) NSMutableArray <NSString*> *quickStringList;
 @end
 
 @implementation CLSettingVC
+
+- (NSMutableArray *)quickStringList {
+
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:kQuickStringKey] == nil) {
+        _quickStringList = [NSMutableArray array];
+        
+        [[NSUserDefaults standardUserDefaults] setObject:_quickStringList forKey:kQuickStringKey];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+    } else {
+        NSArray *array = [[NSUserDefaults standardUserDefaults] objectForKey:kQuickStringKey];
+        _quickStringList = [array mutableCopy];
+    }
+
+    return _quickStringList;
+}
 
 - (NSString *)voiceLanguage {
     
@@ -66,7 +84,8 @@
     
     [self voiceLanguage];
     self.languageLabel.text = [defaults stringForKey:kVoiceLanguageKey];
-
+    
+    self.quickStringCntLabel.text = [NSString stringWithFormat:@"%ld", (unsigned long)self.quickStringList.count];
 }
 
 - (void)newPasswordCreated {

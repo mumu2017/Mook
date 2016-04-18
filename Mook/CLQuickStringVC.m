@@ -19,7 +19,6 @@
 
 @implementation CLQuickStringVC
 
-
 - (NSMutableArray *)quickStringList {
     if (!_quickStringList) {
         if ([[NSUserDefaults standardUserDefaults] objectForKey:kQuickStringKey] == nil) {
