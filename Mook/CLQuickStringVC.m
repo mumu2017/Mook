@@ -109,7 +109,7 @@
 - (NSArray *)rightButtons
 {
     NSMutableArray *rightUtilityButtons = [NSMutableArray new];
-    [rightUtilityButtons sw_addUtilityButtonWithColor:[UIColor redColor] title:NSLocalizedString(@"删除", nil)];
+    [rightUtilityButtons sw_addUtilityButtonWithColor:[UIColor flatRedColor] title:NSLocalizedString(@"删除", nil)];
     
     return rightUtilityButtons;
 }

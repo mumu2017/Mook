@@ -140,7 +140,7 @@
     NSString *tag = NSLocalizedString(@"导入", nil);
     
     if ([routineModel.infoModel.name containsString:[NSString stringWithFormat:@"(%@)", tag]] == NO) {
-        routineModel.infoModel.name = [NSString stringWithFormat:@"%@(%@)", routineModel.infoModel.name, tag];
+        routineModel.infoModel.name = [NSString stringWithFormat:@"%@(%@)", [routineModel getTitle], tag];
     }
     
     routineModel.tags = [NSMutableArray arrayWithObject:tag];
@@ -192,7 +192,7 @@
     NSString *tag = NSLocalizedString(@"导入", nil);
     
     if ([ideaObjModel.infoModel.name containsString:[NSString stringWithFormat:@"(%@)", tag]] == NO) {
-        ideaObjModel.infoModel.name = [NSString stringWithFormat:@"%@(%@)", ideaObjModel.infoModel.name, tag];
+        ideaObjModel.infoModel.name = [NSString stringWithFormat:@"%@(%@)", [ideaObjModel getTitle], tag];
     }
     
     ideaObjModel.tags = [NSMutableArray arrayWithObject:tag];
@@ -230,7 +230,7 @@
     NSString *tag = NSLocalizedString(@"导入", nil);
     
     if ([sleightObjModel.infoModel.name containsString:[NSString stringWithFormat:@"(%@)", tag]] == NO) {
-        sleightObjModel.infoModel.name = [NSString stringWithFormat:@"%@(%@)", sleightObjModel.infoModel.name, tag];
+        sleightObjModel.infoModel.name = [NSString stringWithFormat:@"%@(%@)", [sleightObjModel getTitle], tag];
     }
     
     sleightObjModel.tags = [NSMutableArray arrayWithObject:tag];
@@ -268,7 +268,7 @@
     NSString *tag = NSLocalizedString(@"导入", nil);
     
     if ([propObjModel.infoModel.name containsString:[NSString stringWithFormat:@"(%@)", tag]] == NO) {
-        propObjModel.infoModel.name = [NSString stringWithFormat:@"%@(%@)", propObjModel.infoModel.name, tag];
+        propObjModel.infoModel.name = [NSString stringWithFormat:@"%@(%@)", [propObjModel getTitle], tag];
     }
     
     propObjModel.tags = [NSMutableArray arrayWithObject:tag];
@@ -305,7 +305,7 @@
     // 重设标签
     NSString *tag = NSLocalizedString(@"导入", nil);
     if ([linesObjModel.infoModel.name containsString:[NSString stringWithFormat:@"(%@)", tag]] == NO) {
-        linesObjModel.infoModel.name = [NSString stringWithFormat:@"%@(%@)", linesObjModel.infoModel.name, tag];
+        linesObjModel.infoModel.name = [NSString stringWithFormat:@"%@(%@)", [linesObjModel getTitle], tag];
     }
 
 

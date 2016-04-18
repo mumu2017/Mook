@@ -118,16 +118,42 @@
     NSAttributedString *content;
  
     id modelUnknown = self.allItems[indexPath.row];
-    if ([modelUnknown isKindOfClass:[CLIdeaObjModel class]]) {
-        CLIdeaObjModel *model = (CLIdeaObjModel *)modelUnknown;
-        image = [model getThumbnail];
-        iconName = kIconNameIdea;
-        title = [model getTitle];
-        content = [model getContent];
-    } else if ([modelUnknown isKindOfClass:[CLShowModel class]]) {
+    
+    if ([modelUnknown isKindOfClass:[CLShowModel class]]) {
         CLShowModel *model = (CLShowModel *)modelUnknown;
         image = [model getThumbnail];
         iconName = kIconNameShow;
+        title = [model getTitle];
+        content = [model getContent];
+        
+        if (image != nil) { // 如果返回图片,则表示模型中有图片或多媒体
+            CLListImageCell *cell = [tableView dequeueReusableCellWithIdentifier:kListImageCellID forIndexPath:indexPath];
+            cell.iconView.image = image;
+            cell.iconName = iconName;
+            [cell setTitle:title content:content];
+            
+            cell.rightUtilityButtons = [self showRightButtons];
+            cell.delegate = self;
+            cell.backgroundColor = [UIColor flatWhiteColor];
+            
+            return cell;
+            
+        } else {
+            CLListTextCell *cell = [tableView dequeueReusableCellWithIdentifier:kListTextCellID forIndexPath:indexPath];
+            cell.iconName = iconName;
+            [cell setTitle:title content:content];
+            
+            cell.rightUtilityButtons = [self showRightButtons];
+            cell.delegate = self;
+            cell.backgroundColor = [UIColor flatWhiteColor];
+            
+            return cell;
+        }
+        
+    } else if ([modelUnknown isKindOfClass:[CLIdeaObjModel class]]) {
+        CLIdeaObjModel *model = (CLIdeaObjModel *)modelUnknown;
+        image = [model getThumbnail];
+        iconName = kIconNameIdea;
         title = [model getTitle];
         content = [model getContent];
     } else if ([modelUnknown isKindOfClass:[CLRoutineModel class]]) {
@@ -183,13 +209,21 @@
     
 }
 
+- (NSArray *)showRightButtons
+{
+    NSMutableArray *rightUtilityButtons = [NSMutableArray new];
+    
+    [rightUtilityButtons sw_addUtilityButtonWithColor:[UIColor flatRedColor] icon:[UIImage imageNamed:@"iconBin"]];
+    
+    return rightUtilityButtons;
+}
 
 - (NSArray *)rightButtons
 {
     NSMutableArray *rightUtilityButtons = [NSMutableArray new];
     
     [rightUtilityButtons sw_addUtilityButtonWithColor:[UIColor flatGrayColorDark] icon:[UIImage imageNamed:@"iconAction"]];
-    [rightUtilityButtons sw_addUtilityButtonWithColor:[UIColor redColor] title:NSLocalizedString(@"删除", nil)];
+    [rightUtilityButtons sw_addUtilityButtonWithColor:[UIColor flatRedColor] icon:[UIImage imageNamed:@"iconBin"]];
     
     return rightUtilityButtons;
 }
@@ -203,7 +237,16 @@
     NSIndexPath *path = [self.tableView indexPathForCell:cell];
     
     if (index == 0) {
-        [self exportWithIndexPath:path];
+        
+        id modelUnknown = self.allItems[path.row];
+        if ([modelUnknown isKindOfClass:[CLShowModel class]]) {
+            [self delete:path];
+        } else {
+            
+            [self exportWithIndexPath:path];
+
+        }
+        
     } else if (index == 1) {
         
         [self delete:path];
@@ -217,7 +260,7 @@
 - (void)delete:(NSIndexPath *)path {
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:NSLocalizedString(@"提示: 删除内容后将无法恢复,确定要删除当前内容吗?", nil) preferredStyle:UIAlertControllerStyleActionSheet];
     
-    UIAlertAction* delete = [UIAlertAction actionWithTitle:NSLocalizedString(@"确定", nil) style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction* delete = [UIAlertAction actionWithTitle:NSLocalizedString(@"删除", nil) style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
         
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             
