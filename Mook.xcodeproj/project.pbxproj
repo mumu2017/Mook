@@ -192,6 +192,12 @@
 		430DFBC81CA252DD0054DF6B /* CLNewEntryNavVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLNewEntryNavVC.m; sourceTree = "<group>"; };
 		430DFBCA1CA393CC0054DF6B /* NSDate+MJ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+MJ.h"; sourceTree = "<group>"; };
 		430DFBCB1CA393CC0054DF6B /* NSDate+MJ.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+MJ.m"; sourceTree = "<group>"; };
+		431786F51CC6792D005C14F2 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		431786F61CC67934005C14F2 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Main.strings"; sourceTree = "<group>"; };
+		431786F71CC6794D005C14F2 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		431786F81CC67952005C14F2 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		431786F91CC6797E005C14F2 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/CLTagField.strings"; sourceTree = "<group>"; };
+		431786FA1CC67982005C14F2 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/CLTagField.strings"; sourceTree = "<group>"; };
 		431BCEDE1CA8F81C0085D20F /* JGActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JGActionSheet.h; sourceTree = "<group>"; };
 		431BCEDF1CA8F81C0085D20F /* JGActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JGActionSheet.m; sourceTree = "<group>"; };
 		432345351C94045000200833 /* Mook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mook.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -352,16 +358,12 @@
 		439519CC1CC0904A00505E5B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		439519CE1CC0908A00505E5B /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Base; path = Base.lproj/Info.plist; sourceTree = "<group>"; };
 		439519D11CC0909A00505E5B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
-		439519D41CC090A100505E5B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
-		439519D71CC090A800505E5B /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		439519DA1CC0911000505E5B /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		439519E81CC0A62C00505E5B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		439519E91CC0A62F00505E5B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		439519EA1CC0A63100505E5B /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		439519EC1CC0EEB900505E5B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/CLTagField.xib; sourceTree = "<group>"; };
 		439519EF1CC0EEBB00505E5B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CLTagField.strings; sourceTree = "<group>"; };
-		439519F11CC0EEBF00505E5B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/CLTagField.strings"; sourceTree = "<group>"; };
-		439519F31CC0EEC100505E5B /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/CLTagField.strings"; sourceTree = "<group>"; };
 		439519FA1CC51F6200505E5B /* CLBackUpVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLBackUpVC.h; sourceTree = "<group>"; };
 		439519FB1CC51F6200505E5B /* CLBackUpVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLBackUpVC.m; sourceTree = "<group>"; };
 		439519FD1CC5271C00505E5B /* CLLanguageVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLLanguageVC.h; sourceTree = "<group>"; };
@@ -371,8 +373,6 @@
 		43951A071CC5DAEF00505E5B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Setting.strings"; sourceTree = "<group>"; };
 		43951A091CC5DAF100505E5B /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Setting.strings"; sourceTree = "<group>"; };
 		43951A0B1CC5DDA700505E5B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
-		43951A0D1CC5DDAB00505E5B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
-		43951A0F1CC5DDAE00505E5B /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Main.strings"; sourceTree = "<group>"; };
 		43951A101CC5E7A200505E5B /* CLAboutVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLAboutVC.h; sourceTree = "<group>"; };
 		43951A111CC5E7A200505E5B /* CLAboutVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLAboutVC.m; sourceTree = "<group>"; };
 		43951A141CC5E7BE00505E5B /* CLBackUpInfoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLBackUpInfoVC.h; sourceTree = "<group>"; };
@@ -1402,8 +1402,8 @@
 			children = (
 				439519C91CC0903800505E5B /* Base */,
 				43951A0B1CC5DDA700505E5B /* en */,
-				43951A0D1CC5DDAB00505E5B /* zh-Hans */,
-				43951A0F1CC5DDAE00505E5B /* zh-Hant */,
+				431786F51CC6792D005C14F2 /* zh-Hans */,
+				431786F61CC67934005C14F2 /* zh-Hant */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -1413,8 +1413,8 @@
 			children = (
 				439519CC1CC0904A00505E5B /* Base */,
 				439519D11CC0909A00505E5B /* en */,
-				439519D41CC090A100505E5B /* zh-Hans */,
-				439519D71CC090A800505E5B /* zh-Hant */,
+				431786F71CC6794D005C14F2 /* zh-Hans */,
+				431786F81CC67952005C14F2 /* zh-Hant */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -1443,8 +1443,8 @@
 			children = (
 				439519EC1CC0EEB900505E5B /* Base */,
 				439519EF1CC0EEBB00505E5B /* en */,
-				439519F11CC0EEBF00505E5B /* zh-Hans */,
-				439519F31CC0EEC100505E5B /* zh-Hant */,
+				431786F91CC6797E005C14F2 /* zh-Hans */,
+				431786FA1CC67982005C14F2 /* zh-Hant */,
 			);
 			name = CLTagField.xib;
 			sourceTree = "<group>";

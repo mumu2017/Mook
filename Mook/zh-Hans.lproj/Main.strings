@@ -11,7 +11,7 @@
 /* Class = "UILabel"; text = "What is Magic?"; ObjectID = "3xD-QQ-DJH"; */
 "3xD-QQ-DJH.text" = "What is Magic?";
 
-/* Class = "UINavigationItem"; title = "笔记"; ObjectID = "4Kf-lo-IC0"; */
+/* Class = "UINavigationItem"; title = "时间线"; ObjectID = "4Kf-lo-IC0"; */
 "4Kf-lo-IC0.title" = "时间线";
 
 /* Class = "UILabel"; text = "AppStore 评分"; ObjectID = "4e8-VU-fzj"; */
@@ -20,7 +20,7 @@
 /* Class = "UILabel"; text = "快捷短语"; ObjectID = "7PU-UJ-Tyk"; */
 "7PU-UJ-Tyk.text" = "快捷短语";
 
-/* Class = "UITabBarItem"; title = "笔记"; ObjectID = "7U8-cH-grM"; */
+/* Class = "UITabBarItem"; title = "时间线"; ObjectID = "7U8-cH-grM"; */
 "7U8-cH-grM.title" = "时间线";
 
 /* Class = "UITabBarItem"; title = "设置"; ObjectID = "7UM-em-4Mb"; */
