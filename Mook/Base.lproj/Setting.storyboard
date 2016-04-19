@@ -10,7 +10,7 @@
         <!--备份说明-->
         <scene sceneID="HxQ-c8-fkQ">
             <objects>
-                <viewController storyboardIdentifier="backupExpVC" id="mNy-0Y-aqf" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="backupExpVC" id="mNy-0Y-aqf" customClass="CLBackUpInfoVC" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="mh3-65-pPs"/>
                         <viewControllerLayoutGuide type="bottom" id="zrk-4U-81y"/>
@@ -39,7 +39,7 @@
 
 如果您已经将备份文件保存到了您的电脑或者其它地方, Mook推荐您将备份文件删除,以节省更多存储空间. 当您想要恢复备份时, 可通过iTunes文件共享功能将备份文件导入到Mook文件夹中, 然后恢复备份.</string>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
                                 <variation key="heightClass=regular-widthClass=compact">
@@ -79,6 +79,9 @@
                     </view>
                     <navigationItem key="navigationItem" title="备份说明" id="0Do-me-0Gv"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="contentTextView" destination="S6r-dR-V9X" id="mAe-gz-9IO"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xoD-2B-7WG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -240,7 +243,7 @@
         <!--关于-->
         <scene sceneID="oHh-kR-cLk">
             <objects>
-                <viewController storyboardIdentifier="aboutVC" id="G7Z-Bv-pTg" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="aboutVC" id="G7Z-Bv-pTg" customClass="CLAboutVC" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Y6w-lD-8Rl"/>
                         <viewControllerLayoutGuide type="bottom" id="Ztd-52-Nfj"/>
@@ -276,7 +279,7 @@ Mook 1.0.0            By Chen Lin
 
 Copyright © 2016. All rights reserved.</string>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <variation key="heightClass=regular-widthClass=compact">
                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
@@ -326,6 +329,10 @@ Copyright © 2016. All rights reserved.</string>
                     </view>
                     <navigationItem key="navigationItem" title="关于" id="zzD-KG-stQ"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="contentTextView" destination="MKa-mu-JdA" id="j5P-Gi-gNV"/>
+                        <outlet property="titleLabel" destination="KKz-pB-Q1T" id="5H3-mq-PLh"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xeh-cZ-JwF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

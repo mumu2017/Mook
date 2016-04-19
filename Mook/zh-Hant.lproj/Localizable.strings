@@ -179,6 +179,12 @@
 "便捷短语" = "便捷短語";
 "编辑便捷短语" = "編輯便捷短語";
 
+// 零星
+
+"Mook版本" = "Mook 1.0.0";
+"关于内容" = "這是壹個魔術愛好者的作品.希望它能夠幫助魔術師與愛好者們進行魔術知識管理.\n讓我們壹起,把魔術變得更好.\nMook使用了訊飛語音提供的語音識別服務.\nMook使用了以下開源庫:\nFMDB\nSWTableViewCell\nMWPhotoBrowser\nChameleonFramework\nSSZipArchive\nEAIntroView\nMBProgressHUD\nWJTouchID\nJGActionSheet\n\n特別感謝: Rebekka Gao, 謝謝妳壹直以來的陪伴和支持.\n感謝: 亦明, 歐陽, 易予, 謝謝妳們在魔術之路上的陪伴.\n感謝林卓傑先生提供的\"What is magic?\"創意.感謝各位TMW群的朋友們的支持和反饋.\n\nMook 1.0.0            By Chen Lin\n\nCopyright © 2016. All rights reserved.";
+
+"备份说明内容" = "1. 創建備份:\n\n您點擊創建備份選項後, Mook會將當前您在Mook中記錄的所有數據打包成壹個備份文件(文件名:backup.mook),您可將該文件保存到您的電腦上:\n\n\t將您的iPhone通過數據線連接到您的電腦上(請確保您的電腦上安裝了iTunes軟件). 使用iTunes文件共享功能, 將Mook中的backup.mook文件拷貝到您的電腦上.\n\n\t如果您不了解iTunes文件共享功能,請訪問以下網址了解相關介紹:\n\thttps://support.apple.com/zh-cn/HT201301\n請註意: 備份文件包含了所有的魔術記錄數據, 但並不包括您的設置數據. 如果您在新的手機中恢復了備份, 請根據自己的使用習慣在設置頁面進行設置.\n2. 恢復備份:\n\n當Mook的文件夾中存在Mook生成的備份文件(文件名:backup.mook)時, 您點擊恢復備份後, Mook將自動恢復備份文件中的數據, 並且恢復的數據將會完全覆蓋現有數據. \n\n3. 刪除備份:\n\n如果您已經將備份文件保存到了您的電腦或者其它地方, Mook推薦您將備份文件刪除,以節省更多存儲空間. 當您想要恢復備份時, 可通過iTunes文件共享功能將備份文件導入到Mook文件夾中, 然後恢復備份.";
 
 // Content內容
 //CLShowVC

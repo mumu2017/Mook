@@ -119,6 +119,8 @@
 		439519FC1CC51F6200505E5B /* CLBackUpVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 439519FB1CC51F6200505E5B /* CLBackUpVC.m */; };
 		439519FF1CC5271C00505E5B /* CLLanguageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 439519FE1CC5271C00505E5B /* CLLanguageVC.m */; };
 		43951A011CC5DAEA00505E5B /* Setting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 43951A031CC5DAEA00505E5B /* Setting.storyboard */; };
+		43951A121CC5E7A200505E5B /* CLAboutVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 43951A111CC5E7A200505E5B /* CLAboutVC.m */; };
+		43951A161CC5E7BE00505E5B /* CLBackUpInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 43951A151CC5E7BE00505E5B /* CLBackUpInfoVC.m */; };
 		43A281181CB224BC009C2785 /* CLMookTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A281171CB224BC009C2785 /* CLMookTabBarController.m */; };
 		43A2811F1CB2276A009C2785 /* CLLibraryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A2811D1CB2276A009C2785 /* CLLibraryCell.m */; };
 		43A281201CB2276A009C2785 /* CLLibraryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43A2811E1CB2276A009C2785 /* CLLibraryCell.xib */; };
@@ -371,6 +373,10 @@
 		43951A0B1CC5DDA700505E5B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		43951A0D1CC5DDAB00505E5B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		43951A0F1CC5DDAE00505E5B /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Main.strings"; sourceTree = "<group>"; };
+		43951A101CC5E7A200505E5B /* CLAboutVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLAboutVC.h; sourceTree = "<group>"; };
+		43951A111CC5E7A200505E5B /* CLAboutVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLAboutVC.m; sourceTree = "<group>"; };
+		43951A141CC5E7BE00505E5B /* CLBackUpInfoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLBackUpInfoVC.h; sourceTree = "<group>"; };
+		43951A151CC5E7BE00505E5B /* CLBackUpInfoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLBackUpInfoVC.m; sourceTree = "<group>"; };
 		43A281161CB224BC009C2785 /* CLMookTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLMookTabBarController.h; sourceTree = "<group>"; };
 		43A281171CB224BC009C2785 /* CLMookTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLMookTabBarController.m; sourceTree = "<group>"; };
 		43A2811C1CB2276A009C2785 /* CLLibraryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLLibraryCell.h; sourceTree = "<group>"; };
@@ -651,6 +657,8 @@
 			children = (
 				439519FA1CC51F6200505E5B /* CLBackUpVC.h */,
 				439519FB1CC51F6200505E5B /* CLBackUpVC.m */,
+				43951A141CC5E7BE00505E5B /* CLBackUpInfoVC.h */,
+				43951A151CC5E7BE00505E5B /* CLBackUpInfoVC.m */,
 			);
 			name = BackUp;
 			sourceTree = "<group>";
@@ -671,6 +679,15 @@
 				432345831C9404FB00200833 /* CLPasswordVC.m */,
 			);
 			name = Password;
+			sourceTree = "<group>";
+		};
+		43951A131CC5E7A900505E5B /* About */ = {
+			isa = PBXGroup;
+			children = (
+				43951A101CC5E7A200505E5B /* CLAboutVC.h */,
+				43951A111CC5E7A200505E5B /* CLAboutVC.m */,
+			);
+			name = About;
 			sourceTree = "<group>";
 		};
 		43A281191CB2269C009C2785 /* Library分类 */ = {
@@ -886,6 +903,7 @@
 				439519F91CC51F1600505E5B /* Language */,
 				439519F81CC51F0D00505E5B /* BackUp */,
 				43F5F76D1CB3E45D007BFB0C /* QuickString */,
+				43951A131CC5E7A900505E5B /* About */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -1286,6 +1304,7 @@
 				43885F711CA5079100269CE1 /* CLContentVC.m in Sources */,
 				432346341C94054300200833 /* CLTagField.m in Sources */,
 				439519AD1CBBB5F500505E5B /* CLDataExportTool.m in Sources */,
+				43951A121CC5E7A200505E5B /* CLAboutVC.m in Sources */,
 				432345681C9404A800200833 /* UITableView+Tools.m in Sources */,
 				43EEE7DD1CAD328500F0BCCF /* CLRoutineImageCell.m in Sources */,
 				432345661C9404A800200833 /* UINavigationBar+Awesome.m in Sources */,
@@ -1310,6 +1329,7 @@
 				432345E31C94051A00200833 /* CLPrepModel.m in Sources */,
 				432346301C94054300200833 /* CLTableBackView.m in Sources */,
 				431BCEE01CA8F81C0085D20F /* JGActionSheet.m in Sources */,
+				43951A161CC5E7BE00505E5B /* CLBackUpInfoVC.m in Sources */,
 				432346551C9408F100200833 /* CLToolBar.m in Sources */,
 				43C206921CB12BED00CEF992 /* CLMediaCollectionCell.m in Sources */,
 				432346801C9409BB00200833 /* XLButtonBarViewCell.m in Sources */,
