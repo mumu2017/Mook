@@ -104,6 +104,11 @@
 
 //Setting设置
 // CLSettingVC
+
+"普通话" = "Chinese";
+"粤语" = "Cantonese";
+"英语" = "English";
+
 "当前无法发送邮件" = "Unable to send mail";
 "生成备份" = "Create backup";
 "提示: 生成备份文件后, 请尽快将备份文件导出保存. 为了节省您的存储空间, Mook推荐您在导出备份后删除备份文件. 确定要生成备份文件吗?" = "Note: Please export the backup file after the creation, and delete it after the export to save space. Are you sure to create backup?";
@@ -127,6 +132,10 @@
 "邮件已发送" = "Mail sent";
 "邮件发送失败" = "Mail sending failed";
 "邮件未能发送" = "Mail not sent";
+
+//CLBackUpVC
+"发送备份" = "Export Backup";
+"删除备份" = "Delete Backup";
 
 // CLPasswordVC
 "请输入旧密码" = "Please enter the old password";
@@ -227,9 +236,14 @@
 
 //CLEditingVC
 
+"提示:点击话筒按钮可以语音输入" = "Tip:click speaker button to voice input";
+"提示:点击相机按钮可以插入多媒体" = "Tip:click camera button to add images";
+"提示:常用短语可以添加到快捷短语" = "Tip:quick phrase can improve type speed";
+"提示:点击加号按钮可快速添加内容" = "Tip:click plust button to add content";
+
 "请输入演出说明,任何内容都可以" = "Any info about your show";
 "写点儿好玩儿的台词吧..." = "How about some funny gags?";
-"提示:左右滑动屏幕可切换编辑内容" = "Tip: swipe left/right to switch content";
+"提示:左右滑动屏幕可切换编辑内容" = "Tip:swipe left/right to switch content";
 
 "效果" = "Effect";
 "准备" = "Preparation";

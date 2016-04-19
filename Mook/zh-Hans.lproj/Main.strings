@@ -2,28 +2,6 @@
 /* Class = "UINavigationItem"; title = "多媒体"; ObjectID = "0EJ-Ew-5PU"; */
 "0EJ-Ew-5PU.title" = "多媒体";
 
-/* Class = "UITableViewSection"; headerTitle = "语音输入"; ObjectID = "lpA-jk-IUu"; */
-"lpA-jk-IUu.headerTitle" = "语音输入";
-
-/* Class = "UILabel"; text = "语言"; ObjectID = "gdx-yp-3Uu"; */
-"gdx-yp-3Uu.text" = "语言";
-
-/* Class = "UISegmentedControl"; 4hV-PE-rkF.segmentTitles[0] = "普通话"; ObjectID = "eNw-00-VDx"; */
-"eNw-00-VDx.segmentTitles[0]" = "普通话";
-
-/* Class = "UISegmentedControl"; 4hV-PE-rkF.segmentTitles[1] = "粤语"; ObjectID = "eNw-00-VDx"; */
-"eNw-00-VDx.segmentTitles[1]" = "粤语";
-
-/* Class = "UISegmentedControl"; 4hV-PE-rkF.segmentTitles[2] = "英语"; ObjectID = "eNw-00-VDx"; */
-"eNw-00-VDx.segmentTitles[2]" = "英语";
-
-/* Class = "UITextView"; text = "1. 创建备份:\n\n您点击创建备份选项后, Mook会将当前您在Mook中记录的所有数据打包成一个备份文件(文件名:backup.mook),您可将该文件保存到您的电脑上:\n\n\t将您的iPhone通过数据线连接到您的电脑上(请确保您的电脑上安装了iTunes软件). 使用iTunes文件共享功能, 将Mook中的backup.mook文件拷贝到您的电脑上.\n\n\t如果您不了解iTunes文件共享功能,请访问以下网址了解相关介绍:\n\thttps://support.apple.com/zh-cn/HT201301\n
-请注意: 备份文件包含了所有的魔术记录数据, 但并不包括您的设置数据. 如果您在新的手机中恢复了备份, 请根据自己的使用习惯在设置页面进行设置.
-\n2. 恢复备份:\n\n当Mook的文件夹中存在Mook生成的备份文件(文件名:backup.mook)时, 您点击恢复备份后, Mook将自动恢复备份文件中的数据, 并且恢复的数据将会完全覆盖现有数据. \n\n3. 删除备份:\n\n如果您已经将备份文件保存到了您的电脑或者其它地方, Mook推荐您将备份文件删除,以节省更多存储空间. 当您想要恢复备份时, 可通过iTunes文件共享功能将备份文件导入到Mook文件夹中, 然后恢复备份."; ObjectID = "1j0-gg-ebB"; */
-"1j0-gg-ebB.text" = "1. 创建备份:\n\n您点击创建备份选项后, Mook会将当前您在Mook中记录的所有数据打包成一个备份文件(文件名:backup.mook),您可将该文件保存到您的电脑上:\n\n\t将您的iPhone通过数据线连接到您的电脑上(请确保您的电脑上安装了iTunes软件). 使用iTunes文件共享功能, 将Mook中的backup.mook文件拷贝到您的电脑上.\n\n\t如果您不了解iTunes文件共享功能,请访问以下网址了解相关介绍:\n\thttps://support.apple.com/zh-cn/HT201301\n
-请注意: 备份文件包含了所有的魔术记录数据, 但并不包括您的设置数据. 如果您在新的手机中恢复了备份, 请根据自己的使用习惯在设置页面进行设置.
-\n2. 恢复备份:\n\n当Mook的文件夹中存在Mook生成的备份文件(文件名:backup.mook)时, 您点击恢复备份后, Mook将自动恢复备份文件中的数据, 并且恢复的数据将会完全覆盖现有数据. \n\n3. 删除备份:\n\n如果您已经将备份文件保存到了您的电脑或者其它地方, Mook推荐您将备份文件删除,以节省更多存储空间. 当您想要恢复备份时, 可通过iTunes文件共享功能将备份文件导入到Mook文件夹中, 然后恢复备份.";
-
 /* Class = "UILabel"; text = "照片保存到系统相册"; ObjectID = "22f-xG-7ht"; */
 "22f-xG-7ht.text" = "照片保存到系统相册";
 
@@ -39,14 +17,8 @@
 /* Class = "UILabel"; text = "AppStore 评分"; ObjectID = "4e8-VU-fzj"; */
 "4e8-VU-fzj.text" = "AppStore 评分";
 
-/* Class = "UIButton"; normalTitle = "1"; ObjectID = "5iY-hF-JLS"; */
-"5iY-hF-JLS.normalTitle" = "1";
-
-/* Class = "UILabel"; text = "备份说明"; ObjectID = "5r1-mp-7gD"; */
-"5r1-mp-7gD.text" = "备份说明";
-
-/* Class = "UIButton"; normalTitle = "取消"; ObjectID = "6em-WN-JPk"; */
-"6em-WN-JPk.normalTitle" = "取消";
+/* Class = "UILabel"; text = "快捷短语"; ObjectID = "7PU-UJ-Tyk"; */
+"7PU-UJ-Tyk.text" = "快捷短语";
 
 /* Class = "UITabBarItem"; title = "笔记"; ObjectID = "7U8-cH-grM"; */
 "7U8-cH-grM.title" = "笔记";
@@ -54,11 +26,11 @@
 /* Class = "UITabBarItem"; title = "设置"; ObjectID = "7UM-em-4Mb"; */
 "7UM-em-4Mb.title" = "设置";
 
+/* Class = "UILabel"; text = "语音识别语言"; ObjectID = "89w-VZ-YfD"; */
+"89w-VZ-YfD.text" = "语音识别语言";
+
 /* Class = "UILabel"; text = "道具"; ObjectID = "8wJ-0r-7oX"; */
 "8wJ-0r-7oX.text" = "道具";
-
-/* Class = "UIButton"; normalTitle = "3"; ObjectID = "9j0-YN-YNf"; */
-"9j0-YN-YNf.normalTitle" = "3";
 
 /* Class = "UINavigationItem"; title = "标签"; ObjectID = "AlM-zc-06a"; */
 "AlM-zc-06a.title" = "标签";
@@ -69,27 +41,20 @@
 /* Class = "UINavigationItem"; title = "NewShow"; ObjectID = "CxW-Jg-Sk2"; */
 "CxW-Jg-Sk2.title" = "NewShow";
 
-/* Class = "UITextView"; text = "这是一个魔术爱好者的作品.
-希望它能够帮助魔术师与爱好者们进行魔术知识管理.\n让我们一起,把魔术变得更好.\n
-Mook使用了讯飞语音提供的语音识别服务.\nMook使用了以下开源库:\nFMDB\nSWTableViewCell\nMWPhotoBrowser\nChameleonFramework\nSSZipArchive\nEAIntroView\nMBProgressHUD
-WJTouchID
-JGActionSheet\n\n特别感谢: Rebekka Gao, 谢谢你一直以来的陪伴和支持.\n感谢: 亦明, 欧阳, 易予, 谢谢你们在魔术之路上的陪伴.
-感谢林卓杰先生提供的\"What is magic?\"创意.感谢各位TMW群的朋友们的支持和反馈.\n\nMook 1.0.0            By Chen Lin\n\nCopyright © 2016. All rights reserved."; ObjectID = "Dbt-JU-1f8"; */
-"Dbt-JU-1f8.text" = "这是一个魔术爱好者的作品.
-希望它能够帮助魔术师与爱好者们进行魔术知识管理.\n让我们一起,把魔术变得更好.\n
-Mook使用了讯飞语音提供的语音识别服务.\nMook使用了以下开源库:\nFMDB\nSWTableViewCell\nMWPhotoBrowser\nChameleonFramework\nSSZipArchive\nEAIntroView\nMBProgressHUD
-WJTouchID
-JGActionSheet\n\n特别感谢: Rebekka Gao, 谢谢你一直以来的陪伴和支持.\n感谢: 亦明, 欧阳, 易予, 谢谢你们在魔术之路上的陪伴.
-感谢林卓杰先生提供的\"What is magic?\"创意.感谢各位TMW群的朋友们的支持和反馈.\n\nMook 1.0.0            By Chen Lin\n\nCopyright © 2016. All rights reserved.";
+/* Class = "UINavigationItem"; title = "备份"; ObjectID = "DGL-c5-w4o"; */
+"DGL-c5-w4o.title" = "备份";
 
 /* Class = "UILabel"; text = "视频保存到系统相册"; ObjectID = "Ehe-46-f7g"; */
 "Ehe-46-f7g.text" = "视频保存到系统相册";
 
-/* Class = "UILabel"; text = "♣︎"; ObjectID = "Er6-sH-Vnv"; */
-"Er6-sH-Vnv.text" = "♣︎";
-
 /* Class = "UILabel"; text = "使用密码"; ObjectID = "EyH-x7-klh"; */
 "EyH-x7-klh.text" = "使用密码";
+
+/* Class = "UILabel"; text = "备份说明"; ObjectID = "FdN-nQ-kFs"; */
+"FdN-nQ-kFs.text" = "备份说明";
+
+/* Class = "UILabel"; text = "Detail"; ObjectID = "H8f-mN-WaC"; */
+"H8f-mN-WaC.text" = "Detail";
 
 /* Class = "UITableViewSection"; headerTitle = "反馈"; ObjectID = "HgB-Hf-jmh"; */
 "HgB-Hf-jmh.headerTitle" = "反馈";
@@ -100,14 +65,11 @@ JGActionSheet\n\n特别感谢: Rebekka Gao, 谢谢你一直以来的陪伴和支
 /* Class = "UINavigationItem"; title = "导入"; ObjectID = "I8N-8V-IS7"; */
 "I8N-8V-IS7.title" = "导入";
 
-/* Class = "UILabel"; text = "语音识别语言"; ObjectID = "IPR-58-6Ki"; */
-"IPR-58-6Ki.text" = "语音识别语言";
-
 /* Class = "UITabBarItem"; title = "分类"; ObjectID = "JG5-Ax-guD"; */
 "JG5-Ax-guD.title" = "分类";
 
-/* Class = "UITableViewSection"; headerTitle = "备份与恢复"; ObjectID = "Kd3-Be-FE9"; */
-"Kd3-Be-FE9.headerTitle" = "备份与恢复";
+/* Class = "UITableViewSection"; headerTitle = "数据"; ObjectID = "Kd3-Be-FE9"; */
+"Kd3-Be-FE9.headerTitle" = "数据";
 
 /* Class = "UITextField"; placeholder = "道具数量"; ObjectID = "Km2-Hi-6ix"; */
 "Km2-Hi-6ix.placeholder" = "道具数量";
@@ -118,56 +80,32 @@ JGActionSheet\n\n特别感谢: Rebekka Gao, 谢谢你一直以来的陪伴和支
 /* Class = "UINavigationItem"; title = "编辑"; ObjectID = "LcT-tQ-Efr"; */
 "LcT-tQ-Efr.title" = "编辑";
 
-/* Class = "UIButton"; normalTitle = "2"; ObjectID = "Mhf-VV-tEu"; */
-"Mhf-VV-tEu.normalTitle" = "2";
-
-/* Class = "UILabel"; text = "♠︎"; ObjectID = "NnZ-8A-FC8"; */
-"NnZ-8A-FC8.text" = "♠︎";
-
 /* Class = "UINavigationItem"; title = "分类"; ObjectID = "Nvt-D1-Pat"; */
 "Nvt-D1-Pat.title" = "分类";
 
 /* Class = "UINavigationItem"; title = "Title"; ObjectID = "PGQ-Xa-2tO"; */
 "PGQ-Xa-2tO.title" = "Title";
 
-/* Class = "UITextView"; text = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda."; ObjectID = "QGR-G8-IAZ"; */
-"QGR-G8-IAZ.text" = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.";
+/* Class = "UILabel"; text = "普通话"; ObjectID = "RFX-JZ-j2U"; */
+"RFX-JZ-j2U.text" = "普通话";
 
 /* Class = "UIBarButtonItem"; title = " "; ObjectID = "RV3-TK-3aF"; */
 "RV3-TK-3aF.title" = " ";
 
-/* Class = "UIButton"; normalTitle = "6"; ObjectID = "SO6-ia-fpJ"; */
-"SO6-ia-fpJ.normalTitle" = "6";
-
-/* Class = "UINavigationItem"; title = "关于"; ObjectID = "Sa4-jt-Hx3"; */
-"Sa4-jt-Hx3.title" = "关于";
-
-/* Class = "UINavigationItem"; title = "What is Magic?"; ObjectID = "U3s-9E-4a1"; */
-"U3s-9E-4a1.title" = "What is Magic?";
-
-/* Class = "UIButton"; normalTitle = "9"; ObjectID = "Uem-DQ-NXc"; */
-"Uem-DQ-NXc.normalTitle" = "9";
-
-/* Class = "UINavigationItem"; title = "功能介绍"; ObjectID = "W7I-uB-cmh"; */
-"W7I-uB-cmh.title" = "功能介绍";
+/* Class = "UILabel"; text = "15 MB"; ObjectID = "TqN-F3-vtE"; */
+"TqN-F3-vtE.text" = "15 MB";
 
 /* Class = "UITableViewSection"; headerTitle = "多媒体"; ObjectID = "WkJ-eG-J7Q"; */
 "WkJ-eG-J7Q.headerTitle" = "多媒体";
 
-/* Class = "UILabel"; text = "功能介绍"; ObjectID = "XhW-ea-arZ"; */
-"XhW-ea-arZ.text" = "功能介绍";
+/* Class = "UILabel"; text = "backup 2016/04/18"; ObjectID = "Xwd-V4-U1S"; */
+"Xwd-V4-U1S.text" = "backup 2016/04/18";
 
 /* Class = "UILabel"; text = "数量"; ObjectID = "YAy-P4-5i5"; */
 "YAy-P4-5i5.text" = "数量";
 
-/* Class = "UITextView"; text = "Magic\n\n/ˈmadʒɪk/ \n\n1. The performing art of doing things that seem impossible in order to entertain people. 2. the art of producing a desired effect or result through the use of incantation or various other techniques that presumably assure human control of supernatural agencies or the forces of nature. 3. A power that allows people (such as witches and wizards) to do impossible things by saying special words or performing special actions. 4. Mysterious tricks, such as making things disappear and reappear, performed as entertainment. 5. A quality of being beautiful and delightful in a way that seems remote from daily life. 6. A special quality or ability that somebody/something has, that seems too wonderful to be real. 7. The card you have chosen is the 5 of hearts."; ObjectID = "ZFe-oV-INK"; */
-"ZFe-oV-INK.text" = "Magic\n\n/ˈmadʒɪk/ \n\n1. The performing art of doing things that seem impossible in order to entertain people. 2. the art of producing a desired effect or result through the use of incantation or various other techniques that presumably assure human control of supernatural agencies or the forces of nature. 3. A power that allows people (such as witches and wizards) to do impossible things by saying special words or performing special actions. 4. Mysterious tricks, such as making things disappear and reappear, performed as entertainment. 5. A quality of being beautiful and delightful in a way that seems remote from daily life. 6. A special quality or ability that somebody/something has, that seems too wonderful to be real. 7. The card you have chosen is the 5 of hearts.";
-
-/* Class = "UIButton"; normalTitle = "4"; ObjectID = "ZgJ-9m-jSf"; */
-"ZgJ-9m-jSf.normalTitle" = "4";
-
-/* Class = "UILabel"; text = "♥︎"; ObjectID = "aJ9-sE-n6w"; */
-"aJ9-sE-n6w.text" = "♥︎";
+/* Class = "UILabel"; text = "生成备份"; ObjectID = "ZNV-Sd-2O2"; */
+"ZNV-Sd-2O2.text" = "生成备份";
 
 /* Class = "UILabel"; text = "Title"; ObjectID = "bsq-FM-N2u"; */
 "bsq-FM-N2u.text" = "Title";
@@ -184,11 +122,8 @@ JGActionSheet\n\n特别感谢: Rebekka Gao, 谢谢你一直以来的陪伴和支
 /* Class = "UITableViewSection"; headerTitle = "快捷输入"; ObjectID = "dQc-ov-Y4A"; */
 "dQc-ov-Y4A.headerTitle" = "快捷输入";
 
-/* Class = "UINavigationItem"; title = "备份说明"; ObjectID = "dT4-EL-hwG"; */
-"dT4-EL-hwG.title" = "备份说明";
-
-/* Class = "UIButton"; normalTitle = "0"; ObjectID = "egE-Je-m6v"; */
-"egE-Je-m6v.normalTitle" = "0";
+/* Class = "UILabel"; text = "备份与恢复"; ObjectID = "du6-oW-WfF"; */
+"du6-oW-WfF.text" = "备份与恢复";
 
 /* Class = "UITabBarItem"; title = "多媒体"; ObjectID = "hKg-es-jeP"; */
 "hKg-es-jeP.title" = "多媒体";
@@ -199,47 +134,17 @@ JGActionSheet\n\n特别感谢: Rebekka Gao, 谢谢你一直以来的陪伴和支
 /* Class = "UITableViewSection"; headerTitle = "Mook"; ObjectID = "hqC-JL-53v"; */
 "hqC-JL-53v.headerTitle" = "Mook";
 
-/* Class = "UIButton"; normalTitle = "8"; ObjectID = "iQS-gy-ShF"; */
-"iQS-gy-ShF.normalTitle" = "8";
-
-/* Class = "UILabel"; text = "导出备份"; ObjectID = "ieh-2X-T7C"; */
-"ieh-2X-T7C.text" = "导出备份";
-
-/* Class = "UINavigationItem"; title = "快捷短语"; ObjectID = "j4S-VD-2S8"; */
-"j4S-VD-2S8.title" = "快捷短语";
-
 /* Class = "UITextField"; placeholder = "道具说明"; ObjectID = "jHg-Vx-Yrf"; */
 "jHg-Vx-Yrf.placeholder" = "道具说明";
-
-/* Class = "UILabel"; text = "♦︎"; ObjectID = "jyc-Cu-enz"; */
-"jyc-Cu-enz.text" = "♦︎";
 
 /* Class = "UITextField"; placeholder = "道具名称"; ObjectID = "k1u-Cs-56A"; */
 "k1u-Cs-56A.placeholder" = "道具名称";
 
-/* Class = "UIButton"; normalTitle = "5"; ObjectID = "khr-ft-RQO"; */
-"khr-ft-RQO.normalTitle" = "5";
-
-/* Class = "UILabel"; text = "编辑快捷短语"; ObjectID = "kzd-Fl-Glo"; */
-"kzd-Fl-Glo.text" = "编辑快捷短语";
-
 /* Class = "UILabel"; text = "说明"; ObjectID = "l60-bq-03D"; */
 "l60-bq-03D.text" = "说明";
 
-/* Class = "UILabel"; text = "恢复备份"; ObjectID = "lDl-ts-PQU"; */
-"lDl-ts-PQU.text" = "恢复备份";
-
-/* Class = "UILabel"; text = "Mook 1.0.0"; ObjectID = "m8w-BF-itM"; */
-"m8w-BF-itM.text" = "Mook 1.0.0";
-
 /* Class = "UILabel"; text = "反馈"; ObjectID = "nBl-56-M1c"; */
 "nBl-56-M1c.text" = "反馈";
-
-/* Class = "UIButton"; normalTitle = "7"; ObjectID = "nyd-JG-e86"; */
-"nyd-JG-e86.normalTitle" = "7";
-
-/* Class = "UILabel"; text = "删除备份"; ObjectID = "ofv-EQ-4Qg"; */
-"ofv-EQ-4Qg.text" = "删除备份";
 
 /* Class = "UINavigationItem"; title = "List"; ObjectID = "pTe-6i-VXn"; */
 "pTe-6i-VXn.title" = "List";
@@ -247,14 +152,5 @@ JGActionSheet\n\n特别感谢: Rebekka Gao, 谢谢你一直以来的陪伴和支
 /* Class = "UILabel"; text = "使用TouchID"; ObjectID = "qVZ-E2-AqT"; */
 "qVZ-E2-AqT.text" = "使用TouchID";
 
-/* Class = "UILabel"; text = "生成备份"; ObjectID = "r4A-C4-fxh"; */
-"r4A-C4-fxh.text" = "生成备份";
-
-/* Class = "UILabel"; text = "密码错误!"; ObjectID = "suX-i3-Gto"; */
-"suX-i3-Gto.text" = "密码错误!";
-
 /* Class = "UIBarButtonItem"; title = "导入"; ObjectID = "uSH-LY-M2B"; */
 "uSH-LY-M2B.title" = "导入";
-
-/* Class = "UIButton"; normalTitle = "显示密码提示"; ObjectID = "uxZ-hu-npP"; */
-"uxZ-hu-npP.normalTitle" = "显示密码提示";

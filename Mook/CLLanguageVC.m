@@ -36,7 +36,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -79,10 +80,6 @@
     cell.accessoryType = UITableViewCellAccessoryNone;
 }
 
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
@@ -102,11 +99,11 @@
     if (indexPath.row != row && self.navigationItem.rightBarButtonItem == nil) {
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(saveLanguage)];
         
-        NSLog(@"language changed");
+//        NSLog(@"language changed");
         
     }
 
-    NSLog(@"now what");
+//    NSLog(@"now what");
 }
 
 - (IBAction)dismiss:(id)sender {

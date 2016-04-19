@@ -212,7 +212,6 @@
     self.editTextView.tintColor = kMenuBackgroundColor;
     
     if (self.editingContentType == kEditingContentTypeShow) {
-#warning 添加随机小功能提示
         [self.editTextView addPlaceHolderWithText:NSLocalizedString(@"请输入演出说明,任何内容都可以", nil) andFont:kFontSys16];
         
     } else if (self.editingContentType == kEditingContentTypeLines) {
@@ -220,7 +219,19 @@
         [self.editTextView addPlaceHolderWithText:NSLocalizedString(@"写点儿好玩儿的台词吧...", nil) andFont:kFontSys16];
         
     } else {
-        [self.editTextView addPlaceHolderWithText:NSLocalizedString(@"提示:左右滑动屏幕可切换编辑内容", nil) andFont:kFontSys16];
+        
+        
+        NSString *ph1, *ph2, *ph3, *ph4, *ph5;
+        ph1 = NSLocalizedString(@"提示:左右滑动屏幕可切换编辑内容", nil);
+        ph2 = NSLocalizedString(@"提示:点击话筒按钮可以语音输入", nil);
+        ph3 = NSLocalizedString(@"提示:点击相机按钮可以插入多媒体", nil);
+        ph4 = NSLocalizedString(@"提示:常用短语可以添加到快捷短语", nil);
+        ph5 = NSLocalizedString(@"提示:点击加号按钮可快速添加内容", nil);
+        
+        NSArray *placeHolder = @[ph1, ph2, ph3, ph4, ph5];
+        NSInteger index = arc4random_uniform(5);
+        
+        [self.editTextView addPlaceHolderWithText:placeHolder[index] andFont:kFontSys16];
     }
 
     

@@ -81,9 +81,17 @@
 
     self.savePhotoSwitch.on = [defaults boolForKey:kSavePhotoKey];
     self.saveVideoSwitch.on = [defaults boolForKey:kSaveVideoKey];
+
+    NSString *language;
+    if ([self.voiceLanguage isEqualToString:kVoiceChinese]) {
+        language = NSLocalizedString(@"普通话", nil);
+    } else if ([self.voiceLanguage isEqualToString:kVoiceGuangdong]) {
+        language = NSLocalizedString(@"粤语", nil);
+    }  else if ([self.voiceLanguage isEqualToString:kVoiceEnglish]) {
+        language = NSLocalizedString(@"英语", nil);
+    }
     
-    [self voiceLanguage];
-    self.languageLabel.text = [defaults stringForKey:kVoiceLanguageKey];
+    self.languageLabel.text = language;
     
     self.quickStringCntLabel.text = [NSString stringWithFormat:@"%ld", (unsigned long)self.quickStringList.count];
 }

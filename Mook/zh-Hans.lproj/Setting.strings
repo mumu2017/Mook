@@ -1,0 +1,93 @@
+
+/* Class = "UINavigationItem"; title = "备份说明"; ObjectID = "0Do-me-0Gv"; */
+"0Do-me-0Gv.title" = "备份说明";
+
+/* Class = "UIButton"; normalTitle = "1"; ObjectID = "0VU-o2-WTb"; */
+"0VU-o2-WTb.normalTitle" = "1";
+
+/* Class = "UIButton"; normalTitle = "2"; ObjectID = "1sN-mx-B9a"; */
+"1sN-mx-B9a.normalTitle" = "2";
+
+/* Class = "UINavigationItem"; title = "功能介绍"; ObjectID = "2ij-WJ-dwd"; */
+"2ij-WJ-dwd.title" = "功能介绍";
+
+/* Class = "UIButton"; normalTitle = "7"; ObjectID = "6Ul-HR-ZNK"; */
+"6Ul-HR-ZNK.normalTitle" = "7";
+
+/* Class = "UIButton"; normalTitle = "取消"; ObjectID = "6Wb-ne-ctG"; */
+"6Wb-ne-ctG.normalTitle" = "取消";
+
+/* Class = "UIButton"; normalTitle = "3"; ObjectID = "EEx-5a-v4Y"; */
+"EEx-5a-v4Y.normalTitle" = "3";
+
+/* Class = "UILabel"; text = "普通话"; ObjectID = "EJO-ve-zSd"; */
+"EJO-ve-zSd.text" = "普通话";
+
+/* Class = "UILabel"; text = "粤语"; ObjectID = "EcY-N2-cpC"; */
+"EcY-N2-cpC.text" = "粤语";
+
+/* Class = "UIButton"; normalTitle = "显示密码提示"; ObjectID = "I5V-WJ-jLa"; */
+"I5V-WJ-jLa.normalTitle" = "显示密码提示";
+
+/* Class = "UINavigationItem"; title = "快捷短语"; ObjectID = "JfI-35-SIf"; */
+"JfI-35-SIf.title" = "快捷短语";
+
+/* Class = "UILabel"; text = "Mook 1.0.0"; ObjectID = "KKz-pB-Q1T"; */
+"KKz-pB-Q1T.text" = "Mook 1.0.0";
+
+/* Class = "UITextView"; text = "这是一个魔术爱好者的作品. 希望它能够帮助魔术师与爱好者们进行魔术知识管理.\n让我们一起,把魔术变得更好.\n Mook使用了讯飞语音提供的语音识别服务.\nMook使用了以下开源库:\nFMDB\nSWTableViewCell\nMWPhotoBrowser\nChameleonFramework\nSSZipArchive\nEAIntroView\nMBProgressHUD WJTouchID JGActionSheet\n\n特别感谢: Rebekka Gao, 谢谢你一直以来的陪伴和支持.\n感谢: 亦明, 欧阳, 易予, 谢谢你们在魔术之路上的陪伴. 感谢林卓杰先生提供的\"What is magic?\"创意.感谢各位TMW群的朋友们的支持和反馈.\n\nMook 1.0.0            By Chen Lin\n\nCopyright © 2016. All rights reserved."; ObjectID = "MKa-mu-JdA"; */
+"MKa-mu-JdA.text" = "这是一个魔术爱好者的作品. 希望它能够帮助魔术师与爱好者们进行魔术知识管理.\n让我们一起,把魔术变得更好.\n Mook使用了讯飞语音提供的语音识别服务.\nMook使用了以下开源库:\nFMDB\nSWTableViewCell\nMWPhotoBrowser\nChameleonFramework\nSSZipArchive\nEAIntroView\nMBProgressHUD WJTouchID JGActionSheet\n\n特别感谢: Rebekka Gao, 谢谢你一直以来的陪伴和支持.\n感谢: 亦明, 欧阳, 易予, 谢谢你们在魔术之路上的陪伴. 感谢林卓杰先生提供的\"What is magic?\"创意.感谢各位TMW群的朋友们的支持和反馈.\n\nMook 1.0.0            By Chen Lin\n\nCopyright © 2016. All rights reserved.";
+
+/* Class = "UITextView"; text = "1. 创建备份:\n\n您点击创建备份选项后, Mook会将当前您在Mook中记录的所有数据打包成一个备份文件(文件名:backup.mook),您可将该文件保存到您的电脑上:\n\n\t将您的iPhone通过数据线连接到您的电脑上(请确保您的电脑上安装了iTunes软件). 使用iTunes文件共享功能, 将Mook中的backup.mook文件拷贝到您的电脑上.\n\n\t如果您不了解iTunes文件共享功能,请访问以下网址了解相关介绍:\n\thttps://support.apple.com/zh-cn/HT201301\n 请注意: 备份文件包含了所有的魔术记录数据, 但并不包括您的设置数据. 如果您在新的手机中恢复了备份, 请根据自己的使用习惯在设置页面进行设置. \n2. 恢复备份:\n\n当Mook的文件夹中存在Mook生成的备份文件(文件名:backup.mook)时, 您点击恢复备份后, Mook将自动恢复备份文件中的数据, 并且恢复的数据将会完全覆盖现有数据. \n\n3. 删除备份:\n\n如果您已经将备份文件保存到了您的电脑或者其它地方, Mook推荐您将备份文件删除,以节省更多存储空间. 当您想要恢复备份时, 可通过iTunes文件共享功能将备份文件导入到Mook文件夹中, 然后恢复备份."; ObjectID = "S6r-dR-V9X"; */
+"S6r-dR-V9X.text" = "1. 创建备份:\n\n您点击创建备份选项后, Mook会将当前您在Mook中记录的所有数据打包成一个备份文件(文件名:backup.mook),您可将该文件保存到您的电脑上:\n\n\t将您的iPhone通过数据线连接到您的电脑上(请确保您的电脑上安装了iTunes软件). 使用iTunes文件共享功能, 将Mook中的backup.mook文件拷贝到您的电脑上.\n\n\t如果您不了解iTunes文件共享功能,请访问以下网址了解相关介绍:\n\thttps://support.apple.com/zh-cn/HT201301\n 请注意: 备份文件包含了所有的魔术记录数据, 但并不包括您的设置数据. 如果您在新的手机中恢复了备份, 请根据自己的使用习惯在设置页面进行设置. \n2. 恢复备份:\n\n当Mook的文件夹中存在Mook生成的备份文件(文件名:backup.mook)时, 您点击恢复备份后, Mook将自动恢复备份文件中的数据, 并且恢复的数据将会完全覆盖现有数据. \n\n3. 删除备份:\n\n如果您已经将备份文件保存到了您的电脑或者其它地方, Mook推荐您将备份文件删除,以节省更多存储空间. 当您想要恢复备份时, 可通过iTunes文件共享功能将备份文件导入到Mook文件夹中, 然后恢复备份.";
+
+/* Class = "UILabel"; text = "♥︎"; ObjectID = "Wlc-zl-Q3D"; */
+"Wlc-zl-Q3D.text" = "♥︎";
+
+/* Class = "UITextView"; text = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda."; ObjectID = "Xj1-jb-fgB"; */
+"Xj1-jb-fgB.text" = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.";
+
+/* Class = "UIButton"; normalTitle = "9"; ObjectID = "Yny-VL-cXn"; */
+"Yny-VL-cXn.normalTitle" = "9";
+
+/* Class = "UIButton"; normalTitle = "8"; ObjectID = "a0C-qj-QSB"; */
+"a0C-qj-QSB.normalTitle" = "8";
+
+/* Class = "UILabel"; text = "密码错误!"; ObjectID = "a53-Rt-RJf"; */
+"a53-Rt-RJf.text" = "密码错误!";
+
+/* Class = "UILabel"; text = "♣︎"; ObjectID = "abY-WC-G3g"; */
+"abY-WC-G3g.text" = "♣︎";
+
+/* Class = "UILabel"; text = "英文"; ObjectID = "cGZ-lb-axK"; */
+"cGZ-lb-axK.text" = "英文";
+
+/* Class = "UIButton"; normalTitle = "4"; ObjectID = "fDq-Wj-jyp"; */
+"fDq-Wj-jyp.normalTitle" = "4";
+
+/* Class = "UITextView"; text = "Magic\n\n/ˈmadʒɪk/ \n\n1. The performing art of doing things that seem impossible in order to entertain people. 2. the art of producing a desired effect or result through the use of incantation or various other techniques that presumably assure human control of supernatural agencies or the forces of nature. 3. A power that allows people (such as witches and wizards) to do impossible things by saying special words or performing special actions. 4. Mysterious tricks, such as making things disappear and reappear, performed as entertainment. 5. A quality of being beautiful and delightful in a way that seems remote from daily life. 6. A special quality or ability that somebody/something has, that seems too wonderful to be real. 7. The card you have chosen is the 5 of hearts."; ObjectID = "fr1-PX-6WE"; */
+"fr1-PX-6WE.text" = "Magic\n\n/ˈmadʒɪk/ \n\n1. The performing art of doing things that seem impossible in order to entertain people. 2. the art of producing a desired effect or result through the use of incantation or various other techniques that presumably assure human control of supernatural agencies or the forces of nature. 3. A power that allows people (such as witches and wizards) to do impossible things by saying special words or performing special actions. 4. Mysterious tricks, such as making things disappear and reappear, performed as entertainment. 5. A quality of being beautiful and delightful in a way that seems remote from daily life. 6. A special quality or ability that somebody/something has, that seems too wonderful to be real. 7. The card you have chosen is the 5 of hearts.";
+
+/* Class = "UIButton"; normalTitle = "6"; ObjectID = "ir9-WT-aeE"; */
+"ir9-WT-aeE.normalTitle" = "6";
+
+/* Class = "UIButton"; normalTitle = "0"; ObjectID = "jHl-w2-Sv7"; */
+"jHl-w2-Sv7.normalTitle" = "0";
+
+/* Class = "UINavigationItem"; title = "语言"; ObjectID = "ldb-am-m6b"; */
+"ldb-am-m6b.title" = "语言";
+
+/* Class = "UINavigationItem"; title = "What is Magic?"; ObjectID = "qpe-Fq-FM7"; */
+"qpe-Fq-FM7.title" = "What is Magic?";
+
+/* Class = "UILabel"; text = "♦︎"; ObjectID = "rBQ-gO-Yjf"; */
+"rBQ-gO-Yjf.text" = "♦︎";
+
+/* Class = "UIButton"; normalTitle = "5"; ObjectID = "wEc-h7-J5D"; */
+"wEc-h7-J5D.normalTitle" = "5";
+
+/* Class = "UILabel"; text = "♠︎"; ObjectID = "xrb-jb-Jld"; */
+"xrb-jb-Jld.text" = "♠︎";
+
+/* Class = "UINavigationItem"; title = "关于"; ObjectID = "zzD-KG-stQ"; */
+"zzD-KG-stQ.title" = "关于";
