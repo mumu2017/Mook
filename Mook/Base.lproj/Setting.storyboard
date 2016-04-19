@@ -38,7 +38,7 @@
 3. 删除备份:
 
 如果您已经将备份文件保存到了您的电脑或者其它地方, Mook推荐您将备份文件删除,以节省更多存储空间. 当您想要恢复备份时, 可通过iTunes文件共享功能将备份文件导入到Mook文件夹中, 然后恢复备份.</string>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
@@ -47,7 +47,7 @@
                                 </variation>
                             </textView>
                         </subviews>
-                        <color key="backgroundColor" red="0.111818932" green="0.11183650050000001" blue="0.1118125319" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="S6r-dR-V9X" firstAttribute="trailing" secondItem="kxe-6x-npa" secondAttribute="trailingMargin" id="7Xq-Y1-fV1"/>
                             <constraint firstItem="S6r-dR-V9X" firstAttribute="leading" secondItem="kxe-6x-npa" secondAttribute="leadingMargin" id="Qhq-vi-RUL"/>
@@ -83,64 +83,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xoD-2B-7WG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-11240.25" y="-3355.125"/>
-        </scene>
-        <!--功能介绍-->
-        <scene sceneID="xve-F4-bba">
-            <objects>
-                <viewController storyboardIdentifier="featuresVC" id="RdR-pc-SRj" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="yl1-Ye-dhE"/>
-                        <viewControllerLayoutGuide type="bottom" id="UIh-qv-n5k"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Cd9-cS-CN6">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Xj1-jb-fgB">
-                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
-                        </subviews>
-                        <color key="backgroundColor" red="0.111818932" green="0.11183650050000001" blue="0.1118125319" alpha="1" colorSpace="calibratedRGB"/>
-                        <constraints>
-                            <constraint firstItem="Xj1-jb-fgB" firstAttribute="top" secondItem="yl1-Ye-dhE" secondAttribute="bottom" constant="20" id="UGh-lr-zti"/>
-                            <constraint firstItem="UIh-qv-n5k" firstAttribute="top" secondItem="Xj1-jb-fgB" secondAttribute="bottom" constant="20" id="n6L-gh-BJi"/>
-                            <constraint firstItem="Xj1-jb-fgB" firstAttribute="leading" secondItem="Cd9-cS-CN6" secondAttribute="leadingMargin" id="nZz-FI-Gkf"/>
-                            <constraint firstItem="Xj1-jb-fgB" firstAttribute="trailing" secondItem="Cd9-cS-CN6" secondAttribute="trailingMargin" id="yc4-qH-sup"/>
-                        </constraints>
-                        <variation key="default">
-                            <mask key="subviews">
-                                <exclude reference="Xj1-jb-fgB"/>
-                            </mask>
-                            <mask key="constraints">
-                                <exclude reference="n6L-gh-BJi"/>
-                                <exclude reference="UGh-lr-zti"/>
-                                <exclude reference="nZz-FI-Gkf"/>
-                                <exclude reference="yc4-qH-sup"/>
-                            </mask>
-                        </variation>
-                        <variation key="heightClass=regular-widthClass=compact">
-                            <mask key="subviews">
-                                <include reference="Xj1-jb-fgB"/>
-                            </mask>
-                            <mask key="constraints">
-                                <include reference="n6L-gh-BJi"/>
-                                <include reference="UGh-lr-zti"/>
-                                <include reference="nZz-FI-Gkf"/>
-                                <include reference="yc4-qH-sup"/>
-                            </mask>
-                        </variation>
-                    </view>
-                    <navigationItem key="navigationItem" title="功能介绍" id="2ij-WJ-dwd"/>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="T9Y-Zx-pge" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-10569.75" y="-3135.375"/>
         </scene>
         <!--What is Magic?-->
         <scene sceneID="01V-oJ-8sX">
@@ -310,7 +252,6 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mook 1.0.0" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KKz-pB-Q1T">
                                 <rect key="frame" x="-42" y="-21" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MKa-mu-JdA">
@@ -334,7 +275,7 @@ MBProgressHUD WJTouchID JGActionSheet
 Mook 1.0.0            By Chen Lin
 
 Copyright © 2016. All rights reserved.</string>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <variation key="heightClass=regular-widthClass=compact">
@@ -342,7 +283,7 @@ Copyright © 2016. All rights reserved.</string>
                                 </variation>
                             </textView>
                         </subviews>
-                        <color key="backgroundColor" red="0.111818932" green="0.11183650050000001" blue="0.1118125319" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="MKa-mu-JdA" firstAttribute="top" secondItem="KKz-pB-Q1T" secondAttribute="bottom" constant="10" id="5H1-Sa-i6f"/>
                             <constraint firstItem="Ztd-52-Nfj" firstAttribute="top" secondItem="MKa-mu-JdA" secondAttribute="bottom" constant="20" id="6vJ-Pd-joP"/>
