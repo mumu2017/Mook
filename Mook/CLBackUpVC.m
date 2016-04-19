@@ -147,10 +147,10 @@
             } onQueue:dispatch_get_global_queue(0, 0) completionBlock:^{
                 
                 if (self.isCreatBackUp) {
-                    [MBProgressHUD showGlobalProgressHUDWithTitle:NSLocalizedString(@"已成功生成备份文件", nil) hideAfterDelay:1.5];
+                    [MBProgressHUD showGlobalProgressHUDWithTitle:NSLocalizedString(@"已成功生成备份文件", nil) hideAfterDelay:1.0];
                     [self.tableView reloadData]; // 生成后刷新表格, 显示"恢复备份"
                 } else {
-                    [MBProgressHUD showGlobalProgressHUDWithTitle:NSLocalizedString(@"生成备份文件失败", nil) hideAfterDelay:1.5];
+                    [MBProgressHUD showGlobalProgressHUDWithTitle:NSLocalizedString(@"生成备份文件失败", nil) hideAfterDelay:1.0];
                     
                 }
                 
@@ -201,11 +201,11 @@
             } completionHandler:^(NSString *path, BOOL succeeded, NSError *error) {
                 
                 if (succeeded) {
-                    [MBProgressHUD showGlobalProgressHUDWithTitle:NSLocalizedString(@"已成功恢复备份文件", nil) hideAfterDelay:1.5];
+                    [MBProgressHUD showGlobalProgressHUDWithTitle:NSLocalizedString(@"已成功恢复备份文件", nil) hideAfterDelay:1.0];
                     [(AppDelegate *)[[UIApplication sharedApplication] delegate] reloadData];
                     
                 } else {
-                    [MBProgressHUD showGlobalProgressHUDWithTitle:NSLocalizedString(@"恢复备份文件失败", nil) hideAfterDelay:1.5];
+                    [MBProgressHUD showGlobalProgressHUDWithTitle:NSLocalizedString(@"恢复备份文件失败", nil) hideAfterDelay:1.0];
                     
                 }
                 
@@ -249,7 +249,7 @@
                     title = NSLocalizedString(@"删除备份文件失败", nil);
                 }
                 
-                [MBProgressHUD showGlobalProgressHUDWithTitle:title hideAfterDelay:1.5];
+                [MBProgressHUD showGlobalProgressHUDWithTitle:title hideAfterDelay:1.0];
                 
             }
         });

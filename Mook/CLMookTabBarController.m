@@ -94,7 +94,7 @@
 
 - (void)cancelEntry:(NSNotification *)noti {
     if (noti.object == nil) {
-        NSLog(@"error : cancel object == nil");
+//        NSLog(@"error : cancel object == nil");
         return;
     } else {
         id modelUnknown = noti.object;
@@ -136,14 +136,14 @@
             
         }
         
-        NSLog(@"cancel entry sucess!");
+//        NSLog(@"cancel entry sucess!");
     }
     
 }
 
 - (void)deleteEntry:(NSNotification *)noti {
     if (noti.object == nil) {
-        NSLog(@"error : delete object == nil");
+//        NSLog(@"error : delete object == nil");
         return;
     } else {
         id modelUnknown = noti.object;
@@ -195,7 +195,7 @@
             
         }
         
-        NSLog(@"delete entry sucess!");
+//        NSLog(@"delete entry sucess!");
     }
 }
 

@@ -410,9 +410,9 @@
                     //            NSLog(@" file exists");
                     BOOL fileDeleted= [fileManager removeItemAtPath:thumbnailPath error:nil];
                     if (fileDeleted) {
-                        NSLog(@"thumbnail deleted");
+//                        NSLog(@"thumbnail deleted");
                     }else {
-                        NSLog(@"deleting thumbnail failed");
+//                        NSLog(@"deleting thumbnail failed");
                     }
                 }
                 
@@ -426,14 +426,14 @@
                     //            NSLog(@" file exists");
                     BOOL fileDeleted= [fileManager removeItemAtPath:framePath error:nil];
                     if (fileDeleted) {
-                        NSLog(@"frame deleted");
+//                        NSLog(@"frame deleted");
                     }else {
-                        NSLog(@"deleting frame failed");
+//                        NSLog(@"deleting frame failed");
                     }
                 }
                 
             }else {
-                NSLog(@"deleting video failed");
+//                NSLog(@"deleting video failed");
             }
         }
     });
@@ -472,13 +472,13 @@
                     //            NSLog(@" file exists");
                     BOOL fileDeleted= [fileManager removeItemAtPath:thumbnailPath error:nil];
                     if (fileDeleted) {
-                        NSLog(@"thumbnail deleted");
+//                        NSLog(@"thumbnail deleted");
                     }else {
-                        NSLog(@"deleting thumbnail failed");
+//                        NSLog(@"deleting thumbnail failed");
                     }
                 }
             }else {
-                NSLog(@"deleting image failed");
+//                NSLog(@"deleting image failed");
             }
         }
     });

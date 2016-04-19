@@ -647,16 +647,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="mQe-kW-LzU">
-                                <rect key="frame" x="0.0" y="113.5" width="600" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mQe-kW-LzU" id="mHq-pb-X2b">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="Vsr-fW-qLw" id="fPG-su-Tms"/>
                             <outlet property="delegate" destination="Vsr-fW-qLw" id="grV-DQ-kt2"/>
@@ -687,16 +677,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="ois-gE-CRY">
-                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ois-gE-CRY" id="7hE-0Y-PPr">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="12H-Og-JQl" id="b9d-JK-MiO"/>
                             <outlet property="delegate" destination="12H-Og-JQl" id="C9b-4f-4kf"/>
@@ -767,7 +747,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bdt-kp-9Kk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-10791" y="-2030.25"/>
+            <point key="canvasLocation" x="-10443" y="-2811"/>
         </scene>
         <!--Prop InputVC-->
         <scene sceneID="grB-FX-SsX">
@@ -968,16 +948,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="vg8-yi-igm">
-                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="vg8-yi-igm" id="mFg-rs-uT4">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="yzz-as-UGD" id="Kvb-Ld-KHp"/>
                             <outlet property="delegate" destination="yzz-as-UGD" id="Z8j-Qk-6KY"/>
@@ -1067,17 +1037,7 @@
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
-                        <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="RV8-uV-o62">
-                                <rect key="frame" x="0.0" y="64" width="50" height="50"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                </view>
-                            </collectionViewCell>
-                        </cells>
+                        <cells/>
                         <connections>
                             <outlet property="dataSource" destination="9fA-HC-Vld" id="Yjx-vV-eDw"/>
                             <outlet property="delegate" destination="9fA-HC-Vld" id="jc7-vc-0yS"/>
@@ -1115,7 +1075,7 @@
             </objects>
             <point key="canvasLocation" x="-12271.5" y="-4709.25"/>
         </scene>
-        <!--笔记-->
+        <!--时间线-->
         <scene sceneID="wFR-qS-uql">
             <objects>
                 <tableViewController id="qMI-jb-8zk" customClass="CLAllItemsListVC" sceneMemberID="viewController">
@@ -1128,7 +1088,7 @@
                             <outlet property="delegate" destination="qMI-jb-8zk" id="abC-Ju-RIn"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="笔记" id="4Kf-lo-IC0">
+                    <navigationItem key="navigationItem" title="时间线" id="4Kf-lo-IC0">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="yA2-PY-WXj">
                             <connections>
                                 <action selector="addNewEntry:" destination="qMI-jb-8zk" id="F2G-rz-Qw0"/>
@@ -1374,11 +1334,11 @@
             </objects>
             <point key="canvasLocation" x="-10053" y="-5284.5"/>
         </scene>
-        <!--笔记-->
+        <!--时间线-->
         <scene sceneID="7HN-8R-7kn">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ZNK-Ui-Mmt" customClass="CLHomeNavVC" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="笔记" image="iconnotesLine" selectedImage="iconnotesFill" id="7U8-cH-grM"/>
+                    <tabBarItem key="tabBarItem" title="时间线" image="iconnotesLine" selectedImage="iconnotesFill" id="7U8-cH-grM"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="eMn-os-yaZ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -1686,16 +1646,16 @@
         <image name="iconsettingLine" width="22" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="rfo-I9-DGm"/>
         <segue reference="OYZ-pL-yeb"/>
         <segue reference="u0H-cQ-x0W"/>
         <segue reference="G4h-Vz-pXE"/>
-        <segue reference="NHr-0K-Qxl"/>
+        <segue reference="rfo-I9-DGm"/>
+        <segue reference="Vbh-5V-rgl"/>
+        <segue reference="UDK-lE-GYM"/>
+        <segue reference="rYJ-EA-bEa"/>
+        <segue reference="gRW-Xa-tMF"/>
         <segue reference="cZz-JI-sNE"/>
         <segue reference="F7W-G1-xVl"/>
-        <segue reference="OTr-op-fb5"/>
-        <segue reference="tPt-rP-iQC"/>
-        <segue reference="uIl-vl-NsX"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
 </document>

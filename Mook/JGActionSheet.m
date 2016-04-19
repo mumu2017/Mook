@@ -342,7 +342,7 @@ static BOOL disableCustomEasing = NO;
         [self setButtonStyle:buttonStyle forButton:button];
     }
     else {
-        NSLog(@"ERROR: Index out of bounds");
+//        NSLog(@"ERROR: Index out of bounds");
         return;
     }
 }
@@ -978,7 +978,7 @@ static BOOL disableCustomEasing = NO;
     [_arrowView setFrame:arrowFrame arrowDirection:arrowDirection];
     
     if (!CGRectContainsRect(_targetView.bounds, finalFrame) || !CGRectContainsRect(_targetView.bounds, arrowFrame)) {
-        NSLog(@"WARNING: Action sheet does not fit within view bounds! Select a different arrow direction or provide a different anchor point!");
+//        NSLog(@"WARNING: Action sheet does not fit within view bounds! Select a different arrow direction or provide a different anchor point!");
     }
     
     _scrollViewHost.frame = finalFrame;

@@ -125,7 +125,7 @@
     if (self.tag == nil) return;
     
     if (noti.object == nil) {
-        NSLog(@"error : cancel object == nil");
+//        NSLog(@"error : cancel object == nil");
         return;
     } else {
         id modelUnknown = noti.object;
@@ -172,7 +172,7 @@
             }
         }
         
-        NSLog(@"cancel entry sucess!");
+//        NSLog(@"cancel entry sucess!");
     }
 
 }
@@ -659,7 +659,7 @@
             [self.documentInteractionController presentOptionsMenuFromRect:navRect inView:self.view animated:YES];
         } else {
             
-            [MBProgressHUD showGlobalProgressHUDWithTitle:NSLocalizedString(@"导出失败", nil) hideAfterDelay:2.0];
+            [MBProgressHUD showGlobalProgressHUDWithTitle:NSLocalizedString(@"导出失败", nil) hideAfterDelay:1.0];
         }
     }];
     

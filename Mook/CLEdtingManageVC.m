@@ -712,7 +712,7 @@
  ****/
 -(void)initRecognizer
 {
-    NSLog(@"%s",__func__);
+//    NSLog(@"%s",__func__);
     
     //单例模式，无UI的实例
     if (_iFlySpeechRecognizer == nil) {
@@ -779,7 +779,7 @@
  ****/
 - (void) onBeginOfSpeech
 {
-    NSLog(@"onBeginOfSpeech");
+//    NSLog(@"onBeginOfSpeech");
     [_popUpView showText: NSLocalizedString(@"正在录音", nil)];
 }
 
@@ -788,7 +788,7 @@
  ****/
 - (void) onEndOfSpeech
 {
-    NSLog(@"onEndOfSpeech");
+//    NSLog(@"onEndOfSpeech");
     
     [_popUpView showText: NSLocalizedString(@"停止录音", nil)];
 }
@@ -802,7 +802,7 @@
  ****/
 - (void) onError:(IFlySpeechError *) error
 {
-    NSLog(@"%s",__func__);
+//    NSLog(@"%s",__func__);
     
     if ([IATConfig sharedInstance].haveView == NO ) {
         NSString *text ;
@@ -818,14 +818,14 @@
             }
         }else {
             text = [NSString stringWithFormat:NSLocalizedString(@"发生错误：%d %@", nil), error.errorCode,error.errorDesc];
-            NSLog(@"%@",text);
+//            NSLog(@"%@",text);
         }
         
         [_popUpView showText: text];
         
     }else {
         [_popUpView showText:NSLocalizedString(@"识别结束", nil)];
-        NSLog(@"errorCode:%d",[error errorCode]);
+//        NSLog(@"errorCode:%d",[error errorCode]);
     }
 
     
@@ -849,10 +849,10 @@
     self.content = [NSString stringWithFormat:@"%@%@", self.content,resultFromJson];
     
     if (isLast){
-        NSLog(@"听写结果(json)：%@测试",  self.result);
+//        NSLog(@"听写结果(json)：%@测试",  self.result);
     }
-    NSLog(@"_result=%@",_result);
-    NSLog(@"resultFromJson=%@",resultFromJson);
+//    NSLog(@"_result=%@",_result);
+//    NSLog(@"resultFromJson=%@",resultFromJson);
 //    NSLog(@"isLast=%d,_textView.text=%@",isLast,_editTextView.text);
     
     if ([self.editDelegate respondsToSelector:@selector(editingManageVC:didFinishWithAudioRecognizeResult:currentIdentifierTag:)]) {

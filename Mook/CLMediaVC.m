@@ -408,7 +408,7 @@ static NSString * const reuseIdentifier = @"Cell";
 //}
 
 - (void)photoBrowser:(MWPhotoBrowser *)photoBrowser actionButtonPressedForPhotoAtIndex:(NSUInteger)index {
-    NSLog(@"ACTION!");
+//    NSLog(@"ACTION!");
     
     id modelUnknown = self.dataList[index];
     
@@ -422,7 +422,7 @@ static NSString * const reuseIdentifier = @"Cell";
 }
 
 - (void)photoBrowser:(MWPhotoBrowser *)photoBrowser didDisplayPhotoAtIndex:(NSUInteger)index {
-    NSLog(@"Did start viewing photo at index %lu", (unsigned long)index);
+//    NSLog(@"Did start viewing photo at index %lu", (unsigned long)index);
 }
 
 //- (BOOL)photoBrowser:(MWPhotoBrowser *)photoBrowser isPhotoSelectedAtIndex:(NSUInteger)index {
@@ -440,7 +440,7 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (void)photoBrowserDidFinishModalPresentation:(MWPhotoBrowser *)photoBrowser {
     // If we subscribe to this method we must dismiss the view controller ourselves
-    NSLog(@"Did finish modal presentation");
+//    NSLog(@"Did finish modal presentation");
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

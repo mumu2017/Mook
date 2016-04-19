@@ -176,7 +176,7 @@
             if ([MFMailComposeViewController canSendMail]) {
                 [self displayMailComposerSheet];
             } else {
-                [MBProgressHUD showGlobalProgressHUDWithTitle:NSLocalizedString(@"当前无法发送邮件", nil) hideAfterDelay:1.5];
+                [MBProgressHUD showGlobalProgressHUDWithTitle:NSLocalizedString(@"当前无法发送邮件", nil) hideAfterDelay:1.0];
             }
         }
         
@@ -329,7 +329,7 @@
             break;
     }
 
-    [MBProgressHUD showGlobalProgressHUDWithTitle:title hideAfterDelay:1.5];
+    [MBProgressHUD showGlobalProgressHUDWithTitle:title hideAfterDelay:1.0];
     
     [self dismissViewControllerAnimated:YES completion:NULL];
 }

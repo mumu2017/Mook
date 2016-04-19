@@ -34,7 +34,7 @@ static FMDatabase *_db;
     // 创建了一个数据库实例
     _db = [FMDatabase databaseWithPath:filePath];
     
-    // 打开数据库
+    //打开数据库
     if ([_db open]) {
         NSLog(@"打开成功");
     }else{
@@ -44,25 +44,25 @@ static FMDatabase *_db;
     // 创建Data表格
     BOOL flag1 = [_db executeUpdate:@"create table if not exists t_mook (id integer primary key autoincrement,type text,time_stamp text,dict blob);"];
     if (flag1) {
-        NSLog(@"创建Data表成功");
+//        NSLog(@"创建Data表成功");
     }else{
-        NSLog(@"创建Data表失败");
+//        NSLog(@"创建Data表失败");
     }
     
     // 创建标签表格
     BOOL flag2 = [_db executeUpdate:@"create table if not exists t_tag (id integer primary key autoincrement,type text,tag text);"];
     if (flag2) {
-        NSLog(@"创建Tag表成功");
+//        NSLog(@"创建Tag表成功");
     }else{
-        NSLog(@"创建Tag表失败");
+//        NSLog(@"创建Tag表失败");
     }
     
     // 创建Media表格
     BOOL flag3 = [_db executeUpdate:@"create table if not exists t_media (id integer primary key autoincrement,type text,name text,content text,model_time_stamp text,model_type text);"];
     if (flag3) {
-        NSLog(@"创建Media索引表成功");
+//        NSLog(@"创建Media索引表成功");
     }else{
-        NSLog(@"创建Media索引表失败");
+//        NSLog(@"创建Media索引表失败");
     }
 }
 
@@ -281,17 +281,17 @@ static FMDatabase *_db;
         
         flag = [_db executeUpdate:@"update t_mook set dict=? where time_stamp=?", data, timeStamp];
         if (flag) {
-            NSLog(@"更新Show成功");
+//            NSLog(@"更新Show成功");
         }else{
-            NSLog(@"更新Show失败");
+//            NSLog(@"更新Show失败");
         }
         
     } else {    // 如果为空,则表示没有查询到任何符合条件的结果,所以插入数据.
         flag = [_db executeUpdate:@"insert into t_mook (type, time_stamp, dict) values(?,?,?)", kTypeShow, timeStamp, data];
         if (flag) {
-            NSLog(@"插入Show成功");
+//            NSLog(@"插入Show成功");
         }else{
-            NSLog(@"插入Show失败");
+//            NSLog(@"插入Show失败");
         }
     }
     
@@ -304,9 +304,9 @@ static FMDatabase *_db;
     
     BOOL flag = [_db executeUpdate:@"delete from t_mook where type=? and time_stamp=?", kTypeShow, timeStamp];
     if (flag) {
-        NSLog(@"删除Show成功");
+//        NSLog(@"删除Show成功");
     }else{
-        NSLog(@"删除Show失败");
+//        NSLog(@"删除Show失败");
     }
 }
 
@@ -380,17 +380,17 @@ static FMDatabase *_db;
         
         flag = [_db executeUpdate:@"update t_mook set dict=? where time_stamp=?", data, timeStamp];
         if (flag) {
-            NSLog(@"更新成功");
+//            NSLog(@"更新成功");
         }else{
-            NSLog(@"更新失败");
+//            NSLog(@"更新失败");
         }
         
     } else {    // 如果为空,则表示没有查询到任何符合条件的结果,所以插入数据.
         flag = [_db executeUpdate:@"insert into t_mook (type, time_stamp, dict) values(?,?,?)",type, timeStamp, data];
         if (flag) {
-            NSLog(@"插入成功");
+//            NSLog(@"插入成功");
         }else{
-            NSLog(@"插入失败");
+//            NSLog(@"插入失败");
         }
     }
     
@@ -438,9 +438,9 @@ static FMDatabase *_db;
 + (void)deleteDataWithStamp:(NSString *)timeStamp {
     BOOL flag = [_db executeUpdate:@"delete from t_mook where time_stamp=?", timeStamp];
     if (flag) {
-        NSLog(@"删除成功");
+//        NSLog(@"删除成功");
     }else{
-        NSLog(@"删除失败");
+//        NSLog(@"删除失败");
     }
 }
 
@@ -558,9 +558,9 @@ static FMDatabase *_db;
         
         BOOL flag = [_db executeUpdate:@"insert into t_tag (tag, type) values(?,?)", tag, type];
         if (flag) {
-            NSLog(@"插入成功");
+//            NSLog(@"插入成功");
         }else{
-            NSLog(@"插入失败");
+//            NSLog(@"插入失败");
         }
 
     }
@@ -570,9 +570,9 @@ static FMDatabase *_db;
 + (void)deleteTag:(NSString *)tag type:(NSString *)type {
     BOOL flag = [_db executeUpdate:@"delete from t_tag where type=? and tag=?", type, tag];
     if (flag) {
-        NSLog(@"删除成功");
+//        NSLog(@"删除成功");
     }else{
-        NSLog(@"删除失败");
+//        NSLog(@"删除失败");
     }
 }
 
@@ -647,9 +647,9 @@ static FMDatabase *_db;
     
     BOOL flag = [_db executeUpdate:@"insert into t_media (type, name, content, model_time_stamp, model_type) values(?,?,?,?,?)", @"video", name, content, timeStamp, type];
     if (flag) {
-        NSLog(@"插入media索引成功");
+//        NSLog(@"插入media索引成功");
     }else{
-        NSLog(@"插入media索引失败");
+//        NSLog(@"插入media索引失败");
     }
 }
 
@@ -658,9 +658,9 @@ static FMDatabase *_db;
 + (void)addImageByName:(NSString *)name timesStamp:(NSString *)timeStamp content:(NSString *)content type:(NSString *)type {
     BOOL flag = [_db executeUpdate:@"insert into t_media (type, name, content, model_time_stamp, model_type) values(?,?,?,?,?)", @"image", name, content, timeStamp, type];
     if (flag) {
-        NSLog(@"插入media索引成功");
+//        NSLog(@"插入media索引成功");
     }else{
-        NSLog(@"插入media索引失败");
+//        NSLog(@"插入media索引失败");
     }
 }
 
@@ -668,27 +668,27 @@ static FMDatabase *_db;
     
     BOOL flag = [_db executeUpdate:@"update t_media set content=? where name=?", content, name];
     if (flag) {
-        NSLog(@"更新成功");
+//        NSLog(@"更新成功");
     }else{
-        NSLog(@"更新失败");
+//        NSLog(@"更新失败");
     }
 }
 
 + (void)updateImageByName:(NSString *)name withContent:(NSString *)content {
     BOOL flag = [_db executeUpdate:@"update t_media set content=? where name=?", content, name];
     if (flag) {
-        NSLog(@"更新成功");
+//        NSLog(@"更新成功");
     }else{
-        NSLog(@"更新失败");
+//        NSLog(@"更新失败");
     }
 }
 
 + (void)deleteMediaByName:(NSString *)name {
     BOOL flag = [_db executeUpdate:@"delete from t_media where name=?", name];
     if (flag) {
-        NSLog(@"删除成功");
+//        NSLog(@"删除成功");
     }else{
-        NSLog(@"删除失败");
+//        NSLog(@"删除失败");
     }
 }
 

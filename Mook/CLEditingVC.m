@@ -504,7 +504,16 @@
     
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     
-    UIAlertAction* add = [UIAlertAction actionWithTitle:NSLocalizedString(@"添加准备", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    NSString *str;
+    
+    if (self.editingContentType == kEditingContentTypeRoutine) {
+        str = NSLocalizedString(@"添加准备", nil);
+    } else {
+        str = NSLocalizedString(@"添加细节", nil);
+
+    }
+    
+    UIAlertAction* add = [UIAlertAction actionWithTitle:str style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
 
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             
@@ -946,7 +955,7 @@
 }
 
 - (void) video:(NSString *)videoPath didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo {
-    NSLog(@"Finished saving video with error: %@", error);
+//    NSLog(@"Finished saving video with error: %@", error);
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {

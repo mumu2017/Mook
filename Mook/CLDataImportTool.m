@@ -42,7 +42,7 @@
         BOOL flag = [SSZipArchive unzipFileAtPath:[url path] toDestination:[NSString tempUnzipPath] overwrite:YES password:kZipPassword error:&err];
         
         if (flag) {
-            NSLog(@"unzip sucess");
+//            NSLog(@"unzip sucess");
             
             NSData *data = [NSData dataWithContentsOfFile:[[NSString tempUnzipPath] stringByAppendingPathComponent:@"mookShare.data"]];
             NSDictionary *dict = [NSKeyedUnarchiver unarchiveObjectWithData:data];
@@ -50,7 +50,7 @@
             // 解压后删除Inbox中的文件
             BOOL flag1 = [[NSFileManager defaultManager] removeItemAtURL:url error:NULL];
             if (flag1) {
-                NSLog(@"INBOX CLEANED");
+//                NSLog(@"INBOX CLEANED");
             } else {
                 // 如果删除不成功,再尝试删除一次
                 [[NSFileManager defaultManager] removeItemAtURL:url error:NULL];
@@ -59,11 +59,11 @@
             return dict;
             
         } else {
-            NSLog(@"unzip failed");
+//            NSLog(@"unzip failed");
             // 解压后删除Inbox中的文件
             BOOL flag1 = [[NSFileManager defaultManager] removeItemAtURL:url error:NULL];
             if (flag1) {
-                NSLog(@"INBOX CLEANED");
+//                NSLog(@"INBOX CLEANED");
             } else {
                 // 如果删除不成功,再尝试删除一次
                 [[NSFileManager defaultManager] removeItemAtURL:url error:NULL];

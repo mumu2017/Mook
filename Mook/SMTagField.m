@@ -249,4 +249,8 @@
         [tagDelegate tagField: self tagsChanged: tags];
 }
 
+- (void)tagTapped:(UIButton *)button {
+    
+}
+
 @end

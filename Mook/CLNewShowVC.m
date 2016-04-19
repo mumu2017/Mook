@@ -450,7 +450,7 @@
     UIAlertAction* delete = [UIAlertAction actionWithTitle:NSLocalizedString(@"确定", nil) style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
         
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            NSLog(@"delete current entry");
+//            NSLog(@"delete current entry");
             
             self.currentEntryDelteted = YES;
             [[NSNotificationCenter defaultCenter] postNotificationName:kDeleteEntryNotification object:self.showModel];

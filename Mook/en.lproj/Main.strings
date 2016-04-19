@@ -12,7 +12,7 @@
 "3xD-QQ-DJH.text" = "What is Magic?";
 
 /* Class = "UINavigationItem"; title = "笔记"; ObjectID = "4Kf-lo-IC0"; */
-"4Kf-lo-IC0.title" = "Notes";
+"4Kf-lo-IC0.title" = "Timeline";
 
 /* Class = "UILabel"; text = "AppStore 评分"; ObjectID = "4e8-VU-fzj"; */
 "4e8-VU-fzj.text" = "Please Rate Mook";
@@ -21,7 +21,7 @@
 "7PU-UJ-Tyk.text" = "Quick Phrase";
 
 /* Class = "UITabBarItem"; title = "笔记"; ObjectID = "7U8-cH-grM"; */
-"7U8-cH-grM.title" = "Notes";
+"7U8-cH-grM.title" = "Timeline";
 
 /* Class = "UITabBarItem"; title = "设置"; ObjectID = "7UM-em-4Mb"; */
 "7UM-em-4Mb.title" = "Setting";
@@ -66,7 +66,7 @@
 "I8N-8V-IS7.title" = "Import";
 
 /* Class = "UITabBarItem"; title = "分类"; ObjectID = "JG5-Ax-guD"; */
-"JG5-Ax-guD.title" = "Category";
+"JG5-Ax-guD.title" = "Library";
 
 /* Class = "UITableViewSection"; headerTitle = "数据"; ObjectID = "Kd3-Be-FE9"; */
 "Kd3-Be-FE9.headerTitle" = "Data";
@@ -81,7 +81,7 @@
 "LcT-tQ-Efr.title" = "Edit";
 
 /* Class = "UINavigationItem"; title = "分类"; ObjectID = "Nvt-D1-Pat"; */
-"Nvt-D1-Pat.title" = "Category";
+"Nvt-D1-Pat.title" = "Library";
 
 /* Class = "UINavigationItem"; title = "Title"; ObjectID = "PGQ-Xa-2tO"; */
 "PGQ-Xa-2tO.title" = "Title";
