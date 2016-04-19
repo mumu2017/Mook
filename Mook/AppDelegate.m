@@ -21,7 +21,7 @@
 #import "CLDataImportTool.h"
 #import "CLDataSaveTool.h"
 #import "iflyMSC/IFlyMSC.h"
-
+#import "Appirater.h"
 #import "CLMookTabBarController.h"
 
 @interface AppDelegate ()<MBProgressHUDDelegate>
@@ -151,9 +151,40 @@
     [self checkPasswordInfo];
     [self registerIFlyVoiceRecognition];
     
+    [self setAppiraterForRatingMook];
+//    NSLog(@"%@", [NSString imagePath]);
+    
+    
     return YES;
     
 }
+
+- (void)setAppiraterForRatingMook {
+    
+//    [Appirater setAppId:@"1105302733"];    // Change for your "Your APP ID"
+//    [Appirater setDaysUntilPrompt:0];     // Days from first entered the app until prompt
+//    [Appirater setUsesUntilPrompt:5];     // Number of uses until prompt
+//    [Appirater setTimeBeforeReminding:2]; // Days until reminding if the user taps "remind me"
+//    //[Appirater setDebug:YES];           // If you set this to YES it will display all the time
+//    
+//    //... Perhaps do stuff
+    
+    [Appirater setCustomAlertTitle:NSLocalizedString(@"请评价Mook", nil)];
+    [Appirater setCustomAlertMessage:NSLocalizedString(@"如果您喜欢Mook的话,请给个好评吧!", nil)];
+    [Appirater setCustomAlertRateButtonTitle:NSLocalizedString(@"去AppStore评分", nil)];
+    [Appirater setCustomAlertRateLaterButtonTitle:NSLocalizedString(@"稍后提示", nil)];
+    [Appirater setCustomAlertCancelButtonTitle:NSLocalizedString(@"不用了,谢谢", nil)];
+    
+    
+    [Appirater setAppId:@"1105302733"];
+    [Appirater setDaysUntilPrompt:7];
+    [Appirater setUsesUntilPrompt:5];
+    [Appirater setSignificantEventsUntilPrompt:-1];
+    [Appirater setTimeBeforeReminding:2];
+    [Appirater appLaunched:YES];
+    [Appirater setDebug:NO];
+}
+
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -182,6 +213,8 @@
     BOOL usePassword = [[NSUserDefaults standardUserDefaults] boolForKey:kUsePasswordKey];
     [[NSUserDefaults standardUserDefaults] setBool:usePassword forKey:kCheckIfShouldPasswordKey];
     [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    [Appirater appEnteredForeground:YES];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {

@@ -121,6 +121,9 @@
 		43951A011CC5DAEA00505E5B /* Setting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 43951A031CC5DAEA00505E5B /* Setting.storyboard */; };
 		43951A121CC5E7A200505E5B /* CLAboutVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 43951A111CC5E7A200505E5B /* CLAboutVC.m */; };
 		43951A161CC5E7BE00505E5B /* CLBackUpInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 43951A151CC5E7BE00505E5B /* CLBackUpInfoVC.m */; };
+		43951A181CC65C7000505E5B /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43951A171CC65C7000505E5B /* CFNetwork.framework */; };
+		43951A1A1CC65C8900505E5B /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43951A191CC65C8900505E5B /* StoreKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		43951A1C1CC6681700505E5B /* mookFileIcon.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 43951A1B1CC6681700505E5B /* mookFileIcon.jpg */; };
 		43A281181CB224BC009C2785 /* CLMookTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A281171CB224BC009C2785 /* CLMookTabBarController.m */; };
 		43A2811F1CB2276A009C2785 /* CLLibraryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A2811D1CB2276A009C2785 /* CLLibraryCell.m */; };
 		43A281201CB2276A009C2785 /* CLLibraryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43A2811E1CB2276A009C2785 /* CLLibraryCell.xib */; };
@@ -349,11 +352,8 @@
 		439519CC1CC0904A00505E5B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		439519CE1CC0908A00505E5B /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Base; path = Base.lproj/Info.plist; sourceTree = "<group>"; };
 		439519D11CC0909A00505E5B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
-		439519D21CC0909A00505E5B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = en; path = en.lproj/Info.plist; sourceTree = "<group>"; };
 		439519D41CC090A100505E5B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
-		439519D51CC090A100505E5B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "zh-Hans"; path = "zh-Hans.lproj/Info.plist"; sourceTree = "<group>"; };
 		439519D71CC090A800505E5B /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
-		439519D81CC090A800505E5B /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "zh-Hant"; path = "zh-Hant.lproj/Info.plist"; sourceTree = "<group>"; };
 		439519DA1CC0911000505E5B /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		439519E81CC0A62C00505E5B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		439519E91CC0A62F00505E5B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -377,6 +377,9 @@
 		43951A111CC5E7A200505E5B /* CLAboutVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLAboutVC.m; sourceTree = "<group>"; };
 		43951A141CC5E7BE00505E5B /* CLBackUpInfoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLBackUpInfoVC.h; sourceTree = "<group>"; };
 		43951A151CC5E7BE00505E5B /* CLBackUpInfoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLBackUpInfoVC.m; sourceTree = "<group>"; };
+		43951A171CC65C7000505E5B /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		43951A191CC65C8900505E5B /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		43951A1B1CC6681700505E5B /* mookFileIcon.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = mookFileIcon.jpg; sourceTree = "<group>"; };
 		43A281161CB224BC009C2785 /* CLMookTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLMookTabBarController.h; sourceTree = "<group>"; };
 		43A281171CB224BC009C2785 /* CLMookTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLMookTabBarController.m; sourceTree = "<group>"; };
 		43A2811C1CB2276A009C2785 /* CLLibraryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLLibraryCell.h; sourceTree = "<group>"; };
@@ -458,6 +461,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				43951A1A1CC65C8900505E5B /* StoreKit.framework in Frameworks */,
+				43068BE71CB745A400BA1A57 /* SystemConfiguration.framework in Frameworks */,
+				43951A181CC65C7000505E5B /* CFNetwork.framework in Frameworks */,
 				43068BFE1CB74EF600BA1A57 /* libz.1.1.3.tbd in Frameworks */,
 				43068BFF1CB74EF600BA1A57 /* libz.1.2.5.tbd in Frameworks */,
 				43068C001CB74EF600BA1A57 /* libz.1.tbd in Frameworks */,
@@ -470,7 +476,6 @@
 				43068BED1CB745E500BA1A57 /* UIKit.framework in Frameworks */,
 				43068BEB1CB745DC00BA1A57 /* AudioToolbox.framework in Frameworks */,
 				43068BE91CB745AF00BA1A57 /* Foundation.framework in Frameworks */,
-				43068BE71CB745A400BA1A57 /* SystemConfiguration.framework in Frameworks */,
 				43068BE51CB7459900BA1A57 /* AVFoundation.framework in Frameworks */,
 				43068BE31CB7456200BA1A57 /* iflyMSC.framework in Frameworks */,
 				43E0F7081C9EB2A2005CAD97 /* libsqlite3.0.tbd in Frameworks */,
@@ -740,6 +745,7 @@
 		43A281251CB230FE009C2785 /* jpgs */ = {
 			isa = PBXGroup;
 			children = (
+				43951A1B1CC6681700505E5B /* mookFileIcon.jpg */,
 				43F5F7BE1CB50AD3007BFB0C /* launch.jpg */,
 				43F5F7B61CB50151007BFB0C /* routine.jpg */,
 				43F5F7B81CB5020F007BFB0C /* prop.jpg */,
@@ -1093,6 +1099,8 @@
 		867DD05412560E63BB6BCE80 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				43951A191CC65C8900505E5B /* StoreKit.framework */,
+				43951A171CC65C7000505E5B /* CFNetwork.framework */,
 				43068BF61CB746A600BA1A57 /* CoreTelephony.framework */,
 				43068BF41CB7461700BA1A57 /* CoreGraphics.framework */,
 				43068BF21CB7460C00BA1A57 /* QuartzCore.framework */,
@@ -1207,6 +1215,7 @@
 				439519CB1CC0904A00505E5B /* LaunchScreen.storyboard in Resources */,
 				43EEE7E31CAD329B00F0BCCF /* CLRoutineTextCell.xib in Resources */,
 				43C2068B1CB10CF300CEF992 /* CLListCell.xib in Resources */,
+				43951A1C1CC6681700505E5B /* mookFileIcon.jpg in Resources */,
 				432346641C94094D00200833 /* CLOneLabelDisplayCell.xib in Resources */,
 				432345451C94045000200833 /* Assets.xcassets in Resources */,
 				43F5F7BF1CB50AD3007BFB0C /* launch.jpg in Resources */,
@@ -1414,9 +1423,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				439519CE1CC0908A00505E5B /* Base */,
-				439519D21CC0909A00505E5B /* en */,
-				439519D51CC090A100505E5B /* zh-Hans */,
-				439519D81CC090A800505E5B /* zh-Hant */,
 			);
 			name = Info.plist;
 			sourceTree = "<group>";
@@ -1543,7 +1549,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 41EFA00EF9667E60B4BC3CCB /* Pods-Mook.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-3";
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
@@ -1565,7 +1571,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = F0417F5619A3E977F1F0B558 /* Pods-Mook.release.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-3";
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;

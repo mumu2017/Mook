@@ -9,7 +9,7 @@
 		<dict>
 			<key>CFBundleTypeIconFiles</key>
 			<array>
-				<string>tag.jpg</string>
+				<string>mookFileIcon.jpg</string>
 			</array>
 			<key>CFBundleTypeName</key>
 			<string>Mook File</string>
@@ -97,6 +97,10 @@
 			<string>Mook File</string>
 			<key>UTTypeIdentifier</key>
 			<string>com.linchen.project.Mook.mook</string>
+			<key>UTTypeSize320IconFile</key>
+			<string>mookBig</string>
+			<key>UTTypeSize64IconFile</key>
+			<string>mookSmall</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>

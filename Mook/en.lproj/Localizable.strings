@@ -6,6 +6,12 @@
 
 */
 
+"请评价Mook" = "Please rate Mook";
+"如果您喜欢Mook的话,请给个好评吧!" = "If you like Mook and think it's helpful, please rate it in App Store and let more people know.";
+"去AppStore评分" = "Rate in AppStore";
+"稍后提示" = "Remind me later";
+"不用了,谢谢" = "No, thanks";
+
 "详细信息" = "Details";
 
 // 模型类
@@ -42,11 +48,11 @@
 "导入取消" = "Import cancelled";
 "新建道具" = "New Prop";
 
-"效果描述" = "Effect description";
-"灵感内容" = "Idea description";
-"技巧描述" = "Sleight description";
-"道具描述" = "Prop description";
-"台词内容" = "Lines description";
+"效果描述" = "Effect";
+"灵感内容" = "Idea";
+"技巧描述" = "Sleight";
+"道具描述" = "Prop";
+"台词内容" = "Lines";
 
 "道具清单" = "Prop list";
 "细节描述" = "Details";
@@ -214,12 +220,6 @@
 "编辑道具名称" = "Title";
 "编辑台词标题" = "Title";
 
-
-"灵感描述" = "Idea description";
-"效果描述" = "Effect description";
-"技巧描述" = "Sleight description";
-"道具描述" = "Prop description";
-"台词内容" = "Lines description";
 
 "添加道具" = "Add Prop";
 "添加细节" = "Add details";

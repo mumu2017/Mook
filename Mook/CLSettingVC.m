@@ -9,6 +9,7 @@
 #import "CLSettingVC.h"
 #import "CLPasswordVC.h"
 #import "CLDataSaveTool.h"
+#import "Appirater.h"
 
 #import <MessageUI/MFMailComposeViewController.h>
 
@@ -178,6 +179,8 @@
             } else {
                 [MBProgressHUD showGlobalProgressHUDWithTitle:NSLocalizedString(@"当前无法发送邮件", nil) hideAfterDelay:1.0];
             }
+        } else if (indexPath.row == 1) {
+            [self rateMook];
         }
         
     } else if (indexPath.section == 5) {
@@ -258,9 +261,11 @@
     [defaults synchronize];
 }
 
-#pragma mark 更改语音识别语言
-- (IBAction)languageControlChanged:(UISegmentedControl *)languageControl {
+#pragma mark appStore评分
+- (void)rateMook {
     
+    [Appirater setAppId:@"1105302733"];
+    [Appirater rateApp];
    
 }
 
@@ -279,7 +284,7 @@
     [picker setSubject:@"Mook反馈"];
     
     // Set up recipients
-    NSArray *toRecipients = [NSArray arrayWithObject:@"chenlin7715@163.com"];
+    NSArray *toRecipients = [NSArray arrayWithObject:@"mookformagic@hotmail.com"];
     
     [picker setToRecipients:toRecipients];
 
