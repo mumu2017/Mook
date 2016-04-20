@@ -34,7 +34,7 @@
 @implementation CLMookTabBarController
 
 
-- (BOOL)isNotFirstTimeLaunch {
+- (BOOL)isNotFirstTimeLaunch { // 检测是否是第一次启动应用
 
     return [[NSUserDefaults standardUserDefaults] boolForKey:kNotFirstTimeLaunchKey];
 
@@ -70,6 +70,7 @@
     
 }
 
+// 开始导入操作
 - (void)importStart:(NSNotification *)noti {
     self.isImportingData = YES;
     self.importDict = noti.userInfo;
@@ -86,12 +87,13 @@
     }
 }
 
-- (void)importFinish {
+- (void)importFinish { // 导入完成
     self.isImportingData = NO;
     self.importDict = nil;
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+// 取消新建笔记
 - (void)cancelEntry:(NSNotification *)noti {
     if (noti.object == nil) {
 //        NSLog(@"error : cancel object == nil");
@@ -141,6 +143,7 @@
     
 }
 
+// 删除笔记操作(所有的删除和取消都以通知的方式在本控制器进行操作)
 - (void)deleteEntry:(NSNotification *)noti {
     if (noti.object == nil) {
 //        NSLog(@"error : delete object == nil");
@@ -199,6 +202,7 @@
     }
 }
 
+// 展示欢迎界面
 - (void)showIntroWithCrossDissolve {
     
     NSString *sampleDescription1 = NSLocalizedString(@"随时随地记录灵感,让创作无处不在", nil);
@@ -236,6 +240,7 @@
     [intro showInView:self.rootView animateDuration:0.3];
 }
 
+// 显示密码输入界面
 - (void)inputPassword {
     
     if ([[NSUserDefaults standardUserDefaults] boolForKey:kCheckIfShouldPasswordKey]) {
@@ -243,6 +248,7 @@
     }
 }
 
+// 密码核对正确后的操作
 - (void)passwordMatch {
     
     [self dismissViewControllerAnimated:YES completion:^{

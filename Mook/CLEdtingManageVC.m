@@ -243,6 +243,8 @@
     return _linesObjModel;
 }
 
+
+#pragma mark - 更新进度条
 - (void)updateProgressToRight:(NSInteger)fromIndex withPercent:(CGFloat)percent {
     
     CGFloat progress = (1.0 * (fromIndex + 1 + percent)) / self.childVCCount;
@@ -271,6 +273,7 @@
     [self updateTitle];
 }
 
+#pragma mark 更新标题
 - (void)updateTitle {
     [self.pagerTabStripChildViewControllers enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         NSAssert([obj conformsToProtocol:@protocol(XLPagerTabStripChildItem)], @"child view controller must conform to XLPagerTabStripChildItem");
@@ -283,7 +286,7 @@
     }];
 }
 
-#pragma mark - VC数量
+#pragma mark - 子VC数量
 - (NSUInteger)childVCCount {
     
     _childVCCount = 0;
@@ -360,7 +363,7 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:kUpdateEntryVCNotification object:self];
 }
 
-#pragma mark - XLPagerTabStripViewControllerDataSource
+#pragma mark - XLPagerTabStripViewControllerDataSource 设置子控制器属性
 
 -(NSArray *)childViewControllersForPagerTabStripViewController:(XLPagerTabStripViewController *)pagerTabStripViewController
 {
@@ -378,7 +381,7 @@
                 vc.editingContentType = self.editingContentType;
                 vc.timeStamp = self.routineModel.timeStamp;
                 vc.delegate = self;
-                vc.identifierTag = i;
+                vc.identifierTag = i; // 每个子控制器都有一个单独的tag,用于语音识别传输数据
                 vc.mediaView = self.mediaView;
                 vc.manageVC = self;
                 
@@ -505,7 +508,7 @@
 
 
 
-#pragma mark - XLPagerTabStripViewControllerDelegate
+#pragma mark - XLPagerTabStripViewControllerDelegate 更新进度条
 
 -(void)pagerTabStripViewController:(XLPagerTabStripViewController *)pagerTabStripViewController
           updateIndicatorFromIndex:(NSInteger)fromIndex

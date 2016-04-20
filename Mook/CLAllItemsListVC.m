@@ -209,6 +209,7 @@
     
 }
 
+// 演出的右滑按钮,不含导出
 - (NSArray *)showRightButtons
 {
     NSMutableArray *rightUtilityButtons = [NSMutableArray new];
@@ -218,6 +219,7 @@
     return rightUtilityButtons;
 }
 
+// 其他笔记的右滑按钮,包含导出按钮
 - (NSArray *)rightButtons
 {
     NSMutableArray *rightUtilityButtons = [NSMutableArray new];
@@ -256,6 +258,7 @@
     [cell hideUtilityButtonsAnimated:YES];
 }
 
+#pragma mark - 删除和导出笔记方法
 // 删除笔记
 - (void)delete:(NSIndexPath *)path {
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:NSLocalizedString(@"提示: 删除内容后将无法恢复,确定要删除当前内容吗?", nil) preferredStyle:UIAlertControllerStyleActionSheet];
@@ -593,6 +596,8 @@
     }
     
 }
+
+#pragma mark - 新建笔记方法
 
 - (IBAction)addNewEntry:(id)sender {
 

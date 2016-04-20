@@ -33,7 +33,7 @@
 
 #pragma mark - Update Data
 
-- (void)reloadData {
+- (void)reloadData { //恢复备份后刷新数据
     self.allItems = nil;
     
     self.allTags = nil;
@@ -56,10 +56,9 @@
         [[NSNotificationCenter defaultCenter] postNotificationName:kUpdateMookNotification object:nil];
         
     });
-    
 }
 
-- (void)setAppUI {
+- (void)setAppUI { // 设置应用UI
     self.window.tintColor = kMenuBackgroundColor;
     
     [[UISwitch appearance] setOnTintColor:kMenuBackgroundColor];
@@ -91,7 +90,7 @@
     //    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 }
 
-- (void)registerIFlyVoiceRecognition {
+- (void)registerIFlyVoiceRecognition { // 注册讯飞语音识别
     //创建语音配置,appid必须要传入，仅执行一次则可
     NSString *initString = [[NSString alloc] initWithFormat:@"appid=%@",kIFlyAppID];
     
@@ -100,7 +99,7 @@
 
 }
 
-- (void)checkPasswordInfo {
+- (void)checkPasswordInfo { // 检查是否使用密码
     self.shouldInputPassword = [[NSUserDefaults standardUserDefaults] boolForKey:kUsePasswordKey];
     
     BOOL usePassword = [[NSUserDefaults standardUserDefaults] boolForKey:kUsePasswordKey];
@@ -108,6 +107,7 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
+// 下面两个openURL的方法是导入文件时触发
 - (BOOL)application:(UIApplication *)application
             openURL:(NSURL *)url
   sourceApplication:(NSString *)sourceApplication
@@ -159,6 +159,7 @@
     
 }
 
+// 设置评分提醒
 - (void)setAppiraterForRatingMook {
     
 //    [Appirater setAppId:@"1105302733"];    // Change for your "Your APP ID"
@@ -192,6 +193,7 @@
     
 }
 
+// 应用退到后台时的处理
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
@@ -208,6 +210,7 @@
     
 }
 
+// 应用将要恢复前台时的处理
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
     BOOL usePassword = [[NSUserDefaults standardUserDefaults] boolForKey:kUsePasswordKey];
@@ -226,7 +229,7 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
-
+#pragma mark - 数据懒加载方法
 - (NSMutableArray *)allItems {
     if (!_allItems) {
         _allItems = [CLDataSaveTool allItems];

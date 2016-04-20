@@ -367,6 +367,7 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
+#pragma mark - 跳转方法
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
     id destVC = segue.destinationViewController;

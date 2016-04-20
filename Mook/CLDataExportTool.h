@@ -11,7 +11,7 @@
 
 @interface CLDataExportTool : NSObject
 
-// 生成压缩包,以便导出
+// 生成压缩包,以便导出,返回值是压缩包的路径文本
 + (NSString *)makeDataPackageWithRoutine:(CLRoutineModel *)routineModel passWord:(NSString *)passWord;
 + (NSString *)makeDataPackageWithIdea:(CLIdeaObjModel *)ideaObjModel passWord:(NSString *)passWord;
 

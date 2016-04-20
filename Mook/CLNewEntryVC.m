@@ -405,11 +405,13 @@
 
 }
 
+// 更新数据
 - (void)updateData {
     [self.tableView reloadData];
-
 }
 
+#pragma mark - 取消操作
+// 取消新建
 - (void)cancelNewCreation {
     
     self.newEntryCancelled = YES;

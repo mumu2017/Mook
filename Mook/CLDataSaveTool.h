@@ -12,6 +12,7 @@
 @interface CLDataSaveTool : NSObject
 
 #pragma mark - 数据方法
+// 获取各类型数据
 + (NSMutableArray *)allItems;
 + (NSMutableArray <CLShowModel*>*)allShows;
 + (NSMutableArray <CLRoutineModel*>*)allRoutines;
@@ -20,6 +21,7 @@
 + (NSMutableArray <CLPropObjModel*>*)allProps;
 + (NSMutableArray <CLLinesObjModel*>*)allLines;
 
+// 获取单个模型
 + (CLShowModel *)showByName:(NSString *)name;
 + (CLRoutineModel *)routineByName:(NSString *)name;
 + (CLIdeaObjModel *)ideaByName:(NSString *)name;
@@ -27,6 +29,7 @@
 + (CLPropObjModel *)propByName:(NSString *)name;
 + (CLLinesObjModel *)linesByName:(NSString *)name;
 
+// 更新数据
 + (BOOL)updateRoutine:(CLRoutineModel *)routineModel;
 + (void)deleteRoutine:(CLRoutineModel *)routineModel;
 
@@ -46,6 +49,7 @@
 + (void)deleteLines:(CLLinesObjModel *)linesObjModel;
 
 #pragma mark - 标签方法
+//获取标签数据
 + (NSMutableArray *)allTags;
 + (NSMutableArray *)allTagsShow;
 + (NSMutableArray *)allTagsIdea;
@@ -54,10 +58,12 @@
 + (NSMutableArray *)allTagsProp;
 + (NSMutableArray *)allTagsLines;
 
+// 增删标签
 + (void)addTag:(NSString *)tag type:(NSString *)type;
 + (void)deleteTag:(NSString *)tag type:(NSString *)type;
 
 #pragma mark - 多媒体方法
+// 获取多媒体数据
 + (NSMutableArray *)allMedia;
 + (NSMutableArray *)allVideos;
 + (NSMutableArray *)allImages;

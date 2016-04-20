@@ -26,7 +26,6 @@
 		43068C001CB74EF600BA1A57 /* libz.1.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 43F5F7AA1CB4B03F007BFB0C /* libz.1.tbd */; };
 		43068C011CB74EF600BA1A57 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 43F5F76B1CB3E447007BFB0C /* libz.tbd */; };
 		43068C041CB7546400BA1A57 /* ISRDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 43068C031CB7546400BA1A57 /* ISRDataHelper.m */; };
-		43068C081CB7B9D000BA1A57 /* UINavigationBar+Awesome.m in Sources */ = {isa = PBXBuildFile; fileRef = 43068C071CB7B9D000BA1A57 /* UINavigationBar+Awesome.m */; };
 		430DFBC91CA252DD0054DF6B /* CLNewEntryNavVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 430DFBC81CA252DD0054DF6B /* CLNewEntryNavVC.m */; };
 		430DFBCC1CA393CC0054DF6B /* NSDate+MJ.m in Sources */ = {isa = PBXBuildFile; fileRef = 430DFBCB1CA393CC0054DF6B /* NSDate+MJ.m */; };
 		431BCEE01CA8F81C0085D20F /* JGActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 431BCEDF1CA8F81C0085D20F /* JGActionSheet.m */; };
@@ -1369,7 +1368,6 @@
 				432345A51C9404FB00200833 /* CLEdtingManageVC.m in Sources */,
 				432345AF1C9404FB00200833 /* CLPropChooseNavVC.m in Sources */,
 				43F5F75A1CB390EB007BFB0C /* CLMediaNavVC.m in Sources */,
-				43068C081CB7B9D000BA1A57 /* UINavigationBar+Awesome.m in Sources */,
 				432346941C96B4C200200833 /* CLTextInputCell.m in Sources */,
 				432346761C9409A400200833 /* XLSegmentedPagerTabStripViewController.m in Sources */,
 				432346741C9409A400200833 /* XLButtonBarPagerTabStripViewController.m in Sources */,
@@ -1480,7 +1478,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1503,6 +1501,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "5c373818-3bcf-470c-b6e8-cf4b776689a7";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -1524,7 +1523,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -1540,6 +1540,7 @@
 				INFOPLIST_FILE = /Users/jackchen/MyProjects/Mook/Mook/Base.lproj/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PROVISIONING_PROFILE = "5c373818-3bcf-470c-b6e8-cf4b776689a7";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1550,8 +1551,9 @@
 			baseConfigurationReference = 41EFA00EF9667E60B4BC3CCB /* Pods-Mook.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1563,7 +1565,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.linchen.project.Mook;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "5c373818-3bcf-470c-b6e8-cf4b776689a7";
 			};
 			name = Debug;
 		};
@@ -1572,8 +1574,8 @@
 			baseConfigurationReference = F0417F5619A3E977F1F0B558 /* Pods-Mook.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1585,7 +1587,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.linchen.project.Mook;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "5c373818-3bcf-470c-b6e8-cf4b776689a7";
 			};
 			name = Release;
 		};

@@ -73,6 +73,7 @@
     [self getUserDefaultsData];
 }
 
+#pragma mark 获取用户偏好
 - (void)getUserDefaultsData {
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -269,7 +270,7 @@
    
 }
 
-#pragma mark - Compose Mail/SMS
+#pragma mark - Compose Mail/SMS 反馈方法
 
 // -------------------------------------------------------------------------------
 //	displayMailComposerSheet
