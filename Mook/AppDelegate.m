@@ -58,6 +58,16 @@
     });
 }
 
+- (void)updateData {
+    self.allItems = nil;
+    self.showModelList = nil;
+    self.routineModelList = nil;
+    self.ideaObjModelList = nil;
+    self.sleightObjModelList = nil;
+    self.propObjModelList = nil;
+    self.linesObjModelList = nil;
+}
+
 - (void)setAppUI { // 设置应用UI
     self.window.tintColor = kMenuBackgroundColor;
     
@@ -70,7 +80,6 @@
     
     [[UINavigationBar appearance] setTintColor:kTintColor];
     [[UINavigationBar appearance] setBarTintColor:kMenuBackgroundColor];
-    
     
     [[UITabBar appearance] setTintColor:[UIColor flatSkyBlueColorDark]];
     

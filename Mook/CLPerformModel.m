@@ -8,7 +8,7 @@
 
 #import "CLPerformModel.h"
 #import "CLDataSaveTool.h"
-
+#import "FCFileManager.h"
 
 @implementation CLPerformModel
 
@@ -77,6 +77,23 @@
     BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:path];
     
     return fileExists;
+}
+
+- (NSNumber *)mediaSize {
+    
+    NSNumber *size = @0;
+    NSString *path;
+    if (self.isWithImage) {
+        path = [[NSString imagePath] stringByAppendingPathComponent:self.image];
+        size = [FCFileManager sizeOfFileAtPath:path];
+        
+    } else if (self.isWithVideo) {
+        path = [[NSString videoPath] stringByAppendingPathComponent:self.video];
+        size = [FCFileManager sizeOfFileAtPath:path];
+        
+    }
+    
+    return size;
 }
 
 @end

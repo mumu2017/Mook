@@ -5,6 +5,10 @@
   Created by 陈林 on 16/4/7.
 
 */
+"储存空间占用" = "Storage";
+"总共占用" = "Total Storage";
+"备份文件"= "Backup File";
+"缓存与临时文件" = "Cache and Temporary Files";
 
 "请评价Mook" = "Please rate Mook";
 "如果您喜欢Mook的话,请给个好评吧!" = "If you like Mook and think it's helpful, please rate it in App Store and let more people know.";

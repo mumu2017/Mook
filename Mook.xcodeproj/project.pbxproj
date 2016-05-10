@@ -98,6 +98,8 @@
 		432346901C96B42A00200833 /* CLNewEntryTextCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4323468E1C96B42A00200833 /* CLNewEntryTextCell.xib */; };
 		432346941C96B4C200200833 /* CLTextInputCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 432346921C96B4C200200833 /* CLTextInputCell.m */; };
 		432346951C96B4C200200833 /* CLTextInputCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 432346931C96B4C200200833 /* CLTextInputCell.xib */; };
+		4364861B1CE1A99000FC191B /* CLSizeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4364861A1CE1A99000FC191B /* CLSizeVC.m */; };
+		4364861F1CE1BAEA00FC191B /* CLSizeListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4364861E1CE1BAEA00FC191B /* CLSizeListVC.m */; };
 		43885F6E1CA4F9BE00269CE1 /* CLListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 43885F6D1CA4F9BE00269CE1 /* CLListVC.m */; };
 		43885F711CA5079100269CE1 /* CLContentVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 43885F701CA5079100269CE1 /* CLContentVC.m */; };
 		43885F791CA6A8AC00269CE1 /* CLHomeNavVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 43885F781CA6A8AC00269CE1 /* CLHomeNavVC.m */; };
@@ -328,6 +330,10 @@
 		432346911C96B4C200200833 /* CLTextInputCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLTextInputCell.h; sourceTree = "<group>"; };
 		432346921C96B4C200200833 /* CLTextInputCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLTextInputCell.m; sourceTree = "<group>"; };
 		432346931C96B4C200200833 /* CLTextInputCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CLTextInputCell.xib; sourceTree = "<group>"; };
+		436486191CE1A99000FC191B /* CLSizeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLSizeVC.h; sourceTree = "<group>"; };
+		4364861A1CE1A99000FC191B /* CLSizeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLSizeVC.m; sourceTree = "<group>"; };
+		4364861D1CE1BAEA00FC191B /* CLSizeListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLSizeListVC.h; sourceTree = "<group>"; };
+		4364861E1CE1BAEA00FC191B /* CLSizeListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLSizeListVC.m; sourceTree = "<group>"; };
 		43885F6C1CA4F9BE00269CE1 /* CLListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLListVC.h; sourceTree = "<group>"; };
 		43885F6D1CA4F9BE00269CE1 /* CLListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLListVC.m; sourceTree = "<group>"; };
 		43885F6F1CA5079100269CE1 /* CLContentVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLContentVC.h; sourceTree = "<group>"; };
@@ -656,6 +662,17 @@
 			name = "演出页面";
 			sourceTree = "<group>";
 		};
+		4364861C1CE1BAD400FC191B /* Size */ = {
+			isa = PBXGroup;
+			children = (
+				436486191CE1A99000FC191B /* CLSizeVC.h */,
+				4364861A1CE1A99000FC191B /* CLSizeVC.m */,
+				4364861D1CE1BAEA00FC191B /* CLSizeListVC.h */,
+				4364861E1CE1BAEA00FC191B /* CLSizeListVC.m */,
+			);
+			name = Size;
+			sourceTree = "<group>";
+		};
 		439519F81CC51F0D00505E5B /* BackUp */ = {
 			isa = PBXGroup;
 			children = (
@@ -904,6 +921,7 @@
 				432345931C9404FB00200833 /* CLSettingNavVC.m */,
 				432345941C9404FB00200833 /* CLSettingVC.h */,
 				432345951C9404FB00200833 /* CLSettingVC.m */,
+				4364861C1CE1BAD400FC191B /* Size */,
 				43951A001CC530B200505E5B /* Password */,
 				439519F91CC51F1600505E5B /* Language */,
 				439519F81CC51F0D00505E5B /* BackUp */,
@@ -1339,8 +1357,10 @@
 				431BCEE01CA8F81C0085D20F /* JGActionSheet.m in Sources */,
 				43951A161CC5E7BE00505E5B /* CLBackUpInfoVC.m in Sources */,
 				432346551C9408F100200833 /* CLToolBar.m in Sources */,
+				4364861F1CE1BAEA00FC191B /* CLSizeListVC.m in Sources */,
 				43C206921CB12BED00CEF992 /* CLMediaCollectionCell.m in Sources */,
 				432346801C9409BB00200833 /* XLButtonBarViewCell.m in Sources */,
+				4364861B1CE1A99000FC191B /* CLSizeVC.m in Sources */,
 				43F5F7A31CB4978C007BFB0C /* WJTouchID.m in Sources */,
 				43F5F7571CB390BC007BFB0C /* CLLibraryNavVC.m in Sources */,
 				432345DD1C94051A00200833 /* CLIdeaObjModel.m in Sources */,
@@ -1478,7 +1498,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1501,7 +1521,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "5c373818-3bcf-470c-b6e8-cf4b776689a7";
+				PROVISIONING_PROFILE = "9635c5c5-a759-4705-b693-c699d7dfa8db";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -1523,8 +1543,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -1540,7 +1560,7 @@
 				INFOPLIST_FILE = /Users/jackchen/MyProjects/Mook/Mook/Base.lproj/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "5c373818-3bcf-470c-b6e8-cf4b776689a7";
+				PROVISIONING_PROFILE = "9635c5c5-a759-4705-b693-c699d7dfa8db";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1551,9 +1571,9 @@
 			baseConfigurationReference = 41EFA00EF9667E60B4BC3CCB /* Pods-Mook.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1565,7 +1585,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.linchen.project.Mook;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "5c373818-3bcf-470c-b6e8-cf4b776689a7";
+				PROVISIONING_PROFILE = "9635c5c5-a759-4705-b693-c699d7dfa8db";
 			};
 			name = Debug;
 		};
@@ -1574,8 +1594,8 @@
 			baseConfigurationReference = F0417F5619A3E977F1F0B558 /* Pods-Mook.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1587,7 +1607,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.linchen.project.Mook;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "5c373818-3bcf-470c-b6e8-cf4b776689a7";
+				PROVISIONING_PROFILE = "9635c5c5-a759-4705-b693-c699d7dfa8db";
 			};
 			name = Release;
 		};

@@ -112,13 +112,21 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeEntryIfWithTag:) name:kDeleteEntryNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeEntryIfWithTag:) name:kCancelEntryNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(update:) name:kUpdateDataNotification
+                                               object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self.tableView reloadData];
+//    [self.tableView reloadData];
 
     [self.navigationController setToolbarHidden:YES];
+}
+
+- (void)update:(NSNotification *)noti {
+    if (noti.object == self) return;
+    
+    [self.tableView reloadData];
 }
 
 - (void)removeEntryIfWithTag:(NSNotification *)noti {

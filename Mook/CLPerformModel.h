@@ -29,4 +29,6 @@
 + (instancetype) performModel;
 
 - (void)deleteMedia;
+- (NSNumber *)mediaSize;
+
 @end

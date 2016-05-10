@@ -61,9 +61,9 @@
     
     if (self.editingContentType == kEditingContentTypeRoutine) {
         if (self.editingModel == kEditingModeEffect) {
-            _videoDuration = 90;
+            _videoDuration = 180;
         } else {
-            _videoDuration = 10;
+            _videoDuration = 15;
         }
     } else {
         if (self.editingModel == kEditingModeEffect) {

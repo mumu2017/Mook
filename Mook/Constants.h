@@ -203,7 +203,7 @@ typedef enum {
 #define kSettingToRoutinePDFSegue    @"settingToRoutinePDFSegue"
 #define kSettingToPasswordSegue     @"settingToPasswordSegue"
 #define kQuickStringEditSegue       @"quickStringEditSegue"
-
+#define kSizeListSegue   @"sizeListSegue"
 #pragma mark - Font
 // 字体相关
 #define kFontSys10    [UIFont systemFontOfSize:10]

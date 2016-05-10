@@ -9,11 +9,14 @@
 #import "CLSettingVC.h"
 #import "CLPasswordVC.h"
 #import "CLDataSaveTool.h"
+#import "CLDataSizeTool.h"
 #import "Appirater.h"
 
 #import <MessageUI/MFMailComposeViewController.h>
 
 @interface CLSettingVC ()<MBProgressHUDDelegate, MFMailComposeViewControllerDelegate>
+@property (weak, nonatomic) IBOutlet UILabel *storageTitleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *storageDetailLabel;
 
 @property (weak, nonatomic) IBOutlet UISwitch *passwordSwitch;
 @property (weak, nonatomic) IBOutlet UISwitch *savePhotoSwitch;
@@ -61,6 +64,9 @@
     [super viewDidLoad];
     
     [self getUserDefaultsData];
+    
+    self.storageTitleLabel.text = NSLocalizedString(@"储存空间占用", nil);
+    self.storageDetailLabel.text = [CLDataSizeTool totalSize];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newPasswordCreated) name:@"newPasswordCreated" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cancelPasswordCreation) name:@"cancelPasswordCreation" object:nil];
@@ -134,7 +140,7 @@
     switch (section) {
         case 0:
 
-            number = 1;
+            number = 2;
             break;
             
         case 1:

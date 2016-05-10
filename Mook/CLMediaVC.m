@@ -185,6 +185,9 @@ static NSString * const reuseIdentifier = @"Cell";
     // Do any additional setup after loading the view.
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(update:) name:kUpdateDataNotification
                                                object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(update:) name:kUpdateMookNotification
+                                               object:nil];
 }
 
 //- (void)viewWillAppear:(BOOL)animated {

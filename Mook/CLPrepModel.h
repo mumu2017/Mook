@@ -28,4 +28,6 @@
 + (instancetype) prepModel;
 
 - (void)deleteMedia;
+- (NSNumber *)mediaSize;
+
 @end

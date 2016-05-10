@@ -39,4 +39,5 @@
 - (NSString *)getDurationText;
 - (NSString *)getPlaceText;
 - (NSString *)getAudianceCountText;
+
 @end

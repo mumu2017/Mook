@@ -82,12 +82,23 @@
     [self.tableView registerNib:[UINib nibWithNibName:@"CLListTextCell"
                                                bundle:nil]
          forCellReuseIdentifier:kListTextCellID];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(update:) name:kUpdateDataNotification
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(update:) name:kUpdateMookNotification
+                                               object:nil];
+}
+
+- (void)update:(NSNotification *)noti {
+    if (noti.object == self) return;
+    
+    [self.tableView reloadData];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    [self.tableView reloadData];
+//    [self.tableView reloadData];
 
     [self.navigationController setToolbarHidden:YES];
 }
@@ -288,63 +299,62 @@
     id modelUnknown = self.allItems[path.row];
     if ([modelUnknown isKindOfClass:[CLIdeaObjModel class]]) {
         CLIdeaObjModel *model = (CLIdeaObjModel *)modelUnknown;
-        
-        [kDataListIdea removeObject:model];
-        [kDataListAll removeObject:model];
         [CLDataSaveTool deleteIdea:model];
+
+        [kDataListIdea removeObject:model];
+        [self.allItems removeObjectAtIndex:path.row];
 
         [self.tableView deleteRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationLeft];
         
     } else if ([modelUnknown isKindOfClass:[CLShowModel class]]) {
         CLShowModel *model = (CLShowModel *)modelUnknown;
-        
-        [kDataListShow removeObject:model];
-        [kDataListAll removeObject:model];
         [CLDataSaveTool deleteShow:model];
+
+        [kDataListShow removeObject:model];
+        [self.allItems removeObjectAtIndex:path.row];
 
         [self.tableView deleteRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationLeft];
         
     } else if ([modelUnknown isKindOfClass:[CLRoutineModel class]]) {
         CLRoutineModel *model = (CLRoutineModel *)modelUnknown;
-        
-        [kDataListRoutine removeObject:model];
-        [kDataListAll removeObject:model];
         [CLDataSaveTool deleteRoutine:model];
+
+        [kDataListRoutine removeObject:model];
+        [self.allItems removeObjectAtIndex:path.row];
 
         [self.tableView deleteRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationLeft];
         
     } else if ([modelUnknown isKindOfClass:[CLSleightObjModel class]]) {
         CLSleightObjModel *model = (CLSleightObjModel *)modelUnknown;
-        
+        [CLDataSaveTool deleteSleight:model];
         
         [kDataListSleight removeObject:model];
-        [kDataListAll removeObject:model];
-        [CLDataSaveTool deleteSleight:model];
+        [self.allItems removeObjectAtIndex:path.row];
 
         [self.tableView deleteRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationLeft];
         
         
     } else if ([modelUnknown isKindOfClass:[CLPropObjModel class]]) {
         CLPropObjModel *model = (CLPropObjModel *)modelUnknown;
-
-        [kDataListAll removeObject:model];
-        [kDataListProp removeObject:model];
         [CLDataSaveTool deleteProp:model];
+        [kDataListProp removeObject:model];
+
+        [self.allItems removeObjectAtIndex:path.row];
         [self.tableView deleteRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationLeft];
         
     } else if ([modelUnknown isKindOfClass:[CLLinesObjModel class]]) {
         CLLinesObjModel *model = (CLLinesObjModel *)modelUnknown;
-        
-        [kDataListAll removeObject:model];
-        [kDataListLines removeObject:model];
         [CLDataSaveTool deleteLines:model];
+        [kDataListLines removeObject:model];
+
+        [self.allItems removeObjectAtIndex:path.row];
 
         [self.tableView deleteRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationLeft];
         
     }
     
     self.tableBackView.hidden = !(self.allItems.count == 0);
-
+    [[NSNotificationCenter defaultCenter] postNotificationName:kUpdateDataNotification object:self];
 }
 
 // 导出笔记 (选择是否密码导出)

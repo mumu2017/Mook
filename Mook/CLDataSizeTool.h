@@ -12,22 +12,26 @@
 @interface CLDataSizeTool : NSObject
 
 #pragma mark - 以后再添加文件尺寸功能.
-//+ (NSString *)sizeOfMook;
-//
-//+ (NSString *)sizeOfAllShows;
-//+ (NSString *)sizeOfAllRoutines;
-//+ (NSString *)sizeOfAllIdeas;
-//+ (NSString *)sizeOfAllSleights;
-//+ (NSString *)sizeOfAllProps;
-//+ (NSString *)sizeOfAllLines;
-//
-//+ (NSString *)sizeOfShow:(CLShowModel *)model;
-//+ (NSString *)sizeOfRoutine:(CLRoutineModel *)model;
-//+ (NSString *)sizeOfIdea:(CLIdeaObjModel *)model;
-//+ (NSString *)sizeOfSleight:(CLSleightObjModel *)model;
-//+ (NSString *)sizeOfProp:(CLPropObjModel *)model;
-//+ (NSString *)sizeOfLines:(CLLinesObjModel *)model;
-//
-//+ (NSString *)sizeOfCacheAndTemporaryData;
++ (NSString *)totalSize;
++ (NSString *)sizeOfMook;
++ (NSString *)sizeOfCache;
++ (NSString *)sizeOfTemp;
 
++ (NSString *)sizeOfAllShows;
++ (NSString *)sizeOfAllRoutines;
++ (NSString *)sizeOfAllIdeas;
++ (NSString *)sizeOfAllSleights;
++ (NSString *)sizeOfAllProps;
++ (NSString *)sizeOfAllLines;
+
++ (NSNumber *)sizeOfShow:(CLShowModel *)showModel;
++ (NSNumber *)sizeOfRoutine:(CLRoutineModel *)routineModel;
++ (NSNumber *)sizeOfIdea:(CLIdeaObjModel *)ideaObjModel;
++ (NSNumber *)sizeOfSleight:(CLSleightObjModel *)sleightObjModel;
++ (NSNumber *)sizeOfProp:(CLPropObjModel *)propObjModel;
++ (NSNumber *)sizeOfLines:(CLLinesObjModel *)model;
+
++ (NSNumber *)textAverageSize;
++ (NSString *)sizeOfCacheAndTemporaryData;
++ (NSString *)sizeOfBackUp;
 @end

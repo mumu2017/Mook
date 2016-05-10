@@ -7,7 +7,215 @@
 //
 
 #import "CLDataSizeTool.h"
+#import "FCFileManager.h"
+
+#import "CLRoutineModel.h"
+#import "CLShowModel.h"
+#import "CLIdeaObjModel.h"
+#import "CLSleightObjModel.h"
+#import "CLPropObjModel.h"
+#import "CLLinesObjModel.h"
+
+#import "CLEffectModel.h"
+#import "CLPropModel.h"
+#import "CLPrepModel.h"
+#import "CLPerformModel.h"
+#import "CLNotesModel.h"
 
 @implementation CLDataSizeTool
+
++ (NSString *)totalSize {
+    NSString *size;
+    NSNumber *documentSize = [FCFileManager sizeOfDirectoryAtPath:[FCFileManager pathForDocumentsDirectory]];
+    NSNumber *librarySize = [FCFileManager sizeOfDirectoryAtPath:[FCFileManager pathForLibraryDirectory]];
+    NSNumber *tempSize = [FCFileManager sizeOfDirectoryAtPath:[FCFileManager pathForTemporaryDirectory]];
+    NSNumber *total = @([documentSize intValue] + [librarySize intValue] + [tempSize intValue]);
+    size = [FCFileManager sizeFormatted:total];
+    return size;
+}
+
++ (NSString *)sizeOfMook {
+    
+   return [FCFileManager sizeFormattedOfDirectoryAtPath:[FCFileManager pathForLibraryDirectory]];
+}
+
++ (NSString *)sizeOfCache {
+    
+    return [FCFileManager sizeFormattedOfDirectoryAtPath:[FCFileManager pathForCachesDirectory]];
+}
+
++ (NSString *)sizeOfTemp {
+    
+    return [FCFileManager sizeFormattedOfDirectoryAtPath:[FCFileManager pathForTemporaryDirectory]];
+}
+
++ (NSString *)sizeOfCacheAndTemporaryData {
+    NSString *size;
+    NSNumber *cacheSize = [FCFileManager sizeOfDirectoryAtPath:[FCFileManager pathForCachesDirectory]];
+    NSNumber *tempSize = [FCFileManager sizeOfDirectoryAtPath:[FCFileManager pathForTemporaryDirectory]];
+    NSNumber *total = @([cacheSize intValue] + [tempSize intValue]);
+    size = [FCFileManager sizeFormatted:total];
+    return size;
+}
+
++ (NSNumber *)textAverageSize {
+    
+    NSString *mookPath = [NSString mookPath];
+    // 拼接文件名
+    NSString *filePath = [mookPath stringByAppendingPathComponent:@"mook.sqlite"];
+    NSNumber *dataBaseSize = [FCFileManager sizeOfFileAtPath:filePath];
+    NSNumber *averageSize = @([dataBaseSize floatValue] / kDataListAll.count);
+    
+    return averageSize;
+}
+
++ (NSNumber *)sizeOfIdea:(CLIdeaObjModel *)ideaObjModel {
+    
+    NSNumber *size = [ideaObjModel.effectModel mediaSize];
+    
+    for (CLPrepModel *model in ideaObjModel.prepModelList) {
+        size = @([size intValue] + [[model mediaSize] intValue]);
+    }
+    
+    size = @([size intValue] + [[self textAverageSize] intValue]);
+    
+    return size;
+}
+
++ (NSNumber *)sizeOfShow:(CLShowModel *)showModel {
+    NSNumber *size = [showModel.effectModel mediaSize];
+    
+    size = @([size intValue] + [[self textAverageSize] intValue]);
+    
+    return size;
+}
+
++ (NSNumber *)sizeOfSleight:(CLSleightObjModel *)sleightObjModel {
+    
+    NSNumber *size = [sleightObjModel.effectModel mediaSize];
+    
+    for (CLPrepModel *model in sleightObjModel.prepModelList) {
+        size = @([size intValue] + [[model mediaSize] intValue]);
+    }
+    
+    size = @([size intValue] + [[self textAverageSize] intValue]);
+    
+    return size;
+}
+
++ (NSNumber *)sizeOfProp:(CLPropObjModel *)propObjModel {
+    
+    NSNumber *size = [propObjModel.effectModel mediaSize];
+    
+    for (CLPrepModel *model in propObjModel.prepModelList) {
+        size = @([size intValue] + [[model mediaSize] intValue]);
+    }
+    
+    size = @([size intValue] + [[self textAverageSize] intValue]);
+    
+    return size;
+}
+
++ (NSNumber *)sizeOfRoutine:(CLRoutineModel *)routineModel {
+    
+    NSNumber *size = [routineModel.effectModel mediaSize];
+    
+
+    for (CLPerformModel *model in routineModel.performModelList) {
+        size = @([size intValue] + [[model mediaSize] intValue]);
+        }
+    
+
+    for (CLPrepModel *model in routineModel.prepModelList) {
+            size = @([size intValue] + [[model mediaSize] intValue]);
+        }
+    
+    size = @([size intValue] + [[self textAverageSize] intValue]);
+    
+    return size;
+}
+
++ (NSString *)sizeOfAllShows {
+    
+    NSNumber *size = @0;
+    
+    for (CLShowModel *model in kDataListShow) {
+        size = @([size intValue] + [[self sizeOfShow:model] intValue]);
+    }
+    
+    NSString *formatted = [FCFileManager sizeFormatted:size];
+    
+    return formatted;
+}
+
++ (NSString *)sizeOfAllRoutines {
+    
+    NSNumber *size = @0;
+    
+    for (CLRoutineModel *model in kDataListRoutine) {
+        size = @([size intValue] + [[self sizeOfRoutine:model] intValue]);
+    }
+    
+    NSString *formatted = [FCFileManager sizeFormatted:size];
+    
+    return formatted;
+}
+
++ (NSString *)sizeOfAllIdeas {
+ 
+    NSNumber *size = @0;
+    
+    for (CLIdeaObjModel *model in kDataListIdea) {
+        size = @([size intValue] + [[self sizeOfIdea:model] intValue]);
+    }
+    
+    NSString *formatted = [FCFileManager sizeFormatted:size];
+    
+    return formatted;
+}
+
++ (NSString *)sizeOfAllSleights {
+    
+    NSNumber *size = @0;
+    
+    for (CLSleightObjModel *model in kDataListSleight) {
+        size = @([size intValue] + [[self sizeOfSleight:model] intValue]);
+    }
+    
+    NSString *formatted = [FCFileManager sizeFormatted:size];
+    
+    return formatted;
+}
+
++ (NSString *)sizeOfAllProps {
+    
+    NSNumber *size = @0;
+    
+    for (CLPropObjModel *model in kDataListProp) {
+        size = @([size intValue] + [[self sizeOfProp:model] intValue]);
+    }
+    
+    NSString *formatted = [FCFileManager sizeFormatted:size];
+    
+    return formatted;
+}
+
++ (NSString *)sizeOfAllLines {
+    
+    NSNumber *size = @([[self textAverageSize] intValue] * [kDataListLines count]);
+
+    NSString *formatted = [FCFileManager sizeFormatted:size];
+    
+    return formatted;
+}
+
+
++ (NSString *)sizeOfBackUp {
+    
+    NSNumber *size = @0;
+    size = [FCFileManager sizeOfFileAtPath:[NSString backUpPath]];
+    return [FCFileManager sizeFormatted:size];
+}
+
 
 @end

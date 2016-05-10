@@ -9,6 +9,7 @@
 #import "CLShowModel.h"
 #import "CLRoutineModel.h"
 #import "CLEffectModel.h"
+#import "FCFileManager.h"
 
 @implementation CLShowModel
 
@@ -121,6 +122,7 @@
     
     return image;
 }
+
 
 - (NSAttributedString *)getContent {
     

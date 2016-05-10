@@ -22,7 +22,6 @@
 @property (nonatomic, strong) NSMutableArray *allTagsProp;
 @property (nonatomic, strong) NSMutableArray *allTagsLines;
 
-
 @property (nonatomic, strong) NSMutableArray <CLShowModel*> *showModelList;
 @property (nonatomic, strong) NSMutableArray <CLRoutineModel*> *routineModelList;
 @property (nonatomic, strong) NSMutableArray <CLIdeaObjModel*> *ideaObjModelList;
@@ -32,7 +31,8 @@
 
 @property (nonatomic, assign) BOOL shouldInputPassword;
 
-- (void)reloadData;
+- (void)reloadData; // 恢复备份后更新数据
+- (void)updateData; // 只更新mook笔记的数据,不包括标签
 
 @end
 
