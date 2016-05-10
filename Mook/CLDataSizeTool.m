@@ -24,13 +24,41 @@
 
 @implementation CLDataSizeTool
 
-+ (NSString *)totalSize {
++ (NSString *)totalSize { // 总的储存空间占用, 并不准确, 只计算了近似值.
+    
     NSString *size;
+    
     NSNumber *documentSize = [FCFileManager sizeOfDirectoryAtPath:[FCFileManager pathForDocumentsDirectory]];
-    NSNumber *librarySize = [FCFileManager sizeOfDirectoryAtPath:[FCFileManager pathForLibraryDirectory]];
+    
+    NSNumber *cacheSize = [FCFileManager sizeOfDirectoryAtPath:[FCFileManager pathForCachesDirectory]];
     NSNumber *tempSize = [FCFileManager sizeOfDirectoryAtPath:[FCFileManager pathForTemporaryDirectory]];
-    NSNumber *total = @([documentSize intValue] + [librarySize intValue] + [tempSize intValue]);
+
+    NSString *mookPath = [NSString mookPath];
+    // 拼接文件名
+    NSString *filePath = [mookPath stringByAppendingPathComponent:@"mook.sqlite"];
+    NSNumber *dataBaseSize = [FCFileManager sizeOfFileAtPath:filePath];
+    NSNumber *total = @([documentSize intValue] + [cacheSize intValue] + [dataBaseSize intValue] + [tempSize intValue]);
+    
+    for (CLShowModel *model in kDataListShow) {
+        total = @([total intValue] + [[self sizeOfShow:model] intValue]);
+    }
+    for (CLRoutineModel *model in kDataListRoutine) {
+        total = @([total intValue] + [[self sizeOfRoutine:model] intValue]);
+    }
+    for (CLIdeaObjModel *model in kDataListIdea) {
+        total = @([total intValue] + [[self sizeOfIdea:model] intValue]);
+    }
+    for (CLSleightObjModel *model in kDataListSleight) {
+        total = @([total intValue] + [[self sizeOfSleight:model] intValue]);
+    }
+    for (CLPropObjModel *model in kDataListProp) {
+        total = @([total intValue] + [[self sizeOfProp:model] intValue]);
+    }
+    
+    total = @([total intValue] + [[self textAverageSize] intValue] * [kDataListLines count]);
+    
     size = [FCFileManager sizeFormatted:total];
+    
     return size;
 }
 
@@ -215,6 +243,11 @@
     NSNumber *size = @0;
     size = [FCFileManager sizeOfFileAtPath:[NSString backUpPath]];
     return [FCFileManager sizeFormatted:size];
+}
+
++ (NSNumber *)sizeOfLines:(CLLinesObjModel *)model {
+    
+    return nil;
 }
 
 

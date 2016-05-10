@@ -34,4 +34,5 @@
 + (NSNumber *)textAverageSize;
 + (NSString *)sizeOfCacheAndTemporaryData;
 + (NSString *)sizeOfBackUp;
+
 @end
