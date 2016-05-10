@@ -24,7 +24,6 @@
 @property (nonatomic, strong) NSMutableArray <NSString*> *tags;
 @property (nonatomic, assign) BOOL isStarred;
 
-
 @property (nonatomic, strong) CLInfoModel *infoModel;
 @property (nonatomic, strong) CLEffectModel *effectModel;
 @property (nonatomic, strong) NSMutableArray *prepModelList;
