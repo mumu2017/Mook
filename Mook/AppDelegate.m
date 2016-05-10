@@ -242,7 +242,6 @@
 - (NSMutableArray *)allItems {
     if (!_allItems) {
         _allItems = [CLDataSaveTool allItems];
-        if (!_allItems) _allItems = [NSMutableArray array];
     }
     return _allItems;
 }
@@ -250,7 +249,6 @@
 - (NSMutableArray *)allTags {
     if (!_allTags) {
         _allTags = [CLDataSaveTool allTags];
-        if (!_allTags) _allTags = [NSMutableArray array];
     }
     return _allTags;
 }
@@ -258,7 +256,6 @@
 - (NSMutableArray *)_allTagsShow {
     if (!_allTagsShow) {
         _allTagsShow = [CLDataSaveTool allTagsShow];
-        if (!_allTagsShow) _allTagsShow = [NSMutableArray array];
     }
     return _allTagsShow;
 }
@@ -267,7 +264,6 @@
 - (NSMutableArray *)allTagsShow {
     if (!_allTagsShow) {
         _allTagsShow = [CLDataSaveTool allTagsShow];
-        if (!_allTagsShow) _allTagsShow = [NSMutableArray array];
     }
     return _allTagsShow;
 }
@@ -275,7 +271,6 @@
 - (NSMutableArray *)allTagsIdea {
     if (!_allTagsIdea) {
         _allTagsIdea = [CLDataSaveTool allTagsIdea];
-        if (!_allTagsIdea) _allTagsIdea = [NSMutableArray array];
     }
     return _allTagsIdea;
 }
@@ -283,7 +278,6 @@
 - (NSMutableArray *)allTagsRoutine {
     if (!_allTagsRoutine) {
         _allTagsRoutine = [CLDataSaveTool allTagsRoutine];
-        if (!_allTagsRoutine) _allTagsRoutine = [NSMutableArray array];
     }
     return _allTagsRoutine;
 }
@@ -291,7 +285,6 @@
 - (NSMutableArray *)allTagsSleight {
     if (!_allTagsSleight) {
         _allTagsSleight = [CLDataSaveTool allTagsSleight];
-        if (!_allTagsSleight) _allTagsSleight = [NSMutableArray array];
     }
     return _allTagsSleight;
 }
@@ -299,7 +292,6 @@
 - (NSMutableArray *)allTagsProp {
     if (!_allTagsProp) {
         _allTagsProp = [CLDataSaveTool allTagsProp];
-        if (!_allTagsProp) _allTagsProp = [NSMutableArray array];
     }
     return _allTagsProp;
 }
@@ -307,7 +299,6 @@
 - (NSMutableArray *)allTagsLines {
     if (!_allTagsLines) {
         _allTagsLines = [CLDataSaveTool allTagsLines];
-        if (!_allTagsLines) _allTagsLines = [NSMutableArray array];
     }
     return _allTagsLines;
 }
@@ -315,7 +306,6 @@
 - (NSMutableArray<CLShowModel *> *)showModelList {
     if (!_showModelList) {
         _showModelList = [CLDataSaveTool allShows];
-        if (!_showModelList) _showModelList = [NSMutableArray array];
     }
     return _showModelList;
 }
@@ -323,7 +313,6 @@
 -(NSMutableArray *)routineModelList {
     if (!_routineModelList) {
         _routineModelList = [CLDataSaveTool allRoutines];
-        if (!_routineModelList) _routineModelList = [NSMutableArray array];
     }
     return _routineModelList;
 }
@@ -331,7 +320,6 @@
 -(NSMutableArray *)ideaObjModelList {
     if (!_ideaObjModelList) {
         _ideaObjModelList = [CLDataSaveTool allIdeas];
-        if (!_ideaObjModelList) _ideaObjModelList = [NSMutableArray array];
     }
     return _ideaObjModelList;
 }
@@ -339,7 +327,6 @@
 -(NSMutableArray *)sleightObjModelList {
     if (!_sleightObjModelList) {
         _sleightObjModelList = [CLDataSaveTool allSleights];
-        if (!_sleightObjModelList) _sleightObjModelList = [NSMutableArray array];
     }
     return _sleightObjModelList;
 }
@@ -347,7 +334,6 @@
 - (NSMutableArray *)propObjModelList {
     if (!_propObjModelList) {
         _propObjModelList = [CLDataSaveTool allProps];
-        if (!_propObjModelList) _propObjModelList = [NSMutableArray array];
     }
     return _propObjModelList;
 }
@@ -355,10 +341,52 @@
 - (NSMutableArray *)linesObjModelList {
     if (!_linesObjModelList) {
         _linesObjModelList = [CLDataSaveTool allLines];
-        if (!_linesObjModelList) _linesObjModelList = [NSMutableArray array];
     }
     return _linesObjModelList;
 }
 
+#pragma mark - reload方法: // 如果指针不为空, 则重新加载数据
+- (void)reloadAllItems {
+    if (_allItems) {
+        _allItems = [CLDataSaveTool allItems];
+    }
+}
+
+- (void)reloadAllIdeas {
+    if (_ideaObjModelList) {
+        _ideaObjModelList = [CLDataSaveTool allIdeas];
+    }
+}
+
+- (void)reloadAllShows {
+    if (_showModelList) {
+        _showModelList = [CLDataSaveTool allShows];
+    }
+}
+
+- (void)reloadAllRoutines {
+    if (_routineModelList) {
+        _routineModelList = [CLDataSaveTool allRoutines];
+    }
+}
+
+- (void)reloadAllSleights {
+
+    if (_sleightObjModelList) {
+        _sleightObjModelList = [CLDataSaveTool allSleights];
+    }
+}
+
+- (void)reloadAllProps {
+    if (_propObjModelList) {
+        _propObjModelList = [CLDataSaveTool allProps];
+    }
+}
+
+- (void)reloadAllLines {
+    if (_linesObjModelList) {
+        _linesObjModelList = [CLDataSaveTool allLines];
+    }
+}
 
 @end

@@ -540,6 +540,7 @@
     
     [MBProgressHUD showGlobalProgressHUDWithTitle:title hideAfterDelay:1.5];
 
+    [[NSNotificationCenter defaultCenter] postNotificationName:kUpdateDataNotification object:nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"dismissImportContentVC" object:nil];
 }
 

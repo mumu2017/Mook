@@ -66,7 +66,6 @@
     [self getUserDefaultsData];
     
     self.storageTitleLabel.text = NSLocalizedString(@"储存空间占用", nil);
-    self.storageDetailLabel.text = [CLDataSizeTool totalSize];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newPasswordCreated) name:@"newPasswordCreated" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cancelPasswordCreation) name:@"cancelPasswordCreation" object:nil];
@@ -75,6 +74,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    self.storageDetailLabel.text = [CLDataSizeTool totalSize]; // 每次重新打开页面就重新计算一次文件尺寸
 
     [self getUserDefaultsData];
 }
