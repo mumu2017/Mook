@@ -396,7 +396,7 @@
             BOOL fileDeleted= [fileManager removeItemAtPath:uniquePath error:nil];
             
             if (fileDeleted) {
-                NSLog(@"video deleted");
+//                NSLog(@"video deleted");
                 
                 // 如果视频删除成功,则删除缩略图和首帧图
                 NSString *thumbnailPath = [[NSString thumbnailPath] stringByAppendingPathComponent:self];
@@ -459,7 +459,7 @@
             //            NSLog(@" file exists");
             BOOL fileDeleted= [fileManager removeItemAtPath:uniquePath error:nil];
             if (fileDeleted) {
-                NSLog(@"image deleted");
+//                NSLog(@"image deleted");
                 
                 // 如果视频删除成功,则删除缩略图
                 NSString *thumbnailPath = [[NSString thumbnailPath] stringByAppendingPathComponent:self];
