@@ -14,7 +14,7 @@
 
 - (void) showBorder {
     
-    self.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    self.layer.borderColor = [UIColor clearColor].CGColor;
     self.layer.borderWidth = 1.0;
     self.layer.cornerRadius = 5.0;
     self.layer.masksToBounds = YES;

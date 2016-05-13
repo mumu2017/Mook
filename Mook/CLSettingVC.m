@@ -67,8 +67,9 @@
     
     [self getUserDefaultsData];
     
-    self.storageTitleLabel.text = NSLocalizedString(@"储存空间占用", nil);
-    self.themeColorTitleLabel.text = NSLocalizedString(@"主题色", nil);
+//    self.storageTitleLabel.text = NSLocalizedString(@"储存空间占用", nil);
+//    self.themeColorTitleLabel.text = NSLocalizedString(@"主题色", nil);
+    [self.themeColorView showBorder];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newPasswordCreated) name:@"newPasswordCreated" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cancelPasswordCreation) name:@"cancelPasswordCreation" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cancelPasswordChange) name:@"cancelPasswordChange" object:nil];
