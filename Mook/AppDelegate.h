@@ -35,6 +35,8 @@
 - (void)reloadData; // 恢复备份后更新数据
 - (void)updateData; // 只更新mook笔记的数据,不包括标签
 
+- (void)setAppUI;
+
 - (void)reloadAllItems;
 
 - (void)reloadAllIdeas;

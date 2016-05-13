@@ -229,7 +229,6 @@
 
 - (void)setAppUI { // 设置应用UI
     
-    
     self.window.tintColor = self.themeColor;
     
     [[UISwitch appearance] setOnTintColor:self.themeColor];

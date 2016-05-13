@@ -230,7 +230,38 @@ static NSString * const reuseIdentifier = @"colorCellID";
     [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
+#pragma mark --UICollectionViewDelegateFlowLayout
+//定义每个UICollectionView 的大小
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    return CGSizeMake((self.view.frame.size.width-4)/5, (self.view.frame.size.width-4)/5);
+}
+//定义每个UICollectionView 的 margin
+-(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
+{
+    return UIEdgeInsetsMake(0, 0, 0, 0);
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionView *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
+{
+    return 1; // This is the minimum inter item spacing, can be more
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionView *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
+{
+    return 1; // This is the minimum inter item spacing, can be more
+}
+
+
 #pragma mark <UICollectionViewDelegate>
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    [[NSUserDefaults standardUserDefaults] setInteger:indexPath.row forKey:kThemeColorKey];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    [kAppDelegate setAppUI];
+    [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+}
 
 /*
 // Uncomment this method to specify if the specified item should be highlighted during tracking
