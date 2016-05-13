@@ -29,6 +29,7 @@
 @property (nonatomic, strong) NSMutableArray <CLPropObjModel*> *propObjModelList;
 @property (nonatomic, strong) NSMutableArray <CLLinesObjModel*> *linesObjModelList;
 
+@property (nonatomic, strong) UIColor *themeColor;
 @property (nonatomic, assign) BOOL shouldInputPassword;
 
 - (void)reloadData; // 恢复备份后更新数据

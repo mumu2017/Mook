@@ -1,8 +1,14 @@
 
-/* Class = "UINavigationItem"; title = "多媒体"; ObjectID = "0EJ-Ew-5PU"; */
+/* Class = "UINavigationItem"; title = "Multimedia"; ObjectID = "0EJ-Ew-5PU"; */
 "0EJ-Ew-5PU.title" = "Multimedia";
 
-/* Class = "UILabel"; text = "照片保存到系统相册"; ObjectID = "22f-xG-7ht"; */
+/* Class = "UILabel"; text = "Title"; ObjectID = "0Ez-Nv-c5l"; */
+"0Ez-Nv-c5l.text" = "Title";
+
+/* Class = "UILabel"; text = "Detail"; ObjectID = "1wZ-Pb-cY4"; */
+"1wZ-Pb-cY4.text" = "Detail";
+
+/* Class = "UILabel"; text = "Save Photo to Camera Roll"; ObjectID = "22f-xG-7ht"; */
 "22f-xG-7ht.text" = "Save Photo to Camera Roll";
 
 /* Class = "UILabel"; text = "Detail"; ObjectID = "2MP-tU-4d0"; */
@@ -11,82 +17,112 @@
 /* Class = "UILabel"; text = "What is Magic?"; ObjectID = "3xD-QQ-DJH"; */
 "3xD-QQ-DJH.text" = "What is Magic?";
 
-/* Class = "UINavigationItem"; title = "笔记"; ObjectID = "4Kf-lo-IC0"; */
+/* Class = "UINavigationItem"; title = "Timeline"; ObjectID = "4Kf-lo-IC0"; */
 "4Kf-lo-IC0.title" = "Timeline";
 
-/* Class = "UILabel"; text = "AppStore 评分"; ObjectID = "4e8-VU-fzj"; */
+/* Class = "UILabel"; text = "Detail"; ObjectID = "4dd-Q2-Tn3"; */
+"4dd-Q2-Tn3.text" = "Detail";
+
+/* Class = "UILabel"; text = "Please Rate Mook"; ObjectID = "4e8-VU-fzj"; */
 "4e8-VU-fzj.text" = "Please Rate Mook";
 
-/* Class = "UILabel"; text = "快捷短语"; ObjectID = "7PU-UJ-Tyk"; */
+/* Class = "UILabel"; text = "Quick Phrase"; ObjectID = "7PU-UJ-Tyk"; */
 "7PU-UJ-Tyk.text" = "Quick Phrase";
 
-/* Class = "UITabBarItem"; title = "笔记"; ObjectID = "7U8-cH-grM"; */
+/* Class = "UITabBarItem"; title = "Timeline"; ObjectID = "7U8-cH-grM"; */
 "7U8-cH-grM.title" = "Timeline";
 
-/* Class = "UITabBarItem"; title = "设置"; ObjectID = "7UM-em-4Mb"; */
+/* Class = "UITabBarItem"; title = "Setting"; ObjectID = "7UM-em-4Mb"; */
 "7UM-em-4Mb.title" = "Setting";
 
-/* Class = "UILabel"; text = "语音识别语言"; ObjectID = "89w-VZ-YfD"; */
+/* Class = "UILabel"; text = "Detail"; ObjectID = "7yt-VM-uqU"; */
+"7yt-VM-uqU.text" = "Detail";
+
+/* Class = "UILabel"; text = "Voice Recognition Language"; ObjectID = "89w-VZ-YfD"; */
 "89w-VZ-YfD.text" = "Voice Recognition Language";
 
-/* Class = "UILabel"; text = "道具"; ObjectID = "8wJ-0r-7oX"; */
+/* Class = "UILabel"; text = "Detail"; ObjectID = "8gR-TB-Mp4"; */
+"8gR-TB-Mp4.text" = "Detail";
+
+/* Class = "UILabel"; text = "Prop"; ObjectID = "8wJ-0r-7oX"; */
 "8wJ-0r-7oX.text" = "Prop";
 
-/* Class = "UINavigationItem"; title = "标签"; ObjectID = "AlM-zc-06a"; */
+/* Class = "UINavigationItem"; title = "Tag"; ObjectID = "AlM-zc-06a"; */
 "AlM-zc-06a.title" = "Tag";
 
-/* Class = "UILabel"; text = "关于"; ObjectID = "CYd-co-fVL"; */
+/* Class = "UINavigationItem"; title = "Title"; ObjectID = "Ave-VD-eNz"; */
+"Ave-VD-eNz.title" = "Title";
+
+/* Class = "UILabel"; text = "灵感"; ObjectID = "BM9-IE-Ckv"; */
+"BM9-IE-Ckv.text" = "灵感";
+
+/* Class = "UILabel"; text = "About"; ObjectID = "CYd-co-fVL"; */
 "CYd-co-fVL.text" = "About";
 
 /* Class = "UINavigationItem"; title = "NewShow"; ObjectID = "CxW-Jg-Sk2"; */
 "CxW-Jg-Sk2.title" = "NewShow";
 
-/* Class = "UINavigationItem"; title = "备份"; ObjectID = "DGL-c5-w4o"; */
+/* Class = "UINavigationItem"; title = "BackUp"; ObjectID = "DGL-c5-w4o"; */
 "DGL-c5-w4o.title" = "BackUp";
 
-/* Class = "UILabel"; text = "视频保存到系统相册"; ObjectID = "Ehe-46-f7g"; */
+/* Class = "UILabel"; text = "Save Video to Camera Roll"; ObjectID = "Ehe-46-f7g"; */
 "Ehe-46-f7g.text" = "Save Video to Camera Roll";
 
-/* Class = "UILabel"; text = "使用密码"; ObjectID = "EyH-x7-klh"; */
+/* Class = "UILabel"; text = "Use Password"; ObjectID = "EyH-x7-klh"; */
 "EyH-x7-klh.text" = "Use Password";
 
-/* Class = "UILabel"; text = "备份说明"; ObjectID = "FdN-nQ-kFs"; */
+/* Class = "UILabel"; text = "Storage"; ObjectID = "F6i-VK-QV9"; */
+"F6i-VK-QV9.text" = "Storage";
+
+/* Class = "UILabel"; text = "Backup Info"; ObjectID = "FdN-nQ-kFs"; */
 "FdN-nQ-kFs.text" = "Backup Info";
 
 /* Class = "UILabel"; text = "Detail"; ObjectID = "H8f-mN-WaC"; */
 "H8f-mN-WaC.text" = "Detail";
 
-/* Class = "UITableViewSection"; headerTitle = "反馈"; ObjectID = "HgB-Hf-jmh"; */
+/* Class = "UITableViewSection"; headerTitle = "Feedback"; ObjectID = "HgB-Hf-jmh"; */
 "HgB-Hf-jmh.headerTitle" = "Feedback";
 
-/* Class = "UILabel"; text = "欢迎界面"; ObjectID = "HlL-JS-02V"; */
+/* Class = "UILabel"; text = "View Welcome Screens"; ObjectID = "HlL-JS-02V"; */
 "HlL-JS-02V.text" = "View Welcome Screens";
 
-/* Class = "UINavigationItem"; title = "导入"; ObjectID = "I8N-8V-IS7"; */
+/* Class = "UINavigationItem"; title = "Import"; ObjectID = "I8N-8V-IS7"; */
 "I8N-8V-IS7.title" = "Import";
 
-/* Class = "UITabBarItem"; title = "分类"; ObjectID = "JG5-Ax-guD"; */
+/* Class = "UITabBarItem"; title = "Library"; ObjectID = "JG5-Ax-guD"; */
 "JG5-Ax-guD.title" = "Library";
 
-/* Class = "UITableViewSection"; headerTitle = "数据"; ObjectID = "Kd3-Be-FE9"; */
+/* Class = "UILabel"; text = "Theme Color"; ObjectID = "JXg-c4-CCQ"; */
+"JXg-c4-CCQ.text" = "Theme Color";
+
+/* Class = "UILabel"; text = "总共占用"; ObjectID = "K7J-iz-2Ao"; */
+"K7J-iz-2Ao.text" = "总共占用";
+
+/* Class = "UITableViewSection"; headerTitle = "Data"; ObjectID = "Kd3-Be-FE9"; */
 "Kd3-Be-FE9.headerTitle" = "Data";
 
-/* Class = "UITextField"; placeholder = "道具数量"; ObjectID = "Km2-Hi-6ix"; */
+/* Class = "UITextField"; placeholder = "Number"; ObjectID = "Km2-Hi-6ix"; */
 "Km2-Hi-6ix.placeholder" = "Number";
 
-/* Class = "UINavigationItem"; title = "标签"; ObjectID = "LTv-CY-Tzq"; */
+/* Class = "UINavigationItem"; title = "Tag"; ObjectID = "LTv-CY-Tzq"; */
 "LTv-CY-Tzq.title" = "Tag";
 
-/* Class = "UINavigationItem"; title = "编辑"; ObjectID = "LcT-tQ-Efr"; */
+/* Class = "UINavigationItem"; title = "Edit"; ObjectID = "LcT-tQ-Efr"; */
 "LcT-tQ-Efr.title" = "Edit";
 
-/* Class = "UINavigationItem"; title = "分类"; ObjectID = "Nvt-D1-Pat"; */
+/* Class = "UINavigationItem"; title = "Library"; ObjectID = "Nvt-D1-Pat"; */
 "Nvt-D1-Pat.title" = "Library";
+
+/* Class = "UILabel"; text = "备份文件"; ObjectID = "Ogr-Hn-CCA"; */
+"Ogr-Hn-CCA.text" = "备份文件";
 
 /* Class = "UINavigationItem"; title = "Title"; ObjectID = "PGQ-Xa-2tO"; */
 "PGQ-Xa-2tO.title" = "Title";
 
-/* Class = "UILabel"; text = "普通话"; ObjectID = "RFX-JZ-j2U"; */
+/* Class = "UILabel"; text = "Detail"; ObjectID = "R2q-nh-wwZ"; */
+"R2q-nh-wwZ.text" = "Detail";
+
+/* Class = "UILabel"; text = "Chinese"; ObjectID = "RFX-JZ-j2U"; */
 "RFX-JZ-j2U.text" = "Chinese";
 
 /* Class = "UIBarButtonItem"; title = " "; ObjectID = "RV3-TK-3aF"; */
@@ -95,62 +131,104 @@
 /* Class = "UILabel"; text = "15 MB"; ObjectID = "TqN-F3-vtE"; */
 "TqN-F3-vtE.text" = "15 MB";
 
-/* Class = "UITableViewSection"; headerTitle = "多媒体"; ObjectID = "WkJ-eG-J7Q"; */
+/* Class = "UINavigationItem"; title = "储存空间占用"; ObjectID = "UTC-JP-R0L"; */
+"UTC-JP-R0L.title" = "储存空间占用";
+
+/* Class = "UILabel"; text = "技巧"; ObjectID = "Vva-6X-ybO"; */
+"Vva-6X-ybO.text" = "技巧";
+
+/* Class = "UITableViewSection"; headerTitle = "Multimedia"; ObjectID = "WkJ-eG-J7Q"; */
 "WkJ-eG-J7Q.headerTitle" = "Multimedia";
 
 /* Class = "UILabel"; text = "backup 2016/04/18"; ObjectID = "Xwd-V4-U1S"; */
 "Xwd-V4-U1S.text" = "backup 2016/04/18";
 
-/* Class = "UILabel"; text = "数量"; ObjectID = "YAy-P4-5i5"; */
+/* Class = "UILabel"; text = "Number"; ObjectID = "YAy-P4-5i5"; */
 "YAy-P4-5i5.text" = "Number";
 
-/* Class = "UILabel"; text = "生成备份"; ObjectID = "ZNV-Sd-2O2"; */
+/* Class = "UILabel"; text = "Create Backup"; ObjectID = "ZNV-Sd-2O2"; */
 "ZNV-Sd-2O2.text" = "Create Backup";
+
+/* Class = "UILabel"; text = "Detail"; ObjectID = "bmX-cq-hOa"; */
+"bmX-cq-hOa.text" = "Detail";
 
 /* Class = "UILabel"; text = "Title"; ObjectID = "bsq-FM-N2u"; */
 "bsq-FM-N2u.text" = "Title";
 
-/* Class = "UILabel"; text = "修改密码"; ObjectID = "cCX-kP-prf"; */
+/* Class = "UILabel"; text = "Detail"; ObjectID = "bza-Q2-MD1"; */
+"bza-Q2-MD1.text" = "Detail";
+
+/* Class = "UILabel"; text = "Change Password"; ObjectID = "cCX-kP-prf"; */
 "cCX-kP-prf.text" = "Change Password";
+
+/* Class = "UILabel"; text = "Detail"; ObjectID = "cCc-mZ-pQj"; */
+"cCc-mZ-pQj.text" = "Detail";
 
 /* Class = "UIBarButtonItem"; title = " "; ObjectID = "cDs-IW-89W"; */
 "cDs-IW-89W.title" = " ";
 
-/* Class = "UITableViewSection"; headerTitle = "安全"; ObjectID = "czJ-SJ-RKb"; */
+/* Class = "UITableViewSection"; headerTitle = "Security"; ObjectID = "czJ-SJ-RKb"; */
 "czJ-SJ-RKb.headerTitle" = "Security";
 
-/* Class = "UITableViewSection"; headerTitle = "快捷输入"; ObjectID = "dQc-ov-Y4A"; */
+/* Class = "UILabel"; text = "Detail"; ObjectID = "dLa-MB-O38"; */
+"dLa-MB-O38.text" = "Detail";
+
+/* Class = "UITableViewSection"; headerTitle = "Quick Input"; ObjectID = "dQc-ov-Y4A"; */
 "dQc-ov-Y4A.headerTitle" = "Quick Input";
 
-/* Class = "UILabel"; text = "备份与恢复"; ObjectID = "du6-oW-WfF"; */
+/* Class = "UILabel"; text = "Backup and Restore"; ObjectID = "du6-oW-WfF"; */
 "du6-oW-WfF.text" = "Backup and Restore";
 
-/* Class = "UITabBarItem"; title = "多媒体"; ObjectID = "hKg-es-jeP"; */
+/* Class = "UILabel"; text = "演出"; ObjectID = "f8I-KF-hy7"; */
+"f8I-KF-hy7.text" = "演出";
+
+/* Class = "UILabel"; text = "流程"; ObjectID = "gyJ-en-4p3"; */
+"gyJ-en-4p3.text" = "流程";
+
+/* Class = "UITabBarItem"; title = "Multimedia"; ObjectID = "hKg-es-jeP"; */
 "hKg-es-jeP.title" = "Multimedia";
 
-/* Class = "UINavigationItem"; title = "设置"; ObjectID = "hf4-Qa-rk5"; */
+/* Class = "UINavigationItem"; title = "Setting"; ObjectID = "hf4-Qa-rk5"; */
 "hf4-Qa-rk5.title" = "Setting";
 
 /* Class = "UITableViewSection"; headerTitle = "Mook"; ObjectID = "hqC-JL-53v"; */
 "hqC-JL-53v.headerTitle" = "Mook";
 
-/* Class = "UITextField"; placeholder = "道具说明"; ObjectID = "jHg-Vx-Yrf"; */
+/* Class = "UITextField"; placeholder = "Details"; ObjectID = "jHg-Vx-Yrf"; */
 "jHg-Vx-Yrf.placeholder" = "Details";
 
-/* Class = "UITextField"; placeholder = "道具名称"; ObjectID = "k1u-Cs-56A"; */
+/* Class = "UITextField"; placeholder = "Prop Name"; ObjectID = "k1u-Cs-56A"; */
 "k1u-Cs-56A.placeholder" = "Prop Name";
 
-/* Class = "UILabel"; text = "说明"; ObjectID = "l60-bq-03D"; */
+/* Class = "UILabel"; text = "Details"; ObjectID = "l60-bq-03D"; */
 "l60-bq-03D.text" = "Details";
 
-/* Class = "UILabel"; text = "反馈"; ObjectID = "nBl-56-M1c"; */
+/* Class = "UILabel"; text = "Detail"; ObjectID = "mc8-zK-47L"; */
+"mc8-zK-47L.text" = "Detail";
+
+/* Class = "UITableViewSection"; headerTitle = "Appearence"; ObjectID = "n59-Nq-Pmb"; */
+"n59-Nq-Pmb.headerTitle" = "Appearence";
+
+/* Class = "UILabel"; text = "Feedback"; ObjectID = "nBl-56-M1c"; */
 "nBl-56-M1c.text" = "Feedback";
+
+/* Class = "UILabel"; text = "Detail"; ObjectID = "pJL-66-J5N"; */
+"pJL-66-J5N.text" = "Detail";
 
 /* Class = "UINavigationItem"; title = "List"; ObjectID = "pTe-6i-VXn"; */
 "pTe-6i-VXn.title" = "List";
 
-/* Class = "UILabel"; text = "使用TouchID"; ObjectID = "qVZ-E2-AqT"; */
+/* Class = "UILabel"; text = "台词"; ObjectID = "phq-qh-tOW"; */
+"phq-qh-tOW.text" = "台词";
+
+/* Class = "UILabel"; text = "Use TouchID"; ObjectID = "qVZ-E2-AqT"; */
 "qVZ-E2-AqT.text" = "Use TouchID";
 
-/* Class = "UIBarButtonItem"; title = "导入"; ObjectID = "uSH-LY-M2B"; */
+/* Class = "UILabel"; text = "道具"; ObjectID = "qfb-qA-GJf"; */
+"qfb-qA-GJf.text" = "道具";
+
+/* Class = "UILabel"; text = "缓存与临时文件"; ObjectID = "rel-RA-eMk"; */
+"rel-RA-eMk.text" = "缓存与临时文件";
+
+/* Class = "UIBarButtonItem"; title = "Import"; ObjectID = "uSH-LY-M2B"; */
 "uSH-LY-M2B.title" = "Import";

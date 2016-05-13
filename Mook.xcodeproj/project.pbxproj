@@ -100,6 +100,8 @@
 		432346951C96B4C200200833 /* CLTextInputCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 432346931C96B4C200200833 /* CLTextInputCell.xib */; };
 		4364861B1CE1A99000FC191B /* CLSizeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4364861A1CE1A99000FC191B /* CLSizeVC.m */; };
 		4364861F1CE1BAEA00FC191B /* CLSizeListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4364861E1CE1BAEA00FC191B /* CLSizeListVC.m */; };
+		438540391CE56CF200F82AAB /* CLThemeColorVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 438540381CE56CF200F82AAB /* CLThemeColorVC.m */; };
+		4385403C1CE56D4000F82AAB /* CLThemeColorNavVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4385403B1CE56D4000F82AAB /* CLThemeColorNavVC.m */; };
 		43885F6E1CA4F9BE00269CE1 /* CLListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 43885F6D1CA4F9BE00269CE1 /* CLListVC.m */; };
 		43885F711CA5079100269CE1 /* CLContentVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 43885F701CA5079100269CE1 /* CLContentVC.m */; };
 		43885F791CA6A8AC00269CE1 /* CLHomeNavVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 43885F781CA6A8AC00269CE1 /* CLHomeNavVC.m */; };
@@ -193,8 +195,6 @@
 		430DFBC81CA252DD0054DF6B /* CLNewEntryNavVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLNewEntryNavVC.m; sourceTree = "<group>"; };
 		430DFBCA1CA393CC0054DF6B /* NSDate+MJ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+MJ.h"; sourceTree = "<group>"; };
 		430DFBCB1CA393CC0054DF6B /* NSDate+MJ.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+MJ.m"; sourceTree = "<group>"; };
-		431786F51CC6792D005C14F2 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
-		431786F61CC67934005C14F2 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Main.strings"; sourceTree = "<group>"; };
 		431786F71CC6794D005C14F2 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		431786F81CC67952005C14F2 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		431786F91CC6797E005C14F2 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/CLTagField.strings"; sourceTree = "<group>"; };
@@ -334,6 +334,14 @@
 		4364861A1CE1A99000FC191B /* CLSizeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLSizeVC.m; sourceTree = "<group>"; };
 		4364861D1CE1BAEA00FC191B /* CLSizeListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLSizeListVC.h; sourceTree = "<group>"; };
 		4364861E1CE1BAEA00FC191B /* CLSizeListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLSizeListVC.m; sourceTree = "<group>"; };
+		438540301CE56B2500F82AAB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
+		438540321CE56B5300F82AAB /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		438540341CE56B7D00F82AAB /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Main.strings"; sourceTree = "<group>"; };
+		438540361CE56CD300F82AAB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Setting.strings; sourceTree = "<group>"; };
+		438540371CE56CF200F82AAB /* CLThemeColorVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLThemeColorVC.h; sourceTree = "<group>"; };
+		438540381CE56CF200F82AAB /* CLThemeColorVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLThemeColorVC.m; sourceTree = "<group>"; };
+		4385403A1CE56D4000F82AAB /* CLThemeColorNavVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLThemeColorNavVC.h; sourceTree = "<group>"; };
+		4385403B1CE56D4000F82AAB /* CLThemeColorNavVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLThemeColorNavVC.m; sourceTree = "<group>"; };
 		43885F6C1CA4F9BE00269CE1 /* CLListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLListVC.h; sourceTree = "<group>"; };
 		43885F6D1CA4F9BE00269CE1 /* CLListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLListVC.m; sourceTree = "<group>"; };
 		43885F6F1CA5079100269CE1 /* CLContentVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLContentVC.h; sourceTree = "<group>"; };
@@ -374,10 +382,8 @@
 		439519FD1CC5271C00505E5B /* CLLanguageVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLLanguageVC.h; sourceTree = "<group>"; };
 		439519FE1CC5271C00505E5B /* CLLanguageVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLLanguageVC.m; sourceTree = "<group>"; };
 		43951A021CC5DAEA00505E5B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Setting.storyboard; sourceTree = "<group>"; };
-		43951A051CC5DAED00505E5B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Setting.strings; sourceTree = "<group>"; };
 		43951A071CC5DAEF00505E5B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Setting.strings"; sourceTree = "<group>"; };
 		43951A091CC5DAF100505E5B /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Setting.strings"; sourceTree = "<group>"; };
-		43951A0B1CC5DDA700505E5B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		43951A101CC5E7A200505E5B /* CLAboutVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLAboutVC.h; sourceTree = "<group>"; };
 		43951A111CC5E7A200505E5B /* CLAboutVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLAboutVC.m; sourceTree = "<group>"; };
 		43951A141CC5E7BE00505E5B /* CLBackUpInfoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLBackUpInfoVC.h; sourceTree = "<group>"; };
@@ -673,6 +679,17 @@
 			name = Size;
 			sourceTree = "<group>";
 		};
+		4385403D1CE56D5000F82AAB /* ThemeColor */ = {
+			isa = PBXGroup;
+			children = (
+				438540371CE56CF200F82AAB /* CLThemeColorVC.h */,
+				438540381CE56CF200F82AAB /* CLThemeColorVC.m */,
+				4385403A1CE56D4000F82AAB /* CLThemeColorNavVC.h */,
+				4385403B1CE56D4000F82AAB /* CLThemeColorNavVC.m */,
+			);
+			name = ThemeColor;
+			sourceTree = "<group>";
+		};
 		439519F81CC51F0D00505E5B /* BackUp */ = {
 			isa = PBXGroup;
 			children = (
@@ -927,6 +944,7 @@
 				439519F81CC51F0D00505E5B /* BackUp */,
 				43F5F76D1CB3E45D007BFB0C /* QuickString */,
 				43951A131CC5E7A900505E5B /* About */,
+				4385403D1CE56D5000F82AAB /* ThemeColor */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -1306,10 +1324,12 @@
 				43C2068A1CB10CF300CEF992 /* CLListCell.m in Sources */,
 				432345E71C94051A00200833 /* CLRoutineModel.m in Sources */,
 				439519B31CBBF45D00505E5B /* CLImportContentVC.m in Sources */,
+				4385403C1CE56D4000F82AAB /* CLThemeColorNavVC.m in Sources */,
 				439519B01CBBB60300505E5B /* CLDataImportTool.m in Sources */,
 				439519FF1CC5271C00505E5B /* CLLanguageVC.m in Sources */,
 				432345BC1C9404FB00200833 /* CLTagChooseNavVC.m in Sources */,
 				43A2811F1CB2276A009C2785 /* CLLibraryCell.m in Sources */,
+				438540391CE56CF200F82AAB /* CLThemeColorVC.m in Sources */,
 				439519B61CBBF46F00505E5B /* CLImportContentNavVC.m in Sources */,
 				439519BC1CBD26B900505E5B /* CLImportPasswordInputView.m in Sources */,
 				432345AE1C9404FB00200833 /* CLPasswordVC.m in Sources */,
@@ -1419,9 +1439,9 @@
 			isa = PBXVariantGroup;
 			children = (
 				439519C91CC0903800505E5B /* Base */,
-				43951A0B1CC5DDA700505E5B /* en */,
-				431786F51CC6792D005C14F2 /* zh-Hans */,
-				431786F61CC67934005C14F2 /* zh-Hant */,
+				438540301CE56B2500F82AAB /* en */,
+				438540321CE56B5300F82AAB /* zh-Hans */,
+				438540341CE56B7D00F82AAB /* zh-Hant */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -1471,9 +1491,9 @@
 			isa = PBXVariantGroup;
 			children = (
 				43951A021CC5DAEA00505E5B /* Base */,
-				43951A051CC5DAED00505E5B /* en */,
 				43951A071CC5DAEF00505E5B /* zh-Hans */,
 				43951A091CC5DAF100505E5B /* zh-Hant */,
+				438540361CE56CD300F82AAB /* en */,
 			);
 			name = Setting.storyboard;
 			sourceTree = "<group>";
@@ -1521,7 +1541,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "5c373818-3bcf-470c-b6e8-cf4b776689a7";
+				PROVISIONING_PROFILE = "9635c5c5-a759-4705-b693-c699d7dfa8db";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -1560,7 +1580,7 @@
 				INFOPLIST_FILE = /Users/jackchen/MyProjects/Mook/Mook/Base.lproj/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "5c373818-3bcf-470c-b6e8-cf4b776689a7";
+				PROVISIONING_PROFILE = "9635c5c5-a759-4705-b693-c699d7dfa8db";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1585,7 +1605,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.linchen.project.Mook;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "5c373818-3bcf-470c-b6e8-cf4b776689a7";
+				PROVISIONING_PROFILE = "9635c5c5-a759-4705-b693-c699d7dfa8db";
 			};
 			name = Debug;
 		};
@@ -1607,7 +1627,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.linchen.project.Mook;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "5c373818-3bcf-470c-b6e8-cf4b776689a7";
+				PROVISIONING_PROFILE = "9635c5c5-a759-4705-b693-c699d7dfa8db";
 			};
 			name = Release;
 		};

@@ -5,6 +5,8 @@
   Created by 陈林 on 16/4/7.
 
 */
+
+"主题色" = "Theme Color";
 "储存空间占用" = "Storage";
 "总共占用" = "Total Storage";
 "备份文件"= "Backup File";

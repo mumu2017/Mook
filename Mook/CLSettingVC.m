@@ -17,6 +17,8 @@
 @interface CLSettingVC ()<MBProgressHUDDelegate, MFMailComposeViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *storageTitleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *storageDetailLabel;
+@property (weak, nonatomic) IBOutlet UILabel *themeColorTitleLabel;
+@property (weak, nonatomic) IBOutlet UIView *themeColorView;
 
 @property (weak, nonatomic) IBOutlet UISwitch *passwordSwitch;
 @property (weak, nonatomic) IBOutlet UISwitch *savePhotoSwitch;
@@ -66,7 +68,7 @@
     [self getUserDefaultsData];
     
     self.storageTitleLabel.text = NSLocalizedString(@"储存空间占用", nil);
-    
+    self.themeColorTitleLabel.text = NSLocalizedString(@"主题色", nil);
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newPasswordCreated) name:@"newPasswordCreated" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cancelPasswordCreation) name:@"cancelPasswordCreation" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cancelPasswordChange) name:@"cancelPasswordChange" object:nil];
@@ -75,7 +77,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     self.storageDetailLabel.text = [CLDataSizeTool totalSize]; // 每次重新打开页面就重新计算一次文件尺寸
-
+    self.themeColorView.backgroundColor = kAppThemeColor;
     [self getUserDefaultsData];
 }
 
@@ -116,7 +118,7 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setBool:NO forKey:kUsePasswordKey];
     [defaults synchronize];
-    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationNone];
+    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:2] withRowAnimation:UITableViewRowAnimationNone];
 }
 
 - (void)cancelPasswordChange {
@@ -130,7 +132,7 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 6;
+    return 7;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -144,15 +146,14 @@
             break;
             
         case 1:
+            number = 1;
+            break;
+        case 2:
             if ([[NSUserDefaults standardUserDefaults] boolForKey:kUsePasswordKey]) {
                 number = 3;
             } else {
                 number = 1;
             }
-            break;
-            
-        case 2:
-            number = 2;
             break;
             
         case 3:
@@ -164,6 +165,10 @@
             break;
             
         case 5:
+            number = 2;
+            break;
+            
+        case 6:
             number = 3;
             break;
             
@@ -177,7 +182,7 @@
     if (indexPath.section == 0) {
         
         
-    } else if (indexPath.section == 4) {
+    } else if (indexPath.section == 5) {
         if (indexPath.row == 0) {
             
             // 检测设备能否发送邮件
@@ -190,7 +195,7 @@
             [self rateMook];
         }
         
-    } else if (indexPath.section == 5) {
+    } else if (indexPath.section == 6) {
         if (indexPath.row == 1) {
             [[NSNotificationCenter defaultCenter] postNotificationName:@"showIntroView" object:nil];
         }
@@ -236,7 +241,7 @@
         [self performSegueWithIdentifier:kSettingToPasswordSegue sender:self.passwordSwitch];
     }
     
-    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationNone];
+    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:2] withRowAnimation:UITableViewRowAnimationNone];
     
     
 }

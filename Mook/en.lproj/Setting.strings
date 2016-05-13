@@ -1,6 +1,6 @@
 
 /* Class = "UINavigationItem"; title = "备份说明"; ObjectID = "0Do-me-0Gv"; */
-"0Do-me-0Gv.title" = "Backup Info";
+"0Do-me-0Gv.title" = "备份说明";
 
 /* Class = "UIButton"; normalTitle = "1"; ObjectID = "0VU-o2-WTb"; */
 "0VU-o2-WTb.normalTitle" = "1";
@@ -8,51 +8,38 @@
 /* Class = "UIButton"; normalTitle = "2"; ObjectID = "1sN-mx-B9a"; */
 "1sN-mx-B9a.normalTitle" = "2";
 
-/* Class = "UINavigationItem"; title = "功能介绍"; ObjectID = "2ij-WJ-dwd"; */
-"2ij-WJ-dwd.title" = "Features";
-
 /* Class = "UIButton"; normalTitle = "7"; ObjectID = "6Ul-HR-ZNK"; */
 "6Ul-HR-ZNK.normalTitle" = "7";
 
 /* Class = "UIButton"; normalTitle = "取消"; ObjectID = "6Wb-ne-ctG"; */
-"6Wb-ne-ctG.normalTitle" = "Cancel";
+"6Wb-ne-ctG.normalTitle" = "取消";
 
 /* Class = "UIButton"; normalTitle = "3"; ObjectID = "EEx-5a-v4Y"; */
 "EEx-5a-v4Y.normalTitle" = "3";
 
 /* Class = "UILabel"; text = "普通话"; ObjectID = "EJO-ve-zSd"; */
-"EJO-ve-zSd.text" = "Chinese";
+"EJO-ve-zSd.text" = "普通话";
 
 /* Class = "UILabel"; text = "粤语"; ObjectID = "EcY-N2-cpC"; */
-"EcY-N2-cpC.text" = "Cantonese";
+"EcY-N2-cpC.text" = "粤语";
 
 /* Class = "UIButton"; normalTitle = "显示密码提示"; ObjectID = "I5V-WJ-jLa"; */
-"I5V-WJ-jLa.normalTitle" = "Password Hint";
+"I5V-WJ-jLa.normalTitle" = "显示密码提示";
 
 /* Class = "UINavigationItem"; title = "快捷短语"; ObjectID = "JfI-35-SIf"; */
-"JfI-35-SIf.title" = "Quick Phrase";
+"JfI-35-SIf.title" = "快捷短语";
 
 /* Class = "UILabel"; text = "Mook 1.0.0"; ObjectID = "KKz-pB-Q1T"; */
 "KKz-pB-Q1T.text" = "Mook 1.0.0";
 
-/* Class = "UITextView"; text = "这是一个魔术爱好者的作品.
-希望它能够帮助魔术师与爱好者们进行魔术知识管理.\n让我们一起,把魔术变得更好.\n
-Mook使用了讯飞语音提供的语音识别服务.\nMook使用了以下开源库:\nFMDB\nSWTableViewCell\nMWPhotoBrowser\nChameleonFramework\nSSZipArchive\nEAIntroView\nMBProgressHUD
-WJTouchID
-JGActionSheet\n\n特别感谢: Rebekka Gao, 谢谢你一直以来的陪伴和支持.\n感谢: 亦明, 欧阳, 易予, 谢谢你们在魔术之路上的陪伴.
-感谢林卓杰先生提供的\"What is magic?\"创意.感谢各位TMW群的朋友们的支持和反馈.\n\nMook 1.0.0            By Chen Lin\n\nCopyright © 2016. All rights reserved."; ObjectID = "MKa-mu-JdA"; */
-"MKa-mu-JdA.text" = "A craft made by a magic amateur, to help magicians and amateurs manage their magic asset in a more efficient way.\nMook includes open-soure components:\nFMDB\nSWTableViewCell\nMWPhotoBrowser\nChameleonFramework\nSSZipArchive\nEAIntroView\nMBProgressHUD\nPlus the voice recognition service provided by IFly.\nA special thanks to my wonderful wife, for the everlasting support and encouragement.\nMany thanks to my friends for the tests and feedbacks, and Mr. Michael Lam for the idea of 'What is magic?'.\n\nMook 1.0.0 by Chen Lin\n\nCopyright © 2016. All rights reserved.\n";
+/* Class = "UITextView"; text = "这是一个魔术爱好者的作品. 希望它能够帮助魔术师与爱好者们进行魔术知识管理.\n让我们一起,把魔术变得更好.\n Mook使用了讯飞语音提供的语音识别服务.\nMook使用了以下开源库:\nFMDB\nSWTableViewCell\nMWPhotoBrowser\nChameleonFramework\nSSZipArchive\nEAIntroView\nMBProgressHUD WJTouchID JGActionSheet\n\n特别感谢: Rebekka Gao, 谢谢你一直以来的陪伴和支持.\n感谢: 亦明, 欧阳, 易予, 谢谢你们在魔术之路上的陪伴. 感谢林卓杰先生提供的\"What is magic?\"创意.感谢各位TMW群的朋友们的支持和反馈.\n\nMook 1.0.0            By Chen Lin\n\nCopyright © 2016. All rights reserved."; ObjectID = "MKa-mu-JdA"; */
+"MKa-mu-JdA.text" = "这是一个魔术爱好者的作品. 希望它能够帮助魔术师与爱好者们进行魔术知识管理.\n让我们一起,把魔术变得更好.\n Mook使用了讯飞语音提供的语音识别服务.\nMook使用了以下开源库:\nFMDB\nSWTableViewCell\nMWPhotoBrowser\nChameleonFramework\nSSZipArchive\nEAIntroView\nMBProgressHUD WJTouchID JGActionSheet\n\n特别感谢: Rebekka Gao, 谢谢你一直以来的陪伴和支持.\n感谢: 亦明, 欧阳, 易予, 谢谢你们在魔术之路上的陪伴. 感谢林卓杰先生提供的\"What is magic?\"创意.感谢各位TMW群的朋友们的支持和反馈.\n\nMook 1.0.0            By Chen Lin\n\nCopyright © 2016. All rights reserved.";
 
-/* Class = "UITextView"; text = "1. 创建备份:\n\n您点击创建备份选项后, Mook会将当前您在Mook中记录的所有数据打包成一个备份文件(文件名:backup.mook),您可将该文件保存到您的电脑上:\n\n\t将您的iPhone通过数据线连接到您的电脑上(请确保您的电脑上安装了iTunes软件). 使用iTunes文件共享功能, 将Mook中的backup.mook文件拷贝到您的电脑上.\n\n\t如果您不了解iTunes文件共享功能,请访问以下网址了解相关介绍:\n\thttps://support.apple.com/zh-cn/HT201301\n
-请注意: 备份文件包含了所有的魔术记录数据, 但并不包括您的设置数据. 如果您在新的手机中恢复了备份, 请根据自己的使用习惯在设置页面进行设置.
-\n2. 恢复备份:\n\n当Mook的文件夹中存在Mook生成的备份文件(文件名:backup.mook)时, 您点击恢复备份后, Mook将自动恢复备份文件中的数据, 并且恢复的数据将会完全覆盖现有数据. \n\n3. 删除备份:\n\n如果您已经将备份文件保存到了您的电脑或者其它地方, Mook推荐您将备份文件删除,以节省更多存储空间. 当您想要恢复备份时, 可通过iTunes文件共享功能将备份文件导入到Mook文件夹中, 然后恢复备份."; ObjectID = "S6r-dR-V9X"; */
-"S6r-dR-V9X.text" = "1. Create Backup:\n\nOnce you've clicked Creat Backup cell, Mook would put all your magic data into a backup file (file name: backup.mook), you can store your backup in your PC or Mac:\n\n\tConnect your iPhone to your PC or Mac(please make sure that you it has iTunes installed). Use the iTunes File Sharing function to copy your backup file to your PC or Mac.\n\n\tIf you do not know how to use iTunes File Sharing function, please see the link below:\n\thttps://support.apple.com/zh-cn/HT201301\n\n2. Restore Backup:\n\nWhen the backup file(backup.mook) is in the file folder of Mook, you can restore the backup file. And all your current data in Mook will be permanately replaced by the backup data. \n\n3. Delete Backup:\n\nIf you have already stored your backup file in your PC, Mac or other places, Mook suggests you to delete the backup file to save storage space. When you want to restore your backup, you can use the iTunes File Sharing function to put the backup file back into Mook and restore afterwards.";
+/* Class = "UITextView"; text = "1. 创建备份:\n\n您点击创建备份选项后, Mook会将当前您在Mook中记录的所有数据打包成一个备份文件(文件名:backup.mook),您可将该文件保存到您的电脑上:\n\n\t将您的iPhone通过数据线连接到您的电脑上(请确保您的电脑上安装了iTunes软件). 使用iTunes文件共享功能, 将Mook中的backup.mook文件拷贝到您的电脑上.\n\n\t如果您不了解iTunes文件共享功能,请访问以下网址了解相关介绍:\n\thttps://support.apple.com/zh-cn/HT201301\n 请注意: 备份文件包含了所有的魔术记录数据, 但并不包括您的设置数据. 如果您在新的手机中恢复了备份, 请根据自己的使用习惯在设置页面进行设置. \n2. 恢复备份:\n\n当Mook的文件夹中存在Mook生成的备份文件(文件名:backup.mook)时, 您点击恢复备份后, Mook将自动恢复备份文件中的数据, 并且恢复的数据将会完全覆盖现有数据. \n\n3. 删除备份:\n\n如果您已经将备份文件保存到了您的电脑或者其它地方, Mook推荐您将备份文件删除,以节省更多存储空间. 当您想要恢复备份时, 可通过iTunes文件共享功能将备份文件导入到Mook文件夹中, 然后恢复备份."; ObjectID = "S6r-dR-V9X"; */
+"S6r-dR-V9X.text" = "1. 创建备份:\n\n您点击创建备份选项后, Mook会将当前您在Mook中记录的所有数据打包成一个备份文件(文件名:backup.mook),您可将该文件保存到您的电脑上:\n\n\t将您的iPhone通过数据线连接到您的电脑上(请确保您的电脑上安装了iTunes软件). 使用iTunes文件共享功能, 将Mook中的backup.mook文件拷贝到您的电脑上.\n\n\t如果您不了解iTunes文件共享功能,请访问以下网址了解相关介绍:\n\thttps://support.apple.com/zh-cn/HT201301\n 请注意: 备份文件包含了所有的魔术记录数据, 但并不包括您的设置数据. 如果您在新的手机中恢复了备份, 请根据自己的使用习惯在设置页面进行设置. \n2. 恢复备份:\n\n当Mook的文件夹中存在Mook生成的备份文件(文件名:backup.mook)时, 您点击恢复备份后, Mook将自动恢复备份文件中的数据, 并且恢复的数据将会完全覆盖现有数据. \n\n3. 删除备份:\n\n如果您已经将备份文件保存到了您的电脑或者其它地方, Mook推荐您将备份文件删除,以节省更多存储空间. 当您想要恢复备份时, 可通过iTunes文件共享功能将备份文件导入到Mook文件夹中, 然后恢复备份.";
 
 /* Class = "UILabel"; text = "♥︎"; ObjectID = "Wlc-zl-Q3D"; */
 "Wlc-zl-Q3D.text" = "♥︎";
-
-/* Class = "UITextView"; text = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda."; ObjectID = "Xj1-jb-fgB"; */
-"Xj1-jb-fgB.text" = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.";
 
 /* Class = "UIButton"; normalTitle = "9"; ObjectID = "Yny-VL-cXn"; */
 "Yny-VL-cXn.normalTitle" = "9";
@@ -61,13 +48,13 @@ JGActionSheet\n\n特别感谢: Rebekka Gao, 谢谢你一直以来的陪伴和支
 "a0C-qj-QSB.normalTitle" = "8";
 
 /* Class = "UILabel"; text = "密码错误!"; ObjectID = "a53-Rt-RJf"; */
-"a53-Rt-RJf.text" = "Wrong Password!";
+"a53-Rt-RJf.text" = "密码错误!";
 
 /* Class = "UILabel"; text = "♣︎"; ObjectID = "abY-WC-G3g"; */
 "abY-WC-G3g.text" = "♣︎";
 
 /* Class = "UILabel"; text = "英文"; ObjectID = "cGZ-lb-axK"; */
-"cGZ-lb-axK.text" = "English";
+"cGZ-lb-axK.text" = "英文";
 
 /* Class = "UIButton"; normalTitle = "4"; ObjectID = "fDq-Wj-jyp"; */
 "fDq-Wj-jyp.normalTitle" = "4";
@@ -82,7 +69,7 @@ JGActionSheet\n\n特别感谢: Rebekka Gao, 谢谢你一直以来的陪伴和支
 "jHl-w2-Sv7.normalTitle" = "0";
 
 /* Class = "UINavigationItem"; title = "语言"; ObjectID = "ldb-am-m6b"; */
-"ldb-am-m6b.title" = "Language";
+"ldb-am-m6b.title" = "语言";
 
 /* Class = "UINavigationItem"; title = "What is Magic?"; ObjectID = "qpe-Fq-FM7"; */
 "qpe-Fq-FM7.title" = "What is Magic?";
@@ -97,4 +84,4 @@ JGActionSheet\n\n特别感谢: Rebekka Gao, 谢谢你一直以来的陪伴和支
 "xrb-jb-Jld.text" = "♠︎";
 
 /* Class = "UINavigationItem"; title = "关于"; ObjectID = "zzD-KG-stQ"; */
-"zzD-KG-stQ.title" = "About";
+"zzD-KG-stQ.title" = "关于";

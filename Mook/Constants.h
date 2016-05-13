@@ -46,7 +46,61 @@ typedef enum {
     kEditingModeNotes,
 } EditingMode;
 
+typedef enum {
+
+    flatBlueColor = 0,
+    flatBlackColor,
+    flatBrownColor,
+    flatCoffeeColor,
+    flatForestGreenColor,
+    flatGrayColor,
+    flatGreenColor,
+    flatLimeColor,
+    flatMagentaColor,
+    flatMaroonColor,
+    flatMintColor,
+    flatNavyBlueColor,
+    flatOrangeColor,
+    flatPinkColor,
+    flatPlumColor,
+    flatPowderBlueColor,
+    flatPurpleColor,
+    flatRedColor,
+    flatSandColor,
+    flatSkyBlueColor,
+    flatTealColor,
+    flatWatermelonColor,
+    flatWhiteColor,
+    flatYellowColor,
+    flatBlackColorDark,
+    flatBlueColorDark,
+    flatBrownColorDark,
+    flatCoffeeColorDark,
+    flatForestGreenColorDark,
+    flatGrayColorDark,
+    flatGreenColorDark,
+    flatLimeColorDark,
+    flatMagentaColorDark,
+    flatMaroonColorDark,
+    flatMintColorDark,
+    flatNavyBlueColorDark,
+    flatOrangeColorDark,
+    flatPinkColorDark,
+    flatPlumColorDark,
+    flatPowderBlueColorDark,
+    flatPurpleColorDark,
+    flatRedColorDark,
+    flatSandColorDark,
+    flatSkyBlueColorDark,
+    flatTealColorDark,
+    flatWatermelonColorDark,
+    flatWhiteColorDark,
+    flatYellowColorDark,
+   
+} kThemeColorSet;
+
 #define kAppDelegate   (AppDelegate *)[[UIApplication sharedApplication] delegate]
+#define kAppThemeColor   [(AppDelegate *)[[UIApplication sharedApplication] delegate] themeColor]
 #define kDataListAll   [(AppDelegate *)[[UIApplication sharedApplication] delegate] allItems]
 #define kDataListIdea   [(AppDelegate *)[[UIApplication sharedApplication] delegate] ideaObjModelList]
 #define kDataListShow   [(AppDelegate *)[[UIApplication sharedApplication] delegate] showModelList]
@@ -81,7 +135,7 @@ typedef enum {
 #define kPasswordReminderKey     @"passwordReminderKey"
 #define kTouchIDKey        @"touchIDKey"
 #define kCheckIfShouldPasswordKey        @"checkIfShouldPasswordKey"
-
+#define kThemeColorKey  @"themeColorKey"
 #pragma mark -  NSCoding Key
 
 #define kNotesKey       @"kNotesKey"
@@ -354,8 +408,7 @@ typedef enum {
 #define kBarTintColor     [UIColor colorWithRed:247/255.0 green:247/255.0 blue:247/255.0 alpha:1.0]
 
 #define kTintColor          [UIColor colorWithContrastingBlackOrWhiteColorOn:kMenuBackgroundColor isFlat:YES]    // FlatColor
-#define kMenuBackgroundColor    [UIColor flatBlackColorDark]
-
+#define kMenuBackgroundColor    kAppThemeColor
 // contentVC的背景色
 #define kCellBgColor     [UIColor colorWithRed:247/255.0 green:247/255.0 blue:247/255.0 alpha:1]
 

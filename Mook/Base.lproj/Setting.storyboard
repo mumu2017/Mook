@@ -147,7 +147,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dUs-K1-Nee" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-9627" y="-2757"/>
+            <point key="canvasLocation" x="-8709" y="-2757"/>
         </scene>
         <!--语言-->
         <scene sceneID="yV9-dZ-wRS">
@@ -239,6 +239,47 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iyY-UU-wlN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-11521.5" y="-2477.25"/>
+        </scene>
+        <!--主题色-->
+        <scene sceneID="VQZ-sJ-gMC">
+            <objects>
+                <collectionViewController id="ptD-Z0-UDY" customClass="CLThemeColorVC" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="fvr-c8-bEQ">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Oxk-KN-2Ie">
+                            <size key="itemSize" width="50" height="50"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="colorCellID" id="nAk-QB-n10">
+                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="ptD-Z0-UDY" id="aOd-Za-XVK"/>
+                            <outlet property="delegate" destination="ptD-Z0-UDY" id="27j-gk-1LA"/>
+                        </connections>
+                    </collectionView>
+                    <navigationItem key="navigationItem" title="主题色" id="JcP-Cf-5AE">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="Re0-x0-yrj">
+                            <connections>
+                                <action selector="cancelColorSelection:" destination="ptD-Z0-UDY" id="ZVP-FQ-9hQ"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kz1-dw-FnY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-10171.5" y="-2749.5"/>
         </scene>
         <!--关于-->
         <scene sceneID="oHh-kR-cLk">
@@ -336,7 +377,7 @@ Copyright © 2016. All rights reserved.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xeh-cZ-JwF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-10417.5" y="-2574.75"/>
+            <point key="canvasLocation" x="-9499.5" y="-2574.75"/>
         </scene>
         <!--Quick String NavVC-->
         <scene sceneID="I77-wY-ybo">
@@ -1064,6 +1105,25 @@ Copyright © 2016. All rights reserved.</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QsE-Au-ZV3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-12213" y="-2477.25"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="6Rc-0h-JMS">
+            <objects>
+                <navigationController storyboardIdentifier="themeColorNavVC" automaticallyAdjustsScrollViewInsets="NO" id="XZb-sL-Vfm" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Z3m-kB-Gva">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="ptD-Z0-UDY" kind="relationship" relationship="rootViewController" id="ehQ-Kd-a3t"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="e9s-Ex-nTZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-10693.5" y="-2749.5"/>
         </scene>
     </scenes>
     <resources>

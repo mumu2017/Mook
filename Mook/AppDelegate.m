@@ -68,20 +68,181 @@
     self.linesObjModelList = nil;
 }
 
-- (void)setAppUI { // 设置应用UI
-    self.window.tintColor = kMenuBackgroundColor;
+- (UIColor *)themeColor {
     
-    [[UISwitch appearance] setOnTintColor:kMenuBackgroundColor];
-    [[UISegmentedControl appearance] setTintColor:kMenuBackgroundColor];
+    kThemeColorSet colorCode = 0;
+    
+    colorCode = (int)[[NSUserDefaults standardUserDefaults] integerForKey:kThemeColorKey];
+    
+    switch (colorCode) {
+        case flatBlackColor:
+            _themeColor = [UIColor flatBlackColor];
+            break;
+        
+        case flatBlueColor:
+            _themeColor = [UIColor flatBlueColor];
+            break;
+        case flatBrownColor:
+            _themeColor = [UIColor flatBrownColor];
+            break;
+        case flatCoffeeColor:
+            _themeColor = [UIColor flatCoffeeColor];
+            break;
+        case flatForestGreenColor:
+            _themeColor = [UIColor flatForestGreenColor];
+            break;
+        case flatGrayColor:
+            _themeColor = [UIColor flatGrayColor];
+            break;
+        case flatGreenColor:
+            _themeColor = [UIColor flatGreenColor];
+            break;
+        case flatLimeColor:
+            _themeColor = [UIColor flatLimeColor];
+            break;
+        case flatMagentaColor:
+            _themeColor = [UIColor flatMagentaColor];
+            break;
+        case flatMaroonColor:
+            _themeColor = [UIColor flatMaroonColor];
+            break;
+        case flatMintColor:
+            _themeColor = [UIColor flatMintColor];
+            break;
+        case flatNavyBlueColor:
+            _themeColor = [UIColor flatNavyBlueColor];
+            break;
+        case flatOrangeColor:
+            _themeColor = [UIColor flatOrangeColor];
+            break;
+        case flatPinkColor:
+            _themeColor = [UIColor flatPinkColor];
+            break;
+        case flatPlumColor:
+            _themeColor = [UIColor flatPlumColor];
+            break;
+        case flatPowderBlueColor:
+            _themeColor = [UIColor flatPowderBlueColor];
+            break;
+        case flatPurpleColor:
+            _themeColor = [UIColor flatPurpleColor];
+            break;
+        case flatRedColor:
+            _themeColor = [UIColor flatRedColor];
+            break;
+        case flatSandColor:
+            _themeColor = [UIColor flatSandColor];
+            break;
+        case flatSkyBlueColor:
+            _themeColor = [UIColor flatSkyBlueColor];
+            break;
+        case flatTealColor:
+            _themeColor = [UIColor flatTealColor];
+            break;
+        case flatWatermelonColor:
+            _themeColor = [UIColor flatWatermelonColor];
+            break;
+        case flatWhiteColor:
+            _themeColor = [UIColor flatWhiteColor];
+            break;
+        case flatYellowColor:
+            _themeColor = [UIColor flatYellowColor];
+            break;
+        case flatBlackColorDark:
+            _themeColor = [UIColor flatBlackColorDark];
+            break;
+        case flatBlueColorDark:
+            _themeColor = [UIColor flatBlueColorDark];
+            break;
+        case flatBrownColorDark:
+            _themeColor = [UIColor flatBrownColorDark];
+            break;
+        case flatCoffeeColorDark:
+            _themeColor = [UIColor flatCoffeeColorDark];
+            break;
+        case flatForestGreenColorDark:
+            _themeColor = [UIColor flatForestGreenColorDark];
+            break;
+        case flatGrayColorDark:
+            _themeColor = [UIColor flatGrayColorDark];
+            break;
+        case flatGreenColorDark:
+            _themeColor = [UIColor flatGreenColorDark];
+            break;
+        case flatLimeColorDark:
+            _themeColor = [UIColor flatLimeColorDark];
+            break;
+        case flatMagentaColorDark:
+            _themeColor = [UIColor flatMagentaColorDark];
+            break;
+        case flatMaroonColorDark:
+            _themeColor = [UIColor flatMaroonColorDark];
+            break;
+        case flatMintColorDark:
+            _themeColor = [UIColor flatMintColorDark];
+            break;
+        case flatNavyBlueColorDark:
+            _themeColor = [UIColor flatNavyBlueColorDark];
+            break;
+        case flatOrangeColorDark:
+            _themeColor = [UIColor flatOrangeColorDark];
+            break;
+        case flatPinkColorDark:
+            _themeColor = [UIColor flatPinkColorDark];
+            break;
+        case flatPlumColorDark:
+            _themeColor = [UIColor flatPlumColorDark];
+            break;
+        case flatPowderBlueColorDark:
+            _themeColor = [UIColor flatPowderBlueColorDark];
+            break;
+        case flatPurpleColorDark:
+            _themeColor = [UIColor flatPurpleColorDark];
+            break;
+        case flatRedColorDark:
+            _themeColor = [UIColor flatRedColorDark];
+            break;
+        case flatSandColorDark:
+            _themeColor = [UIColor flatSandColorDark];
+            break;
+        case flatSkyBlueColorDark:
+            _themeColor = [UIColor flatSkyBlueColorDark];
+            break;
+        case flatTealColorDark:
+            _themeColor = [UIColor flatTealColorDark];
+            break;
+        case flatWatermelonColorDark:
+            _themeColor = [UIColor flatWatermelonColorDark];
+            break;
+        case flatWhiteColorDark:
+            _themeColor = [UIColor flatWhiteColorDark];
+            break;
+        case flatYellowColorDark:
+            _themeColor = [UIColor flatYellowColorDark];
+            break;
+        default:
+            break;
+    }
+    
+    return _themeColor;
+}
+
+- (void)setAppUI { // 设置应用UI
+    
+    
+    self.window.tintColor = self.themeColor;
+    
+    [[UISwitch appearance] setOnTintColor:self.themeColor];
+    [[UISegmentedControl appearance] setTintColor:self.themeColor];
     
     [[UIToolbar appearance] setTranslucent:NO];
     [[UIToolbar appearance] setOpaque:YES];
     [[UIToolbar appearance] setTintColor:kTintColor];
     
     [[UINavigationBar appearance] setTintColor:kTintColor];
-    [[UINavigationBar appearance] setBarTintColor:kMenuBackgroundColor];
+    [[UINavigationBar appearance] setBarTintColor:self.themeColor];
     
-    [[UITabBar appearance] setTintColor:[UIColor flatSkyBlueColorDark]];
+    [[UITabBar appearance] setTintColor:self.themeColor];
     
     // 设置导航栏没有边线
 //    [[UINavigationBar appearance] setBackgroundImage:[[UIImage alloc] init]
