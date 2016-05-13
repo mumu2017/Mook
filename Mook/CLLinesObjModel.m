@@ -82,7 +82,7 @@
         effect = @"";
     }
     
-    NSString *modelString = [NSString stringWithFormat:@"%@  ", NSLocalizedString(@"台词", nil)];
+    NSString *modelString = [NSString stringWithFormat:@"%@ / ", NSLocalizedString(@"台词", nil)];
     NSString *infoString = [modelString stringByAppendingString:[NSString getDateString:self.date]];    return [effect contentStringWithDate:infoString];
 }
 

@@ -186,7 +186,7 @@
         effect = @"";
     }
     
-    NSString *modelString = [NSString stringWithFormat:@"%@  ", NSLocalizedString(@"道具", nil)];
+    NSString *modelString = [NSString stringWithFormat:@"%@ / ", NSLocalizedString(@"道具", nil)];
     NSString *infoString = [modelString stringByAppendingString:[NSString getDateString:self.date]];    return [effect contentStringWithDate:infoString];
 }
 

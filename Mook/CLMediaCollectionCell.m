@@ -16,7 +16,7 @@
     [self.contentView addSubview:self.imageView];
     [self.contentView addSubview:self.titleLabel];
     [self.contentView addSubview:self.iconView];
-    
+        
 }
 
 - (void)setName:(NSString *)name {
