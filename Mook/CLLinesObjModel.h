@@ -30,4 +30,6 @@
 
 - (NSString *)getTitle;
 - (NSAttributedString *)getContent;
+- (NSAttributedString *)getContentWithType;
+
 @end

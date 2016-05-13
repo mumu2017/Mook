@@ -26,9 +26,24 @@
     _iconName = iconName;
     
     if (iconName.length > 0) {
-        self.iconType.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@",iconName]];
-    } else {
-        self.iconType.image = nil;
+        
+        NSString *imageName;
+        if ([iconName isEqualToString:kIconNameIdea]) {
+            imageName = @"idea.jpg";
+        } else if ([iconName isEqualToString:kIconNameShow]) {
+            imageName = @"show.jpg";
+        } else if ([iconName isEqualToString:kIconNameRoutine]) {
+            imageName = @"routine.jpg";
+        } else if ([iconName isEqualToString:kIconNameSleight]) {
+            imageName = @"sleight.jpg";
+        } else if ([iconName isEqualToString:kIconNameProp]) {
+            imageName = @"prop.jpg";
+        } if ([iconName isEqualToString:kIconNameLines]) {
+            imageName = @"lines.jpg";
+        }
+        
+        self.typeIcon.image = [UIImage imageNamed:imageName];
+        
     }
 }
 

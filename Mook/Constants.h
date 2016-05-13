@@ -289,7 +289,7 @@ typedef enum {
 #define kScreenW        [UIScreen mainScreen].bounds.size.width
 #define kScreenH        [UIScreen mainScreen].bounds.size.height
 
-#define kListCellHeight     90
+#define kListCellHeight     80
 #define kStatusBarHeight    20
 #define kNavigationBarHeight    44
 
@@ -451,14 +451,14 @@ typedef enum {
 #define kNewPropInfoText    NSLocalizedString(@"新建道具", nil)
 #define kNewLinesInfoText   NSLocalizedString(@"新建台词", nil)
 
-#define kIconNameAll       @"iconNameAll"
-#define kIconNameIdea       @"iconNameIdea"
-#define kIconNameShow       @"iconNameShow"
-#define kIconNameRoutine    @"iconNameRoutine"
-#define kIconNameSleight    @"iconNameSleight"
-#define kIconNameProp       @"iconNameProp"
-#define kIconNameLines      @"iconNameLines"
-#define kIconNameTag        @"iconNameTag"
+//#define kIconNameAll       @"iconNameAll"
+#define kIconNameIdea       NSLocalizedString(@"灵感", nil)
+#define kIconNameShow       NSLocalizedString(@"演出", nil)
+#define kIconNameRoutine    NSLocalizedString(@"流程", nil)
+#define kIconNameSleight    NSLocalizedString(@"技巧", nil)
+#define kIconNameProp       NSLocalizedString(@"道具", nil)
+#define kIconNameLines      NSLocalizedString(@"台词", nil)
+//#define kIconNameTag        @"iconNameTag"
 
 #define kVoiceChinese       @"chinese"
 #define kVoiceGuangdong       @"guangdong"

@@ -35,6 +35,8 @@
 
 - (NSString *)getTitle;
 - (NSAttributedString *)getContent;
+- (NSAttributedString *)getContentWithType;
+
 - (UIImage *)getImage;
 - (UIImage *)getThumbnail;
 

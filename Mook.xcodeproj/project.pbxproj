@@ -102,6 +102,7 @@
 		4364861F1CE1BAEA00FC191B /* CLSizeListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4364861E1CE1BAEA00FC191B /* CLSizeListVC.m */; };
 		438540391CE56CF200F82AAB /* CLThemeColorVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 438540381CE56CF200F82AAB /* CLThemeColorVC.m */; };
 		4385403C1CE56D4000F82AAB /* CLThemeColorNavVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4385403B1CE56D4000F82AAB /* CLThemeColorNavVC.m */; };
+		438540421CE5C59A00F82AAB /* mookTitle.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 438540411CE5C59A00F82AAB /* mookTitle.jpg */; };
 		43885F6E1CA4F9BE00269CE1 /* CLListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 43885F6D1CA4F9BE00269CE1 /* CLListVC.m */; };
 		43885F711CA5079100269CE1 /* CLContentVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 43885F701CA5079100269CE1 /* CLContentVC.m */; };
 		43885F791CA6A8AC00269CE1 /* CLHomeNavVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 43885F781CA6A8AC00269CE1 /* CLHomeNavVC.m */; };
@@ -342,6 +343,7 @@
 		438540381CE56CF200F82AAB /* CLThemeColorVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLThemeColorVC.m; sourceTree = "<group>"; };
 		4385403A1CE56D4000F82AAB /* CLThemeColorNavVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLThemeColorNavVC.h; sourceTree = "<group>"; };
 		4385403B1CE56D4000F82AAB /* CLThemeColorNavVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLThemeColorNavVC.m; sourceTree = "<group>"; };
+		438540411CE5C59A00F82AAB /* mookTitle.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = mookTitle.jpg; sourceTree = "<group>"; };
 		43885F6C1CA4F9BE00269CE1 /* CLListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLListVC.h; sourceTree = "<group>"; };
 		43885F6D1CA4F9BE00269CE1 /* CLListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLListVC.m; sourceTree = "<group>"; };
 		43885F6F1CA5079100269CE1 /* CLContentVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLContentVC.h; sourceTree = "<group>"; };
@@ -778,6 +780,7 @@
 		43A281251CB230FE009C2785 /* jpgs */ = {
 			isa = PBXGroup;
 			children = (
+				438540411CE5C59A00F82AAB /* mookTitle.jpg */,
 				43951A1B1CC6681700505E5B /* mookFileIcon.jpg */,
 				43F5F7BE1CB50AD3007BFB0C /* launch.jpg */,
 				43F5F7B61CB50151007BFB0C /* routine.jpg */,
@@ -1242,6 +1245,7 @@
 				43C206931CB12BED00CEF992 /* CLMediaCollectionCell.xib in Resources */,
 				43A2812F1CB2336C009C2785 /* idea.jpg in Resources */,
 				439519D91CC0911000505E5B /* Localizable.strings in Resources */,
+				438540421CE5C59A00F82AAB /* mookTitle.jpg in Resources */,
 				432346561C9408F100200833 /* CLToolBar.xib in Resources */,
 				43F5F7B71CB50151007BFB0C /* routine.jpg in Resources */,
 				43A281331CB23486009C2785 /* show.jpg in Resources */,

@@ -126,7 +126,7 @@
     
     NSString *iconName, *title;
     UIImage *image;
-    NSAttributedString *content;
+    NSAttributedString *contentWithType;
  
     id modelUnknown = self.allItems[indexPath.row];
     
@@ -135,13 +135,14 @@
         image = [model getThumbnail];
         iconName = kIconNameShow;
         title = [model getTitle];
-        content = [model getContent];
-        
+        contentWithType = [model getContentWithType];
         if (image != nil) { // 如果返回图片,则表示模型中有图片或多媒体
             CLListImageCell *cell = [tableView dequeueReusableCellWithIdentifier:kListImageCellID forIndexPath:indexPath];
             cell.iconView.image = image;
             cell.iconName = iconName;
-            [cell setTitle:title content:content];
+            
+            
+            [cell setTitle:title content:contentWithType];
             
             cell.rightUtilityButtons = [self showRightButtons];
             cell.delegate = self;
@@ -152,7 +153,8 @@
         } else {
             CLListTextCell *cell = [tableView dequeueReusableCellWithIdentifier:kListTextCellID forIndexPath:indexPath];
             cell.iconName = iconName;
-            [cell setTitle:title content:content];
+            
+            [cell setTitle:title content:contentWithType];
             
             cell.rightUtilityButtons = [self showRightButtons];
             cell.delegate = self;
@@ -166,37 +168,37 @@
         image = [model getThumbnail];
         iconName = kIconNameIdea;
         title = [model getTitle];
-        content = [model getContent];
+        contentWithType = [model getContentWithType];
     } else if ([modelUnknown isKindOfClass:[CLRoutineModel class]]) {
         CLRoutineModel *model = (CLRoutineModel *)modelUnknown;
         image = [model getThumbnail];
         iconName = kIconNameRoutine;
         title = [model getTitle];
-        content = [model getContent];
+        contentWithType = [model getContentWithType];
     } else if ([modelUnknown isKindOfClass:[CLSleightObjModel class]]) {
         CLSleightObjModel *model = (CLSleightObjModel *)modelUnknown;
         image = [model getThumbnail];
         iconName = kIconNameSleight;
         title = [model getTitle];
-        content = [model getContent];
+        contentWithType = [model getContentWithType];
     } else if ([modelUnknown isKindOfClass:[CLPropObjModel class]]) {
         CLPropObjModel *model = (CLPropObjModel *)modelUnknown;
         image = [model getThumbnail];
         iconName = kIconNameProp;
         title = [model getTitle];
-        content = [model getContent];
+        contentWithType = [model getContentWithType];
     } else if ([modelUnknown isKindOfClass:[CLLinesObjModel class]]) {
         CLLinesObjModel *model = (CLLinesObjModel *)modelUnknown;
         iconName = kIconNameLines;
         title = [model getTitle];
-        content = [model getContent];
+        contentWithType = [model getContentWithType];
     }
     
     if (image != nil) { // 如果返回图片,则表示模型中有图片或多媒体
         CLListImageCell *cell = [tableView dequeueReusableCellWithIdentifier:kListImageCellID forIndexPath:indexPath];
         cell.iconView.image = image;
         cell.iconName = iconName;
-        [cell setTitle:title content:content];
+        [cell setTitle:title content:contentWithType];
         
         cell.rightUtilityButtons = [self rightButtons];
         cell.delegate = self;
@@ -207,7 +209,7 @@
     } else {
         CLListTextCell *cell = [tableView dequeueReusableCellWithIdentifier:kListTextCellID forIndexPath:indexPath];
         cell.iconName = iconName;
-        [cell setTitle:title content:content];
+        [cell setTitle:title content:contentWithType];
         
         cell.rightUtilityButtons = [self rightButtons];
         cell.delegate = self;

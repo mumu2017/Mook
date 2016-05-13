@@ -62,8 +62,25 @@
     } else {
         effect = @"";
     }
+
+    NSString *infoString = [NSString getDateString:self.date];
+    return [effect contentStringWithDate:infoString];
+}
+
+- (NSAttributedString *)getContentWithType {
     
-    return [effect contentStringWithDate:[NSString getDateString:self.date]];
+    NSString *effect;
+    
+    if (self.effectModel.isWithEffect) {
+        effect = [NSString stringWithFormat:@"  %@", self.effectModel.effect];
+        
+    } else {
+        effect = @"";
+    }
+    
+    NSString *modelString = [NSString stringWithFormat:@"%@  ", NSLocalizedString(@"灵感", nil)];
+    NSString *infoString = [modelString stringByAppendingString:[NSString getDateString:self.date]];
+    return [effect contentStringWithDate:infoString];
 }
 
 

@@ -17,69 +17,48 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launch.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="JUp-ok-h0z">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mookTitle.jpg" highlightedImage="mookTitle.jpg" highlighted="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yjh-aA-NCb">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="120" id="cxd-1R-fLT"/>
+                                    <constraint firstAttribute="height" constant="120" id="iRY-6R-cRH"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="cxd-1R-fLT"/>
+                                        <exclude reference="iRY-6R-cRH"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="cxd-1R-fLT"/>
+                                        <include reference="iRY-6R-cRH"/>
+                                    </mask>
+                                </variation>
                             </imageView>
-                            <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="MOOK" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hyU-5t-bmQ">
-                                <rect key="frame" x="279" y="242" width="42" height="21"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" weight="black" pointSize="24"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="做一个更好的魔术师" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yDs-f5-k0U">
-                                <rect key="frame" x="-42" y="-21" width="42" height="21"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
-                        <color key="backgroundColor" red="0.111818932" green="0.11183650050000001" blue="0.1118125319" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="yDs-f5-k0U" secondAttribute="trailing" constant="8" id="13g-EJ-ikB"/>
-                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="JUp-ok-h0z" secondAttribute="bottom" id="7aj-YL-0na"/>
-                            <constraint firstItem="JUp-ok-h0z" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="B6H-au-eZZ"/>
-                            <constraint firstAttribute="trailing" secondItem="JUp-ok-h0z" secondAttribute="trailing" id="Hma-PZ-jGa"/>
-                            <constraint firstItem="hyU-5t-bmQ" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" constant="-10" id="MBg-lt-iMU"/>
-                            <constraint firstItem="JUp-ok-h0z" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="f9D-cm-WkU"/>
-                            <constraint firstItem="yDs-f5-k0U" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" constant="8" id="rIg-An-sVE"/>
-                            <constraint firstItem="hyU-5t-bmQ" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="sTs-fZ-Zdf"/>
-                            <constraint firstItem="yDs-f5-k0U" firstAttribute="top" secondItem="hyU-5t-bmQ" secondAttribute="bottom" constant="40" id="xQK-lP-MJQ"/>
+                            <constraint firstItem="yjh-aA-NCb" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="20v-aW-RBa"/>
+                            <constraint firstItem="yjh-aA-NCb" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="5gU-KE-M66"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
-                                <exclude reference="JUp-ok-h0z"/>
-                                <exclude reference="yDs-f5-k0U"/>
+                                <exclude reference="yjh-aA-NCb"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="13g-EJ-ikB"/>
-                                <exclude reference="rIg-An-sVE"/>
-                                <exclude reference="xQK-lP-MJQ"/>
-                                <exclude reference="B6H-au-eZZ"/>
-                                <exclude reference="Hma-PZ-jGa"/>
-                                <exclude reference="f9D-cm-WkU"/>
-                                <exclude reference="MBg-lt-iMU"/>
-                                <exclude reference="sTs-fZ-Zdf"/>
-                                <exclude reference="7aj-YL-0na"/>
+                                <exclude reference="20v-aW-RBa"/>
+                                <exclude reference="5gU-KE-M66"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
                             <mask key="subviews">
-                                <include reference="JUp-ok-h0z"/>
-                                <include reference="yDs-f5-k0U"/>
+                                <include reference="yjh-aA-NCb"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="13g-EJ-ikB"/>
-                                <include reference="rIg-An-sVE"/>
-                                <include reference="xQK-lP-MJQ"/>
-                                <include reference="B6H-au-eZZ"/>
-                                <include reference="Hma-PZ-jGa"/>
-                                <include reference="f9D-cm-WkU"/>
-                                <include reference="MBg-lt-iMU"/>
-                                <include reference="sTs-fZ-Zdf"/>
-                                <include reference="7aj-YL-0na"/>
+                                <include reference="20v-aW-RBa"/>
+                                <include reference="5gU-KE-M66"/>
                             </mask>
                         </variation>
                     </view>
@@ -92,6 +71,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="launch.jpg" width="1440" height="1079"/>
+        <image name="mookTitle.jpg" width="540" height="540"/>
     </resources>
 </document>

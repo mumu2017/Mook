@@ -34,6 +34,7 @@
 
 - (NSString *)getTitle;
 - (NSAttributedString *)getContent;
+- (NSAttributedString *)getContentWithType;
 
 - (NSString *)getEffectText;
 - (NSString *)getDurationText;

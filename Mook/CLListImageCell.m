@@ -26,11 +26,11 @@
 - (void)setIconName:(NSString *)iconName {
     _iconName = iconName;
     
-    if (iconName.length > 0) {
-        self.iconType.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@",iconName]];
-    } else {
-        self.iconType.image = nil;
-    }
+//    if (iconName.length > 0) {
+//        self.iconType.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@",iconName]];
+//    } else {
+//        self.iconType.image = nil;
+//    }
 }
 
 - (void)awakeFromNib {
