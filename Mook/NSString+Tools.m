@@ -37,10 +37,15 @@
 // 获取日期时间+effect的content内容(显示在ListCell中)
 - (NSAttributedString *)contentStringWithDate:(NSString *)date {
     NSMutableAttributedString * datePart = [[NSMutableAttributedString alloc] initWithString:date];
-    NSDictionary * firstAttributes = @{ NSFontAttributeName:kFontSys12,NSForegroundColorAttributeName:kMenuBackgroundColor,};
+    
+    UIColor *color = kAppThemeColor;
+    if (color == nil) {
+        color = [UIColor flatBlueColorDark];
+    }
+    NSDictionary * firstAttributes = @{ NSFontAttributeName:kFontSys14,NSForegroundColorAttributeName:color,};
     [datePart setAttributes:firstAttributes range:NSMakeRange(0,datePart.length)];
     NSMutableAttributedString * contentPart = [[NSMutableAttributedString alloc] initWithString:self];
-    NSDictionary * secondAttributes = @{NSFontAttributeName:kFontSys13,NSForegroundColorAttributeName:[UIColor darkGrayColor],};
+    NSDictionary * secondAttributes = @{NSFontAttributeName:kFontSys14,NSForegroundColorAttributeName:[UIColor darkGrayColor],};
     [contentPart setAttributes:secondAttributes range:NSMakeRange(0,contentPart.length)];
     [datePart appendAttributedString:contentPart];
     

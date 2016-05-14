@@ -53,7 +53,7 @@ static NSString * const reuseIdentifier = @"colorCellID";
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
 
-    kThemeColorSet lastColorCode = flatYellowColorDark;
+    kThemeColorSet lastColorCode = flatWatermelonColorDark;
     return lastColorCode + 1;
 }
 
@@ -73,102 +73,17 @@ static NSString * const reuseIdentifier = @"colorCellID";
     kThemeColorSet colorCode = (int)index;
     
     switch (colorCode) {
-        case flatBlackColor:
-            themeColor = [UIColor flatBlackColor];
-            break;
-            
-        case flatBlueColor:
-            themeColor = [UIColor flatBlueColor];
-            break;
-        case flatBrownColor:
-            themeColor = [UIColor flatBrownColor];
-            break;
-        case flatCoffeeColor:
-            themeColor = [UIColor flatCoffeeColor];
-            break;
-        case flatForestGreenColor:
-            themeColor = [UIColor flatForestGreenColor];
-            break;
-        case flatGrayColor:
-            themeColor = [UIColor flatGrayColor];
-            break;
-        case flatGreenColor:
-            themeColor = [UIColor flatGreenColor];
-            break;
-        case flatLimeColor:
-            themeColor = [UIColor flatLimeColor];
-            break;
-        case flatMagentaColor:
-            themeColor = [UIColor flatMagentaColor];
-            break;
-        case flatMaroonColor:
-            themeColor = [UIColor flatMaroonColor];
-            break;
-        case flatMintColor:
-            themeColor = [UIColor flatMintColor];
-            break;
-        case flatNavyBlueColor:
-            themeColor = [UIColor flatNavyBlueColor];
-            break;
-        case flatOrangeColor:
-            themeColor = [UIColor flatOrangeColor];
-            break;
-        case flatPinkColor:
-            themeColor = [UIColor flatPinkColor];
-            break;
-        case flatPlumColor:
-            themeColor = [UIColor flatPlumColor];
-            break;
-        case flatPowderBlueColor:
-            themeColor = [UIColor flatPowderBlueColor];
-            break;
-        case flatPurpleColor:
-            themeColor = [UIColor flatPurpleColor];
-            break;
-        case flatRedColor:
-            themeColor = [UIColor flatRedColor];
-            break;
-        case flatSandColor:
-            themeColor = [UIColor flatSandColor];
-            break;
-        case flatSkyBlueColor:
-            themeColor = [UIColor flatSkyBlueColor];
-            break;
-        case flatTealColor:
-            themeColor = [UIColor flatTealColor];
-            break;
-        case flatWatermelonColor:
-            themeColor = [UIColor flatWatermelonColor];
-            break;
-        case flatWhiteColor:
-            themeColor = [UIColor flatWhiteColor];
-            break;
-        case flatYellowColor:
-            themeColor = [UIColor flatYellowColor];
-            break;
         case flatBlackColorDark:
             themeColor = [UIColor flatBlackColorDark];
             break;
         case flatBlueColorDark:
             themeColor = [UIColor flatBlueColorDark];
             break;
-        case flatBrownColorDark:
-            themeColor = [UIColor flatBrownColorDark];
-            break;
-        case flatCoffeeColorDark:
-            themeColor = [UIColor flatCoffeeColorDark];
-            break;
         case flatForestGreenColorDark:
             themeColor = [UIColor flatForestGreenColorDark];
             break;
-        case flatGrayColorDark:
-            themeColor = [UIColor flatGrayColorDark];
-            break;
         case flatGreenColorDark:
             themeColor = [UIColor flatGreenColorDark];
-            break;
-        case flatLimeColorDark:
-            themeColor = [UIColor flatLimeColorDark];
             break;
         case flatMagentaColorDark:
             themeColor = [UIColor flatMagentaColorDark];
@@ -191,17 +106,11 @@ static NSString * const reuseIdentifier = @"colorCellID";
         case flatPlumColorDark:
             themeColor = [UIColor flatPlumColorDark];
             break;
-        case flatPowderBlueColorDark:
-            themeColor = [UIColor flatPowderBlueColorDark];
-            break;
         case flatPurpleColorDark:
             themeColor = [UIColor flatPurpleColorDark];
             break;
         case flatRedColorDark:
             themeColor = [UIColor flatRedColorDark];
-            break;
-        case flatSandColorDark:
-            themeColor = [UIColor flatSandColorDark];
             break;
         case flatSkyBlueColorDark:
             themeColor = [UIColor flatSkyBlueColorDark];
@@ -211,12 +120,6 @@ static NSString * const reuseIdentifier = @"colorCellID";
             break;
         case flatWatermelonColorDark:
             themeColor = [UIColor flatWatermelonColorDark];
-            break;
-        case flatWhiteColorDark:
-            themeColor = [UIColor flatWhiteColorDark];
-            break;
-        case flatYellowColorDark:
-            themeColor = [UIColor flatYellowColorDark];
             break;
         default:
             break;
@@ -234,7 +137,7 @@ static NSString * const reuseIdentifier = @"colorCellID";
 //定义每个UICollectionView 的大小
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return CGSizeMake((self.view.frame.size.width-4)/5, (self.view.frame.size.width-4)/5);
+    return CGSizeMake((self.view.frame.size.width-3)/4, (self.view.frame.size.width-3)/4);
 }
 //定义每个UICollectionView 的 margin
 -(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section

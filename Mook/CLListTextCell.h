@@ -17,6 +17,7 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView *typeIcon;
 
+@property (weak, nonatomic) IBOutlet UILabel *typeLabel;
 @property (nonatomic, copy) NSString *iconName;
 
 

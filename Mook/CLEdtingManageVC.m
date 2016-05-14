@@ -329,6 +329,10 @@
     [self mediaView];
     self.isProgressiveIndicator = YES;
     self.isElasticIndicatorLimit = YES;
+    self.progressView.progressTintColor = [UIColor whiteColor];
+    self.progressView.trackTintColor = kMenuBackgroundColor;
+    self.topProgressView.progressTintColor = kMenuBackgroundColor;
+    self.topProgressView.trackTintColor = [UIColor clearColor];
     
     CGFloat posY = 100;
     _popUpView = [[PopupView alloc] initWithFrame:CGRectMake(100, posY, 0, 0) withParentView:self.view];

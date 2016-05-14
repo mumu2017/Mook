@@ -81,7 +81,7 @@
                                         <rect key="frame" x="0.0" y="263.5" width="414" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" tableViewCell="ANE-vi-C4J" id="UnL-mI-I2V">
-                                            <rect key="frame" x="0.0" y="0.0" width="381" height="49.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="49.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="主题色" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JXg-c4-CCQ">
@@ -1309,7 +1309,7 @@
                             <progressView contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="2LD-kt-MtF">
                                 <rect key="frame" x="0.0" y="-2" width="150" height="2"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="2" id="Tim-en-1bv"/>
+                                    <constraint firstAttribute="height" constant="3" id="Tim-en-1bv"/>
                                 </constraints>
                                 <color key="progressTintColor" red="0.85262101888656616" green="0.42218321561813354" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="trackTintColor" red="0.11181893199682236" green="0.1118365004658699" blue="0.1118125319480896" alpha="1" colorSpace="calibratedRGB"/>
@@ -1318,7 +1318,8 @@
                                         <exclude reference="Tim-en-1bv"/>
                                     </mask>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=compact">
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="0.0" y="64" width="400" height="3"/>
                                     <mask key="constraints">
                                         <include reference="Tim-en-1bv"/>
                                     </mask>
@@ -1326,8 +1327,22 @@
                             </progressView>
                             <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="FqY-tk-Xdx">
                                 <rect key="frame" x="0.0" y="-2" width="150" height="2"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="3" id="EJz-Fw-fY6"/>
+                                </constraints>
                                 <color key="progressTintColor" red="0.111818932" green="0.11183650050000001" blue="0.1118125319" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="trackTintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="EJz-Fw-fY6"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="0.0" y="64" width="400" height="3"/>
+                                    <mask key="constraints">
+                                        <include reference="EJz-Fw-fY6"/>
+                                    </mask>
+                                </variation>
                             </progressView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Eed-Kj-9em">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
@@ -1338,7 +1353,6 @@
                             <constraint firstItem="Eed-Kj-9em" firstAttribute="leading" secondItem="rXo-og-oDg" secondAttribute="leading" id="01n-ZY-cRk"/>
                             <constraint firstAttribute="trailing" secondItem="Eed-Kj-9em" secondAttribute="trailing" id="17o-bW-Gze"/>
                             <constraint firstItem="2LD-kt-MtF" firstAttribute="leading" secondItem="rXo-og-oDg" secondAttribute="leading" id="4Wa-Av-dbn"/>
-                            <constraint firstItem="FqY-tk-Xdx" firstAttribute="height" secondItem="2LD-kt-MtF" secondAttribute="height" id="B2a-gd-QGc"/>
                             <constraint firstItem="2LD-kt-MtF" firstAttribute="top" secondItem="bQh-UT-miE" secondAttribute="bottom" id="B7o-aM-eZq"/>
                             <constraint firstItem="FqY-tk-Xdx" firstAttribute="top" secondItem="2LD-kt-MtF" secondAttribute="top" id="GQI-dE-3yy"/>
                             <constraint firstItem="Eed-Kj-9em" firstAttribute="top" secondItem="2LD-kt-MtF" secondAttribute="bottom" id="I0S-GJ-hHS"/>
@@ -1358,7 +1372,6 @@
                                 <exclude reference="B7o-aM-eZq"/>
                                 <exclude reference="goB-bo-mkY"/>
                                 <exclude reference="QLT-sR-jzh"/>
-                                <exclude reference="B2a-gd-QGc"/>
                                 <exclude reference="GQI-dE-3yy"/>
                                 <exclude reference="VP7-3C-X4q"/>
                                 <exclude reference="y12-BU-Xji"/>
@@ -1378,7 +1391,6 @@
                                 <include reference="B7o-aM-eZq"/>
                                 <include reference="goB-bo-mkY"/>
                                 <include reference="QLT-sR-jzh"/>
-                                <include reference="B2a-gd-QGc"/>
                                 <include reference="GQI-dE-3yy"/>
                                 <include reference="VP7-3C-X4q"/>
                                 <include reference="y12-BU-Xji"/>

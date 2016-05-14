@@ -139,7 +139,7 @@
         if (image != nil) { // 如果返回图片,则表示模型中有图片或多媒体
             CLListImageCell *cell = [tableView dequeueReusableCellWithIdentifier:kListImageCellID forIndexPath:indexPath];
             cell.iconView.image = image;
-            cell.iconName = iconName;
+            cell.iconName = title;
             
             
             [cell setTitle:title content:contentWithType];
@@ -152,7 +152,7 @@
             
         } else {
             CLListTextCell *cell = [tableView dequeueReusableCellWithIdentifier:kListTextCellID forIndexPath:indexPath];
-            cell.iconName = iconName;
+            cell.iconName = title;
             
             [cell setTitle:title content:contentWithType];
             
@@ -197,7 +197,7 @@
     if (image != nil) { // 如果返回图片,则表示模型中有图片或多媒体
         CLListImageCell *cell = [tableView dequeueReusableCellWithIdentifier:kListImageCellID forIndexPath:indexPath];
         cell.iconView.image = image;
-        cell.iconName = iconName;
+        cell.iconName = title;
         [cell setTitle:title content:contentWithType];
         
         cell.rightUtilityButtons = [self rightButtons];
@@ -208,7 +208,7 @@
         
     } else {
         CLListTextCell *cell = [tableView dequeueReusableCellWithIdentifier:kListTextCellID forIndexPath:indexPath];
-        cell.iconName = iconName;
+        cell.iconName = title;
         [cell setTitle:title content:contentWithType];
         
         cell.rightUtilityButtons = [self rightButtons];

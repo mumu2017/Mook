@@ -47,39 +47,11 @@ typedef enum {
 } EditingMode;
 
 typedef enum {
-
-    flatBlueColor = 0,
-    flatBlackColor,
-    flatBrownColor,
-    flatCoffeeColor,
-    flatForestGreenColor,
-    flatGrayColor,
-    flatGreenColor,
-    flatLimeColor,
-    flatMagentaColor,
-    flatMaroonColor,
-    flatMintColor,
-    flatNavyBlueColor,
-    flatOrangeColor,
-    flatPinkColor,
-    flatPlumColor,
-    flatPowderBlueColor,
-    flatPurpleColor,
-    flatRedColor,
-    flatSandColor,
-    flatSkyBlueColor,
-    flatTealColor,
-    flatWatermelonColor,
-    flatWhiteColor,
-    flatYellowColor,
+    
+    flatBlueColorDark = 0,
     flatBlackColorDark,
-    flatBlueColorDark,
-    flatBrownColorDark,
-    flatCoffeeColorDark,
     flatForestGreenColorDark,
-    flatGrayColorDark,
     flatGreenColorDark,
-    flatLimeColorDark,
     flatMagentaColorDark,
     flatMaroonColorDark,
     flatMintColorDark,
@@ -87,15 +59,11 @@ typedef enum {
     flatOrangeColorDark,
     flatPinkColorDark,
     flatPlumColorDark,
-    flatPowderBlueColorDark,
     flatPurpleColorDark,
     flatRedColorDark,
-    flatSandColorDark,
     flatSkyBlueColorDark,
     flatTealColorDark,
     flatWatermelonColorDark,
-    flatWhiteColorDark,
-    flatYellowColorDark,
    
 } kThemeColorSet;
 
@@ -289,7 +257,7 @@ typedef enum {
 #define kScreenW        [UIScreen mainScreen].bounds.size.width
 #define kScreenH        [UIScreen mainScreen].bounds.size.height
 
-#define kListCellHeight     80
+#define kListCellHeight     77
 #define kStatusBarHeight    20
 #define kNavigationBarHeight    44
 
