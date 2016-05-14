@@ -15,10 +15,10 @@
 #import <MessageUI/MFMailComposeViewController.h>
 
 @interface CLSettingVC ()<MBProgressHUDDelegate, MFMailComposeViewControllerDelegate>
-@property (weak, nonatomic) IBOutlet UILabel *storageTitleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *storageDetailLabel;
-@property (weak, nonatomic) IBOutlet UILabel *themeColorTitleLabel;
 @property (weak, nonatomic) IBOutlet UIView *themeColorView;
+
+@property (weak, nonatomic) IBOutlet UILabel *backupLabel;
 
 @property (weak, nonatomic) IBOutlet UISwitch *passwordSwitch;
 @property (weak, nonatomic) IBOutlet UISwitch *savePhotoSwitch;
@@ -67,8 +67,6 @@
     
     [self getUserDefaultsData];
     
-//    self.storageTitleLabel.text = NSLocalizedString(@"储存空间占用", nil);
-//    self.themeColorTitleLabel.text = NSLocalizedString(@"主题色", nil);
     [self.themeColorView showBorder];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newPasswordCreated) name:@"newPasswordCreated" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cancelPasswordCreation) name:@"cancelPasswordCreation" object:nil];
@@ -77,6 +75,15 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
+    BOOL backupExists = [[NSFileManager defaultManager] fileExistsAtPath:[NSString backUpPath]];
+    if (backupExists) {
+        self.backupLabel.text = NSLocalizedString(@"有可用备份", nil);
+    } else {
+        self.backupLabel.text = NSLocalizedString(@"无可用备份", nil);
+
+    }
+    
     self.storageDetailLabel.text = [CLDataSizeTool totalSize]; // 每次重新打开页面就重新计算一次文件尺寸
     self.themeColorView.backgroundColor = kAppThemeColor;
     [self getUserDefaultsData];

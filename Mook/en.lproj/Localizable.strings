@@ -5,6 +5,8 @@
   Created by 陈林 on 16/4/7.
 
 */
+"有可用备份" = "Backup File Exists";
+"无可用备份" = "No Backup File";
 
 "主题色" = "Theme Color";
 "储存空间占用" = "Storage";

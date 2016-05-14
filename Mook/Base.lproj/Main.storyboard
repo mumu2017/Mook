@@ -17,7 +17,7 @@
                         <sections>
                             <tableViewSection headerTitle="数据" id="Kd3-Be-FE9">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="du6-oW-WfF" rowHeight="50" style="IBUITableViewCellStyleDefault" id="KMe-Sv-8sj">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="du6-oW-WfF" detailTextLabel="m7Q-fo-EnD" rowHeight="50" style="IBUITableViewCellStyleValue1" id="KMe-Sv-8sj">
                                         <rect key="frame" x="0.0" y="113.5" width="414" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KMe-Sv-8sj" id="T6c-HH-7vL">
@@ -28,7 +28,16 @@
                                                     <rect key="frame" x="15" y="0.0" width="364" height="49.5"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <variation key="heightClass=regular-widthClass=compact">
+                                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    </variation>
+                                                </label>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="m7Q-fo-EnD">
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="heightClass=regular-widthClass=compact">
                                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -626,14 +635,13 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="414" height="1300"/>
                     <connections>
+                        <outlet property="backupLabel" destination="m7Q-fo-EnD" id="3Ws-2k-bO0"/>
                         <outlet property="languageLabel" destination="RFX-JZ-j2U" id="jnu-z1-nEp"/>
                         <outlet property="passwordSwitch" destination="gh9-WQ-QOg" id="r2A-CH-Cj2"/>
                         <outlet property="quickStringCntLabel" destination="H8f-mN-WaC" id="wiC-lZ-gfk"/>
                         <outlet property="savePhotoSwitch" destination="ZJ7-nM-2ht" id="BPK-OQ-Io0"/>
                         <outlet property="saveVideoSwitch" destination="B3v-Ka-xlU" id="cuL-aW-fxy"/>
                         <outlet property="storageDetailLabel" destination="4dd-Q2-Tn3" id="DN0-Uf-PxV"/>
-                        <outlet property="storageTitleLabel" destination="F6i-VK-QV9" id="zJU-pV-G3V"/>
-                        <outlet property="themeColorTitleLabel" destination="JXg-c4-CCQ" id="9tR-Cp-vgE"/>
                         <outlet property="themeColorView" destination="ab5-O8-vKp" id="qog-Mq-7hV"/>
                         <outlet property="touchIDSwitch" destination="N07-Hv-Lyu" id="WdO-gF-a5M"/>
                         <segue destination="tYr-nI-P3n" kind="presentation" identifier="settingToPasswordSegue" id="0lF-pS-X1C"/>
@@ -2136,7 +2144,7 @@
         <image name="iconnotesLine" width="22" height="22"/>
         <image name="iconsettingFill" width="22" height="22"/>
         <image name="iconsettingLine" width="22" height="22"/>
-        <image name="tagIcon" width="22" height="22"/>
+        <image name="tagIcon" width="16" height="16"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="OYZ-pL-yeb"/>
