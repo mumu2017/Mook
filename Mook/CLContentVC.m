@@ -322,6 +322,7 @@
 
 - (void)setToolBarStatus {
     
+    
     self.navigationController.toolbar.tintColor = kMenuBackgroundColor;
     
     // 用了下面两行代码之后, toolBar上方的黑边就去掉了

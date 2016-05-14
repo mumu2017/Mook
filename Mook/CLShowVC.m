@@ -272,6 +272,8 @@
                 [cell.imageButton addTarget:self action:@selector(showPhotoBrowser:) forControlEvents:UIControlEventTouchUpInside];
                 
                 self.tag = 0;
+                
+#warning 按钮tag在cell重用时不准确的bug.
                 cell.imageButton.tag = self.tag; // effectModel肯定是第一张图片或视频,所以作为图片数组中的Index,tag = 0;
                 [cell setImageWithVideoName:self.showModel.effectModel.video];
                 
