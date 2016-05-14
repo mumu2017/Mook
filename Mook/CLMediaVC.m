@@ -183,7 +183,7 @@ static NSString * const reuseIdentifier = @"Cell";
     self.collectionView.backgroundColor = [UIColor flatWhiteColor];
     [self.collectionView registerNib:[UINib nibWithNibName:@"CLMediaCollectionCell" bundle: nil] forCellWithReuseIdentifier:reuseIdentifier];
     // Do any additional setup after loading the view.
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(update:) name:kUpdateDataNotification
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(update) name:kUpdateDataNotification
                                                object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(update:) name:kUpdateMookNotification
@@ -195,6 +195,11 @@ static NSString * const reuseIdentifier = @"Cell";
 //    
 //    [self.navigationController setToolbarHidden:YES];
 //}
+
+- (void) update {
+
+    [self.collectionView reloadData];
+}
 
 - (void) update:(NSNotification *)noti {
     

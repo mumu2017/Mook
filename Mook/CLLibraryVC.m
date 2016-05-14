@@ -75,8 +75,8 @@ static NSString * const reuseIdentifier = @"Cell";
     // Register cell classes
     [self.collectionView registerNib:[UINib nibWithNibName:@"CLLibraryCell" bundle: nil] forCellWithReuseIdentifier:reuseIdentifier];
     
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(update:) name:kUpdateDataNotification
-//                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(update:) name:kUpdateDataNotification
+                                               object:nil];
 }
 
 // 不知道为什么, 只能通过willAppear时刷新collectionView的方式来解决删除数据不更新记录数量的bug
@@ -96,14 +96,14 @@ static NSString * const reuseIdentifier = @"Cell";
 //    [super viewWillDisappear:animated];
 //}
 
-//- (void) update:(NSNotification *)noti {
-//    
-//    if (noti.object == self) {  //如果是自己发出的更新通知,则不刷新.
-//        return;
-//    }
-//
-//    [self.collectionView reloadData];
-//}
+- (void) update:(NSNotification *)noti {
+    
+    if (noti.object == self) {  //如果是自己发出的更新通知,则不刷新.
+        return;
+    }
+
+    [self.collectionView reloadData];
+}
 
 //- (void)dealloc {
 //    [[NSNotificationCenter defaultCenter] removeObserver:self];
@@ -120,7 +120,7 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
 
-    return 7;
+    return 6;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -166,16 +166,11 @@ static NSString * const reuseIdentifier = @"Cell";
             iconName = @"lines.jpg";
             break;
 
-        case 6:
-            title = NSLocalizedString(@"标签", nil);
-            count = [NSString stringWithFormat:@"%ld", (unsigned long)self.allTags.count];
-            iconName = @"tag.jpg";
-            break;
-
         default:
             break;
     }
     
+    cell.coverView.backgroundColor = kAppThemeColor;
     cell.titleLabel.text = title;
     cell.contentLabel.text = count;
     cell.imageView.image = [UIImage imageNamed:iconName];
@@ -199,14 +194,7 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
 
-    if (indexPath.row == 6) {
-        [self performSegueWithIdentifier:kSeguekHomeToTagList sender:indexPath];
-
-    } else {
-        [self performSegueWithIdentifier:kSegueHomeToList sender:indexPath];
-    }
-    
-    //    NSLog(@"~~");
+    [self performSegueWithIdentifier:kSegueHomeToList sender:indexPath];
 }
 
 //- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionView *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
@@ -246,6 +234,11 @@ static NSString * const reuseIdentifier = @"Cell";
 	
 }
 */
+- (IBAction)goToTags:(id)sender {
+    
+    [self performSegueWithIdentifier:kSeguekHomeToTagList sender:nil];
+    
+}
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     

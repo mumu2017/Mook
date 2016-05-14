@@ -20,7 +20,7 @@
     [self.contentView addSubview:self.contentLabel];
     
     self.imageView.clipsToBounds = YES;
-//    self.coverView.alpha = 0.2;
+    self.coverView.alpha = 0.1;
 }
 
 @end

@@ -66,6 +66,8 @@
 @property (nonatomic, assign) BOOL newEntryCancelled;
 @property (nonatomic, assign) BOOL currentEntryDelteted;
 
+@property (nonatomic, strong) UITextField *nameTextField;
+
 @end
 
 @implementation CLNewEntryVC
@@ -97,7 +99,6 @@
 - (NSMutableArray *)allTagsLines {
     if (!_allTagsLines) _allTagsLines = kDataListTagLines;  return _allTagsLines;
 }
-
 
 
 - (NSString *)entryTitle {
@@ -484,7 +485,16 @@
 // 隐藏MBProgreeHUD
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
     self.currentEntryDelteted = NO;
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    if (self.infoModel.isWithName == NO) {
+        [self.nameTextField becomeFirstResponder];
+    }
 }
 
 // 在此处保存数据
@@ -683,6 +693,7 @@
                     cell.inputTextField.placeholder = self.entryTitle;
                     cell.inputTextField.text = self.infoModel.name;
                     cell.inputTextField.tag = 1;
+                    self.nameTextField = cell.inputTextField;
                     cell.inputTextField.delegate = self;
                 }
                 return cell;

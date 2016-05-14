@@ -714,7 +714,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tJM-Cg-WPZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-9888" y="-4407"/>
+            <point key="canvasLocation" x="-9822" y="-4093.5"/>
         </scene>
         <!--New EntryVC-->
         <scene sceneID="kYp-5b-vxu">
@@ -1151,7 +1151,13 @@
                             <outlet property="delegate" destination="9fA-HC-Vld" id="jc7-vc-0yS"/>
                         </connections>
                     </collectionView>
-                    <navigationItem key="navigationItem" title="分类" id="Nvt-D1-Pat"/>
+                    <navigationItem key="navigationItem" title="分类" id="Nvt-D1-Pat">
+                        <barButtonItem key="rightBarButtonItem" image="tagIcon" id="tpo-Xa-uY5">
+                            <connections>
+                                <action selector="goToTags:" destination="9fA-HC-Vld" id="bDQ-bf-Mv6"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <segue destination="msb-Eh-Iuc" kind="show" identifier="kHomeToTagListSegue" id="o9A-pa-swy"/>
                         <segue destination="LBd-Rh-VHR" kind="show" identifier="homeToListSegue" id="Vbh-5V-rgl"/>
@@ -1159,7 +1165,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rWZ-80-Ajl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-9519" y="-4461"/>
+            <point key="canvasLocation" x="-9465" y="-4470"/>
         </scene>
         <!--Mook Tab Bar Controller-->
         <scene sceneID="BUU-3J-dNb">
@@ -1549,7 +1555,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NRt-qZ-mya" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-10374" y="-4455.75"/>
+            <point key="canvasLocation" x="-10339.5" y="-4437.75"/>
         </scene>
         <!--多媒体-->
         <scene sceneID="C5G-wl-0Wc">
@@ -2130,6 +2136,7 @@
         <image name="iconnotesLine" width="22" height="22"/>
         <image name="iconsettingFill" width="22" height="22"/>
         <image name="iconsettingLine" width="22" height="22"/>
+        <image name="tagIcon" width="22" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="OYZ-pL-yeb"/>

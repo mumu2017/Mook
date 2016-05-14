@@ -660,6 +660,7 @@
         }
         
         [sheet dismissAnimated:YES];
+        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
     }];
     
     [sheet showInView:self.tabBarController.view animated:YES];
