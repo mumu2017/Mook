@@ -243,7 +243,7 @@
         }
         case 1:
         {
-            CLShowInfoCell * cell = [self.tableView dequeueReusableCellWithIdentifier:kShowInfoCell];
+            CLShowInfoCell * cell = [self.tableView dequeueReusableCellWithIdentifier:kShowInfoCell forIndexPath:indexPath];
             
             NSString *title, *content;
             if (indexPath.row == 0) {
@@ -265,7 +265,7 @@
         {
             if (self.showModel.effectModel.isWithVideo) {
                 
-                CLOneLabelImageDisplayCell * cell = [self.tableView dequeueReusableCellWithIdentifier:kOneLabelImageDisplayCell];
+                CLOneLabelImageDisplayCell *cell = [self.tableView dequeueReusableCellWithIdentifier:kOneLabelImageDisplayCell forIndexPath:indexPath];
                 
                 cell.contentLabel.attributedText = [[NSString attributedStringWithFirstPart:NSLocalizedString(@"演出说明\n", nil) secondPart:[self.showModel getEffectText] firstPartFont:kBoldFontSys17 firstPartColor:[UIColor blackColor] secondPardFont:kFontSys17 secondPartColor:[UIColor blackColor]] styledString];
                 
@@ -278,7 +278,7 @@
                 return cell;
             } else if (self.showModel.effectModel.isWithImage) {
                 
-                CLOneLabelImageDisplayCell * cell = [self.tableView dequeueReusableCellWithIdentifier:kOneLabelImageDisplayCell];
+                CLOneLabelImageDisplayCell * cell = [self.tableView dequeueReusableCellWithIdentifier:kOneLabelImageDisplayCell forIndexPath:indexPath];
                 
                 cell.contentLabel.attributedText = [[NSString attributedStringWithFirstPart:NSLocalizedString(@"演出说明\n", nil) secondPart:[self.showModel getEffectText] firstPartFont:kBoldFontSys17 firstPartColor:[UIColor blackColor] secondPardFont:kFontSys17 secondPartColor:[UIColor blackColor]] styledString];
                 
@@ -309,7 +309,7 @@
             
             if (effectModel.isWithVideo) {
                 
-                CLRoutineImageCell * cell = [self.tableView dequeueReusableCellWithIdentifier:kRoutineImageCell];
+                CLRoutineImageCell * cell = [self.tableView dequeueReusableCellWithIdentifier:kRoutineImageCell forIndexPath:indexPath];
                 
                 NSString *count = [NSString stringWithFormat:NSLocalizedString(@"流程 %ld  ", nil), indexPath.row+1];
                 cell.titleLabel.text = [count stringByAppendingString:[model getTitle]];
@@ -331,7 +331,7 @@
                 return cell;
             } else if (effectModel.isWithImage) {
                 
-                CLRoutineImageCell * cell = [self.tableView dequeueReusableCellWithIdentifier:kRoutineImageCell];
+                CLRoutineImageCell * cell = [self.tableView dequeueReusableCellWithIdentifier:kRoutineImageCell forIndexPath:indexPath];
                 
                 NSString *count = [NSString stringWithFormat:NSLocalizedString(@"流程 %ld  ", nil), indexPath.row+1];
                 cell.titleLabel.text = [count stringByAppendingString:[model getTitle]];

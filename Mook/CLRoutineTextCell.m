@@ -16,6 +16,8 @@
     [self.infoButton setTitle:NSLocalizedString(@"查看流程", nil) forState:UIControlStateHighlighted];
     self.backgroundColor = kCellBgColor;
     self.infoButton.tintColor = kMenuBackgroundColor;
+    [self.infoButton setTitleColor:kMenuBackgroundColor forState:UIControlStateNormal];
+
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

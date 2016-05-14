@@ -36,6 +36,8 @@
 
 @interface CLNewShowVC ()<UITextFieldDelegate, SMTagFieldDelegate, SWTableViewCellDelegate, CLTagChooseNavVCDelegate, CLRoutineChooseVCDelegate>
 
+@property (nonatomic, strong) UITextField *titleTF;
+
 @property (nonatomic, strong) CLTagField *tagField;
 @property (nonatomic, strong) NSMutableArray *allTags;
 @property (nonatomic, strong) NSMutableArray *allTagsShow;
@@ -136,6 +138,14 @@
     self.currentEntryDelteted = NO;
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    if (self.showModel.name.length == 0) {
+        [self.titleTF becomeFirstResponder];
+    }
+}
+
 - (void)setTableViewStatus {
     
     self.tableView.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0);
@@ -229,7 +239,7 @@
             cell.inputTextField.placeholder = NSLocalizedString(@"编辑演出标题", nil);
             cell.inputTextField.text = self.showModel.name;
             cell.inputTextField.tag = kTagShowName;
-//            self.titleTF = cell.inputTextField;
+            self.titleTF = cell.inputTextField;
             cell.inputTextField.delegate = self;
         } else if (indexPath.row == 1) {
             

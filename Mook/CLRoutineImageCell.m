@@ -35,7 +35,7 @@
     self.backgroundColor = kCellBgColor;
     self.iconView.clipsToBounds = YES;
     self.infoButton.tintColor = kMenuBackgroundColor;
-
+    [self.infoButton setTitleColor:kMenuBackgroundColor forState:UIControlStateNormal];
 }
 
 @end
