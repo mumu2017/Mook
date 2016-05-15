@@ -67,6 +67,7 @@
 @property (nonatomic, assign) BOOL currentEntryDelteted;
 
 @property (nonatomic, strong) UITextField *nameTextField;
+@property (nonatomic, assign) BOOL showedFirstTime;
 
 @end
 
@@ -385,6 +386,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.showedFirstTime = YES;
     self.newEntryCancelled = NO; //加载视图时, 自动设置取消状态为否定
     // 如果是导航控制器是CLNewEntryNavVC, 说明是新建条目,所以提供取消按钮
     if ([self.navigationController isKindOfClass:[CLNewEntryNavVC class]]) {
@@ -485,16 +487,20 @@
 // 隐藏MBProgreeHUD
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
+
     self.currentEntryDelteted = NO;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
-    if (self.infoModel.isWithName == NO) {
-        [self.nameTextField becomeFirstResponder];
+    if (self.showedFirstTime) {
+        if (self.infoModel.isWithName == NO) {
+            [self.nameTextField becomeFirstResponder];
+        }
+        self.showedFirstTime = NO;
     }
+    
 }
 
 // 在此处保存数据

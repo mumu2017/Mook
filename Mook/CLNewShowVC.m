@@ -45,6 +45,9 @@
 @property (nonatomic, strong) NSMutableArray <CLRoutineModel*> *routineModelList;
 @property (nonatomic, assign) BOOL newEntryCancelled;
 @property (nonatomic, assign) BOOL currentEntryDelteted;
+
+@property (nonatomic, assign) BOOL showedFirstTime;
+
 @end
 
 @implementation CLNewShowVC
@@ -91,6 +94,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.showedFirstTime = YES;
     self.newEntryCancelled = NO; //加载视图时, 自动设置取消状态为否定
     // 如果是导航控制器是CLNewEntryNavVC, 说明是新建条目,所以提供取消按钮
     if ([self.navigationController isKindOfClass:[CLNewShowNavVC class]]) {
@@ -141,9 +145,13 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
-    if (self.showModel.name.length == 0) {
-        [self.titleTF becomeFirstResponder];
+    if (self.showedFirstTime) {
+        if (self.showModel.name.length == 0) {
+            [self.titleTF becomeFirstResponder];
+        }
+        self.showedFirstTime = NO;
     }
+    
 }
 
 - (void)setTableViewStatus {
