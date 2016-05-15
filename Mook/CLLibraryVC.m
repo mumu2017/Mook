@@ -71,7 +71,8 @@ static NSString * const reuseIdentifier = @"Cell";
     
     // Uncomment the following line to preserve selection between presentations
     // self.clearsSelectionOnViewWillAppear = NO;
-    self.collectionView.backgroundColor = [UIColor flatBlackColorDark];
+    self.collectionView.alwaysBounceVertical = YES;
+    self.collectionView.backgroundColor = [UIColor whiteColor];
     // Register cell classes
     [self.collectionView registerNib:[UINib nibWithNibName:@"CLLibraryCell" bundle: nil] forCellWithReuseIdentifier:reuseIdentifier];
     
@@ -170,7 +171,8 @@ static NSString * const reuseIdentifier = @"Cell";
             break;
     }
     
-    cell.coverView.backgroundColor = kAppThemeColor;
+//    cell.coverView.backgroundColor = kAppThemeColor;
+    cell.titleView.backgroundColor = kAppThemeColor;
     cell.titleLabel.text = title;
     cell.contentLabel.text = count;
     cell.imageView.image = [UIImage imageNamed:iconName];
@@ -182,12 +184,22 @@ static NSString * const reuseIdentifier = @"Cell";
 //定义每个UICollectionView 的大小
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return CGSizeMake(self.view.frame.size.width, self.view.frame.size.width/2);
+    return CGSizeMake((self.view.frame.size.width-15)/2, (self.view.frame.size.height-69)/3);
 }
 //定义每个UICollectionView 的 margin
 -(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
 {
-    return UIEdgeInsetsMake(0, 0, 0, 0);
+    return UIEdgeInsetsMake(5, 5, 5, 5);
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionView *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
+{
+    return 5; // This is the minimum inter item spacing, can be more
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionView *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
+{
+    return 5; // This is the minimum inter item spacing, can be more
 }
 
 #pragma mark <UICollectionViewDelegate>
@@ -201,11 +213,6 @@ static NSString * const reuseIdentifier = @"Cell";
 //{
 //    return 10; // This is the minimum inter item spacing, can be more
 //}
-
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionView *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
-{
-    return 0; // This is the minimum inter item spacing, can be more
-}
 
 /*
 // Uncomment this method to specify if the specified item should be highlighted during tracking

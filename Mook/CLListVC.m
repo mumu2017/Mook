@@ -94,7 +94,7 @@
     [super viewDidLoad];
     
     self.tableView.backgroundView = self.tableBackView;
-    self.tableView.backgroundColor = [UIColor flatWhiteColor];
+    self.tableView.backgroundColor = [UIColor whiteColor];
     self.tableView.rowHeight = kListCellHeight;
     self.tableView.tableFooterView = [UIView new];
     
@@ -839,7 +839,11 @@
             break;
     }
 
-    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
+    if ([self.tableView numberOfRowsInSection:0] > 0) {
+        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
+
+    }
+    
 }
 
 - (void)addNewIdea {
