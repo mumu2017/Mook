@@ -28,7 +28,6 @@
 
 @property (nonatomic, strong) NSMutableArray *photos;
 @property (nonatomic, strong) NSMutableArray *thumbs;
-@property (nonatomic, assign) NSInteger tag;
 
 @end
 
@@ -103,6 +102,46 @@
         }
     }
     return photos;
+}
+
+- (NSInteger)getTagWithMediaName:(NSString *)name {
+    
+    NSInteger tag = -1;
+    
+    if (self.showModel.effectModel.isWithImage) {
+        
+        tag ++;
+        if ([name isEqualToString:self.showModel.effectModel.image]) {
+            return tag;
+        }
+        
+    } else if (self.showModel.effectModel.isWithVideo) {
+        
+        tag ++;
+        if ([name isEqualToString:self.showModel.effectModel.video]) {
+            return tag;
+        }
+    }
+    
+    for (CLRoutineModel *model in self.routineModelList) {
+        if (model.effectModel.isWithImage) {
+            
+            tag ++;
+            if ([name isEqualToString:model.effectModel.image]) {
+                return tag;
+            }
+            
+        } else if (model.effectModel.isWithVideo) {
+            
+            tag ++;
+            if ([name isEqualToString:model.effectModel.video]) {
+                return tag;
+            }
+            
+        }
+    }
+    
+    return tag;
 }
 
 - (NSMutableArray *)loadThumbs {
@@ -271,10 +310,7 @@
                 
                 [cell.imageButton addTarget:self action:@selector(showPhotoBrowser:) forControlEvents:UIControlEventTouchUpInside];
                 
-                self.tag = 0;
-                
-#warning 按钮tag在cell重用时不准确的bug.
-                cell.imageButton.tag = self.tag; // effectModel肯定是第一张图片或视频,所以作为图片数组中的Index,tag = 0;
+                cell.imageButton.tag = [self getTagWithMediaName:self.showModel.effectModel.video]; // effectModel肯定是第一张图片或视频,所以作为图片数组中的Index,tag = 0;
                 [cell setImageWithVideoName:self.showModel.effectModel.video];
                 
                 return cell;
@@ -285,9 +321,8 @@
                 cell.contentLabel.attributedText = [[NSString attributedStringWithFirstPart:NSLocalizedString(@"演出说明\n", nil) secondPart:[self.showModel getEffectText] firstPartFont:kBoldFontSys17 firstPartColor:[UIColor blackColor] secondPardFont:kFontSys17 secondPartColor:[UIColor blackColor]] styledString];
                 
                 [cell.imageButton addTarget:self action:@selector(showPhotoBrowser:) forControlEvents:UIControlEventTouchUpInside];
-                
-                self.tag = 0;
-                cell.imageButton.tag = self.tag;
+
+                cell.imageButton.tag = [self getTagWithMediaName:self.showModel.effectModel.image];
                 [cell setImageWithName:self.showModel.effectModel.image];
                 
                 return cell;
@@ -296,8 +331,6 @@
                 CLOneLabelDisplayCell *cell = [self.tableView dequeueReusableCellWithIdentifier:kOneLabelDisplayCell forIndexPath:indexPath];
                 
                 cell.contentLabel.attributedText = [[NSString attributedStringWithFirstPart:NSLocalizedString(@"演出说明\n", nil) secondPart:[self.showModel getEffectText] firstPartFont:kBoldFontSys17 firstPartColor:[UIColor blackColor] secondPardFont:kFontSys17 secondPartColor:[UIColor blackColor]] styledString];
-                
-                self.tag = -1;
                 
                 return cell;
             }
@@ -323,8 +356,7 @@
                 
                 [cell.iconButton addTarget:self action:@selector(showPhotoBrowser:) forControlEvents:UIControlEventTouchUpInside];
                 
-                self.tag += 1;
-                cell.iconButton.tag = self.tag;
+                cell.iconButton.tag = [self getTagWithMediaName:effectModel.video];
 
                 [cell setImageWithVideoName:effectModel.video];
                 
@@ -344,8 +376,8 @@
                 [cell.infoButton addTarget:self action:@selector(showRoutineDetail:) forControlEvents:UIControlEventTouchUpInside];
 
                 [cell.iconButton addTarget:self action:@selector(showPhotoBrowser:) forControlEvents:UIControlEventTouchUpInside];
-                self.tag += 1;
-                cell.iconButton.tag = self.tag;
+                
+                cell.iconButton.tag = [self getTagWithMediaName:effectModel.image];
                 
                 [cell setImageWithName:effectModel.image];
                 

@@ -12,6 +12,9 @@
 
 - (void)setImageWithName:(NSString *)imageName {
     
+    [self.iconButton setImage:nil forState:UIControlStateNormal];
+    [self.iconButton setImage:nil forState:UIControlStateHighlighted];
+    
     UIImage *image = [imageName getNamedImage];
     self.iconView.contentMode = UIViewContentModeScaleAspectFill;
     self.iconView.image = image;
