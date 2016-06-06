@@ -24,8 +24,8 @@
 #import "CLTableBackView.h"
 
 @interface CLMediaVC ()<MWPhotoBrowserDelegate>
-@property (nonatomic, strong) NSMutableArray *allMedia;
-@property (nonatomic, strong) NSMutableArray *dataList;
+@property (nonatomic, strong) NSMutableArray *allMedia; // 多媒体数组
+@property (nonatomic, strong) NSMutableArray *dataList; // 数据模型数组
 
 @property (nonatomic, strong) NSMutableArray *photos;
 @property (nonatomic, strong) NSMutableArray *thumbs;
@@ -180,7 +180,7 @@ static NSString * const reuseIdentifier = @"Cell";
     
     self.collectionView.backgroundView = self.tableBackView;
     self.collectionView.alwaysBounceVertical = YES;
-    self.collectionView.backgroundColor = [UIColor flatWhiteColor];
+    self.collectionView.backgroundColor = [UIColor blackColor];
     [self.collectionView registerNib:[UINib nibWithNibName:@"CLMediaCollectionCell" bundle: nil] forCellWithReuseIdentifier:reuseIdentifier];
     // Do any additional setup after loading the view.
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(update) name:kUpdateDataNotification
@@ -198,6 +198,9 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (void) update {
 
+    self.allMedia = nil;
+    self.photos = nil;
+    self.dataList = nil;
     [self.collectionView reloadData];
 }
 

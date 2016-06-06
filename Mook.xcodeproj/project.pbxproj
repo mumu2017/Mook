@@ -100,6 +100,8 @@
 		432346951C96B4C200200833 /* CLTextInputCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 432346931C96B4C200200833 /* CLTextInputCell.xib */; };
 		4364861B1CE1A99000FC191B /* CLSizeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4364861A1CE1A99000FC191B /* CLSizeVC.m */; };
 		4364861F1CE1BAEA00FC191B /* CLSizeListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4364861E1CE1BAEA00FC191B /* CLSizeListVC.m */; };
+		436927261D053D400041ED9C /* CLShowCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 436927241D053D400041ED9C /* CLShowCell.m */; };
+		436927271D053D400041ED9C /* CLShowCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 436927251D053D400041ED9C /* CLShowCell.xib */; };
 		438540391CE56CF200F82AAB /* CLThemeColorVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 438540381CE56CF200F82AAB /* CLThemeColorVC.m */; };
 		4385403C1CE56D4000F82AAB /* CLThemeColorNavVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4385403B1CE56D4000F82AAB /* CLThemeColorNavVC.m */; };
 		438540421CE5C59A00F82AAB /* mookTitle.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 438540411CE5C59A00F82AAB /* mookTitle.jpg */; };
@@ -335,6 +337,9 @@
 		4364861A1CE1A99000FC191B /* CLSizeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLSizeVC.m; sourceTree = "<group>"; };
 		4364861D1CE1BAEA00FC191B /* CLSizeListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLSizeListVC.h; sourceTree = "<group>"; };
 		4364861E1CE1BAEA00FC191B /* CLSizeListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLSizeListVC.m; sourceTree = "<group>"; };
+		436927231D053D400041ED9C /* CLShowCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLShowCell.h; sourceTree = "<group>"; };
+		436927241D053D400041ED9C /* CLShowCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLShowCell.m; sourceTree = "<group>"; };
+		436927251D053D400041ED9C /* CLShowCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CLShowCell.xib; sourceTree = "<group>"; };
 		438540301CE56B2500F82AAB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		438540321CE56B5300F82AAB /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		438540341CE56B7D00F82AAB /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Main.strings"; sourceTree = "<group>"; };
@@ -917,6 +922,9 @@
 				432346091C94054300200833 /* CLTableBackView.h */,
 				4323460A1C94054300200833 /* CLTableBackView.m */,
 				4323460B1C94054300200833 /* CLTableBackView.xib */,
+				436927231D053D400041ED9C /* CLShowCell.h */,
+				436927241D053D400041ED9C /* CLShowCell.m */,
+				436927251D053D400041ED9C /* CLShowCell.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -1235,6 +1243,7 @@
 				43A2812D1CB2324C009C2785 /* lines.jpg in Resources */,
 				439519C81CC0903800505E5B /* Main.storyboard in Resources */,
 				432346901C96B42A00200833 /* CLNewEntryTextCell.xib in Resources */,
+				436927271D053D400041ED9C /* CLShowCell.xib in Resources */,
 				43EEE7DE1CAD328500F0BCCF /* CLRoutineImageCell.xib in Resources */,
 				4323468B1C96B0DA00200833 /* CLNewEntryImageCell.xib in Resources */,
 				43F5F7B91CB5020F007BFB0C /* prop.jpg in Resources */,
@@ -1346,6 +1355,7 @@
 				4323461E1C94054300200833 /* CLListImageCell.m in Sources */,
 				43068BFA1CB74DEB00BA1A57 /* PopupView.m in Sources */,
 				432345E51C94051A00200833 /* CLPropObjModel.m in Sources */,
+				436927261D053D400041ED9C /* CLShowCell.m in Sources */,
 				432345651C9404A800200833 /* UIImageView+Tools.m in Sources */,
 				439519FC1CC51F6200505E5B /* CLBackUpVC.m in Sources */,
 				43885F791CA6A8AC00269CE1 /* CLHomeNavVC.m in Sources */,
