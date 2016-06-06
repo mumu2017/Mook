@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -108,14 +108,14 @@
 
 1. The performing art of doing things that seem impossible in order to entertain people. 2. the art of producing a desired effect or result through the use of incantation or various other techniques that presumably assure human control of supernatural agencies or the forces of nature. 3. A power that allows people (such as witches and wizards) to do impossible things by saying special words or performing special actions. 4. Mysterious tricks, such as making things disappear and reappear, performed as entertainment. 5. A quality of being beautiful and delightful in a way that seems remote from daily life. 6. A special quality or ability that somebody/something has, that seems too wonderful to be real. 7. The card you have chosen is the 5 of hearts.</string>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                         </subviews>
                         <color key="backgroundColor" red="0.111818932" green="0.11183650050000001" blue="0.1118125319" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="oVr-Ld-zCf" firstAttribute="top" secondItem="fr1-PX-6WE" secondAttribute="bottom" constant="20" id="5xN-cv-osO"/>
-                            <constraint firstItem="fr1-PX-6WE" firstAttribute="top" secondItem="B7d-Jc-RW8" secondAttribute="bottom" constant="20" id="jLm-JJ-0l8"/>
+                            <constraint firstItem="oVr-Ld-zCf" firstAttribute="top" secondItem="fr1-PX-6WE" secondAttribute="bottom" id="5xN-cv-osO"/>
+                            <constraint firstItem="fr1-PX-6WE" firstAttribute="top" secondItem="B7d-Jc-RW8" secondAttribute="bottom" id="jLm-JJ-0l8"/>
                             <constraint firstItem="fr1-PX-6WE" firstAttribute="leading" secondItem="t5v-9E-ot2" secondAttribute="leadingMargin" id="jZN-j9-eEA"/>
                             <constraint firstItem="fr1-PX-6WE" firstAttribute="trailing" secondItem="t5v-9E-ot2" secondAttribute="trailingMargin" id="ujD-0N-Ruc"/>
                         </constraints>
