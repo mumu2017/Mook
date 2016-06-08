@@ -314,6 +314,7 @@ static NSString * const reuseIdentifier = @"Cell";
 //定义每个UICollectionView 的大小
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
+//    return CGSizeMake((self.view.frame.size.width-1)/2, (self.view.frame.size.width-1)/2);
     return CGSizeMake((self.view.frame.size.width-2)/3, (self.view.frame.size.width-2)/3);
 }
 //定义每个UICollectionView 的 margin
