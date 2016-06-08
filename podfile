@@ -1,0 +1,13 @@
+platform :ios, ‘8.0’
+use_frameworks!
+
+target ‘Mook’ do
+ pod 'FMDB'
+ pod 'SWTableViewCell', '~> 0.3.7'
+ pod "MWPhotoBrowser"
+ pod 'ChameleonFramework'
+ pod 'SSZipArchive'
+ pod 'EAIntroView', '~> 2.8.0'
+ pod "Appirater"
+ end
+
