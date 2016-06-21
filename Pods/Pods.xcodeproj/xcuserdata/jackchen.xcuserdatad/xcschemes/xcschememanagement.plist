@@ -74,6 +74,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>SCRecorder.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>SDWebImage.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -102,17 +107,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>2184ECD525DC59E59B5AA9524D5B9CAC</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>23CF27B2BA6AC7125EFFEDA8C5AA819F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>2EC2A498F5E807A18D44259B7835E7A5</key>
+		<key>262B3CE7DE0959F5CC42F0B48599E62B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>40FEC0329FBE5A5EEA4560E3D81C1BA2</key>
+		<key>3CC0DB7C5478473A4BFD2EAC667A79BE</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -123,6 +133,11 @@
 			<true/>
 		</dict>
 		<key>6918E3DB32B2936FD18B206A341CEDE0</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>78945AB812352100C7651FD3CD742A69</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -157,12 +172,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B0DCE9AC6E91805C32212C9F0BDFDDF6</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>B7EC1573C5C27C408A16D2CF528EE170</key>
+		<key>B213ACDF0D2A25CCA332F5F5B01CA33C</key>
 		<dict>
 			<key>primary</key>
 			<true/>

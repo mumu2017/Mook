@@ -117,9 +117,9 @@ typedef enum {
         [_addButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.equalTo(self.navigationController.view.mas_right).with.offset(-15);
             make.bottom.equalTo(self.navigationController.view.mas_bottom).with.offset(-64);
-            make.width.height.equalTo(@66);
+            make.width.height.equalTo(@kAddButtonHeight);
         }];
-        _addButton.layer.cornerRadius = 33;
+        _addButton.layer.cornerRadius = kAddButtonHeight/2;
         _addButton.backgroundColor = [kAppThemeColor darkenByPercentage:0.05];
         _addButton.alpha = 1.0f;
         
@@ -150,11 +150,11 @@ typedef enum {
         [_addView addTarget:self action:@selector(toggleAddView) forControlEvents:UIControlEventTouchUpInside];
         
         [_addView.ideaBtn addTarget:self action:@selector(addNewIdeaWithVideo) forControlEvents:UIControlEventTouchUpInside];
-        [_addView.showBtn addTarget:self action:@selector(addNewShow) forControlEvents:UIControlEventTouchUpInside];
+//        [_addView.showBtn addTarget:self action:@selector(addNewShow) forControlEvents:UIControlEventTouchUpInside];
         [_addView.routineBtn addTarget:self action:@selector(addNewRoutineWithVideo) forControlEvents:UIControlEventTouchUpInside];
         [_addView.sleightBtn addTarget:self action:@selector(addNewSleightWithVideo) forControlEvents:UIControlEventTouchUpInside];
         [_addView.propBtn addTarget:self action:@selector(addNewPropWithVideo) forControlEvents:UIControlEventTouchUpInside];
-        [_addView.linesBtn addTarget:self action:@selector(addNewLines) forControlEvents:UIControlEventTouchUpInside];
+//        [_addView.linesBtn addTarget:self action:@selector(addNewLines) forControlEvents:UIControlEventTouchUpInside];
     }
     
     return _addView;

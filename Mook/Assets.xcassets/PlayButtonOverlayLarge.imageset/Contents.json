@@ -2,13 +2,13 @@
   "images" : [
     {
       "idiom" : "universal",
-      "scale" : "1x",
-      "filename" : "PlayButtonOverlayLarge.png"
+      "filename" : "PlayButtonOverlayLarge.png",
+      "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "scale" : "2x",
-      "filename" : "PlayButtonOverlayLarge@2x.png"
+      "filename" : "PlayButtonOverlayLarge@2x.png",
+      "scale" : "2x"
     },
     {
       "idiom" : "universal",

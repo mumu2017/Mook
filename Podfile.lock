@@ -19,6 +19,7 @@ PODS:
     - MBProgressHUD (~> 0.9)
     - SDWebImage (!= 3.7.2, ~> 3.7)
   - pop (1.0.9)
+  - SCRecorder (2.7.0)
   - SDWebImage (3.8.1):
     - SDWebImage/Core (= 3.8.1)
   - SDWebImage/Core (3.8.1)
@@ -35,6 +36,7 @@ DEPENDENCIES:
   - Masonry
   - MWPhotoBrowser
   - pop
+  - SCRecorder
   - SSZipArchive
   - SWTableViewCell (~> 0.3.7)
 
@@ -51,10 +53,11 @@ SPEC CHECKSUMS:
   MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
   MWPhotoBrowser: 5836d7aa041dc05a13de380c246826578adc5ea5
   pop: f667631a5108a2e60d9e8797c9b32ddaf2080bce
+  SCRecorder: bbb521dbc222908876ec9cd9156bbc8a893bed44
   SDWebImage: 35f9627a3e44b4f292a8a8ce6a531fa488239b91
   SSZipArchive: 251093c65f98d6ea282c50bc404bfa631d9fd721
   SWTableViewCell: 2a94aadc9d47b2b611fa064566bf57948b95b579
 
-PODFILE CHECKSUM: 4cb8c77a499522937b8ec89c2d3ae5de2cae09e7
+PODFILE CHECKSUM: 93410a095b8b3872a53ee68d56f05591ae2cde0c
 
 COCOAPODS: 1.0.0.beta.5

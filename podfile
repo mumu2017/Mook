@@ -13,5 +13,6 @@ target ‘Mook’ do
  pod 'Masonry' 
  pod 'BTNavigationDropdownMenu'
  pod 'DZNWebViewController'
+ pod 'SCRecorder'
 end
 

@@ -96,9 +96,9 @@
         [_addButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.equalTo(self.navigationController.view.mas_right).with.offset(-15);
             make.bottom.equalTo(self.navigationController.view.mas_bottom).with.offset(-64);
-            make.width.height.equalTo(@66);
+            make.width.height.equalTo(@kAddButtonHeight);
         }];
-        _addButton.layer.cornerRadius = 33;
+        _addButton.layer.cornerRadius = kAddButtonHeight/2;
         _addButton.backgroundColor = [kAppThemeColor darkenByPercentage:0.05];
         _addButton.alpha = 1.0f;
         
