@@ -17,8 +17,8 @@
 /* Class = "UILabel"; text = "What is Magic?"; ObjectID = "3xD-QQ-DJH"; */
 "3xD-QQ-DJH.text" = "What is Magic?";
 
-/* Class = "UINavigationItem"; title = "Timeline"; ObjectID = "4Kf-lo-IC0"; */
-"4Kf-lo-IC0.title" = "Timeline";
+/* Class = "UINavigationItem"; title = "Notes"; ObjectID = "4Kf-lo-IC0"; */
+"4Kf-lo-IC0.title" = "Notes";
 
 /* Class = "UILabel"; text = "Detail"; ObjectID = "4dd-Q2-Tn3"; */
 "4dd-Q2-Tn3.text" = "Detail";
@@ -29,8 +29,8 @@
 /* Class = "UILabel"; text = "Quick Phrase"; ObjectID = "7PU-UJ-Tyk"; */
 "7PU-UJ-Tyk.text" = "Quick Phrase";
 
-/* Class = "UITabBarItem"; title = "Timeline"; ObjectID = "7U8-cH-grM"; */
-"7U8-cH-grM.title" = "Timeline";
+/* Class = "UITabBarItem"; title = "Notes"; ObjectID = "7U8-cH-grM"; */
+"7U8-cH-grM.title" = "Notes";
 
 /* Class = "UITabBarItem"; title = "Setting"; ObjectID = "7UM-em-4Mb"; */
 "7UM-em-4Mb.title" = "Setting";
@@ -89,8 +89,8 @@
 /* Class = "UINavigationItem"; title = "Import"; ObjectID = "I8N-8V-IS7"; */
 "I8N-8V-IS7.title" = "Import";
 
-/* Class = "UITabBarItem"; title = "Library"; ObjectID = "JG5-Ax-guD"; */
-"JG5-Ax-guD.title" = "Library";
+/* Class = "UITabBarItem"; title = "Tools"; ObjectID = "JG5-Ax-guD"; */
+"JG5-Ax-guD.title" = "Tools";
 
 /* Class = "UILabel"; text = "Theme Color"; ObjectID = "JXg-c4-CCQ"; */
 "JXg-c4-CCQ.text" = "Theme Color";

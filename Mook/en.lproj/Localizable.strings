@@ -5,6 +5,11 @@
   Created by 陈林 on 16/4/7.
 
 */
+
+"全部" = "All";
+"视频" = "Video";
+"图片" = "Image";
+
 "有可用备份" = "Backup File Exists";
 "无可用备份" = "No Backup File";
 

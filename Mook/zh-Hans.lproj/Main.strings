@@ -17,8 +17,8 @@
 /* Class = "UILabel"; text = "What is Magic?"; ObjectID = "3xD-QQ-DJH"; */
 "3xD-QQ-DJH.text" = "What is Magic?";
 
-/* Class = "UINavigationItem"; title = "时间线"; ObjectID = "4Kf-lo-IC0"; */
-"4Kf-lo-IC0.title" = "时间线";
+/* Class = "UINavigationItem"; title = "笔记"; ObjectID = "4Kf-lo-IC0"; */
+"4Kf-lo-IC0.title" = "笔记";
 
 /* Class = "UILabel"; text = "Detail"; ObjectID = "4dd-Q2-Tn3"; */
 "4dd-Q2-Tn3.text" = "Detail";
@@ -29,8 +29,8 @@
 /* Class = "UILabel"; text = "快捷短语"; ObjectID = "7PU-UJ-Tyk"; */
 "7PU-UJ-Tyk.text" = "快捷短语";
 
-/* Class = "UITabBarItem"; title = "时间线"; ObjectID = "7U8-cH-grM"; */
-"7U8-cH-grM.title" = "时间线";
+/* Class = "UITabBarItem"; title = "笔记"; ObjectID = "7U8-cH-grM"; */
+"7U8-cH-grM.title" = "笔记";
 
 /* Class = "UITabBarItem"; title = "设置"; ObjectID = "7UM-em-4Mb"; */
 "7UM-em-4Mb.title" = "设置";
@@ -89,8 +89,8 @@
 /* Class = "UINavigationItem"; title = "导入"; ObjectID = "I8N-8V-IS7"; */
 "I8N-8V-IS7.title" = "导入";
 
-/* Class = "UITabBarItem"; title = "分类"; ObjectID = "JG5-Ax-guD"; */
-"JG5-Ax-guD.title" = "分类";
+/* Class = "UITabBarItem"; title = "工具"; ObjectID = "JG5-Ax-guD"; */
+"JG5-Ax-guD.title" = "工具";
 
 /* Class = "UILabel"; text = "主题色"; ObjectID = "JXg-c4-CCQ"; */
 "JXg-c4-CCQ.text" = "主题色";

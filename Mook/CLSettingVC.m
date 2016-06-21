@@ -359,4 +359,35 @@
     [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
+- (BOOL)shouldAutorotate {
+    return NO;
+}
+
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
+    
+    [self.view setNeedsLayout];
+}
+
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
+    
+    [self updateViewConstraints];
+
+    [self.view layoutSubviews];
+
+}
+
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
+    
+    [self updateViewConstraints];
+    [self.view layoutSubviews];
+
+}
+
+- (void)updateViewConstraints {
+    [super updateViewConstraints];
+    
+}
+
 @end

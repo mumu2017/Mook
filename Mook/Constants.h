@@ -257,6 +257,7 @@ typedef enum {
 #define kScreenW        [UIScreen mainScreen].bounds.size.width
 #define kScreenH        [UIScreen mainScreen].bounds.size.height
 
+#define kAddButtonHeight    66
 #define kListCellHeight     77
 #define kStatusBarHeight    20
 #define kNavigationBarHeight    44

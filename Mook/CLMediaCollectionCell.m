@@ -14,7 +14,7 @@
     [super awakeFromNib];
     // Initialization code
     [self.contentView addSubview:self.imageView];
-    [self.contentView addSubview:self.titleLabel];
+//    [self.contentView addSubview:self.titleLabel];
     [self.contentView addSubview:self.iconView];
         
 }
@@ -25,7 +25,7 @@
     if ([name containsString:@"mp4"]) {
         
         self.imageView.image = [name getNamedVideoFrame];
-        self.iconView.image = [UIImage imageNamed:@"PlayButtonOverlaySmall"];
+        self.iconView.image = [UIImage imageNamed:@"iconVideoCamera"];
         
     } else if ([name containsString:@"jpg"]) {
         self.imageView.image = [name getNamedImageThumbnail];

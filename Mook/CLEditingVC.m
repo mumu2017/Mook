@@ -25,14 +25,15 @@
 
 #import "CLInfoModel.h"
 
-#import <MobileCoreServices/MobileCoreServices.h> // needed for video types
+#import "CLGetMediaTool.h"
+
 #import "XLPagerTabStripViewController.h"
 
 #import "IATConfig.h"
 #import "PopupView.h"
 #import "ISRDataHelper.h"
 
-@interface CLEditingVC ()<CLToolBarDelegate, CLQuickStringNavDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, XLPagerTabStripChildItem, CLEdtingManageVCDelegate>
+@interface CLEditingVC ()<CLToolBarDelegate, CLQuickStringNavDelegate, UITextViewDelegate, UINavigationControllerDelegate, XLPagerTabStripChildItem, CLEdtingManageVCDelegate>
 
 @property (nonatomic, strong) UIPickerView *pickerView;
 
@@ -709,7 +710,9 @@
             
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 
-                [self pickVideoFromCamera];
+                [[CLGetMediaTool getInstance] recordVideoFromCurrentController:self maximumDuration:self.videoDuration resultBlock:^(NSURL *videoURL) {
+                    [self saveVideo:videoURL];
+                }];
             });
             
             
@@ -720,7 +723,9 @@
             
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 
-                [self pickVideoFromAlbum];
+                [[CLGetMediaTool getInstance] pickAlbumVideoFromCurrentController:self maximumDuration:self.videoDuration resultBlock:^(NSURL *videoURL) {
+                    [self saveVideo:videoURL];
+                }];
 
             });
             
@@ -731,7 +736,9 @@
             
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 
-                [self pickImageFromCamera];
+                [[CLGetMediaTool getInstance] takePhotoFromCurrentController:self resultBlock:^(UIImage *photo) {
+                    [self saveImage:photo];
+                }];
                 
             });
             
@@ -741,7 +748,9 @@
             
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 
-                [self pickImageFromAlbum];
+                [[CLGetMediaTool getInstance] pickAlbumPhotoFromCurrentController:self resultBlock:^(UIImage *photo) {
+                    [self saveImage:photo];
+                }];
                 
             });
             
@@ -759,7 +768,6 @@
 
     }
   
-    
     [self presentViewController:alert animated:YES completion:nil];
 }
 
@@ -838,137 +846,6 @@
     [alert addAction:cancel];
     
     [self presentViewController:alert animated:YES completion:nil];
-    
-}
-
-
-#pragma mark 从用户相册获取活动图片
-- (void)pickImageFromAlbum
-{
-    UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
-    imagePicker.delegate = self;
-    imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-    
-    imagePicker.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-    imagePicker.allowsEditing = YES;
-    
-    [self presentViewController:imagePicker animated:YES completion:nil];
-}
-
-#pragma mark 拍摄照片
-- (void)pickImageFromCamera
-{
-    UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
-    imagePicker.delegate = self;
-    imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
-    imagePicker.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-    imagePicker.allowsEditing = YES;
-    
-    [self presentViewController:imagePicker animated:YES completion:nil];
-}
-
-#pragma mark 从相册获取活动视频
-- (void)pickVideoFromAlbum {
-    UIImagePickerController *videoPicker = [[UIImagePickerController alloc] init];
-    videoPicker.delegate = self;
-    videoPicker.modalPresentationStyle = UIModalPresentationCurrentContext;
-    videoPicker.mediaTypes =[UIImagePickerController availableMediaTypesForSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
-    videoPicker.mediaTypes = @[(NSString*)kUTTypeMovie, (NSString*)kUTTypeAVIMovie, (NSString*)kUTTypeVideo, (NSString*)kUTTypeMPEG4];
-    
-    videoPicker.allowsEditing = YES;
-    videoPicker.videoQuality = UIImagePickerControllerQualityTypeMedium;
-    videoPicker.videoMaximumDuration = self.videoDuration;
-    
-    [self presentViewController:videoPicker animated:YES completion:nil];
-}
-
-
-#pragma mark 拍摄视频
-- (void)pickVideoFromCamera
-{
-    UIImagePickerController *videoPicker = [[UIImagePickerController alloc] init];
-    videoPicker.delegate = self;
-    videoPicker.sourceType = UIImagePickerControllerSourceTypeCamera;
-    
-    [videoPicker setMediaTypes: [NSArray arrayWithObject:(NSString *)kUTTypeMovie]];
-    videoPicker.cameraCaptureMode = UIImagePickerControllerCameraCaptureModeVideo;
-    
-    videoPicker.videoQuality = UIImagePickerControllerQualityTypeMedium;
-    videoPicker.videoMaximumDuration = self.videoDuration;
-    
-    videoPicker.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-    videoPicker.allowsEditing = YES;
-    
-    [self presentViewController:videoPicker animated:YES completion:nil];
-}
-
-
-- (void) imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
-{
-    // 获取选择的媒体类型
-    NSString *mediaType = [info objectForKey:UIImagePickerControllerMediaType];
-    
-    // 如果是图片
-    if ([mediaType isEqualToString:@"public.image"]){
-        
-        UIImage *image= [info objectForKey:UIImagePickerControllerOriginalImage];
-
-        //如果根据设置保存图片到系统相册
-        if ([[NSUserDefaults standardUserDefaults] boolForKey:kSavePhotoKey]) {
-            if (picker.sourceType == UIImagePickerControllerSourceTypeCamera)
-            {
-                UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
-            }
-        }
-        
-        
-        [self dismissViewControllerAnimated:YES completion:nil];
-        
-        [self saveImage:image];
-        
-        
-        // 如果是视频
-    } else if ([mediaType isEqualToString:@"public.movie"]) {
-        
-        NSURL *videoURL = [info objectForKey:UIImagePickerControllerMediaURL];
-
-        if ([[NSUserDefaults standardUserDefaults] boolForKey:kSaveVideoKey]) {
-            NSString *tempFilePath = [videoURL path];
-            
-            if (picker.sourceType == UIImagePickerControllerSourceTypeCamera && UIVideoAtPathIsCompatibleWithSavedPhotosAlbum(tempFilePath))
-            {
-                // Copy it to the camera roll.
-                UISaveVideoAtPathToSavedPhotosAlbum(tempFilePath, self, @selector(video:didFinishSavingWithError:contextInfo:), (__bridge void * _Nullable)(tempFilePath));
-            }
-        }
-        
-        [self dismissViewControllerAnimated:YES completion:nil];
-        
-        [self saveVideo:videoURL];
-    }
-    
-    UIView *view = [UIResponder currentFirstResponder];
-    
-    if (view != self.editTextView) {
-        [view resignFirstResponder];
-        [self.editTextView becomeFirstResponder];
-    }
-}
-
-- (void) video:(NSString *)videoPath didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo {
-//    NSLog(@"Finished saving video with error: %@", error);
-}
-
-- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
-    
-    [self dismissViewControllerAnimated:YES completion:nil];
-    
-    UIView *view = [UIResponder currentFirstResponder];
-    
-    if (view != self.editTextView) {
-        [view resignFirstResponder];
-        [self.editTextView becomeFirstResponder];
-    }
     
 }
 

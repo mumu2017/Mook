@@ -8,6 +8,7 @@
 
 #import "CLAllItemsListVC.h"
 
+#import "CLNewEntryTool.h"
 #import "CLDataSaveTool.h"
 #import "CLDataExportTool.h"
 #import "CLNewEntryNavVC.h"
@@ -33,26 +34,189 @@
 #import "CLPerformModel.h"
 //#import "CLNotesModel.h"
 
-#import "JGActionSheet.h"
 #import "CLTableBackView.h"
+#import "CLGetMediaTool.h"
+
+#import "Masonry.h"
+#import "CLAddView.h"
+#import "Pop.h"
+#import "BTNavigationDropdownMenu-Swift.h"
+@class BTNavigationDropdownMenu;
 
 @interface CLAllItemsListVC ()<SWTableViewCellDelegate, MBProgressHUDDelegate, UIDocumentInteractionControllerDelegate>
 
 @property (nonatomic, strong) NSMutableArray *allItems;
+
+@property (nonatomic, copy) NSString *tag;
+
+@property (nonatomic, strong) NSMutableArray *ideaObjModelList;
+@property (nonatomic, strong) NSMutableArray *showModelList;
+@property (nonatomic, strong) NSMutableArray *routineModelList;
+@property (nonatomic, strong) NSMutableArray *sleightObjModelList;
+@property (nonatomic, strong) NSMutableArray *propObjModelList;
+@property (nonatomic, strong) NSMutableArray *linesObjModelList;
 
 @property (nonatomic, strong) CLTableBackView *tableBackView;
 @property (nonatomic, assign) EditingContentType editingContentType;
 @property (nonatomic, strong) UIDocumentInteractionController *documentInteractionController;
 @property (nonatomic, copy) NSString *exportPath;
 
+@property (strong, nonatomic) UIButton *addButton;
+@property (strong, nonatomic) UIButton *coverButton;
+
+@property (strong, nonatomic) BTNavigationDropdownMenu *menu;
+
+@property (strong, nonatomic) CLAddView *addView;
+
 @end
 
 @implementation CLAllItemsListVC
+
+- (UIButton *)coverButton {
+    if (!_coverButton) {
+        _coverButton = [[UIButton alloc] initWithFrame:self.navigationController.view.frame];
+        [self.navigationController.view addSubview:_coverButton];
+        _coverButton.backgroundColor = [UIColor darkGrayColor];
+        _coverButton.alpha = 0.0;
+        _coverButton.enabled = NO;
+        
+        [_coverButton addTarget:self action:@selector(toggleAddView) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _coverButton;
+}
+
+- (UIButton *)addButton {
+    if (!_addButton) {
+        _addButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [self.navigationController.view addSubview:_addButton];
+        
+        [_addButton addTarget:self action:@selector(addNewEntry:) forControlEvents:UIControlEventTouchUpInside];
+//        [_addButton setTitle:@"添加" forState:UIControlStateNormal];
+        [_addButton setImage:[UIImage imageNamed:@"plus"] forState:UIControlStateNormal];
+        [_addButton mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.right.equalTo(self.navigationController.view.mas_right).with.offset(-15);
+            make.bottom.equalTo(self.navigationController.view.mas_bottom).with.offset(-64);
+            make.width.height.equalTo(@66);
+        }];
+        _addButton.layer.cornerRadius = 33;
+        _addButton.backgroundColor = [kAppThemeColor darkenByPercentage:0.05];
+        _addButton.alpha = 1.0f;
+        
+    }
+    
+    return _addButton;
+}
+
+- (CLAddView *)addView {
+    if (!_addView) {
+        _addView = [[CLAddView alloc] initWithFrame:CGRectMake(self.addButton.center.x, self.addButton.center.y, 0, 0)];
+        [self.navigationController.view addSubview:_addView];
+        _addView.hidden = NO;
+        
+        [_addView mas_makeConstraints:^(MASConstraintMaker *make) {
+
+            make.width.equalTo(self.navigationController.view.mas_width).offset( -kAddButtonHeight);
+            make.height.equalTo(_addView.mas_width).multipliedBy(1.5);
+            make.centerX.equalTo(self.navigationController.view);
+            make.top.equalTo(self.navigationController.view.mas_bottom).offset(_addView.frame.size.height);
+        }];
+        _addView.center = CGPointMake(self.navigationController.view.center.x, CGRectGetMaxY(self.navigationController.view.frame)+self.addView.frame.size.height/2);
+
+        _addView.backgroundColor = [UIColor clearColor];
+        [_addView initSubViews];
+        [_addView updateColor:self.addButton.backgroundColor];
+
+        [_addView addTarget:self action:@selector(toggleAddView) forControlEvents:UIControlEventTouchUpInside];
+        
+        [_addView.ideaBtn addTarget:self action:@selector(addNewIdea) forControlEvents:UIControlEventTouchUpInside];
+        [_addView.showBtn addTarget:self action:@selector(addNewShow) forControlEvents:UIControlEventTouchUpInside];
+        [_addView.routineBtn addTarget:self action:@selector(addNewRoutine) forControlEvents:UIControlEventTouchUpInside];
+        [_addView.sleightBtn addTarget:self action:@selector(addNewSleight) forControlEvents:UIControlEventTouchUpInside];
+        [_addView.propBtn addTarget:self action:@selector(addNewProp) forControlEvents:UIControlEventTouchUpInside];
+        [_addView.linesBtn addTarget:self action:@selector(addNewLines) forControlEvents:UIControlEventTouchUpInside];
+    }
+    
+    return _addView;
+}
+
+- (BTNavigationDropdownMenu *)menu {
+    if (!_menu) {
+
+        NSArray *items = [NSArray arrayWithObjects:NSLocalizedString(@"演出", nil), NSLocalizedString(@"流程", nil), NSLocalizedString(@"灵感", nil), NSLocalizedString(@"技巧", nil), NSLocalizedString(@"道具", nil), NSLocalizedString(@"台词", nil), NSLocalizedString(@"全部", nil), nil];
+        _menu = [[BTNavigationDropdownMenu alloc] initWithTitle:items[1] items:items];
+        self.listType = kListTypeRoutine;
+        [_menu setDidSelectItemAtIndexHandler:^(NSInteger index) {
+            switch (index) {
+                case 0:
+                    _listType = kListTypeShow;
+                    break;
+                case 1:
+                    _listType = kListTypeRoutine;
+                    break;
+                case 2:
+                    _listType = kListTypeIdea;
+                    break;
+                case 3:
+                    _listType = kListTypeSleight;
+                    break;
+                case 4:
+                    _listType = kListTypeProp;
+                    break;
+                case 5:
+                    _listType = kListTypeLines;
+                    break;
+                case 6:
+                    _listType = kListTypeAll;
+                    break;
+                    
+                default:
+                    break;
+            }
+            [[NSNotificationCenter defaultCenter] postNotificationName:kUpdateDataNotification object:nil];
+        }];
+        
+        _menu.cellBackgroundColor = kAppThemeColor;
+        _menu.cellSelectionColor = [UIColor whiteColor];
+        _menu.cellSeparatorColor = [UIColor flatGrayColorDark];
+
+    }
+    return _menu;
+}
 
 #pragma mark - 模型数组懒加载
 - (NSMutableArray *)allItems {
     _allItems = kDataListAll;
     return kDataListAll;
+}
+
+-(NSMutableArray *)ideaObjModelList {
+    if (!_ideaObjModelList) _ideaObjModelList = kDataListIdea;
+    return _ideaObjModelList;
+}
+
+- (NSMutableArray *)showModelList {
+    if (!_showModelList) _showModelList = kDataListShow;
+    return _showModelList;
+}
+
+- (NSMutableArray *)routineModelList {
+    if (!_routineModelList)  _routineModelList = kDataListRoutine;
+    return _routineModelList;
+}
+
+-(NSMutableArray *)sleightObjModelList {
+    if (!_sleightObjModelList) _sleightObjModelList = kDataListSleight;
+    return _sleightObjModelList;
+}
+
+- (NSMutableArray *)propObjModelList {
+    if (!_propObjModelList)  _propObjModelList = kDataListProp;
+    return _propObjModelList;
+}
+
+- (NSMutableArray *)linesObjModelList {
+    if (!_linesObjModelList)  _linesObjModelList = kDataListLines;
+    return _linesObjModelList;
 }
 
 #pragma mark - 背景view懒加载
@@ -65,11 +229,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    [self coverButton];
     self.tableView.backgroundView = self.tableBackView;
     self.tableView.backgroundColor = [UIColor whiteColor];
     self.tableView.rowHeight = kListCellHeight;
     self.tableView.tableFooterView = [UIView new];
+    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 96, 0);
+    
+    self.navigationItem.titleView = self.menu;
     
     [self.tableView registerNib:[UINib nibWithNibName:@"CLListCell"
                                                bundle:nil]
@@ -87,25 +254,74 @@
                                                object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(update:) name:kUpdateMookNotification
                                                object:nil];
+    
+    [self addView];
+    [self addButton];
+
+}
+
+- (void)toggleAddView {
+    POPSpringAnimation *springAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerPosition];
+    
+    //弹性值
+    springAnimation.springBounciness = 10.0;
+    //弹性速度
+    springAnimation.springSpeed = 15.0;
+    
+    CGPoint point = self.addView.center;
+    
+    if (point.y == self.navigationController.view.center.y) {
+        
+        springAnimation.toValue = [NSValue valueWithCGPoint:CGPointMake(point.x, CGRectGetMaxY(self.navigationController.view.frame)+self.addView.frame.size.height)];
+        
+        self.coverButton.enabled = NO;
+        self.coverButton.alpha = 0.0;
+        [self.addView pop_addAnimation:springAnimation forKey:@"changeposition"];
+
+        [_addButton setImage:[UIImage imageNamed:@"plus"] forState:UIControlStateNormal];
+
+    }
+    else{
+        springAnimation.toValue = [NSValue valueWithCGPoint:CGPointMake(point.x, self.navigationController.view.center.y)];
+        [self.addView pop_addAnimation:springAnimation forKey:@"changeposition"];
+
+        self.coverButton.enabled = YES;
+        self.coverButton.alpha = 0.9;
+        [_addButton setImage:[UIImage imageNamed:@"cancel"] forState:UIControlStateNormal];
+    }
+
 }
 
 - (void)update:(NSNotification *)noti {
     if (noti.object == self) return;
     
+    self.addButton.backgroundColor = [kAppThemeColor darkenByPercentage:0.05];
+    self.menu.cellBackgroundColor = kAppThemeColor;
+    [self.addView updateColor:self.addButton.backgroundColor];
     [self.tableView reloadData];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-//    [self.tableView reloadData];
-
+    self.addButton.hidden = NO;
     [self.navigationController setToolbarHidden:YES];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    self.addButton.hidden = YES;
+    [self.menu hide];
+    if (self.addView.center.y == self.navigationController.view.center.y) {
+        [self toggleAddView];
+    }
 }
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
+
 
 #pragma mark - Table view data source
 
@@ -116,8 +332,40 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    NSInteger number = self.allItems.count;
-
+    NSInteger number;
+    switch (self.listType) {
+        case kListTypeAll:
+            number = self.allItems.count;
+            break;
+            
+        case kListTypeIdea:
+            number = self.ideaObjModelList.count;
+            break;
+            
+        case kListTypeShow:
+            number = self.showModelList.count;
+            break;
+            
+        case kListTypeRoutine:
+            number = self.routineModelList.count;
+            break;
+            
+        case kListTypeSleight:
+            number = self.sleightObjModelList.count;
+            break;
+            
+        case kListTypeProp:
+            number = self.propObjModelList.count;
+            break;
+            
+        case kListTypeLines:
+            number = self.linesObjModelList.count;
+            break;
+            
+        default:
+            break;
+    }
+    
     self.tableBackView.hidden = !(number == 0);
     return number;
 }
@@ -126,79 +374,169 @@
     
     NSString *iconName, *title;
     UIImage *image;
-    NSAttributedString *contentWithType;
+    NSAttributedString *contentWithType, *content;
  
-    id modelUnknown = self.allItems[indexPath.row];
-    
-    if ([modelUnknown isKindOfClass:[CLShowModel class]]) {
-        CLShowModel *model = (CLShowModel *)modelUnknown;
-        image = [model getThumbnail];
-        iconName = kIconNameShow;
-        title = [model getTitle];
-        contentWithType = [model getContentWithType];
-        if (image != nil) { // 如果返回图片,则表示模型中有图片或多媒体
-            CLListImageCell *cell = [tableView dequeueReusableCellWithIdentifier:kListImageCellID forIndexPath:indexPath];
-            cell.iconView.image = image;
-            cell.iconName = title;
+    switch (self.listType) {
+        case kListTypeAll:
+        {
+            id modelUnknown = self.allItems[indexPath.row];
             
+            if ([modelUnknown isKindOfClass:[CLShowModel class]]) {
+                CLShowModel *model = (CLShowModel *)modelUnknown;
+                image = [model getThumbnail];
+                iconName = kIconNameShow;
+                title = [model getTitle];
+                contentWithType = [model getContentWithType];
+                if (image != nil) { // 如果返回图片,则表示模型中有图片或多媒体
+                    CLListImageCell *cell = [tableView dequeueReusableCellWithIdentifier:kListImageCellID forIndexPath:indexPath];
+                    cell.iconView.image = image;
+                    cell.iconName = title;
+                    
+                    
+                    [cell setTitle:title content:contentWithType];
+                    
+                    cell.rightUtilityButtons = [self showRightButtons];
+                    cell.delegate = self;
+                    cell.backgroundColor = [UIColor flatWhiteColor];
+                    
+                    return cell;
+                    
+                } else {
+                    CLListTextCell *cell = [tableView dequeueReusableCellWithIdentifier:kListTextCellID forIndexPath:indexPath];
+                    cell.iconName = title;
+                    
+                    [cell setTitle:title content:contentWithType];
+                    
+                    cell.rightUtilityButtons = [self showRightButtons];
+                    cell.delegate = self;
+                    cell.backgroundColor = [UIColor flatWhiteColor];
+                    
+                    return cell;
+                }
+                
+            } else if ([modelUnknown isKindOfClass:[CLIdeaObjModel class]]) {
+                CLIdeaObjModel *model = (CLIdeaObjModel *)modelUnknown;
+                image = [model getThumbnail];
+                iconName = kIconNameIdea;
+                title = [model getTitle];
+                contentWithType = [model getContentWithType];
+            } else if ([modelUnknown isKindOfClass:[CLRoutineModel class]]) {
+                CLRoutineModel *model = (CLRoutineModel *)modelUnknown;
+                image = [model getThumbnail];
+                iconName = kIconNameRoutine;
+                title = [model getTitle];
+                contentWithType = [model getContentWithType];
+            } else if ([modelUnknown isKindOfClass:[CLSleightObjModel class]]) {
+                CLSleightObjModel *model = (CLSleightObjModel *)modelUnknown;
+                image = [model getThumbnail];
+                iconName = kIconNameSleight;
+                title = [model getTitle];
+                contentWithType = [model getContentWithType];
+            } else if ([modelUnknown isKindOfClass:[CLPropObjModel class]]) {
+                CLPropObjModel *model = (CLPropObjModel *)modelUnknown;
+                image = [model getThumbnail];
+                iconName = kIconNameProp;
+                title = [model getTitle];
+                contentWithType = [model getContentWithType];
+            } else if ([modelUnknown isKindOfClass:[CLLinesObjModel class]]) {
+                CLLinesObjModel *model = (CLLinesObjModel *)modelUnknown;
+                iconName = kIconNameLines;
+                title = [model getTitle];
+                contentWithType = [model getContentWithType];
+            }
             
-            [cell setTitle:title content:contentWithType];
-            
-            cell.rightUtilityButtons = [self showRightButtons];
-            cell.delegate = self;
-            cell.backgroundColor = [UIColor flatWhiteColor];
-            
-            return cell;
-            
-        } else {
-            CLListTextCell *cell = [tableView dequeueReusableCellWithIdentifier:kListTextCellID forIndexPath:indexPath];
-            cell.iconName = title;
-            
-            [cell setTitle:title content:contentWithType];
-            
-            cell.rightUtilityButtons = [self showRightButtons];
-            cell.delegate = self;
-            cell.backgroundColor = [UIColor flatWhiteColor];
-            
-            return cell;
+            if (image != nil) { // 如果返回图片,则表示模型中有图片或多媒体
+                CLListImageCell *cell = [tableView dequeueReusableCellWithIdentifier:kListImageCellID forIndexPath:indexPath];
+                cell.iconView.image = image;
+                cell.iconName = title;
+                [cell setTitle:title content:contentWithType];
+                
+                cell.rightUtilityButtons = [self rightButtons];
+                cell.delegate = self;
+                cell.backgroundColor = [UIColor flatWhiteColor];
+                
+                return cell;
+                
+            } else {
+                CLListTextCell *cell = [tableView dequeueReusableCellWithIdentifier:kListTextCellID forIndexPath:indexPath];
+                cell.iconName = title;
+                [cell setTitle:title content:contentWithType];
+                
+                cell.rightUtilityButtons = [self rightButtons];
+                cell.delegate = self;
+                cell.backgroundColor = [UIColor flatWhiteColor];
+                
+                return cell;
+            }
+
+            break;
         }
-        
-    } else if ([modelUnknown isKindOfClass:[CLIdeaObjModel class]]) {
-        CLIdeaObjModel *model = (CLIdeaObjModel *)modelUnknown;
-        image = [model getThumbnail];
-        iconName = kIconNameIdea;
-        title = [model getTitle];
-        contentWithType = [model getContentWithType];
-    } else if ([modelUnknown isKindOfClass:[CLRoutineModel class]]) {
-        CLRoutineModel *model = (CLRoutineModel *)modelUnknown;
-        image = [model getThumbnail];
-        iconName = kIconNameRoutine;
-        title = [model getTitle];
-        contentWithType = [model getContentWithType];
-    } else if ([modelUnknown isKindOfClass:[CLSleightObjModel class]]) {
-        CLSleightObjModel *model = (CLSleightObjModel *)modelUnknown;
-        image = [model getThumbnail];
-        iconName = kIconNameSleight;
-        title = [model getTitle];
-        contentWithType = [model getContentWithType];
-    } else if ([modelUnknown isKindOfClass:[CLPropObjModel class]]) {
-        CLPropObjModel *model = (CLPropObjModel *)modelUnknown;
-        image = [model getThumbnail];
-        iconName = kIconNameProp;
-        title = [model getTitle];
-        contentWithType = [model getContentWithType];
-    } else if ([modelUnknown isKindOfClass:[CLLinesObjModel class]]) {
-        CLLinesObjModel *model = (CLLinesObjModel *)modelUnknown;
-        iconName = kIconNameLines;
-        title = [model getTitle];
-        contentWithType = [model getContentWithType];
+        case kListTypeIdea:
+        {
+            CLIdeaObjModel *model = self.ideaObjModelList[indexPath.row];
+            image = [model getThumbnail];
+            iconName = kIconNameIdea;
+            title = [model getTitle];
+            content = [model getContent];
+            break;
+        }
+            
+        case kListTypeShow:
+        {
+            CLShowModel *model = self.showModelList[indexPath.row];
+            image = [model getThumbnail];
+            iconName = kIconNameShow;
+            title = [model getTitle];
+            content = [model getContent];
+            
+            break;
+        }
+        case kListTypeRoutine:
+        {
+            CLRoutineModel *model = self.routineModelList[indexPath.row];
+            image = [model getThumbnail];
+            iconName = kIconNameRoutine;
+            title = [model getTitle];
+            content = [model getContent];
+            break;
+        }
+        case kListTypeSleight:
+        {
+            CLSleightObjModel *model = self.sleightObjModelList[indexPath.row];
+            image = [model getThumbnail];
+            iconName = kIconNameSleight;
+            title = [model getTitle];
+            content = [model getContent];
+            break;
+        }
+            
+            
+        case kListTypeProp:
+        {
+            CLPropObjModel *model = self.propObjModelList[indexPath.row];
+            image = [model getThumbnail];
+            iconName = kIconNameProp;
+            title = [model getTitle];
+            content = [model getContent];
+            break;
+        }
+        case kListTypeLines:
+        {
+            CLLinesObjModel *model = self.linesObjModelList[indexPath.row];
+            iconName = kIconNameLines;
+            title = [model getTitle];
+            content = [model getContent];
+            break;
+        }
+        default:
+            break;
     }
     
     if (image != nil) { // 如果返回图片,则表示模型中有图片或多媒体
         CLListImageCell *cell = [tableView dequeueReusableCellWithIdentifier:kListImageCellID forIndexPath:indexPath];
         cell.iconView.image = image;
         cell.iconName = title;
-        [cell setTitle:title content:contentWithType];
+        [cell setTitle:title content:content];
         
         cell.rightUtilityButtons = [self rightButtons];
         cell.delegate = self;
@@ -209,7 +547,7 @@
     } else {
         CLListTextCell *cell = [tableView dequeueReusableCellWithIdentifier:kListTextCellID forIndexPath:indexPath];
         cell.iconName = title;
-        [cell setTitle:title content:contentWithType];
+        [cell setTitle:title content:content];
         
         cell.rightUtilityButtons = [self rightButtons];
         cell.delegate = self;
@@ -252,14 +590,24 @@
     NSIndexPath *path = [self.tableView indexPathForCell:cell];
     
     if (index == 0) {
+        if (self.listType == kListTypeAll) {
+            id modelUnknown = self.allItems[path.row];
+            if ([modelUnknown isKindOfClass:[CLShowModel class]]) {
+                [self delete:path];
+            }else {
+                
+                [self exportWithIndexPath:path];
+                
+            }
+        }
         
-        id modelUnknown = self.allItems[path.row];
-        if ([modelUnknown isKindOfClass:[CLShowModel class]]) {
+        if (self.listType == kListTypeShow) {
+            // 演讲不可导出,所以只有删除按钮
             [self delete:path];
         } else {
-            
+            // 如果不是演讲, 则可导出
             [self exportWithIndexPath:path];
-
+            
         }
         
     } else if (index == 1) {
@@ -298,66 +646,180 @@
 
 - (void)deleteEntryWithIndexPath:(NSIndexPath *)path {
  
-    id modelUnknown = self.allItems[path.row];
-
-    if ([modelUnknown isKindOfClass:[CLIdeaObjModel class]]) {
-        CLIdeaObjModel *model = (CLIdeaObjModel *)modelUnknown;
-        [CLDataSaveTool deleteIdea:model];
-        
-        NSLog(@"%lu, %lu", (unsigned long)kDataListAll.count, (unsigned long)kDataListIdea.count);
-        
-        [kAppDelegate reloadAllIdeas];
-        
-//        [kDataListIdea removeObject:model];
-//        [kDataListAll removeObject:model];
-        
-        NSLog(@"%lu, %lu", (unsigned long)kDataListAll.count, (unsigned long)kDataListIdea.count);
-        
-    } else if ([modelUnknown isKindOfClass:[CLShowModel class]]) {
-        CLShowModel *model = (CLShowModel *)modelUnknown;
-        [CLDataSaveTool deleteShow:model];
-        [kAppDelegate reloadAllShows];
-
-//        [kDataListShow removeObject:model];
-//        [kDataListAll removeObject:model];
-        
-    } else if ([modelUnknown isKindOfClass:[CLRoutineModel class]]) {
-        CLRoutineModel *model = (CLRoutineModel *)modelUnknown;
-        [CLDataSaveTool deleteRoutine:model];
-        [kAppDelegate reloadAllRoutines];
-
-//        [kDataListRoutine removeObject:model];
-//        [kDataListAll removeObject:model];
-        
-    } else if ([modelUnknown isKindOfClass:[CLSleightObjModel class]]) {
-        CLSleightObjModel *model = (CLSleightObjModel *)modelUnknown;
-        [CLDataSaveTool deleteSleight:model];
-        [kAppDelegate reloadAllSleights];
-
-//        [kDataListSleight removeObject:model];
-//        [kDataListAll removeObject:model];
-        
-        
-    } else if ([modelUnknown isKindOfClass:[CLPropObjModel class]]) {
-        CLPropObjModel *model = (CLPropObjModel *)modelUnknown;
-        [CLDataSaveTool deleteProp:model];
-        [kAppDelegate reloadAllProps];
-
-//        [kDataListProp removeObject:model];
-//        [kDataListAll removeObject:model];
-        
-    } else if ([modelUnknown isKindOfClass:[CLLinesObjModel class]]) {
-        CLLinesObjModel *model = (CLLinesObjModel *)modelUnknown;
-        [CLDataSaveTool deleteLines:model];
-        [kAppDelegate reloadAllLines];
-
-//        [kDataListLines removeObject:model];
-//        [kDataListAll removeObject:model];
-
-        
+    switch (self.listType) {
+        case kListTypeAll:
+        {
+            
+            
+            id modelUnknown = self.allItems[path.row];
+            
+            if ([modelUnknown isKindOfClass:[CLIdeaObjModel class]]) {
+                CLIdeaObjModel *model = (CLIdeaObjModel *)modelUnknown;
+                [CLDataSaveTool deleteIdea:model];
+                
+                NSLog(@"%lu, %lu", (unsigned long)kDataListAll.count, (unsigned long)kDataListIdea.count);
+                
+                [kAppDelegate reloadAllIdeas];
+                
+                //        [kDataListIdea removeObject:model];
+                //        [kDataListAll removeObject:model];
+                
+                NSLog(@"%lu, %lu", (unsigned long)kDataListAll.count, (unsigned long)kDataListIdea.count);
+                
+            } else if ([modelUnknown isKindOfClass:[CLShowModel class]]) {
+                CLShowModel *model = (CLShowModel *)modelUnknown;
+                [CLDataSaveTool deleteShow:model];
+                [kAppDelegate reloadAllShows];
+                
+                //        [kDataListShow removeObject:model];
+                //        [kDataListAll removeObject:model];
+                
+            } else if ([modelUnknown isKindOfClass:[CLRoutineModel class]]) {
+                CLRoutineModel *model = (CLRoutineModel *)modelUnknown;
+                [CLDataSaveTool deleteRoutine:model];
+                [kAppDelegate reloadAllRoutines];
+                
+                //        [kDataListRoutine removeObject:model];
+                //        [kDataListAll removeObject:model];
+                
+            } else if ([modelUnknown isKindOfClass:[CLSleightObjModel class]]) {
+                CLSleightObjModel *model = (CLSleightObjModel *)modelUnknown;
+                [CLDataSaveTool deleteSleight:model];
+                [kAppDelegate reloadAllSleights];
+                
+                //        [kDataListSleight removeObject:model];
+                //        [kDataListAll removeObject:model];
+                
+                
+            } else if ([modelUnknown isKindOfClass:[CLPropObjModel class]]) {
+                CLPropObjModel *model = (CLPropObjModel *)modelUnknown;
+                [CLDataSaveTool deleteProp:model];
+                [kAppDelegate reloadAllProps];
+                
+                //        [kDataListProp removeObject:model];
+                //        [kDataListAll removeObject:model];
+                
+            } else if ([modelUnknown isKindOfClass:[CLLinesObjModel class]]) {
+                CLLinesObjModel *model = (CLLinesObjModel *)modelUnknown;
+                [CLDataSaveTool deleteLines:model];
+                [kAppDelegate reloadAllLines];
+                
+                //        [kDataListLines removeObject:model];
+                //        [kDataListAll removeObject:model];
+                
+                
+            }
+            
+            [self.allItems removeObject:modelUnknown];
+        }
+            break;
+        case kListTypeIdea:
+        {
+            CLIdeaObjModel *model = self.ideaObjModelList[path.row];
+            
+            [CLDataSaveTool deleteIdea:model];
+            [kAppDelegate reloadAllItems];
+            
+            [self.ideaObjModelList removeObject:model];
+            
+            if (self.tag) {
+                [kAppDelegate reloadAllIdeas];
+                
+            }
+            
+            self.tableBackView.hidden = !(self.ideaObjModelList.count == 0);
+            
+            break;
+        }
+        case kListTypeShow:
+        {
+            CLShowModel *model = self.showModelList[path.row];
+            
+            [CLDataSaveTool deleteShow:model];
+            [kAppDelegate reloadAllItems];
+            
+            [self.showModelList removeObject:model];
+            
+            if (self.tag) {
+                [kAppDelegate reloadAllShows];
+                
+            }
+            self.tableBackView.hidden = !(self.showModelList.count == 0);
+            
+            break;
+        }
+            
+        case kListTypeRoutine:
+        {
+            CLRoutineModel *model = self.routineModelList[path.row];
+            
+            [CLDataSaveTool deleteRoutine:model];
+            [kAppDelegate reloadAllItems];
+            
+            [self.routineModelList removeObject:model];
+            
+            if (self.tag) {
+                [kAppDelegate reloadAllRoutines];
+                
+            }
+            self.tableBackView.hidden = !(self.routineModelList.count == 0);
+            
+            break;
+        }
+        case kListTypeSleight:
+        {
+            CLSleightObjModel *model = self.sleightObjModelList[path.row];
+            
+            [CLDataSaveTool deleteSleight:model];
+            [kAppDelegate reloadAllItems];
+            [self.sleightObjModelList removeObject:model];
+            
+            if (self.tag) {
+                [kAppDelegate reloadAllSleights];
+                
+            }
+            self.tableBackView.hidden = !(self.sleightObjModelList.count == 0);
+            
+            break;
+        }
+            
+        case kListTypeProp:
+        {
+            CLPropObjModel *model = self.propObjModelList[path.row];
+            
+            [CLDataSaveTool deleteProp:model];
+            [kAppDelegate reloadAllItems];
+            [self.propObjModelList removeObject:model];
+            
+            if (self.tag) {
+                [kAppDelegate reloadAllProps];
+                
+            }
+            self.tableBackView.hidden = !(self.propObjModelList.count == 0);
+            
+            break;
+        }
+        case kListTypeLines:
+        {
+            CLLinesObjModel *model = self.linesObjModelList[path.row];
+            
+            [CLDataSaveTool deleteLines:model];
+            [kAppDelegate reloadAllItems];
+            [self.linesObjModelList removeObject:model];
+            
+            if (self.tag) {
+                [kAppDelegate reloadAllLines];
+                
+            }
+            self.tableBackView.hidden = !(self.linesObjModelList.count == 0);
+            
+            break;
+        }
+            
+        default:
+            break;
     }
-    
-    [self.allItems removeObject:modelUnknown];
+  
     [self.tableView deleteRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationLeft];
     self.tableBackView.hidden = !(self.allItems.count == 0);
     [[NSNotificationCenter defaultCenter] postNotificationName:kUpdateDataNotification object:self];
@@ -455,31 +917,78 @@
     
     [HUD showAnimated:YES whileExecutingBlock:^{
         
-        id modelUnknown = self.allItems[indexPath.row];
-        if ([modelUnknown isKindOfClass:[CLIdeaObjModel class]]) {
-            CLIdeaObjModel *ideaObjModel = (CLIdeaObjModel *)modelUnknown;
-            
-            self.exportPath = [CLDataExportTool makeDataPackageWithIdea:ideaObjModel passWord:importPassword];
-            
-        } else if ([modelUnknown isKindOfClass:[CLRoutineModel class]]) {
-            CLRoutineModel *routineModel = (CLRoutineModel *)modelUnknown;
-            self.exportPath = [CLDataExportTool makeDataPackageWithRoutine:routineModel passWord:importPassword];
-            
-            
-        } else if ([modelUnknown isKindOfClass:[CLSleightObjModel class]]) {
-            CLSleightObjModel *sleightObjModel = (CLSleightObjModel *)modelUnknown;
-            self.exportPath = [CLDataExportTool makeDataPackageWithSleight:sleightObjModel passWord:importPassword];
-            
-            
-        } else if ([modelUnknown isKindOfClass:[CLPropObjModel class]]) {
-            CLPropObjModel *propObjModel = (CLPropObjModel *)modelUnknown;
-            self.exportPath = [CLDataExportTool makeDataPackageWithProp:propObjModel passWord:importPassword];
-            
-            
-        } else if ([modelUnknown isKindOfClass:[CLLinesObjModel class]]) {
-            CLLinesObjModel *linesObjModel = (CLLinesObjModel *)modelUnknown;
-            self.exportPath = [CLDataExportTool makeDataPackageWithLines:linesObjModel passWord:importPassword];
-            
+        switch (self.listType) {
+            case kListTypeAll:
+            {
+                id modelUnknown = self.allItems[indexPath.row];
+                if ([modelUnknown isKindOfClass:[CLIdeaObjModel class]]) {
+                    CLIdeaObjModel *ideaObjModel = (CLIdeaObjModel *)modelUnknown;
+                    
+                    self.exportPath = [CLDataExportTool makeDataPackageWithIdea:ideaObjModel passWord:importPassword];
+                    
+                } else if ([modelUnknown isKindOfClass:[CLRoutineModel class]]) {
+                    CLRoutineModel *routineModel = (CLRoutineModel *)modelUnknown;
+                    self.exportPath = [CLDataExportTool makeDataPackageWithRoutine:routineModel passWord:importPassword];
+                    
+                    
+                } else if ([modelUnknown isKindOfClass:[CLSleightObjModel class]]) {
+                    CLSleightObjModel *sleightObjModel = (CLSleightObjModel *)modelUnknown;
+                    self.exportPath = [CLDataExportTool makeDataPackageWithSleight:sleightObjModel passWord:importPassword];
+                    
+                    
+                } else if ([modelUnknown isKindOfClass:[CLPropObjModel class]]) {
+                    CLPropObjModel *propObjModel = (CLPropObjModel *)modelUnknown;
+                    self.exportPath = [CLDataExportTool makeDataPackageWithProp:propObjModel passWord:importPassword];
+                    
+                    
+                } else if ([modelUnknown isKindOfClass:[CLLinesObjModel class]]) {
+                    CLLinesObjModel *linesObjModel = (CLLinesObjModel *)modelUnknown;
+                    self.exportPath = [CLDataExportTool makeDataPackageWithLines:linesObjModel passWord:importPassword];
+                    
+                }
+            }
+                break;
+                
+            case kListTypeIdea:
+            {
+                CLIdeaObjModel *ideaObjModel = self.ideaObjModelList[indexPath.row];
+                
+                self.exportPath = [CLDataExportTool makeDataPackageWithIdea:ideaObjModel passWord:importPassword];
+                break;
+            }
+            case kListTypeShow:
+                break;
+                
+            case kListTypeRoutine:
+            {
+                CLRoutineModel *routineModel = self.routineModelList[indexPath.row];
+                self.exportPath = [CLDataExportTool makeDataPackageWithRoutine:routineModel passWord:importPassword];
+                break;
+            }
+            case kListTypeSleight:
+            {
+                CLSleightObjModel *sleightObjModel = self.sleightObjModelList[indexPath.row];
+                self.exportPath = [CLDataExportTool makeDataPackageWithSleight:sleightObjModel passWord:importPassword];
+                
+                break;
+            }
+                
+            case kListTypeProp:
+            {
+                CLPropObjModel *propObjModel = self.propObjModelList[indexPath.row];
+                self.exportPath = [CLDataExportTool makeDataPackageWithProp:propObjModel passWord:importPassword];
+                
+                break;
+            }
+            case kListTypeLines:
+            {
+                CLLinesObjModel *linesObjModel = self.linesObjModelList[indexPath.row];
+                self.exportPath = [CLDataExportTool makeDataPackageWithLines:linesObjModel passWord:importPassword];
+                break;
+            }
+                
+            default:
+                break;
         }
         
     } onQueue:dispatch_get_main_queue() completionBlock:^{
@@ -524,13 +1033,24 @@
 #pragma mark 选中cell跳转
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    id modelUnknown = self.allItems[indexPath.row];
-    if ([modelUnknown isKindOfClass:[CLShowModel class]]) {
+    if (self.listType == kListTypeAll) {
+        id modelUnknown = self.allItems[indexPath.row];
+        if ([modelUnknown isKindOfClass:[CLShowModel class]]) {
+            [self performSegueWithIdentifier:kSegueHomeToShowSegue sender:indexPath];
+        } else {
+            
+            [self performSegueWithIdentifier:kSegueHomeToContentSegue sender:indexPath];
+        }
+    } else if (self.listType == kListTypeShow) {
+        
         [self performSegueWithIdentifier:kSegueHomeToShowSegue sender:indexPath];
+        
     } else {
         
         [self performSegueWithIdentifier:kSegueHomeToContentSegue sender:indexPath];
     }
+    
+
 }
 
 #pragma mark - segue方法
@@ -545,55 +1065,83 @@
         if ([sender isKindOfClass:[NSIndexPath class]]) {
             NSIndexPath *indexPath = (NSIndexPath *)sender;
    
-            id modelUnknown = self.allItems[indexPath.row];
-            if ([modelUnknown isKindOfClass:[CLIdeaObjModel class]]) {
-                CLIdeaObjModel *model = (CLIdeaObjModel *)modelUnknown;
-                vc.contentType = kContentTypeIdea;
-                vc.ideaObjModel = model;
-                
-            } else if ([modelUnknown isKindOfClass:[CLRoutineModel class]]) {
-                CLRoutineModel *model = (CLRoutineModel *)modelUnknown;
-                vc.contentType = kContentTypeRoutine;
-                vc.routineModel = model;
-                
-            } else if ([modelUnknown isKindOfClass:[CLSleightObjModel class]]) {
-                CLSleightObjModel *model = (CLSleightObjModel *)modelUnknown;
-                vc.contentType = kContentTypeSleight;
-                vc.sleightObjModel = model;
-                
-            } else if ([modelUnknown isKindOfClass:[CLPropObjModel class]]) {
-                CLPropObjModel *model = (CLPropObjModel *)modelUnknown;
-                vc.contentType = kContentTypeProp;
-                vc.propObjModel = model;
-                
-            } else if ([modelUnknown isKindOfClass:[CLLinesObjModel class]]) {
-                CLLinesObjModel *model = (CLLinesObjModel *)modelUnknown;
-                vc.contentType = kContentTypeLines;
-                vc.linesObjModel = model;
+            
+            switch (self.listType) {
+                case kListTypeAll:
+                {
+                    id modelUnknown = self.allItems[indexPath.row];
+                    if ([modelUnknown isKindOfClass:[CLIdeaObjModel class]]) {
+                        CLIdeaObjModel *model = (CLIdeaObjModel *)modelUnknown;
+                        vc.contentType = kContentTypeIdea;
+                        vc.ideaObjModel = model;
+                        
+                    } else if ([modelUnknown isKindOfClass:[CLRoutineModel class]]) {
+                        CLRoutineModel *model = (CLRoutineModel *)modelUnknown;
+                        vc.contentType = kContentTypeRoutine;
+                        vc.routineModel = model;
+                        
+                    } else if ([modelUnknown isKindOfClass:[CLSleightObjModel class]]) {
+                        CLSleightObjModel *model = (CLSleightObjModel *)modelUnknown;
+                        vc.contentType = kContentTypeSleight;
+                        vc.sleightObjModel = model;
+                        
+                    } else if ([modelUnknown isKindOfClass:[CLPropObjModel class]]) {
+                        CLPropObjModel *model = (CLPropObjModel *)modelUnknown;
+                        vc.contentType = kContentTypeProp;
+                        vc.propObjModel = model;
+                        
+                    } else if ([modelUnknown isKindOfClass:[CLLinesObjModel class]]) {
+                        CLLinesObjModel *model = (CLLinesObjModel *)modelUnknown;
+                        vc.contentType = kContentTypeLines;
+                        vc.linesObjModel = model;
+                    }
+
+                }
+                    break;
+                    
+                case kListTypeIdea:
+                {
+                    CLIdeaObjModel *model = self.ideaObjModelList[indexPath.row];
+                    vc.contentType = kContentTypeIdea;
+                    vc.ideaObjModel = model;
+                    break;
+                }
+                    
+                case kListTypeRoutine:
+                {
+                    CLRoutineModel *model = self.routineModelList[indexPath.row];
+                    vc.contentType = kContentTypeRoutine;
+                    vc.routineModel = model;
+                    break;
+                }
+                case kListTypeSleight:
+                {
+                    CLSleightObjModel *model = self.sleightObjModelList[indexPath.row];
+                    vc.contentType = kContentTypeSleight;
+                    vc.sleightObjModel = model;
+                    break;
+                }
+                    
+                    
+                case kListTypeProp:
+                {
+                    CLPropObjModel *model = self.propObjModelList[indexPath.row];
+                    vc.contentType = kContentTypeProp;
+                    vc.propObjModel = model;
+                    break;
+                }
+                case kListTypeLines:
+                {
+                    CLLinesObjModel *model = self.linesObjModelList[indexPath.row];
+                    vc.contentType = kContentTypeLines;
+                    vc.linesObjModel = model;
+                    break;
+                }
+                    
+                default:
+                    break;
             }
-   
         }
-        
-    } else if ([destVC isKindOfClass:[CLNewEntryNavVC class]]) {
-        CLNewEntryNavVC *vc = (CLNewEntryNavVC *)destVC;
-        
-        vc.editingContentType = self.editingContentType;
-        
-        if (self.editingContentType == kEditingContentTypeIdea) {
-            vc.ideaObjModel = kDataListIdea[0];
-        } else if (self.editingContentType == kEditingContentTypeRoutine) {
-            vc.routineModel = kDataListRoutine[0];
-        } else if (self.editingContentType == kEditingContentTypeSleight) {
-            vc.sleightObjModel = kDataListSleight[0];
-        } else if (self.editingContentType == kEditingContentTypeProp) {
-            vc.propObjModel = kDataListProp[0];
-        } else if (self.editingContentType == kEditingContentTypeLines) {
-            vc.linesObjModel = kDataListLines[0];
-        }
-    } else if ([destVC isKindOfClass:[CLNewShowNavVC class]]) {
-        CLNewShowNavVC *vc = (CLNewShowNavVC *)destVC;
-        
-        vc.showModel = kDataListShow[0];
         
     } else if ([destVC isKindOfClass:[CLShowVC class]]) {
         CLShowVC *vc = (CLShowVC *)destVC;
@@ -615,134 +1163,117 @@
 
 #pragma mark - 新建笔记方法
 
-- (IBAction)addNewEntry:(id)sender {
+- (void)addNewEntry:(id)sender {
 
-    [self addNewEntry];
+    switch (self.listType) {
+        case kListTypeAll:
+            [self addNewEntry];
+            break;
+            
+        case kListTypeIdea:
+            [self addNewIdea];
+            break;
+            
+        case kListTypeShow:
+            [self addNewShow];
+            break;
+            
+        case kListTypeRoutine:
+            [self addNewRoutine];
+            break;
+            
+        case kListTypeSleight:
+            [self addNewSleight];
+            break;
+            
+        case kListTypeProp:
+            [self addNewProp];
+            break;
+            
+        case kListTypeLines:
+            [self addNewLines];
+            break;
+            
+        default:
+            break;
+    }
+    
+    if (self.listType == kListTypeAll) {
+        return;
+    }
+//    滚动到第一行
+//    if ([self.tableView numberOfRowsInSection:0] > 0) {
+//        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
+//        
+//    }
+    
 }
+
 
 - (void)addNewEntry {
     
-    JGActionSheetSection *section1 = [JGActionSheetSection sectionWithTitle:nil message:nil buttonTitles:@[NSLocalizedString(@"新建灵感", nil), NSLocalizedString(@"新建演出", nil), NSLocalizedString(@"新建流程", nil), NSLocalizedString(@"新建技巧", nil), NSLocalizedString(@"新建道具", nil), NSLocalizedString(@"新建台词", nil)] buttonStyle:JGActionSheetButtonStyleDefault];
-    JGActionSheetSection *cancelSection = [JGActionSheetSection sectionWithTitle:nil message:nil buttonTitles:@[NSLocalizedString(@"取消", nil)] buttonStyle:JGActionSheetButtonStyleCancel];
+    [self toggleAddView];
+}
+
+- (void)addNewIdeaWithVideo {
     
-    NSArray *sections = @[section1, cancelSection];
-    
-    JGActionSheet *sheet = [JGActionSheet actionSheetWithSections:sections];
-    sheet.backgroundColor = [UIColor colorWithWhite:0.1 alpha:0.9];
-    
-    [sheet setButtonPressedBlock:^(JGActionSheet *sheet, NSIndexPath *indexPath) {
+    [[CLGetMediaTool getInstance] recordVideoFromCurrentController:self maximumDuration:30.0 resultBlock:^(NSURL *videoURL) {
         
-        if (indexPath.section == 0) {
-            switch (indexPath.row) {
-                case 0:
-                    [self addNewIdea];
-                    break;
-                case 1:
-                    [self addNewShow];
-                    break;
-                    
-                case 2:
-                    [self addNewRoutine];
-                    break;
-                case 3:
-                    [self addNewSleight];
-                    break;
-                case 4:
-                    [self addNewProp];
-                    break;
-                case 5:
-                    [self addNewLines];
-                    break;
-                default:
-                    break;
-            }
-            
-        }
-        
-        [sheet dismissAnimated:YES];
-        
-        if ([self.tableView numberOfRowsInSection:0] > 0) {
-            [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
-            
-        }    }];
+        [CLNewEntryTool addNewIdeaFromCurrentController:self withVideo:videoURL];
+    }];
+}
+
+- (void)addNewRoutineWithVideo {
     
-    [sheet showInView:self.tabBarController.view animated:YES];
+    [[CLGetMediaTool getInstance] recordVideoFromCurrentController:self maximumDuration:30.0 resultBlock:^(NSURL *videoURL) {
+        
+        [CLNewEntryTool addNewRoutineFromCurrentController:self withVideo:videoURL];
+    }];
+}
+
+- (void)addNewSleightWithVideo {
+    
+    [[CLGetMediaTool getInstance] recordVideoFromCurrentController:self maximumDuration:30.0 resultBlock:^(NSURL *videoURL) {
+        
+        [CLNewEntryTool addNewSleightFromCurrentController:self withVideo:videoURL];
+    }];
+}
+
+- (void)addNewPropWithVideo {
+    
+    [[CLGetMediaTool getInstance] recordVideoFromCurrentController:self maximumDuration:30.0 resultBlock:^(NSURL *videoURL) {
+        
+        [CLNewEntryTool addNewPropFromCurrentController:self withVideo:videoURL];
+    }];
 }
 
 - (void)addNewIdea {
-    self.editingContentType = kEditingContentTypeIdea;
-    
-    // 创建一个新的routineModel,传递给newRoutineVC,并添加到routineModelList中
-    CLIdeaObjModel *model = [CLIdeaObjModel ideaObjModel];
-    
-    // 将新增的model放在数组第一个,这样在现实到list中时,新增的model会显示在最上面
-    [kDataListIdea insertObject:model atIndex:0];
-    [kDataListAll insertObject:model atIndex:0];
-    
-    [self performSegueWithIdentifier:kSegueHomeToNewEntrySegue sender:nil];
+        
+    [CLNewEntryTool addNewIdeaFromCurrentController:self withVideo:nil];
 }
 
 - (void)addNewShow {
-    
-    // 创建一个新的routineModel,传递给newRoutineVC,并添加到routineModelList中
-    CLShowModel *model = [CLShowModel showModel];
-    
-    // 将新增的model放在数组第一个,这样在现实到list中时,新增的model会显示在最上面
-    [kDataListShow insertObject:model atIndex:0];
-    [kDataListAll insertObject:model atIndex:0];
-    
-    [self performSegueWithIdentifier:kSegueHomeToNewShowSegue sender:nil];
+
+    [CLNewEntryTool addNewShowFromCurrentController:self];
 }
 
 - (void)addNewRoutine {
-    
-    self.editingContentType = kEditingContentTypeRoutine;
-    
-    // 创建一个新的routineModel,传递给newRoutineVC,并添加到routineModelList中
-    CLRoutineModel *model = [CLRoutineModel routineModel];
-    
-    // 将新增的model放在数组第一个,这样在现实到list中时,新增的model会显示在最上面
-    [kDataListRoutine insertObject:model atIndex:0];
-    [kDataListAll insertObject:model atIndex:0];
-    
-    [self performSegueWithIdentifier:kSegueHomeToNewEntrySegue sender:nil];
+
+    [CLNewEntryTool addNewRoutineFromCurrentController:self withVideo:nil];
 }
 
 - (void)addNewSleight {
-    self.editingContentType = kEditingContentTypeSleight;
     
-    // 创建一个新的routineModel,传递给newRoutineVC,并添加到routineModelList中
-    CLSleightObjModel *model = [CLSleightObjModel sleightObjModel];
-    
-    // 将新增的model放在数组第一个,这样在现实到list中时,新增的model会显示在最上面
-    [kDataListSleight insertObject:model atIndex:0];
-    [kDataListAll insertObject:model atIndex:0];
-    
-    [self performSegueWithIdentifier:kSegueHomeToNewEntrySegue sender:nil];
+    [CLNewEntryTool addNewSleightFromCurrentController:self withVideo:nil];
 }
 
 - (void)addNewProp {
-    self.editingContentType = kEditingContentTypeProp;
-    // 创建一个新的routineModel,传递给newRoutineVC,并添加到routineModelList中
-    CLPropObjModel *model = [CLPropObjModel propObjModel];
-    
-    // 将新增的model放在数组第一个,这样在现实到list中时,新增的model会显示在最上面
-    [kDataListProp insertObject:model atIndex:0];
-    [kDataListAll insertObject:model atIndex:0];
-    
-    [self performSegueWithIdentifier:kSegueHomeToNewEntrySegue sender:nil];
+
+    [CLNewEntryTool addNewPropFromCurrentController:self withVideo:nil];
 }
 
 - (void)addNewLines {
-    self.editingContentType = kEditingContentTypeLines;
-    // 创建一个新的routineModel,传递给newRoutineVC,并添加到routineModelList中
-    CLLinesObjModel *model = [CLLinesObjModel linesObjModel];
-    
-    // 将新增的model放在数组第一个,这样在现实到list中时,新增的model会显示在最上面
-    [kDataListLines insertObject:model atIndex:0];
-    [kDataListAll insertObject:model atIndex:0];
-    
-    [self performSegueWithIdentifier:kSegueHomeToNewEntrySegue sender:nil];
+    [CLNewEntryTool addNewLinesFromCurrentController:self];
 }
 
 

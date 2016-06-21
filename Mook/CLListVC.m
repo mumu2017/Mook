@@ -33,9 +33,11 @@
 #import "CLPerformModel.h"
 //#import "CLNotesModel.h"
 
-#import "JGActionSheet.h"
 #import "CLTableBackView.h"
 
+#import "Masonry.h"
+#import "CLAddView.h"
+#import "Pop.h"
 
 @interface CLListVC ()<SWTableViewCellDelegate, MBProgressHUDDelegate, UIDocumentInteractionControllerDelegate>
 
@@ -46,9 +48,83 @@
 @property (nonatomic, strong) UIDocumentInteractionController *documentInteractionController;
 @property (nonatomic, copy) NSString *exportPath;
 
+@property (strong, nonatomic) UIButton *addButton;
+@property (strong, nonatomic) UIButton *coverButton;
+
+@property (strong, nonatomic) CLAddView *addView;
+
 @end
 
 @implementation CLListVC
+
+
+- (UIButton *)coverButton {
+    if (!_coverButton) {
+        _coverButton = [[UIButton alloc] initWithFrame:self.navigationController.view.frame];
+        [self.navigationController.view addSubview:_coverButton];
+        _coverButton.backgroundColor = [UIColor darkGrayColor];
+        _coverButton.alpha = 0.0;
+        _coverButton.enabled = NO;
+        
+        [_coverButton addTarget:self action:@selector(toggleAddView) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _coverButton;
+}
+
+- (UIButton *)addButton {
+    if (!_addButton) {
+        _addButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [self.navigationController.view addSubview:_addButton];
+        
+        [_addButton addTarget:self action:@selector(addNewEntry:) forControlEvents:UIControlEventTouchUpInside];
+        //        [_addButton setTitle:@"添加" forState:UIControlStateNormal];
+        [_addButton setImage:[UIImage imageNamed:@"plus"] forState:UIControlStateNormal];
+        [_addButton mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.right.equalTo(self.navigationController.view.mas_right).with.offset(-15);
+            make.bottom.equalTo(self.navigationController.view.mas_bottom).with.offset(-15);
+            make.width.height.equalTo(@66);
+        }];
+        _addButton.layer.cornerRadius = 33;
+        _addButton.backgroundColor = [kAppThemeColor darkenByPercentage:0.05];
+        _addButton.alpha = 1.0f;
+        
+    }
+    
+    return _addButton;
+}
+
+- (CLAddView *)addView {
+    if (!_addView) {
+        _addView = [[CLAddView alloc] initWithFrame:CGRectMake(self.addButton.center.x, self.addButton.center.y, 0, 0)];
+        [self.navigationController.view addSubview:_addView];
+        _addView.hidden = NO;
+        
+        [_addView mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.width.equalTo(self.navigationController.view.mas_width).offset( -kAddButtonHeight);
+            make.height.equalTo(_addView.mas_width).multipliedBy(1.5);
+            make.centerX.equalTo(self.navigationController.view);
+            make.top.equalTo(self.navigationController.view.mas_bottom).offset(_addView.frame.size.height);
+        }];
+        _addView.center = CGPointMake(self.navigationController.view.center.x, CGRectGetMaxY(self.navigationController.view.frame)+self.addView.frame.size.height/2);
+        
+        _addView.backgroundColor = [UIColor clearColor];
+        [_addView initSubViews];
+        [_addView updateColor:self.addButton.backgroundColor];
+        
+        [_addView addTarget:self action:@selector(toggleAddView) forControlEvents:UIControlEventTouchUpInside];
+        
+        [_addView.ideaBtn addTarget:self action:@selector(addNewIdea) forControlEvents:UIControlEventTouchUpInside];
+        [_addView.showBtn addTarget:self action:@selector(addNewShow) forControlEvents:UIControlEventTouchUpInside];
+        [_addView.routineBtn addTarget:self action:@selector(addNewRoutine) forControlEvents:UIControlEventTouchUpInside];
+        [_addView.sleightBtn addTarget:self action:@selector(addNewSleight) forControlEvents:UIControlEventTouchUpInside];
+        [_addView.propBtn addTarget:self action:@selector(addNewProp) forControlEvents:UIControlEventTouchUpInside];
+        [_addView.linesBtn addTarget:self action:@selector(addNewLines) forControlEvents:UIControlEventTouchUpInside];
+    }
+    
+    return _addView;
+}
+
 
 #pragma mark - 模型数组懒加载
 
@@ -92,12 +168,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    [self coverButton];
+
     self.tableView.backgroundView = self.tableBackView;
     self.tableView.backgroundColor = [UIColor whiteColor];
     self.tableView.rowHeight = kListCellHeight;
     self.tableView.tableFooterView = [UIView new];
-    
+    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 96, 0);
+
     [self.tableView registerNib:[UINib nibWithNibName:@"CLListCell"
                                                bundle:nil]
          forCellReuseIdentifier:kListCellID];
@@ -114,18 +192,67 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeEntryIfWithTag:) name:kCancelEntryNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(update:) name:kUpdateDataNotification
                                                object:nil];
+    
+    [self addView];
+    [self addButton];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
 //    [self.tableView reloadData];
+    self.addButton.hidden = NO;
 
     [self.navigationController setToolbarHidden:YES];
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    self.addButton.hidden = YES;
+    if (self.addView.center.y == self.navigationController.view.center.y) {
+        [self toggleAddView];
+    }
+    //    [self hidePop];
+}
+
+- (void)toggleAddView {
+    POPSpringAnimation *springAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerPosition];
+    
+    //弹性值
+    springAnimation.springBounciness = 10.0;
+    //弹性速度
+    springAnimation.springSpeed = 15.0;
+    
+    CGPoint point = self.addView.center;
+    
+    if (point.y == self.navigationController.view.center.y) {
+        
+        springAnimation.toValue = [NSValue valueWithCGPoint:CGPointMake(point.x, CGRectGetMaxY(self.navigationController.view.frame)+self.addView.frame.size.height)];
+        
+        self.coverButton.enabled = NO;
+        self.coverButton.alpha = 0.0;
+        [self.addView pop_addAnimation:springAnimation forKey:@"changeposition"];
+        
+        [_addButton setImage:[UIImage imageNamed:@"plus"] forState:UIControlStateNormal];
+        
+    }
+    else{
+        springAnimation.toValue = [NSValue valueWithCGPoint:CGPointMake(point.x, self.navigationController.view.center.y)];
+        [self.addView pop_addAnimation:springAnimation forKey:@"changeposition"];
+        
+        self.coverButton.enabled = YES;
+        self.coverButton.alpha = 0.9;
+        [_addButton setImage:[UIImage imageNamed:@"cancel"] forState:UIControlStateNormal];
+    }
+    
+}
+
+
 - (void)update:(NSNotification *)noti {
     if (noti.object == self) return;
     
+    self.addButton.backgroundColor = [kAppThemeColor darkenByPercentage:0.05];
+    [self.addView updateColor:self.addButton.backgroundColor];
     [self.tableView reloadData];
 }
 
@@ -772,17 +899,29 @@
         vc.editingContentType = self.editingContentType;
         
         if (self.editingContentType == kEditingContentTypeIdea) {
-            vc.ideaObjModel = [(AppDelegate *)[[UIApplication sharedApplication] delegate] ideaObjModelList][0];
-            
+            vc.ideaObjModel = kDataListIdea[0];
         } else if (self.editingContentType == kEditingContentTypeRoutine) {
-            vc.routineModel = [(AppDelegate *)[[UIApplication sharedApplication] delegate] routineModelList][0];
+            vc.routineModel = kDataListRoutine[0];
         } else if (self.editingContentType == kEditingContentTypeSleight) {
-            vc.sleightObjModel = [(AppDelegate *)[[UIApplication sharedApplication] delegate] sleightObjModelList][0];
+            vc.sleightObjModel = kDataListSleight[0];
         } else if (self.editingContentType == kEditingContentTypeProp) {
-            vc.propObjModel = [(AppDelegate *)[[UIApplication sharedApplication] delegate] propObjModelList][0];
+            vc.propObjModel = kDataListProp[0];
         } else if (self.editingContentType == kEditingContentTypeLines) {
-            vc.linesObjModel = [(AppDelegate *)[[UIApplication sharedApplication] delegate] linesObjModelList][0];
+            vc.linesObjModel = kDataListLines[0];
         }
+        
+//        if (self.editingContentType == kEditingContentTypeIdea) {
+//            vc.ideaObjModel = [(AppDelegate *)[[UIApplication sharedApplication] delegate] ideaObjModelList][0];
+//            
+//        } else if (self.editingContentType == kEditingContentTypeRoutine) {
+//            vc.routineModel = [(AppDelegate *)[[UIApplication sharedApplication] delegate] routineModelList][0];
+//        } else if (self.editingContentType == kEditingContentTypeSleight) {
+//            vc.sleightObjModel = [(AppDelegate *)[[UIApplication sharedApplication] delegate] sleightObjModelList][0];
+//        } else if (self.editingContentType == kEditingContentTypeProp) {
+//            vc.propObjModel = [(AppDelegate *)[[UIApplication sharedApplication] delegate] propObjModelList][0];
+//        } else if (self.editingContentType == kEditingContentTypeLines) {
+//            vc.linesObjModel = [(AppDelegate *)[[UIApplication sharedApplication] delegate] linesObjModelList][0];
+//        }
     } else if ([destVC isKindOfClass:[CLNewShowNavVC class]]) {
         CLNewShowNavVC *vc = (CLNewShowNavVC *)destVC;
         vc.showModel = kDataListShow[0];

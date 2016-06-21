@@ -14,12 +14,22 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>BTNavigationDropdownMenu.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>ChameleonFramework.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
 		<key>DACircularProgress.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>DZNWebViewController.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -54,6 +64,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Masonry.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-Mook.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -74,6 +89,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>pop.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
@@ -87,17 +107,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>251846D58CC268DF8CAC44403F0120E1</key>
+		<key>2EC2A498F5E807A18D44259B7835E7A5</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>3A6F19ABAA9AD85C32D4C8B28F3906F7</key>
+		<key>40FEC0329FBE5A5EEA4560E3D81C1BA2</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>6461FF73E606AC17ECB9C28944E4F30F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>6918E3DB32B2936FD18B206A341CEDE0</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -122,17 +147,27 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>A9A83F63385AA43314397B8DD375464B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>AB045440E0FF21FA9AA0E0A151C95FDB</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>BE7A5E8E0FDE9CA58316BC4D6568818D</key>
+		<key>B0DCE9AC6E91805C32212C9F0BDFDDF6</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>D2B1BE047A4B4209BB54E4DDA1D4BE88</key>
+		<key>B7EC1573C5C27C408A16D2CF528EE170</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>BE7A5E8E0FDE9CA58316BC4D6568818D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -143,6 +178,11 @@
 			<true/>
 		</dict>
 		<key>E61CE3B6DFA1FE6B3E296965C76C0E10</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>FD23F1DA220A44C7E84F356B64871271</key>
 		<dict>
 			<key>primary</key>
 			<true/>

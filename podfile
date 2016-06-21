@@ -9,5 +9,9 @@ target ‘Mook’ do
  pod 'SSZipArchive'
  pod 'EAIntroView', '~> 2.8.0'
  pod "Appirater"
- end
+ pod 'pop'
+ pod 'Masonry' 
+ pod 'BTNavigationDropdownMenu'
+ pod 'DZNWebViewController'
+end
 

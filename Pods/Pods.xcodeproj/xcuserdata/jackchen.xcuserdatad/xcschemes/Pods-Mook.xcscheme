@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0730"
+   LastUpgradeVersion = "0700"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "251846D58CC268DF8CAC44403F0120E1"
+               BlueprintIdentifier = "40FEC0329FBE5A5EEA4560E3D81C1BA2"
                BuildableName = "Pods_Mook.framework"
                BlueprintName = "Pods-Mook"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "251846D58CC268DF8CAC44403F0120E1"
+            BlueprintIdentifier = "40FEC0329FBE5A5EEA4560E3D81C1BA2"
             BuildableName = "Pods_Mook.framework"
             BlueprintName = "Pods-Mook"
             ReferencedContainer = "container:Pods.xcodeproj">

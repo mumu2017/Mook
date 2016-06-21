@@ -42,7 +42,8 @@
     
 //    UIColor *typeViewBackgroundColor = [[UIColor flatBlackColorDark] lightenByPercentage:0.2];
     
-    UIColor *typeViewBackgroundColor = [UIColor colorWithRandomFlatColorOfShadeStyle:UIShadeStyleDark];
+//    UIColor *typeViewBackgroundColor = [UIColor colorWithRandomFlatColorOfShadeStyle:UIShadeStyleDark];
+    UIColor *typeViewBackgroundColor = [UIColor grayColor];
     UIColor *typeLabelTextColor = [UIColor colorWithContrastingBlackOrWhiteColorOn:typeViewBackgroundColor isFlat:YES];
     
     self.typeView.backgroundColor = typeViewBackgroundColor;

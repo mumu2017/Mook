@@ -394,7 +394,8 @@
     } else {
         self.navigationItem.leftBarButtonItem = nil;
     }
-
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(saveButtonClicked:)];
     
     [self setTableViewStatus];
     

@@ -151,9 +151,9 @@
     [[UITabBar appearance] setTintColor:self.themeColor];
     
 //     设置导航栏没有边线
-//    [[UINavigationBar appearance] setBackgroundImage:[[UIImage alloc] init]
-//                                      forBarPosition:UIBarPositionAny
-//                                          barMetrics:UIBarMetricsDefault];
+    [[UINavigationBar appearance] setBackgroundImage:[[UIImage alloc] init]
+                                      forBarPosition:UIBarPositionAny
+                                          barMetrics:UIBarMetricsDefault];
     
     [[UINavigationBar appearance] setShadowImage:[[UIImage alloc] init]];
     [[UINavigationBar appearance] setTranslucent:NO];

@@ -10,4 +10,6 @@
 
 @interface CLAllItemsListVC : UITableViewController
 
+@property (nonatomic, assign) ListType listType;
+
 @end
