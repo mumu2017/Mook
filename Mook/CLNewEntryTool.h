@@ -13,14 +13,13 @@
 + (void)addNewShowFromCurrentController:(UIViewController *)controller;
 
 
-+ (void)addNewIdeaFromCurrentController:(UIViewController *)controller withVideo:(NSURL *)videoURL;
++ (void)addNewIdeaFromCurrentController:(UIViewController *)controller withVideo:(NSURL *)videoURL orImage:(UIImage *)image;
 
++ (void)addNewRoutineFromCurrentController:(UIViewController *)controller withVideo:(NSURL *)videoURL orImage:(UIImage *)image;;
 
-+ (void)addNewRoutineFromCurrentController:(UIViewController *)controller withVideo:(NSURL *)videoURL;
++ (void)addNewSleightFromCurrentController:(UIViewController *)controller withVideo:(NSURL *)videoURL orImage:(UIImage *)image;;
 
-+ (void)addNewSleightFromCurrentController:(UIViewController *)controller withVideo:(NSURL *)videoURL;
-
-+ (void)addNewPropFromCurrentController:(UIViewController *)controller withVideo:(NSURL *)videoURL;
++ (void)addNewPropFromCurrentController:(UIViewController *)controller withVideo:(NSURL *)videoURL orImage:(UIImage *)image;;
 
 + (void)addNewLinesFromCurrentController:(UIViewController *)controller ;
 

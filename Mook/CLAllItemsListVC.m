@@ -1218,49 +1218,39 @@
     [self toggleAddView];
 }
 
+
 - (void)addNewIdeaWithVideo {
     
-    [[CLGetMediaTool getInstance] recordVideoFromCurrentController:self maximumDuration:30.0 resultBlock:^(NSURL *videoURL) {
-        
-        [CLNewEntryTool addNewIdeaFromCurrentController:self withVideo:videoURL];
+    [[CLGetMediaTool getInstance] loadCameraFromCurrentViewController:self maximumDuration:30.0 completion:^(NSURL *videoURL, UIImage *photo) {
+        [CLNewEntryTool addNewIdeaFromCurrentController:self withVideo:videoURL orImage:photo];
     }];
 }
 
 - (void)addNewRoutineWithVideo {
     
-    [[CLGetMediaTool getInstance] recordVideoFromCurrentController:self maximumDuration:30.0 resultBlock:^(NSURL *videoURL) {
-        
-        [CLNewEntryTool addNewRoutineFromCurrentController:self withVideo:videoURL];
+    [[CLGetMediaTool getInstance] loadCameraFromCurrentViewController:self maximumDuration:30.0 completion:^(NSURL *videoURL, UIImage *photo) {
+        [CLNewEntryTool addNewRoutineFromCurrentController:self withVideo:videoURL orImage:photo];
     }];
 }
 
 - (void)addNewSleightWithVideo {
     
-    [[CLGetMediaTool getInstance] recordVideoFromCurrentController:self maximumDuration:30.0 resultBlock:^(NSURL *videoURL) {
-        
-        [CLNewEntryTool addNewSleightFromCurrentController:self withVideo:videoURL];
+    [[CLGetMediaTool getInstance] loadCameraFromCurrentViewController:self maximumDuration:30.0 completion:^(NSURL *videoURL, UIImage *photo) {
+        [CLNewEntryTool addNewSleightFromCurrentController:self withVideo:videoURL orImage:photo];
     }];
 }
 
 - (void)addNewPropWithVideo {
     
-    [[CLGetMediaTool getInstance] recordVideoFromCurrentController:self maximumDuration:30.0 resultBlock:^(NSURL *videoURL) {
+    [[CLGetMediaTool getInstance] loadCameraFromCurrentViewController:self maximumDuration:30.0 completion:^(NSURL *videoURL, UIImage *photo) {
+        [CLNewEntryTool addNewPropFromCurrentController:self withVideo:videoURL orImage:photo];
         
-        [CLNewEntryTool addNewPropFromCurrentController:self withVideo:videoURL];
     }];
 }
 
 - (void)addNewIdea {
-    [CLCameraRecorderVC recordFromCurrentViewController:self completion:^(NSURL *videoURL, UIImage *image) {
-        
-        [self dismissViewControllerAnimated:YES completion:^{
-            [CLNewEntryTool addNewIdeaFromCurrentController:self withVideo:videoURL];
 
-        }];
-
-    }];
-
-//    [CLNewEntryTool addNewIdeaFromCurrentController:self withVideo:nil];
+    [CLNewEntryTool addNewIdeaFromCurrentController:self withVideo:nil orImage:nil];
 }
 
 - (void)addNewShow {
@@ -1270,17 +1260,17 @@
 
 - (void)addNewRoutine {
 
-    [CLNewEntryTool addNewRoutineFromCurrentController:self withVideo:nil];
+    [CLNewEntryTool addNewRoutineFromCurrentController:self withVideo:nil  orImage:nil];
 }
 
 - (void)addNewSleight {
     
-    [CLNewEntryTool addNewSleightFromCurrentController:self withVideo:nil];
+    [CLNewEntryTool addNewSleightFromCurrentController:self withVideo:nil  orImage:nil];
 }
 
 - (void)addNewProp {
 
-    [CLNewEntryTool addNewPropFromCurrentController:self withVideo:nil];
+    [CLNewEntryTool addNewPropFromCurrentController:self withVideo:nil  orImage:nil];
 }
 
 - (void)addNewLines {

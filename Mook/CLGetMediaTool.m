@@ -26,45 +26,33 @@
     return getMediaTool;
 }
 
-- (void)pickAlbumPhotoFromCurrentController:(UIViewController *)controller resultBlock:(ImageBlock)imageBlock {
-    
-    _controller = controller;
-    _imageBlock = imageBlock;
-    
-    UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
-    imagePicker.delegate = self;
-    imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-    
-    imagePicker.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-    imagePicker.allowsEditing = YES;
-    
-    [controller presentViewController:imagePicker animated:YES completion:nil];
-}
+//- (void)pickAlbumPhotoFromCurrentController:(UIViewController *)controller  completion:(CompletionBlock)completion {
+//    
+//    _controller = controller;
+//    _completion = completion;
+//    
+//    UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+//    imagePicker.delegate = self;
+//    imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+//    
+//    imagePicker.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+//    imagePicker.allowsEditing = YES;
+//    
+//    [controller presentViewController:imagePicker animated:YES completion:nil];
+//}
 
-- (void)takePhotoFromCurrentController:(UIViewController *)controller resultBlock:(ImageBlock)imageBlock {
+- (void)pickAlbumMediaFromCurrentController:(UIViewController *)controller maximumDuration:(CGFloat)duration completion:(CompletionBlock)completion {
     
     _controller = controller;
-    _imageBlock = imageBlock;
-    
-    UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
-    imagePicker.delegate = self;
-    imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
-    imagePicker.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-    imagePicker.allowsEditing = YES;
-    
-    [controller presentViewController:imagePicker animated:YES completion:nil];
-}
-
-- (void)pickAlbumVideoFromCurrentController:(UIViewController *)controller maximumDuration:(CGFloat)duration resultBlock:(VideoBlock)videoBlock {
-    
-    _controller = controller;
-    _videoBlock = videoBlock;
+    _completion = completion;
     
     UIImagePickerController *videoPicker = [[UIImagePickerController alloc] init];
     videoPicker.delegate = self;
     videoPicker.modalPresentationStyle = UIModalPresentationCurrentContext;
     videoPicker.mediaTypes =[UIImagePickerController availableMediaTypesForSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
-    videoPicker.mediaTypes = @[(NSString*)kUTTypeMovie, (NSString*)kUTTypeAVIMovie, (NSString*)kUTTypeVideo, (NSString*)kUTTypeMPEG4];
+    
+    [videoPicker setMediaTypes:[UIImagePickerController availableMediaTypesForSourceType:UIImagePickerControllerSourceTypeCamera]];
+//    videoPicker.mediaTypes = @[(NSString*)kUTTypeMovie, (NSString*)kUTTypeAVIMovie, (NSString*)kUTTypeVideo, (NSString*)kUTTypeMPEG4];
     
     videoPicker.allowsEditing = YES;
     videoPicker.videoQuality = UIImagePickerControllerQualityTypeMedium;
@@ -73,16 +61,33 @@
     [controller presentViewController:videoPicker animated:YES completion:nil];
 }
 
-- (void)recordVideoFromCurrentController:(UIViewController *)controller maximumDuration:(CGFloat)duration resultBlock:(VideoBlock)videoBlock {
+
+//- (void)takePhotoFromCurrentController:(UIViewController *)controller  completion:(CompletionBlock)completion {
+//    
+//    _controller = controller;
+//    _completion = completion;
+//    
+//    UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+//    imagePicker.delegate = self;
+//    imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+//    imagePicker.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+//    imagePicker.allowsEditing = YES;
+//    
+//    [controller presentViewController:imagePicker animated:YES completion:nil];
+//}
+
+- (void)loadCameraFromCurrentViewController:(UIViewController *)controller maximumDuration:(CGFloat)duration completion:(CompletionBlock)completion {
     
     _controller = controller;
-    _videoBlock = videoBlock;
+    _completion = completion;
     
     UIImagePickerController *videoPicker = [[UIImagePickerController alloc] init];
     videoPicker.delegate = self;
     videoPicker.sourceType = UIImagePickerControllerSourceTypeCamera;
     
-    [videoPicker setMediaTypes: [NSArray arrayWithObject:(NSString *)kUTTypeMovie]];
+    // 设置mediaTypes为所有的类型,这样照相机界面就可以自由切换图片和视频.
+    [videoPicker setMediaTypes:[UIImagePickerController availableMediaTypesForSourceType:UIImagePickerControllerSourceTypeCamera]];
+//     [NSArray arrayWithObject:(NSString *)kUTTypeMovie]];
     videoPicker.cameraCaptureMode = UIImagePickerControllerCameraCaptureModeVideo;
     
     videoPicker.videoQuality = UIImagePickerControllerQualityTypeMedium;
@@ -95,8 +100,7 @@
 }
 
 
-
-- (void) imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     // 获取选择的媒体类型
     NSString *mediaType = [info objectForKey:UIImagePickerControllerMediaType];
@@ -117,11 +121,12 @@
         
         [picker dismissViewControllerAnimated:YES completion:nil];
         
-        if (_imageBlock) {
-            _imageBlock(image);
+//        if (_imageBlock) {
+//            _imageBlock(image);
+//        }
+        if (_completion) {
+            _completion(nil, image);
         }
-        
-        
         // 如果是视频
     } else if ([mediaType isEqualToString:@"public.movie"]) {
         
@@ -139,14 +144,17 @@
         
         [picker dismissViewControllerAnimated:YES completion:nil];
         
-        if (_videoBlock) {
-            _videoBlock(videoURL);
+//        if (_videoBlock) {
+//            _videoBlock(videoURL);
+//        }
+        if (_completion) {
+            _completion(videoURL, nil);
         }
     }
 
 }
 
-- (void) video:(NSString *)videoPath didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo {
+- (void)video:(NSString *)videoPath didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo {
     //    NSLog(@"Finished saving video with error: %@", error);
 }
 

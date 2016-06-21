@@ -47,7 +47,7 @@
     [controller presentViewController:navVC animated:YES completion:nil];
 }
 
-+ (void)addNewIdeaFromCurrentController:(UIViewController *)controller withVideo:(NSURL *)videoURL {
++ (void)addNewIdeaFromCurrentController:(UIViewController *)controller withVideo:(NSURL *)videoURL orImage:(UIImage *)image {
     
     // 创建一个新的routineModel,传递给newRoutineVC,并添加到routineModelList中
     CLIdeaObjModel *model = [CLIdeaObjModel ideaObjModel];
@@ -58,6 +58,12 @@
         
         model.effectModel.video = videoName;
         [CLDataSaveTool addVideoByName:videoName timesStamp:model.timeStamp content:nil type:kTypeIdea];
+    } else if (image) {
+        NSString *imageName = [kTimestamp stringByAppendingString:@".jpg"];
+        [imageName saveNamedImageToDocument:image];
+        
+        model.effectModel.image = imageName;
+        [CLDataSaveTool addImageByName:imageName timesStamp:model.timeStamp content:nil type:kTypeIdea];
     }
     
     // 将新增的model放在数组第一个,这样在现实到list中时,新增的model会显示在最上面
@@ -74,7 +80,7 @@
     [controller presentViewController:navVC animated:YES completion:nil];
 }
 
-+ (void)addNewRoutineFromCurrentController:(UIViewController *)controller withVideo:(NSURL *)videoURL {
++ (void)addNewRoutineFromCurrentController:(UIViewController *)controller withVideo:(NSURL *)videoURL orImage:(UIImage *)image {
     
     // 创建一个新的routineModel,传递给newRoutineVC,并添加到routineModelList中
     CLRoutineModel *model = [CLRoutineModel routineModel];
@@ -85,6 +91,12 @@
         
         model.effectModel.video = videoName;
         [CLDataSaveTool addVideoByName:videoName timesStamp:model.timeStamp content:nil type:kTypeRoutine];
+    } else if (image) {
+        NSString *imageName = [kTimestamp stringByAppendingString:@".jpg"];
+        [imageName saveNamedImageToDocument:image];
+        
+        model.effectModel.image = imageName;
+        [CLDataSaveTool addImageByName:imageName timesStamp:model.timeStamp content:nil type:kTypeRoutine];
     }
     
     // 将新增的model放在数组第一个,这样在现实到list中时,新增的model会显示在最上面
@@ -101,7 +113,7 @@
     [controller presentViewController:navVC animated:YES completion:nil];
 }
 
-+ (void)addNewSleightFromCurrentController:(UIViewController *)controller withVideo:(NSURL *)videoURL {
++ (void)addNewSleightFromCurrentController:(UIViewController *)controller withVideo:(NSURL *)videoURL orImage:(UIImage *)image {
     
     // 创建一个新的routineModel,传递给newRoutineVC,并添加到routineModelList中
     CLSleightObjModel *model = [CLSleightObjModel sleightObjModel];
@@ -112,6 +124,12 @@
         
         model.effectModel.video = videoName;
         [CLDataSaveTool addVideoByName:videoName timesStamp:model.timeStamp content:nil type:kTypeSleight];
+    } else if (image) {
+        NSString *imageName = [kTimestamp stringByAppendingString:@".jpg"];
+        [imageName saveNamedImageToDocument:image];
+        
+        model.effectModel.image = imageName;
+        [CLDataSaveTool addImageByName:imageName timesStamp:model.timeStamp content:nil type:kTypeSleight];
     }
     
     // 将新增的model放在数组第一个,这样在现实到list中时,新增的model会显示在最上面
@@ -129,7 +147,7 @@
 }
 
 
-+ (void)addNewPropFromCurrentController:(UIViewController *)controller withVideo:(NSURL *)videoURL {
++ (void)addNewPropFromCurrentController:(UIViewController *)controller withVideo:(NSURL *)videoURL orImage:(UIImage *)image {
     
     // 创建一个新的routineModel,传递给newRoutineVC,并添加到routineModelList中
     CLPropObjModel *model = [CLPropObjModel propObjModel];
@@ -140,6 +158,12 @@
         
         model.effectModel.video = videoName;
         [CLDataSaveTool addVideoByName:videoName timesStamp:model.timeStamp content:nil type:kTypeProp];
+    }  else if (image) {
+        NSString *imageName = [kTimestamp stringByAppendingString:@".jpg"];
+        [imageName saveNamedImageToDocument:image];
+        
+        model.effectModel.image = imageName;
+        [CLDataSaveTool addImageByName:imageName timesStamp:model.timeStamp content:nil type:kTypeProp];
     }
     
     // 将新增的model放在数组第一个,这样在现实到list中时,新增的model会显示在最上面

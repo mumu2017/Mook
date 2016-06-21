@@ -207,7 +207,7 @@
 }
 
 
-+ (void)recordFromCurrentViewController:(UIViewController *)controller completion:(completionBlock)completion {
++ (void)loadCameraFromCurrentViewController:(UIViewController *)controller completion:(completionBlock)completion {
     
     UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Recorder" bundle:[NSBundle mainBundle]];
     CLRecorderNavVC *vc = [sb instantiateViewControllerWithIdentifier:@"recorderNavVC"];

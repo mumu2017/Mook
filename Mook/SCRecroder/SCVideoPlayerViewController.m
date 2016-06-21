@@ -8,7 +8,6 @@
 
 #import "SCVideoPlayerViewController.h"
 #import "SCEditVideoViewController.h"
-#import "SCWatermarkOverlayView.h"
 #import "CLRecorderNavVC.h"
 
 @interface SCVideoPlayerViewController ()
@@ -223,9 +222,6 @@
         self.exportView.alpha = 1;
     }];
 
-    SCWatermarkOverlayView *overlay = [SCWatermarkOverlayView new];
-    overlay.date = self.recordSession.date;
-    exportSession.videoConfiguration.overlay = overlay;
     NSLog(@"Starting exporting");
 
     CFTimeInterval time = CACurrentMediaTime();

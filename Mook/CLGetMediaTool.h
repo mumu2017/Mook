@@ -11,25 +11,28 @@
 @interface CLGetMediaTool : NSObject
 
 @property (strong, nonatomic) UIViewController *controller;
-@property (strong, nonatomic) UIImage *photo;
+//@property (strong, nonatomic) UIImage *photo;
+//@property (strong, nonatomic) NSURL *videoURL;
 
-typedef void (^ImageBlock)(UIImage *photo);
-typedef void (^VideoBlock)(NSURL *videoURL);
+//typedef void (^ImageBlock)(UIImage *photo);
+//typedef void (^VideoBlock)(NSURL *videoURL);
+typedef void (^CompletionBlock)(NSURL *videoURL, UIImage *photo);
 
-@property (strong, nonatomic) ImageBlock imageBlock;
-@property (strong, nonatomic) VideoBlock videoBlock;
+//@property (strong, nonatomic) ImageBlock imageBlock;
+//@property (strong, nonatomic) VideoBlock videoBlock;
+@property (strong, nonatomic) CompletionBlock completion;
 
 + (instancetype)getInstance;
 
 #pragma mark - 自己拍摄
-- (void)takePhotoFromCurrentController:(UIViewController *)controller resultBlock:(ImageBlock)imageBlock;
+//- (void)takePhotoFromCurrentController:(UIViewController *)controller resultBlock:(ImageBlock)imageBlock;
 
-- (void)recordVideoFromCurrentController:(UIViewController *)controller maximumDuration:(CGFloat)duration resultBlock:(VideoBlock)videoBlock;
+- (void)loadCameraFromCurrentViewController:(UIViewController *)controller maximumDuration:(CGFloat)duration completion:(CompletionBlock)completion;
 
 #pragma mark - 相册挑选
-- (void)pickAlbumPhotoFromCurrentController:(UIViewController *)controller resultBlock:(ImageBlock)imageBlock;
+//- (void)pickAlbumPhotoFromCurrentController:(UIViewController *)controller resultBlock:(ImageBlock)imageBlock;
 
 
-- (void)pickAlbumVideoFromCurrentController:(UIViewController *)controller maximumDuration:(CGFloat)duration resultBlock:(VideoBlock)videoBlock;
+- (void)pickAlbumMediaFromCurrentController:(UIViewController *)controller maximumDuration:(CGFloat)duration completion:(CompletionBlock)completion;
 
 @end

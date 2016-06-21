@@ -6,6 +6,9 @@
 
 */
 
+"相机拍摄" = "Record";
+"相册导入" = "Photo Album";
+
 "全部" = "All";
 "视频" = "Video";
 "图片" = "Image";

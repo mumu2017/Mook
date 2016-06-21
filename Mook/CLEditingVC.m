@@ -706,12 +706,17 @@
     
     if (self.editingModel == kEditingModeEffect || self.editingModel == kEditingModePrep || self.editingModel == kEditingModePerform) {
         
-        UIAlertAction* takeVideo = [UIAlertAction actionWithTitle:NSLocalizedString(@"拍摄视频", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        UIAlertAction* recordMedia = [UIAlertAction actionWithTitle:NSLocalizedString(@"相机拍摄", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 
-                [[CLGetMediaTool getInstance] recordVideoFromCurrentController:self maximumDuration:self.videoDuration resultBlock:^(NSURL *videoURL) {
-                    [self saveVideo:videoURL];
+                [[CLGetMediaTool getInstance] loadCameraFromCurrentViewController:self maximumDuration:self.videoDuration completion:^(NSURL *videoURL, UIImage *photo) {
+                    
+                    if (videoURL) {
+                        [self saveVideo:videoURL];
+                    } else if (photo) {
+                        [self saveImage:photo];
+                    }
                 }];
             });
             
@@ -719,51 +724,30 @@
             
         }];
         
-        UIAlertAction* pickVideo = [UIAlertAction actionWithTitle:NSLocalizedString(@"相册视频", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        UIAlertAction* pickMedia = [UIAlertAction actionWithTitle:NSLocalizedString(@"相册导入", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 
-                [[CLGetMediaTool getInstance] pickAlbumVideoFromCurrentController:self maximumDuration:self.videoDuration resultBlock:^(NSURL *videoURL) {
-                    [self saveVideo:videoURL];
+                [[CLGetMediaTool getInstance] pickAlbumMediaFromCurrentController:self maximumDuration:self.videoDuration completion:^(NSURL *videoURL, UIImage *photo) {
+                    
+                    if (videoURL) {
+                        [self saveVideo:videoURL];
+                    } else if (photo) {
+                        [self saveImage:photo];
+                    }
                 }];
 
             });
             
         }];
         
-        UIAlertAction* takePhoto = [UIAlertAction actionWithTitle:NSLocalizedString(@"拍摄照片", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            //        prepCell.prepFrame.model.image = image;
-            
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                
-                [[CLGetMediaTool getInstance] takePhotoFromCurrentController:self resultBlock:^(UIImage *photo) {
-                    [self saveImage:photo];
-                }];
-                
-            });
-            
-        }];
-        
-        UIAlertAction* pickPhoto = [UIAlertAction actionWithTitle:NSLocalizedString(@"相册图片", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
-            
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                
-                [[CLGetMediaTool getInstance] pickAlbumPhotoFromCurrentController:self resultBlock:^(UIImage *photo) {
-                    [self saveImage:photo];
-                }];
-                
-            });
-            
-        }];
         
         UIAlertAction* cancel = [UIAlertAction actionWithTitle:NSLocalizedString(@"取消", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
             
         }];
         
-        [alert addAction:takeVideo];
-        [alert addAction:takePhoto];
-        [alert addAction:pickVideo];
-        [alert addAction:pickPhoto];
+        [alert addAction:recordMedia];
+        [alert addAction:pickMedia];
         [alert addAction:cancel];
 
     }
