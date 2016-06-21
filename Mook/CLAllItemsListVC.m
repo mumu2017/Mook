@@ -43,6 +43,9 @@
 #import "BTNavigationDropdownMenu-Swift.h"
 @class BTNavigationDropdownMenu;
 
+
+#import "CLCameraRecorderVC.h"
+
 @interface CLAllItemsListVC ()<SWTableViewCellDelegate, MBProgressHUDDelegate, UIDocumentInteractionControllerDelegate>
 
 @property (nonatomic, strong) NSMutableArray *allItems;
@@ -234,7 +237,7 @@
     self.tableView.backgroundColor = [UIColor whiteColor];
     self.tableView.rowHeight = kListCellHeight;
     self.tableView.tableFooterView = [UIView new];
-    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 96, 0);
+    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, kAddButtonHeight, 0);
     
     self.navigationItem.titleView = self.menu;
     
@@ -1248,8 +1251,16 @@
 }
 
 - (void)addNewIdea {
+    [CLCameraRecorderVC recordFromCurrentViewController:self completion:^(NSURL *videoURL, UIImage *image) {
         
-    [CLNewEntryTool addNewIdeaFromCurrentController:self withVideo:nil];
+        [self dismissViewControllerAnimated:YES completion:^{
+            [CLNewEntryTool addNewIdeaFromCurrentController:self withVideo:videoURL];
+
+        }];
+
+    }];
+
+//    [CLNewEntryTool addNewIdeaFromCurrentController:self withVideo:nil];
 }
 
 - (void)addNewShow {

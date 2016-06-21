@@ -1,18 +1,18 @@
 //
-//  CLTakePhotoVC.m
+//  CLRecorderNavVC.m
 //  Mook
 //
-//  Created by 陈林 on 16/6/20.
+//  Created by 陈林 on 16/6/22.
 //  Copyright © 2016年 Chen Lin. All rights reserved.
 //
 
-#import "CLTakePhotoVC.h"
+#import "CLRecorderNavVC.h"
 
-@interface CLTakePhotoVC ()
+@interface CLRecorderNavVC ()
 
 @end
 
-@implementation CLTakePhotoVC
+@implementation CLRecorderNavVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];

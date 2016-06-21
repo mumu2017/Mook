@@ -331,7 +331,7 @@ static NSString * const reuseIdentifier = @"Cell";
     
     [self coverButton];
     self.navigationItem.titleView = self.menu;
-    
+    self.collectionView.contentInset = UIEdgeInsetsMake(0, 0, kAddButtonHeight, 0);
     self.collectionView.backgroundView = self.tableBackView;
     self.collectionView.alwaysBounceVertical = YES;
     self.collectionView.backgroundColor = [UIColor whiteColor];
