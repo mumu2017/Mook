@@ -86,7 +86,7 @@
         [_addButton addTarget:self action:@selector(addNewEntry:) forControlEvents:UIControlEventTouchUpInside];
         [_addButton setImage:[UIImage imageNamed:@"plus"] forState:UIControlStateNormal];
         [_addButton mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.right.equalTo(self.navigationController.view.mas_right).with.offset(-15);
+            make.right.equalTo(self.navigationController.view.mas_right).with.offset(-10);
             make.bottom.equalTo(self.navigationController.view.mas_bottom).with.offset(-15);
             make.width.height.equalTo(@kAddButtonHeight);
         }];
@@ -109,7 +109,7 @@
         //        [_addButton setTitle:@"添加" forState:UIControlStateNormal];
         [_mediaButton setImage:[UIImage imageNamed:@"addMedia"] forState:UIControlStateNormal];
         [_mediaButton mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.right.equalTo(self.navigationController.view.mas_right).with.offset(-15);
+            make.right.equalTo(self.navigationController.view.mas_right).with.offset(-10);
             make.bottom.equalTo(self.addButton.mas_top).with.offset(-15);
             make.width.height.equalTo(@kAddButtonHeight);
         }];

@@ -115,7 +115,7 @@ typedef enum {
         //        [_addButton setTitle:@"添加" forState:UIControlStateNormal];
         [_mediaButton setImage:[UIImage imageNamed:@"addMedia"] forState:UIControlStateNormal];
         [_mediaButton mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.right.equalTo(self.navigationController.view.mas_right).with.offset(-15);
+            make.right.equalTo(self.navigationController.view.mas_right).with.offset(-10);
             make.bottom.equalTo(self.navigationController.view.mas_bottom).with.offset(-64);
             make.width.height.equalTo(@kAddButtonHeight);
         }];
@@ -334,7 +334,7 @@ static NSString * const reuseIdentifier = @"Cell";
     
     [self coverButton];
     self.navigationItem.titleView = self.menu;
-    self.collectionView.contentInset = UIEdgeInsetsMake(0, 0, kAddButtonHeight, 0);
+    self.collectionView.contentInset = UIEdgeInsetsMake(10, 0, kAddButtonHeight, 0);
     self.collectionView.backgroundView = self.tableBackView;
     self.collectionView.alwaysBounceVertical = YES;
     self.collectionView.backgroundColor = [UIColor whiteColor];
@@ -430,7 +430,7 @@ static NSString * const reuseIdentifier = @"Cell";
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
 //    return CGSizeMake((self.view.frame.size.width-1)/2, (self.view.frame.size.width-1)/2);
-    return CGSizeMake((self.view.frame.size.width-2)/3, (self.view.frame.size.width-2)/3);
+    return CGSizeMake((self.view.frame.size.width-4)/3, (self.view.frame.size.width-4)/3);
 }
 //定义每个UICollectionView 的 margin
 -(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
@@ -440,12 +440,12 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionView *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
 {
-    return 1; // This is the minimum inter item spacing, can be more
+    return 2; // This is the minimum inter item spacing, can be more
 }
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionView *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
 {
-    return 1; // This is the minimum inter item spacing, can be more
+    return 2; // This is the minimum inter item spacing, can be more
 }
 
 #pragma mark <UICollectionViewDelegate>

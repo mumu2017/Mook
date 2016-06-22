@@ -17,33 +17,33 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Hv-JU-cNn">
-                        <rect key="frame" x="108" y="15" width="194" height="20.5"/>
+                        <rect key="frame" x="113" y="12" width="189" height="20.5"/>
                         <color key="tintColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="detail safsafas  sdfsa dsa fdsa fdsa fdsa fda fdafdsa fdsa fda sfaf sf ds fsf ds" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9C8-6j-LAQ">
-                        <rect key="frame" x="108" y="42.5" width="194" height="46"/>
+                        <rect key="frame" x="113" y="37.5" width="189" height="47"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hol-Nr-reY">
-                        <rect key="frame" x="5" y="5" width="88.5" height="88.5"/>
+                        <rect key="frame" x="0.0" y="0.0" width="98.5" height="98.5"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="hol-Nr-reY" secondAttribute="height" multiplier="1:1" id="3co-oC-Bpe"/>
                         </constraints>
                     </imageView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="hol-Nr-reY" firstAttribute="top" secondItem="TzT-1U-qrp" secondAttribute="top" constant="5" id="2YL-40-iv5"/>
-                    <constraint firstItem="9C8-6j-LAQ" firstAttribute="top" secondItem="2Hv-JU-cNn" secondAttribute="bottom" constant="7" id="3sE-1S-zQk"/>
-                    <constraint firstAttribute="bottom" secondItem="hol-Nr-reY" secondAttribute="bottom" constant="5" id="CUd-to-52k"/>
-                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="9C8-6j-LAQ" secondAttribute="bottom" constant="10" id="O9l-Gr-saU"/>
+                    <constraint firstItem="hol-Nr-reY" firstAttribute="top" secondItem="TzT-1U-qrp" secondAttribute="top" id="2YL-40-iv5"/>
+                    <constraint firstItem="9C8-6j-LAQ" firstAttribute="top" secondItem="2Hv-JU-cNn" secondAttribute="bottom" constant="5" id="3sE-1S-zQk"/>
+                    <constraint firstAttribute="bottom" secondItem="hol-Nr-reY" secondAttribute="bottom" id="CUd-to-52k"/>
+                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="9C8-6j-LAQ" secondAttribute="bottom" constant="8" id="O9l-Gr-saU"/>
                     <constraint firstItem="9C8-6j-LAQ" firstAttribute="width" secondItem="2Hv-JU-cNn" secondAttribute="width" id="Qyy-Qu-bEu"/>
-                    <constraint firstItem="hol-Nr-reY" firstAttribute="leading" secondItem="TzT-1U-qrp" secondAttribute="leading" constant="5" id="TYs-dq-Gea"/>
-                    <constraint firstItem="2Hv-JU-cNn" firstAttribute="top" secondItem="TzT-1U-qrp" secondAttribute="top" constant="15" id="XU2-dr-CwF"/>
+                    <constraint firstItem="hol-Nr-reY" firstAttribute="leading" secondItem="TzT-1U-qrp" secondAttribute="leading" id="TYs-dq-Gea"/>
+                    <constraint firstItem="2Hv-JU-cNn" firstAttribute="top" secondItem="TzT-1U-qrp" secondAttribute="top" constant="12" id="XU2-dr-CwF"/>
                     <constraint firstItem="9C8-6j-LAQ" firstAttribute="leading" secondItem="2Hv-JU-cNn" secondAttribute="leading" id="dSP-bN-ddv"/>
                     <constraint firstItem="2Hv-JU-cNn" firstAttribute="leading" secondItem="hol-Nr-reY" secondAttribute="trailing" constant="15" id="m5k-A9-rJc"/>
                     <constraint firstAttribute="trailingMargin" secondItem="2Hv-JU-cNn" secondAttribute="trailing" constant="10" id="rA0-of-cOj"/>
