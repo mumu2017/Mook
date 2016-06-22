@@ -29,7 +29,7 @@
 #import "CLAddView.h"
 
 #import "MASonry.h"
-
+#import "BFPaperButton.h"
 #import "BTNavigationDropdownMenu-Swift.h"
 @class BTNavigationDropdownMenu;
 
@@ -56,7 +56,7 @@ typedef enum {
 
 @property (nonatomic, strong) CLTableBackView *tableBackView;
 
-@property (strong, nonatomic) UIButton *addButton;
+@property (strong, nonatomic) BFPaperButton *mediaButton;
 @property (strong, nonatomic) UIButton *coverButton;
 
 @property (strong, nonatomic) CLAddView *addView;
@@ -106,31 +106,33 @@ typedef enum {
     return _coverButton;
 }
 
-- (UIButton *)addButton {
-    if (!_addButton) {
-        _addButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [self.navigationController.view addSubview:_addButton];
+- (BFPaperButton *)mediaButton {
+    if (!_mediaButton) {
+        _mediaButton = [[BFPaperButton alloc] initWithRaised:YES];
+        [self.navigationController.view addSubview:_mediaButton];
         
-        [_addButton addTarget:self action:@selector(toggleAddView) forControlEvents:UIControlEventTouchUpInside];
+        [_mediaButton addTarget:self action:@selector(toggleAddView) forControlEvents:UIControlEventTouchUpInside];
         //        [_addButton setTitle:@"添加" forState:UIControlStateNormal];
-        [_addButton setImage:[UIImage imageNamed:@"addMedia"] forState:UIControlStateNormal];
-        [_addButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        [_mediaButton setImage:[UIImage imageNamed:@"addMedia"] forState:UIControlStateNormal];
+        [_mediaButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.equalTo(self.navigationController.view.mas_right).with.offset(-15);
             make.bottom.equalTo(self.navigationController.view.mas_bottom).with.offset(-64);
             make.width.height.equalTo(@kAddButtonHeight);
         }];
-        _addButton.layer.cornerRadius = kAddButtonHeight/2;
-        _addButton.backgroundColor = [kAppThemeColor darkenByPercentage:0.05];
-        _addButton.alpha = 1.0f;
+        _mediaButton.cornerRadius = kAddButtonHeight/2;
+        _mediaButton.backgroundColor = [kAppThemeColor darkenByPercentage:0.05];
+        _mediaButton.alpha = 1.0f;
         
     }
     
-    return _addButton;
+    return _mediaButton;
 }
+
+
 
 - (CLAddView *)addView {
     if (!_addView) {
-        _addView = [[CLAddView alloc] initWithFrame:CGRectMake(self.addButton.center.x, self.addButton.center.y, 0, 0)];
+        _addView = [[CLAddView alloc] initWithFrame:CGRectMake(self.mediaButton.center.x, self.mediaButton.center.y, 0, 0)];
         [self.navigationController.view addSubview:_addView];
         _addView.hidden = NO;
         
@@ -145,16 +147,17 @@ typedef enum {
         
         _addView.backgroundColor = [UIColor clearColor];
         [_addView initSubViews];
-        [_addView updateColor:self.addButton.backgroundColor];
+        [_addView updateColor:self.mediaButton.backgroundColor];
         
         [_addView addTarget:self action:@selector(toggleAddView) forControlEvents:UIControlEventTouchUpInside];
         
         [_addView.ideaBtn addTarget:self action:@selector(addNewIdeaWithVideo) forControlEvents:UIControlEventTouchUpInside];
-//        [_addView.showBtn addTarget:self action:@selector(addNewShow) forControlEvents:UIControlEventTouchUpInside];
+        [_addView.showBtn addTarget:self action:@selector(addNewShowWithVideo) forControlEvents:UIControlEventTouchUpInside];
         [_addView.routineBtn addTarget:self action:@selector(addNewRoutineWithVideo) forControlEvents:UIControlEventTouchUpInside];
         [_addView.sleightBtn addTarget:self action:@selector(addNewSleightWithVideo) forControlEvents:UIControlEventTouchUpInside];
         [_addView.propBtn addTarget:self action:@selector(addNewPropWithVideo) forControlEvents:UIControlEventTouchUpInside];
 //        [_addView.linesBtn addTarget:self action:@selector(addNewLines) forControlEvents:UIControlEventTouchUpInside];
+        _addView.linesBtn.hidden = YES;
     }
     
     return _addView;
@@ -344,7 +347,7 @@ static NSString * const reuseIdentifier = @"Cell";
                                                object:nil];
     
     [self addView];
-    [self addButton];
+    [self mediaButton];
 }
 
 //- (void)viewWillAppear:(BOOL)animated {
@@ -363,9 +366,9 @@ static NSString * const reuseIdentifier = @"Cell";
 
     [self.collectionView reloadData];
     
-    self.addButton.backgroundColor = [kAppThemeColor darkenByPercentage:0.05];
+    self.mediaButton.backgroundColor = [kAppThemeColor darkenByPercentage:0.05];
     self.menu.cellBackgroundColor = kAppThemeColor;
-    [self.addView updateColor:self.addButton.backgroundColor];
+    [self.addView updateColor:self.mediaButton.backgroundColor];
 }
 
 - (void) update:(NSNotification *)noti {
@@ -380,14 +383,14 @@ static NSString * const reuseIdentifier = @"Cell";
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    self.addButton.hidden = NO;
+    self.mediaButton.hidden = NO;
     [self.navigationController setToolbarHidden:YES];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     
-    self.addButton.hidden = YES;
+    self.mediaButton.hidden = YES;
     [self.menu hide];
     if (self.addView.center.y == self.navigationController.view.center.y) {
         [self toggleAddView];
@@ -632,7 +635,7 @@ static NSString * const reuseIdentifier = @"Cell";
         self.coverButton.alpha = 0.0;
         [self.addView pop_addAnimation:springAnimation forKey:@"changeposition"];
         
-        [_addButton setImage:[UIImage imageNamed:@"addMedia"] forState:UIControlStateNormal];
+        [_mediaButton setImage:[UIImage imageNamed:@"addMedia"] forState:UIControlStateNormal];
         
     }
     else{
@@ -641,9 +644,16 @@ static NSString * const reuseIdentifier = @"Cell";
         
         self.coverButton.enabled = YES;
         self.coverButton.alpha = 0.9;
-        [_addButton setImage:[UIImage imageNamed:@"cancel"] forState:UIControlStateNormal];
+        [_mediaButton setImage:[UIImage imageNamed:@"cancel"] forState:UIControlStateNormal];
     }
     
+}
+
+- (void)addNewShowWithVideo {
+    
+    [[CLGetMediaTool getInstance] loadCameraFromCurrentViewController:self maximumDuration:600.0 completion:^(NSURL *videoURL, UIImage *photo) {
+        [CLNewEntryTool addNewShowFromCurrentController:self withVideo:videoURL orImage:photo];
+    }];
 }
 
 - (void)addNewIdeaWithVideo {

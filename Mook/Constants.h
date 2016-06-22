@@ -258,7 +258,7 @@ typedef enum {
 #define kScreenH        [UIScreen mainScreen].bounds.size.height
 
 #define kAddButtonHeight    66
-#define kListCellHeight     77
+#define kListCellHeight     90
 #define kStatusBarHeight    20
 #define kNavigationBarHeight    44
 
@@ -416,7 +416,7 @@ typedef enum {
 #define kNewShowInfoText    NSLocalizedString(@"新建演出", nil)
 #define kNewRoutineInfoText    NSLocalizedString(@"新建流程", nil)
 #define kNewIdeaInfoText    NSLocalizedString(@"新建灵感", nil)
-#define kNewSleightInfoText    NSLocalizedString(@"新建手法", nil)
+#define kNewSleightInfoText    NSLocalizedString(@"新建技巧", nil)
 #define kNewPropInfoText    NSLocalizedString(@"新建道具", nil)
 #define kNewLinesInfoText   NSLocalizedString(@"新建台词", nil)
 

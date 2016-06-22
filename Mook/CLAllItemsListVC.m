@@ -43,6 +43,8 @@
 #import "BTNavigationDropdownMenu-Swift.h"
 @class BTNavigationDropdownMenu;
 
+#import "BFPaperButton.h"
+
 @interface CLAllItemsListVC ()<SWTableViewCellDelegate, MBProgressHUDDelegate, UIDocumentInteractionControllerDelegate>
 
 @property (nonatomic, strong) NSMutableArray *allItems;
@@ -61,8 +63,8 @@
 @property (nonatomic, strong) UIDocumentInteractionController *documentInteractionController;
 @property (nonatomic, copy) NSString *exportPath;
 
-@property (strong, nonatomic) UIButton *addButton;
-@property (strong, nonatomic) UIButton *mediaButton;
+@property (strong, nonatomic) BFPaperButton *addButton;
+@property (strong, nonatomic) BFPaperButton *mediaButton;
 
 @property (strong, nonatomic) UIButton *coverButton;
 
@@ -87,20 +89,19 @@
     return _coverButton;
 }
 
-- (UIButton *)addButton {
+- (BFPaperButton *)addButton {
     if (!_addButton) {
-        _addButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        _addButton = [[BFPaperButton alloc] initWithRaised:YES];
         [self.navigationController.view addSubview:_addButton];
         
         [_addButton addTarget:self action:@selector(addNewEntry:) forControlEvents:UIControlEventTouchUpInside];
-//        [_addButton setTitle:@"添加" forState:UIControlStateNormal];
         [_addButton setImage:[UIImage imageNamed:@"plus"] forState:UIControlStateNormal];
         [_addButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.equalTo(self.navigationController.view.mas_right).with.offset(-15);
             make.bottom.equalTo(self.navigationController.view.mas_bottom).with.offset(-64);
             make.width.height.equalTo(@kAddButtonHeight);
         }];
-        _addButton.layer.cornerRadius = kAddButtonHeight/2;
+        _addButton.cornerRadius = kAddButtonHeight/2;
         _addButton.backgroundColor = [kAppThemeColor darkenByPercentage:0.05];
         _addButton.alpha = 1.0f;
         
@@ -110,24 +111,24 @@
 }
 
 
-- (UIButton *)mediaButton {
+- (BFPaperButton *)mediaButton {
     if (!_mediaButton) {
-        _mediaButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        _mediaButton = [[BFPaperButton alloc] initWithRaised:YES];
         [self.navigationController.view addSubview:_mediaButton];
         
         [_mediaButton addTarget:self action:@selector(addNewEntryWithMedia) forControlEvents:UIControlEventTouchUpInside];
         //        [_addButton setTitle:@"添加" forState:UIControlStateNormal];
         [_mediaButton setImage:[UIImage imageNamed:@"addMedia"] forState:UIControlStateNormal];
         [_mediaButton mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.right.equalTo(self.addButton.mas_left).with.offset(-15);
             make.right.equalTo(self.navigationController.view.mas_right).with.offset(-15);
             make.bottom.equalTo(self.addButton.mas_top).with.offset(-15);
             make.width.height.equalTo(@kAddButtonHeight);
         }];
-        _mediaButton.layer.cornerRadius = kAddButtonHeight/2;
+        _mediaButton.cornerRadius = kAddButtonHeight/2;
         _mediaButton.backgroundColor = [kAppThemeColor darkenByPercentage:0.05];
         _mediaButton.alpha = 1.0f;
         _mediaButton.hidden = (self.listType == kListTypeAll);
+
 
     }
     
@@ -263,7 +264,7 @@
     self.tableView.backgroundColor = [UIColor whiteColor];
     self.tableView.rowHeight = kListCellHeight;
     self.tableView.tableFooterView = [UIView new];
-    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, kAddButtonHeight, 0);
+    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, kAddButtonHeight*2, 0);
     
     self.navigationItem.titleView = self.menu;
     
@@ -328,8 +329,12 @@
     self.addButton.backgroundColor = [kAppThemeColor darkenByPercentage:0.05];
     self.menu.cellBackgroundColor = kAppThemeColor;
     self.mediaButton.backgroundColor = self.addButton.backgroundColor;
-    self.mediaButton.hidden = (self.listType == kListTypeAll);
+    
+    if (self.navigationController.visibleViewController == self) {
+        self.mediaButton.hidden = (self.listType == kListTypeAll);
 
+    }
+    
     [self.addView updateColor:self.addButton.backgroundColor];
     [self.tableView reloadData];
 }
@@ -916,7 +921,6 @@
     }
 }
 
-
 // 导出笔记
 - (void)exportEntryWithIndexPath:(NSIndexPath *)indexPath importPassword:(NSString *)importPassword {
     
@@ -1263,7 +1267,7 @@
 
 - (void)addNewShowWithVideo {
     
-    [[CLGetMediaTool getInstance] loadCameraFromCurrentViewController:self maximumDuration:30.0 completion:^(NSURL *videoURL, UIImage *photo) {
+    [[CLGetMediaTool getInstance] loadCameraFromCurrentViewController:self maximumDuration:600.0 completion:^(NSURL *videoURL, UIImage *photo) {
         [CLNewEntryTool addNewShowFromCurrentController:self withVideo:videoURL orImage:photo];
     }];
 }
@@ -1278,7 +1282,7 @@
 
 - (void)addNewRoutineWithVideo {
     
-    [[CLGetMediaTool getInstance] loadCameraFromCurrentViewController:self maximumDuration:30.0 completion:^(NSURL *videoURL, UIImage *photo) {
+    [[CLGetMediaTool getInstance] loadCameraFromCurrentViewController:self maximumDuration:180.0 completion:^(NSURL *videoURL, UIImage *photo) {
         [CLNewEntryTool addNewRoutineFromCurrentController:self withVideo:videoURL orImage:photo];
     }];
 }
@@ -1305,7 +1309,7 @@
 
 - (void)addNewShow {
 
-    [CLNewEntryTool addNewShowFromCurrentController:self];
+    [CLNewEntryTool addNewShowFromCurrentController:self withVideo:nil orImage:nil];
 }
 
 - (void)addNewRoutine {

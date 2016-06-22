@@ -134,4 +134,11 @@
     return themeColor;
 }
 
+- (void)awakeFromNib {
+    [super awakeFromNib];
+    self.typeView.layer.cornerRadius = 3.0;
+//    self.typeView.layer.borderColor = [UIColor lightGrayColor].CGColor;
+//    self.typeView.layer.borderWidth = 0.5;
+}
+
 @end

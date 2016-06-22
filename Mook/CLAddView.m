@@ -20,7 +20,7 @@
 
     CGFloat padding = (self.frame.size.width-kAddButtonHeight*2)/3;
     
-    _ideaBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    _ideaBtn = [[BFPaperButton alloc] initWithRaised:YES];
     [self addSubview:_ideaBtn];
     [_ideaBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.height.equalTo(@kAddButtonHeight);
@@ -28,22 +28,22 @@
         make.left.equalTo(self).offset(-padding);
 
     }];
-    _ideaBtn.layer.cornerRadius = kAddButtonHeight/2;
+    _ideaBtn.cornerRadius = kAddButtonHeight/2;
     [_ideaBtn setTitle:@"灵感" forState:UIControlStateNormal];
 
     // 演出
-    _showBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    _showBtn = [[BFPaperButton alloc] initWithRaised:YES];
     [self addSubview:_showBtn];
     [_showBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.height.equalTo(@kAddButtonHeight);
         make.top.equalTo(self.mas_top).offset(-padding);
         make.right.equalTo(self).offset(padding);
     }];
-    _showBtn.layer.cornerRadius = kAddButtonHeight/2;
+    _showBtn.cornerRadius = kAddButtonHeight/2;
     [_showBtn setTitle:@"演出" forState:UIControlStateNormal];
 
     // 流程
-    _routineBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    _routineBtn = [[BFPaperButton alloc] initWithRaised:YES];
     [self addSubview:_routineBtn];
     [_routineBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.height.equalTo(@kAddButtonHeight);
@@ -51,11 +51,11 @@
         make.centerY.equalTo(self);
         make.left.equalTo(self).offset(-padding);
     }];
-    _routineBtn.layer.cornerRadius = kAddButtonHeight/2;
+    _routineBtn.cornerRadius = kAddButtonHeight/2;
     [_routineBtn setTitle:@"流程" forState:UIControlStateNormal];
 
     // 技巧
-    _sleightBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    _sleightBtn = [[BFPaperButton alloc] initWithRaised:YES];
     [self addSubview:_sleightBtn];
     [_sleightBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.height.equalTo(@kAddButtonHeight);
@@ -63,29 +63,29 @@
         make.centerY.equalTo(self);
         make.right.equalTo(self).offset(padding);
     }];
-    _sleightBtn.layer.cornerRadius = kAddButtonHeight/2;
+    _sleightBtn.cornerRadius = kAddButtonHeight/2;
     [_sleightBtn setTitle:@"技巧" forState:UIControlStateNormal];
 
     // 道具
-    _propBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    _propBtn = [[BFPaperButton alloc] initWithRaised:YES];
     [self addSubview:_propBtn];
     [_propBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.height.equalTo(@kAddButtonHeight);
         make.bottom.equalTo(self).offset(padding);
         make.left.equalTo(self).offset(-padding);
     }];
-    _propBtn.layer.cornerRadius = kAddButtonHeight/2;
+    _propBtn.cornerRadius = kAddButtonHeight/2;
     [_propBtn setTitle:@"道具" forState:UIControlStateNormal];
 
     // 台词
-    _linesBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    _linesBtn = [[BFPaperButton alloc] initWithRaised:YES];
     [self addSubview:_linesBtn];
     [_linesBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.height.equalTo(@kAddButtonHeight);
         make.bottom.equalTo(self).offset(padding);
         make.right.equalTo(self).offset(padding);
     }];
-    _linesBtn.layer.cornerRadius = kAddButtonHeight/2;
+    _linesBtn.cornerRadius = kAddButtonHeight/2;
     [_linesBtn setTitle:@"台词" forState:UIControlStateNormal];
     
 }

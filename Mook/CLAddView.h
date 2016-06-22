@@ -7,16 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BFPaperButton.h"
 
 @interface CLAddView : UIButton
 
 //@property (strong, nonatomic) UIButton *coverBtn;
-@property (strong, nonatomic) UIButton *ideaBtn;
-@property (strong, nonatomic) UIButton *showBtn;
-@property (strong, nonatomic) UIButton *routineBtn;
-@property (strong, nonatomic) UIButton *sleightBtn;
-@property (strong, nonatomic) UIButton *propBtn;
-@property (strong, nonatomic) UIButton *linesBtn;
+@property (strong, nonatomic) BFPaperButton *ideaBtn;
+@property (strong, nonatomic) BFPaperButton *showBtn;
+@property (strong, nonatomic) BFPaperButton *routineBtn;
+@property (strong, nonatomic) BFPaperButton *sleightBtn;
+@property (strong, nonatomic) BFPaperButton *propBtn;
+@property (strong, nonatomic) BFPaperButton *linesBtn;
 
 - (void) initSubViews;
 - (void) updateColor:(UIColor *)color;

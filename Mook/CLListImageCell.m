@@ -35,7 +35,9 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-//    self.iconView.layer.cornerRadius = 3.0;
+    self.iconView.layer.cornerRadius = 3.0;
+//    self.iconView.layer.borderColor = [UIColor lightGrayColor].CGColor;
+//    self.iconView.layer.borderWidth = 0.5;
 }
 
 @end

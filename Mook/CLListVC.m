@@ -8,6 +8,8 @@
 
 #import "CLListVC.h"
 
+#import "CLNewEntryTool.h"
+#import "CLGetMediaTool.h"
 #import "CLDataSaveTool.h"
 #import "CLDataExportTool.h"
 #import "CLNewEntryNavVC.h"
@@ -39,6 +41,8 @@
 #import "CLAddView.h"
 #import "Pop.h"
 
+#import "BFPaperButton.h"
+
 @interface CLListVC ()<SWTableViewCellDelegate, MBProgressHUDDelegate, UIDocumentInteractionControllerDelegate>
 
 @property (nonatomic, strong) NSMutableArray *tagList;
@@ -48,7 +52,10 @@
 @property (nonatomic, strong) UIDocumentInteractionController *documentInteractionController;
 @property (nonatomic, copy) NSString *exportPath;
 
-@property (strong, nonatomic) UIButton *addButton;
+
+@property (strong, nonatomic) BFPaperButton *addButton;
+@property (strong, nonatomic) BFPaperButton *mediaButton;
+
 @property (strong, nonatomic) UIButton *coverButton;
 
 @property (strong, nonatomic) CLAddView *addView;
@@ -71,26 +78,50 @@
     return _coverButton;
 }
 
-- (UIButton *)addButton {
+- (BFPaperButton *)addButton {
     if (!_addButton) {
-        _addButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        _addButton = [[BFPaperButton alloc] initWithRaised:YES];
         [self.navigationController.view addSubview:_addButton];
         
         [_addButton addTarget:self action:@selector(addNewEntry:) forControlEvents:UIControlEventTouchUpInside];
-        //        [_addButton setTitle:@"添加" forState:UIControlStateNormal];
         [_addButton setImage:[UIImage imageNamed:@"plus"] forState:UIControlStateNormal];
         [_addButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.equalTo(self.navigationController.view.mas_right).with.offset(-15);
             make.bottom.equalTo(self.navigationController.view.mas_bottom).with.offset(-15);
-            make.width.height.equalTo(@66);
+            make.width.height.equalTo(@kAddButtonHeight);
         }];
-        _addButton.layer.cornerRadius = 33;
+        _addButton.cornerRadius = kAddButtonHeight/2;
         _addButton.backgroundColor = [kAppThemeColor darkenByPercentage:0.05];
         _addButton.alpha = 1.0f;
         
     }
     
     return _addButton;
+}
+
+
+- (BFPaperButton *)mediaButton {
+    if (!_mediaButton) {
+        _mediaButton = [[BFPaperButton alloc] initWithRaised:YES];
+        [self.navigationController.view addSubview:_mediaButton];
+        
+        [_mediaButton addTarget:self action:@selector(addNewEntryWithMedia) forControlEvents:UIControlEventTouchUpInside];
+        //        [_addButton setTitle:@"添加" forState:UIControlStateNormal];
+        [_mediaButton setImage:[UIImage imageNamed:@"addMedia"] forState:UIControlStateNormal];
+        [_mediaButton mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.right.equalTo(self.navigationController.view.mas_right).with.offset(-15);
+            make.bottom.equalTo(self.addButton.mas_top).with.offset(-15);
+            make.width.height.equalTo(@kAddButtonHeight);
+        }];
+        _mediaButton.cornerRadius = kAddButtonHeight/2;
+        _mediaButton.backgroundColor = [kAppThemeColor darkenByPercentage:0.05];
+        _mediaButton.alpha = 1.0f;
+        _mediaButton.hidden = (self.listType == kListTypeAll);
+        
+        
+    }
+    
+    return _mediaButton;
 }
 
 - (CLAddView *)addView {
@@ -195,13 +226,16 @@
     
     [self addView];
     [self addButton];
+    [self mediaButton];
+
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-//    [self.tableView reloadData];
+    
     self.addButton.hidden = NO;
-
+    self.mediaButton.hidden = (self.listType == kListTypeAll);
+    
     [self.navigationController setToolbarHidden:YES];
 }
 
@@ -209,12 +243,11 @@
     [super viewWillDisappear:animated];
     
     self.addButton.hidden = YES;
+    self.mediaButton.hidden = YES;
     if (self.addView.center.y == self.navigationController.view.center.y) {
         [self toggleAddView];
     }
-    //    [self hidePop];
 }
-
 - (void)toggleAddView {
     POPSpringAnimation *springAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerPosition];
     
@@ -252,6 +285,13 @@
     if (noti.object == self) return;
     
     self.addButton.backgroundColor = [kAppThemeColor darkenByPercentage:0.05];
+    self.mediaButton.backgroundColor = self.addButton.backgroundColor;
+    
+    if (self.navigationController.visibleViewController == self) {
+        self.mediaButton.hidden = (self.listType == kListTypeAll);
+        
+    }
+    
     [self.addView updateColor:self.addButton.backgroundColor];
     [self.tableView reloadData];
 }
@@ -910,18 +950,6 @@
             vc.linesObjModel = kDataListLines[0];
         }
         
-//        if (self.editingContentType == kEditingContentTypeIdea) {
-//            vc.ideaObjModel = [(AppDelegate *)[[UIApplication sharedApplication] delegate] ideaObjModelList][0];
-//            
-//        } else if (self.editingContentType == kEditingContentTypeRoutine) {
-//            vc.routineModel = [(AppDelegate *)[[UIApplication sharedApplication] delegate] routineModelList][0];
-//        } else if (self.editingContentType == kEditingContentTypeSleight) {
-//            vc.sleightObjModel = [(AppDelegate *)[[UIApplication sharedApplication] delegate] sleightObjModelList][0];
-//        } else if (self.editingContentType == kEditingContentTypeProp) {
-//            vc.propObjModel = [(AppDelegate *)[[UIApplication sharedApplication] delegate] propObjModelList][0];
-//        } else if (self.editingContentType == kEditingContentTypeLines) {
-//            vc.linesObjModel = [(AppDelegate *)[[UIApplication sharedApplication] delegate] linesObjModelList][0];
-//        }
     } else if ([destVC isKindOfClass:[CLNewShowNavVC class]]) {
         CLNewShowNavVC *vc = (CLNewShowNavVC *)destVC;
         vc.showModel = kDataListShow[0];
@@ -951,23 +979,23 @@
             break;
             
         case kListTypeIdea:
-            [self addNewIdea];
+            [self addNewIdeaWithVideo:nil orImage:nil];
             break;
           
         case kListTypeShow:
-            [self addNewShow];
+            [self addNewShowWithVideo:nil orImage:nil];
             break;
             
         case kListTypeRoutine:
-            [self addNewRoutine];
+            [self addNewRoutineWithVideo:nil orImage:nil];
             break;
             
         case kListTypeSleight:
-            [self addNewSleight];
+            [self addNewSleightWithVideo:nil orImage:nil];
             break;
             
         case kListTypeProp:
-            [self addNewProp];
+            [self addNewPropWithVideo:nil orImage:nil];
             break;
             
         case kListTypeLines:
@@ -985,12 +1013,99 @@
     
 }
 
-- (void)addNewIdea {
+
+- (void)addNewEntryWithMedia {
+    
+    
+    switch (self.listType) {
+        case kListTypeAll:
+            break;
+            
+        case kListTypeIdea:
+            [self addNewIdeaWithVideo];
+            break;
+            
+        case kListTypeShow:
+            [self addNewShowWithVideo];
+            break;
+            
+        case kListTypeRoutine:
+            [self addNewRoutineWithVideo];
+            break;
+            
+        case kListTypeSleight:
+            [self addNewSleightWithVideo];
+            break;
+            
+        case kListTypeProp:
+            [self addNewPropWithVideo];
+            break;
+            
+#warning 添加录音功能
+        case kListTypeLines:
+            
+            break;
+            
+        default:
+            break;
+    }
+}
+
+- (void)addNewShowWithVideo {
+    
+    [[CLGetMediaTool getInstance] loadCameraFromCurrentViewController:self maximumDuration:600.0 completion:^(NSURL *videoURL, UIImage *photo) {
+        [self addNewShowWithVideo:videoURL orImage:photo];
+    }];
+}
+
+
+- (void)addNewIdeaWithVideo {
+    
+    [[CLGetMediaTool getInstance] loadCameraFromCurrentViewController:self maximumDuration:30.0 completion:^(NSURL *videoURL, UIImage *photo) {
+        [self addNewIdeaWithVideo:videoURL orImage:photo];
+    }];
+}
+
+- (void)addNewRoutineWithVideo {
+    
+    [[CLGetMediaTool getInstance] loadCameraFromCurrentViewController:self maximumDuration:180.0 completion:^(NSURL *videoURL, UIImage *photo) {
+        [self addNewRoutineWithVideo:videoURL orImage:photo];
+    }];
+}
+
+- (void)addNewSleightWithVideo {
+    
+    [[CLGetMediaTool getInstance] loadCameraFromCurrentViewController:self maximumDuration:30.0 completion:^(NSURL *videoURL, UIImage *photo) {
+        [self addNewSleightWithVideo:videoURL orImage:photo];
+    }];
+}
+
+- (void)addNewPropWithVideo {
+    
+    [[CLGetMediaTool getInstance] loadCameraFromCurrentViewController:self maximumDuration:30.0 completion:^(NSURL *videoURL, UIImage *photo) {
+        [self addNewPropWithVideo:videoURL orImage:photo];
+        
+    }];
+}
+
+- (void)addNewIdeaWithVideo:videoURL orImage:image {
     self.editingContentType = kEditingContentTypeIdea;
     
     // 创建一个新的routineModel,传递给newRoutineVC,并添加到routineModelList中
     CLIdeaObjModel *model = [CLIdeaObjModel ideaObjModel];
-    
+    if (videoURL) {
+        NSString *videoName = [kTimestamp stringByAppendingString:@".mp4"];
+        [videoName saveNamedVideoToDocument:videoURL];
+        
+        model.effectModel.video = videoName;
+        [CLDataSaveTool addVideoByName:videoName timesStamp:model.timeStamp content:nil type:kTypeIdea];
+    } else if (image) {
+        NSString *imageName = [kTimestamp stringByAppendingString:@".jpg"];
+        [imageName saveNamedImageToDocument:image];
+        
+        model.effectModel.image = imageName;
+        [CLDataSaveTool addImageByName:imageName timesStamp:model.timeStamp content:nil type:kTypeIdea];
+    }
     // 将新增的model放在数组第一个,这样在现实到list中时,新增的model会显示在最上面
     [kDataListIdea insertObject:model atIndex:0];
     [kDataListAll insertObject:model atIndex:0];
@@ -1004,10 +1119,23 @@
     [self performSegueWithIdentifier:kSegueListToNewEntry sender:nil];
 }
 
-- (void)addNewShow {
+- (void)addNewShowWithVideo:videoURL orImage:image {
     
     // 创建一个新的routineModel,传递给newRoutineVC,并添加到routineModelList中
     CLShowModel *model = [CLShowModel showModel];
+    if (videoURL) {
+        NSString *videoName = [kTimestamp stringByAppendingString:@".mp4"];
+        [videoName saveNamedVideoToDocument:videoURL];
+        
+        model.effectModel.video = videoName;
+        [CLDataSaveTool addVideoByName:videoName timesStamp:model.timeStamp content:nil type:kTypeShow];
+    } else if (image) {
+        NSString *imageName = [kTimestamp stringByAppendingString:@".jpg"];
+        [imageName saveNamedImageToDocument:image];
+        
+        model.effectModel.image = imageName;
+        [CLDataSaveTool addImageByName:imageName timesStamp:model.timeStamp content:nil type:kTypeShow];
+    }
     
     // 将新增的model放在数组第一个,这样在现实到list中时,新增的model会显示在最上面
     [kDataListShow insertObject:model atIndex:0];
@@ -1022,13 +1150,25 @@
     [self performSegueWithIdentifier:kSegueListToNewShow sender:nil];
 }
 
-- (void)addNewRoutine {
+- (void)addNewRoutineWithVideo:videoURL orImage:image {
     
     self.editingContentType = kEditingContentTypeRoutine;
     
     // 创建一个新的routineModel,传递给newRoutineVC,并添加到routineModelList中
     CLRoutineModel *model = [CLRoutineModel routineModel];
-    
+    if (videoURL) {
+        NSString *videoName = [kTimestamp stringByAppendingString:@".mp4"];
+        [videoName saveNamedVideoToDocument:videoURL];
+        
+        model.effectModel.video = videoName;
+        [CLDataSaveTool addVideoByName:videoName timesStamp:model.timeStamp content:nil type:kTypeRoutine];
+    } else if (image) {
+        NSString *imageName = [kTimestamp stringByAppendingString:@".jpg"];
+        [imageName saveNamedImageToDocument:image];
+        
+        model.effectModel.image = imageName;
+        [CLDataSaveTool addImageByName:imageName timesStamp:model.timeStamp content:nil type:kTypeRoutine];
+    }
     // 将新增的model放在数组第一个,这样在现实到list中时,新增的model会显示在最上面
     [kDataListRoutine insertObject:model atIndex:0];
     [kDataListAll insertObject:model atIndex:0];
@@ -1042,12 +1182,25 @@
     [self performSegueWithIdentifier:kSegueListToNewEntry sender:nil];
 }
 
-- (void)addNewSleight {
+- (void)addNewSleightWithVideo:videoURL orImage:image {
     self.editingContentType = kEditingContentTypeSleight;
     
     // 创建一个新的routineModel,传递给newRoutineVC,并添加到routineModelList中
     CLSleightObjModel *model = [CLSleightObjModel sleightObjModel];
-    
+    if (videoURL) {
+        NSString *videoName = [kTimestamp stringByAppendingString:@".mp4"];
+        [videoName saveNamedVideoToDocument:videoURL];
+        
+        model.effectModel.video = videoName;
+        [CLDataSaveTool addVideoByName:videoName timesStamp:model.timeStamp content:nil type:kTypeSleight];
+    } else if (image) {
+        NSString *imageName = [kTimestamp stringByAppendingString:@".jpg"];
+        [imageName saveNamedImageToDocument:image];
+        
+        model.effectModel.image = imageName;
+        [CLDataSaveTool addImageByName:imageName timesStamp:model.timeStamp content:nil type:kTypeSleight];
+    }
+
     // 将新增的model放在数组第一个,这样在现实到list中时,新增的model会显示在最上面
     [kDataListSleight insertObject:model atIndex:0];
     [kDataListAll insertObject:model atIndex:0];
@@ -1061,11 +1214,23 @@
     [self performSegueWithIdentifier:kSegueListToNewEntry sender:nil];
 }
 
-- (void)addNewProp {
+- (void)addNewPropWithVideo:videoURL orImage:image {
     self.editingContentType = kEditingContentTypeProp;
     // 创建一个新的routineModel,传递给newRoutineVC,并添加到routineModelList中
     CLPropObjModel *model = [CLPropObjModel propObjModel];
-    
+    if (videoURL) {
+        NSString *videoName = [kTimestamp stringByAppendingString:@".mp4"];
+        [videoName saveNamedVideoToDocument:videoURL];
+        
+        model.effectModel.video = videoName;
+        [CLDataSaveTool addVideoByName:videoName timesStamp:model.timeStamp content:nil type:kTypeProp];
+    }  else if (image) {
+        NSString *imageName = [kTimestamp stringByAppendingString:@".jpg"];
+        [imageName saveNamedImageToDocument:image];
+        
+        model.effectModel.image = imageName;
+        [CLDataSaveTool addImageByName:imageName timesStamp:model.timeStamp content:nil type:kTypeProp];
+    }
     // 将新增的model放在数组第一个,这样在现实到list中时,新增的model会显示在最上面
     [kDataListProp insertObject:model atIndex:0];
     [kDataListAll insertObject:model atIndex:0];

@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-@class CLImportPasswordInputView;
+
+@class CLImportPasswordInputView, BFPaperButton;
 
 @protocol CLImportPasswordInputViewDelegate <NSObject>
 
@@ -21,8 +22,7 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *noticeLabel;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTF;
-@property (weak, nonatomic) IBOutlet UIButton *unlockButton;
-@property (weak, nonatomic) IBOutlet UIButton *cancelButton;
+@property (weak, nonatomic) IBOutlet BFPaperButton *unlockButton;
 
 @property (nonatomic, weak) id<CLImportPasswordInputViewDelegate> delegate;
 

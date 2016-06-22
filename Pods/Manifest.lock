@@ -1,5 +1,7 @@
 PODS:
   - Appirater (2.0.5)
+  - BFPaperButton (2.0.29):
+    - UIColor+BFPaperColors
   - BTNavigationDropdownMenu (0.3)
   - ChameleonFramework (2.1.0):
     - ChameleonFramework/Default (= 2.1.0)
@@ -25,9 +27,11 @@ PODS:
   - SDWebImage/Core (3.8.1)
   - SSZipArchive (1.2)
   - SWTableViewCell (0.3.7)
+  - UIColor+BFPaperColors (1.7.2)
 
 DEPENDENCIES:
   - Appirater
+  - BFPaperButton
   - BTNavigationDropdownMenu
   - ChameleonFramework
   - DZNWebViewController
@@ -42,6 +46,7 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   Appirater: e7c0a47fb67ee5041ce8479e6ba960927fb40264
+  BFPaperButton: 7df738f2e749a9a4edd3e043f0621ee02215e417
   BTNavigationDropdownMenu: c36d20785253699046fdd295698c24b1d1c18f53
   ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
   DACircularProgress: 4dd437c0fc3da5161cb289e07ac449493d41db71
@@ -57,7 +62,8 @@ SPEC CHECKSUMS:
   SDWebImage: 35f9627a3e44b4f292a8a8ce6a531fa488239b91
   SSZipArchive: 251093c65f98d6ea282c50bc404bfa631d9fd721
   SWTableViewCell: 2a94aadc9d47b2b611fa064566bf57948b95b579
+  UIColor+BFPaperColors: 03101fe6c10ed00c6daae7c26553f1de41500853
 
-PODFILE CHECKSUM: 93410a095b8b3872a53ee68d56f05591ae2cde0c
+PODFILE CHECKSUM: ca2621ab9994460e0d6ed39805cc7ec3eb2c23a5
 
 COCOAPODS: 1.0.0.beta.5

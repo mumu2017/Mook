@@ -902,6 +902,10 @@
     self.passwordString = textField.text;
 }
 
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    [self.view endEditing:YES];
+}
+
 #pragma mark - CLImportPasswordInputViewDelegate 方法
 
 - (void)importPasswordInputViewdidClickUnlockButton:(CLImportPasswordInputView *)view {

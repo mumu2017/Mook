@@ -10,19 +10,17 @@
 
 @interface CLNewEntryTool : NSObject
 
-+ (void)addNewShowFromCurrentController:(UIViewController *)controller;
-
 + (void)addNewShowFromCurrentController:(UIViewController *)controller withVideo:(NSURL *)videoURL orImage:(UIImage *)image;
 
 + (void)addNewIdeaFromCurrentController:(UIViewController *)controller withVideo:(NSURL *)videoURL orImage:(UIImage *)image;
 
-+ (void)addNewRoutineFromCurrentController:(UIViewController *)controller withVideo:(NSURL *)videoURL orImage:(UIImage *)image;;
++ (void)addNewRoutineFromCurrentController:(UIViewController *)controller withVideo:(NSURL *)videoURL orImage:(UIImage *)image;
 
-+ (void)addNewSleightFromCurrentController:(UIViewController *)controller withVideo:(NSURL *)videoURL orImage:(UIImage *)image;;
++ (void)addNewSleightFromCurrentController:(UIViewController *)controller withVideo:(NSURL *)videoURL orImage:(UIImage *)image;
 
-+ (void)addNewPropFromCurrentController:(UIViewController *)controller withVideo:(NSURL *)videoURL orImage:(UIImage *)image;;
++ (void)addNewPropFromCurrentController:(UIViewController *)controller withVideo:(NSURL *)videoURL orImage:(UIImage *)image;
 
-+ (void)addNewLinesFromCurrentController:(UIViewController *)controller ;
++ (void)addNewLinesFromCurrentController:(UIViewController *)controller;
 
 + (void)addNewLinesWithAudio:(NSURL *)audioURL;
 

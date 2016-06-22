@@ -14,6 +14,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>BFPaperButton.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>BTNavigationDropdownMenu.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -94,6 +99,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>UIColor+BFPaperColors.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>pop.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -102,12 +112,17 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>14E6E2E2484806AB62B60CA2EAD41F9B</key>
+		<key>03B15615889710FDACFA6CB29AFBBDF0</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>2184ECD525DC59E59B5AA9524D5B9CAC</key>
+		<key>0F18CF0CC9748E6BB97F91B13831459B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>14E6E2E2484806AB62B60CA2EAD41F9B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -117,12 +132,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>262B3CE7DE0959F5CC42F0B48599E62B</key>
+		<key>53029ACADBE42945DD548EBC02362C29</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>3CC0DB7C5478473A4BFD2EAC667A79BE</key>
+		<key>62533255699ECECEBA3B5CBC0BBEF4CD</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -137,12 +152,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>78945AB812352100C7651FD3CD742A69</key>
+		<key>7B70870D8B461DF43521B992C810D78B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>7B70870D8B461DF43521B992C810D78B</key>
+		<key>7BD749EEE07E1CD6BE7409DB3966A10E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -157,7 +172,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>99CADFE69A7E494B256A79CC7E9026C1</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>9B57F4EE4746045CEAE2D933A3C8EC9E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9EDFCA106D3F035281D2F7E1A6C97C16</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -168,11 +193,6 @@
 			<true/>
 		</dict>
 		<key>AB045440E0FF21FA9AA0E0A151C95FDB</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>B213ACDF0D2A25CCA332F5F5B01CA33C</key>
 		<dict>
 			<key>primary</key>
 			<true/>
