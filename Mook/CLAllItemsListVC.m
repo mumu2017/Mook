@@ -43,9 +43,6 @@
 #import "BTNavigationDropdownMenu-Swift.h"
 @class BTNavigationDropdownMenu;
 
-
-#import "CLCameraRecorderVC.h"
-
 @interface CLAllItemsListVC ()<SWTableViewCellDelegate, MBProgressHUDDelegate, UIDocumentInteractionControllerDelegate>
 
 @property (nonatomic, strong) NSMutableArray *allItems;
@@ -65,6 +62,8 @@
 @property (nonatomic, copy) NSString *exportPath;
 
 @property (strong, nonatomic) UIButton *addButton;
+@property (strong, nonatomic) UIButton *mediaButton;
+
 @property (strong, nonatomic) UIButton *coverButton;
 
 @property (strong, nonatomic) BTNavigationDropdownMenu *menu;
@@ -108,6 +107,31 @@
     }
     
     return _addButton;
+}
+
+
+- (UIButton *)mediaButton {
+    if (!_mediaButton) {
+        _mediaButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [self.navigationController.view addSubview:_mediaButton];
+        
+        [_mediaButton addTarget:self action:@selector(addNewEntryWithMedia) forControlEvents:UIControlEventTouchUpInside];
+        //        [_addButton setTitle:@"添加" forState:UIControlStateNormal];
+        [_mediaButton setImage:[UIImage imageNamed:@"addMedia"] forState:UIControlStateNormal];
+        [_mediaButton mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.right.equalTo(self.addButton.mas_left).with.offset(-15);
+            make.right.equalTo(self.navigationController.view.mas_right).with.offset(-15);
+            make.bottom.equalTo(self.addButton.mas_top).with.offset(-15);
+            make.width.height.equalTo(@kAddButtonHeight);
+        }];
+        _mediaButton.layer.cornerRadius = kAddButtonHeight/2;
+        _mediaButton.backgroundColor = [kAppThemeColor darkenByPercentage:0.05];
+        _mediaButton.alpha = 1.0f;
+        _mediaButton.hidden = (self.listType == kListTypeAll);
+
+    }
+    
+    return _mediaButton;
 }
 
 - (CLAddView *)addView {
@@ -230,6 +254,8 @@
     return _tableBackView;
 }
 
+#pragma mark - 控制器生命周期
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self coverButton];
@@ -260,6 +286,7 @@
     
     [self addView];
     [self addButton];
+    [self mediaButton];
 
 }
 
@@ -300,6 +327,9 @@
     
     self.addButton.backgroundColor = [kAppThemeColor darkenByPercentage:0.05];
     self.menu.cellBackgroundColor = kAppThemeColor;
+    self.mediaButton.backgroundColor = self.addButton.backgroundColor;
+    self.mediaButton.hidden = (self.listType == kListTypeAll);
+
     [self.addView updateColor:self.addButton.backgroundColor];
     [self.tableView reloadData];
 }
@@ -308,6 +338,8 @@
     [super viewWillAppear:animated];
     
     self.addButton.hidden = NO;
+    self.mediaButton.hidden = (self.listType == kListTypeAll);
+
     [self.navigationController setToolbarHidden:YES];
 }
 
@@ -315,6 +347,7 @@
     [super viewWillDisappear:animated];
     
     self.addButton.hidden = YES;
+    self.mediaButton.hidden = YES;
     [self.menu hide];
     if (self.addView.center.y == self.navigationController.view.center.y) {
         [self toggleAddView];
@@ -653,64 +686,39 @@
         case kListTypeAll:
         {
             
-            
             id modelUnknown = self.allItems[path.row];
             
             if ([modelUnknown isKindOfClass:[CLIdeaObjModel class]]) {
                 CLIdeaObjModel *model = (CLIdeaObjModel *)modelUnknown;
                 [CLDataSaveTool deleteIdea:model];
                 
-                NSLog(@"%lu, %lu", (unsigned long)kDataListAll.count, (unsigned long)kDataListIdea.count);
-                
                 [kAppDelegate reloadAllIdeas];
-                
-                //        [kDataListIdea removeObject:model];
-                //        [kDataListAll removeObject:model];
-                
-                NSLog(@"%lu, %lu", (unsigned long)kDataListAll.count, (unsigned long)kDataListIdea.count);
                 
             } else if ([modelUnknown isKindOfClass:[CLShowModel class]]) {
                 CLShowModel *model = (CLShowModel *)modelUnknown;
                 [CLDataSaveTool deleteShow:model];
                 [kAppDelegate reloadAllShows];
                 
-                //        [kDataListShow removeObject:model];
-                //        [kDataListAll removeObject:model];
-                
             } else if ([modelUnknown isKindOfClass:[CLRoutineModel class]]) {
                 CLRoutineModel *model = (CLRoutineModel *)modelUnknown;
                 [CLDataSaveTool deleteRoutine:model];
                 [kAppDelegate reloadAllRoutines];
                 
-                //        [kDataListRoutine removeObject:model];
-                //        [kDataListAll removeObject:model];
-                
             } else if ([modelUnknown isKindOfClass:[CLSleightObjModel class]]) {
                 CLSleightObjModel *model = (CLSleightObjModel *)modelUnknown;
                 [CLDataSaveTool deleteSleight:model];
                 [kAppDelegate reloadAllSleights];
-                
-                //        [kDataListSleight removeObject:model];
-                //        [kDataListAll removeObject:model];
-                
-                
+ 
             } else if ([modelUnknown isKindOfClass:[CLPropObjModel class]]) {
                 CLPropObjModel *model = (CLPropObjModel *)modelUnknown;
                 [CLDataSaveTool deleteProp:model];
                 [kAppDelegate reloadAllProps];
                 
-                //        [kDataListProp removeObject:model];
-                //        [kDataListAll removeObject:model];
-                
             } else if ([modelUnknown isKindOfClass:[CLLinesObjModel class]]) {
                 CLLinesObjModel *model = (CLLinesObjModel *)modelUnknown;
                 [CLDataSaveTool deleteLines:model];
                 [kAppDelegate reloadAllLines];
-                
-                //        [kDataListLines removeObject:model];
-                //        [kDataListAll removeObject:model];
-                
-                
+
             }
             
             [self.allItems removeObject:modelUnknown];
@@ -1056,7 +1064,8 @@
 
 }
 
-#pragma mark - segue方法
+#pragma mark - segue跳转
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     id destVC = segue.destinationViewController;
     UIViewController *vc = (UIViewController *)destVC;
@@ -1148,14 +1157,20 @@
         
     } else if ([destVC isKindOfClass:[CLShowVC class]]) {
         CLShowVC *vc = (CLShowVC *)destVC;
+        
         if ([sender isKindOfClass:[NSIndexPath class]]) {
             NSIndexPath *indexPath = (NSIndexPath *)sender;
             CLShowModel *model;
             
-            id modelUnknown = self.allItems[indexPath.row];
-            if ([modelUnknown isKindOfClass:[CLShowModel class]]) {
-                model = (CLShowModel *)modelUnknown;
+            if (self.listType == kListTypeAll) {
+                id modelUnknown = self.allItems[indexPath.row];
+                if ([modelUnknown isKindOfClass:[CLShowModel class]]) {
+                    model = (CLShowModel *)modelUnknown;
+                }
+            } else if (self.listType == kListTypeShow) {
+                model = self.showModelList[indexPath.row];
             }
+
             
             vc.showModel = model;
             vc.date = model.date;
@@ -1164,13 +1179,13 @@
     
 }
 
-#pragma mark - 新建笔记方法
+#pragma mark - 新建笔记
 
 - (void)addNewEntry:(id)sender {
 
     switch (self.listType) {
         case kListTypeAll:
-            [self addNewEntry];
+            [self toggleAddView];
             break;
             
         case kListTypeIdea:
@@ -1200,10 +1215,7 @@
         default:
             break;
     }
-    
-    if (self.listType == kListTypeAll) {
-        return;
-    }
+
 //    滚动到第一行
 //    if ([self.tableView numberOfRowsInSection:0] > 0) {
 //        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
@@ -1212,10 +1224,48 @@
     
 }
 
-
-- (void)addNewEntry {
+- (void)addNewEntryWithMedia {
     
-    [self toggleAddView];
+    
+    switch (self.listType) {
+        case kListTypeAll:
+            break;
+            
+        case kListTypeIdea:
+            [self addNewIdeaWithVideo];
+            break;
+            
+        case kListTypeShow:
+            [self addNewShowWithVideo];
+            break;
+            
+        case kListTypeRoutine:
+            [self addNewRoutineWithVideo];
+            break;
+            
+        case kListTypeSleight:
+            [self addNewSleightWithVideo];
+            break;
+            
+        case kListTypeProp:
+            [self addNewPropWithVideo];
+            break;
+            
+#warning 添加录音功能
+        case kListTypeLines:
+
+            break;
+            
+        default:
+            break;
+    }
+}
+
+- (void)addNewShowWithVideo {
+    
+    [[CLGetMediaTool getInstance] loadCameraFromCurrentViewController:self maximumDuration:30.0 completion:^(NSURL *videoURL, UIImage *photo) {
+        [CLNewEntryTool addNewShowFromCurrentController:self withVideo:videoURL orImage:photo];
+    }];
 }
 
 

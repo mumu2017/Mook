@@ -47,6 +47,39 @@
     [controller presentViewController:navVC animated:YES completion:nil];
 }
 
+
++ (void)addNewShowFromCurrentController:(UIViewController *)controller withVideo:(NSURL *)videoURL orImage:(UIImage *)image {
+    
+    // 创建一个新的routineModel,传递给newRoutineVC,并添加到routineModelList中
+    CLShowModel *model = [CLShowModel showModel];
+    
+    if (videoURL) {
+        NSString *videoName = [kTimestamp stringByAppendingString:@".mp4"];
+        [videoName saveNamedVideoToDocument:videoURL];
+        
+        model.effectModel.video = videoName;
+        [CLDataSaveTool addVideoByName:videoName timesStamp:model.timeStamp content:nil type:kTypeShow];
+    } else if (image) {
+        NSString *imageName = [kTimestamp stringByAppendingString:@".jpg"];
+        [imageName saveNamedImageToDocument:image];
+        
+        model.effectModel.image = imageName;
+        [CLDataSaveTool addImageByName:imageName timesStamp:model.timeStamp content:nil type:kTypeShow];
+    }
+    
+    // 将新增的model放在数组第一个,这样在现实到list中时,新增的model会显示在最上面
+    [kDataListShow insertObject:model atIndex:0];
+    [kDataListAll insertObject:model atIndex:0];
+    
+    //获取storyboard
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+    CLNewShowNavVC *navVC = [storyboard instantiateViewControllerWithIdentifier:@"newShowNav"];
+    
+    navVC.showModel = kDataListShow[0];
+    
+    [controller presentViewController:navVC animated:YES completion:nil];
+}
+
 + (void)addNewIdeaFromCurrentController:(UIViewController *)controller withVideo:(NSURL *)videoURL orImage:(UIImage *)image {
     
     // 创建一个新的routineModel,传递给newRoutineVC,并添加到routineModelList中

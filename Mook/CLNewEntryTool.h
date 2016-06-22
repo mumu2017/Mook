@@ -12,6 +12,7 @@
 
 + (void)addNewShowFromCurrentController:(UIViewController *)controller;
 
++ (void)addNewShowFromCurrentController:(UIViewController *)controller withVideo:(NSURL *)videoURL orImage:(UIImage *)image;
 
 + (void)addNewIdeaFromCurrentController:(UIViewController *)controller withVideo:(NSURL *)videoURL orImage:(UIImage *)image;
 

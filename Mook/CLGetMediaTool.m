@@ -51,7 +51,7 @@
     videoPicker.modalPresentationStyle = UIModalPresentationCurrentContext;
     videoPicker.mediaTypes =[UIImagePickerController availableMediaTypesForSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
     
-    [videoPicker setMediaTypes:[UIImagePickerController availableMediaTypesForSourceType:UIImagePickerControllerSourceTypeCamera]];
+    [videoPicker setMediaTypes:[UIImagePickerController availableMediaTypesForSourceType:UIImagePickerControllerSourceTypePhotoLibrary]];
 //    videoPicker.mediaTypes = @[(NSString*)kUTTypeMovie, (NSString*)kUTTypeAVIMovie, (NSString*)kUTTypeVideo, (NSString*)kUTTypeMPEG4];
     
     videoPicker.allowsEditing = YES;
@@ -62,19 +62,19 @@
 }
 
 
-//- (void)takePhotoFromCurrentController:(UIViewController *)controller  completion:(CompletionBlock)completion {
-//    
-//    _controller = controller;
-//    _completion = completion;
-//    
-//    UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
-//    imagePicker.delegate = self;
-//    imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
-//    imagePicker.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-//    imagePicker.allowsEditing = YES;
-//    
-//    [controller presentViewController:imagePicker animated:YES completion:nil];
-//}
+- (void)takePhotoFromCurrentController:(UIViewController *)controller  completion:(CompletionBlock)completion {
+    
+    _controller = controller;
+    _completion = completion;
+    
+    UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+    imagePicker.delegate = self;
+    imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+    imagePicker.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+    imagePicker.allowsEditing = YES;
+    
+    [controller presentViewController:imagePicker animated:YES completion:nil];
+}
 
 - (void)loadCameraFromCurrentViewController:(UIViewController *)controller maximumDuration:(CGFloat)duration completion:(CompletionBlock)completion {
     
