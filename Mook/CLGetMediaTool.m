@@ -8,8 +8,11 @@
 
 #import "CLGetMediaTool.h"
 #import <MobileCoreServices/MobileCoreServices.h> // needed for video types
+#import "IQAudioRecorderViewController.h"
 
-@interface CLGetMediaTool ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+#import <MediaPlayer/MediaPlayer.h>
+
+@interface CLGetMediaTool ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate, IQAudioRecorderViewControllerDelegate>
 
 @end
 
@@ -164,5 +167,33 @@
     
 }
 
+#pragma mark - Audio 
+- (void)recordAudioFromCurrentController:(UIViewController *)controller audioBlock:(AudioBlock)audioBlock {
+    
+    _audioBlock = audioBlock;
+    
+    IQAudioRecorderViewController *vc = [[IQAudioRecorderViewController alloc] init];
+    vc.delegate = self;
+    
+    vc.title = @"录音";
+    vc.maximumRecordDuration = 60.0f;
+    vc.allowCropping = NO;
+    vc.barStyle = UIBarStyleBlack;
 
+    vc.normalTintColor = [UIColor whiteColor];
+    vc.highlightedTintColor = [UIColor orangeColor];
+    [controller presentBlurredAudioRecorderViewControllerAnimated:vc];
+}
+
+- (void)audioRecorderController:(IQAudioRecorderViewController *)controller didFinishWithAudioAtPath:(NSString *)filePath {
+    
+    _audioBlock(filePath);
+    [controller dismissViewControllerAnimated:YES completion:nil];
+
+}
+
+-(void)audioRecorderControllerDidCancel:(IQAudioRecorderViewController *)controller
+{
+    [controller dismissViewControllerAnimated:YES completion:nil];
+}
 @end

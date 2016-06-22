@@ -145,11 +145,11 @@
         
         [_addView addTarget:self action:@selector(toggleAddView) forControlEvents:UIControlEventTouchUpInside];
         
-        [_addView.ideaBtn addTarget:self action:@selector(addNewIdea) forControlEvents:UIControlEventTouchUpInside];
-        [_addView.showBtn addTarget:self action:@selector(addNewShow) forControlEvents:UIControlEventTouchUpInside];
-        [_addView.routineBtn addTarget:self action:@selector(addNewRoutine) forControlEvents:UIControlEventTouchUpInside];
-        [_addView.sleightBtn addTarget:self action:@selector(addNewSleight) forControlEvents:UIControlEventTouchUpInside];
-        [_addView.propBtn addTarget:self action:@selector(addNewProp) forControlEvents:UIControlEventTouchUpInside];
+        [_addView.ideaBtn addTarget:self action:@selector(addNewIdeaWithVideo:orImage:) forControlEvents:UIControlEventTouchUpInside];
+        [_addView.showBtn addTarget:self action:@selector(addNewShowWithVideo:orImage:) forControlEvents:UIControlEventTouchUpInside];
+        [_addView.routineBtn addTarget:self action:@selector(addNewRoutineWithVideo:orImage:) forControlEvents:UIControlEventTouchUpInside];
+        [_addView.sleightBtn addTarget:self action:@selector(addNewSleightWithVideo:orImage:) forControlEvents:UIControlEventTouchUpInside];
+        [_addView.propBtn addTarget:self action:@selector(addNewPropWithVideo:orImage:) forControlEvents:UIControlEventTouchUpInside];
         [_addView.linesBtn addTarget:self action:@selector(addNewLines) forControlEvents:UIControlEventTouchUpInside];
     }
     
@@ -1043,12 +1043,18 @@
             
 #warning 添加录音功能
         case kListTypeLines:
-            
+            [self addAudioRecording];
             break;
             
         default:
             break;
     }
+}
+
+- (void)addAudioRecording {
+    [[CLGetMediaTool getInstance] recordAudioFromCurrentController:self audioBlock:^(NSString *filePath) {
+        NSLog(@"%@", filePath);
+    }];
 }
 
 - (void)addNewShowWithVideo {

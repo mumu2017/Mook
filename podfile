@@ -13,7 +13,9 @@ target ‘Mook’ do
  pod 'Masonry' 
  pod 'BTNavigationDropdownMenu'
  pod 'DZNWebViewController'
- pod 'SCRecorder'
+ pod 'IQAudioRecorderController'
  pod 'BFPaperButton'
+ pod 'SCRecorder'
+ pod 'FDWaveformView'
 end
 

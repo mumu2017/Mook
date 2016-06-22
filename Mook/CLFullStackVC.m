@@ -11,7 +11,7 @@
 #import "CLCard.h"
 #import "LTInfiniteScrollView.h"
 
-#define kCardTableColor [UIColor flatBlackColor]
+#define kCardTableColor     [UIColor colorWithRed:21/225.0 green:102/225.0 blue:46/225.0 alpha:1.0]
 
 #define SCREEN_WIDTH [UIScreen mainScreen].bounds.size.width
 #define SCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height

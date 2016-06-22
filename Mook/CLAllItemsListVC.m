@@ -682,7 +682,6 @@
     
     [self presentViewController:alert animated:YES completion:nil];
     
-
 }
 
 - (void)deleteEntryWithIndexPath:(NSIndexPath *)path {

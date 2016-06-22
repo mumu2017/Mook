@@ -17,14 +17,16 @@
 //typedef void (^ImageBlock)(UIImage *photo);
 //typedef void (^VideoBlock)(NSURL *videoURL);
 typedef void (^CompletionBlock)(NSURL *videoURL, UIImage *photo);
+typedef void (^AudioBlock)(NSString *filePath);
 
 //@property (strong, nonatomic) ImageBlock imageBlock;
 //@property (strong, nonatomic) VideoBlock videoBlock;
 @property (strong, nonatomic) CompletionBlock completion;
+@property (strong, nonatomic) AudioBlock audioBlock;
 
 + (instancetype)getInstance;
 
-#pragma mark - 自己拍摄
+#pragma mark - 相机拍摄
 //- (void)takePhotoFromCurrentController:(UIViewController *)controller resultBlock:(ImageBlock)imageBlock;
 
 - (void)loadCameraFromCurrentViewController:(UIViewController *)controller maximumDuration:(CGFloat)duration completion:(CompletionBlock)completion;
@@ -34,5 +36,7 @@ typedef void (^CompletionBlock)(NSURL *videoURL, UIImage *photo);
 
 
 - (void)pickAlbumMediaFromCurrentController:(UIViewController *)controller maximumDuration:(CGFloat)duration completion:(CompletionBlock)completion;
+
+- (void)recordAudioFromCurrentController:(UIViewController *)controller audioBlock:(AudioBlock)audioBlock;
 
 @end

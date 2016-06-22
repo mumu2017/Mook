@@ -8,6 +8,30 @@
 
 /* Begin PBXBuildFile section */
 		000DF63334356F18B88B6DE8 /* Pods_Mook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5207E880A1B2E72EF9075B94 /* Pods_Mook.framework */; };
+		4300C4261D1A98EF0065E94E /* IQAudioCropperViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4300C4151D1A98EF0065E94E /* IQAudioCropperViewController.m */; };
+		4300C4271D1A98EF0065E94E /* IQAudioRecorderConstraints.m in Sources */ = {isa = PBXBuildFile; fileRef = 4300C4171D1A98EF0065E94E /* IQAudioRecorderConstraints.m */; };
+		4300C4281D1A98EF0065E94E /* IQAudioRecorderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4300C4191D1A98EF0065E94E /* IQAudioRecorderViewController.m */; };
+		4300C4291D1A98EF0065E94E /* IQCropSelectionBeginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4300C41B1D1A98EF0065E94E /* IQCropSelectionBeginView.m */; };
+		4300C42A1D1A98EF0065E94E /* IQCropSelectionEndView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4300C41D1D1A98EF0065E94E /* IQCropSelectionEndView.m */; };
+		4300C42B1D1A98EF0065E94E /* IQCropSelectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4300C41F1D1A98EF0065E94E /* IQCropSelectionView.m */; };
+		4300C42C1D1A98EF0065E94E /* IQMessageDisplayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4300C4211D1A98EF0065E94E /* IQMessageDisplayView.m */; };
+		4300C42D1D1A98EF0065E94E /* IQPlaybackDurationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4300C4231D1A98EF0065E94E /* IQPlaybackDurationView.m */; };
+		4300C42E1D1A98EF0065E94E /* NSString+IQTimeIntervalFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4300C4251D1A98EF0065E94E /* NSString+IQTimeIntervalFormatter.m */; };
+		4300C43F1D1A9B8C0065E94E /* audio_record.png in Resources */ = {isa = PBXBuildFile; fileRef = 4300C4301D1A9B8C0065E94E /* audio_record.png */; };
+		4300C4401D1A9B8C0065E94E /* audio_record@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4300C4311D1A9B8C0065E94E /* audio_record@2x.png */; };
+		4300C4411D1A9B8C0065E94E /* audio_record@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4300C4321D1A9B8C0065E94E /* audio_record@3x.png */; };
+		4300C4421D1A9B8C0065E94E /* microphone_access.png in Resources */ = {isa = PBXBuildFile; fileRef = 4300C4331D1A9B8C0065E94E /* microphone_access.png */; };
+		4300C4431D1A9B8C0065E94E /* microphone_access@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4300C4341D1A9B8C0065E94E /* microphone_access@2x.png */; };
+		4300C4441D1A9B8C0065E94E /* microphone_access@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4300C4351D1A9B8C0065E94E /* microphone_access@3x.png */; };
+		4300C4451D1A9B8C0065E94E /* scissor.png in Resources */ = {isa = PBXBuildFile; fileRef = 4300C4361D1A9B8C0065E94E /* scissor.png */; };
+		4300C4461D1A9B8C0065E94E /* scissor@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4300C4371D1A9B8C0065E94E /* scissor@2x.png */; };
+		4300C4471D1A9B8C0065E94E /* scissor@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4300C4381D1A9B8C0065E94E /* scissor@3x.png */; };
+		4300C4481D1A9B8C0065E94E /* stop_playing.png in Resources */ = {isa = PBXBuildFile; fileRef = 4300C4391D1A9B8C0065E94E /* stop_playing.png */; };
+		4300C4491D1A9B8C0065E94E /* stop_playing@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4300C43A1D1A9B8C0065E94E /* stop_playing@2x.png */; };
+		4300C44A1D1A9B8C0065E94E /* stop_playing@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4300C43B1D1A9B8C0065E94E /* stop_playing@3x.png */; };
+		4300C44B1D1A9B8C0065E94E /* stop_recording.png in Resources */ = {isa = PBXBuildFile; fileRef = 4300C43C1D1A9B8C0065E94E /* stop_recording.png */; };
+		4300C44C1D1A9B8C0065E94E /* stop_recording@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4300C43D1D1A9B8C0065E94E /* stop_recording@2x.png */; };
+		4300C44D1D1A9B8C0065E94E /* stop_recording@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4300C43E1D1A9B8C0065E94E /* stop_recording@3x.png */; };
 		43068BE31CB7456200BA1A57 /* iflyMSC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43068BE21CB7456200BA1A57 /* iflyMSC.framework */; };
 		43068BE51CB7459900BA1A57 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43068BE41CB7459900BA1A57 /* AVFoundation.framework */; };
 		43068BE71CB745A400BA1A57 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43068BE61CB745A400BA1A57 /* SystemConfiguration.framework */; };
@@ -194,6 +218,39 @@
 
 /* Begin PBXFileReference section */
 		41EFA00EF9667E60B4BC3CCB /* Pods-Mook.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mook.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Mook/Pods-Mook.debug.xcconfig"; sourceTree = "<group>"; };
+		4300C4141D1A98EF0065E94E /* IQAudioCropperViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IQAudioCropperViewController.h; sourceTree = "<group>"; };
+		4300C4151D1A98EF0065E94E /* IQAudioCropperViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IQAudioCropperViewController.m; sourceTree = "<group>"; };
+		4300C4161D1A98EF0065E94E /* IQAudioRecorderConstraints.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IQAudioRecorderConstraints.h; sourceTree = "<group>"; };
+		4300C4171D1A98EF0065E94E /* IQAudioRecorderConstraints.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IQAudioRecorderConstraints.m; sourceTree = "<group>"; };
+		4300C4181D1A98EF0065E94E /* IQAudioRecorderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IQAudioRecorderViewController.h; sourceTree = "<group>"; };
+		4300C4191D1A98EF0065E94E /* IQAudioRecorderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IQAudioRecorderViewController.m; sourceTree = "<group>"; };
+		4300C41A1D1A98EF0065E94E /* IQCropSelectionBeginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IQCropSelectionBeginView.h; sourceTree = "<group>"; };
+		4300C41B1D1A98EF0065E94E /* IQCropSelectionBeginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IQCropSelectionBeginView.m; sourceTree = "<group>"; };
+		4300C41C1D1A98EF0065E94E /* IQCropSelectionEndView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IQCropSelectionEndView.h; sourceTree = "<group>"; };
+		4300C41D1D1A98EF0065E94E /* IQCropSelectionEndView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IQCropSelectionEndView.m; sourceTree = "<group>"; };
+		4300C41E1D1A98EF0065E94E /* IQCropSelectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IQCropSelectionView.h; sourceTree = "<group>"; };
+		4300C41F1D1A98EF0065E94E /* IQCropSelectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IQCropSelectionView.m; sourceTree = "<group>"; };
+		4300C4201D1A98EF0065E94E /* IQMessageDisplayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IQMessageDisplayView.h; sourceTree = "<group>"; };
+		4300C4211D1A98EF0065E94E /* IQMessageDisplayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IQMessageDisplayView.m; sourceTree = "<group>"; };
+		4300C4221D1A98EF0065E94E /* IQPlaybackDurationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IQPlaybackDurationView.h; sourceTree = "<group>"; };
+		4300C4231D1A98EF0065E94E /* IQPlaybackDurationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IQPlaybackDurationView.m; sourceTree = "<group>"; };
+		4300C4241D1A98EF0065E94E /* NSString+IQTimeIntervalFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+IQTimeIntervalFormatter.h"; sourceTree = "<group>"; };
+		4300C4251D1A98EF0065E94E /* NSString+IQTimeIntervalFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+IQTimeIntervalFormatter.m"; sourceTree = "<group>"; };
+		4300C4301D1A9B8C0065E94E /* audio_record.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = audio_record.png; sourceTree = "<group>"; };
+		4300C4311D1A9B8C0065E94E /* audio_record@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "audio_record@2x.png"; sourceTree = "<group>"; };
+		4300C4321D1A9B8C0065E94E /* audio_record@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "audio_record@3x.png"; sourceTree = "<group>"; };
+		4300C4331D1A9B8C0065E94E /* microphone_access.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = microphone_access.png; sourceTree = "<group>"; };
+		4300C4341D1A9B8C0065E94E /* microphone_access@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "microphone_access@2x.png"; sourceTree = "<group>"; };
+		4300C4351D1A9B8C0065E94E /* microphone_access@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "microphone_access@3x.png"; sourceTree = "<group>"; };
+		4300C4361D1A9B8C0065E94E /* scissor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = scissor.png; sourceTree = "<group>"; };
+		4300C4371D1A9B8C0065E94E /* scissor@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "scissor@2x.png"; sourceTree = "<group>"; };
+		4300C4381D1A9B8C0065E94E /* scissor@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "scissor@3x.png"; sourceTree = "<group>"; };
+		4300C4391D1A9B8C0065E94E /* stop_playing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stop_playing.png; sourceTree = "<group>"; };
+		4300C43A1D1A9B8C0065E94E /* stop_playing@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stop_playing@2x.png"; sourceTree = "<group>"; };
+		4300C43B1D1A9B8C0065E94E /* stop_playing@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stop_playing@3x.png"; sourceTree = "<group>"; };
+		4300C43C1D1A9B8C0065E94E /* stop_recording.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stop_recording.png; sourceTree = "<group>"; };
+		4300C43D1D1A9B8C0065E94E /* stop_recording@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stop_recording@2x.png"; sourceTree = "<group>"; };
+		4300C43E1D1A9B8C0065E94E /* stop_recording@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stop_recording@3x.png"; sourceTree = "<group>"; };
 		43068BE21CB7456200BA1A57 /* iflyMSC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = iflyMSC.framework; sourceTree = "<group>"; };
 		43068BE41CB7459900BA1A57 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		43068BE61CB745A400BA1A57 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -560,6 +617,54 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4300C4131D1A98D60065E94E /* IQRecorderVC */ = {
+			isa = PBXGroup;
+			children = (
+				4300C4141D1A98EF0065E94E /* IQAudioCropperViewController.h */,
+				4300C4151D1A98EF0065E94E /* IQAudioCropperViewController.m */,
+				4300C4161D1A98EF0065E94E /* IQAudioRecorderConstraints.h */,
+				4300C4171D1A98EF0065E94E /* IQAudioRecorderConstraints.m */,
+				4300C4181D1A98EF0065E94E /* IQAudioRecorderViewController.h */,
+				4300C4191D1A98EF0065E94E /* IQAudioRecorderViewController.m */,
+				4300C41A1D1A98EF0065E94E /* IQCropSelectionBeginView.h */,
+				4300C41B1D1A98EF0065E94E /* IQCropSelectionBeginView.m */,
+				4300C41C1D1A98EF0065E94E /* IQCropSelectionEndView.h */,
+				4300C41D1D1A98EF0065E94E /* IQCropSelectionEndView.m */,
+				4300C41E1D1A98EF0065E94E /* IQCropSelectionView.h */,
+				4300C41F1D1A98EF0065E94E /* IQCropSelectionView.m */,
+				4300C4201D1A98EF0065E94E /* IQMessageDisplayView.h */,
+				4300C4211D1A98EF0065E94E /* IQMessageDisplayView.m */,
+				4300C4221D1A98EF0065E94E /* IQPlaybackDurationView.h */,
+				4300C4231D1A98EF0065E94E /* IQPlaybackDurationView.m */,
+				4300C4241D1A98EF0065E94E /* NSString+IQTimeIntervalFormatter.h */,
+				4300C4251D1A98EF0065E94E /* NSString+IQTimeIntervalFormatter.m */,
+				4300C42F1D1A9B7F0065E94E /* Resources */,
+			);
+			name = IQRecorderVC;
+			sourceTree = "<group>";
+		};
+		4300C42F1D1A9B7F0065E94E /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				4300C4301D1A9B8C0065E94E /* audio_record.png */,
+				4300C4311D1A9B8C0065E94E /* audio_record@2x.png */,
+				4300C4321D1A9B8C0065E94E /* audio_record@3x.png */,
+				4300C4331D1A9B8C0065E94E /* microphone_access.png */,
+				4300C4341D1A9B8C0065E94E /* microphone_access@2x.png */,
+				4300C4351D1A9B8C0065E94E /* microphone_access@3x.png */,
+				4300C4361D1A9B8C0065E94E /* scissor.png */,
+				4300C4371D1A9B8C0065E94E /* scissor@2x.png */,
+				4300C4381D1A9B8C0065E94E /* scissor@3x.png */,
+				4300C4391D1A9B8C0065E94E /* stop_playing.png */,
+				4300C43A1D1A9B8C0065E94E /* stop_playing@2x.png */,
+				4300C43B1D1A9B8C0065E94E /* stop_playing@3x.png */,
+				4300C43C1D1A9B8C0065E94E /* stop_recording.png */,
+				4300C43D1D1A9B8C0065E94E /* stop_recording@2x.png */,
+				4300C43E1D1A9B8C0065E94E /* stop_recording@3x.png */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		43068C051CB75D3700BA1A57 /* 语音识别helper */ = {
 			isa = PBXGroup;
 			children = (
@@ -1195,6 +1300,7 @@
 				43E9D0BF1D19236700036DDD /* CLGetMediaTool.m */,
 				4389969B1D193A2B0069DF8B /* CLNewEntryTool.h */,
 				4389969C1D193A2B0069DF8B /* CLNewEntryTool.m */,
+				4300C4131D1A98D60065E94E /* IQRecorderVC */,
 			);
 			name = "Tools(业务类)";
 			sourceTree = "<group>";
@@ -1317,12 +1423,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4323454C1C94045000200833 /* Build configuration list for PBXNativeTarget "Mook" */;
 			buildPhases = (
-				721A9F2C6F6D3B3C4E94B56A /* 📦 Check Pods Manifest.lock */,
+				721A9F2C6F6D3B3C4E94B56A /* [CP] Check Pods Manifest.lock */,
 				432345311C94045000200833 /* Sources */,
 				432345321C94045000200833 /* Frameworks */,
 				432345331C94045000200833 /* Resources */,
-				B48F3FD469ED68818D8799A8 /* 📦 Embed Pods Frameworks */,
-				4E6C66DF39C00C4E2DCC079B /* 📦 Copy Pods Resources */,
+				B48F3FD469ED68818D8799A8 /* [CP] Embed Pods Frameworks */,
+				4E6C66DF39C00C4E2DCC079B /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1374,35 +1480,50 @@
 			buildActionMask = 2147483647;
 			files = (
 				43A2812D1CB2324C009C2785 /* lines.jpg in Resources */,
+				4300C4411D1A9B8C0065E94E /* audio_record@3x.png in Resources */,
+				4300C4451D1A9B8C0065E94E /* scissor.png in Resources */,
+				4300C4421D1A9B8C0065E94E /* microphone_access.png in Resources */,
 				439519C81CC0903800505E5B /* Main.storyboard in Resources */,
 				432346901C96B42A00200833 /* CLNewEntryTextCell.xib in Resources */,
 				436927271D053D400041ED9C /* CLShowCell.xib in Resources */,
+				4300C4461D1A9B8C0065E94E /* scissor@2x.png in Resources */,
 				43EEE7DE1CAD328500F0BCCF /* CLRoutineImageCell.xib in Resources */,
 				4323468B1C96B0DA00200833 /* CLNewEntryImageCell.xib in Resources */,
+				4300C4471D1A9B8C0065E94E /* scissor@3x.png in Resources */,
+				4300C44A1D1A9B8C0065E94E /* stop_playing@3x.png in Resources */,
 				43F5F7B91CB5020F007BFB0C /* prop.jpg in Resources */,
 				4323461F1C94054300200833 /* CLListImageCell.xib in Resources */,
 				4383426F1D0FE16B0089B58E /* PFNavigationDropdownMenu.bundle in Resources */,
 				43F5F7B31CB4FEE6007BFB0C /* sleight.jpg in Resources */,
 				432346951C96B4C200200833 /* CLTextInputCell.xib in Resources */,
+				4300C43F1D1A9B8C0065E94E /* audio_record.png in Resources */,
 				43A281201CB2276A009C2785 /* CLLibraryCell.xib in Resources */,
+				4300C44C1D1A9B8C0065E94E /* stop_recording@2x.png in Resources */,
 				43C206931CB12BED00CEF992 /* CLMediaCollectionCell.xib in Resources */,
 				43A2812F1CB2336C009C2785 /* idea.jpg in Resources */,
 				439519D91CC0911000505E5B /* Localizable.strings in Resources */,
+				4300C4491D1A9B8C0065E94E /* stop_playing@2x.png in Resources */,
 				438540421CE5C59A00F82AAB /* mookTitle.jpg in Resources */,
 				432346561C9408F100200833 /* CLToolBar.xib in Resources */,
 				43F5F7B71CB50151007BFB0C /* routine.jpg in Resources */,
 				43A281331CB23486009C2785 /* show.jpg in Resources */,
+				4300C4401D1A9B8C0065E94E /* audio_record@2x.png in Resources */,
 				432346311C94054300200833 /* CLTableBackView.xib in Resources */,
 				432346661C94094D00200833 /* CLOneLabelImageDisplayCell.xib in Resources */,
 				439519CB1CC0904A00505E5B /* LaunchScreen.storyboard in Resources */,
 				43EEE7E31CAD329B00F0BCCF /* CLRoutineTextCell.xib in Resources */,
 				43C2068B1CB10CF300CEF992 /* CLListCell.xib in Resources */,
+				4300C4481D1A9B8C0065E94E /* stop_playing.png in Resources */,
 				43951A1C1CC6681700505E5B /* mookFileIcon.jpg in Resources */,
 				432346641C94094D00200833 /* CLOneLabelDisplayCell.xib in Resources */,
 				432345451C94045000200833 /* Assets.xcassets in Resources */,
 				43F5F7BF1CB50AD3007BFB0C /* launch.jpg in Resources */,
+				4300C4441D1A9B8C0065E94E /* microphone_access@3x.png in Resources */,
+				4300C44B1D1A9B8C0065E94E /* stop_recording.png in Resources */,
+				4300C44D1D1A9B8C0065E94E /* stop_recording@3x.png in Resources */,
 				43F5F7621CB3922B007BFB0C /* CLShowInfoCell.xib in Resources */,
 				439519BE1CBD26C600505E5B /* CLImportPasswordInputView.xib in Resources */,
+				4300C4431D1A9B8C0065E94E /* microphone_access@2x.png in Resources */,
 				43951A011CC5DAEA00505E5B /* Setting.storyboard in Resources */,
 				4323462D1C94054300200833 /* CLQuickStringCell.xib in Resources */,
 				439519EB1CC0EEB900505E5B /* CLTagField.xib in Resources */,
@@ -1414,14 +1535,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		4E6C66DF39C00C4E2DCC079B /* 📦 Copy Pods Resources */ = {
+		4E6C66DF39C00C4E2DCC079B /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1429,14 +1550,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Mook/Pods-Mook-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		721A9F2C6F6D3B3C4E94B56A /* 📦 Check Pods Manifest.lock */ = {
+		721A9F2C6F6D3B3C4E94B56A /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1444,14 +1565,14 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		B48F3FD469ED68818D8799A8 /* 📦 Embed Pods Frameworks */ = {
+		B48F3FD469ED68818D8799A8 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1467,11 +1588,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				432346631C94094D00200833 /* CLOneLabelDisplayCell.m in Sources */,
+				4300C4291D1A98EF0065E94E /* IQCropSelectionBeginView.m in Sources */,
 				432345A41C9404FB00200833 /* CLEditingVC.m in Sources */,
 				43C2068A1CB10CF300CEF992 /* CLListCell.m in Sources */,
 				432345E71C94051A00200833 /* CLRoutineModel.m in Sources */,
 				439519B31CBBF45D00505E5B /* CLImportContentVC.m in Sources */,
 				4385403C1CE56D4000F82AAB /* CLThemeColorNavVC.m in Sources */,
+				4300C42B1D1A98EF0065E94E /* IQCropSelectionView.m in Sources */,
 				439519B01CBBB60300505E5B /* CLDataImportTool.m in Sources */,
 				438342701D0FE16B0089B58E /* PFNavigationDropdownMenu.m in Sources */,
 				439519FF1CC5271C00505E5B /* CLLanguageVC.m in Sources */,
@@ -1484,6 +1607,7 @@
 				432345AE1C9404FB00200833 /* CLPasswordVC.m in Sources */,
 				4323453D1C94045000200833 /* AppDelegate.m in Sources */,
 				439519C71CBF888900505E5B /* CLDataSizeTool.m in Sources */,
+				4300C42E1D1A98EF0065E94E /* NSString+IQTimeIntervalFormatter.m in Sources */,
 				43068BFD1CB74E5900BA1A57 /* IATConfig.m in Sources */,
 				4383428B1D1283350089B58E /* UIView+viewController.m in Sources */,
 				43E0F73C1CA10D27005CAD97 /* MJIvar.m in Sources */,
@@ -1493,6 +1617,7 @@
 				43068BFA1CB74DEB00BA1A57 /* PopupView.m in Sources */,
 				432345E51C94051A00200833 /* CLPropObjModel.m in Sources */,
 				438342951D13A7280089B58E /* CLDeckView.m in Sources */,
+				4300C4261D1A98EF0065E94E /* IQAudioCropperViewController.m in Sources */,
 				436927261D053D400041ED9C /* CLShowCell.m in Sources */,
 				432345651C9404A800200833 /* UIImageView+Tools.m in Sources */,
 				439519FC1CC51F6200505E5B /* CLBackUpVC.m in Sources */,
@@ -1520,7 +1645,9 @@
 				43E0F73F1CA10D27005CAD97 /* NSObject+MJIvar.m in Sources */,
 				439519B91CBCC14000505E5B /* CLAllItemsListVC.m in Sources */,
 				432346621C94094D00200833 /* CLMediaView.m in Sources */,
+				4300C4281D1A98EF0065E94E /* IQAudioRecorderViewController.m in Sources */,
 				43F5F7651CB3A4EE007BFB0C /* NSAttributedString+Tools.m in Sources */,
+				4300C42D1D1A98EF0065E94E /* IQPlaybackDurationView.m in Sources */,
 				432345DE1C94051A00200833 /* CLInfoModel.m in Sources */,
 				4323462C1C94054300200833 /* CLQuickStringCell.m in Sources */,
 				43E0F73D1CA10D27005CAD97 /* MJType.m in Sources */,
@@ -1530,6 +1657,7 @@
 				432345E31C94051A00200833 /* CLPrepModel.m in Sources */,
 				432346301C94054300200833 /* CLTableBackView.m in Sources */,
 				43951A161CC5E7BE00505E5B /* CLBackUpInfoVC.m in Sources */,
+				4300C4271D1A98EF0065E94E /* IQAudioRecorderConstraints.m in Sources */,
 				4389969D1D193A2B0069DF8B /* CLNewEntryTool.m in Sources */,
 				432346551C9408F100200833 /* CLToolBar.m in Sources */,
 				4364861F1CE1BAEA00FC191B /* CLSizeListVC.m in Sources */,
@@ -1552,6 +1680,7 @@
 				4323468F1C96B42A00200833 /* CLNewEntryTextCell.m in Sources */,
 				43A281181CB224BC009C2785 /* CLMookTabBarController.m in Sources */,
 				43068C041CB7546400BA1A57 /* ISRDataHelper.m in Sources */,
+				4300C42C1D1A98EF0065E94E /* IQMessageDisplayView.m in Sources */,
 				43F5F7A61CB4A2C2007BFB0C /* CLPropChooseVC.m in Sources */,
 				4323464D1C9405EA00200833 /* main.m in Sources */,
 				438342841D1277FC0089B58E /* CLDeck.m in Sources */,
@@ -1567,6 +1696,7 @@
 				439519C41CBF886C00505E5B /* FCFileManager.m in Sources */,
 				432345A51C9404FB00200833 /* CLEdtingManageVC.m in Sources */,
 				432345AF1C9404FB00200833 /* CLPropChooseNavVC.m in Sources */,
+				4300C42A1D1A98EF0065E94E /* IQCropSelectionEndView.m in Sources */,
 				43F5F75A1CB390EB007BFB0C /* CLMediaNavVC.m in Sources */,
 				438342711D0FE16B0089B58E /* PFTableCellContentView.m in Sources */,
 				4383426E1D0FE16B0089B58E /* PFConfiguration.m in Sources */,
@@ -1772,6 +1902,10 @@
 				GCC_PREFIX_HEADER = /Users/jackchen/MyProjects/Mook/Mook/PrefixHeader.pch;
 				INFOPLIST_FILE = /Users/jackchen/MyProjects/Mook/Mook/Base.lproj/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Mook",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.linchen.project.Mook;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "b3c1146b-9d44-4007-9274-17061760e032";
@@ -1795,6 +1929,10 @@
 				GCC_PREFIX_HEADER = /Users/jackchen/MyProjects/Mook/Mook/PrefixHeader.pch;
 				INFOPLIST_FILE = /Users/jackchen/MyProjects/Mook/Mook/Base.lproj/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Mook",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.linchen.project.Mook;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "b3c1146b-9d44-4007-9274-17061760e032";

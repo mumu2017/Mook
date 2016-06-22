@@ -350,12 +350,6 @@ static NSString * const reuseIdentifier = @"Cell";
     [self mediaButton];
 }
 
-//- (void)viewWillAppear:(BOOL)animated {
-//    [super viewWillAppear:animated];
-//    
-//    [self.navigationController setToolbarHidden:YES];
-//}
-
 - (void) update {
 
     self.allMedia = nil;

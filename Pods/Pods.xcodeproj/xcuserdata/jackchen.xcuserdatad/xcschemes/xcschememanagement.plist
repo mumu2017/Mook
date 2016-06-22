@@ -49,7 +49,22 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>FDWaveformView-FDWaveformView.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>FDWaveformView.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>FMDB.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>IQAudioRecorderController.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -80,6 +95,11 @@
 			<false/>
 		</dict>
 		<key>SCRecorder.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>SCSiriWaveformView.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -117,7 +137,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>0F18CF0CC9748E6BB97F91B13831459B</key>
+		<key>04B1980E355A040AF099EBD6FA1C6760</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -132,12 +152,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>53029ACADBE42945DD548EBC02362C29</key>
+		<key>2983A5926E37E0925673B43C4FA61A4C</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>62533255699ECECEBA3B5CBC0BBEF4CD</key>
+		<key>38B2474207004164BABDA2224ECB3965</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>43B3DCFC1782D3C4D90EB7C04C6158C0</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -157,12 +182,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>7BD749EEE07E1CD6BE7409DB3966A10E</key>
+		<key>871A7BA32C7B5C87DF08B9ECB4DFDC3C</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>871A7BA32C7B5C87DF08B9ECB4DFDC3C</key>
+		<key>8E87ADD4AB9D85900D80FEB8122CD688</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -182,11 +207,6 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>9EDFCA106D3F035281D2F7E1A6C97C16</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>A9A83F63385AA43314397B8DD375464B</key>
 		<dict>
 			<key>primary</key>
@@ -197,7 +217,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>B6A339BFABBB6B0652A7269AFE7F8465</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>BE7A5E8E0FDE9CA58316BC4D6568818D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D06A9201622959C6FBA15F9984C4530A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -207,7 +237,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>E1A10459CF41967D18E2C1AEE2296DC0</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>E61CE3B6DFA1FE6B3E296965C76C0E10</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E83A4C8D3A490744F653F05D22155627</key>
 		<dict>
 			<key>primary</key>
 			<true/>
