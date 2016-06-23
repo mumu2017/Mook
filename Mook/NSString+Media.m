@@ -87,6 +87,16 @@
     return imagePath;
 }
 
++ (NSString *)audioPath {
+    NSError *error;
+    NSString *mookPath = [NSString mookPath]; // Get documents folder
+    NSString *audioPath = [mookPath stringByAppendingPathComponent:@"/Audios"];
+    
+    if (![[NSFileManager defaultManager] fileExistsAtPath:audioPath])
+        [[NSFileManager defaultManager] createDirectoryAtPath:audioPath withIntermediateDirectories:NO attributes:nil error:&error]; //Create folder
+    return audioPath;
+}
+
 + (NSString *)framePath {
     NSError *error;
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
@@ -145,6 +155,15 @@
     [UIImageJPEGRepresentation(thumbnail, 0.5) writeToFile:thumbnailPath atomically:YES];
 }
 
+- (void)saveNamedAudioToDocument:(NSString *)filePath {
+    
+    NSString *audioPath = [[NSString audioPath] stringByAppendingPathComponent:self];
+    [[NSFileManager defaultManager] copyItemAtPath:filePath toPath:audioPath error:nil];
+//    NSData *audioData = [NSData dataWithContentsOfFile:filePath];
+//    [audioData writeToFile:audioPath atomically:YES];
+    
+}
+
 - (void)saveNamedVideoThumbnailImageToCache {
     
     // 存储缩略图文件
@@ -152,7 +171,13 @@
     UIImage *thumbnail0 = [UIImage imageWithImage:[self getNamedVideoFrame] scaledToNewSize:CGSizeMake(240, 240)];
     UIImage *baseImage = [thumbnail0 imageByCroppingImageToSize:CGSizeMake(240, 240)];
     UIImage *thumbnail = [baseImage imageWaterMarkWithImage:[UIImage imageNamed:@"iconVideoCamera"] imageRect:CGRectMake(20, 186, 44, 44) alpha:1]; // 186 = 240 - 44 - 20 也就是水印距离底部20pix
-    [UIImageJPEGRepresentation(thumbnail, 0.5) writeToFile:thumbnailPath atomically:YES];
+    
+    if ([UIImageJPEGRepresentation(thumbnail, 0.5) writeToFile:thumbnailPath atomically:YES]) {
+        NSLog(@"保存音频成功");
+    } else {
+        NSLog(@"保存音频失败");
+
+    }
 }
 
 - (void)saveNamedImageToDocument:(UIImage *)image {
@@ -343,6 +368,33 @@
     });
 }
 
+- (void)deleteNamedAudioFromDocument {
+    
+    // 从数据库媒体表中删除图片条目
+    [CLDataSaveTool deleteMediaByName:self];
+    
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        
+        NSFileManager* fileManager=[NSFileManager defaultManager];
+        NSString *uniquePath = [[NSString audioPath] stringByAppendingPathComponent:self];
+        
+        // 判定图片是否存在
+        BOOL fileExists=[[NSFileManager defaultManager] fileExistsAtPath:uniquePath];
+        if (!fileExists) {
+            //            NSLog(@"file does not exist");
+            return ;
+        }else {
+            //            NSLog(@" file exists");
+            BOOL fileDeleted= [fileManager removeItemAtPath:uniquePath error:nil];
+            if (fileDeleted) {
+                NSLog(@"audio deleted");
+            }else {
+                NSLog(@"deleting audio failed");
+            }
+        }
+    });
+
+}
 
 #pragma mark - 获取多媒体文件
 - (AVPlayerItem *)getNamedAVPlayerItem {
@@ -376,6 +428,12 @@
     NSString *path = [[NSString imagePath] stringByAppendingPathComponent:self];
     UIImage *image = [UIImage imageWithContentsOfFile:path];
     return image;
+}
+
+- (NSString *)getNamedAudio {
+    
+    NSString *path = [[NSString audioPath] stringByAppendingPathComponent:self];
+    return path;
 }
 
 - (UIImage *)getNamedVideoThumbnail { // 获取视频缩略图,如果没有就创建一份到缓存中

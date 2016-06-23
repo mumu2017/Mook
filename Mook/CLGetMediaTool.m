@@ -187,8 +187,10 @@
 
 - (void)audioRecorderController:(IQAudioRecorderViewController *)controller didFinishWithAudioAtPath:(NSString *)filePath {
     
-    _audioBlock(filePath);
-    [controller dismissViewControllerAnimated:YES completion:nil];
+    [controller dismissViewControllerAnimated:YES completion:^{
+        _audioBlock(filePath);
+
+    }];
 
 }
 

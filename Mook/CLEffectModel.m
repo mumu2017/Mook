@@ -82,6 +82,18 @@
     return fileExists;
 }
 
+- (BOOL)isWithAudio {
+    if (self.audio.length == 0) {
+        return NO;
+    }
+    
+    NSString *path = [[NSString audioPath] stringByAppendingPathComponent:self.audio];
+    
+    BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:path];
+    
+    return fileExists;
+}
+
 - (NSString *)effect {
     if (_effect == nil) {
         _effect = @"";
@@ -101,6 +113,12 @@
         path = [[NSString videoPath] stringByAppendingPathComponent:self.video];
         size = [FCFileManager sizeOfFileAtPath:path];
 
+    }
+    
+    if (self.isWithAudio) {
+        path = [[NSString audioPath] stringByAppendingPathComponent:self.video];
+        size = @(size.intValue + [FCFileManager sizeOfFileAtPath:path].intValue);
+        
     }
 
     return size;

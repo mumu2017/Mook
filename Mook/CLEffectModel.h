@@ -16,6 +16,8 @@
 
 @property (nonatomic, copy) NSString *video;
 
+@property (nonatomic, copy) NSString *audio;
+
 // 是否有效果信息
 @property (nonatomic, assign) BOOL isWithEffect;
 
@@ -23,8 +25,11 @@
 
 @property (nonatomic, assign) BOOL isWithImage;
 
+@property (nonatomic, assign) BOOL isWithAudio;
+
 + (instancetype) effectModel;
 
+- (MediaUnitType)mediaType;
 - (void)deleteMedia;
 - (NSNumber *)mediaSize;
 

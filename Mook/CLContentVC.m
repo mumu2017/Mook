@@ -25,14 +25,19 @@
 #import "CLPerformModel.h"
 #import "CLNotesModel.h"
 
+#import "UIViewController+BlurPresenting.h"
 #import "CLOneLabelDisplayCell.h"
 #import "CLOneLabelImageDisplayCell.h"
 
 #import "QuartzCore/QuartzCore.h"
 #import <AVFoundation/AVFoundation.h>
+#import "CLAudioPlayTool.h"
 
-@interface CLContentVC ()<UIDocumentInteractionControllerDelegate, MBProgressHUDDelegate>
+@interface CLContentVC ()<UIDocumentInteractionControllerDelegate, MBProgressHUDDelegate, AVAudioPlayerDelegate>
 
+{
+    AVAudioPlayer *_audioPlayer;
+}
 // section属性(需要根据model内容进行设置)
 @property (nonatomic, assign) NSInteger infoSection;
 @property (nonatomic, assign) NSInteger effectSection;
@@ -59,6 +64,7 @@
 
 @property (nonatomic, strong) UIDocumentInteractionController *documentInteractionController;
 @property (nonatomic, copy) NSString *exportPath;
+
 
 
 @end
@@ -473,6 +479,10 @@
             
             cell.contentLabel.attributedText = [self.effectModel.effect styledString];
             
+            if (self.effectModel.isWithAudio) {
+                cell.audioButton.hidden = NO;
+                [cell.audioButton addTarget:self action:@selector(playAudio:) forControlEvents:UIControlEventTouchUpInside];
+            }
             return cell;
         }
         
@@ -692,6 +702,34 @@
     return kLabelHeight;
 }
 
+#pragma mark -Audio 方法
+- (void)playAudio:(UIButton *)sender {
+    NSLog(@"%s", __func__);
+    [CLAudioPlayTool playAudioFromCurrentController:self audioPath:[self.effectModel.audio getNamedAudio]];
+//
+//    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
+//    [UIApplication sharedApplication].idleTimerDisabled = YES;
+//    _audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:[self.effectModel.audio getNamedAudio] error:nil];
+//    _audioPlayer.delegate = self;
+//    _audioPlayer.meteringEnabled = YES;
+//
+////    _audioPlayer.volume = 10.0f;
+//    
+//    [_audioPlayer prepareToPlay];
+//    [_audioPlayer play];
+}
+
+- (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag {
+    if (flag) {
+        NSLog(@"播放完毕");
+
+    }
+}
+
+- (void)audioPlayerDecodeErrorDidOccur:(AVAudioPlayer *)player error:(NSError *)error {
+    NSLog(@"%@", error);
+}
+
 #pragma mark - PhotoBrowser方法
 // 遍历模型,加载图片
 - (NSMutableArray *)loadPhotos {
@@ -891,7 +929,8 @@
     browser.autoPlayOnAppear = autoPlayOnAppear;
     [browser setCurrentPhotoIndex:button.tag];
     // Show
-    [self.navigationController pushViewController:browser animated:YES];
+//    [self.navigationController pushViewController:browser animated:YES];
+    [self presentNavigationViewControllerAnimated:browser];
 }
 
 - (void)showGrid {

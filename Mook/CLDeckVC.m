@@ -13,7 +13,7 @@
 #import "InfiniteScrollPicker.h"
 #import "LTInfiniteScrollView.h"
 
-#import "Masonry.h"
+//#import "Masonry.h"
 
 #define kCardTableColor     [UIColor colorWithRed:21/225.0 green:102/225.0 blue:46/225.0 alpha:1.0]
 

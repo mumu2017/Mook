@@ -20,6 +20,14 @@ typedef enum {
 } ListType;
 
 typedef enum {
+    kMediaUnitTypeNone = 0,
+    kMediaUnitTypeImage,
+    kMediaUnitTypeVideo,
+    kMediaUnitTypeAudio,
+} MediaUnitType;
+
+
+typedef enum {
     kContentTypeIdea = 0,
     kContentTypeShow,
     kContentTypeRoutine,

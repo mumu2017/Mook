@@ -37,7 +37,7 @@
 
 #import "CLTableBackView.h"
 
-#import "Masonry.h"
+//#import "Masonry.h"
 #import "CLAddView.h"
 #import "Pop.h"
 
@@ -1041,9 +1041,8 @@
             [self addNewPropWithVideo];
             break;
             
-#warning 添加录音功能
         case kListTypeLines:
-            [self addAudioRecording];
+            [self addNewLinesWithAudio];
             break;
             
         default:
@@ -1051,10 +1050,45 @@
     }
 }
 
-- (void)addAudioRecording {
+- (void)addNewLinesWithAudio {
     [[CLGetMediaTool getInstance] recordAudioFromCurrentController:self audioBlock:^(NSString *filePath) {
-        NSLog(@"%@", filePath);
+        
+        [self addNewLinesWithAudio:filePath];
     }];
+}
+
+- (void)addNewLinesWithAudio:(NSString *)filePath {
+    self.editingContentType = kEditingContentTypeLines;
+    // 创建一个新的routineModel,传递给newRoutineVC,并添加到routineModelList中
+    CLLinesObjModel *model = [CLLinesObjModel linesObjModel];
+    
+    NSString *audioName = [kTimestamp stringByAppendingString:@".m4a"];
+    [audioName saveNamedAudioToDocument:filePath];
+    model.effectModel.audio = audioName;
+    [CLDataSaveTool addAudioByName:audioName timesStamp:model.timeStamp content:nil type:kTypeLines];
+    
+    // 将新增的model放在数组第一个,这样在现实到list中时,新增的model会显示在最上面
+    [kDataListLines insertObject:model atIndex:0];
+    [kDataListAll insertObject:model atIndex:0];
+    
+    // 当有tag的时候,说明是tag页面跳转而来, 新增模型时, 自动添加该tag, 且添加到tag的ModelList中
+    if (self.tag.length > 0 && self.linesObjModelList != kDataListLines) {
+        [model.tags addObject:self.tag];
+        [self.linesObjModelList insertObject:model atIndex:0];
+    }
+    
+    [CLNewEntryTool showAlertControllerWithTextFieldFromCurrentController:self comfirmHandler:^(NSString * _Nullable title) {
+        model.infoModel.name = title;
+        [CLDataSaveTool updateLines:model];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:kUpdateDataNotification object:nil];
+    } editMoreHandler:^(NSString * _Nullable title) {
+        model.infoModel.name = title;
+        
+        [self performSegueWithIdentifier:kSegueListToNewEntry sender:nil];
+
+    }];
+    
 }
 
 - (void)addNewShowWithVideo {
@@ -1122,7 +1156,17 @@
         [self.ideaObjModelList insertObject:model atIndex:0];
     }
     
-    [self performSegueWithIdentifier:kSegueListToNewEntry sender:nil];
+    [CLNewEntryTool showAlertControllerWithTextFieldFromCurrentController:self comfirmHandler:^(NSString * _Nullable title) {
+        model.infoModel.name = title;
+        [CLDataSaveTool updateIdea:model];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:kUpdateDataNotification object:nil];
+    } editMoreHandler:^(NSString * _Nullable title) {
+        model.infoModel.name = title;
+        
+        [self performSegueWithIdentifier:kSegueListToNewEntry sender:nil];
+        
+    }];
 }
 
 - (void)addNewShowWithVideo:videoURL orImage:image {
@@ -1153,7 +1197,17 @@
         [self.showModelList insertObject:model atIndex:0];
     }
     
-    [self performSegueWithIdentifier:kSegueListToNewShow sender:nil];
+    [CLNewEntryTool showAlertControllerWithTextFieldFromCurrentController:self comfirmHandler:^(NSString * _Nullable title) {
+        model.name = title;
+        [CLDataSaveTool updateShow:model];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:kUpdateDataNotification object:nil];
+    } editMoreHandler:^(NSString * _Nullable title) {
+        model.name = title;
+        
+        [self performSegueWithIdentifier:kSegueListToNewShow sender:nil];
+        
+    }];
 }
 
 - (void)addNewRoutineWithVideo:videoURL orImage:image {
@@ -1185,7 +1239,17 @@
         [self.routineModelList insertObject:model atIndex:0];
     }
     
-    [self performSegueWithIdentifier:kSegueListToNewEntry sender:nil];
+    [CLNewEntryTool showAlertControllerWithTextFieldFromCurrentController:self comfirmHandler:^(NSString * _Nullable title) {
+        model.infoModel.name = title;
+        [CLDataSaveTool updateRoutine:model];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:kUpdateDataNotification object:nil];
+    } editMoreHandler:^(NSString * _Nullable title) {
+        model.infoModel.name = title;
+        
+        [self performSegueWithIdentifier:kSegueListToNewEntry sender:nil];
+        
+    }];
 }
 
 - (void)addNewSleightWithVideo:videoURL orImage:image {
@@ -1217,7 +1281,17 @@
         [self.sleightObjModelList insertObject:model atIndex:0];
     }
     
-    [self performSegueWithIdentifier:kSegueListToNewEntry sender:nil];
+    [CLNewEntryTool showAlertControllerWithTextFieldFromCurrentController:self comfirmHandler:^(NSString * _Nullable title) {
+        model.infoModel.name = title;
+        [CLDataSaveTool updateSleight:model];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:kUpdateDataNotification object:nil];
+    } editMoreHandler:^(NSString * _Nullable title) {
+        model.infoModel.name = title;
+        
+        [self performSegueWithIdentifier:kSegueListToNewEntry sender:nil];
+        
+    }];
 }
 
 - (void)addNewPropWithVideo:videoURL orImage:image {
@@ -1247,7 +1321,17 @@
         [self.propObjModelList insertObject:model atIndex:0];
     }
     
-    [self performSegueWithIdentifier:kSegueListToNewEntry sender:nil];
+    [CLNewEntryTool showAlertControllerWithTextFieldFromCurrentController:self comfirmHandler:^(NSString * _Nullable title) {
+        model.infoModel.name = title;
+        [CLDataSaveTool updateProp:model];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:kUpdateDataNotification object:nil];
+    } editMoreHandler:^(NSString * _Nullable title) {
+        model.infoModel.name = title;
+        
+        [self performSegueWithIdentifier:kSegueListToNewEntry sender:nil];
+        
+    }];
 }
 
 - (void)addNewLines {

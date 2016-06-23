@@ -28,5 +28,6 @@
 #import <ChameleonFramework/Chameleon.h>
 #import "MBProgressHUD.h"
 #import "MBProgressHUD+Tools.h"
+#import "MASonry.h"
 
 #endif /* PrefixHeader_pch */

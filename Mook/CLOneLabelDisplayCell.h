@@ -11,5 +11,6 @@
 @interface CLOneLabelDisplayCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UILabel *contentLabel;
+@property (strong, nonatomic) IBOutlet UIButton *audioButton;
 
 @end

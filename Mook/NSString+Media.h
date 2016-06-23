@@ -26,13 +26,18 @@
 + (NSString *)imagePath;
 + (NSString *)thumbnailPath;
 
++ (NSString *)audioPath;
+
 // 根据文件名,存储和删除image 和 video 到沙盒document文件夹中
 - (void)deleteNamedVideoFromDocument;
 - (void)deleteNamedImageFromDocument;
+- (void)deleteNamedAudioFromDocument;
 
 // 储存多媒体
 - (void)saveNamedImageToDocument:(UIImage *)image;
 - (void)saveNamedVideoToDocument:(NSURL *)videoURL;
+- (void)saveNamedAudioToDocument:(NSString *)filePath;
+
 
 // 存储多媒体缩略图到缓存文件夹
 - (void)saveNamedImageThumbnailImageToCache;
@@ -40,6 +45,7 @@
 
 // 根据文件名获取多媒体
 - (UIImage *)getNamedImage;
+- (NSString *)getNamedAudio;
 
 - (UIImage *)getNamedImageThumbnail;
 - (UIImage *)getNamedVideoThumbnail;

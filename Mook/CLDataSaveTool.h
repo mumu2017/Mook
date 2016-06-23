@@ -67,16 +67,20 @@
 + (NSMutableArray *)allMedia;
 + (NSMutableArray *)allVideos;
 + (NSMutableArray *)allImages;
++ (NSMutableArray *)allAudios;
 
 + (NSData *)videoByName:(NSString *)name;
 + (UIImage *)imageByName:(NSString *)name;
++ (NSURL *)audioByName:(NSString *)name;
 
 // timaStamp是多媒体所在模型的timaStamp, 这样可以建立模型与多媒体之间的联系
 + (void)addVideoByName:(NSString *)name timesStamp:(NSString *)timeStamp content:(NSString *)content type:(NSString *)type;
 + (void)addImageByName:(NSString *)name timesStamp:(NSString *)timeStamp content:(NSString *)content type:(NSString *)type;
++ (void)addAudioByName:(NSString *)name timesStamp:(NSString *)timeStamp content:(NSString *)content type:(NSString *)type;
 
 + (void)updateVideoByName:(NSString *)name withContent:(NSString *)content;
 + (void)updateImageByName:(NSString *)name withContent:(NSString *)content;
++ (void)updateAudioByName:(NSString *)name withContent:(NSString *)content;
 
 + (void)deleteMediaByName:(NSString *)name;
 

@@ -184,6 +184,9 @@
 		43C206921CB12BED00CEF992 /* CLMediaCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 43C206901CB12BED00CEF992 /* CLMediaCollectionCell.m */; };
 		43C206931CB12BED00CEF992 /* CLMediaCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43C206911CB12BED00CEF992 /* CLMediaCollectionCell.xib */; };
 		43DDCF3A1D1B72E4007E5CAC /* NSString+Media.m in Sources */ = {isa = PBXBuildFile; fileRef = 43DDCF391D1B72E4007E5CAC /* NSString+Media.m */; };
+		43DDCF3D1D1BA5C2007E5CAC /* CLAudioPlayVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 43DDCF3C1D1BA5C2007E5CAC /* CLAudioPlayVC.m */; };
+		43DDCF401D1BAA01007E5CAC /* UIViewController+BlurPresenting.m in Sources */ = {isa = PBXBuildFile; fileRef = 43DDCF3F1D1BAA01007E5CAC /* UIViewController+BlurPresenting.m */; };
+		43DDCF431D1BACB2007E5CAC /* CLAudioPlayTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 43DDCF421D1BACB2007E5CAC /* CLAudioPlayTool.m */; };
 		43DF3AC81CAA78A100712D81 /* UIImage+WaterMark.m in Sources */ = {isa = PBXBuildFile; fileRef = 43DF3AC71CAA78A100712D81 /* UIImage+WaterMark.m */; };
 		43E0F7081C9EB2A2005CAD97 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 43E0F7071C9EB2A2005CAD97 /* libsqlite3.0.tbd */; };
 		43E0F7291CA0FC6E005CAD97 /* CLDataSaveTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E0F7281CA0FC6E005CAD97 /* CLDataSaveTool.m */; };
@@ -528,6 +531,12 @@
 		43C206911CB12BED00CEF992 /* CLMediaCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CLMediaCollectionCell.xib; sourceTree = "<group>"; };
 		43DDCF381D1B72E4007E5CAC /* NSString+Media.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Media.h"; sourceTree = "<group>"; };
 		43DDCF391D1B72E4007E5CAC /* NSString+Media.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Media.m"; sourceTree = "<group>"; };
+		43DDCF3B1D1BA5C2007E5CAC /* CLAudioPlayVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLAudioPlayVC.h; sourceTree = "<group>"; };
+		43DDCF3C1D1BA5C2007E5CAC /* CLAudioPlayVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLAudioPlayVC.m; sourceTree = "<group>"; };
+		43DDCF3E1D1BAA01007E5CAC /* UIViewController+BlurPresenting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+BlurPresenting.h"; sourceTree = "<group>"; };
+		43DDCF3F1D1BAA01007E5CAC /* UIViewController+BlurPresenting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+BlurPresenting.m"; sourceTree = "<group>"; };
+		43DDCF411D1BACB2007E5CAC /* CLAudioPlayTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLAudioPlayTool.h; sourceTree = "<group>"; };
+		43DDCF421D1BACB2007E5CAC /* CLAudioPlayTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLAudioPlayTool.m; sourceTree = "<group>"; };
 		43DF3AC61CAA78A100712D81 /* UIImage+WaterMark.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+WaterMark.h"; sourceTree = "<group>"; };
 		43DF3AC71CAA78A100712D81 /* UIImage+WaterMark.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+WaterMark.m"; sourceTree = "<group>"; };
 		43E0F7071C9EB2A2005CAD97 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
@@ -801,6 +810,8 @@
 				432345621C9404A800200833 /* UIView+Tools.m */,
 				439519BF1CBF610700505E5B /* MBProgressHUD+Tools.h */,
 				439519C01CBF610700505E5B /* MBProgressHUD+Tools.m */,
+				43DDCF3E1D1BAA01007E5CAC /* UIViewController+BlurPresenting.h */,
+				43DDCF3F1D1BAA01007E5CAC /* UIViewController+BlurPresenting.m */,
 			);
 			name = Category;
 			sourceTree = "<group>";
@@ -1305,6 +1316,10 @@
 				43E9D0BF1D19236700036DDD /* CLGetMediaTool.m */,
 				4389969B1D193A2B0069DF8B /* CLNewEntryTool.h */,
 				4389969C1D193A2B0069DF8B /* CLNewEntryTool.m */,
+				43DDCF411D1BACB2007E5CAC /* CLAudioPlayTool.h */,
+				43DDCF421D1BACB2007E5CAC /* CLAudioPlayTool.m */,
+				43DDCF3B1D1BA5C2007E5CAC /* CLAudioPlayVC.h */,
+				43DDCF3C1D1BA5C2007E5CAC /* CLAudioPlayVC.m */,
 				4300C4131D1A98D60065E94E /* IQRecorderVC */,
 			);
 			name = "Tools(业务类)";
@@ -1626,6 +1641,7 @@
 				436927261D053D400041ED9C /* CLShowCell.m in Sources */,
 				432345651C9404A800200833 /* UIImageView+Tools.m in Sources */,
 				439519FC1CC51F6200505E5B /* CLBackUpVC.m in Sources */,
+				43DDCF401D1BAA01007E5CAC /* UIViewController+BlurPresenting.m in Sources */,
 				43885F791CA6A8AC00269CE1 /* CLHomeNavVC.m in Sources */,
 				4323468A1C96B0DA00200833 /* CLNewEntryImageCell.m in Sources */,
 				43E0F73B1CA10D27005CAD97 /* MJFoundation.m in Sources */,
@@ -1638,6 +1654,7 @@
 				432345661C9404A800200833 /* UINavigationBar+Awesome.m in Sources */,
 				438342731D0FE16B0089B58E /* PFTableViewCell.m in Sources */,
 				432345E91C94051A00200833 /* CLSleightObjModel.m in Sources */,
+				43DDCF431D1BACB2007E5CAC /* CLAudioPlayTool.m in Sources */,
 				43F5F7681CB3BD63007BFB0C /* CLQuickStringNavVC.m in Sources */,
 				43EEE7E21CAD329B00F0BCCF /* CLRoutineTextCell.m in Sources */,
 				432346651C94094D00200833 /* CLOneLabelImageDisplayCell.m in Sources */,
@@ -1718,6 +1735,7 @@
 				432346451C94055700200833 /* SMTagField.m in Sources */,
 				43E0F7401CA10D27005CAD97 /* NSObject+MJKeyValue.m in Sources */,
 				43A281241CB2299B009C2785 /* CLLibraryVC.m in Sources */,
+				43DDCF3D1D1BA5C2007E5CAC /* CLAudioPlayVC.m in Sources */,
 				4323456B1C9404A800200833 /* UIView+Tools.m in Sources */,
 				432345E21C94051A00200833 /* CLPerformModel.m in Sources */,
 				438342781D10FB4B0089B58E /* CLToolsVC.m in Sources */,

@@ -354,6 +354,11 @@
     self.addButton.hidden = YES;
     self.mediaButton.hidden = YES;
     [self.menu hide];
+    
+    [self hideAddView];
+}
+
+- (void)hideAddView {
     if (self.addView.center.y == self.navigationController.view.center.y) {
         [self toggleAddView];
     }
@@ -1254,9 +1259,8 @@
             [self addNewPropWithVideo];
             break;
             
-#warning 添加录音功能
         case kListTypeLines:
-
+            [self addNewLinesWithAudio];
             break;
             
         default:
@@ -1264,39 +1268,53 @@
     }
 }
 
+- (void)addNewLinesWithAudio {
+    [self hideAddView];
+
+    [[CLGetMediaTool getInstance] recordAudioFromCurrentController:self.tabBarController audioBlock:^(NSString *filePath) {
+        [CLNewEntryTool quickAddNewLinesFromCurrentController:self withAudio:filePath];
+    }];
+}
+
 - (void)addNewShowWithVideo {
-    
+    [self hideAddView];
+
     [[CLGetMediaTool getInstance] loadCameraFromCurrentViewController:self maximumDuration:600.0 completion:^(NSURL *videoURL, UIImage *photo) {
-        [CLNewEntryTool addNewShowFromCurrentController:self withVideo:videoURL orImage:photo];
+        [CLNewEntryTool quickAddNewShowFromCurrentController:self withVideo:videoURL orImage:photo];
     }];
 }
 
 
 - (void)addNewIdeaWithVideo {
     
+    [self hideAddView];
+
     [[CLGetMediaTool getInstance] loadCameraFromCurrentViewController:self maximumDuration:30.0 completion:^(NSURL *videoURL, UIImage *photo) {
-        [CLNewEntryTool addNewIdeaFromCurrentController:self withVideo:videoURL orImage:photo];
+        [CLNewEntryTool quickAddNewIdeaFromCurrentController:self withVideo:videoURL orImage:photo];
     }];
 }
 
 - (void)addNewRoutineWithVideo {
-    
+    [self hideAddView];
+
     [[CLGetMediaTool getInstance] loadCameraFromCurrentViewController:self maximumDuration:180.0 completion:^(NSURL *videoURL, UIImage *photo) {
-        [CLNewEntryTool addNewRoutineFromCurrentController:self withVideo:videoURL orImage:photo];
+        [CLNewEntryTool quickAddNewRoutineFromCurrentController:self withVideo:videoURL orImage:photo];
     }];
 }
 
 - (void)addNewSleightWithVideo {
-    
+    [self hideAddView];
+
     [[CLGetMediaTool getInstance] loadCameraFromCurrentViewController:self maximumDuration:30.0 completion:^(NSURL *videoURL, UIImage *photo) {
-        [CLNewEntryTool addNewSleightFromCurrentController:self withVideo:videoURL orImage:photo];
+        [CLNewEntryTool quickAddNewSleightFromCurrentController:self withVideo:videoURL orImage:photo];
     }];
 }
 
 - (void)addNewPropWithVideo {
-    
+    [self hideAddView];
+
     [[CLGetMediaTool getInstance] loadCameraFromCurrentViewController:self maximumDuration:30.0 completion:^(NSURL *videoURL, UIImage *photo) {
-        [CLNewEntryTool addNewPropFromCurrentController:self withVideo:videoURL orImage:photo];
+        [CLNewEntryTool quickAddNewPropFromCurrentController:self withVideo:videoURL orImage:photo];
         
     }];
 }

@@ -21,6 +21,7 @@
 #import "CLRoutineModel.h"
 #import "CLInfoModel.h"
 #import "CLEffectModel.h"
+#import "UIViewController+BlurPresenting.h"
 
 @interface CLShowVC ()<SWTableViewCellDelegate, MWPhotoBrowserDelegate>
 
@@ -490,7 +491,9 @@
     browser.autoPlayOnAppear = autoPlayOnAppear;
     [browser setCurrentPhotoIndex:button.tag];
     // Show
-    [self.navigationController pushViewController:browser animated:YES];
+//    [self.navigationController pushViewController:browser animated:YES];
+    [self presentNavigationViewControllerAnimated:browser];
+
 }
 
 #pragma mark - MWPhotoBrowserDelegate
