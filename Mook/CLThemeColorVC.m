@@ -162,10 +162,11 @@ static NSString * const reuseIdentifier = @"colorCellID";
     
     [[NSUserDefaults standardUserDefaults] setInteger:indexPath.row forKey:kThemeColorKey];
     [[NSUserDefaults standardUserDefaults] synchronize];
-    [kAppDelegate setAppUI];
     [[NSNotificationCenter defaultCenter] postNotificationName:kUpdateDataNotification object:nil];
     
     [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+    
+    [kAppDelegate setAppUI];
 }
 
 /*

@@ -183,6 +183,7 @@
 		43C2068E1CB12A6400CEF992 /* CLMediaVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 43C2068D1CB12A6400CEF992 /* CLMediaVC.m */; };
 		43C206921CB12BED00CEF992 /* CLMediaCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 43C206901CB12BED00CEF992 /* CLMediaCollectionCell.m */; };
 		43C206931CB12BED00CEF992 /* CLMediaCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43C206911CB12BED00CEF992 /* CLMediaCollectionCell.xib */; };
+		43DDCF3A1D1B72E4007E5CAC /* NSString+Media.m in Sources */ = {isa = PBXBuildFile; fileRef = 43DDCF391D1B72E4007E5CAC /* NSString+Media.m */; };
 		43DF3AC81CAA78A100712D81 /* UIImage+WaterMark.m in Sources */ = {isa = PBXBuildFile; fileRef = 43DF3AC71CAA78A100712D81 /* UIImage+WaterMark.m */; };
 		43E0F7081C9EB2A2005CAD97 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 43E0F7071C9EB2A2005CAD97 /* libsqlite3.0.tbd */; };
 		43E0F7291CA0FC6E005CAD97 /* CLDataSaveTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E0F7281CA0FC6E005CAD97 /* CLDataSaveTool.m */; };
@@ -525,6 +526,8 @@
 		43C2068F1CB12BED00CEF992 /* CLMediaCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLMediaCollectionCell.h; sourceTree = "<group>"; };
 		43C206901CB12BED00CEF992 /* CLMediaCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLMediaCollectionCell.m; sourceTree = "<group>"; };
 		43C206911CB12BED00CEF992 /* CLMediaCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CLMediaCollectionCell.xib; sourceTree = "<group>"; };
+		43DDCF381D1B72E4007E5CAC /* NSString+Media.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Media.h"; sourceTree = "<group>"; };
+		43DDCF391D1B72E4007E5CAC /* NSString+Media.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Media.m"; sourceTree = "<group>"; };
 		43DF3AC61CAA78A100712D81 /* UIImage+WaterMark.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+WaterMark.h"; sourceTree = "<group>"; };
 		43DF3AC71CAA78A100712D81 /* UIImage+WaterMark.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+WaterMark.m"; sourceTree = "<group>"; };
 		43E0F7071C9EB2A2005CAD97 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
@@ -718,6 +721,7 @@
 				439519DB1CC0911000505E5B /* Localizable.strings */,
 				4323454F1C9404A800200833 /* Constants.h */,
 				432345521C9404A800200833 /* PrefixHeader.pch */,
+				439519CF1CC0908A00505E5B /* Info.plist */,
 				4323453B1C94045000200833 /* AppDelegate.h */,
 				4323453C1C94045000200833 /* AppDelegate.m */,
 				438342751D10FB1A0089B58E /* Tools */,
@@ -731,7 +735,6 @@
 				43E0F71C1CA0F534005CAD97 /* Editing(编辑) */,
 				43E0F71B1CA0F141005CAD97 /* Libs */,
 				432345441C94045000200833 /* Assets.xcassets */,
-				439519CF1CC0908A00505E5B /* Info.plist */,
 				432345381C94045000200833 /* Supporting Files */,
 			);
 			path = Mook;
@@ -776,6 +779,8 @@
 				430DFBCB1CA393CC0054DF6B /* NSDate+MJ.m */,
 				432345501C9404A800200833 /* NSString+Tools.h */,
 				432345511C9404A800200833 /* NSString+Tools.m */,
+				43DDCF381D1B72E4007E5CAC /* NSString+Media.h */,
+				43DDCF391D1B72E4007E5CAC /* NSString+Media.m */,
 				43F5F7631CB3A4EE007BFB0C /* NSAttributedString+Tools.h */,
 				43F5F7641CB3A4EE007BFB0C /* NSAttributedString+Tools.m */,
 				432345531C9404A800200833 /* UIImage+Tools.h */,
@@ -1636,6 +1641,7 @@
 				43F5F7681CB3BD63007BFB0C /* CLQuickStringNavVC.m in Sources */,
 				43EEE7E21CAD329B00F0BCCF /* CLRoutineTextCell.m in Sources */,
 				432346651C94094D00200833 /* CLOneLabelImageDisplayCell.m in Sources */,
+				43DDCF3A1D1B72E4007E5CAC /* NSString+Media.m in Sources */,
 				4323467E1C9409BB00200833 /* XLBarView.m in Sources */,
 				432346201C94054300200833 /* CLListTextCell.m in Sources */,
 				43E0F7291CA0FC6E005CAD97 /* CLDataSaveTool.m in Sources */,
