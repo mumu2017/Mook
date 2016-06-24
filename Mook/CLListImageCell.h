@@ -9,19 +9,29 @@
 //#import <SWTableViewCell/SWTableViewCell.h>
 @class SMTag;
 @class CLInfoModel, CLEffectModel, CLPrepModel;
+@class CLShowModel, CLRoutineModel, CLIdeaObjModel, CLSleightObjModel, CLPropObjModel, CLLinesObjModel;
 
 @interface CLListImageCell : SWTableViewCell
 
 @property (weak, nonatomic) IBOutlet UIImageView *iconView;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *contentLabel;
+@property (weak, nonatomic) IBOutlet UILabel *timeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *letterLabel;
+@property (weak, nonatomic) IBOutlet UIView *containerView;
 
-@property (nonatomic, copy) NSString *iconName;
+@property (strong, nonatomic) UIImage *image;
+@property (strong, nonatomic) NSString *title;
+@property (strong, nonatomic) NSString *content;
+@property (strong, nonatomic) NSString *time;
+
+@property (strong, nonatomic) id model;
 
 @property (nonatomic, copy) NSString *date;
 @property (nonatomic, strong) NSMutableArray <NSString*> *tags;
 
 + (instancetype)listImageCell;
-- (void)setTitle:(NSString *)title content:(NSAttributedString *)content;
+
+- (void)setModel:(id)model utilityButtons:(NSArray *)rightButtons delegate:(id<SWTableViewCellDelegate>)delegate;
 
 @end

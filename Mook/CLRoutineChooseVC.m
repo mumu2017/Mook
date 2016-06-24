@@ -9,7 +9,6 @@
 #import "CLRoutineChooseVC.h"
 #import "CLRoutineModel.h"
 
-#import "CLListTextCell.h"
 #import "CLListImageCell.h"
 
 #import "CLTableBackView.h"
@@ -62,10 +61,6 @@
     [self.tableView registerNib:[UINib nibWithNibName:@"CLListImageCell"
                                                bundle:nil]
          forCellReuseIdentifier:kListImageCellID];
-    
-    [self.tableView registerNib:[UINib nibWithNibName:@"CLListTextCell"
-                                               bundle:nil]
-         forCellReuseIdentifier:kListTextCellID];
 }
 
 - (void) finishPickRoutines {
@@ -98,42 +93,11 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    NSString *iconName, *title;
-    UIImage *image;
-    NSAttributedString *content;
-    
+    CLListImageCell *cell = [tableView dequeueReusableCellWithIdentifier:kListImageCellID forIndexPath:indexPath];
     CLRoutineModel *model = self.routineModelList[indexPath.row];
-    image = [model getThumbnail];
-    iconName = kIconNameRoutine;
-    title = [model getTitle];
-    content = [model getContent];
-
-    if (image != nil) { // 如果返回图片名称,则表示模型中有图片或多媒体
-        CLListImageCell *cell = [tableView dequeueReusableCellWithIdentifier:kListImageCellID forIndexPath:indexPath];
-        cell.iconView.image = image;
-        cell.iconName = iconName;
-        [cell setTitle:title content:content];
-        cell.selectionStyle = UITableViewCellSelectionStyleDefault;
-        if (!cell.isSelected) {
-            cell.accessoryType = UITableViewCellAccessoryNone;
-        }
-        cell.tintColor = kTintColor;
-        return cell;
-        
-    } else {
-        CLListTextCell *cell = [tableView dequeueReusableCellWithIdentifier:kListTextCellID forIndexPath:indexPath];
-        cell.iconName = iconName;
-        [cell setTitle:title content:content];
-        cell.selectionStyle = UITableViewCellSelectionStyleDefault;
-        if (!cell.isSelected) {
-            cell.accessoryType = UITableViewCellAccessoryNone;
-        }
-        cell.tintColor = kTintColor;
-
-        return cell;
-    }
+    [cell setModel:model utilityButtons:nil delegate:nil];
     
-    return nil;
+    return cell;
     
 }
 

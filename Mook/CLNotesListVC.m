@@ -1,12 +1,12 @@
 //
-//  CLAllItemsListVC.m
+//  CLNotesListVC.m
 //  Mook
 //
-//  Created by 陈林 on 16/4/12.
+//  Created by 陈林 on 16/6/24.
 //  Copyright © 2016年 Chen Lin. All rights reserved.
 //
 
-#import "CLAllItemsListVC.h"
+#import "CLNotesListVC.h"
 
 #import "CLNewEntryTool.h"
 #import "CLDataSaveTool.h"
@@ -16,9 +16,7 @@
 #import "CLContentVC.h"
 #import "CLShowVC.h"
 
-#import "CLListCell.h"
-#import "CLListImageCell.h"
-
+#import "CLNotesListCell.h"
 #import "CLShowModel.h"
 #import "CLIdeaObjModel.h"
 #import "CLRoutineModel.h"
@@ -31,7 +29,6 @@
 #import "CLPropModel.h"
 #import "CLPrepModel.h"
 #import "CLPerformModel.h"
-//#import "CLNotesModel.h"
 
 #import "CLTableBackView.h"
 #import "CLGetMediaTool.h"
@@ -43,8 +40,9 @@
 @class BTNavigationDropdownMenu;
 
 #import "BFPaperButton.h"
+@interface CLNotesListVC()<UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIDocumentInteractionControllerDelegate, MBProgressHUDDelegate>
 
-@interface CLAllItemsListVC ()<SWTableViewCellDelegate, MBProgressHUDDelegate, UIDocumentInteractionControllerDelegate>
+@property (nonatomic, strong) UICollectionView *collectionView;
 
 @property (nonatomic, strong) NSMutableArray *allItems;
 
@@ -71,9 +69,23 @@
 
 @property (strong, nonatomic) CLAddView *addView;
 
+
 @end
 
-@implementation CLAllItemsListVC
+@implementation CLNotesListVC
+
+- (UICollectionView *)collectionView {
+    if (!_collectionView) {
+        UICollectionViewFlowLayout *flowLayout =[[UICollectionViewFlowLayout alloc]init];
+
+        _collectionView = [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:flowLayout];
+        [self.view addSubview: _collectionView];
+        _collectionView.dataSource = self;
+        _collectionView.delegate = self;
+    }
+    return _collectionView;
+}
+
 
 - (UIButton *)coverButton {
     if (!_coverButton) {
@@ -119,10 +131,10 @@
         //        [_addButton setTitle:@"添加" forState:UIControlStateNormal];
         if (self.listType == kListTypeLines) {
             [_mediaButton setImage:[UIImage imageNamed:@"addAudio"] forState:UIControlStateNormal];
-
+            
         } else {
             [_mediaButton setImage:[UIImage imageNamed:@"addMedia"] forState:UIControlStateNormal];
-
+            
         }
         [_mediaButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.equalTo(self.navigationController.view.mas_right).with.offset(-10);
@@ -133,8 +145,8 @@
         _mediaButton.backgroundColor = [kAppThemeColor darkenByPercentage:0.05];
         _mediaButton.alpha = 1.0f;
         _mediaButton.hidden = (self.listType == kListTypeAll);
-
-
+        
+        
     }
     
     return _mediaButton;
@@ -147,18 +159,18 @@
         _addView.hidden = NO;
         
         [_addView mas_makeConstraints:^(MASConstraintMaker *make) {
-
+            
             make.width.equalTo(self.navigationController.view.mas_width).offset( -kAddButtonHeight);
             make.height.equalTo(_addView.mas_width).multipliedBy(1.5);
             make.centerX.equalTo(self.navigationController.view);
             make.top.equalTo(self.navigationController.view.mas_bottom).offset(_addView.frame.size.height);
         }];
         _addView.center = CGPointMake(self.navigationController.view.center.x, CGRectGetMaxY(self.navigationController.view.frame)+self.addView.frame.size.height/2);
-
+        
         _addView.backgroundColor = [UIColor clearColor];
         [_addView initSubViews];
         [_addView updateColor:self.addButton.backgroundColor];
-
+        
         [_addView addTarget:self action:@selector(toggleAddView) forControlEvents:UIControlEventTouchUpInside];
         
         [_addView.ideaBtn addTarget:self action:@selector(addNewIdea) forControlEvents:UIControlEventTouchUpInside];
@@ -174,19 +186,12 @@
 
 - (BTNavigationDropdownMenu *)menu {
     if (!_menu) {
-
+        
         NSArray *items = [NSArray arrayWithObjects:NSLocalizedString(@"演出", nil), NSLocalizedString(@"流程", nil), NSLocalizedString(@"灵感", nil), NSLocalizedString(@"技巧", nil), NSLocalizedString(@"道具", nil), NSLocalizedString(@"台词", nil), NSLocalizedString(@"全部", nil), nil];
         _menu = [[BTNavigationDropdownMenu alloc] initWithTitle:items[1] items:items];
         self.listType = kListTypeRoutine;
-        
-        __weak typeof(self) weakself = self;
-
         [_menu setDidSelectItemAtIndexHandler:^(NSInteger index) {
-            
-            typeof(self) strongself = weakself;
-
             switch (index) {
-                    
                 case 0:
                     _listType = kListTypeShow;
                     break;
@@ -212,35 +217,13 @@
                 default:
                     break;
             }
-            
-            [strongself.tableView reloadData];
-            
-            if (_listType == kListTypeLines) {
-                [strongself.mediaButton setImage:[UIImage imageNamed:@"addAudio"] forState:UIControlStateNormal];
-                
-            } else {
-                [strongself.mediaButton setImage:[UIImage imageNamed:@"addMedia"] forState:UIControlStateNormal];
-                
-            }
-            
-            if (strongself.navigationController.visibleViewController == strongself) {
-                strongself.mediaButton.hidden = (self.listType == kListTypeAll);
-                
-            }
-            
-            if ([strongself.tableView.dataSource tableView:strongself.tableView numberOfRowsInSection:0] > 0) {
-                [strongself.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:NO];
-
-            }
-
-            [strongself prepareVisibleCellsForAnimation];
-            [strongself animateVisibleCells];
+            [[NSNotificationCenter defaultCenter] postNotificationName:kUpdateDataNotification object:nil];
         }];
         
         _menu.cellBackgroundColor = kAppThemeColor;
         _menu.cellSelectionColor = [UIColor whiteColor];
         _menu.cellSeparatorColor = [UIColor flatGrayColorDark];
-
+        
     }
     return _menu;
 }
@@ -294,22 +277,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self coverButton];
-    self.tableView.backgroundView = self.tableBackView;
-    self.tableView.backgroundColor = [UIColor whiteColor];
-    self.tableView.rowHeight = kListCellHeight;
-    self.tableView.tableFooterView = [UIView new];
-    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, kAddButtonHeight*2, 0);
+    
+    self.collectionView.backgroundView = self.tableBackView;
+    self.collectionView.backgroundColor = kAppThemeColor;
+    self.collectionView.contentInset = UIEdgeInsetsMake(0, 0, kAddButtonHeight*2, 0);
     
     self.navigationItem.titleView = self.menu;
     
-    [self.tableView registerNib:[UINib nibWithNibName:@"CLListCell"
-                                               bundle:nil]
-         forCellReuseIdentifier:kListCellID];
-    
-    [self.tableView registerNib:[UINib nibWithNibName:@"CLListImageCell"
-                                               bundle:nil]
-         forCellReuseIdentifier:kListImageCellID];
-    
+    [self.collectionView registerNib:[UINib nibWithNibName:@"CLNotesListCell"
+                                                    bundle:nil] forCellWithReuseIdentifier:@"notesListCell"];
+
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(update:) name:kUpdateDataNotification
                                                object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(update:) name:kUpdateMookNotification
@@ -318,8 +295,53 @@
     [self addView];
     [self addButton];
     [self mediaButton];
-
+    
 }
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+        
+    self.addButton.hidden = NO;
+    self.mediaButton.hidden = (self.listType == kListTypeAll);
+    
+    [self.navigationController setToolbarHidden:YES];
+    
+//    [self.collectionView selectItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:0] animated:YES scrollPosition:UICollectionViewScrollPositionNone];
+    
+    [self prepareVisibleCellsForAnimation];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    [self animateVisibleCells];
+}
+
+#pragma mark - Private
+
+- (void)prepareVisibleCellsForAnimation {
+    for (int i = 0; i < [self.collectionView.visibleCells count]; i++) {
+        CLNotesListCell * cell = (CLNotesListCell *) [self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:i inSection:0]];
+        cell.frame = CGRectMake(-CGRectGetWidth(cell.bounds), cell.frame.origin.y, CGRectGetWidth(cell.bounds), CGRectGetHeight(cell.bounds));
+        cell.alpha = 0.f;
+    }
+}
+
+- (void)animateVisibleCells {
+    for (int i = 0; i < [self.collectionView.visibleCells count]; i++) {
+        CLNotesListCell * cell = (CLNotesListCell *) [self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:i inSection:0]];
+        
+        cell.alpha = 1.f;
+        [UIView animateWithDuration:0.25f
+                              delay:i * 0.1
+                            options:UIViewAnimationOptionCurveEaseOut
+                         animations:^{
+                             cell.frame = CGRectMake(0.f, cell.frame.origin.y, CGRectGetWidth(cell.bounds), CGRectGetHeight(cell.bounds));
+                         }
+                         completion:nil];
+    }
+}
+
 
 - (void)toggleAddView {
     POPSpringAnimation *springAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerPosition];
@@ -338,19 +360,19 @@
         self.coverButton.enabled = NO;
         self.coverButton.alpha = 0.0;
         [self.addView pop_addAnimation:springAnimation forKey:@"changeposition"];
-
+        
         [_addButton setImage:[UIImage imageNamed:@"plus"] forState:UIControlStateNormal];
-
+        
     }
     else{
         springAnimation.toValue = [NSValue valueWithCGPoint:CGPointMake(point.x, self.navigationController.view.center.y)];
         [self.addView pop_addAnimation:springAnimation forKey:@"changeposition"];
-
+        
         self.coverButton.enabled = YES;
         self.coverButton.alpha = 0.9;
         [_addButton setImage:[UIImage imageNamed:@"cancel"] forState:UIControlStateNormal];
     }
-
+    
 }
 
 - (void)update:(NSNotification *)noti {
@@ -370,29 +392,12 @@
     
     if (self.navigationController.visibleViewController == self) {
         self.mediaButton.hidden = (self.listType == kListTypeAll);
-
+        
     }
     
     [self.addView updateColor:self.addButton.backgroundColor];
-    [self.tableView reloadData];
+    [self.collectionView reloadData];
 }
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    
-    self.addButton.hidden = NO;
-    self.mediaButton.hidden = (self.listType == kListTypeAll);
-
-    [self.navigationController setToolbarHidden:YES];
-    
-//    [self prepareVisibleCellsForAnimation];
-}
-
-//- (void)viewDidAppear:(BOOL)animated {
-//    [super viewDidAppear:animated];
-
-//    [self animateVisibleCells];
-//}
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
@@ -402,41 +407,6 @@
     [self.menu hide];
     
     [self hideAddView];
-}
-
-#pragma mark - Private Cell的动画效果
-
-- (void)prepareVisibleCellsForAnimation {
-    
-    NSArray *indexArr = [self.tableView indexPathsForVisibleRows];
-    NSIndexPath *topIndexPath = [indexArr firstObject];
-    NSIndexPath *bottomIndexPath = [indexArr lastObject];
-    
-    for (NSInteger i = topIndexPath.row; i < bottomIndexPath.row+1; i++) {
-        CLListImageCell * cell = (CLListImageCell *) [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForItem:i inSection:0]];
-        cell.frame = CGRectMake(-CGRectGetWidth(cell.bounds), cell.frame.origin.y, CGRectGetWidth(cell.bounds), CGRectGetHeight(cell.bounds));
-        cell.alpha = 0.f;
-    }
-}
-
-- (void)animateVisibleCells {
-    
-    NSArray *indexArr = [self.tableView indexPathsForVisibleRows];
-    NSIndexPath *topIndexPath = [indexArr firstObject];
-    NSIndexPath *bottomIndexPath = [indexArr lastObject];
-    
-    for (NSInteger i = topIndexPath.row; i < bottomIndexPath.row+1; i++) {
-        CLListImageCell * cell = (CLListImageCell *) [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForItem:i inSection:0]];
-        
-        cell.alpha = 1.f;
-        [UIView animateWithDuration:0.2f
-                              delay:(i-topIndexPath.row) * 0.1
-                            options:UIViewAnimationOptionCurveEaseOut
-                         animations:^{
-                             cell.frame = CGRectMake(0.f, cell.frame.origin.y, CGRectGetWidth(cell.bounds), CGRectGetHeight(cell.bounds));
-                         }
-                         completion:nil];
-    }
 }
 
 - (void)hideAddView {
@@ -449,16 +419,15 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
+#pragma mark - UICollectionViewDataSource
 
-#pragma mark - Table view data source
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    
+-(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
+{
     return 1;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+
     NSInteger number;
     switch (self.listType) {
         case kListTypeAll:
@@ -497,116 +466,108 @@
     return number;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
-    CLListImageCell *cell = [tableView dequeueReusableCellWithIdentifier:kListImageCellID forIndexPath:indexPath];
-
-    id model;
+    CLNotesListCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"notesListCell" forIndexPath:indexPath];
+    
+    cell.backgroundColor = kAppThemeColor;
     
     switch (self.listType) {
         case kListTypeAll:
-    
-            model = self.allItems[indexPath.row];
+        {
+            id modelUnknown = self.allItems[indexPath.row];
+            [cell setModel:modelUnknown];
+            
             break;
-     
+        }
         case kListTypeIdea:
-      
-            model = self.ideaObjModelList[indexPath.row];
+        {
+            CLIdeaObjModel *model = self.ideaObjModelList[indexPath.row];
+            [cell setModel:model];
+            
             break;
+        }
             
         case kListTypeShow:
-
-            model = self.showModelList[indexPath.row];
-            break;
-
-        case kListTypeRoutine:
-
-            model = self.routineModelList[indexPath.row];
-            break;
-
-        case kListTypeSleight:
-
-            model = self.sleightObjModelList[indexPath.row];
-            break;
-  
-        case kListTypeProp:
-
-            model = self.propObjModelList[indexPath.row];
-            break;
-        case kListTypeLines:
-            model = self.linesObjModelList[indexPath.row];
-            break;
+        {
+            CLShowModel *model = self.showModelList[indexPath.row];
+            [cell setModel:model];
             
+            break;
+        }
+        case kListTypeRoutine:
+        {
+            CLRoutineModel *model = self.routineModelList[indexPath.row];
+            [cell setModel:model];
+            
+            break;
+        }
+        case kListTypeSleight:
+        {
+            CLSleightObjModel *model = self.sleightObjModelList[indexPath.row];
+            [cell setModel:model];
+            
+            break;
+        }
+            
+            
+        case kListTypeProp:
+        {
+            CLPropObjModel *model = self.propObjModelList[indexPath.row];
+            [cell setModel:model];
+            
+            break;
+        }
+        case kListTypeLines:
+        {
+            CLLinesObjModel *model = self.linesObjModelList[indexPath.row];
+            [cell setModel:model];
+            break;
+        }
         default:
             break;
     }
     
-    [cell setModel:model utilityButtons:[self rightButtons] delegate:self];
-    
-    cell.backgroundColor = [UIColor flatWhiteColor];
-    
     return cell;
     
+
 }
 
-// 演出的右滑按钮,不含导出
-- (NSArray *)showRightButtons
+#pragma mark - UICollectionViewDelegateFlowLayout
+
+//- (CGSize)collectionView:(UICollectionView *)collectionView
+//                  layout:(UICollectionViewLayout *)collectionViewLayout
+//  sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+//    
+//    UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *)collectionViewLayout;
+//    
+//    return CGSizeMake(CGRectGetWidth(self.view.bounds), layout.itemSize.height);
+//}
+
+
+#pragma mark --UICollectionViewDelegateFlowLayout
+//定义每个UICollectionView 的大小
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSMutableArray *rightUtilityButtons = [NSMutableArray new];
-    
-    [rightUtilityButtons sw_addUtilityButtonWithColor:[UIColor flatRedColor] icon:[UIImage imageNamed:@"iconBin"]];
-    
-    return rightUtilityButtons;
+    //    return CGSizeMake((self.view.frame.size.width-1)/2, (self.view.frame.size.width-1)/2);
+    return CGSizeMake(self.view.frame.size.width, kListCellHeight);
 }
-
-// 其他笔记的右滑按钮,包含导出按钮
-- (NSArray *)rightButtons
+//定义每个UICollectionView 的 margin
+-(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
 {
-    NSMutableArray *rightUtilityButtons = [NSMutableArray new];
-    
-    [rightUtilityButtons sw_addUtilityButtonWithColor:[UIColor flatGrayColorDark] icon:[UIImage imageNamed:@"iconAction"]];
-    [rightUtilityButtons sw_addUtilityButtonWithColor:[UIColor flatRedColor] icon:[UIImage imageNamed:@"iconBin"]];
-    
-    return rightUtilityButtons;
+    return UIEdgeInsetsMake(1, 0, 1, 0);
 }
 
-- (BOOL)swipeableTableViewCellShouldHideUtilityButtonsOnSwipe:(SWTableViewCell *)cell{
-    return YES;
-}
-
-- (void)swipeableTableViewCell:(SWTableViewCell *)cell didTriggerRightUtilityButtonWithIndex:(NSInteger)index
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionView *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
 {
-    NSIndexPath *path = [self.tableView indexPathForCell:cell];
-    
-    if (index == 0) {
-        if (self.listType == kListTypeAll) {
-            id modelUnknown = self.allItems[path.row];
-            if ([modelUnknown isKindOfClass:[CLShowModel class]]) {
-                [self delete:path];
-            }else {
-                
-                [self exportWithIndexPath:path];
-                
-            }
-        }
-        
-        if (self.listType == kListTypeShow) {
-            // 演讲不可导出,所以只有删除按钮
-            [self delete:path];
-        } else {
-            // 如果不是演讲, 则可导出
-            [self exportWithIndexPath:path];
-            
-        }
-        
-    } else if (index == 1) {
-        
-        [self delete:path];
-        
-    }
-    
-    [cell hideUtilityButtonsAnimated:YES];
+    return 1; // This is the minimum inter item spacing, can be more
 }
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionView *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
+{
+    return 1; // This is the minimum inter item spacing, can be more
+}
+
 
 #pragma mark - 删除和导出笔记方法
 // 删除笔记
@@ -633,7 +594,7 @@
 }
 
 - (void)deleteEntryWithIndexPath:(NSIndexPath *)path {
- 
+    
     switch (self.listType) {
         case kListTypeAll:
         {
@@ -660,7 +621,7 @@
                 CLSleightObjModel *model = (CLSleightObjModel *)modelUnknown;
                 [CLDataSaveTool deleteSleight:model];
                 [kAppDelegate reloadAllSleights];
- 
+                
             } else if ([modelUnknown isKindOfClass:[CLPropObjModel class]]) {
                 CLPropObjModel *model = (CLPropObjModel *)modelUnknown;
                 [CLDataSaveTool deleteProp:model];
@@ -670,7 +631,7 @@
                 CLLinesObjModel *model = (CLLinesObjModel *)modelUnknown;
                 [CLDataSaveTool deleteLines:model];
                 [kAppDelegate reloadAllLines];
-
+                
             }
             
             [self.allItems removeObject:modelUnknown];
@@ -782,8 +743,9 @@
         default:
             break;
     }
-  
-    [self.tableView deleteRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationLeft];
+    
+    [self.collectionView deleteItemsAtIndexPaths:@[path]];
+//     deleteRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationLeft];
     self.tableBackView.hidden = !(self.allItems.count == 0);
     [[NSNotificationCenter defaultCenter] postNotificationName:kUpdateDataNotification object:self];
 }
@@ -802,7 +764,7 @@
     UIAlertAction* exportWithoutPassword = [UIAlertAction actionWithTitle:NSLocalizedString(@"直接导出", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
         [self exportEntryWithIndexPath:indexPath importPassword:@""];
-
+        
     }];
     
     UIAlertAction* cancel = [UIAlertAction actionWithTitle:NSLocalizedString(@"取消", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
@@ -833,14 +795,14 @@
     
     UIAlertAction *okAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"导出", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         
-            UITextField *passwordTF = alertController.textFields.firstObject;
-            
-            NSString *exportPassword = passwordTF.text;
-            
-            [[NSNotificationCenter defaultCenter] removeObserver:self name:UITextFieldTextDidChangeNotification object:nil];
+        UITextField *passwordTF = alertController.textFields.firstObject;
         
-            [self exportEntryWithIndexPath:indexPath importPassword:exportPassword];
-
+        NSString *exportPassword = passwordTF.text;
+        
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:UITextFieldTextDidChangeNotification object:nil];
+        
+        [self exportEntryWithIndexPath:indexPath importPassword:exportPassword];
+        
     }];
     
     
@@ -966,9 +928,9 @@
             [self.documentInteractionController presentOptionsMenuFromRect:navRect inView:self.view animated:YES];
         } else {
             [MBProgressHUD showGlobalProgressHUDWithTitle:NSLocalizedString(@"导出失败", nil) hideAfterDelay:1.0];
-
+            
         }
-
+        
     }];
     
 }
@@ -993,7 +955,7 @@
 
 
 #pragma mark 选中cell跳转
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     
     if (self.listType == kListTypeAll) {
         id modelUnknown = self.allItems[indexPath.row];
@@ -1012,7 +974,6 @@
         [self performSegueWithIdentifier:kSegueHomeToContentSegue sender:indexPath];
     }
     
-
 }
 
 #pragma mark - segue跳转
@@ -1027,7 +988,7 @@
         
         if ([sender isKindOfClass:[NSIndexPath class]]) {
             NSIndexPath *indexPath = (NSIndexPath *)sender;
-   
+            
             
             switch (self.listType) {
                 case kListTypeAll:
@@ -1058,7 +1019,7 @@
                         vc.contentType = kContentTypeLines;
                         vc.linesObjModel = model;
                     }
-
+                    
                 }
                     break;
                     
@@ -1121,7 +1082,7 @@
             } else if (self.listType == kListTypeShow) {
                 model = self.showModelList[indexPath.row];
             }
-
+            
             
             vc.showModel = model;
             vc.date = model.date;
@@ -1133,7 +1094,7 @@
 #pragma mark - 新建笔记
 
 - (void)addNewEntry:(id)sender {
-
+    
     switch (self.listType) {
         case kListTypeAll:
             [self toggleAddView];
@@ -1166,12 +1127,12 @@
         default:
             break;
     }
-
-//    滚动到第一行
-//    if ([self.tableView numberOfRowsInSection:0] > 0) {
-//        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
-//        
-//    }
+    
+    //    滚动到第一行
+    //    if ([self.tableView numberOfRowsInSection:0] > 0) {
+    //        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
+    //
+    //    }
     
 }
 
@@ -1213,7 +1174,7 @@
 
 - (void)addNewLinesWithAudio {
     [self hideAddView];
-
+    
     [[CLGetMediaTool getInstance] recordAudioFromCurrentController:self.tabBarController audioBlock:^(NSString *filePath) {
         [CLNewEntryTool quickAddNewLinesFromCurrentController:self withAudio:filePath];
     }];
@@ -1221,7 +1182,7 @@
 
 - (void)addNewShowWithVideo {
     [self hideAddView];
-
+    
     [[CLGetMediaTool getInstance] loadCameraFromCurrentViewController:self maximumDuration:600.0 completion:^(NSURL *videoURL, UIImage *photo) {
         [CLNewEntryTool quickAddNewShowFromCurrentController:self withVideo:videoURL orImage:photo];
     }];
@@ -1231,7 +1192,7 @@
 - (void)addNewIdeaWithVideo {
     
     [self hideAddView];
-
+    
     [[CLGetMediaTool getInstance] loadCameraFromCurrentViewController:self maximumDuration:30.0 completion:^(NSURL *videoURL, UIImage *photo) {
         [CLNewEntryTool quickAddNewIdeaFromCurrentController:self withVideo:videoURL orImage:photo];
     }];
@@ -1239,7 +1200,7 @@
 
 - (void)addNewRoutineWithVideo {
     [self hideAddView];
-
+    
     [[CLGetMediaTool getInstance] loadCameraFromCurrentViewController:self maximumDuration:180.0 completion:^(NSURL *videoURL, UIImage *photo) {
         [CLNewEntryTool quickAddNewRoutineFromCurrentController:self withVideo:videoURL orImage:photo];
     }];
@@ -1247,7 +1208,7 @@
 
 - (void)addNewSleightWithVideo {
     [self hideAddView];
-
+    
     [[CLGetMediaTool getInstance] loadCameraFromCurrentViewController:self maximumDuration:30.0 completion:^(NSURL *videoURL, UIImage *photo) {
         [CLNewEntryTool quickAddNewSleightFromCurrentController:self withVideo:videoURL orImage:photo];
     }];
@@ -1255,7 +1216,7 @@
 
 - (void)addNewPropWithVideo {
     [self hideAddView];
-
+    
     [[CLGetMediaTool getInstance] loadCameraFromCurrentViewController:self maximumDuration:30.0 completion:^(NSURL *videoURL, UIImage *photo) {
         [CLNewEntryTool quickAddNewPropFromCurrentController:self withVideo:videoURL orImage:photo];
         
@@ -1263,17 +1224,17 @@
 }
 
 - (void)addNewIdea {
-
+    
     [CLNewEntryTool addNewIdeaFromCurrentController:self withVideo:nil orImage:nil];
 }
 
 - (void)addNewShow {
-
+    
     [CLNewEntryTool addNewShowFromCurrentController:self withVideo:nil orImage:nil];
 }
 
 - (void)addNewRoutine {
-
+    
     [CLNewEntryTool addNewRoutineFromCurrentController:self withVideo:nil  orImage:nil];
 }
 
@@ -1283,13 +1244,14 @@
 }
 
 - (void)addNewProp {
-
+    
     [CLNewEntryTool addNewPropFromCurrentController:self withVideo:nil  orImage:nil];
 }
 
 - (void)addNewLines {
     [CLNewEntryTool addNewLinesFromCurrentController:self];
 }
+
 
 
 @end

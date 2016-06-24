@@ -91,8 +91,6 @@
 		432345E91C94051A00200833 /* CLSleightObjModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 432345DB1C94051A00200833 /* CLSleightObjModel.m */; };
 		4323461E1C94054300200833 /* CLListImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 432345EF1C94054300200833 /* CLListImageCell.m */; };
 		4323461F1C94054300200833 /* CLListImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 432345F01C94054300200833 /* CLListImageCell.xib */; };
-		432346201C94054300200833 /* CLListTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 432345F21C94054300200833 /* CLListTextCell.m */; };
-		432346211C94054300200833 /* CLListTextCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 432345F31C94054300200833 /* CLListTextCell.xib */; };
 		4323462C1C94054300200833 /* CLQuickStringCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 432346041C94054300200833 /* CLQuickStringCell.m */; };
 		4323462D1C94054300200833 /* CLQuickStringCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 432346051C94054300200833 /* CLQuickStringCell.xib */; };
 		432346301C94054300200833 /* CLTableBackView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4323460A1C94054300200833 /* CLTableBackView.m */; };
@@ -187,6 +185,10 @@
 		43DDCF3D1D1BA5C2007E5CAC /* CLAudioPlayVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 43DDCF3C1D1BA5C2007E5CAC /* CLAudioPlayVC.m */; };
 		43DDCF401D1BAA01007E5CAC /* UIViewController+BlurPresenting.m in Sources */ = {isa = PBXBuildFile; fileRef = 43DDCF3F1D1BAA01007E5CAC /* UIViewController+BlurPresenting.m */; };
 		43DDCF431D1BACB2007E5CAC /* CLAudioPlayTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 43DDCF421D1BACB2007E5CAC /* CLAudioPlayTool.m */; };
+		43DDCF471D1CE8F3007E5CAC /* UIImage+Color.m in Sources */ = {isa = PBXBuildFile; fileRef = 43DDCF461D1CE8F3007E5CAC /* UIImage+Color.m */; };
+		43DDCF4A1D1CFC9D007E5CAC /* CLNotesListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 43DDCF491D1CFC9D007E5CAC /* CLNotesListVC.m */; };
+		43DDCF4E1D1D016E007E5CAC /* CLNotesListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 43DDCF4C1D1D016E007E5CAC /* CLNotesListCell.m */; };
+		43DDCF4F1D1D016E007E5CAC /* CLNotesListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43DDCF4D1D1D016E007E5CAC /* CLNotesListCell.xib */; };
 		43DF3AC81CAA78A100712D81 /* UIImage+WaterMark.m in Sources */ = {isa = PBXBuildFile; fileRef = 43DF3AC71CAA78A100712D81 /* UIImage+WaterMark.m */; };
 		43E0F7081C9EB2A2005CAD97 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 43E0F7071C9EB2A2005CAD97 /* libsqlite3.0.tbd */; };
 		43E0F7291CA0FC6E005CAD97 /* CLDataSaveTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E0F7281CA0FC6E005CAD97 /* CLDataSaveTool.m */; };
@@ -361,9 +363,6 @@
 		432345EE1C94054300200833 /* CLListImageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLListImageCell.h; sourceTree = "<group>"; };
 		432345EF1C94054300200833 /* CLListImageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLListImageCell.m; sourceTree = "<group>"; };
 		432345F01C94054300200833 /* CLListImageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CLListImageCell.xib; sourceTree = "<group>"; };
-		432345F11C94054300200833 /* CLListTextCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLListTextCell.h; sourceTree = "<group>"; };
-		432345F21C94054300200833 /* CLListTextCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLListTextCell.m; sourceTree = "<group>"; };
-		432345F31C94054300200833 /* CLListTextCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CLListTextCell.xib; sourceTree = "<group>"; };
 		432346031C94054300200833 /* CLQuickStringCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLQuickStringCell.h; sourceTree = "<group>"; };
 		432346041C94054300200833 /* CLQuickStringCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLQuickStringCell.m; sourceTree = "<group>"; };
 		432346051C94054300200833 /* CLQuickStringCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CLQuickStringCell.xib; sourceTree = "<group>"; };
@@ -537,6 +536,13 @@
 		43DDCF3F1D1BAA01007E5CAC /* UIViewController+BlurPresenting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+BlurPresenting.m"; sourceTree = "<group>"; };
 		43DDCF411D1BACB2007E5CAC /* CLAudioPlayTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLAudioPlayTool.h; sourceTree = "<group>"; };
 		43DDCF421D1BACB2007E5CAC /* CLAudioPlayTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLAudioPlayTool.m; sourceTree = "<group>"; };
+		43DDCF451D1CE8F3007E5CAC /* UIImage+Color.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Color.h"; sourceTree = "<group>"; };
+		43DDCF461D1CE8F3007E5CAC /* UIImage+Color.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Color.m"; sourceTree = "<group>"; };
+		43DDCF481D1CFC9D007E5CAC /* CLNotesListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLNotesListVC.h; sourceTree = "<group>"; };
+		43DDCF491D1CFC9D007E5CAC /* CLNotesListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLNotesListVC.m; sourceTree = "<group>"; };
+		43DDCF4B1D1D016E007E5CAC /* CLNotesListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLNotesListCell.h; sourceTree = "<group>"; };
+		43DDCF4C1D1D016E007E5CAC /* CLNotesListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLNotesListCell.m; sourceTree = "<group>"; };
+		43DDCF4D1D1D016E007E5CAC /* CLNotesListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CLNotesListCell.xib; sourceTree = "<group>"; };
 		43DF3AC61CAA78A100712D81 /* UIImage+WaterMark.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+WaterMark.h"; sourceTree = "<group>"; };
 		43DF3AC71CAA78A100712D81 /* UIImage+WaterMark.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+WaterMark.m"; sourceTree = "<group>"; };
 		43E0F7071C9EB2A2005CAD97 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
@@ -794,6 +800,8 @@
 				43F5F7641CB3A4EE007BFB0C /* NSAttributedString+Tools.m */,
 				432345531C9404A800200833 /* UIImage+Tools.h */,
 				432345541C9404A800200833 /* UIImage+Tools.m */,
+				43DDCF451D1CE8F3007E5CAC /* UIImage+Color.h */,
+				43DDCF461D1CE8F3007E5CAC /* UIImage+Color.m */,
 				432345551C9404A800200833 /* UIImageView+Tools.h */,
 				432345561C9404A800200833 /* UIImageView+Tools.m */,
 				432345571C9404A800200833 /* UINavigationBar+Awesome.h */,
@@ -888,6 +896,8 @@
 				439519B81CBCC14000505E5B /* CLAllItemsListVC.m */,
 				4383427C1D115E350089B58E /* CLAddView.h */,
 				4383427D1D115E350089B58E /* CLAddView.m */,
+				43DDCF481D1CFC9D007E5CAC /* CLNotesListVC.h */,
+				43DDCF491D1CFC9D007E5CAC /* CLNotesListVC.m */,
 			);
 			name = "Notes(笔记)";
 			sourceTree = "<group>";
@@ -1161,9 +1171,9 @@
 				432345EE1C94054300200833 /* CLListImageCell.h */,
 				432345EF1C94054300200833 /* CLListImageCell.m */,
 				432345F01C94054300200833 /* CLListImageCell.xib */,
-				432345F11C94054300200833 /* CLListTextCell.h */,
-				432345F21C94054300200833 /* CLListTextCell.m */,
-				432345F31C94054300200833 /* CLListTextCell.xib */,
+				43DDCF4B1D1D016E007E5CAC /* CLNotesListCell.h */,
+				43DDCF4C1D1D016E007E5CAC /* CLNotesListCell.m */,
+				43DDCF4D1D1D016E007E5CAC /* CLNotesListCell.xib */,
 				43C206871CB10CF300CEF992 /* CLListCell.h */,
 				43C206881CB10CF300CEF992 /* CLListCell.m */,
 				43C206891CB10CF300CEF992 /* CLListCell.xib */,
@@ -1545,9 +1555,9 @@
 				439519BE1CBD26C600505E5B /* CLImportPasswordInputView.xib in Resources */,
 				4300C4431D1A9B8C0065E94E /* microphone_access@2x.png in Resources */,
 				43951A011CC5DAEA00505E5B /* Setting.storyboard in Resources */,
+				43DDCF4F1D1D016E007E5CAC /* CLNotesListCell.xib in Resources */,
 				4323462D1C94054300200833 /* CLQuickStringCell.xib in Resources */,
 				439519EB1CC0EEB900505E5B /* CLTagField.xib in Resources */,
-				432346211C94054300200833 /* CLListTextCell.xib in Resources */,
 				43F5F7B51CB50039007BFB0C /* tag.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1660,7 +1670,6 @@
 				432346651C94094D00200833 /* CLOneLabelImageDisplayCell.m in Sources */,
 				43DDCF3A1D1B72E4007E5CAC /* NSString+Media.m in Sources */,
 				4323467E1C9409BB00200833 /* XLBarView.m in Sources */,
-				432346201C94054300200833 /* CLListTextCell.m in Sources */,
 				43E0F7291CA0FC6E005CAD97 /* CLDataSaveTool.m in Sources */,
 				432345671C9404A800200833 /* UIResponder+FirstResponder.m in Sources */,
 				432346731C9409A400200833 /* XLBarPagerTabStripViewController.m in Sources */,
@@ -1672,6 +1681,7 @@
 				43F5F7651CB3A4EE007BFB0C /* NSAttributedString+Tools.m in Sources */,
 				4300C42D1D1A98EF0065E94E /* IQPlaybackDurationView.m in Sources */,
 				432345DE1C94051A00200833 /* CLInfoModel.m in Sources */,
+				43DDCF4E1D1D016E007E5CAC /* CLNotesListCell.m in Sources */,
 				4323462C1C94054300200833 /* CLQuickStringCell.m in Sources */,
 				43E0F73D1CA10D27005CAD97 /* MJType.m in Sources */,
 				43F5F7611CB3922B007BFB0C /* CLShowInfoCell.m in Sources */,
@@ -1686,6 +1696,7 @@
 				4364861F1CE1BAEA00FC191B /* CLSizeListVC.m in Sources */,
 				43E9D0C01D19236700036DDD /* CLGetMediaTool.m in Sources */,
 				43C206921CB12BED00CEF992 /* CLMediaCollectionCell.m in Sources */,
+				43DDCF4A1D1CFC9D007E5CAC /* CLNotesListVC.m in Sources */,
 				432346801C9409BB00200833 /* XLButtonBarViewCell.m in Sources */,
 				4364861B1CE1A99000FC191B /* CLSizeVC.m in Sources */,
 				43F5F7A31CB4978C007BFB0C /* WJTouchID.m in Sources */,
@@ -1736,6 +1747,7 @@
 				43E0F7401CA10D27005CAD97 /* NSObject+MJKeyValue.m in Sources */,
 				43A281241CB2299B009C2785 /* CLLibraryVC.m in Sources */,
 				43DDCF3D1D1BA5C2007E5CAC /* CLAudioPlayVC.m in Sources */,
+				43DDCF471D1CE8F3007E5CAC /* UIImage+Color.m in Sources */,
 				4323456B1C9404A800200833 /* UIView+Tools.m in Sources */,
 				432345E21C94051A00200833 /* CLPerformModel.m in Sources */,
 				438342781D10FB4B0089B58E /* CLToolsVC.m in Sources */,

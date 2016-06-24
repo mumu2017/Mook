@@ -9,7 +9,6 @@
 #import "CLPropChooseVC.h"
 #import "CLPropObjModel.h"
 
-#import "CLListTextCell.h"
 #import "CLListImageCell.h"
 
 #import "CLTableBackView.h"
@@ -51,10 +50,7 @@
     [self.tableView registerNib:[UINib nibWithNibName:@"CLListImageCell"
                                                bundle:nil]
          forCellReuseIdentifier:kListImageCellID];
-    
-    [self.tableView registerNib:[UINib nibWithNibName:@"CLListTextCell"
-                                               bundle:nil]
-         forCellReuseIdentifier:kListTextCellID];
+
 }
 
 
@@ -73,33 +69,12 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    NSString *iconName, *title;
-    UIImage *image;
-    NSAttributedString *content;
-    
+    CLListImageCell *cell = [tableView dequeueReusableCellWithIdentifier:kListImageCellID forIndexPath:indexPath];
     CLPropObjModel *model = self.propObjModelList[indexPath.row];
-    image = [model getThumbnail];
-    iconName = kIconNameProp;
-    title = [model getTitle];
-    content = [model getContent];
+
+    [cell setModel:model utilityButtons:nil delegate:nil];
     
-    if (image != nil) { // 如果返回图片名称,则表示模型中有图片或多媒体
-        CLListImageCell *cell = [tableView dequeueReusableCellWithIdentifier:kListImageCellID forIndexPath:indexPath];
-        cell.iconView.image = image;
-        cell.iconName = iconName;
-        [cell setTitle:title content:content];
-        
-        return cell;
-        
-    } else {
-        CLListTextCell *cell = [tableView dequeueReusableCellWithIdentifier:kListTextCellID forIndexPath:indexPath];
-        cell.iconName = iconName;
-        [cell setTitle:title content:content];
-        
-        return cell;
-    }
-    
-    return nil;
+    return cell;
     
 }
 

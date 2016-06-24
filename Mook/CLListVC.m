@@ -18,7 +18,6 @@
 #import "CLShowVC.h"
 
 #import "CLListCell.h"
-#import "CLListTextCell.h"
 #import "CLListImageCell.h"
 
 #import "CLShowModel.h"
@@ -107,7 +106,13 @@
         
         [_mediaButton addTarget:self action:@selector(addNewEntryWithMedia) forControlEvents:UIControlEventTouchUpInside];
         //        [_addButton setTitle:@"添加" forState:UIControlStateNormal];
-        [_mediaButton setImage:[UIImage imageNamed:@"addMedia"] forState:UIControlStateNormal];
+        if (self.listType == kListTypeLines) {
+            [_mediaButton setImage:[UIImage imageNamed:@"addAudio"] forState:UIControlStateNormal];
+            
+        } else {
+            [_mediaButton setImage:[UIImage imageNamed:@"addMedia"] forState:UIControlStateNormal];
+            
+        }
         [_mediaButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.equalTo(self.navigationController.view.mas_right).with.offset(-10);
             make.bottom.equalTo(self.addButton.mas_top).with.offset(-15);
@@ -215,10 +220,6 @@
                                                bundle:nil]
          forCellReuseIdentifier:kListImageCellID];
     
-    [self.tableView registerNib:[UINib nibWithNibName:@"CLListTextCell"
-                                               bundle:nil]
-         forCellReuseIdentifier:kListTextCellID];
-    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeEntryIfWithTag:) name:kDeleteEntryNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeEntryIfWithTag:) name:kCancelEntryNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(update:) name:kUpdateDataNotification
@@ -289,6 +290,14 @@
     
     if (self.navigationController.visibleViewController == self) {
         self.mediaButton.hidden = (self.listType == kListTypeAll);
+        
+    }
+    
+    if (self.listType == kListTypeLines) {
+        [_mediaButton setImage:[UIImage imageNamed:@"addAudio"] forState:UIControlStateNormal];
+        
+    } else {
+        [_mediaButton setImage:[UIImage imageNamed:@"addMedia"] forState:UIControlStateNormal];
         
     }
     
@@ -405,100 +414,65 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    NSString *iconName, *title;
-    UIImage *image;
-    NSAttributedString *content;
+    CLListImageCell *cell = [tableView dequeueReusableCellWithIdentifier:kListImageCellID forIndexPath:indexPath];
     
     switch (self.listType) {
         case kListTypeAll:
+        {
+            id modelUnknown = kDataListAll[indexPath.row];
+            [cell setModel:modelUnknown utilityButtons:[self rightButtons] delegate:self];
+            
             break;
-        
+        }
         case kListTypeIdea:
         {
             CLIdeaObjModel *model = self.ideaObjModelList[indexPath.row];
-            image = [model getThumbnail];
-            iconName = kIconNameIdea;
-            title = [model getTitle];
-            content = [model getContent];
+            [cell setModel:model utilityButtons:[self rightButtons] delegate:self];
+            
             break;
         }
             
         case kListTypeShow:
         {
             CLShowModel *model = self.showModelList[indexPath.row];
-            image = [model getThumbnail];
-            iconName = kIconNameShow;
-            title = [model getTitle];
-            content = [model getContent];
+            [cell setModel:model utilityButtons:[self rightButtons] delegate:self];
             
             break;
         }
         case kListTypeRoutine:
         {
             CLRoutineModel *model = self.routineModelList[indexPath.row];
-            image = [model getThumbnail];
-            iconName = kIconNameRoutine;
-            title = [model getTitle];
-            content = [model getContent];
+            [cell setModel:model utilityButtons:[self rightButtons] delegate:self];
+            
             break;
         }
         case kListTypeSleight:
         {
             CLSleightObjModel *model = self.sleightObjModelList[indexPath.row];
-            image = [model getThumbnail];
-            iconName = kIconNameSleight;
-            title = [model getTitle];
-            content = [model getContent];
+            [cell setModel:model utilityButtons:[self rightButtons] delegate:self];
+            
             break;
         }
-
+            
             
         case kListTypeProp:
         {
             CLPropObjModel *model = self.propObjModelList[indexPath.row];
-            image = [model getThumbnail];
-            iconName = kIconNameProp;
-            title = [model getTitle];
-            content = [model getContent];
+            [cell setModel:model utilityButtons:[self rightButtons] delegate:self];
+            
             break;
         }
         case kListTypeLines:
         {
             CLLinesObjModel *model = self.linesObjModelList[indexPath.row];
-            iconName = kIconNameLines;
-            title = [model getTitle];
-            content = [model getContent];
+            [cell setModel:model utilityButtons:[self rightButtons] delegate:self];
             break;
         }
         default:
             break;
     }
     
-    if (image != nil) { // 如果返回图片,则表示模型中有图片或多媒体
-        CLListImageCell *cell = [tableView dequeueReusableCellWithIdentifier:kListImageCellID forIndexPath:indexPath];
-        cell.iconView.image = image;
-        cell.iconName = title;
-        [cell setTitle:title content:content];
-        
-        cell.rightUtilityButtons = [self rightButtons];
-        cell.delegate = self;
-        cell.backgroundColor = [UIColor flatWhiteColor];
-
-        return cell;
-        
-    } else {
-        CLListTextCell *cell = [tableView dequeueReusableCellWithIdentifier:kListTextCellID forIndexPath:indexPath];
-        cell.iconName = title;
-        [cell setTitle:title content:content];
-        
-        cell.rightUtilityButtons = [self rightButtons];
-        cell.delegate = self;
-        cell.backgroundColor = [UIColor flatWhiteColor];
-
-        return cell;
-    }
-    
-    return nil;
+    return cell;
     
 }
 
