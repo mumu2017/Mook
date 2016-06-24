@@ -335,10 +335,6 @@
         // 默认为扬声器播放
         _portOverride = AVAudioSessionPortOverrideSpeaker;
         
-        [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayAndRecord error:nil];
-        
-        [[AVAudioSession sharedInstance] overrideOutputAudioPort:AVAudioSessionPortOverrideSpeaker error:nil];
-        
         _speakerButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"speaker" inBundle:bundle compatibleWithTraitCollection:nil] style:UIBarButtonItemStylePlain target:self action:@selector(switchToSpeaker)];
         _speakerButton.tintColor = [self _normalTintColor];
         
@@ -394,12 +390,7 @@
         beginPoint = [panRecognizer translationInView:middleContainerView];
         beginCenter = _lineView.center;
         
-        [self stopPlayingButtonAction:_stopPlayButton];
-        
-//        NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:[_stopPlayButton.target methodSignatureForSelector:_stopPlayButton.action]];
-//        invocation.target = _stopPlayButton.target;
-//        invocation.selector = _stopPlayButton.action;
-//        [invocation invoke];
+        [self pauseAction:nil];
     }
     else if (panRecognizer.state == UIGestureRecognizerStateChanged)
     {
@@ -464,7 +455,11 @@
 - (void)playAction:(UIBarButtonItem *)item
 {
     _oldSessionCategory = [AVAudioSession sharedInstance].category;
-    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
+    
+    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayAndRecord error:nil];
+    
+    [[AVAudioSession sharedInstance] overrideOutputAudioPort:_portOverride error:nil];
+    
     [UIApplication sharedApplication].idleTimerDisabled = YES;
     
     [_audioPlayer prepareToPlay];
@@ -491,7 +486,7 @@
     
     [_audioPlayer pause];
     
-    //    //UI Update
+    // UI Update
     {
         [self setToolbarItems:@[_stopPlayButton,_flexItem, _playButton,_flexItem,_speakerButton] animated:YES];
     }
