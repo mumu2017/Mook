@@ -110,7 +110,7 @@
                 break;
                 
             case kEditingContentTypeIdea:
-                _entryTitle = NSLocalizedString(@"编辑灵感标题", nil);
+                _entryTitle = NSLocalizedString(@"编辑想法标题", nil);
                 break;
                 
             case kEditingContentTypeSleight:
@@ -748,7 +748,7 @@
                         NSString *effectTitle;
                         
                         if (self.editingContentType == kEditingContentTypeIdea) {
-                            effectTitle = NSLocalizedString(@"灵感描述", nil);
+                            effectTitle = NSLocalizedString(@"想法描述", nil);
                         } else if (self.editingContentType == kEditingContentTypeRoutine) {
                             effectTitle = NSLocalizedString(@"效果描述", nil);
                         } else if (self.editingContentType == kEditingContentTypeSleight) {
@@ -1404,7 +1404,7 @@
         if (indexPath.row == 0) {
             
             if (self.editingContentType == kEditingContentTypeSleight || self.editingContentType == kEditingContentTypeProp || self.editingContentType == kEditingContentTypeIdea) {
-                // 如果是灵感/技巧/道具, 该行是删除cell
+                // 如果是想法/技巧/道具, 该行是删除cell
                 [self deleteCurrentEntry];
                 
             } else if (self.editingContentType == kEditingContentTypeRoutine) {

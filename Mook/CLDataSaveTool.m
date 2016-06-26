@@ -586,15 +586,21 @@ static FMDatabase *_db;
         // 先查询是否存在对应模型
         FMResultSet *set1 = [_db executeQuery:@"select * from t_mook where  time_stamp=?;", modelName];
         if ([set1 next]) {        // 如果[set next]不为空,则表示查询到至少一个结果.所以更新数据.
-
-            NSString *type = [set stringForColumn:@"type"];
-            NSString *name = [set stringForColumn:@"name"];
-            NSString *content = [set stringForColumn:@"content"];
-            if (content == nil) content = @" "; // content可能没有内容
             
-            NSString *modelType = [set stringForColumn:@"model_type"];
-            NSDictionary *dict = @{@"type":type, @"name":name, @"content":content, @"model_time_stamp":modelName, @"model_type":modelType};
-            [arrM insertObject:dict atIndex:0];
+            NSString *type = [set stringForColumn:@"type"];
+            
+            if ([type isEqualToString:@"audio"]) { // 先排除音頻
+                
+            } else {
+                NSString *name = [set stringForColumn:@"name"];
+                NSString *content = [set stringForColumn:@"content"];
+                if (content == nil) content = @" "; // content可能没有内容
+                
+                NSString *modelType = [set stringForColumn:@"model_type"];
+                NSDictionary *dict = @{@"type":type, @"name":name, @"content":content, @"model_time_stamp":modelName, @"model_type":modelType};
+                [arrM insertObject:dict atIndex:0];
+            }
+
             
         } else { // 如果在t_mook表中没有查询到对应模型条目, 则表示包含该多媒体的模型已经被删除, 所以在这里删除掉该条多媒体.
             

@@ -78,7 +78,7 @@
             break;
             
         case kListTypeIdea:
-            self.navigationItem.title = NSLocalizedString(@"灵感", nil);
+            self.navigationItem.title = NSLocalizedString(@"想法", nil);
             break;
             
         case kListTypeShow:

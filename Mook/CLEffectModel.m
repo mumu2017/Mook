@@ -37,6 +37,7 @@
     [coder encodeObject:self.effect forKey:kEffectKey];
     [coder encodeObject:self.video forKey:kEffectVideoKey];
     [coder encodeObject:self.image forKey:kEffectImageKey];
+    [coder encodeObject:self.audio forKey:kEffectAudioKey];
 
 }
 
@@ -47,6 +48,8 @@
         self.effect = [coder decodeObjectForKey:kEffectKey];
         self.video = [coder decodeObjectForKey:kEffectVideoKey];
         self.image = [coder decodeObjectForKey:kEffectImageKey];
+        self.audio = [coder decodeObjectForKey:kEffectAudioKey];
+
 
     }
     return self;

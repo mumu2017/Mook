@@ -30,9 +30,7 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    self.containerView.layer.cornerRadius = 5.0;
-//    self.iconView.layer.borderColor = [UIColor lightGrayColor].CGColor;
-//    self.iconView.layer.borderWidth = 0.5;
+    self.containerView.layer.cornerRadius = 3.0;
 }
 
 - (void)setModel:(id)modelUnknown utilityButtons:(NSArray *)rightButtons delegate:(id<SWTableViewCellDelegate>)delegate {

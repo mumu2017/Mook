@@ -125,7 +125,7 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     
-    NSArray *titleArr = @[NSLocalizedString(@"灵感", nil), NSLocalizedString(@"流程", nil), NSLocalizedString(@"技巧", nil), NSLocalizedString(@"道具", nil), NSLocalizedString(@"台词", nil), NSLocalizedString(@"演出", nil)];
+    NSArray *titleArr = @[NSLocalizedString(@"想法", nil), NSLocalizedString(@"流程", nil), NSLocalizedString(@"技巧", nil), NSLocalizedString(@"道具", nil), NSLocalizedString(@"台词", nil), NSLocalizedString(@"演出", nil)];
     
     // editingContentType从0-4与数组一一对应,所以可以用下标取title;
     return titleArr[self.editingContentType];

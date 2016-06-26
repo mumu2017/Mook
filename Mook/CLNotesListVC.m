@@ -187,7 +187,7 @@
 - (BTNavigationDropdownMenu *)menu {
     if (!_menu) {
         
-        NSArray *items = [NSArray arrayWithObjects:NSLocalizedString(@"演出", nil), NSLocalizedString(@"流程", nil), NSLocalizedString(@"灵感", nil), NSLocalizedString(@"技巧", nil), NSLocalizedString(@"道具", nil), NSLocalizedString(@"台词", nil), NSLocalizedString(@"全部", nil), nil];
+        NSArray *items = [NSArray arrayWithObjects:NSLocalizedString(@"演出", nil), NSLocalizedString(@"流程", nil), NSLocalizedString(@"想法", nil), NSLocalizedString(@"技巧", nil), NSLocalizedString(@"道具", nil), NSLocalizedString(@"台词", nil), NSLocalizedString(@"全部", nil), nil];
         _menu = [[BTNavigationDropdownMenu alloc] initWithTitle:items[1] items:items];
         self.listType = kListTypeRoutine;
         [_menu setDidSelectItemAtIndexHandler:^(NSInteger index) {

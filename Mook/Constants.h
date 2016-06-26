@@ -115,6 +115,7 @@ typedef enum {
 #pragma mark -  NSCoding Key
 
 #define kNotesKey       @"kNotesKey"
+#define kNotesAudioKey  @"kNotesAudioKey"
 
 #define kPerformKey    @"kPerformKey"
 #define kPerformLinesKey    @"kPerformLinesKey"
@@ -125,11 +126,15 @@ typedef enum {
 #define kPrepNotesKey    @"kPrepNotesKey"
 #define kPrepImageKey    @"kPrepImageKey"
 #define kPrepVideoKey    @"kPrepVideoKey"
+#define kPrepAudioKey   @"kPrepAudioKey"
+
 #define kPerformVideoKey    @"kPerformVideoKey"
+#define kPerformAudioKey    @"kPerformAudioKey"
 
 #define kEffectKey      @"kEffectKey"
 #define kEffectVideoKey @"kEffectVideoKey"
 #define kEffectImageKey @"kEffectImageKey"
+#define kEffectAudioKey @"kEffectAudioKey"
 
 #define kPropKey        @"kPropKey"
 #define kPropQuantityKey    @"kPropQuantityKey"
@@ -266,7 +271,7 @@ typedef enum {
 #define kScreenH        [UIScreen mainScreen].bounds.size.height
 
 #define kAddButtonHeight    60
-#define kListCellHeight     80
+#define kListCellHeight     88
 #define kStatusBarHeight    20
 #define kNavigationBarHeight    44
 
@@ -415,7 +420,7 @@ typedef enum {
 #define kDefaultTitleAll   NSLocalizedString(@"全部", nil)
 #define kDefaultTitleShow  NSLocalizedString(@"演出", nil)
 #define kDefaultTitleRoutine   NSLocalizedString(@"流程", nil)
-#define kDefaultTitleIdea   NSLocalizedString(@"灵感", nil)
+#define kDefaultTitleIdea   NSLocalizedString(@"想法", nil)
 #define kDefaultTitleSleight   NSLocalizedString(@"技巧", nil)
 #define kDefaultTitleProp   NSLocalizedString(@"道具", nil)
 #define kDefaultTitleLines   NSLocalizedString(@"台词", nil)
@@ -423,13 +428,13 @@ typedef enum {
 
 #define kNewShowInfoText    NSLocalizedString(@"新建演出", nil)
 #define kNewRoutineInfoText    NSLocalizedString(@"新建流程", nil)
-#define kNewIdeaInfoText    NSLocalizedString(@"新建灵感", nil)
+#define kNewIdeaInfoText    NSLocalizedString(@"新建想法", nil)
 #define kNewSleightInfoText    NSLocalizedString(@"新建技巧", nil)
 #define kNewPropInfoText    NSLocalizedString(@"新建道具", nil)
 #define kNewLinesInfoText   NSLocalizedString(@"新建台词", nil)
 
 //#define kIconNameAll       @"iconNameAll"
-#define kIconNameIdea       NSLocalizedString(@"灵感", nil)
+#define kIconNameIdea       NSLocalizedString(@"想法", nil)
 #define kIconNameShow       NSLocalizedString(@"演出", nil)
 #define kIconNameRoutine    NSLocalizedString(@"流程", nil)
 #define kIconNameSleight    NSLocalizedString(@"技巧", nil)
@@ -489,6 +494,7 @@ typedef enum {
 #define kToolBarWriteImage  [UIImage imageNamed:@"toolBarWrite"]
 #define kToolBarApproveImageHighlighted   [UIImage imageNamed:@"toolBarWriteHighlighted"]
 
+#define kToolBarVoiceImage  [UIImage imageNamed:@"toolBarVoice"]
 
 #define kToolBarUpImage   [UIImage imageNamed:@"toolBarUp"]
 #define kToolBarUpImageHighlighted    [UIImage imageNamed:@"toolBarUpHighlighted"]

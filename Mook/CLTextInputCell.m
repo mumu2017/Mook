@@ -29,7 +29,7 @@
             break;
         case kEditingContentTypeIdea:
             
-            title = NSLocalizedString(@"灵感标题", nil);
+            title = NSLocalizedString(@"想法标题", nil);
             
             break;
         case kEditingContentTypeSleight:

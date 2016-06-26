@@ -35,6 +35,7 @@
     [coder encodeObject:self.perform forKey:kPerformKey];
     [coder encodeObject:self.image forKey:kPerformImageKey];
     [coder encodeObject:self.video forKey:kPerformVideoKey];
+    [coder encodeObject:self.audio forKey:kPerformAudioKey];
 
 }
 
@@ -46,6 +47,7 @@
         self.perform = [coder decodeObjectForKey:kPerformKey];
         self.image = [coder decodeObjectForKey:kPerformImageKey];
         self.video = [coder decodeObjectForKey:kPerformVideoKey];
+        self.audio = [coder decodeObjectForKey:kPerformAudioKey];
 
     }
     return self;
@@ -94,6 +96,18 @@
     }
     
     return size;
+}
+
+- (BOOL)isWithAudio {
+    if (self.audio.length == 0) {
+        return NO;
+    }
+    
+    NSString *path = [[NSString audioPath] stringByAppendingPathComponent:self.audio];
+    
+    BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:path];
+    
+    return fileExists;
 }
 
 @end

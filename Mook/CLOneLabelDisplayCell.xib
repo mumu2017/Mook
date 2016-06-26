@@ -19,10 +19,10 @@
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0vb-92-KlR">
-                        <rect key="frame" x="208" y="6" width="80" height="30"/>
+                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0vb-92-KlR">
+                        <rect key="frame" x="237" y="7" width="57" height="29"/>
                         <color key="backgroundColor" red="0.15101002159999999" green="0.56891876460000002" blue="0.43715286250000002" alpha="1" colorSpace="calibratedRGB"/>
-                        <state key="normal" title="play"/>
+                        <state key="normal" image="sound"/>
                     </button>
                 </subviews>
                 <constraints>
@@ -39,4 +39,7 @@
             <point key="canvasLocation" x="293" y="274"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="sound" width="22" height="22"/>
+    </resources>
 </document>

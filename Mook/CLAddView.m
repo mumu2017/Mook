@@ -29,7 +29,7 @@
 
     }];
     _ideaBtn.cornerRadius = kAddButtonHeight/2;
-    [_ideaBtn setTitle:@"灵感" forState:UIControlStateNormal];
+    [_ideaBtn setTitle:@"想法" forState:UIControlStateNormal];
 
     // 演出
     _showBtn = [[BFPaperButton alloc] initWithRaised:YES];
@@ -115,7 +115,7 @@
 //    }];
 //    _ideaBtn.layer.cornerRadius = kAddButtonHeight/2;
 //    _ideaBtn.backgroundColor = [kAppThemeColor darkenByPercentage:0.05];
-//    [_ideaBtn setTitle:@"灵感" forState:UIControlStateNormal];
+//    [_ideaBtn setTitle:@"想法" forState:UIControlStateNormal];
 //    
 //    // 演出
 //    _showBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -194,7 +194,7 @@
 //     }];
 //     _ideaBtn.layer.cornerRadius = kAddButtonHeight/2;
 //     _ideaBtn.backgroundColor = [kAppThemeColor darkenByPercentage:0.05];
-//     [_ideaBtn setTitle:@"灵感" forState:UIControlStateNormal];
+//     [_ideaBtn setTitle:@"想法" forState:UIControlStateNormal];
 //     
 //     // 演出
 //     _showBtn = [UIButton buttonWithType:UIButtonTypeCustom];

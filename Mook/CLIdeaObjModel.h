@@ -9,8 +9,8 @@
 #import <Foundation/Foundation.h>
 @class CLInfoModel, CLPrepModel, CLEffectModel;
 
-// 灵感的数据分为两部分:
-// 1. 灵感的名字
+// 想法的数据分为两部分:
+// 1. 想法的名字
 // 2. 详细信息:文字和图片
 
 @interface CLIdeaObjModel : NSObject

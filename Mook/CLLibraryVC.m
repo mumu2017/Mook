@@ -132,7 +132,7 @@ static NSString * const reuseIdentifier = @"Cell";
     switch (indexPath.row) {
             
         case 0:
-            title = NSLocalizedString(@"灵感", nil);
+            title = NSLocalizedString(@"想法", nil);
             count = [NSString stringWithFormat:@"%ld", (unsigned long)self.ideaObjModelList.count];
             iconName = @"idea.jpg";
             break;

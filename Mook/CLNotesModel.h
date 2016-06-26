@@ -12,6 +12,10 @@
 
 @property (nonatomic, copy) NSString *notes;
 
+@property (nonatomic, copy) NSString *audio;
+
+@property (nonatomic, assign) BOOL isWithAudio;
+
 // 是否有效果信息
 @property (nonatomic, assign) BOOL isWithNotes;
 

@@ -5,6 +5,10 @@
   Created by 陈林 on 16/4/7.
 
 */
+"播放录音" = "Play Audio";
+
+"删除录音" = "Delete Audio";
+
 "Done" = "Done";
 
 "相机拍摄" = "Record";
@@ -46,7 +50,7 @@
 
 // Home
 // CLMookTabBarController
-"随时随地记录灵感,让创作无处不在" = "Capture magic ideas, anytime, anywhere";
+"随时随地记录想法,让创作无处不在" = "Capture magic ideas, anytime, anywhere";
 "私人订制魔术库,触手可及" = "Personal magic library within your reach";
 "视频,图片,语音...魔术记录从未如此简单" = "Videos, images and voice input, it has been this simple to record your magic";
 "从今天起,做一个更好的魔术师" = "Be a better magician";
@@ -66,7 +70,7 @@
 "新建道具" = "New Prop";
 
 "效果描述" = "Effect";
-"灵感内容" = "Idea";
+"想法描述" = "Idea";
 "技巧描述" = "Sleight";
 "道具描述" = "Prop";
 "台词内容" = "Lines";
@@ -100,7 +104,7 @@
 "导出失败" = "Export failed";
 
 
-"新建灵感" = "New Idea";
+"新建想法" = "New Idea";
 "新建演出" = "New Show";
 "新建流程" = "New Routine";
 "新建技巧" = "New Sleight";
@@ -113,7 +117,7 @@
 //Library分类
 // CLTagListVC
 "无标签" = "No tag";
-"灵感" = "Idea";
+"想法" = "Idea";
 "演出" = "Show";
 "流程" = "Routine";
 "技巧" = "Sleight";
@@ -232,7 +236,7 @@
 
 //CLNewEntryVC
 "编辑流程名称" = "Title";
-"编辑灵感标题" = "Title";
+"编辑想法标题" = "Title";
 "编辑技巧名称" = "Title";
 "编辑道具名称" = "Title";
 "编辑台词标题" = "Title";
@@ -298,7 +302,7 @@
 
 //CLTextInputCell
 "流程标题" = "Routine title";
-"灵感标题" = "Idea title";
+"想法标题" = "Idea title";
 "技巧标题" = "Sleight title";
 "道具标题" = "Prop title";
 "台词标题" = "Lines title";

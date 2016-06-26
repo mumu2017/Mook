@@ -18,7 +18,8 @@
 - (void)encodeWithCoder:(NSCoder *)coder
 {
     [coder encodeObject:self.notes forKey:kNotesKey];
-    
+    [coder encodeObject:self.audio forKey:kNotesAudioKey];
+
 }
 
 - (instancetype)initWithCoder:(NSCoder *)coder
@@ -26,6 +27,8 @@
     self = [super init];
     if (self) {
         self.notes = [coder decodeObjectForKey:kNotesKey];
+        self.audio = [coder decodeObjectForKey:kNotesAudioKey];
+
         
     }
     return self;
@@ -33,6 +36,18 @@
 
 - (BOOL)isWithNotes {
     return (self.notes.length > 0);
+}
+
+- (BOOL)isWithAudio {
+    if (self.audio.length == 0) {
+        return NO;
+    }
+    
+    NSString *path = [[NSString audioPath] stringByAppendingPathComponent:self.audio];
+    
+    BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:path];
+    
+    return fileExists;
 }
 
 @end

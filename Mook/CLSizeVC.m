@@ -61,7 +61,7 @@
         case 1:
             switch (indexPath.row) {
                 case 0:
-                    cell.textLabel.text = NSLocalizedString(@"灵感", nil);
+                    cell.textLabel.text = NSLocalizedString(@"想法", nil);
                     cell.detailTextLabel.text = [CLDataSizeTool sizeOfAllIdeas];
                     break;
                 case 1:

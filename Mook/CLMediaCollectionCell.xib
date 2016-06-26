@@ -17,10 +17,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="105" height="105"/>
                     </imageView>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nVZ-RP-NHx">
-                        <rect key="frame" x="8" y="84" width="16" height="16"/>
+                        <rect key="frame" x="5" y="88" width="14" height="14"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="16" id="aFr-3P-rCk"/>
-                            <constraint firstAttribute="height" constant="16" id="uVM-H5-LRU"/>
+                            <constraint firstAttribute="width" constant="14" id="aFr-3P-rCk"/>
+                            <constraint firstAttribute="height" constant="14" id="uVM-H5-LRU"/>
                         </constraints>
                     </imageView>
                 </subviews>
@@ -30,9 +30,9 @@
                 <constraint firstAttribute="bottom" secondItem="jd3-gK-xIX" secondAttribute="bottom" id="ABT-X5-UBD"/>
                 <constraint firstItem="jd3-gK-xIX" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="C0D-9L-64g"/>
                 <constraint firstItem="jd3-gK-xIX" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="Mu4-j2-vMP"/>
-                <constraint firstAttribute="bottom" secondItem="nVZ-RP-NHx" secondAttribute="bottom" constant="5" id="NR7-yY-CNw"/>
+                <constraint firstAttribute="bottom" secondItem="nVZ-RP-NHx" secondAttribute="bottom" constant="3" id="NR7-yY-CNw"/>
                 <constraint firstAttribute="trailing" secondItem="jd3-gK-xIX" secondAttribute="trailing" id="Onh-uU-emH"/>
-                <constraint firstItem="nVZ-RP-NHx" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="8" id="ot0-qY-kvn"/>
+                <constraint firstItem="nVZ-RP-NHx" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="5" id="ot0-qY-kvn"/>
             </constraints>
             <size key="customSize" width="92" height="90"/>
             <connections>

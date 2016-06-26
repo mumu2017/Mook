@@ -319,7 +319,6 @@ typedef enum {
                 photo = [MWPhoto photoWithImage:[name getNamedImage]];
                 photo.caption = content;
                 [_photos addObject:photo];
-//                NSLog(@"111111");
             }
         }
     }
@@ -354,6 +353,12 @@ static NSString * const reuseIdentifier = @"Cell";
     self.allMedia = nil;
     self.photos = nil;
     self.dataList = nil;
+    
+    [self allMedia];
+    [self photos];
+    [self dataList];
+    
+    NSLog(@"總共有%ld", self.allMedia.count);
     
     self.menu.cellBackgroundColor = kAppThemeColor;
 

@@ -849,7 +849,7 @@
             if (self.contentType == kContentTypeRoutine) {
                 sectionTitle = NSLocalizedString(@"效果描述", nil);
             } else if (self.contentType == kContentTypeIdea) {
-                sectionTitle = NSLocalizedString(@"灵感内容", nil);
+                sectionTitle = NSLocalizedString(@"想法描述", nil);
                 
             } else if (self.contentType == kContentTypeSleight) {
                 sectionTitle = NSLocalizedString(@"技巧描述", nil);

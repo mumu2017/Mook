@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -29,10 +29,10 @@
                         <rect key="frame" x="77" y="0.0" width="44" height="44"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <state key="normal" image="toolBarWrite">
+                        <state key="normal" image="toolBarVoice">
                             <color key="titleColor" red="0.1019607843" green="0.4039215686" blue="0.99607843139999996" alpha="1" colorSpace="calibratedRGB"/>
                         </state>
-                        <state key="highlighted" image="toolBarWriteHighlighted"/>
+                        <state key="highlighted" image="toolBarVoiceHighlighted"/>
                         <connections>
                             <action selector="buttonClicked:" destination="B1t-9i-QS9" eventType="touchUpInside" id="w3a-jf-Xog"/>
                         </connections>
@@ -56,10 +56,10 @@
                         <rect key="frame" x="199" y="0.0" width="44" height="44"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <state key="normal" image="toolBarVoice">
+                        <state key="normal" image="toolBarWrite">
                             <color key="titleColor" red="0.1019607843" green="0.4039215686" blue="0.99607843139999996" alpha="1" colorSpace="calibratedRGB"/>
                         </state>
-                        <state key="highlighted" image="toolBarVoiceHighlighted"/>
+                        <state key="highlighted" image="toolBarWriteHighlighted"/>
                         <connections>
                             <action selector="buttonClicked:" destination="B1t-9i-QS9" eventType="touchUpInside" id="QCk-LT-oat"/>
                         </connections>

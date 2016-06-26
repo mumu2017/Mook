@@ -35,6 +35,8 @@
     [coder encodeObject:self.prep forKey:kPrepKey];
     [coder encodeObject:self.image forKey:kPrepImageKey];
     [coder encodeObject:self.video forKey:kPrepVideoKey];
+    [coder encodeObject:self.audio forKey:kPrepAudioKey];
+
 
 }
 
@@ -45,6 +47,7 @@
         self.prep = [coder decodeObjectForKey:kPrepKey];
         self.image = [coder decodeObjectForKey:kPrepImageKey];
         self.video = [coder decodeObjectForKey:kPrepVideoKey];
+        self.audio = [coder decodeObjectForKey:kPrepAudioKey];
 
 
     }
@@ -76,6 +79,18 @@
     }
         
     NSString *path = [[NSString videoPath] stringByAppendingPathComponent:self.video];
+    
+    BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:path];
+    
+    return fileExists;
+}
+
+- (BOOL)isWithAudio {
+    if (self.audio.length == 0) {
+        return NO;
+    }
+    
+    NSString *path = [[NSString audioPath] stringByAppendingPathComponent:self.audio];
     
     BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:path];
     

@@ -10,6 +10,8 @@
 #import "CLEdtingManageVC.h"
 #import "CLQuickStringNavVC.h"
 #import "CLDataSaveTool.h"
+#import "CLGetMediaTool.h"
+#import "CLAudioPlayTool.h"
 #import "CLToolBar.h"
 #import "CLMediaView.h"
 
@@ -39,9 +41,12 @@
 
 @property (nonatomic, copy) NSString *imageName;
 @property (nonatomic, copy) NSString *videoName;
+@property (nonatomic, copy) NSString *audioName;
+
 
 @property (nonatomic, assign) BOOL isWithVideo;
 @property (nonatomic, assign) BOOL isWithImage;
+@property (nonatomic, assign) BOOL isWithAudio;
 
 @property (nonatomic, assign) BOOL didMakeChange;
 
@@ -166,24 +171,20 @@
             
             self.toolBar.addButton.hidden = YES;
             self.toolBar.deleteButton.hidden = YES;
-            [self.toolBar.previousButton setImage:kToolBarWriteImage forState:UIControlStateNormal];
-            [self.toolBar.previousButton setImage:kToolBarApproveImageHighlighted forState:UIControlStateHighlighted];
+
             break;
             
         case kEditingModePrep:
-            [self.toolBar.previousButton setImage:kToolBarWriteImage forState:UIControlStateNormal];
-            [self.toolBar.previousButton setImage:kToolBarApproveImageHighlighted forState:UIControlStateHighlighted];
+
             break;
             
         case kEditingModePerform:
-            [self.toolBar.previousButton setImage:kToolBarWriteImage forState:UIControlStateNormal];
-            [self.toolBar.previousButton setImage:kToolBarApproveImageHighlighted forState:UIControlStateHighlighted];
+
             break;
             
         case kEditingModeNotes:
             self.toolBar.imageButton.hidden = YES;
-            [self.toolBar.previousButton setImage:kToolBarWriteImage forState:UIControlStateNormal];
-            [self.toolBar.previousButton setImage:kToolBarApproveImageHighlighted forState:UIControlStateHighlighted];
+
             break;
             
         default:
@@ -250,22 +251,29 @@
             self.editTextView.text = self.effectModel.effect;
             self.imageName = self.effectModel.image;
             self.videoName = self.effectModel.video;
+            self.audioName = self.effectModel.audio;
             break;
             
         case kEditingModePrep:
             self.editTextView.text = self.prepModel.prep;
             self.imageName = self.prepModel.image;
             self.videoName = self.prepModel.video;
+            self.audioName = self.prepModel.audio;
+
             break;
             
         case kEditingModePerform:
             self.editTextView.text = self.performModel.perform;
             self.imageName = self.performModel.image;
             self.videoName = self.performModel.video;
+            self.audioName = self.performModel.audio;
+
             break;
             
         case kEditingModeNotes:
             self.editTextView.text = self.notesModel.notes;
+            self.audioName = self.notesModel.audio;
+
             break;
             
         default:
@@ -280,6 +288,12 @@
     } else if (self.isWithImage) {
         [self.toolBar setButtonImageWithImageName:self.imageName];
         
+    }
+    
+    if (self.isWithAudio) {
+        UIImage *image = [kToolBarVoiceImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        [self.toolBar.previousButton setImage:image forState:UIControlStateNormal];
+        self.toolBar.previousButton.tintColor = [UIColor redColor];
     }
 }
 
@@ -445,11 +459,22 @@
 
     } else if (button == toolBar.previousButton) {
         
-        [self performSegueWithIdentifier:kQuickStringSegue sender:nil];
+        if (self.isWithAudio) {
+            [self deleteAudio];
+            
+        } else {
+            [self addAudio];
+
+        }
         
     } else if (button == toolBar.nextButton) {
 
         if ([self.delegate respondsToSelector:@selector(editingVC:startAudioRecognitionWithContent:andIdentifierTag:)]) {
+            
+            UIImage *image = [kToolBarWriteImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+            [self.toolBar.nextButton setImage:image forState:UIControlStateNormal];
+            self.toolBar.nextButton.tintColor = [UIColor redColor];
+            
             [self.delegate editingVC:self startAudioRecognitionWithContent:self.editTextView.text andIdentifierTag:self.identifierTag];
         }
         
@@ -498,6 +523,9 @@
     if (self.identifierTag == identifierTag) { // 如果和editingManageVC中的currentIden
         self.editTextView.text = result;
         [self updateTextView:self.editTextView];
+        
+        UIImage *image = [kToolBarWriteImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        [self.toolBar.nextButton setImage:image forState:UIControlStateNormal];
     }
 
 }
@@ -697,7 +725,17 @@
     return fileExists;
 }
 
-
+- (BOOL)isWithAudio {
+    if (self.audioName.length == 0) {
+        return NO;
+    }
+    
+    NSString *path = [[NSString audioPath] stringByAppendingPathComponent:self.audioName];
+    
+    BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:path];
+    
+    return fileExists;
+}
 
 #pragma mark 添加多媒体
 - (void)addMedia {
@@ -833,46 +871,60 @@
     
 }
 
+- (void)deleteAudio {
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    
+    UIAlertAction* playAudio = [UIAlertAction actionWithTitle:NSLocalizedString(@"播放录音", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            
+            [CLAudioPlayTool playAudioFromCurrentController:self audioPath:[self.audioName getNamedAudio]];
+            
+        });
+        
+    }];
+    
+    UIAlertAction* deleteAudio = [UIAlertAction actionWithTitle:NSLocalizedString(@"删除录音", nil) style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            
+            // 如果发生了编辑改变, 则将发生编辑的状态设置为YES
+            self.didMakeChange = YES;
+            
+            [self.audioName deleteNamedAudioFromDocument];
+            [CLDataSaveTool deleteMediaByName:self.audioName];
+            self.audioName = nil;
+            
+            UIImage *image = [kToolBarVoiceImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+            [self.toolBar.previousButton setImage:image forState:UIControlStateNormal];
+            
+        });
+        
+    }];
+
+    
+    UIAlertAction* cancel = [UIAlertAction actionWithTitle:NSLocalizedString(@"取消", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
+        
+    }];
+    
+    [alert addAction:playAudio];
+    [alert addAction:deleteAudio];
+    [alert addAction:cancel];
+    
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
 - (void) saveImage:(UIImage *)image {
     
     // 如果发生了编辑改变, 则将发生编辑的状态设置为YES
     self.didMakeChange = YES;
     
     NSString *imageName = [kTimestamp stringByAppendingString:@".jpg"];
-    NSString *type;
-    switch (self.editingContentType) {
-        case kEditingContentTypeShow:
-            type = kTypeShow;
-            break;
-            
-        case kEditingContentTypeIdea:
-            type = kTypeIdea;
-            break;
-            
-        case kEditingContentTypeRoutine:
-            type = kTypeRoutine;
-            break;
-            
-        case kEditingContentTypeSleight:
-            type = kTypeSleight;
-            break;
-            
-            
-        case kEditingContentTypeProp:
-            type = kTypeProp;
-            break;
-            
-            
-        case kEditingContentTypeLines:
-            type = kTypeLines;
-            break;
-            
-        default:
-            break;
-    }
     
     [imageName saveNamedImageToDocument:image];
-    [CLDataSaveTool addImageByName:imageName timesStamp:self.timeStamp content:self.editTextView.text type:type];
+    [CLDataSaveTool addImageByName:imageName timesStamp:self.timeStamp content:self.editTextView.text type:[self getModelType]];
     
     self.imageName = imageName;
     
@@ -915,39 +967,7 @@
         });
     });
     
-    NSString *type;
-    switch (self.editingContentType) {
-            
-        case kEditingContentTypeShow:
-            type = kTypeShow;
-            break;
-            
-        case kEditingContentTypeIdea:
-            type = kTypeIdea;
-            break;
-            
-        case kEditingContentTypeRoutine:
-            type = kTypeRoutine;
-            break;
-            
-        case kEditingContentTypeSleight:
-            type = kTypeSleight;
-            break;
-            
-        case kEditingContentTypeProp:
-            type = kTypeProp;
-            break;
-            
-            
-        case kEditingContentTypeLines:
-            type = kTypeLines;
-            break;
-            
-        default:
-            break;
-    }
-    
-    [CLDataSaveTool addVideoByName:videoName timesStamp:self.timeStamp content:self.editTextView.text type:type];
+    [CLDataSaveTool addVideoByName:videoName timesStamp:self.timeStamp content:self.editTextView.text type:[self getModelType]];
     self.videoName = videoName;
     
     switch (self.editingModel) {
@@ -971,6 +991,46 @@
 }
 
 
+- (void)addAudio {
+    
+    [[CLGetMediaTool getInstance] recordAudioFromCurrentController:self audioBlock:^(NSString *filePath) {
+        
+        NSString *audioName = [kTimestamp stringByAppendingString:@".m4a"];
+        [audioName saveNamedAudioToDocument:filePath];
+        self.audioName = audioName;
+
+        switch (self.editingModel) {
+            case kEditingModeEffect:
+                self.effectModel.audio = audioName;
+                
+                break;
+                
+            case kEditingModePrep:
+                self.prepModel.audio = audioName;
+                
+                break;
+                
+            case kEditingModePerform:
+                self.performModel.audio = audioName;
+                break;
+                
+            case kEditingModeNotes:
+                self.notesModel.audio = audioName;
+                break;
+                
+            default:
+                break;
+        }
+        
+        //修改按鈕圖片的顏色
+        UIImage *image = [kToolBarVoiceImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        [self.toolBar.previousButton setImage:image forState:UIControlStateNormal];
+        self.toolBar.previousButton.tintColor = [UIColor redColor];
+        
+        [CLDataSaveTool addAudioByName:audioName timesStamp:self.timeStamp content:nil type:[self getModelType]];
+    }];
+}
+
 #pragma mark - textView 代理方法
 - (void)textViewDidChange:(UITextView *)textView {
     
@@ -982,6 +1042,19 @@
             [textView showPlaceHolder];
         } else {
             [textView hidePlaceHolder];
+        }
+        
+        // 如果输入@, 弹出快捷短语选项
+        // Create the predicate
+        NSPredicate *myPredicate = [NSPredicate predicateWithFormat:@"SELF endswith %@", @"@"];
+        NSString *oldString = textView.text;
+        // Run the predicate
+        // match == YES if the predicate is successful
+        BOOL match = [myPredicate evaluateWithObject:textView.text];
+        if (match) {
+            NSString *newString = [oldString substringToIndex:[oldString length]-1];
+            textView.text = newString;
+            [self performSegueWithIdentifier:kQuickStringSegue sender:nil];
         }
         
         [self saveText:textView];
@@ -1028,6 +1101,45 @@
             break;
     }
 
+}
+
+#pragma mark - Helpers
+
+- (NSString *)getModelType {
+    
+    NSString *type;
+    
+    switch (self.editingContentType) {
+        case kEditingContentTypeShow:
+            type = kTypeShow;
+            break;
+            
+        case kEditingContentTypeIdea:
+            type = kTypeIdea;
+            break;
+            
+        case kEditingContentTypeRoutine:
+            type = kTypeRoutine;
+            break;
+            
+        case kEditingContentTypeSleight:
+            type = kTypeSleight;
+            break;
+            
+            
+        case kEditingContentTypeProp:
+            type = kTypeProp;
+            break;
+            
+            
+        case kEditingContentTypeLines:
+            type = kTypeLines;
+            break;
+            
+        default:
+            break;
+    }
+    return type;
 }
 
 @end
