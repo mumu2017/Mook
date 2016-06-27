@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+@class FDWaveformView;
 
 @interface CLTextAudioImageCell : UITableViewCell
 
@@ -16,6 +17,7 @@ typedef void (^VideoBlock)(NSString *videoName);
 
 @property (strong, nonatomic) UILabel *contentLabel;
 @property (strong, nonatomic) UIButton *audioButton;
+@property (strong, nonatomic) FDWaveformView *waveformView;
 
 @property (strong, nonatomic) UIImageView *iconView;
 
@@ -38,9 +40,6 @@ typedef void (^VideoBlock)(NSString *videoName);
 @property (strong, nonatomic) AudioBlock audioBlock;
 @property (strong, nonatomic) ImageBlock imageBlock;
 @property (strong, nonatomic) VideoBlock videoBlock;
-
-- (void)setText:(NSString *)text audioName:(NSString *)audioName;
-- (void)setAttributedString:(NSAttributedString *)text audioName:(NSString *)audioName;
 
 - (void)setAttributedString:(NSAttributedString *)text audioName:(NSString *)audioName audioBlock:(AudioBlock)audioBlock imageName:(NSString *)imageName imageBlock:(ImageBlock)imageBlock videoName:(NSString *)videoName videoBlock:(VideoBlock)videoBlock;
 

@@ -7,6 +7,7 @@
 //
 
 #import "CLTextAudioCell.h"
+#import "FDWaveformView.h"
 
 @implementation CLTextAudioCell
 
@@ -18,7 +19,8 @@
         self.backgroundColor = kCellBgColor;
         [self contentLabel];
         [self audioButton];
-        
+        [self waveformView];
+
     }
     return self;
 }
@@ -31,6 +33,7 @@
         
         [self contentLabel];
         [self audioButton];
+        [self waveformView];
     }
     return self;
 }
@@ -55,30 +58,61 @@
 - (UIButton *)audioButton {
     if (!_audioButton) {
         _audioButton = [[UIButton alloc] init];
-        [self.contentView addSubview:_audioButton];
+        [self.waveformView addSubview:_audioButton];
         [_audioButton mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.contentLabel.mas_bottom).offset(10);
-            make.left.equalTo(self.contentLabel);
-            make.right.equalTo(self.contentLabel);
-            make.bottom.equalTo(self.contentView).offset(-10);
-            make.height.equalTo(@44);
+            
+            make.edges.equalTo(self.waveformView);
+            
         }];
     }
-    _audioButton.backgroundColor = [UIColor redColor];
+    
+    _audioButton.titleLabel.font = kFontSys14;
+    
+    [_audioButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    _audioButton.backgroundColor = [UIColor clearColor];
+    
     return _audioButton;
+}
+
+- (FDWaveformView *)waveformView {
+    if (!_waveformView) {
+        _waveformView = [[FDWaveformView alloc] init];
+        [self.contentView addSubview:_waveformView];
+        
+        [_waveformView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.contentLabel.mas_bottom).offset(20);
+            make.left.right.equalTo(self.contentLabel);
+            make.bottom.equalTo(self.contentView).offset(-20);
+            make.height.equalTo(@44);
+        }];
+        
+        _waveformView.wavesColor = [UIColor whiteColor];
+        _waveformView.backgroundColor = [UIColor grayColor];
+        _waveformView.doesAllowScroll = NO;
+        _waveformView.doesAllowScrubbing = NO;
+        _waveformView.doesAllowStretch = NO;
+        _waveformView.layer.cornerRadius = 1.0;
+        
+    }
+    return _waveformView;
 }
 
 - (void)setAttributedString:(NSAttributedString *)text audioName:(NSString *)audioName audioBlock:(AudioBlock)audioBlock
 {
     _audioName = audioName;
     _audioBlock = audioBlock;
-
+    
     
     self.contentLabel.attributedText = text;
     
     [self.audioButton addTarget:self action:@selector(playAudio) forControlEvents:UIControlEventTouchUpInside];
-        
-    }
+    
+    NSInteger duration = [audioName getDurationForNamedAudio];
+    [self.audioButton setTitle:[NSString stringWithFormat:@"Tap to play (%.2ld:%.2ld)", (long)duration/60, (long)duration%60] forState:UIControlStateNormal];
+    
+    self.waveformView.audioURL = [NSURL fileURLWithPath:[audioName getNamedAudio]];
+    
+}
 
 - (void)playAudio {
     _audioBlock(_audioName);

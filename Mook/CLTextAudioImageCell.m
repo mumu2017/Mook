@@ -7,6 +7,7 @@
 //
 
 #import "CLTextAudioImageCell.h"
+#import "FDWaveformView.h"
 
 @implementation CLTextAudioImageCell
 
@@ -37,6 +38,7 @@
     
     [self contentLabel];
     [self audioButton];
+    [self waveformView];
     [self imageContainer];
     [self iconView];
     [self imageButton];
@@ -95,16 +97,42 @@
 - (UIButton *)audioButton {
     if (!_audioButton) {
         _audioButton = [[UIButton alloc] init];
-        [self.contentView addSubview:_audioButton];
+        [self.waveformView addSubview:_audioButton];
         [_audioButton mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.contentLabel.mas_bottom).offset(10);
-            make.left.equalTo(self.contentLabel);
-            make.right.equalTo(self.contentLabel);
-            make.height.equalTo(@44);
+            
+            make.edges.equalTo(self.waveformView);
+            
         }];
     }
-    _audioButton.backgroundColor = [UIColor redColor];
+    
+    _audioButton.titleLabel.font = kFontSys14;
+    
+    [_audioButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    _audioButton.backgroundColor = [UIColor clearColor];
+    
     return _audioButton;
+}
+
+- (FDWaveformView *)waveformView {
+    if (!_waveformView) {
+        _waveformView = [[FDWaveformView alloc] init];
+        [self.contentView addSubview:_waveformView];
+        
+        [_waveformView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.contentLabel.mas_bottom).offset(20);
+            make.left.right.equalTo(self.contentLabel);
+            make.height.equalTo(@44);
+        }];
+        
+        _waveformView.wavesColor = [UIColor whiteColor];
+        _waveformView.backgroundColor = [UIColor grayColor];
+        _waveformView.doesAllowScroll = NO;
+        _waveformView.doesAllowScrubbing = NO;
+        _waveformView.doesAllowStretch = NO;
+        _waveformView.layer.cornerRadius = 1.0;
+        
+    }
+    return _waveformView;
 }
 
 - (UIView *)imageContainer {
@@ -113,7 +141,7 @@
         [self.contentView addSubview:_imageContainer];
         
         [_imageContainer mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.audioButton.mas_bottom).offset(20);
+            make.top.equalTo(self.waveformView.mas_bottom).offset(30);
             make.left.right.equalTo(self.contentView);
             make.bottom.equalTo(self.contentView).offset(-20);
         }];
@@ -164,11 +192,16 @@
     
     self.contentLabel.attributedText = text;
     
+    NSInteger duration = [audioName getDurationForNamedAudio];
+    
+    [self.audioButton setTitle:[NSString stringWithFormat:@"Tap to play (%.2ld:%.2ld)", (long)duration/60, (long)duration%60] forState:UIControlStateNormal];
+    
+    self.waveformView.audioURL = [NSURL fileURLWithPath:[audioName getNamedAudio]];
+    
     if (self.isWithAudio && !self.isWithImage && self.isWithVideo) {
         
         [self loadCellWithAudioAndVideo];
 
-        
     } else if (self.isWithAudio && self.isWithImage && !self.isWithVideo) {
         
         [self loadCellWithAudioAndImage];

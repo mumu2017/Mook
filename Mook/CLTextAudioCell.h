@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+@class FDWaveformView;
 
 @interface CLTextAudioCell : UITableViewCell
 
@@ -15,6 +16,7 @@ typedef void (^AudioBlock)(NSString *audioName);
 
 @property (strong, nonatomic) UILabel *contentLabel;
 @property (strong, nonatomic) UIButton *audioButton;
+@property (strong, nonatomic) FDWaveformView *waveformView;
 
 @property (strong, nonatomic) NSString *audioName;
 

@@ -462,4 +462,25 @@
 }
 
 
+- (NSInteger)getDurationForNamedAudio {
+    
+    NSURL *url = [NSURL fileURLWithPath:[self getNamedAudio]];
+    AVURLAsset *avUrl = [AVURLAsset assetWithURL:url];
+    CMTime time = [avUrl duration];
+    NSInteger seconds = ceil(time.value/time.timescale);
+    
+    return seconds;
+}
+
+- (NSInteger)getDurationForNamedVideo {
+    NSString *path = [[NSString videoPath] stringByAppendingPathComponent:self];
+    NSURL *url = [NSURL fileURLWithPath:path];
+    
+    AVURLAsset *avUrl = [AVURLAsset assetWithURL:url];
+    CMTime time = [avUrl duration];
+    NSInteger seconds = ceil(time.value/time.timescale);
+    
+    return seconds;
+}
+
 @end
