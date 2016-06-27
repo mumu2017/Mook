@@ -10,9 +10,13 @@
 #import "CLShowModel.h"
 #import "CLContentVC.h"
 #import "CLNewShowVC.h"
+#import "CLAudioPlayTool.h"
 
-#import "CLOneLabelDisplayCell.h"
-#import "CLOneLabelImageDisplayCell.h"
+#import "CLTextCell.h"
+#import "CLTextAudioCell.h"
+#import "CLTextImageCell.h"
+#import "CLTextAudioImageCell.h"
+
 #import "CLNewShowVC.h"
 #import "CLRoutineImageCell.h"
 #import "CLRoutineTextCell.h"
@@ -188,13 +192,15 @@
     self.tableView.backgroundColor = kCellBgColor;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 
-    [self.tableView registerNib:[UINib nibWithNibName:@"CLOneLabelImageDisplayCell"
-                                               bundle:nil]
-         forCellReuseIdentifier:kOneLabelImageDisplayCell];
+    [self.tableView registerClass:[CLTextCell class]
+           forCellReuseIdentifier:kTextCell];
+    [self.tableView registerClass:[CLTextAudioCell class]
+           forCellReuseIdentifier:kTextAudioCell];
+    [self.tableView registerClass:[CLTextImageCell class]
+           forCellReuseIdentifier:kTextImageCell];
+    [self.tableView registerClass:[CLTextAudioImageCell class]
+           forCellReuseIdentifier:kTextAudioImageCell];
     
-    [self.tableView registerNib:[UINib nibWithNibName:@"CLOneLabelDisplayCell"
-                                               bundle:nil]
-         forCellReuseIdentifier:kOneLabelDisplayCell];
     
     [self.tableView registerNib:[UINib nibWithNibName:@"CLShowInfoCell"
                                                bundle:nil]
@@ -265,8 +271,8 @@
     switch (indexPath.section) {
         case 0:
         {
-            CLOneLabelDisplayCell *cell = [self.tableView dequeueReusableCellWithIdentifier:kOneLabelDisplayCell forIndexPath:indexPath];
             
+            CLTextCell *cell = [self.tableView dequeueReusableCellWithIdentifier:kTextCell forIndexPath:indexPath];
             NSString *title;
             if (self.showModel.name.length > 0) {
                 title = self.showModel.name;
@@ -276,7 +282,7 @@
             
             NSAttributedString *titleString = [NSString titleString:title withDate:self.showModel.date tags:self.showModel.tags];
 
-            cell.contentLabel.attributedText = titleString;
+            [cell setAttributedString:titleString];
             cell.contentLabel.textAlignment = NSTextAlignmentCenter;
             
             return cell;
@@ -303,35 +309,59 @@
         }
         case 2:
         {
-            if (self.showModel.effectModel.isWithVideo) {
-                
-                CLOneLabelImageDisplayCell *cell = [self.tableView dequeueReusableCellWithIdentifier:kOneLabelImageDisplayCell forIndexPath:indexPath];
-                
-                cell.contentLabel.attributedText = [[NSString attributedStringWithFirstPart:NSLocalizedString(@"演出说明\n", nil) secondPart:[self.showModel getEffectText] firstPartFont:kBoldFontSys17 firstPartColor:[UIColor blackColor] secondPardFont:kFontSys17 secondPartColor:[UIColor blackColor]] styledString];
-                
-                [cell.imageButton addTarget:self action:@selector(showPhotoBrowser:) forControlEvents:UIControlEventTouchUpInside];
-                
-                cell.imageButton.tag = [self getTagWithMediaName:self.showModel.effectModel.video]; // effectModel肯定是第一张图片或视频,所以作为图片数组中的Index,tag = 0;
-                [cell setImageWithVideoName:self.showModel.effectModel.video];
+            
+            NSAttributedString *text = [[NSString attributedStringWithFirstPart:NSLocalizedString(@"演出说明\n", nil) secondPart:[self.showModel getEffectText] firstPartFont:kBoldFontSys17 firstPartColor:[UIColor blackColor] secondPardFont:kFontSys17 secondPartColor:[UIColor blackColor]] styledString];;
+            
+            // 只有文字
+            if (!self.showModel.effectModel.isWithAudio && !self.showModel.effectModel.isWithImage && !self.showModel.effectModel.isWithVideo) {
+                CLTextCell *cell = [self.tableView dequeueReusableCellWithIdentifier:kTextCell forIndexPath:indexPath];
+                [cell setAttributedString:text];
+                cell.contentLabel.textAlignment = NSTextAlignmentLeft;
                 
                 return cell;
-            } else if (self.showModel.effectModel.isWithImage) {
+                // 有文字和音频
+            } else if (self.showModel.effectModel.isWithAudio && !self.showModel.effectModel.isWithImage && !self.showModel.effectModel.isWithVideo) {
                 
-                CLOneLabelImageDisplayCell * cell = [self.tableView dequeueReusableCellWithIdentifier:kOneLabelImageDisplayCell forIndexPath:indexPath];
+                CLTextAudioCell *cell = [self.tableView dequeueReusableCellWithIdentifier:kTextAudioCell forIndexPath:indexPath];
+                [cell setAttributedString:text audioName:self.showModel.effectModel.audio audioBlock:^(NSString *audioName) {
+                    [self playAudio:audioName];
+                }];
                 
-                cell.contentLabel.attributedText = [[NSString attributedStringWithFirstPart:NSLocalizedString(@"演出说明\n", nil) secondPart:[self.showModel getEffectText] firstPartFont:kBoldFontSys17 firstPartColor:[UIColor blackColor] secondPardFont:kFontSys17 secondPartColor:[UIColor blackColor]] styledString];
+                return cell;
+                // 有文字,图片/视频
+            } else if (!self.showModel.effectModel.isWithAudio && (self.showModel.effectModel.isWithImage || self.showModel.effectModel.isWithVideo)) {
                 
-                [cell.imageButton addTarget:self action:@selector(showPhotoBrowser:) forControlEvents:UIControlEventTouchUpInside];
-
-                cell.imageButton.tag = [self getTagWithMediaName:self.showModel.effectModel.image];
-                [cell setImageWithName:self.showModel.effectModel.image];
+                CLTextImageCell *cell = [self.tableView dequeueReusableCellWithIdentifier:kTextImageCell forIndexPath:indexPath];
+                
+                [cell setAttributedString:text imageName:self.showModel.effectModel.image imageBlock:^(NSString *imageName) {
+                    NSInteger index = [self getTagWithMediaName:self.showModel.effectModel.image];
+                    [self showPhotoBrowser:index];
+                    
+                } videoName:self.showModel.effectModel.video videoBlock:^(NSString *videoName) {
+                    NSInteger index = [self getTagWithMediaName:self.showModel.effectModel.video];
+                    [self showPhotoBrowser:index];
+                }];
                 
                 return cell;
                 
-            } else {
-                CLOneLabelDisplayCell *cell = [self.tableView dequeueReusableCellWithIdentifier:kOneLabelDisplayCell forIndexPath:indexPath];
+                // 有文字, 音频和图片/视频
+            } else if (self.showModel.effectModel.isWithAudio && (self.showModel.effectModel.isWithImage || self.showModel.effectModel.isWithVideo)) {
                 
-                cell.contentLabel.attributedText = [[NSString attributedStringWithFirstPart:NSLocalizedString(@"演出说明\n", nil) secondPart:[self.showModel getEffectText] firstPartFont:kBoldFontSys17 firstPartColor:[UIColor blackColor] secondPardFont:kFontSys17 secondPartColor:[UIColor blackColor]] styledString];
+                CLTextAudioImageCell *cell = [self.tableView dequeueReusableCellWithIdentifier:kTextAudioImageCell forIndexPath:indexPath];
+                
+                [cell setAttributedString:text audioName:self.showModel.effectModel.audio audioBlock:^(NSString *audioName) {
+                    [self playAudio:audioName];
+                    
+                } imageName:self.showModel.effectModel.image imageBlock:^(NSString *imageName) {
+                    
+                    NSInteger index = [self getTagWithMediaName:self.showModel.effectModel.image];
+                    [self showPhotoBrowser:index];
+                    
+                } videoName:self.showModel.effectModel.video videoBlock:^(NSString *videoName) {
+                    
+                    NSInteger index = [self getTagWithMediaName:self.showModel.effectModel.video];
+                    [self showPhotoBrowser:index];
+                }];
                 
                 return cell;
             }
@@ -355,7 +385,7 @@
                 cell.infoButton.tag = indexPath.row;
                 [cell.infoButton addTarget:self action:@selector(showRoutineDetail:) forControlEvents:UIControlEventTouchUpInside];
                 
-                [cell.iconButton addTarget:self action:@selector(showPhotoBrowser:) forControlEvents:UIControlEventTouchUpInside];
+                [cell.iconButton addTarget:self action:@selector(showPhotoBrowserWithButton:) forControlEvents:UIControlEventTouchUpInside];
                 
                 cell.iconButton.tag = [self getTagWithMediaName:effectModel.video];
 
@@ -376,7 +406,7 @@
                 cell.infoButton.tag = indexPath.row;
                 [cell.infoButton addTarget:self action:@selector(showRoutineDetail:) forControlEvents:UIControlEventTouchUpInside];
 
-                [cell.iconButton addTarget:self action:@selector(showPhotoBrowser:) forControlEvents:UIControlEventTouchUpInside];
+                [cell.iconButton addTarget:self action:@selector(showPhotoBrowserWithButton:) forControlEvents:UIControlEventTouchUpInside];
                 
                 cell.iconButton.tag = [self getTagWithMediaName:effectModel.image];
                 
@@ -445,6 +475,13 @@
 
 }
 
+#pragma mark -Audio 方法
+- (void)playAudio:(NSString *)audioName {
+    
+    [CLAudioPlayTool playAudioFromCurrentController:self audioPath:[audioName getNamedAudio]];
+    
+}
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     id destVC = segue.destinationViewController;
     
@@ -467,8 +504,12 @@
  
 }
 
+- (void)showPhotoBrowserWithButton:(UIButton *)button {
+    
+    [self showPhotoBrowser:button.tag];
+}
 
-- (void)showPhotoBrowser:(UIButton *)button {
+- (void)showPhotoBrowser:(NSInteger)index {
     
     BOOL displayActionButton = YES;
     BOOL displaySelectionButtons = NO;
@@ -489,7 +530,7 @@
     browser.startOnGrid = startOnGrid;
     browser.enableSwipeToDismiss = NO;
     browser.autoPlayOnAppear = autoPlayOnAppear;
-    [browser setCurrentPhotoIndex:button.tag];
+    [browser setCurrentPhotoIndex:index];
     // Show
 //    [self.navigationController pushViewController:browser animated:YES];
     [self presentNavigationViewControllerAnimated:browser];

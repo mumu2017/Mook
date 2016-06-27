@@ -1,23 +1,23 @@
 //
-//  CLOneLabelDisplayCell.m
+//  CLTextAudioImageCell.m
 //  Mook
 //
-//  Created by 陈林 on 15/12/12.
-//  Copyright © 2015年 ChenLin. All rights reserved.
+//  Created by 陈林 on 16/6/27.
+//  Copyright © 2016年 Chen Lin. All rights reserved.
 //
 
-#import "CLOneLabelDisplayCell.h"
+#import "CLTextAudioImageCell.h"
 
-@implementation CLOneLabelDisplayCell
+@implementation CLTextAudioImageCell
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
         self.contentView.clipsToBounds = YES;
-
         self.backgroundColor = kCellBgColor;
-        
+        [self initSubviews];
+
     }
     return self;
 }
@@ -27,47 +27,22 @@
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         self.backgroundColor = kCellBgColor;
         self.contentView.clipsToBounds = YES;
-
-
+        [self initSubviews];
+        
     }
     return self;
 }
 
-- (void)loadSubviewsWithTextOnly {
+- (void)initSubviews {
     
-    if (_imageContainer) {
-        
-        [self.imageContainer mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.height.width.equalTo(@0);
-        }];
-
-    }
-    
-    if (_audioButton) {
-        [self.audioButton mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.height.width.equalTo(@0);
-        }];
-    }
+    [self contentLabel];
+    [self audioButton];
+    [self imageContainer];
+    [self iconView];
+    [self imageButton];
 }
 
-- (void)loadSubviewsWithAudioOnly {
-    
-    [self.audioButton mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.contentLabel.mas_bottom).offset(10);
-        make.left.equalTo(self.contentLabel);
-        make.right.equalTo(self.contentLabel);
-        make.bottom.equalTo(self.contentView).offset(-10);
-        make.height.equalTo(@44);
-    }];
-}
-
-- (void)loadSubviewsWithImageOnly {
-    
-    [self.imageContainer mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.contentLabel.mas_bottom).offset(20);
-        make.left.right.equalTo(self.contentView);
-        make.bottom.equalTo(self.contentView).offset(-20);
-    }];
+- (void)loadCellWithAudioAndImage {
     
     self.iconView.contentMode = UIViewContentModeScaleAspectFill;
     
@@ -76,15 +51,15 @@
     
     UIImage *image = [_imageName getNamedImage];
     self.iconView.image = image;
+    
+    [self.audioButton addTarget:self action:@selector(playAudio) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.imageButton addTarget:self action:@selector(showImage) forControlEvents:UIControlEventTouchUpInside];
+
 }
 
-- (void)loadSubviewsWithVideoOnly {
-    
-    [self.imageContainer mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.contentLabel.mas_bottom).offset(20);
-        make.left.right.equalTo(self.contentView);
-        make.bottom.equalTo(self.contentView).offset(-20);
-    }];
+
+- (void)loadCellWithAudioAndVideo {
     
     self.iconView.contentMode = UIViewContentModeScaleAspectFit;
     
@@ -93,57 +68,11 @@
     
     UIImage *image = [_videoName getNamedVideoFrame];
     self.iconView.image = image;
-
-}
-
-- (void)loadSubviewsWithAudioAndImage {
     
-    [self.audioButton mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.contentLabel.mas_bottom).offset(10);
-        make.left.equalTo(self.contentLabel);
-        make.right.equalTo(self.contentLabel);
-        make.height.equalTo(@44);
-    }];
     
-    [self.imageContainer mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.audioButton.mas_bottom).offset(20);
-        make.left.right.equalTo(self.contentView);
-        make.bottom.equalTo(self.contentView).offset(-20);
-    }];
+    [self.audioButton addTarget:self action:@selector(playAudio) forControlEvents:UIControlEventTouchUpInside];
     
-    self.iconView.contentMode = UIViewContentModeScaleAspectFill;
-    
-    [self.imageButton setImage:nil forState:UIControlStateNormal];
-    [self.imageButton setImage:nil forState:UIControlStateHighlighted];
-    
-    UIImage *image = [_imageName getNamedImage];
-    self.iconView.image = image;
-
-}
-
-
-- (void)loadSubviewsWithAudioAndVideo {
-    
-    [self.audioButton mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.contentLabel.mas_bottom).offset(10);
-        make.left.equalTo(self.contentLabel);
-        make.right.equalTo(self.contentLabel);
-        make.height.equalTo(@44);
-    }];
-    
-    [self.imageContainer mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.audioButton.mas_bottom).offset(20);
-        make.left.right.equalTo(self.contentView);
-        make.bottom.equalTo(self.contentView).offset(-20);
-    }];
-    
-    self.iconView.contentMode = UIViewContentModeScaleAspectFit;
-    
-    [self.imageButton setImage:[UIImage imageNamed:@"PlayButtonOverlayLarge"] forState:UIControlStateNormal];
-    [self.imageButton setImage:[UIImage imageNamed:@"PlayButtonOverlayLargeTap"] forState:UIControlStateHighlighted];
-    
-    UIImage *image = [_videoName getNamedVideoFrame];
-    self.iconView.image = image;
+    [self.imageButton addTarget:self action:@selector(playVideo) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (UILabel *)contentLabel {
@@ -157,7 +86,7 @@
             make.bottom.lessThanOrEqualTo(self.contentView).offset(-10);
         }];
         _contentLabel.numberOfLines = 0;
-
+        
     }
     
     return _contentLabel;
@@ -167,7 +96,12 @@
     if (!_audioButton) {
         _audioButton = [[UIButton alloc] init];
         [self.contentView addSubview:_audioButton];
-
+        [_audioButton mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.contentLabel.mas_bottom).offset(10);
+            make.left.equalTo(self.contentLabel);
+            make.right.equalTo(self.contentLabel);
+            make.height.equalTo(@44);
+        }];
     }
     _audioButton.backgroundColor = [UIColor redColor];
     return _audioButton;
@@ -177,6 +111,13 @@
     if (!_imageContainer) {
         _imageContainer = [[UIView alloc] init];
         [self.contentView addSubview:_imageContainer];
+        
+        [_imageContainer mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.audioButton.mas_bottom).offset(20);
+            make.left.right.equalTo(self.contentView);
+            make.bottom.equalTo(self.contentView).offset(-20);
+        }];
+        
         _imageContainer.backgroundColor = [UIColor blackColor];
     }
     return _imageContainer;
@@ -209,22 +150,6 @@
     return _imageButton;
 }
 
-- (void)setText:(NSString *)text audioName:(NSString *)audioName {
-    
-    self.contentLabel.text = text;
-    if (audioName) {
-        [self audioButton];
-    }
-}
-
-- (void)setAttributedString:(NSAttributedString *)text audioName:(NSString *)audioName {
-    
-    self.contentLabel.attributedText = text;
-    if (audioName) {
-        [self audioButton];
-        
-    }
-}
 
 - (void)setAttributedString:(NSAttributedString *)text audioName:(NSString *)audioName audioBlock:(AudioBlock)audioBlock imageName:(NSString *)imageName imageBlock:(ImageBlock)imageBlock videoName:(NSString *)videoName videoBlock:(VideoBlock)videoBlock
 {
@@ -238,45 +163,15 @@
     _videoBlock = videoBlock;
     
     self.contentLabel.attributedText = text;
+    
+    if (self.isWithAudio && !self.isWithImage && self.isWithVideo) {
+        
+        [self loadCellWithAudioAndVideo];
 
-    if (self.isWithAudio && !self.isWithImage && !self.isWithVideo) {
-        
-        [self loadSubviewsWithAudioOnly];
-        
-        [self.audioButton addTarget:self action:@selector(playAudio) forControlEvents:UIControlEventTouchUpInside];
         
     } else if (self.isWithAudio && self.isWithImage && !self.isWithVideo) {
         
-        [self loadSubviewsWithAudioAndImage];
-        
-        [self.audioButton addTarget:self action:@selector(playAudio) forControlEvents:UIControlEventTouchUpInside];
-        
-        [self.imageButton addTarget:self action:@selector(showImage) forControlEvents:UIControlEventTouchUpInside];
-        
-    } else if (self.isWithAudio && !self.isWithImage && self.isWithVideo) {
-        
-        [self loadSubviewsWithAudioAndVideo];
-        
-        [self.audioButton addTarget:self action:@selector(playAudio) forControlEvents:UIControlEventTouchUpInside];
-        
-        [self.imageButton addTarget:self action:@selector(playVideo) forControlEvents:UIControlEventTouchUpInside];
-        
-    } else if (!self.isWithAudio && self.isWithImage && !self.isWithVideo) {
-        
-        [self loadSubviewsWithImageOnly];
-        
-        [self.imageButton addTarget:self action:@selector(showImage) forControlEvents:UIControlEventTouchUpInside];
-
-    } else if (!self.isWithAudio && !self.isWithImage && self.isWithVideo) {
-        
-        [self loadSubviewsWithVideoOnly];
-        
-        [self.imageButton addTarget:self action:@selector(playVideo) forControlEvents:UIControlEventTouchUpInside];
-        
-    } else if (!self.isWithAudio && !self.isWithImage && !self.isWithVideo) {
-        
-        [self loadSubviewsWithTextOnly];
-        
+        [self loadCellWithAudioAndImage];
     }
 }
 
@@ -297,7 +192,7 @@
     if (self = [super init]) {
         self.backgroundColor = kCellBgColor;
         self.contentView.clipsToBounds = YES;
-
+        
     }
     return self;
 }
@@ -351,7 +246,7 @@
     if (self) {
         
         self.backgroundColor = kCellBgColor;
-
+        
     }
     return self;
     
@@ -362,14 +257,14 @@
     self = [super awakeAfterUsingCoder:aDecoder];
     if (self) {
         self.backgroundColor = kCellBgColor;
-
+        
     }
     return self;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
+    
     // Configure the view for the selected state
 }
 

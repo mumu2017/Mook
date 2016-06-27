@@ -1,14 +1,14 @@
 //
-//  CLOneLabelDisplayCell.h
+//  CLTextAudioImageCell.h
 //  Mook
 //
-//  Created by 陈林 on 15/12/12.
-//  Copyright © 2015年 ChenLin. All rights reserved.
+//  Created by 陈林 on 16/6/27.
+//  Copyright © 2016年 Chen Lin. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
-@interface CLOneLabelDisplayCell : UITableViewCell
+@interface CLTextAudioImageCell : UITableViewCell
 
 typedef void (^AudioBlock)(NSString *audioName);
 typedef void (^ImageBlock)(NSString *imageName);
@@ -39,11 +39,9 @@ typedef void (^VideoBlock)(NSString *videoName);
 @property (strong, nonatomic) ImageBlock imageBlock;
 @property (strong, nonatomic) VideoBlock videoBlock;
 
-
 - (void)setText:(NSString *)text audioName:(NSString *)audioName;
 - (void)setAttributedString:(NSAttributedString *)text audioName:(NSString *)audioName;
 
 - (void)setAttributedString:(NSAttributedString *)text audioName:(NSString *)audioName audioBlock:(AudioBlock)audioBlock imageName:(NSString *)imageName imageBlock:(ImageBlock)imageBlock videoName:(NSString *)videoName videoBlock:(VideoBlock)videoBlock;
-
 
 @end

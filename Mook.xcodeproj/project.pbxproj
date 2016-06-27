@@ -50,6 +50,10 @@
 		43068C001CB74EF600BA1A57 /* libz.1.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 43F5F7AA1CB4B03F007BFB0C /* libz.1.tbd */; };
 		43068C011CB74EF600BA1A57 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 43F5F76B1CB3E447007BFB0C /* libz.tbd */; };
 		43068C041CB7546400BA1A57 /* ISRDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 43068C031CB7546400BA1A57 /* ISRDataHelper.m */; };
+		4307A3CA1D20F9FB002C3527 /* CLTextAudioCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4307A3C91D20F9FB002C3527 /* CLTextAudioCell.m */; };
+		4307A3CD1D20FA20002C3527 /* CLTextAudioImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4307A3CC1D20FA20002C3527 /* CLTextAudioImageCell.m */; };
+		4307A3D01D20FD5F002C3527 /* CLTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4307A3CF1D20FD5F002C3527 /* CLTextCell.m */; };
+		4307A3D31D20FDDA002C3527 /* CLTextImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4307A3D21D20FDDA002C3527 /* CLTextImageCell.m */; };
 		430DFBC91CA252DD0054DF6B /* CLNewEntryNavVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 430DFBC81CA252DD0054DF6B /* CLNewEntryNavVC.m */; };
 		430DFBCC1CA393CC0054DF6B /* NSDate+MJ.m in Sources */ = {isa = PBXBuildFile; fileRef = 430DFBCB1CA393CC0054DF6B /* NSDate+MJ.m */; };
 		4323453D1C94045000200833 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4323453C1C94045000200833 /* AppDelegate.m */; };
@@ -102,10 +106,6 @@
 		432346551C9408F100200833 /* CLToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 432346531C9408F100200833 /* CLToolBar.m */; };
 		432346561C9408F100200833 /* CLToolBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 432346541C9408F100200833 /* CLToolBar.xib */; };
 		432346621C94094D00200833 /* CLMediaView.m in Sources */ = {isa = PBXBuildFile; fileRef = 432346581C94094D00200833 /* CLMediaView.m */; };
-		432346631C94094D00200833 /* CLOneLabelDisplayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4323465A1C94094D00200833 /* CLOneLabelDisplayCell.m */; };
-		432346641C94094D00200833 /* CLOneLabelDisplayCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4323465B1C94094D00200833 /* CLOneLabelDisplayCell.xib */; };
-		432346651C94094D00200833 /* CLOneLabelImageDisplayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4323465D1C94094D00200833 /* CLOneLabelImageDisplayCell.m */; };
-		432346661C94094D00200833 /* CLOneLabelImageDisplayCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4323465E1C94094D00200833 /* CLOneLabelImageDisplayCell.xib */; };
 		432346731C9409A400200833 /* XLBarPagerTabStripViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4323466A1C9409A400200833 /* XLBarPagerTabStripViewController.m */; };
 		432346741C9409A400200833 /* XLButtonBarPagerTabStripViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4323466C1C9409A400200833 /* XLButtonBarPagerTabStripViewController.m */; };
 		432346751C9409A400200833 /* XLPagerTabStripViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4323466E1C9409A400200833 /* XLPagerTabStripViewController.m */; };
@@ -276,6 +276,14 @@
 		43068C031CB7546400BA1A57 /* ISRDataHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ISRDataHelper.m; sourceTree = "<group>"; };
 		43068C061CB7B9D000BA1A57 /* UINavigationBar+Awesome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+Awesome.h"; sourceTree = "<group>"; };
 		43068C071CB7B9D000BA1A57 /* UINavigationBar+Awesome.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+Awesome.m"; sourceTree = "<group>"; };
+		4307A3C81D20F9FB002C3527 /* CLTextAudioCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLTextAudioCell.h; sourceTree = "<group>"; };
+		4307A3C91D20F9FB002C3527 /* CLTextAudioCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLTextAudioCell.m; sourceTree = "<group>"; };
+		4307A3CB1D20FA20002C3527 /* CLTextAudioImageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLTextAudioImageCell.h; sourceTree = "<group>"; };
+		4307A3CC1D20FA20002C3527 /* CLTextAudioImageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLTextAudioImageCell.m; sourceTree = "<group>"; };
+		4307A3CE1D20FD5F002C3527 /* CLTextCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLTextCell.h; sourceTree = "<group>"; };
+		4307A3CF1D20FD5F002C3527 /* CLTextCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLTextCell.m; sourceTree = "<group>"; };
+		4307A3D11D20FDDA002C3527 /* CLTextImageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLTextImageCell.h; sourceTree = "<group>"; };
+		4307A3D21D20FDDA002C3527 /* CLTextImageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLTextImageCell.m; sourceTree = "<group>"; };
 		430DFBC71CA252DD0054DF6B /* CLNewEntryNavVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLNewEntryNavVC.h; sourceTree = "<group>"; };
 		430DFBC81CA252DD0054DF6B /* CLNewEntryNavVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLNewEntryNavVC.m; sourceTree = "<group>"; };
 		430DFBCA1CA393CC0054DF6B /* NSDate+MJ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+MJ.h"; sourceTree = "<group>"; };
@@ -381,12 +389,6 @@
 		432346541C9408F100200833 /* CLToolBar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CLToolBar.xib; path = "New Routine Page/CLToolBar.xib"; sourceTree = "<group>"; };
 		432346571C94094D00200833 /* CLMediaView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLMediaView.h; sourceTree = "<group>"; };
 		432346581C94094D00200833 /* CLMediaView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLMediaView.m; sourceTree = "<group>"; };
-		432346591C94094D00200833 /* CLOneLabelDisplayCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLOneLabelDisplayCell.h; sourceTree = "<group>"; };
-		4323465A1C94094D00200833 /* CLOneLabelDisplayCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLOneLabelDisplayCell.m; sourceTree = "<group>"; };
-		4323465B1C94094D00200833 /* CLOneLabelDisplayCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CLOneLabelDisplayCell.xib; sourceTree = "<group>"; };
-		4323465C1C94094D00200833 /* CLOneLabelImageDisplayCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLOneLabelImageDisplayCell.h; sourceTree = "<group>"; };
-		4323465D1C94094D00200833 /* CLOneLabelImageDisplayCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLOneLabelImageDisplayCell.m; sourceTree = "<group>"; };
-		4323465E1C94094D00200833 /* CLOneLabelImageDisplayCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CLOneLabelImageDisplayCell.xib; sourceTree = "<group>"; };
 		432346691C9409A400200833 /* XLBarPagerTabStripViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLBarPagerTabStripViewController.h; sourceTree = "<group>"; };
 		4323466A1C9409A400200833 /* XLBarPagerTabStripViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLBarPagerTabStripViewController.m; sourceTree = "<group>"; };
 		4323466B1C9409A400200833 /* XLButtonBarPagerTabStripViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLButtonBarPagerTabStripViewController.h; sourceTree = "<group>"; };
@@ -1380,12 +1382,14 @@
 		43F5F75D1CB3920D007BFB0C /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				432346591C94094D00200833 /* CLOneLabelDisplayCell.h */,
-				4323465A1C94094D00200833 /* CLOneLabelDisplayCell.m */,
-				4323465B1C94094D00200833 /* CLOneLabelDisplayCell.xib */,
-				4323465C1C94094D00200833 /* CLOneLabelImageDisplayCell.h */,
-				4323465D1C94094D00200833 /* CLOneLabelImageDisplayCell.m */,
-				4323465E1C94094D00200833 /* CLOneLabelImageDisplayCell.xib */,
+				4307A3C81D20F9FB002C3527 /* CLTextAudioCell.h */,
+				4307A3C91D20F9FB002C3527 /* CLTextAudioCell.m */,
+				4307A3CB1D20FA20002C3527 /* CLTextAudioImageCell.h */,
+				4307A3CC1D20FA20002C3527 /* CLTextAudioImageCell.m */,
+				4307A3CE1D20FD5F002C3527 /* CLTextCell.h */,
+				4307A3CF1D20FD5F002C3527 /* CLTextCell.m */,
+				4307A3D11D20FDDA002C3527 /* CLTextImageCell.h */,
+				4307A3D21D20FDDA002C3527 /* CLTextImageCell.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -1539,13 +1543,11 @@
 				43A281331CB23486009C2785 /* show.jpg in Resources */,
 				4300C4401D1A9B8C0065E94E /* audio_record@2x.png in Resources */,
 				432346311C94054300200833 /* CLTableBackView.xib in Resources */,
-				432346661C94094D00200833 /* CLOneLabelImageDisplayCell.xib in Resources */,
 				439519CB1CC0904A00505E5B /* LaunchScreen.storyboard in Resources */,
 				43EEE7E31CAD329B00F0BCCF /* CLRoutineTextCell.xib in Resources */,
 				43C2068B1CB10CF300CEF992 /* CLListCell.xib in Resources */,
 				4300C4481D1A9B8C0065E94E /* stop_playing.png in Resources */,
 				43951A1C1CC6681700505E5B /* mookFileIcon.jpg in Resources */,
-				432346641C94094D00200833 /* CLOneLabelDisplayCell.xib in Resources */,
 				432345451C94045000200833 /* Assets.xcassets in Resources */,
 				43F5F7BF1CB50AD3007BFB0C /* launch.jpg in Resources */,
 				4300C4441D1A9B8C0065E94E /* microphone_access@3x.png in Resources */,
@@ -1617,7 +1619,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				432346631C94094D00200833 /* CLOneLabelDisplayCell.m in Sources */,
 				4300C4291D1A98EF0065E94E /* IQCropSelectionBeginView.m in Sources */,
 				432345A41C9404FB00200833 /* CLEditingVC.m in Sources */,
 				43C2068A1CB10CF300CEF992 /* CLListCell.m in Sources */,
@@ -1666,11 +1667,12 @@
 				432345E91C94051A00200833 /* CLSleightObjModel.m in Sources */,
 				43DDCF431D1BACB2007E5CAC /* CLAudioPlayTool.m in Sources */,
 				43F5F7681CB3BD63007BFB0C /* CLQuickStringNavVC.m in Sources */,
+				4307A3CA1D20F9FB002C3527 /* CLTextAudioCell.m in Sources */,
 				43EEE7E21CAD329B00F0BCCF /* CLRoutineTextCell.m in Sources */,
-				432346651C94094D00200833 /* CLOneLabelImageDisplayCell.m in Sources */,
 				43DDCF3A1D1B72E4007E5CAC /* NSString+Media.m in Sources */,
 				4323467E1C9409BB00200833 /* XLBarView.m in Sources */,
 				43E0F7291CA0FC6E005CAD97 /* CLDataSaveTool.m in Sources */,
+				4307A3D31D20FDDA002C3527 /* CLTextImageCell.m in Sources */,
 				432345671C9404A800200833 /* UIResponder+FirstResponder.m in Sources */,
 				432346731C9409A400200833 /* XLBarPagerTabStripViewController.m in Sources */,
 				432345AD1C9404FB00200833 /* CLNewShowVC.m in Sources */,
@@ -1680,6 +1682,7 @@
 				4300C4281D1A98EF0065E94E /* IQAudioRecorderViewController.m in Sources */,
 				43F5F7651CB3A4EE007BFB0C /* NSAttributedString+Tools.m in Sources */,
 				4300C42D1D1A98EF0065E94E /* IQPlaybackDurationView.m in Sources */,
+				4307A3CD1D20FA20002C3527 /* CLTextAudioImageCell.m in Sources */,
 				432345DE1C94051A00200833 /* CLInfoModel.m in Sources */,
 				43DDCF4E1D1D016E007E5CAC /* CLNotesListCell.m in Sources */,
 				4323462C1C94054300200833 /* CLQuickStringCell.m in Sources */,
@@ -1717,6 +1720,7 @@
 				4300C42C1D1A98EF0065E94E /* IQMessageDisplayView.m in Sources */,
 				43F5F7A61CB4A2C2007BFB0C /* CLPropChooseVC.m in Sources */,
 				4323464D1C9405EA00200833 /* main.m in Sources */,
+				4307A3D01D20FD5F002C3527 /* CLTextCell.m in Sources */,
 				438342841D1277FC0089B58E /* CLDeck.m in Sources */,
 				430DFBC91CA252DD0054DF6B /* CLNewEntryNavVC.m in Sources */,
 				43EEE7D61CACD3ED00F0BCCF /* CLNewShowNavVC.m in Sources */,

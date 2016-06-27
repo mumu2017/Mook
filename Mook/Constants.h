@@ -367,6 +367,11 @@ typedef enum {
 #define kRoutineImageCell    @"routineImageCell"
 #define kRoutineTextCell    @"routineTextCell"
 
+#define kTextCell   @"kTextCell"
+#define kTextAudioCell  @"kTextAudioCell"
+#define kTextImageCell  @"kTextImageCell"
+#define kTextAudioImageCell @"kTextAudioImageCell"
+
 #define kOneLabelDisplayCell    @"oneLabelDisplayCell"
 #define kOneLabelMediaDisplayCell   @"oneLabelMediaDisplayCell"
 #define kOneLabelImageDisplayCell @"oneLabelImageDisplayCell"
