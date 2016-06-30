@@ -3,16 +3,16 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "levels.png"
+      "filename" : "sound.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "levels@2x.png"
+      "filename" : "sound@2x.png"
     },
     {
       "idiom" : "universal",
-      "filename" : "levels@3x.png",
+      "filename" : "sound@3x.png",
       "scale" : "3x"
     }
   ],

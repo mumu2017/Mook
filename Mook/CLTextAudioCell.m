@@ -107,8 +107,7 @@
     
     [self.audioButton addTarget:self action:@selector(playAudio) forControlEvents:UIControlEventTouchUpInside];
     
-    NSInteger duration = [audioName getDurationForNamedAudio];
-    [self.audioButton setTitle:[NSString stringWithFormat:@"Tap to play (%.2ld:%.2ld)", (long)duration/60, (long)duration%60] forState:UIControlStateNormal];
+    [self.audioButton setTitle:[audioName getDurationForNamedAudio]forState:UIControlStateNormal];
     
     self.waveformView.audioURL = [NSURL fileURLWithPath:[audioName getNamedAudio]];
     

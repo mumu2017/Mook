@@ -88,57 +88,57 @@
     return _coverButton;
 }
 
-- (BFPaperButton *)addButton {
-    if (!_addButton) {
-        _addButton = [[BFPaperButton alloc] initWithRaised:YES];
-        [self.navigationController.view addSubview:_addButton];
-        
-        [_addButton addTarget:self action:@selector(addNewEntry:) forControlEvents:UIControlEventTouchUpInside];
-        [_addButton setImage:[UIImage imageNamed:@"plus"] forState:UIControlStateNormal];
-        [_addButton mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.right.equalTo(self.navigationController.view.mas_right).with.offset(-10);
-            make.bottom.equalTo(self.navigationController.view.mas_bottom).with.offset(-64);
-            make.width.height.equalTo(@kAddButtonHeight);
-        }];
-        _addButton.cornerRadius = kAddButtonHeight/2;
-        _addButton.backgroundColor = [kAppThemeColor darkenByPercentage:0.05];
-        _addButton.alpha = 1.0f;
-        
-    }
-    
-    return _addButton;
-}
-
-
-- (BFPaperButton *)mediaButton {
-    if (!_mediaButton) {
-        _mediaButton = [[BFPaperButton alloc] initWithRaised:YES];
-        [self.navigationController.view addSubview:_mediaButton];
-        
-        [_mediaButton addTarget:self action:@selector(addNewEntryWithMedia) forControlEvents:UIControlEventTouchUpInside];
-        //        [_addButton setTitle:@"添加" forState:UIControlStateNormal];
-        if (self.listType == kListTypeLines) {
-            [_mediaButton setImage:[UIImage imageNamed:@"addAudio"] forState:UIControlStateNormal];
-
-        } else {
-            [_mediaButton setImage:[UIImage imageNamed:@"addMedia"] forState:UIControlStateNormal];
-
-        }
-        [_mediaButton mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.right.equalTo(self.navigationController.view.mas_right).with.offset(-10);
-            make.bottom.equalTo(self.addButton.mas_top).with.offset(-15);
-            make.width.height.equalTo(@kAddButtonHeight);
-        }];
-        _mediaButton.cornerRadius = kAddButtonHeight/2;
-        _mediaButton.backgroundColor = [kAppThemeColor darkenByPercentage:0.05];
-        _mediaButton.alpha = 1.0f;
-        _mediaButton.hidden = (self.listType == kListTypeAll);
-
-
-    }
-    
-    return _mediaButton;
-}
+//- (BFPaperButton *)addButton {
+//    if (!_addButton) {
+//        _addButton = [[BFPaperButton alloc] initWithRaised:YES];
+//        [self.navigationController.view addSubview:_addButton];
+//        
+//        [_addButton addTarget:self action:@selector(addNewEntry:) forControlEvents:UIControlEventTouchUpInside];
+//        [_addButton setImage:[UIImage imageNamed:@"plus"] forState:UIControlStateNormal];
+//        [_addButton mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.right.equalTo(self.navigationController.view.mas_right).with.offset(-10);
+//            make.bottom.equalTo(self.navigationController.view.mas_bottom).with.offset(-64);
+//            make.width.height.equalTo(@kAddButtonHeight);
+//        }];
+//        _addButton.cornerRadius = kAddButtonHeight/2;
+//        _addButton.backgroundColor = [kAppThemeColor darkenByPercentage:0.05];
+//        _addButton.alpha = 1.0f;
+//        
+//    }
+//    
+//    return _addButton;
+//}
+//
+//
+//- (BFPaperButton *)mediaButton {
+//    if (!_mediaButton) {
+//        _mediaButton = [[BFPaperButton alloc] initWithRaised:YES];
+//        [self.navigationController.view addSubview:_mediaButton];
+//        
+//        [_mediaButton addTarget:self action:@selector(addNewEntryWithMedia) forControlEvents:UIControlEventTouchUpInside];
+//        //        [_addButton setTitle:@"添加" forState:UIControlStateNormal];
+//        if (self.listType == kListTypeLines) {
+//            [_mediaButton setImage:[UIImage imageNamed:@"addAudio"] forState:UIControlStateNormal];
+//
+//        } else {
+//            [_mediaButton setImage:[UIImage imageNamed:@"addMedia"] forState:UIControlStateNormal];
+//
+//        }
+//        [_mediaButton mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.right.equalTo(self.navigationController.view.mas_right).with.offset(-10);
+//            make.bottom.equalTo(self.addButton.mas_top).with.offset(-15);
+//            make.width.height.equalTo(@kAddButtonHeight);
+//        }];
+//        _mediaButton.cornerRadius = kAddButtonHeight/2;
+//        _mediaButton.backgroundColor = [kAppThemeColor darkenByPercentage:0.05];
+//        _mediaButton.alpha = 1.0f;
+//        _mediaButton.hidden = (self.listType == kListTypeAll);
+//
+//
+//    }
+//    
+//    return _mediaButton;
+//}
 
 - (CLAddView *)addView {
     if (!_addView) {
@@ -157,7 +157,7 @@
 
         _addView.backgroundColor = [UIColor clearColor];
         [_addView initSubViews];
-        [_addView updateColor:self.addButton.backgroundColor];
+        [_addView updateColor:kAppThemeColor];
 
         [_addView addTarget:self action:@selector(toggleAddView) forControlEvents:UIControlEventTouchUpInside];
         
@@ -216,10 +216,10 @@
             [strongself.tableView reloadData];
             
             if (_listType == kListTypeLines) {
-                [strongself.mediaButton setImage:[UIImage imageNamed:@"addAudio"] forState:UIControlStateNormal];
+                [strongself.navigationItem.rightBarButtonItems[1] setImage:[UIImage imageNamed:@"addAudio"]];
                 
             } else {
-                [strongself.mediaButton setImage:[UIImage imageNamed:@"addMedia"] forState:UIControlStateNormal];
+                [strongself.navigationItem.rightBarButtonItems[1] setImage:[UIImage imageNamed:@"addMedia"]];
                 
             }
             
@@ -373,7 +373,7 @@
 
     }
     
-    [self.addView updateColor:self.addButton.backgroundColor];
+    [self.addView updateColor:kAppThemeColor];
     [self.tableView reloadData];
 }
 
@@ -1132,7 +1132,7 @@
 
 #pragma mark - 新建笔记
 
-- (void)addNewEntry:(id)sender {
+- (IBAction)addNewEntry:(id)sender {
 
     switch (self.listType) {
         case kListTypeAll:
@@ -1175,7 +1175,7 @@
     
 }
 
-- (void)addNewEntryWithMedia {
+- (IBAction)addNewEntryWithMedia {
     
     
     switch (self.listType) {

@@ -1202,15 +1202,27 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="笔记" id="4Kf-lo-IC0">
-                        <rightBarButtonItems>
+                        <leftBarButtonItems>
+                            <barButtonItem image="iconlibraryFill" id="qyJ-Gg-M6J">
+                                <connections>
+                                    <segue destination="9fA-HC-Vld" kind="show" id="EgZ-P4-Qfy"/>
+                                </connections>
+                            </barButtonItem>
                             <barButtonItem image="tagIcon" id="yA2-PY-WXj">
                                 <connections>
                                     <segue destination="msb-Eh-Iuc" kind="show" id="Zn4-zO-yfj"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem image="iconlibraryFill" id="qyJ-Gg-M6J">
+                        </leftBarButtonItems>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="add" id="nB6-C0-Zn1">
                                 <connections>
-                                    <segue destination="9fA-HC-Vld" kind="show" id="EgZ-P4-Qfy"/>
+                                    <action selector="addNewEntry:" destination="qMI-jb-8zk" id="rKU-aC-hg6"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem image="addMedia" id="oDb-LJ-RhH">
+                                <connections>
+                                    <action selector="addNewEntryWithMedia" destination="qMI-jb-8zk" id="TIn-J5-TEv"/>
                                 </connections>
                             </barButtonItem>
                         </rightBarButtonItems>
@@ -1223,24 +1235,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vme-4b-vzN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-11107.5" y="-5259"/>
-        </scene>
-        <!--Notes ListVC-->
-        <scene sceneID="JFw-rV-nIt">
-            <objects>
-                <viewController id="3in-R0-s5g" customClass="CLNotesListVC" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="dfy-US-dhA"/>
-                        <viewControllerLayoutGuide type="bottom" id="dN3-Km-Xzm"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="GJt-2M-Bzu">
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="bYI-0B-F9k"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ZcX-HR-mQe" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-11233.5" y="-4613.25"/>
         </scene>
         <!--List-->
         <scene sceneID="OSQ-RY-o4L">
@@ -1567,7 +1561,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="3in-R0-s5g" kind="relationship" relationship="rootViewController" id="O8h-jM-Y8I"/>
+                        <segue destination="iz5-xj-AUP" kind="relationship" relationship="rootViewController" id="EWD-tQ-Ymk"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NRt-qZ-mya" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1601,7 +1595,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WC0-QS-mTS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-11292" y="-4409.25"/>
+            <point key="canvasLocation" x="-11166" y="-4277.25"/>
         </scene>
         <!--多媒体-->
         <scene sceneID="C5G-wl-0Wc">
@@ -2174,6 +2168,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="addMedia" width="22" height="22"/>
         <image name="iconlibraryFill" width="16" height="16"/>
         <image name="iconlibraryLine" width="22" height="22"/>
         <image name="iconmediaFill" width="22" height="22"/>

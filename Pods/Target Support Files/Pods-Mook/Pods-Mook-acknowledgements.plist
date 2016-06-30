@@ -271,6 +271,15 @@ THE SOFTWARE.</string>
 		</dict>
 		<dict>
 			<key>FooterText</key>
+			<string>HTMLReader is in the public domain.
+</string>
+			<key>Title</key>
+			<string>HTMLReader</string>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+		</dict>
+		<dict>
+			<key>FooterText</key>
 			<string>The MIT License (MIT)
 
 Copyright (c) 2015 Mohd Iftekhar Qurashi

@@ -13,6 +13,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *iconView;
 
 //@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *durationLabel;
 
 @property (strong, nonatomic) NSString *name;
 

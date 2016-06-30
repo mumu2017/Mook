@@ -55,8 +55,8 @@
 //- (UIImage *)getFirstFrameOfNamedVideo;
 - (AVPlayerItem *)getNamedAVPlayerItem;
 
-- (NSInteger)getDurationForNamedAudio;
-- (NSInteger)getDurationForNamedVideo;
+- (NSString *)getDurationForNamedAudio;
+- (NSString *)getDurationForNamedVideo;
 
 
 

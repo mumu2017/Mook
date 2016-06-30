@@ -357,9 +357,7 @@ static NSString * const reuseIdentifier = @"Cell";
     [self allMedia];
     [self photos];
     [self dataList];
-    
-    NSLog(@"總共有%ld", self.allMedia.count);
-    
+        
     self.menu.cellBackgroundColor = kAppThemeColor;
 
     [self.collectionView reloadData];

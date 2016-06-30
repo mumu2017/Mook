@@ -10,6 +10,7 @@
 #import <WebKit/WebKit.h>
 #import "DZNWebViewController.h"
 #import "CLWebSiteModel.h"
+#import "FKFaviconManager.h"
 
 @interface CLWebVC ()
 
@@ -69,7 +70,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 
     return self.webSiteList.count;
-;
+
 }
 
 
@@ -81,7 +82,7 @@
      }
      
      CLWebSiteModel *model = self.webSiteList[indexPath.row];
-     
+    
      cell.textLabel.text = model.title;
      
      return cell;
@@ -109,6 +110,25 @@
 
 - (void)dismissWebVC {
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (UIImage *)getFaviconFromWebsite:(NSURL *)websiteUrl {
+    
+    UIImage * __block myImage;
+
+    [[FKFaviconManager sharedManager] getFaviconDataFromURL:websiteUrl completionHandler:^(NSData *data) {
+        
+        myImage = [[UIImage alloc] initWithData:data];
+
+    }];
+    
+//    NSString *myURLString = [NSString stringWithFormat:@"http://www.google.com/s2/favicons?domain=%@", website];
+//    NSURL *myURL=[NSURL URLWithString: myURLString];
+//    NSData *myData=[NSData dataWithContentsOfURL:myURL];
+//    
+//    UIImage *myImage=[[UIImage alloc] initWithData:myData];
+    
+    return myImage;
 }
 
 @end

@@ -17,5 +17,6 @@ target ‘Mook’ do
  pod 'BFPaperButton'
  pod 'SCRecorder'
  pod 'FDWaveformView'
+ pod "HTMLReader"
 end
 
