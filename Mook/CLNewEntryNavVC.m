@@ -17,6 +17,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    self.fd_interactivePopDisabled = YES;
     UIViewController *rootViewController = [[self viewControllers] firstObject];
     
     if ([rootViewController isKindOfClass:[CLNewEntryVC class]]) {

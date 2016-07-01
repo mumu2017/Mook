@@ -329,7 +329,7 @@
     //弹性速度
     springAnimation.springSpeed = 15.0;
     
-    CGPoint point = CGPointMake(self.view.center.x, CGRectGetMaxY(self.view.frame));
+    CGPoint point = self.addView.center;
     
     if (point.y == self.navigationController.view.center.y) {
         

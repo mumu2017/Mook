@@ -112,7 +112,7 @@
         
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.audioButton setTitle:duration forState:UIControlStateNormal];
-            
+//            [self.audioButton setImage:[UIImage imageNamed:@"PlayButtonOverlayLarge"] forState:UIControlStateNormal];
         });
     });
     

@@ -29,5 +29,6 @@
 #import "MBProgressHUD.h"
 #import "MBProgressHUD+Tools.h"
 #import "MASonry.h"
+#import "UINavigationController+FDFullscreenPopGesture.h"
 
 #endif /* PrefixHeader_pch */

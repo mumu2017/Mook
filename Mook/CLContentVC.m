@@ -311,6 +311,7 @@ typedef void (^VideoBlock)(NSString *videoName);
     [super viewDidLoad];
     
     [self setContentTitle];
+        
     self.tableView.backgroundColor = kCellBgColor;
     self.tableView.estimatedRowHeight = 44;
     self.tableView.allowsSelection = NO;

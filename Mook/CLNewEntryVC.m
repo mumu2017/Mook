@@ -386,6 +386,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.fd_interactivePopDisabled = YES;
     self.showedFirstTime = YES;
     self.newEntryCancelled = NO; //加载视图时, 自动设置取消状态为否定
     // 如果是导航控制器是CLNewEntryNavVC, 说明是新建条目,所以提供取消按钮

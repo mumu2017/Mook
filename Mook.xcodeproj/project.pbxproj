@@ -221,6 +221,7 @@
 		43F5F7B71CB50151007BFB0C /* routine.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 43F5F7B61CB50151007BFB0C /* routine.jpg */; };
 		43F5F7B91CB5020F007BFB0C /* prop.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 43F5F7B81CB5020F007BFB0C /* prop.jpg */; };
 		43F5F7BF1CB50AD3007BFB0C /* launch.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 43F5F7BE1CB50AD3007BFB0C /* launch.jpg */; };
+		43FAB4DD1D2655390046997D /* UINavigationController+FDFullscreenPopGesture.m in Sources */ = {isa = PBXBuildFile; fileRef = 43FAB4DC1D2655390046997D /* UINavigationController+FDFullscreenPopGesture.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -606,6 +607,8 @@
 		43F5F7B61CB50151007BFB0C /* routine.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = routine.jpg; sourceTree = "<group>"; };
 		43F5F7B81CB5020F007BFB0C /* prop.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = prop.jpg; sourceTree = "<group>"; };
 		43F5F7BE1CB50AD3007BFB0C /* launch.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = launch.jpg; sourceTree = "<group>"; };
+		43FAB4DB1D2655390046997D /* UINavigationController+FDFullscreenPopGesture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+FDFullscreenPopGesture.h"; sourceTree = "<group>"; };
+		43FAB4DC1D2655390046997D /* UINavigationController+FDFullscreenPopGesture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+FDFullscreenPopGesture.m"; sourceTree = "<group>"; };
 		5207E880A1B2E72EF9075B94 /* Pods_Mook.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Mook.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0417F5619A3E977F1F0B558 /* Pods-Mook.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mook.release.xcconfig"; path = "Pods/Target Support Files/Pods-Mook/Pods-Mook.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1245,6 +1248,7 @@
 		43E0F71B1CA0F141005CAD97 /* Libs */ = {
 			isa = PBXGroup;
 			children = (
+				43FAB4DE1D26553E0046997D /* FullScreenPopGesture */,
 				438342851D12831F0089B58E /* InfiniteScrollPicker */,
 				438342621D0FE1600089B58E /* PFNavigationDropdownMenu */,
 				432346861C96AFBB00200833 /* XLStripTabPager */,
@@ -1418,6 +1422,15 @@
 				43F5F7A21CB4978C007BFB0C /* WJTouchID.m */,
 			);
 			name = WJTouchID;
+			sourceTree = "<group>";
+		};
+		43FAB4DE1D26553E0046997D /* FullScreenPopGesture */ = {
+			isa = PBXGroup;
+			children = (
+				43FAB4DB1D2655390046997D /* UINavigationController+FDFullscreenPopGesture.h */,
+				43FAB4DC1D2655390046997D /* UINavigationController+FDFullscreenPopGesture.m */,
+			);
+			name = FullScreenPopGesture;
 			sourceTree = "<group>";
 		};
 		867DD05412560E63BB6BCE80 /* Frameworks */ = {
@@ -1766,6 +1779,7 @@
 				432345DC1C94051A00200833 /* CLEffectModel.m in Sources */,
 				43E0F73E1CA10D27005CAD97 /* NSObject+MJCoding.m in Sources */,
 				432345B91C9404FB00200833 /* CLShowVC.m in Sources */,
+				43FAB4DD1D2655390046997D /* UINavigationController+FDFullscreenPopGesture.m in Sources */,
 				438342811D1274F90089B58E /* CLCard.m in Sources */,
 				432345691C9404A800200833 /* UITextField+Tools.m in Sources */,
 				432346441C94055700200833 /* SMTag.m in Sources */,
