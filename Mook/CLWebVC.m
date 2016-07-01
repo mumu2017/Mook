@@ -8,13 +8,18 @@
 
 #import "CLWebVC.h"
 #import <WebKit/WebKit.h>
-#import "DZNWebViewController.h"
+#import "CLWebViewController.h"
 #import "CLWebSiteModel.h"
 #import "FKFaviconManager.h"
 
 @interface CLWebVC ()
+{
+    CLWebViewController *_webVC;
+ 
+}
 
 @property (strong, nonatomic) NSMutableArray *webSiteList;
+
 
 @end
 
@@ -48,16 +53,19 @@
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"ID"];
     
     self.title = @"Magic in Web";
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
     
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    self.extendedLayoutIncludesOpaqueBars = YES;
+    self.edgesForExtendedLayout = UIRectEdgeBottom;
+    
+
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)viewWillAppear:(BOOL)animated {
+    
+    [super viewWillAppear:animated];
+    
+    self.navigationController.toolbar.hidden = YES;
+
 }
 
 #pragma mark - Table view data source
@@ -92,25 +100,13 @@
     
     CLWebSiteModel *model = self.webSiteList[indexPath.row];
 
-    DZNWebViewController *WVC = [[DZNWebViewController alloc] initWithURL:model.url];
-    UINavigationController *NC = [[UINavigationController alloc] initWithRootViewController:WVC];
-
-    WVC.supportedWebNavigationTools = DZNWebNavigationToolAll;
-    WVC.supportedWebActions = DZNWebActionAll;
-    WVC.showLoadingProgress = YES;
-    WVC.allowHistory = YES;
-    WVC.hideBarsWithGestures = YES;
-    WVC.showPageTitleAndURL = NO;
-    WVC.title = model.title;
-    WVC.actionButtonImage = [UIImage imageNamed:@"iconAction"];
-    WVC.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(dismissWebVC)];
-
-    [self presentViewController:NC animated:YES completion:NULL];
+    _webVC = [[CLWebViewController alloc] initWithURL:model.url];
+    
+    [self.navigationController pushViewController:_webVC animated:YES];
 }
 
-- (void)dismissWebVC {
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
+
+
 
 - (UIImage *)getFaviconFromWebsite:(NSURL *)websiteUrl {
     

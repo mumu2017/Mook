@@ -222,6 +222,7 @@
 		43F5F7B91CB5020F007BFB0C /* prop.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 43F5F7B81CB5020F007BFB0C /* prop.jpg */; };
 		43F5F7BF1CB50AD3007BFB0C /* launch.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 43F5F7BE1CB50AD3007BFB0C /* launch.jpg */; };
 		43FAB4DD1D2655390046997D /* UINavigationController+FDFullscreenPopGesture.m in Sources */ = {isa = PBXBuildFile; fileRef = 43FAB4DC1D2655390046997D /* UINavigationController+FDFullscreenPopGesture.m */; };
+		43FAB4E51D267BF80046997D /* CLWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43FAB4E41D267BF80046997D /* CLWebViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -609,6 +610,8 @@
 		43F5F7BE1CB50AD3007BFB0C /* launch.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = launch.jpg; sourceTree = "<group>"; };
 		43FAB4DB1D2655390046997D /* UINavigationController+FDFullscreenPopGesture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+FDFullscreenPopGesture.h"; sourceTree = "<group>"; };
 		43FAB4DC1D2655390046997D /* UINavigationController+FDFullscreenPopGesture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+FDFullscreenPopGesture.m"; sourceTree = "<group>"; };
+		43FAB4E31D267BF80046997D /* CLWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLWebViewController.h; sourceTree = "<group>"; };
+		43FAB4E41D267BF80046997D /* CLWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLWebViewController.m; sourceTree = "<group>"; };
 		5207E880A1B2E72EF9075B94 /* Pods_Mook.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Mook.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0417F5619A3E977F1F0B558 /* Pods-Mook.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mook.release.xcconfig"; path = "Pods/Target Support Files/Pods-Mook/Pods-Mook.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -917,6 +920,8 @@
 				438342771D10FB4B0089B58E /* CLToolsVC.m */,
 				4383428F1D139E2B0089B58E /* CLWebVC.h */,
 				438342901D139E2B0089B58E /* CLWebVC.m */,
+				43FAB4E31D267BF80046997D /* CLWebViewController.h */,
+				43FAB4E41D267BF80046997D /* CLWebViewController.m */,
 				438342791D11331A0089B58E /* CLWebSiteModel.h */,
 				4383427A1D11331A0089B58E /* CLWebSiteModel.m */,
 				4306BC881D213CEB0015F8D3 /* FKFaviconManager.h */,
@@ -1688,6 +1693,7 @@
 				4307A3CA1D20F9FB002C3527 /* CLTextAudioCell.m in Sources */,
 				43EEE7E21CAD329B00F0BCCF /* CLRoutineTextCell.m in Sources */,
 				43DDCF3A1D1B72E4007E5CAC /* NSString+Media.m in Sources */,
+				43FAB4E51D267BF80046997D /* CLWebViewController.m in Sources */,
 				4323467E1C9409BB00200833 /* XLBarView.m in Sources */,
 				43E0F7291CA0FC6E005CAD97 /* CLDataSaveTool.m in Sources */,
 				4307A3D31D20FDDA002C3527 /* CLTextImageCell.m in Sources */,

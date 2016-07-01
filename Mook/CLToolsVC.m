@@ -27,6 +27,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.extendedLayoutIncludesOpaqueBars = YES;
+    self.edgesForExtendedLayout = UIRectEdgeBottom;
+    
     self.title = @"工具";
     self.tableView.rowHeight = 50;
     self.tableView.tableFooterView = [UIView new];

@@ -125,9 +125,10 @@
         
 //        UIImage *colorImage = [UIImage createImageWithColor:kAppThemeColor];
 //        self.iconView.image = colorImage;
+        
         self.iconView.hidden = YES;
         self.letterLabel.hidden = NO;
-        self.containerView.backgroundColor = [UIColor darkGrayColor];
+        self.containerView.backgroundColor = [UIColor blackColor];
         NSString *firstLetter = [self.title substringToIndex:1];
         
         firstLetter = [firstLetter uppercaseString];
