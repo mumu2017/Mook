@@ -72,23 +72,16 @@
 
 - (void)goBackward {
     
-    NSString *meta = [NSString stringWithFormat:@"document.getElementsByName(\"viewport\")[0].content = \"width=%f, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no\"", self.webView.frame.size.width];
-//    [self.webView stringByEvaluatingJavaScriptFromString:meta];
-    [self.webView evaluateJavaScript:meta completionHandler:^(id _Nullable what, NSError * _Nullable error) {
-        [self.webView reload];
-    }];
+    if (self.webView.canGoBack) {
+        
+        [self.webView goBack];
+        
+    } else {
+        
+        [self.navigationController popViewControllerAnimated:YES];
+        
+    }
 }
-
-//    if (self.webView.canGoBack) {
-//        
-//        [self.webView goBack];
-//        
-//    } else {
-//        
-//        [self.navigationController popViewControllerAnimated:YES];
-//        
-//    }
-//}
 
 - (void)closeWebVC {
     
