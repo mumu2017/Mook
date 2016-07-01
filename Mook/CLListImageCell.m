@@ -40,56 +40,68 @@
     self.rightUtilityButtons = rightButtons;
     self.delegate = delegate;
     
-    UIImage *image;
-    NSString *title, *content, *time;
-    
-    if ([modelUnknown isKindOfClass:[CLShowModel class]]) {
-        CLShowModel *model = (CLShowModel *)modelUnknown;
-        image = [model getThumbnail];
-        title = [model getTitle];
-        content = model.effectModel.effect;
-        time = [NSString getDateString:model.date];
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
         
-    } else if ([modelUnknown isKindOfClass:[CLIdeaObjModel class]]) {
-        CLIdeaObjModel *model = (CLIdeaObjModel *)modelUnknown;
-        image = [model getThumbnail];
-        title = [model getTitle];
-        content = model.effectModel.effect;
-        time = [NSString getDateString:model.date];
+        UIImage *image;
+        NSString *title, *content, *time;
         
-    } else if ([modelUnknown isKindOfClass:[CLRoutineModel class]]) {
-        CLRoutineModel *model = (CLRoutineModel *)modelUnknown;
-        
-        image = [model getThumbnail];
-        title = [model getTitle];
-        content = model.effectModel.effect;
-        time = [NSString getDateString:model.date];
-        
-    } else if ([modelUnknown isKindOfClass:[CLSleightObjModel class]]) {
-        CLSleightObjModel *model = (CLSleightObjModel *)modelUnknown;
-        image = [model getThumbnail];
-        title = [model getTitle];
-        content = model.effectModel.effect;
-        time = [NSString getDateString:model.date];
-        
-    } else if ([modelUnknown isKindOfClass:[CLPropObjModel class]]) {
-        CLPropObjModel *model = (CLPropObjModel *)modelUnknown;
-        image = [model getThumbnail];
-        title = [model getTitle];
-        content = model.effectModel.effect;
-        time = [NSString getDateString:model.date];
-        
-    } else if ([modelUnknown isKindOfClass:[CLLinesObjModel class]]) {
-        CLLinesObjModel *model = (CLLinesObjModel *)modelUnknown;
-        image = nil;
-        title = [model getTitle];
-        content = model.effectModel.effect;
-        time = [NSString getDateString:model.date];
-    } else {
-        return;
-    }
+        if ([modelUnknown isKindOfClass:[CLShowModel class]]) {
+            CLShowModel *model = (CLShowModel *)modelUnknown;
+            image = [model getThumbnail];
+            title = [model getTitle];
+            content = model.effectModel.effect;
+            time = [NSString getDateString:model.date];
+            
+        } else if ([modelUnknown isKindOfClass:[CLIdeaObjModel class]]) {
+            CLIdeaObjModel *model = (CLIdeaObjModel *)modelUnknown;
+            image = [model getThumbnail];
+            title = [model getTitle];
+            content = model.effectModel.effect;
+            time = [NSString getDateString:model.date];
+            
+        } else if ([modelUnknown isKindOfClass:[CLRoutineModel class]]) {
+            CLRoutineModel *model = (CLRoutineModel *)modelUnknown;
+            
+            image = [model getThumbnail];
+            title = [model getTitle];
+            content = model.effectModel.effect;
+            time = [NSString getDateString:model.date];
+            
+        } else if ([modelUnknown isKindOfClass:[CLSleightObjModel class]]) {
+            CLSleightObjModel *model = (CLSleightObjModel *)modelUnknown;
+            image = [model getThumbnail];
+            title = [model getTitle];
+            content = model.effectModel.effect;
+            time = [NSString getDateString:model.date];
+            
+        } else if ([modelUnknown isKindOfClass:[CLPropObjModel class]]) {
+            CLPropObjModel *model = (CLPropObjModel *)modelUnknown;
+            image = [model getThumbnail];
+            title = [model getTitle];
+            content = model.effectModel.effect;
+            time = [NSString getDateString:model.date];
+            
+        } else if ([modelUnknown isKindOfClass:[CLLinesObjModel class]]) {
+            CLLinesObjModel *model = (CLLinesObjModel *)modelUnknown;
+            image = nil;
+            title = [model getTitle];
+            content = model.effectModel.effect;
+            time = [NSString getDateString:model.date];
+        } else {
+            return;
+        }
 
-    [self configureCellWithImage:(UIImage *)image title:(NSString *)title content:(NSString *)content time:(NSString *)time];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            [self configureCellWithImage:(UIImage *)image title:(NSString *)title content:(NSString *)content time:(NSString *)time];
+            
+        });
+    });
+    
+    
+    
+    
 }
 
 - (void)configureCellWithImage:(UIImage *)image title:(NSString *)title content:(NSString *)content time:(NSString *)time {

@@ -107,7 +107,14 @@
     
     [self.audioButton addTarget:self action:@selector(playAudio) forControlEvents:UIControlEventTouchUpInside];
     
-    [self.audioButton setTitle:[audioName getDurationForNamedAudio]forState:UIControlStateNormal];
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        NSString *duration = [audioName getDurationForNamedAudio];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.audioButton setTitle:duration forState:UIControlStateNormal];
+            
+        });
+    });
     
     self.waveformView.audioURL = [NSURL fileURLWithPath:[audioName getNamedAudio]];
     

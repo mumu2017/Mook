@@ -1509,7 +1509,13 @@
                             <outlet property="delegate" destination="yp7-9x-at2" id="6bF-vi-leW"/>
                         </connections>
                     </collectionView>
-                    <navigationItem key="navigationItem" title="多媒体" id="0EJ-Ew-5PU"/>
+                    <navigationItem key="navigationItem" title="多媒体" id="0EJ-Ew-5PU">
+                        <barButtonItem key="rightBarButtonItem" image="addMedia" id="x3p-2O-cOc">
+                            <connections>
+                                <action selector="toggleAddView" destination="yp7-9x-at2" id="rOx-GK-s9r"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <segue destination="Kbv-an-OW2" kind="show" identifier="mediaToContentSegue" id="u0H-cQ-x0W"/>
                         <segue destination="kvn-wA-MVn" kind="show" identifier="mediaToShowSegue" id="OYZ-pL-yeb"/>
@@ -2180,15 +2186,15 @@
         <image name="tagIcon" width="16" height="16"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="gRW-Xa-tMF"/>
-        <segue reference="OTr-op-fb5"/>
-        <segue reference="Zn4-zO-yfj"/>
         <segue reference="eSP-0F-ROY"/>
-        <segue reference="bs2-Rb-eFp"/>
-        <segue reference="K6b-qL-31m"/>
-        <segue reference="4tP-b3-hII"/>
-        <segue reference="cZz-JI-sNE"/>
+        <segue reference="OYZ-pL-yeb"/>
+        <segue reference="u0H-cQ-x0W"/>
+        <segue reference="Zn4-zO-yfj"/>
+        <segue reference="OTr-op-fb5"/>
+        <segue reference="gRW-Xa-tMF"/>
         <segue reference="F7W-G1-xVl"/>
+        <segue reference="cZz-JI-sNE"/>
+        <segue reference="4tP-b3-hII"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
 </document>

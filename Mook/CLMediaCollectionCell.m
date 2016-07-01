@@ -24,16 +24,36 @@
     
     if ([name containsString:@"mp4"]) {
         
-        self.imageView.image = [name getNamedVideoFrame];
         self.iconView.image = [UIImage imageNamed:@"iconVideoCamera"];
         
-        self.durationLabel.text = [name getDurationForNamedVideo];
+        dispatch_async(dispatch_get_global_queue(0, 0), ^{
+            
+            UIImage *image = [name getNamedVideoFrame];
+            NSString *duration = [name getDurationForNamedVideo];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                self.imageView.image = image;
+                self.durationLabel.text = duration;
+                
+            });
+        });
         
     } else if ([name containsString:@"jpg"]) {
-        self.imageView.image = [name getNamedImageThumbnail];
+
         self.iconView.image = nil;
-        
         self.durationLabel.text = nil;
+        
+        dispatch_async(dispatch_get_global_queue(0, 0), ^{
+            
+            UIImage *image = [name getNamedImageThumbnail];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                self.imageView.image = image;
+                
+            });
+        });
 
     }
 }

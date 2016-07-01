@@ -62,8 +62,8 @@
 @property (nonatomic, strong) UIDocumentInteractionController *documentInteractionController;
 @property (nonatomic, copy) NSString *exportPath;
 
-@property (strong, nonatomic) BFPaperButton *addButton;
-@property (strong, nonatomic) BFPaperButton *mediaButton;
+//@property (strong, nonatomic) BFPaperButton *addButton;
+//@property (strong, nonatomic) BFPaperButton *mediaButton;
 
 @property (strong, nonatomic) UIButton *coverButton;
 
@@ -142,7 +142,7 @@
 
 - (CLAddView *)addView {
     if (!_addView) {
-        _addView = [[CLAddView alloc] initWithFrame:CGRectMake(self.addButton.center.x, self.addButton.center.y, 0, 0)];
+        _addView = [[CLAddView alloc] initWithFrame:CGRectMake(self.view.center.x, CGRectGetMaxY(self.view.frame), 0, 0)];
         [self.navigationController.view addSubview:_addView];
         _addView.hidden = NO;
         
@@ -223,10 +223,10 @@
                 
             }
             
-            if (strongself.navigationController.visibleViewController == strongself) {
-                strongself.mediaButton.hidden = (self.listType == kListTypeAll);
-                
-            }
+//            if (strongself.navigationController.visibleViewController == strongself) {
+//                strongself.mediaButton.hidden = (self.listType == kListTypeAll);
+//                
+//            }
             
             if ([strongself.tableView.dataSource tableView:strongself.tableView numberOfRowsInSection:0] > 0) {
                 [strongself.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:NO];
@@ -298,7 +298,7 @@
     self.tableView.backgroundColor = [UIColor whiteColor];
     self.tableView.rowHeight = kListCellHeight;
     self.tableView.tableFooterView = [UIView new];
-    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, kAddButtonHeight*2, 0);
+//    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, kAddButtonHeight*2, 0);
     
     self.navigationItem.titleView = self.menu;
     
@@ -316,8 +316,8 @@
                                                object:nil];
     
     [self addView];
-    [self addButton];
-    [self mediaButton];
+//    [self addButton];
+//    [self mediaButton];
 
 }
 
@@ -329,7 +329,7 @@
     //弹性速度
     springAnimation.springSpeed = 15.0;
     
-    CGPoint point = self.addView.center;
+    CGPoint point = CGPointMake(self.view.center.x, CGRectGetMaxY(self.view.frame));
     
     if (point.y == self.navigationController.view.center.y) {
         
@@ -339,7 +339,7 @@
         self.coverButton.alpha = 0.0;
         [self.addView pop_addAnimation:springAnimation forKey:@"changeposition"];
 
-        [_addButton setImage:[UIImage imageNamed:@"plus"] forState:UIControlStateNormal];
+//        [_addButton setImage:[UIImage imageNamed:@"plus"] forState:UIControlStateNormal];
 
     }
     else{
@@ -348,7 +348,7 @@
 
         self.coverButton.enabled = YES;
         self.coverButton.alpha = 0.9;
-        [_addButton setImage:[UIImage imageNamed:@"cancel"] forState:UIControlStateNormal];
+//        [_addButton setImage:[UIImage imageNamed:@"cancel"] forState:UIControlStateNormal];
     }
 
 }
@@ -356,22 +356,22 @@
 - (void)update:(NSNotification *)noti {
     if (noti.object == self) return;
     
-    self.addButton.backgroundColor = [kAppThemeColor darkenByPercentage:0.05];
+//    self.addButton.backgroundColor = [kAppThemeColor darkenByPercentage:0.05];
     self.menu.cellBackgroundColor = kAppThemeColor;
-    self.mediaButton.backgroundColor = self.addButton.backgroundColor;
+//    self.mediaButton.backgroundColor = self.addButton.backgroundColor;
     
-    if (self.listType == kListTypeLines) {
-        [_mediaButton setImage:[UIImage imageNamed:@"addAudio"] forState:UIControlStateNormal];
-        
-    } else {
-        [_mediaButton setImage:[UIImage imageNamed:@"addMedia"] forState:UIControlStateNormal];
-        
-    }
-    
-    if (self.navigationController.visibleViewController == self) {
-        self.mediaButton.hidden = (self.listType == kListTypeAll);
-
-    }
+//    if (self.listType == kListTypeLines) {
+////        [_mediaButton setImage:[UIImage imageNamed:@"addAudio"] forState:UIControlStateNormal];
+//        
+//    } else {
+////        [_mediaButton setImage:[UIImage imageNamed:@"addMedia"] forState:UIControlStateNormal];
+//        
+//    }
+//
+//    if (self.navigationController.visibleViewController == self) {
+//        self.mediaButton.hidden = (self.listType == kListTypeAll);
+//
+//    }
     
     [self.addView updateColor:kAppThemeColor];
     [self.tableView reloadData];
@@ -380,25 +380,19 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    self.addButton.hidden = NO;
-    self.mediaButton.hidden = (self.listType == kListTypeAll);
+//    self.addButton.hidden = NO;
+//    self.mediaButton.hidden = (self.listType == kListTypeAll);
 
     [self.navigationController setToolbarHidden:YES];
     
 //    [self prepareVisibleCellsForAnimation];
 }
 
-//- (void)viewDidAppear:(BOOL)animated {
-//    [super viewDidAppear:animated];
-
-//    [self animateVisibleCells];
-//}
-
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     
-    self.addButton.hidden = YES;
-    self.mediaButton.hidden = YES;
+//    self.addButton.hidden = YES;
+//    self.mediaButton.hidden = YES;
     [self.menu hide];
     
     [self hideAddView];

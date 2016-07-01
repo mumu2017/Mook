@@ -56,7 +56,7 @@ typedef enum {
 
 @property (nonatomic, strong) CLTableBackView *tableBackView;
 
-@property (strong, nonatomic) BFPaperButton *mediaButton;
+//@property (strong, nonatomic) BFPaperButton *mediaButton;
 @property (strong, nonatomic) UIButton *coverButton;
 
 @property (strong, nonatomic) CLAddView *addView;
@@ -106,33 +106,33 @@ typedef enum {
     return _coverButton;
 }
 
-- (BFPaperButton *)mediaButton {
-    if (!_mediaButton) {
-        _mediaButton = [[BFPaperButton alloc] initWithRaised:YES];
-        [self.navigationController.view addSubview:_mediaButton];
-        
-        [_mediaButton addTarget:self action:@selector(toggleAddView) forControlEvents:UIControlEventTouchUpInside];
-        //        [_addButton setTitle:@"添加" forState:UIControlStateNormal];
-        [_mediaButton setImage:[UIImage imageNamed:@"addMedia"] forState:UIControlStateNormal];
-        [_mediaButton mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.right.equalTo(self.navigationController.view.mas_right).with.offset(-10);
-            make.bottom.equalTo(self.navigationController.view.mas_bottom).with.offset(-64);
-            make.width.height.equalTo(@kAddButtonHeight);
-        }];
-        _mediaButton.cornerRadius = kAddButtonHeight/2;
-        _mediaButton.backgroundColor = [kAppThemeColor darkenByPercentage:0.05];
-        _mediaButton.alpha = 1.0f;
-        
-    }
-    
-    return _mediaButton;
-}
+//- (BFPaperButton *)mediaButton {
+//    if (!_mediaButton) {
+//        _mediaButton = [[BFPaperButton alloc] initWithRaised:YES];
+//        [self.navigationController.view addSubview:_mediaButton];
+//        
+//        [_mediaButton addTarget:self action:@selector(toggleAddView) forControlEvents:UIControlEventTouchUpInside];
+//        //        [_addButton setTitle:@"添加" forState:UIControlStateNormal];
+//        [_mediaButton setImage:[UIImage imageNamed:@"addMedia"] forState:UIControlStateNormal];
+//        [_mediaButton mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.right.equalTo(self.navigationController.view.mas_right).with.offset(-10);
+//            make.bottom.equalTo(self.navigationController.view.mas_bottom).with.offset(-64);
+//            make.width.height.equalTo(@kAddButtonHeight);
+//        }];
+//        _mediaButton.cornerRadius = kAddButtonHeight/2;
+//        _mediaButton.backgroundColor = [kAppThemeColor darkenByPercentage:0.05];
+//        _mediaButton.alpha = 1.0f;
+//        
+//    }
+//    
+//    return _mediaButton;
+//}
 
 
 
 - (CLAddView *)addView {
     if (!_addView) {
-        _addView = [[CLAddView alloc] initWithFrame:CGRectMake(self.mediaButton.center.x, self.mediaButton.center.y, 0, 0)];
+        _addView = [[CLAddView alloc] initWithFrame:CGRectMake(self.view.center.x, self.view.center.y, 0, 0)];
         [self.navigationController.view addSubview:_addView];
         _addView.hidden = NO;
         
@@ -147,7 +147,7 @@ typedef enum {
         
         _addView.backgroundColor = [UIColor clearColor];
         [_addView initSubViews];
-        [_addView updateColor:self.mediaButton.backgroundColor];
+        [_addView updateColor:kAppThemeColor];
         
         [_addView addTarget:self action:@selector(toggleAddView) forControlEvents:UIControlEventTouchUpInside];
         
@@ -332,10 +332,12 @@ static NSString * const reuseIdentifier = @"Cell";
     
     [self coverButton];
     self.navigationItem.titleView = self.menu;
-    self.collectionView.contentInset = UIEdgeInsetsMake(10, 0, kAddButtonHeight, 0);
+    
+//    self.collectionView.contentInset = UIEdgeInsetsMake(10, 0, 10, 0);
+    
     self.collectionView.backgroundView = self.tableBackView;
     self.collectionView.alwaysBounceVertical = YES;
-    self.collectionView.backgroundColor = [UIColor whiteColor];
+    self.collectionView.backgroundColor = [UIColor blackColor];
     [self.collectionView registerNib:[UINib nibWithNibName:@"CLMediaCollectionCell" bundle: nil] forCellWithReuseIdentifier:reuseIdentifier];
     // Do any additional setup after loading the view.
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(update) name:kUpdateDataNotification
@@ -345,7 +347,7 @@ static NSString * const reuseIdentifier = @"Cell";
                                                object:nil];
     
     [self addView];
-    [self mediaButton];
+//    [self mediaButton];
 }
 
 - (void) update {
@@ -362,9 +364,9 @@ static NSString * const reuseIdentifier = @"Cell";
 
     [self.collectionView reloadData];
     
-    self.mediaButton.backgroundColor = [kAppThemeColor darkenByPercentage:0.05];
+//    self.mediaButton.backgroundColor = [kAppThemeColor darkenByPercentage:0.05];
     self.menu.cellBackgroundColor = kAppThemeColor;
-    [self.addView updateColor:self.mediaButton.backgroundColor];
+    [self.addView updateColor:kAppThemeColor];
 }
 
 - (void) update:(NSNotification *)noti {
@@ -379,14 +381,14 @@ static NSString * const reuseIdentifier = @"Cell";
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    self.mediaButton.hidden = NO;
+//    self.mediaButton.hidden = NO;
     [self.navigationController setToolbarHidden:YES];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     
-    self.mediaButton.hidden = YES;
+//    self.mediaButton.hidden = YES;
     [self.menu hide];
     [self hideAddView];
 
@@ -432,7 +434,7 @@ static NSString * const reuseIdentifier = @"Cell";
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
 //    return CGSizeMake((self.view.frame.size.width-1)/2, (self.view.frame.size.width-1)/2);
-    return CGSizeMake((self.view.frame.size.width-4)/3, (self.view.frame.size.width-4)/3);
+    return CGSizeMake((self.view.frame.size.width-2)/3, (self.view.frame.size.width-2)/3);
 }
 //定义每个UICollectionView 的 margin
 -(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
@@ -442,12 +444,12 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionView *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
 {
-    return 2; // This is the minimum inter item spacing, can be more
+    return 1; // This is the minimum inter item spacing, can be more
 }
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionView *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
 {
-    return 2; // This is the minimum inter item spacing, can be more
+    return 1; // This is the minimum inter item spacing, can be more
 }
 
 #pragma mark <UICollectionViewDelegate>
@@ -619,7 +621,7 @@ static NSString * const reuseIdentifier = @"Cell";
 
 #pragma mark - 新建笔记方法
 
-- (void)toggleAddView {
+- (IBAction)toggleAddView {
     POPSpringAnimation *springAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerPosition];
     
     //弹性值
@@ -637,7 +639,7 @@ static NSString * const reuseIdentifier = @"Cell";
         self.coverButton.alpha = 0.0;
         [self.addView pop_addAnimation:springAnimation forKey:@"changeposition"];
         
-        [_mediaButton setImage:[UIImage imageNamed:@"addMedia"] forState:UIControlStateNormal];
+//        [_mediaButton setImage:[UIImage imageNamed:@"addMedia"] forState:UIControlStateNormal];
         
     }
     else{
@@ -646,7 +648,7 @@ static NSString * const reuseIdentifier = @"Cell";
         
         self.coverButton.enabled = YES;
         self.coverButton.alpha = 0.9;
-        [_mediaButton setImage:[UIImage imageNamed:@"cancel"] forState:UIControlStateNormal];
+//        [_mediaButton setImage:[UIImage imageNamed:@"cancel"] forState:UIControlStateNormal];
     }
     
 }

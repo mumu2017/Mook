@@ -51,8 +51,15 @@
     [self.imageButton setImage:nil forState:UIControlStateNormal];
     [self.imageButton setImage:nil forState:UIControlStateHighlighted];
     
-    UIImage *image = [_imageName getNamedImage];
-    self.iconView.image = image;
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        UIImage *image = [_imageName getNamedImage];
+
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.iconView.image = image;
+            
+        });
+    });
     
     [self.audioButton addTarget:self action:@selector(playAudio) forControlEvents:UIControlEventTouchUpInside];
     
@@ -68,8 +75,14 @@
     [self.imageButton setImage:[UIImage imageNamed:@"PlayButtonOverlayLarge"] forState:UIControlStateNormal];
     [self.imageButton setImage:[UIImage imageNamed:@"PlayButtonOverlayLargeTap"] forState:UIControlStateHighlighted];
     
-    UIImage *image = [_videoName getNamedVideoFrame];
-    self.iconView.image = image;
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        UIImage *image = [_videoName getNamedVideoFrame];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.iconView.image = image;
+            
+        });
+    });
     
     
     [self.audioButton addTarget:self action:@selector(playAudio) forControlEvents:UIControlEventTouchUpInside];
@@ -192,7 +205,14 @@
     
     self.contentLabel.attributedText = text;
         
-    [self.audioButton setTitle:[audioName getDurationForNamedAudio] forState:UIControlStateNormal];
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        NSString *duration = [audioName getDurationForNamedAudio];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.audioButton setTitle:duration forState:UIControlStateNormal];
+            
+        });
+    });
     
     self.waveformView.audioURL = [NSURL fileURLWithPath:[audioName getNamedAudio]];
     
