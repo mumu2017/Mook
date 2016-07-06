@@ -11,11 +11,14 @@
 
 @interface CLTextAudioCell : UITableViewCell
 
-
+typedef void (^PlayBlock)(NSString *audioName, FDWaveformView *waveformView);
 typedef void (^AudioBlock)(NSString *audioName);
 
 @property (strong, nonatomic) UILabel *contentLabel;
 @property (strong, nonatomic) UIButton *audioButton;
+
+@property (strong, nonatomic) UIButton *playButton;
+
 @property (strong, nonatomic) FDWaveformView *waveformView;
 
 @property (strong, nonatomic) NSString *audioName;
@@ -24,7 +27,10 @@ typedef void (^AudioBlock)(NSString *audioName);
 
 @property (strong, nonatomic) AudioBlock audioBlock;
 
-- (void)setAttributedString:(NSAttributedString *)text audioName:(NSString *)audioName audioBlock:(AudioBlock)audioBlock;
+@property (strong, nonatomic) PlayBlock playBlock;
+
+
+- (void)setAttributedString:(NSAttributedString *)text audioName:(NSString *)audioName playBlock:(PlayBlock)playBlock audioBlock:(AudioBlock)audioBlock;
 
 
 @end

@@ -11,7 +11,7 @@
 
 @interface CLAudioPlayVC : UIViewController
 
-@property (strong, nonatomic) NSString *audioPath;
+@property (strong, nonatomic) NSString * _Nonnull audioPath;
 
 @property(nonatomic,assign) UIBarStyle barStyle;
 

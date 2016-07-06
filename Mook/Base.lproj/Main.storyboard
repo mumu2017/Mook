@@ -1252,6 +1252,18 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="List" id="pTe-6i-VXn">
                         <barButtonItem key="backBarButtonItem" title=" " id="RV3-TK-3aF"/>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="add" id="jPG-zD-BzN">
+                                <connections>
+                                    <action selector="addNewEntry:" destination="LBd-Rh-VHR" id="CU9-rl-Aav"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem image="addMedia" id="b9C-Kb-9yT">
+                                <connections>
+                                    <action selector="addNewEntryWithMedia" destination="LBd-Rh-VHR" id="WIB-Ae-2EB"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
@@ -2187,10 +2199,10 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="eSP-0F-ROY"/>
-        <segue reference="OYZ-pL-yeb"/>
-        <segue reference="u0H-cQ-x0W"/>
         <segue reference="Zn4-zO-yfj"/>
         <segue reference="OTr-op-fb5"/>
+        <segue reference="6Pb-2m-Pgc"/>
+        <segue reference="aHE-KK-7rw"/>
         <segue reference="gRW-Xa-tMF"/>
         <segue reference="F7W-G1-xVl"/>
         <segue reference="cZz-JI-sNE"/>

@@ -7,7 +7,6 @@
 //
 
 #import "CLImportPasswordInputView.h"
-#import "BFPaperButton.h"
 
 @implementation CLImportPasswordInputView
 
@@ -31,7 +30,7 @@
     [super awakeFromNib];
     
     [self.unlockButton setTitle:NSLocalizedString(@"解锁", nil) forState:UIControlStateNormal];
-    self.unlockButton.cornerRadius = 5;
+    self.unlockButton.layer.cornerRadius = 5;
     self.passwordTF.tintColor = kMenuBackgroundColor;
     [self.passwordTF adjustCursor];
     self.noticeLabel.text = NSLocalizedString(@"当前笔记有密码锁定, 请输入密码解锁.", nil);

@@ -19,7 +19,8 @@
 @property (strong, nonatomic) BFPaperButton *propBtn;
 @property (strong, nonatomic) BFPaperButton *linesBtn;
 
-- (void) initSubViews;
+//- (void)initSubViewsWithPadding:(CGFloat)padding;
+
 - (void) updateColor:(UIColor *)color;
 
 @end

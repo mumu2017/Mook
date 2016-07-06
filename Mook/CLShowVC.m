@@ -27,7 +27,15 @@
 #import "CLEffectModel.h"
 #import "UIViewController+BlurPresenting.h"
 
-@interface CLShowVC ()<SWTableViewCellDelegate, MWPhotoBrowserDelegate>
+#import <AVFoundation/AVFoundation.h>
+#import "FDWaveformView.h"
+
+@interface CLShowVC ()<SWTableViewCellDelegate, MWPhotoBrowserDelegate, AVAudioPlayerDelegate>
+{
+    AVAudioPlayer *_audioPlayer;
+    CADisplayLink *_playProgressDisplayLink;
+    FDWaveformView * _waveformView;
+}
 
 @property (nonatomic, strong) NSMutableArray *routineModelList;
 
@@ -233,6 +241,19 @@
 }
 
 
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    [self.navigationController setToolbarHidden:YES];
+    
+    // 如果要去其他页面, 则停止播放录音
+    if (_audioPlayer.isPlaying) {
+        
+        [_audioPlayer stop];
+        
+    }
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -323,10 +344,15 @@
             } else if (self.showModel.effectModel.isWithAudio && !self.showModel.effectModel.isWithImage && !self.showModel.effectModel.isWithVideo) {
                 
                 CLTextAudioCell *cell = [self.tableView dequeueReusableCellWithIdentifier:kTextAudioCell forIndexPath:indexPath];
-                [cell setAttributedString:text audioName:self.showModel.effectModel.audio audioBlock:^(NSString *audioName) {
+                
+                [cell setAttributedString:text audioName:self.showModel.effectModel.audio playBlock:^(NSString *audioName, FDWaveformView *waveformView) {
+                    
+                    [self quickPlay:audioName waveformView:waveformView];
+                    
+                }  audioBlock:^(NSString *audioName) {
                     [self playAudio:audioName];
                 }];
-                
+   
                 return cell;
                 // 有文字,图片/视频
             } else if (!self.showModel.effectModel.isWithAudio && (self.showModel.effectModel.isWithImage || self.showModel.effectModel.isWithVideo)) {
@@ -478,8 +504,65 @@
 #pragma mark -Audio 方法
 - (void)playAudio:(NSString *)audioName {
     
+    if (_audioPlayer.isPlaying) {
+        [_audioPlayer stop];
+        
+    }
     [CLAudioPlayTool playAudioFromCurrentController:self audioPath:[audioName getNamedAudio]];
     
+}
+
+- (void)quickPlay:(NSString *)audioName waveformView:(FDWaveformView *)waveformView {
+    
+    _waveformView = waveformView;
+    
+    NSURL *url = [NSURL fileURLWithPath:[audioName getNamedAudio]];
+    
+    if ([_audioPlayer.url.absoluteString isEqualToString:url.absoluteString]) {
+        
+        if (_audioPlayer.isPlaying) {
+            [_audioPlayer pause];
+            
+        } else {
+            
+            [_audioPlayer play];
+        }
+        
+    } else {
+        
+        if (_audioPlayer) {
+            [_audioPlayer stop];
+        }
+        
+        _audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];
+        _audioPlayer.delegate = self;
+        _audioPlayer.meteringEnabled = YES;
+        
+        [_playProgressDisplayLink invalidate];
+        _playProgressDisplayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(updatePlayProgress)];
+        
+        [_playProgressDisplayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
+        
+        [_audioPlayer prepareToPlay];
+        [_audioPlayer play];
+    }
+    
+}
+
+-(void)updatePlayProgress
+{
+    _waveformView.progressSamples = _waveformView.totalSamples*(_audioPlayer.currentTime/_audioPlayer.duration);
+}
+
+- (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag {
+    if (flag) {
+        NSLog(@"播放完毕");
+        
+    }
+}
+
+- (void)audioPlayerDecodeErrorDidOccur:(AVAudioPlayer *)player error:(NSError *)error {
+    NSLog(@"%@", error);
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {

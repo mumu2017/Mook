@@ -35,11 +35,14 @@
 #import "QuartzCore/QuartzCore.h"
 #import <AVFoundation/AVFoundation.h>
 #import "CLAudioPlayTool.h"
+#import "FDWaveformView.h"
 
 @interface CLContentVC ()<UIDocumentInteractionControllerDelegate, MBProgressHUDDelegate, AVAudioPlayerDelegate>
 
 {
     AVAudioPlayer *_audioPlayer;
+    CADisplayLink *_playProgressDisplayLink;
+    FDWaveformView * _waveformView;
 }
 
 // section属性(需要根据model内容进行设置)
@@ -392,6 +395,13 @@ typedef void (^VideoBlock)(NSString *videoName);
     [super viewWillDisappear:animated];
     
     [self.navigationController setToolbarHidden:YES];
+    
+    // 如果要去其他页面, 则停止播放录音
+    if (_audioPlayer.isPlaying) {
+        
+        [_audioPlayer stop];
+        
+    }
 }
 
 - (void) update {
@@ -472,7 +482,11 @@ typedef void (^VideoBlock)(NSString *videoName);
         } else if (self.effectModel.isWithAudio && !self.effectModel.isWithImage && !self.effectModel.isWithVideo) {
             
             CLTextAudioCell *cell = [self.tableView dequeueReusableCellWithIdentifier:kTextAudioCell forIndexPath:indexPath];
-            [cell setAttributedString:[self.effectModel.effect styledString] audioName:self.effectModel.audio audioBlock:^(NSString *audioName) {
+            [cell setAttributedString:[self.effectModel.effect styledString] audioName:self.effectModel.audio playBlock:^(NSString *audioName, FDWaveformView *waveformView) {
+                
+                [self quickPlay:audioName waveformView:waveformView];
+                
+            }  audioBlock:^(NSString *audioName) {
                 [self playAudio:audioName];
             }];
             
@@ -566,7 +580,11 @@ typedef void (^VideoBlock)(NSString *videoName);
             } else if (model.isWithAudio && !model.isWithImage && !model.isWithVideo) {
                 
                 CLTextAudioCell *cell = [self.tableView dequeueReusableCellWithIdentifier:kTextAudioCell forIndexPath:indexPath];
-                [cell setAttributedString:[model.prep styledString] audioName:model.audio audioBlock:^(NSString *audioName) {
+                [cell setAttributedString:[model.prep styledString] audioName:model.audio playBlock:^(NSString *audioName, FDWaveformView *waveformView) {
+                    
+                    [self quickPlay:audioName waveformView:waveformView];
+                    
+                }  audioBlock:^(NSString *audioName) {
                     [self playAudio:audioName];
                 }];
                 
@@ -628,7 +646,11 @@ typedef void (^VideoBlock)(NSString *videoName);
             } else if (model.isWithAudio && !model.isWithImage && !model.isWithVideo) {
                 
                 CLTextAudioCell *cell = [self.tableView dequeueReusableCellWithIdentifier:kTextAudioCell forIndexPath:indexPath];
-                [cell setAttributedString:[model.prep styledString] audioName:model.audio audioBlock:^(NSString *audioName) {
+                [cell setAttributedString:[model.prep styledString] audioName:model.audio playBlock:^(NSString *audioName, FDWaveformView *waveformView) {
+                    
+                    [self quickPlay:audioName waveformView:waveformView];
+                    
+                }  audioBlock:^(NSString *audioName) {
                     [self playAudio:audioName];
                 }];
                 
@@ -687,7 +709,11 @@ typedef void (^VideoBlock)(NSString *videoName);
         } else if (model.isWithAudio && !model.isWithImage && !model.isWithVideo) {
             
             CLTextAudioCell *cell = [self.tableView dequeueReusableCellWithIdentifier:kTextAudioCell forIndexPath:indexPath];
-            [cell setAttributedString:[model.perform styledString] audioName:model.audio audioBlock:^(NSString *audioName) {
+            [cell setAttributedString:[model.perform styledString] audioName:model.audio playBlock:^(NSString *audioName, FDWaveformView *waveformView) {
+                
+                [self quickPlay:audioName waveformView:waveformView];
+                
+            }  audioBlock:^(NSString *audioName) {
                 [self playAudio:audioName];
             }];
             
@@ -745,7 +771,11 @@ typedef void (^VideoBlock)(NSString *videoName);
         } else if (model.isWithAudio) {
             
             CLTextAudioCell *cell = [self.tableView dequeueReusableCellWithIdentifier:kTextAudioCell forIndexPath:indexPath];
-            [cell setAttributedString:[model.notes styledString] audioName:model.audio audioBlock:^(NSString *audioName) {
+            [cell setAttributedString:[model.notes styledString] audioName:model.audio playBlock:^(NSString *audioName, FDWaveformView *waveformView) {
+                
+                [self quickPlay:audioName waveformView:waveformView];
+                
+            } audioBlock:^(NSString *audioName) {
                 [self playAudio:audioName];
             }];
             
@@ -829,8 +859,54 @@ typedef void (^VideoBlock)(NSString *videoName);
 #pragma mark -Audio 方法
 - (void)playAudio:(NSString *)audioName {
 
+    if (_audioPlayer.isPlaying) {
+        [_audioPlayer stop];
+        
+    }
     [CLAudioPlayTool playAudioFromCurrentController:self audioPath:[audioName getNamedAudio]];
     
+}
+
+- (void)quickPlay:(NSString *)audioName waveformView:(FDWaveformView *)waveformView {
+    
+    _waveformView = waveformView;
+    
+    NSURL *url = [NSURL fileURLWithPath:[audioName getNamedAudio]];
+    
+    if ([_audioPlayer.url.absoluteString isEqualToString:url.absoluteString]) {
+        
+        if (_audioPlayer.isPlaying) {
+            [_audioPlayer pause];
+            
+        } else {
+            
+            [_audioPlayer play];
+        }
+        
+    } else {
+        
+        if (_audioPlayer) {
+            [_audioPlayer stop];
+        }
+        
+        _audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];
+        _audioPlayer.delegate = self;
+        _audioPlayer.meteringEnabled = YES;
+        
+        [_playProgressDisplayLink invalidate];
+        _playProgressDisplayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(updatePlayProgress)];
+        
+        [_playProgressDisplayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
+        
+        [_audioPlayer prepareToPlay];
+        [_audioPlayer play];
+    }
+    
+}
+
+-(void)updatePlayProgress
+{
+    _waveformView.progressSamples = _waveformView.totalSamples*(_audioPlayer.currentTime/_audioPlayer.duration);
 }
 
 - (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag {

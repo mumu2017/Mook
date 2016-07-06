@@ -32,15 +32,8 @@
 #import "CLPropModel.h"
 #import "CLPrepModel.h"
 #import "CLPerformModel.h"
-//#import "CLNotesModel.h"
 
 #import "CLTableBackView.h"
-
-//#import "Masonry.h"
-#import "CLAddView.h"
-#import "Pop.h"
-
-#import "BFPaperButton.h"
 
 @interface CLListVC ()<SWTableViewCellDelegate, MBProgressHUDDelegate, UIDocumentInteractionControllerDelegate>
 
@@ -51,116 +44,9 @@
 @property (nonatomic, strong) UIDocumentInteractionController *documentInteractionController;
 @property (nonatomic, copy) NSString *exportPath;
 
-
-@property (strong, nonatomic) BFPaperButton *addButton;
-@property (strong, nonatomic) BFPaperButton *mediaButton;
-
-@property (strong, nonatomic) UIButton *coverButton;
-
-@property (strong, nonatomic) CLAddView *addView;
-
 @end
 
 @implementation CLListVC
-
-
-- (UIButton *)coverButton {
-    if (!_coverButton) {
-        _coverButton = [[UIButton alloc] initWithFrame:self.navigationController.view.frame];
-        [self.navigationController.view addSubview:_coverButton];
-        _coverButton.backgroundColor = [UIColor darkGrayColor];
-        _coverButton.alpha = 0.0;
-        _coverButton.enabled = NO;
-        
-        [_coverButton addTarget:self action:@selector(toggleAddView) forControlEvents:UIControlEventTouchUpInside];
-    }
-    return _coverButton;
-}
-
-- (BFPaperButton *)addButton {
-    if (!_addButton) {
-        _addButton = [[BFPaperButton alloc] initWithRaised:YES];
-        [self.navigationController.view addSubview:_addButton];
-        
-        [_addButton addTarget:self action:@selector(addNewEntry:) forControlEvents:UIControlEventTouchUpInside];
-        [_addButton setImage:[UIImage imageNamed:@"plus"] forState:UIControlStateNormal];
-        [_addButton mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.right.equalTo(self.navigationController.view.mas_right).with.offset(-10);
-            make.bottom.equalTo(self.navigationController.view.mas_bottom).with.offset(-15);
-            make.width.height.equalTo(@kAddButtonHeight);
-        }];
-        _addButton.cornerRadius = kAddButtonHeight/2;
-        _addButton.backgroundColor = [kAppThemeColor darkenByPercentage:0.05];
-        _addButton.alpha = 1.0f;
-        
-    }
-    
-    return _addButton;
-}
-
-
-- (BFPaperButton *)mediaButton {
-    if (!_mediaButton) {
-        _mediaButton = [[BFPaperButton alloc] initWithRaised:YES];
-        [self.navigationController.view addSubview:_mediaButton];
-        
-        [_mediaButton addTarget:self action:@selector(addNewEntryWithMedia) forControlEvents:UIControlEventTouchUpInside];
-        //        [_addButton setTitle:@"添加" forState:UIControlStateNormal];
-        if (self.listType == kListTypeLines) {
-            [_mediaButton setImage:[UIImage imageNamed:@"addAudio"] forState:UIControlStateNormal];
-            
-        } else {
-            [_mediaButton setImage:[UIImage imageNamed:@"addMedia"] forState:UIControlStateNormal];
-            
-        }
-        [_mediaButton mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.right.equalTo(self.navigationController.view.mas_right).with.offset(-10);
-            make.bottom.equalTo(self.addButton.mas_top).with.offset(-15);
-            make.width.height.equalTo(@kAddButtonHeight);
-        }];
-        _mediaButton.cornerRadius = kAddButtonHeight/2;
-        _mediaButton.backgroundColor = [kAppThemeColor darkenByPercentage:0.05];
-        _mediaButton.alpha = 1.0f;
-        _mediaButton.hidden = (self.listType == kListTypeAll);
-        
-        
-    }
-    
-    return _mediaButton;
-}
-
-- (CLAddView *)addView {
-    if (!_addView) {
-        _addView = [[CLAddView alloc] initWithFrame:CGRectMake(self.addButton.center.x, self.addButton.center.y, 0, 0)];
-        [self.navigationController.view addSubview:_addView];
-        _addView.hidden = NO;
-        
-        [_addView mas_makeConstraints:^(MASConstraintMaker *make) {
-            
-            make.width.equalTo(self.navigationController.view.mas_width).offset( -kAddButtonHeight);
-            make.height.equalTo(_addView.mas_width).multipliedBy(1.5);
-            make.centerX.equalTo(self.navigationController.view);
-            make.top.equalTo(self.navigationController.view.mas_bottom).offset(_addView.frame.size.height);
-        }];
-        _addView.center = CGPointMake(self.navigationController.view.center.x, CGRectGetMaxY(self.navigationController.view.frame)+self.addView.frame.size.height/2);
-        
-        _addView.backgroundColor = [UIColor clearColor];
-        [_addView initSubViews];
-        [_addView updateColor:self.addButton.backgroundColor];
-        
-        [_addView addTarget:self action:@selector(toggleAddView) forControlEvents:UIControlEventTouchUpInside];
-        
-        [_addView.ideaBtn addTarget:self action:@selector(addNewIdeaWithVideo:orImage:) forControlEvents:UIControlEventTouchUpInside];
-        [_addView.showBtn addTarget:self action:@selector(addNewShowWithVideo:orImage:) forControlEvents:UIControlEventTouchUpInside];
-        [_addView.routineBtn addTarget:self action:@selector(addNewRoutineWithVideo:orImage:) forControlEvents:UIControlEventTouchUpInside];
-        [_addView.sleightBtn addTarget:self action:@selector(addNewSleightWithVideo:orImage:) forControlEvents:UIControlEventTouchUpInside];
-        [_addView.propBtn addTarget:self action:@selector(addNewPropWithVideo:orImage:) forControlEvents:UIControlEventTouchUpInside];
-        [_addView.linesBtn addTarget:self action:@selector(addNewLines) forControlEvents:UIControlEventTouchUpInside];
-    }
-    
-    return _addView;
-}
-
 
 #pragma mark - 模型数组懒加载
 
@@ -204,7 +90,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self coverButton];
 
     self.tableView.backgroundView = self.tableBackView;
     self.tableView.backgroundColor = [UIColor whiteColor];
@@ -225,83 +110,34 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(update:) name:kUpdateDataNotification
                                                object:nil];
     
-    [self addView];
-    [self addButton];
-    [self mediaButton];
+    if (_listType == kListTypeLines) {
+        [self.navigationItem.rightBarButtonItems[1] setImage:[UIImage imageNamed:@"addAudio"]];
+        
+    } else {
+        [self.navigationItem.rightBarButtonItems[1] setImage:[UIImage imageNamed:@"addMedia"]];
+        
+    }
 
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    self.addButton.hidden = NO;
-    self.mediaButton.hidden = (self.listType == kListTypeAll);
-    
     [self.navigationController setToolbarHidden:YES];
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    
-    self.addButton.hidden = YES;
-    self.mediaButton.hidden = YES;
-    if (self.addView.center.y == self.navigationController.view.center.y) {
-        [self toggleAddView];
-    }
-}
-- (void)toggleAddView {
-    POPSpringAnimation *springAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerPosition];
-    
-    //弹性值
-    springAnimation.springBounciness = 10.0;
-    //弹性速度
-    springAnimation.springSpeed = 15.0;
-    
-    CGPoint point = self.addView.center;
-    
-    if (point.y == self.navigationController.view.center.y) {
-        
-        springAnimation.toValue = [NSValue valueWithCGPoint:CGPointMake(point.x, CGRectGetMaxY(self.navigationController.view.frame)+self.addView.frame.size.height)];
-        
-        self.coverButton.enabled = NO;
-        self.coverButton.alpha = 0.0;
-        [self.addView pop_addAnimation:springAnimation forKey:@"changeposition"];
-        
-        [_addButton setImage:[UIImage imageNamed:@"plus"] forState:UIControlStateNormal];
-        
-    }
-    else{
-        springAnimation.toValue = [NSValue valueWithCGPoint:CGPointMake(point.x, self.navigationController.view.center.y)];
-        [self.addView pop_addAnimation:springAnimation forKey:@"changeposition"];
-        
-        self.coverButton.enabled = YES;
-        self.coverButton.alpha = 0.9;
-        [_addButton setImage:[UIImage imageNamed:@"cancel"] forState:UIControlStateNormal];
-    }
-    
 }
 
 
 - (void)update:(NSNotification *)noti {
     if (noti.object == self) return;
-    
-    self.addButton.backgroundColor = [kAppThemeColor darkenByPercentage:0.05];
-    self.mediaButton.backgroundColor = self.addButton.backgroundColor;
-    
-    if (self.navigationController.visibleViewController == self) {
-        self.mediaButton.hidden = (self.listType == kListTypeAll);
-        
-    }
-    
-    if (self.listType == kListTypeLines) {
-        [_mediaButton setImage:[UIImage imageNamed:@"addAudio"] forState:UIControlStateNormal];
+
+    if (_listType == kListTypeLines) {
+        [self.navigationItem.rightBarButtonItems[1] setImage:[UIImage imageNamed:@"addAudio"]];
         
     } else {
-        [_mediaButton setImage:[UIImage imageNamed:@"addMedia"] forState:UIControlStateNormal];
+        [self.navigationItem.rightBarButtonItems[1] setImage:[UIImage imageNamed:@"addMedia"]];
         
     }
     
-    [self.addView updateColor:self.addButton.backgroundColor];
     [self.tableView reloadData];
 }
 
@@ -988,7 +824,7 @@
 }
 
 
-- (void)addNewEntryWithMedia {
+- (IBAction)addNewEntryWithMedia {
     
     
     switch (self.listType) {
@@ -1024,46 +860,6 @@
     }
 }
 
-- (void)addNewLinesWithAudio {
-    [[CLGetMediaTool getInstance] recordAudioFromCurrentController:self audioBlock:^(NSString *filePath) {
-        
-        [self addNewLinesWithAudio:filePath];
-    }];
-}
-
-- (void)addNewLinesWithAudio:(NSString *)filePath {
-    self.editingContentType = kEditingContentTypeLines;
-    // 创建一个新的routineModel,传递给newRoutineVC,并添加到routineModelList中
-    CLLinesObjModel *model = [CLLinesObjModel linesObjModel];
-    
-    NSString *audioName = [kTimestamp stringByAppendingString:@".m4a"];
-    [audioName saveNamedAudioToDocument:filePath];
-    model.effectModel.audio = audioName;
-    [CLDataSaveTool addAudioByName:audioName timesStamp:model.timeStamp content:nil type:kTypeLines];
-    
-    // 将新增的model放在数组第一个,这样在现实到list中时,新增的model会显示在最上面
-    [kDataListLines insertObject:model atIndex:0];
-    [kDataListAll insertObject:model atIndex:0];
-    
-    // 当有tag的时候,说明是tag页面跳转而来, 新增模型时, 自动添加该tag, 且添加到tag的ModelList中
-    if (self.tag.length > 0 && self.linesObjModelList != kDataListLines) {
-        [model.tags addObject:self.tag];
-        [self.linesObjModelList insertObject:model atIndex:0];
-    }
-    
-    [CLNewEntryTool showAlertControllerWithTextFieldFromCurrentController:self comfirmHandler:^(NSString * _Nullable title) {
-        model.infoModel.name = title;
-        [CLDataSaveTool updateLines:model];
-        
-        [[NSNotificationCenter defaultCenter] postNotificationName:kUpdateDataNotification object:nil];
-    } editMoreHandler:^(NSString * _Nullable title) {
-        model.infoModel.name = title;
-        
-        [self performSegueWithIdentifier:kSegueListToNewEntry sender:nil];
-
-    }];
-    
-}
 
 - (void)addNewShowWithVideo {
     
@@ -1130,17 +926,24 @@
         [self.ideaObjModelList insertObject:model atIndex:0];
     }
     
-    [CLNewEntryTool showAlertControllerWithTextFieldFromCurrentController:self comfirmHandler:^(NSString * _Nullable title) {
-        model.infoModel.name = title;
-        [CLDataSaveTool updateIdea:model];
+    if (videoURL || image) {
         
-        [[NSNotificationCenter defaultCenter] postNotificationName:kUpdateDataNotification object:nil];
-    } editMoreHandler:^(NSString * _Nullable title) {
-        model.infoModel.name = title;
-        
+        [CLNewEntryTool showAlertControllerWithTextFieldFromCurrentController:self comfirmHandler:^(NSString * _Nullable title) {
+            model.infoModel.name = title;
+            [CLDataSaveTool updateIdea:model];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:kUpdateDataNotification object:nil];
+        } editMoreHandler:^(NSString * _Nullable title) {
+            model.infoModel.name = title;
+            
+            [self performSegueWithIdentifier:kSegueListToNewEntry sender:nil];
+            
+        }];
+    } else {
         [self performSegueWithIdentifier:kSegueListToNewEntry sender:nil];
-        
-    }];
+
+    }
+
 }
 
 - (void)addNewShowWithVideo:videoURL orImage:image {
@@ -1171,17 +974,24 @@
         [self.showModelList insertObject:model atIndex:0];
     }
     
-    [CLNewEntryTool showAlertControllerWithTextFieldFromCurrentController:self comfirmHandler:^(NSString * _Nullable title) {
-        model.name = title;
-        [CLDataSaveTool updateShow:model];
+    if (videoURL || image) {
+    
+        [CLNewEntryTool showAlertControllerWithTextFieldFromCurrentController:self comfirmHandler:^(NSString * _Nullable title) {
+            model.name = title;
+            [CLDataSaveTool updateShow:model];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:kUpdateDataNotification object:nil];
+        } editMoreHandler:^(NSString * _Nullable title) {
+            model.name = title;
+            
+            [self performSegueWithIdentifier:kSegueListToNewShow sender:nil];
+            
+        }];
         
-        [[NSNotificationCenter defaultCenter] postNotificationName:kUpdateDataNotification object:nil];
-    } editMoreHandler:^(NSString * _Nullable title) {
-        model.name = title;
-        
+    } else {
         [self performSegueWithIdentifier:kSegueListToNewShow sender:nil];
-        
-    }];
+
+    }
 }
 
 - (void)addNewRoutineWithVideo:videoURL orImage:image {
@@ -1213,17 +1023,27 @@
         [self.routineModelList insertObject:model atIndex:0];
     }
     
-    [CLNewEntryTool showAlertControllerWithTextFieldFromCurrentController:self comfirmHandler:^(NSString * _Nullable title) {
-        model.infoModel.name = title;
-        [CLDataSaveTool updateRoutine:model];
+    if (videoURL || image) {
         
-        [[NSNotificationCenter defaultCenter] postNotificationName:kUpdateDataNotification object:nil];
-    } editMoreHandler:^(NSString * _Nullable title) {
-        model.infoModel.name = title;
+        [CLNewEntryTool showAlertControllerWithTextFieldFromCurrentController:self comfirmHandler:^(NSString * _Nullable title) {
+            model.infoModel.name = title;
+            [CLDataSaveTool updateRoutine:model];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:kUpdateDataNotification object:nil];
+        } editMoreHandler:^(NSString * _Nullable title) {
+            model.infoModel.name = title;
+            
+            [self performSegueWithIdentifier:kSegueListToNewEntry sender:nil];
+            
+        }];
+    } else {
         
         [self performSegueWithIdentifier:kSegueListToNewEntry sender:nil];
-        
-    }];
+
+    }
+    
+    
+
 }
 
 - (void)addNewSleightWithVideo:videoURL orImage:image {
@@ -1255,17 +1075,26 @@
         [self.sleightObjModelList insertObject:model atIndex:0];
     }
     
-    [CLNewEntryTool showAlertControllerWithTextFieldFromCurrentController:self comfirmHandler:^(NSString * _Nullable title) {
-        model.infoModel.name = title;
-        [CLDataSaveTool updateSleight:model];
+    if (videoURL || image) {
         
-        [[NSNotificationCenter defaultCenter] postNotificationName:kUpdateDataNotification object:nil];
-    } editMoreHandler:^(NSString * _Nullable title) {
-        model.infoModel.name = title;
+        [CLNewEntryTool showAlertControllerWithTextFieldFromCurrentController:self comfirmHandler:^(NSString * _Nullable title) {
+            model.infoModel.name = title;
+            [CLDataSaveTool updateSleight:model];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:kUpdateDataNotification object:nil];
+        } editMoreHandler:^(NSString * _Nullable title) {
+            model.infoModel.name = title;
+            
+            [self performSegueWithIdentifier:kSegueListToNewEntry sender:nil];
+            
+        }];
+        
+    } else {
         
         [self performSegueWithIdentifier:kSegueListToNewEntry sender:nil];
-        
-    }];
+
+    }
+
 }
 
 - (void)addNewPropWithVideo:videoURL orImage:image {
@@ -1295,9 +1124,59 @@
         [self.propObjModelList insertObject:model atIndex:0];
     }
     
+    
+    if (videoURL || image) {
+        
+        [CLNewEntryTool showAlertControllerWithTextFieldFromCurrentController:self comfirmHandler:^(NSString * _Nullable title) {
+            model.infoModel.name = title;
+            [CLDataSaveTool updateProp:model];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:kUpdateDataNotification object:nil];
+        } editMoreHandler:^(NSString * _Nullable title) {
+            model.infoModel.name = title;
+            
+            [self performSegueWithIdentifier:kSegueListToNewEntry sender:nil];
+            
+        }];
+    } else {
+        
+        [self performSegueWithIdentifier:kSegueListToNewEntry sender:nil];
+
+    }
+    
+}
+
+
+- (void)addNewLinesWithAudio {
+    [[CLGetMediaTool getInstance] recordAudioFromCurrentController:self audioBlock:^(NSString *filePath) {
+        
+        [self addNewLinesWithAudio:filePath];
+    }];
+}
+
+- (void)addNewLinesWithAudio:(NSString *)filePath {
+    self.editingContentType = kEditingContentTypeLines;
+    // 创建一个新的routineModel,传递给newRoutineVC,并添加到routineModelList中
+    CLLinesObjModel *model = [CLLinesObjModel linesObjModel];
+    
+    NSString *audioName = [kTimestamp stringByAppendingString:@".m4a"];
+    [audioName saveNamedAudioToDocument:filePath];
+    model.effectModel.audio = audioName;
+    [CLDataSaveTool addAudioByName:audioName timesStamp:model.timeStamp content:nil type:kTypeLines];
+    
+    // 将新增的model放在数组第一个,这样在现实到list中时,新增的model会显示在最上面
+    [kDataListLines insertObject:model atIndex:0];
+    [kDataListAll insertObject:model atIndex:0];
+    
+    // 当有tag的时候,说明是tag页面跳转而来, 新增模型时, 自动添加该tag, 且添加到tag的ModelList中
+    if (self.tag.length > 0 && self.linesObjModelList != kDataListLines) {
+        [model.tags addObject:self.tag];
+        [self.linesObjModelList insertObject:model atIndex:0];
+    }
+    
     [CLNewEntryTool showAlertControllerWithTextFieldFromCurrentController:self comfirmHandler:^(NSString * _Nullable title) {
         model.infoModel.name = title;
-        [CLDataSaveTool updateProp:model];
+        [CLDataSaveTool updateLines:model];
         
         [[NSNotificationCenter defaultCenter] postNotificationName:kUpdateDataNotification object:nil];
     } editMoreHandler:^(NSString * _Nullable title) {
@@ -1306,6 +1185,7 @@
         [self performSegueWithIdentifier:kSegueListToNewEntry sender:nil];
         
     }];
+    
 }
 
 - (void)addNewLines {
@@ -1322,7 +1202,7 @@
         [model.tags addObject:self.tag];
         [self.linesObjModelList insertObject:model atIndex:0];
     }
-    
+
     [self performSegueWithIdentifier:kSegueListToNewEntry sender:nil];
 }
 

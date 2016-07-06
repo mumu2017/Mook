@@ -12,34 +12,34 @@
 
 #pragma mark - 快速添加
 
-+ (void)quickAddNewShowFromCurrentController:(UIViewController *)controller withVideo:(NSURL *)videoURL orImage:(UIImage *)image;
++ (void)quickAddNewShowFromCurrentController:(UIViewController * _Nonnull)controller withVideo:(NSURL * _Nullable)videoURL orImage:(UIImage * _Nullable)image;
 
-+ (void)quickAddNewIdeaFromCurrentController:(UIViewController *)controller withVideo:(NSURL *)videoURL orImage:(UIImage *)image;
++ (void)quickAddNewIdeaFromCurrentController:(UIViewController * _Nonnull)controller withVideo:(NSURL * _Nullable)videoURL orImage:(UIImage * _Nullable)image;
 
-+ (void)quickAddNewRoutineFromCurrentController:(UIViewController *)controller withVideo:(NSURL *)videoURL orImage:(UIImage *)image;
++ (void)quickAddNewRoutineFromCurrentController:(UIViewController * _Nonnull)controller withVideo:(NSURL * _Nullable)videoURL orImage:(UIImage * _Nullable)image;
 
-+ (void)quickAddNewSleightFromCurrentController:(UIViewController *)controller withVideo:(NSURL *)videoURL orImage:(UIImage *)image;
++ (void)quickAddNewSleightFromCurrentController:(UIViewController * _Nonnull)controller withVideo:(NSURL * _Nullable)videoURL orImage:(UIImage * _Nullable)image;
 
-+ (void)quickAddNewPropFromCurrentController:(UIViewController *)controller withVideo:(NSURL *)videoURL orImage:(UIImage *)image;
++ (void)quickAddNewPropFromCurrentController:(UIViewController * _Nonnull)controller withVideo:(NSURL * _Nullable)videoURL orImage:(UIImage * _Nullable)image;
 
-+ (void)quickAddNewLinesFromCurrentController:(UIViewController *)controller withAudio:(NSString *)filePath;
++ (void)quickAddNewLinesFromCurrentController:(UIViewController * _Nonnull)controller withAudio:(NSString * _Nullable)filePath;
 
 #pragma mark - 直接弹出NewEntryNavVC
-+ (void)addNewShowFromCurrentController:(UIViewController *)controller withVideo:(NSURL *)videoURL orImage:(UIImage *)image;
++ (void)addNewShowFromCurrentController:(UIViewController * _Nonnull)controller withVideo:(NSURL * _Nullable)videoURL orImage:(UIImage * _Nullable)image;
 
-+ (void)addNewIdeaFromCurrentController:(UIViewController *)controller withVideo:(NSURL *)videoURL orImage:(UIImage *)image;
++ (void)addNewIdeaFromCurrentController:(UIViewController * _Nonnull)controller withVideo:(NSURL * _Nullable)videoURL orImage:(UIImage * _Nullable)image;
 
-+ (void)addNewRoutineFromCurrentController:(UIViewController *)controller withVideo:(NSURL *)videoURL orImage:(UIImage *)image;
++ (void)addNewRoutineFromCurrentController:(UIViewController * _Nonnull)controller withVideo:(NSURL * _Nullable)videoURL orImage:(UIImage * _Nullable)image;
 
-+ (void)addNewSleightFromCurrentController:(UIViewController *)controller withVideo:(NSURL *)videoURL orImage:(UIImage *)image;
++ (void)addNewSleightFromCurrentController:(UIViewController * _Nonnull)controller withVideo:(NSURL * _Nullable)videoURL orImage:(UIImage * _Nullable)image;
 
-+ (void)addNewPropFromCurrentController:(UIViewController *)controller withVideo:(NSURL *)videoURL orImage:(UIImage *)image;
++ (void)addNewPropFromCurrentController:(UIViewController * _Nonnull)controller withVideo:(NSURL * _Nullable)videoURL orImage:(UIImage * _Nullable)image;
 
-+ (void)addNewLinesFromCurrentController:(UIViewController *)controller;
++ (void)addNewLinesFromCurrentController:(UIViewController * _Nonnull)controller;
 
-+ (void)addNewLinesFromCurrentController:(UIViewController *)controller withAudio:(NSString *)filePath;
++ (void)addNewLinesFromCurrentController:(UIViewController * _Nonnull)controller withAudio:(NSString * _Nullable)filePath;
 
 
-+ (void)showAlertControllerWithTextFieldFromCurrentController:(UIViewController *)controller comfirmHandler:(void (^ __nullable)(NSString * __nullable title))comfirmHandler editMoreHandler:(void (^ __nullable)(NSString * __nullable title)) editMoreHandler;
++ (void)showAlertControllerWithTextFieldFromCurrentController:(UIViewController * _Nonnull)controller comfirmHandler:(void (^ __nullable)(NSString * __nullable title))comfirmHandler editMoreHandler:(void (^ __nullable)(NSString * __nullable title)) editMoreHandler;
 
 @end

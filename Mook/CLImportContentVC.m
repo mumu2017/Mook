@@ -660,7 +660,12 @@
         } else if (self.effectModel.isWithAudio && !self.effectModel.isWithImage && !self.effectModel.isWithVideo) {
             
             CLTextAudioCell *cell = [self.tableView dequeueReusableCellWithIdentifier:kTextAudioCell forIndexPath:indexPath];
-            [cell setAttributedString:[self.effectModel.effect styledString] audioName:self.effectModel.audio audioBlock:^(NSString *audioName) {
+            
+            [cell setAttributedString:[self.effectModel.effect styledString]  audioName:self.effectModel.audio playBlock:^(NSString *audioName, FDWaveformView *waveformView) {
+                
+//                [self quickPlay:audioName waveformView:waveformView];
+                
+            } audioBlock:^(NSString *audioName) {
                 [self playAudio:audioName];
             }];
             
@@ -754,9 +759,15 @@
             } else if (model.isWithAudio && !model.isWithImage && !model.isWithVideo) {
                 
                 CLTextAudioCell *cell = [self.tableView dequeueReusableCellWithIdentifier:kTextAudioCell forIndexPath:indexPath];
-                [cell setAttributedString:[model.prep styledString] audioName:model.audio audioBlock:^(NSString *audioName) {
+
+                [cell setAttributedString:[model.prep styledString]  audioName:model.audio playBlock:^(NSString *audioName, FDWaveformView *waveformView) {
+                    
+//                    [self quickPlay:audioName waveformView:waveformView];
+                    
+                } audioBlock:^(NSString *audioName) {
                     [self playAudio:audioName];
                 }];
+
                 
                 return cell;
                 // 有文字,图片/视频
@@ -816,7 +827,12 @@
             } else if (model.isWithAudio && !model.isWithImage && !model.isWithVideo) {
                 
                 CLTextAudioCell *cell = [self.tableView dequeueReusableCellWithIdentifier:kTextAudioCell forIndexPath:indexPath];
-                [cell setAttributedString:[model.prep styledString] audioName:model.audio audioBlock:^(NSString *audioName) {
+                
+                [cell setAttributedString:[model.prep styledString]  audioName:model.audio playBlock:^(NSString *audioName, FDWaveformView *waveformView) {
+                    
+//                    [self quickPlay:audioName waveformView:waveformView];
+                    
+                } audioBlock:^(NSString *audioName) {
                     [self playAudio:audioName];
                 }];
                 
@@ -875,7 +891,12 @@
         } else if (model.isWithAudio && !model.isWithImage && !model.isWithVideo) {
             
             CLTextAudioCell *cell = [self.tableView dequeueReusableCellWithIdentifier:kTextAudioCell forIndexPath:indexPath];
-            [cell setAttributedString:[model.perform styledString] audioName:model.audio audioBlock:^(NSString *audioName) {
+
+            [cell setAttributedString:[model.perform styledString]  audioName:model.audio playBlock:^(NSString *audioName, FDWaveformView *waveformView) {
+                
+//                [self quickPlay:audioName waveformView:waveformView];
+                
+            } audioBlock:^(NSString *audioName) {
                 [self playAudio:audioName];
             }];
             
@@ -933,9 +954,15 @@
         } else if (model.isWithAudio) {
             
             CLTextAudioCell *cell = [self.tableView dequeueReusableCellWithIdentifier:kTextAudioCell forIndexPath:indexPath];
-            [cell setAttributedString:[model.notes styledString] audioName:model.audio audioBlock:^(NSString *audioName) {
+
+            [cell setAttributedString:[model.notes styledString]  audioName:model.audio playBlock:^(NSString *audioName, FDWaveformView *waveformView) {
+                
+//                [self quickPlay:audioName waveformView:waveformView];
+                
+            } audioBlock:^(NSString *audioName) {
                 [self playAudio:audioName];
             }];
+            
             
             return cell;
             // 有文字,图片/视频

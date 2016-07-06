@@ -22,7 +22,7 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *noticeLabel;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTF;
-@property (weak, nonatomic) IBOutlet BFPaperButton *unlockButton;
+@property (weak, nonatomic) IBOutlet UIButton *unlockButton;
 
 @property (nonatomic, weak) id<CLImportPasswordInputViewDelegate> delegate;
 

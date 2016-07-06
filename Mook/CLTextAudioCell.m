@@ -55,6 +55,27 @@
     return _contentLabel;
 }
 
+- (UIButton *)playButton {
+    if (!_playButton) {
+        _playButton = [[UIButton alloc] init];
+        [self.contentView addSubview:_playButton];
+        [_playButton mas_remakeConstraints:^(MASConstraintMaker *make) {
+            
+            make.top.equalTo(self.contentLabel.mas_bottom).offset(20);
+            make.left.equalTo(self.contentLabel);
+            make.bottom.equalTo(self.contentView).offset(-20);
+            make.height.width.equalTo(@44);
+        }];
+    }
+    
+    _playButton.titleLabel.font = kFontSys14;
+    
+    [_playButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    _playButton.backgroundColor = [UIColor blueColor];
+    
+    return _playButton;
+}
+
 - (UIButton *)audioButton {
     if (!_audioButton) {
         _audioButton = [[UIButton alloc] init];
@@ -81,7 +102,8 @@
         
         [_waveformView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.contentLabel.mas_bottom).offset(20);
-            make.left.right.equalTo(self.contentLabel);
+            make.left.equalTo(self.playButton.mas_right).offset(20);
+            make.right.equalTo(self.contentLabel);
             make.bottom.equalTo(self.contentView).offset(-20);
             make.height.equalTo(@44);
         }];
@@ -97,15 +119,18 @@
     return _waveformView;
 }
 
-- (void)setAttributedString:(NSAttributedString *)text audioName:(NSString *)audioName audioBlock:(AudioBlock)audioBlock
+- (void)setAttributedString:(NSAttributedString *)text audioName:(NSString *)audioName playBlock:(PlayBlock)playBlock audioBlock:(AudioBlock)audioBlock
 {
     _audioName = audioName;
     _audioBlock = audioBlock;
+    _playBlock = playBlock;
     
     
     self.contentLabel.attributedText = text;
     
     [self.audioButton addTarget:self action:@selector(playAudio) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.playButton addTarget:self action:@selector(quickPlay) forControlEvents:UIControlEventTouchUpInside];
     
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         NSString *duration = [audioName getDurationForNamedAudio];
@@ -120,7 +145,14 @@
     
 }
 
+
+- (void)quickPlay {
+    
+    _playBlock(_audioName, self.waveformView);
+}
+
 - (void)playAudio {
+    
     _audioBlock(_audioName);
 }
 

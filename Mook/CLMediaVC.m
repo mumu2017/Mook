@@ -13,8 +13,6 @@
 #import "CLNewEntryTool.h"
 
 #import "MWPhotoBrowser.h"
-#import "Pop.h"
-
 #import "CLContentVC.h"
 #import "CLShowVC.h"
 
@@ -26,11 +24,8 @@
 #import "CLPropObjModel.h"
 #import "CLLinesObjModel.h"
 #import "CLTableBackView.h"
-#import "CLAddView.h"
-#import "MJRefresh.h"
+#import "CLListRefreshHeader.h"
 
-//#import "MASonry.h"
-#import "BFPaperButton.h"
 #import "BTNavigationDropdownMenu-Swift.h"
 @class BTNavigationDropdownMenu;
 
@@ -57,11 +52,6 @@ typedef enum {
 
 @property (nonatomic, strong) CLTableBackView *tableBackView;
 
-//@property (strong, nonatomic) BFPaperButton *mediaButton;
-@property (strong, nonatomic) UIButton *coverButton;
-
-@property (strong, nonatomic) CLAddView *addView;
-
 @end
 
 @implementation CLMediaVC
@@ -82,75 +72,6 @@ typedef enum {
         
     }
     return _allMedia;
-}
-
-- (UIButton *)coverButton {
-    if (!_coverButton) {
-        _coverButton = [[UIButton alloc] initWithFrame:self.navigationController.view.frame];
-        [self.navigationController.view addSubview:_coverButton];
-        _coverButton.backgroundColor = [UIColor darkGrayColor];
-        _coverButton.alpha = 0.0;
-        _coverButton.enabled = NO;
-        
-        [_coverButton addTarget:self action:@selector(toggleAddView) forControlEvents:UIControlEventTouchUpInside];
-    }
-    return _coverButton;
-}
-
-//- (BFPaperButton *)mediaButton {
-//    if (!_mediaButton) {
-//        _mediaButton = [[BFPaperButton alloc] initWithRaised:YES];
-//        [self.navigationController.view addSubview:_mediaButton];
-//        
-//        [_mediaButton addTarget:self action:@selector(toggleAddView) forControlEvents:UIControlEventTouchUpInside];
-//        //        [_addButton setTitle:@"添加" forState:UIControlStateNormal];
-//        [_mediaButton setImage:[UIImage imageNamed:@"addMedia"] forState:UIControlStateNormal];
-//        [_mediaButton mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.right.equalTo(self.navigationController.view.mas_right).with.offset(-10);
-//            make.bottom.equalTo(self.navigationController.view.mas_bottom).with.offset(-64);
-//            make.width.height.equalTo(@kAddButtonHeight);
-//        }];
-//        _mediaButton.cornerRadius = kAddButtonHeight/2;
-//        _mediaButton.backgroundColor = [kAppThemeColor darkenByPercentage:0.05];
-//        _mediaButton.alpha = 1.0f;
-//        
-//    }
-//    
-//    return _mediaButton;
-//}
-
-
-
-- (CLAddView *)addView {
-    if (!_addView) {
-        _addView = [[CLAddView alloc] initWithFrame:CGRectMake(self.view.center.x, self.view.center.y, 0, 0)];
-        [self.navigationController.view addSubview:_addView];
-        _addView.hidden = NO;
-        
-        [_addView mas_makeConstraints:^(MASConstraintMaker *make) {
-            
-            make.width.equalTo(self.navigationController.view.mas_width).offset( -kAddButtonHeight);
-            make.height.equalTo(_addView.mas_width).multipliedBy(1.5);
-            make.centerX.equalTo(self.navigationController.view);
-            make.top.equalTo(self.navigationController.view.mas_bottom).offset(_addView.frame.size.height);
-        }];
-        _addView.center = CGPointMake(self.navigationController.view.center.x, CGRectGetMaxY(self.navigationController.view.frame)+self.addView.frame.size.height/2);
-        
-        _addView.backgroundColor = [UIColor clearColor];
-        [_addView initSubViews];
-        [_addView updateColor:kAppThemeColor];
-        
-        [_addView addTarget:self action:@selector(toggleAddView) forControlEvents:UIControlEventTouchUpInside];
-        
-        [_addView.ideaBtn addTarget:self action:@selector(addNewIdeaWithVideo) forControlEvents:UIControlEventTouchUpInside];
-        [_addView.showBtn addTarget:self action:@selector(addNewShowWithVideo) forControlEvents:UIControlEventTouchUpInside];
-        [_addView.routineBtn addTarget:self action:@selector(addNewRoutineWithVideo) forControlEvents:UIControlEventTouchUpInside];
-        [_addView.sleightBtn addTarget:self action:@selector(addNewSleightWithVideo) forControlEvents:UIControlEventTouchUpInside];
-        [_addView.propBtn addTarget:self action:@selector(addNewPropWithVideo) forControlEvents:UIControlEventTouchUpInside];
-        [_addView.linesBtn addTarget:self action:@selector(addNewLinesWithAudio) forControlEvents:UIControlEventTouchUpInside];
-    }
-    
-    return _addView;
 }
 
 
@@ -349,7 +270,6 @@ static NSString * const reuseIdentifier = @"Cell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self coverButton];
     self.navigationItem.titleView = self.menu;
     
 //    self.collectionView.contentInset = UIEdgeInsetsMake(10, 0, 10, 0);
@@ -365,30 +285,33 @@ static NSString * const reuseIdentifier = @"Cell";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(update:) name:kUpdateMookNotification
                                                object:nil];
     
-    [self addView];
-//    [self mediaButton];
     [self setRefreshHeader];
 }
 
 - (void)setRefreshHeader {
     
-    
     // 设置回调（一旦进入刷新状态，就调用target的action，也就是调用self的loadNewData方法）
-    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(showMenu)];
+    CLListRefreshHeader *header = [CLListRefreshHeader headerWithRefreshingBlock:^{
+        
+        [self.collectionView.mj_header endRefreshing];
+    }];
+    
+    header.endRefreshingCompletionBlock = ^ () {
+        
+        [self showMenu];
+    };
     
     // 设置文字
     [header setTitle:@"下拉可以切换笔记" forState:MJRefreshStateIdle];
     [header setTitle:@"松开马上切换笔记" forState:MJRefreshStatePulling];
     [header setTitle:@"" forState:MJRefreshStateRefreshing];
     
-    header.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhite;
     // 设置字体
     header.stateLabel.font = [UIFont systemFontOfSize:16];
     
     // 设置颜色
     header.stateLabel.textColor = [UIColor whiteColor];
     header.lastUpdatedTimeLabel.hidden = YES;
-    //    header.lastUpdatedTimeLabel.textColor = [UIColor clearColor];
     
     header.automaticallyChangeAlpha = YES;
     
@@ -473,7 +396,6 @@ static NSString * const reuseIdentifier = @"Cell";
     
 //    self.mediaButton.backgroundColor = [kAppThemeColor darkenByPercentage:0.05];
     self.menu.cellBackgroundColor = kAppThemeColor;
-    [self.addView updateColor:kAppThemeColor];
 }
 
 - (void) update:(NSNotification *)noti {
@@ -497,15 +419,7 @@ static NSString * const reuseIdentifier = @"Cell";
     
 //    self.mediaButton.hidden = YES;
     [self.menu hide];
-    [self hideAddView];
 
-}
-
-- (void)hideAddView {
-    
-    if (self.addView.center.y == self.navigationController.view.center.y) {
-        [self toggleAddView];
-    }
 }
 
 - (void)dealloc {
@@ -728,41 +642,65 @@ static NSString * const reuseIdentifier = @"Cell";
 
 #pragma mark - 新建笔记方法
 
+
 - (IBAction)toggleAddView {
     
-    POPSpringAnimation *springAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerPosition];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     
-    //弹性值
-    springAnimation.springBounciness = 10.0;
-    //弹性速度
-    springAnimation.springSpeed = 15.0;
+    UIAlertAction* addShow = [UIAlertAction actionWithTitle:NSLocalizedString(@"新建演出", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
     
-    CGPoint point = self.addView.center;
+        [self addNewShowWithVideo];
+        
+    }];
     
-    if (point.y == self.navigationController.view.center.y) {
+    UIAlertAction* addRoutine = [UIAlertAction actionWithTitle:NSLocalizedString(@"新建流程", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+
+        [self addNewRoutineWithVideo];
+       
+    }];
+    
+    UIAlertAction* addIdea = [UIAlertAction actionWithTitle:NSLocalizedString(@"新建想法", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+
+        [self addNewIdeaWithVideo];
         
-        springAnimation.toValue = [NSValue valueWithCGPoint:CGPointMake(point.x, CGRectGetMaxY(self.navigationController.view.frame)+self.addView.frame.size.height)];
-        
-        self.coverButton.enabled = NO;
-        self.coverButton.alpha = 0.0;
-        [self.addView pop_addAnimation:springAnimation forKey:@"changeposition"];
-        
-//        [_mediaButton setImage:[UIImage imageNamed:@"addMedia"] forState:UIControlStateNormal];
-        
-    }
-    else{
-        springAnimation.toValue = [NSValue valueWithCGPoint:CGPointMake(point.x, self.navigationController.view.center.y)];
-        [self.addView pop_addAnimation:springAnimation forKey:@"changeposition"];
-        
-        self.coverButton.enabled = YES;
-        self.coverButton.alpha = 0.9;
-//        [_mediaButton setImage:[UIImage imageNamed:@"cancel"] forState:UIControlStateNormal];
-    }
+    }];
+    
+    UIAlertAction* addSleight = [UIAlertAction actionWithTitle:NSLocalizedString(@"新建技巧", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+
+        [self addNewSleightWithVideo];
+
+    }];
+    
+    UIAlertAction* addProp = [UIAlertAction actionWithTitle:NSLocalizedString(@"新建道具", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+
+        [self addNewPropWithVideo];
+
+    }];
+    
+    UIAlertAction* addLines = [UIAlertAction actionWithTitle:NSLocalizedString(@"新建台词", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+
+        [self addNewLinesWithAudio];
+
+    }];
+    
+    UIAlertAction* cancel = [UIAlertAction actionWithTitle:NSLocalizedString(@"取消", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
+    }];
+    
+    [alert addAction:addShow];
+    [alert addAction:addRoutine];
+    [alert addAction:addIdea];
+    
+    [alert addAction:addSleight];
+    [alert addAction:addProp];
+    [alert addAction:addLines];
+    
+    [alert addAction:cancel];
+    
+    [self presentViewController:alert animated:YES completion:nil];
     
 }
 
 - (void)addNewShowWithVideo {
-    [self hideAddView];
 
     [[CLGetMediaTool getInstance] loadCameraFromCurrentViewController:self maximumDuration:600.0 completion:^(NSURL *videoURL, UIImage *photo) {
         [CLNewEntryTool quickAddNewShowFromCurrentController:self withVideo:videoURL orImage:photo];
@@ -770,7 +708,6 @@ static NSString * const reuseIdentifier = @"Cell";
 }
 
 - (void)addNewIdeaWithVideo {
-    [self hideAddView];
 
     [[CLGetMediaTool getInstance] loadCameraFromCurrentViewController:self maximumDuration:30.0 completion:^(NSURL *videoURL, UIImage *photo) {
         [CLNewEntryTool quickAddNewIdeaFromCurrentController:self withVideo:videoURL orImage:photo];
@@ -778,7 +715,6 @@ static NSString * const reuseIdentifier = @"Cell";
 }
 
 - (void)addNewRoutineWithVideo {
-    [self hideAddView];
 
     [[CLGetMediaTool getInstance] loadCameraFromCurrentViewController:self maximumDuration:30.0 completion:^(NSURL *videoURL, UIImage *photo) {
         [CLNewEntryTool quickAddNewRoutineFromCurrentController:self withVideo:videoURL orImage:photo];
@@ -786,7 +722,6 @@ static NSString * const reuseIdentifier = @"Cell";
 }
 
 - (void)addNewSleightWithVideo {
-    [self hideAddView];
 
     [[CLGetMediaTool getInstance] loadCameraFromCurrentViewController:self maximumDuration:30.0 completion:^(NSURL *videoURL, UIImage *photo) {
         [CLNewEntryTool quickAddNewSleightFromCurrentController:self withVideo:videoURL orImage:photo];
@@ -794,7 +729,6 @@ static NSString * const reuseIdentifier = @"Cell";
 }
 
 - (void)addNewPropWithVideo {
-    [self hideAddView];
 
     [[CLGetMediaTool getInstance] loadCameraFromCurrentViewController:self maximumDuration:30.0 completion:^(NSURL *videoURL, UIImage *photo) {
         [CLNewEntryTool quickAddNewPropFromCurrentController:self withVideo:videoURL orImage:photo];
@@ -803,7 +737,6 @@ static NSString * const reuseIdentifier = @"Cell";
 }
 
 - (void)addNewLinesWithAudio {
-    [self hideAddView];
 
     [[CLGetMediaTool getInstance] recordAudioFromCurrentController:self.tabBarController audioBlock:^(NSString *filePath) {
         [CLNewEntryTool quickAddNewLinesFromCurrentController:self withAudio:filePath];

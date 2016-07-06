@@ -120,6 +120,7 @@
 		432346901C96B42A00200833 /* CLNewEntryTextCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4323468E1C96B42A00200833 /* CLNewEntryTextCell.xib */; };
 		432346941C96B4C200200833 /* CLTextInputCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 432346921C96B4C200200833 /* CLTextInputCell.m */; };
 		432346951C96B4C200200833 /* CLTextInputCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 432346931C96B4C200200833 /* CLTextInputCell.xib */; };
+		435E47FC1D2D14A50002D157 /* CLListRefreshHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 435E47FB1D2D14A50002D157 /* CLListRefreshHeader.m */; };
 		4364861B1CE1A99000FC191B /* CLSizeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4364861A1CE1A99000FC191B /* CLSizeVC.m */; };
 		4364861F1CE1BAEA00FC191B /* CLSizeListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4364861E1CE1BAEA00FC191B /* CLSizeListVC.m */; };
 		436927261D053D400041ED9C /* CLShowCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 436927241D053D400041ED9C /* CLShowCell.m */; };
@@ -132,7 +133,6 @@
 		438342731D0FE16B0089B58E /* PFTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4383426D1D0FE16B0089B58E /* PFTableViewCell.m */; };
 		438342781D10FB4B0089B58E /* CLToolsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 438342771D10FB4B0089B58E /* CLToolsVC.m */; };
 		4383427B1D11331A0089B58E /* CLWebSiteModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4383427A1D11331A0089B58E /* CLWebSiteModel.m */; };
-		4383427E1D115E350089B58E /* CLAddView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4383427D1D115E350089B58E /* CLAddView.m */; };
 		438342811D1274F90089B58E /* CLCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 438342801D1274F90089B58E /* CLCard.m */; };
 		438342841D1277FC0089B58E /* CLDeck.m in Sources */ = {isa = PBXBuildFile; fileRef = 438342831D1277FC0089B58E /* CLDeck.m */; };
 		4383428A1D1283350089B58E /* InfiniteScrollPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 438342871D1283350089B58E /* InfiniteScrollPicker.m */; };
@@ -187,9 +187,6 @@
 		43DDCF401D1BAA01007E5CAC /* UIViewController+BlurPresenting.m in Sources */ = {isa = PBXBuildFile; fileRef = 43DDCF3F1D1BAA01007E5CAC /* UIViewController+BlurPresenting.m */; };
 		43DDCF431D1BACB2007E5CAC /* CLAudioPlayTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 43DDCF421D1BACB2007E5CAC /* CLAudioPlayTool.m */; };
 		43DDCF471D1CE8F3007E5CAC /* UIImage+Color.m in Sources */ = {isa = PBXBuildFile; fileRef = 43DDCF461D1CE8F3007E5CAC /* UIImage+Color.m */; };
-		43DDCF4A1D1CFC9D007E5CAC /* CLNotesListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 43DDCF491D1CFC9D007E5CAC /* CLNotesListVC.m */; };
-		43DDCF4E1D1D016E007E5CAC /* CLNotesListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 43DDCF4C1D1D016E007E5CAC /* CLNotesListCell.m */; };
-		43DDCF4F1D1D016E007E5CAC /* CLNotesListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43DDCF4D1D1D016E007E5CAC /* CLNotesListCell.xib */; };
 		43DF3AC81CAA78A100712D81 /* UIImage+WaterMark.m in Sources */ = {isa = PBXBuildFile; fileRef = 43DF3AC71CAA78A100712D81 /* UIImage+WaterMark.m */; };
 		43E0F7081C9EB2A2005CAD97 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 43E0F7071C9EB2A2005CAD97 /* libsqlite3.0.tbd */; };
 		43E0F7291CA0FC6E005CAD97 /* CLDataSaveTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E0F7281CA0FC6E005CAD97 /* CLDataSaveTool.m */; };
@@ -417,6 +414,8 @@
 		432346911C96B4C200200833 /* CLTextInputCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLTextInputCell.h; sourceTree = "<group>"; };
 		432346921C96B4C200200833 /* CLTextInputCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLTextInputCell.m; sourceTree = "<group>"; };
 		432346931C96B4C200200833 /* CLTextInputCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CLTextInputCell.xib; sourceTree = "<group>"; };
+		435E47FA1D2D14A50002D157 /* CLListRefreshHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLListRefreshHeader.h; sourceTree = "<group>"; };
+		435E47FB1D2D14A50002D157 /* CLListRefreshHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLListRefreshHeader.m; sourceTree = "<group>"; };
 		436486191CE1A99000FC191B /* CLSizeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLSizeVC.h; sourceTree = "<group>"; };
 		4364861A1CE1A99000FC191B /* CLSizeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLSizeVC.m; sourceTree = "<group>"; };
 		4364861D1CE1BAEA00FC191B /* CLSizeListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLSizeListVC.h; sourceTree = "<group>"; };
@@ -439,8 +438,6 @@
 		438342771D10FB4B0089B58E /* CLToolsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLToolsVC.m; sourceTree = "<group>"; };
 		438342791D11331A0089B58E /* CLWebSiteModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLWebSiteModel.h; sourceTree = "<group>"; };
 		4383427A1D11331A0089B58E /* CLWebSiteModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLWebSiteModel.m; sourceTree = "<group>"; };
-		4383427C1D115E350089B58E /* CLAddView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLAddView.h; sourceTree = "<group>"; };
-		4383427D1D115E350089B58E /* CLAddView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLAddView.m; sourceTree = "<group>"; };
 		4383427F1D1274F90089B58E /* CLCard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLCard.h; sourceTree = "<group>"; };
 		438342801D1274F90089B58E /* CLCard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLCard.m; sourceTree = "<group>"; };
 		438342821D1277FC0089B58E /* CLDeck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLDeck.h; sourceTree = "<group>"; };
@@ -545,11 +542,6 @@
 		43DDCF421D1BACB2007E5CAC /* CLAudioPlayTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLAudioPlayTool.m; sourceTree = "<group>"; };
 		43DDCF451D1CE8F3007E5CAC /* UIImage+Color.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Color.h"; sourceTree = "<group>"; };
 		43DDCF461D1CE8F3007E5CAC /* UIImage+Color.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Color.m"; sourceTree = "<group>"; };
-		43DDCF481D1CFC9D007E5CAC /* CLNotesListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLNotesListVC.h; sourceTree = "<group>"; };
-		43DDCF491D1CFC9D007E5CAC /* CLNotesListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLNotesListVC.m; sourceTree = "<group>"; };
-		43DDCF4B1D1D016E007E5CAC /* CLNotesListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLNotesListCell.h; sourceTree = "<group>"; };
-		43DDCF4C1D1D016E007E5CAC /* CLNotesListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLNotesListCell.m; sourceTree = "<group>"; };
-		43DDCF4D1D1D016E007E5CAC /* CLNotesListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CLNotesListCell.xib; sourceTree = "<group>"; };
 		43DF3AC61CAA78A100712D81 /* UIImage+WaterMark.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+WaterMark.h"; sourceTree = "<group>"; };
 		43DF3AC71CAA78A100712D81 /* UIImage+WaterMark.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+WaterMark.m"; sourceTree = "<group>"; };
 		43E0F7071C9EB2A2005CAD97 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
@@ -905,10 +897,6 @@
 				43885F781CA6A8AC00269CE1 /* CLHomeNavVC.m */,
 				439519B71CBCC14000505E5B /* CLAllItemsListVC.h */,
 				439519B81CBCC14000505E5B /* CLAllItemsListVC.m */,
-				4383427C1D115E350089B58E /* CLAddView.h */,
-				4383427D1D115E350089B58E /* CLAddView.m */,
-				43DDCF481D1CFC9D007E5CAC /* CLNotesListVC.h */,
-				43DDCF491D1CFC9D007E5CAC /* CLNotesListVC.m */,
 			);
 			name = "Notes(笔记)";
 			sourceTree = "<group>";
@@ -1052,6 +1040,8 @@
 				43C2068F1CB12BED00CEF992 /* CLMediaCollectionCell.h */,
 				43C206901CB12BED00CEF992 /* CLMediaCollectionCell.m */,
 				43C206911CB12BED00CEF992 /* CLMediaCollectionCell.xib */,
+				435E47FA1D2D14A50002D157 /* CLListRefreshHeader.h */,
+				435E47FB1D2D14A50002D157 /* CLListRefreshHeader.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -1186,9 +1176,6 @@
 				432345EE1C94054300200833 /* CLListImageCell.h */,
 				432345EF1C94054300200833 /* CLListImageCell.m */,
 				432345F01C94054300200833 /* CLListImageCell.xib */,
-				43DDCF4B1D1D016E007E5CAC /* CLNotesListCell.h */,
-				43DDCF4C1D1D016E007E5CAC /* CLNotesListCell.m */,
-				43DDCF4D1D1D016E007E5CAC /* CLNotesListCell.xib */,
 				43C206871CB10CF300CEF992 /* CLListCell.h */,
 				43C206881CB10CF300CEF992 /* CLListCell.m */,
 				43C206891CB10CF300CEF992 /* CLListCell.xib */,
@@ -1580,7 +1567,6 @@
 				439519BE1CBD26C600505E5B /* CLImportPasswordInputView.xib in Resources */,
 				4300C4431D1A9B8C0065E94E /* microphone_access@2x.png in Resources */,
 				43951A011CC5DAEA00505E5B /* Setting.storyboard in Resources */,
-				43DDCF4F1D1D016E007E5CAC /* CLNotesListCell.xib in Resources */,
 				4323462D1C94054300200833 /* CLQuickStringCell.xib in Resources */,
 				439519EB1CC0EEB900505E5B /* CLTagField.xib in Resources */,
 				43F5F7B51CB50039007BFB0C /* tag.jpg in Resources */,
@@ -1695,6 +1681,7 @@
 				43DDCF3A1D1B72E4007E5CAC /* NSString+Media.m in Sources */,
 				43FAB4E51D267BF80046997D /* CLWebViewController.m in Sources */,
 				4323467E1C9409BB00200833 /* XLBarView.m in Sources */,
+				435E47FC1D2D14A50002D157 /* CLListRefreshHeader.m in Sources */,
 				43E0F7291CA0FC6E005CAD97 /* CLDataSaveTool.m in Sources */,
 				4307A3D31D20FDDA002C3527 /* CLTextImageCell.m in Sources */,
 				432345671C9404A800200833 /* UIResponder+FirstResponder.m in Sources */,
@@ -1708,7 +1695,6 @@
 				4300C42D1D1A98EF0065E94E /* IQPlaybackDurationView.m in Sources */,
 				4307A3CD1D20FA20002C3527 /* CLTextAudioImageCell.m in Sources */,
 				432345DE1C94051A00200833 /* CLInfoModel.m in Sources */,
-				43DDCF4E1D1D016E007E5CAC /* CLNotesListCell.m in Sources */,
 				4323462C1C94054300200833 /* CLQuickStringCell.m in Sources */,
 				43E0F73D1CA10D27005CAD97 /* MJType.m in Sources */,
 				43F5F7611CB3922B007BFB0C /* CLShowInfoCell.m in Sources */,
@@ -1723,7 +1709,6 @@
 				4364861F1CE1BAEA00FC191B /* CLSizeListVC.m in Sources */,
 				43E9D0C01D19236700036DDD /* CLGetMediaTool.m in Sources */,
 				43C206921CB12BED00CEF992 /* CLMediaCollectionCell.m in Sources */,
-				43DDCF4A1D1CFC9D007E5CAC /* CLNotesListVC.m in Sources */,
 				4306BC8A1D213CEB0015F8D3 /* FKFaviconManager.m in Sources */,
 				432346801C9409BB00200833 /* XLButtonBarViewCell.m in Sources */,
 				4364861B1CE1A99000FC191B /* CLSizeVC.m in Sources */,
@@ -1769,7 +1754,6 @@
 				432346751C9409A400200833 /* XLPagerTabStripViewController.m in Sources */,
 				432345E81C94051A00200833 /* CLShowModel.m in Sources */,
 				432345B01C9404FB00200833 /* CLPropInputVC.m in Sources */,
-				4383427E1D115E350089B58E /* CLAddView.m in Sources */,
 				432345B31C9404FB00200833 /* CLQuickStringVC.m in Sources */,
 				438342981D13C6B60089B58E /* LTInfiniteScrollView.m in Sources */,
 				432346451C94055700200833 /* SMTagField.m in Sources */,

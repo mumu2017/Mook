@@ -690,7 +690,6 @@ static FMDatabase *_db;
     return arrM;
 }
 
-#warning 未完成音频方法
 + (NSMutableArray *)allAudios {
     
     FMResultSet *set = [_db executeQuery:@"select * from t_media where type=?;",@"audio"];

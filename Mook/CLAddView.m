@@ -16,9 +16,23 @@
 
 @implementation CLAddView
 
+- (instancetype)initWithFrame:(CGRect)frame {
+    
+    if (self = [super initWithFrame:frame]) {
+        
+        [self initSubViews];
+        
+    }
+    
+    return self;
+}
+
+
 - (void)initSubViews {
 
     CGFloat padding = (self.frame.size.width-kAddButtonHeight*2)/3;
+    
+    NSLog(@"padding = %lf, self.width = %lf", padding, self.frame.size.width);
     
     _ideaBtn = [[BFPaperButton alloc] initWithRaised:YES];
     [self addSubview:_ideaBtn];
