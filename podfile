@@ -9,14 +9,13 @@ target ‘Mook’ do
  pod 'SSZipArchive'
  pod 'EAIntroView', '~> 2.8.0'
  pod "Appirater"
- pod 'pop'
  pod 'Masonry' 
  pod 'BTNavigationDropdownMenu'
  pod 'DZNWebViewController'
  pod 'IQAudioRecorderController'
- pod 'BFPaperButton'
  pod 'SCRecorder'
  pod 'FDWaveformView'
  pod "HTMLReader"
+ pod 'MJRefresh'
 end
 
