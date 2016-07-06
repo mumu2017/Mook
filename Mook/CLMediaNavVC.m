@@ -17,6 +17,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    // disable掉全局收拾返回
     self.fd_interactivePopDisabled = YES;
 
 //    self.navigationBar.barTintColor = [UIColor flatSkyBlueColorDark];

@@ -376,6 +376,7 @@
         _tagField.frame = CGRectMake(0, 0, kScreenW, 55);
         
         _tagField.tagField.tagDelegate = self;
+        _tagField.tagField.delegate = self;
         [_tagField.tagField setTags:self.tags];
     }
     return _tagField;
@@ -1565,15 +1566,40 @@
 #pragma mark - textField 代理方法
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
     
-    textField.textAlignment = NSTextAlignmentLeft;
+    if (textField == self.nameTextField) {
+        
+        textField.textAlignment = NSTextAlignmentLeft;
+
+    }
     
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
     
-    textField.textAlignment = NSTextAlignmentRight;
+    if (textField == self.nameTextField) {
+        
+        textField.textAlignment = NSTextAlignmentRight;
+        
+        self.infoModel.name = textField.text;
+    }
+
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
     
-    self.infoModel.name = textField.text;
+    if (textField == self.nameTextField) {
+        
+    } else if (textField == self.tagField.tagField) {
+        
+        if(self.tagField.tagField.text.length > 0)
+            self.tagField.tagField.text = [self.tagField.tagField.text stringByAppendingString:@" "];
+        
+        [self.tagField.tagField textFieldDidChange:nil];
+    }
+    
+    [textField resignFirstResponder];
+    
+    return YES;
 }
 
 #pragma mark - tagField 代理方法

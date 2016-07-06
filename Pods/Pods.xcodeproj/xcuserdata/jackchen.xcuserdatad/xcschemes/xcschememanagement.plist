@@ -49,11 +49,6 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>FDWaveformView-FDWaveformView.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>FDWaveformView.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -75,6 +70,11 @@
 			<false/>
 		</dict>
 		<key>MBProgressHUD.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>MJRefresh.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -142,22 +142,27 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>03CB3993A1F2C19F124215819C345E0B</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>14E6E2E2484806AB62B60CA2EAD41F9B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>1D88F3D2EC92249A484522BD87F87524</key>
+		<key>21E154417075D2644AEADB991F8ED343</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>23CF27B2BA6AC7125EFFEDA8C5AA819F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>243416C36F0637D1DBF1A5C4E7E25676</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>29DD99664D189A7CA206368F493B1E0B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -172,17 +177,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>43B3DCFC1782D3C4D90EB7C04C6158C0</key>
+		<key>4807A72653DA695D7DEE184865BB05AC</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>4B264FC3CC0C747BB644ADBC20EF6763</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>4DA4A8D5B02BA61A11691025BE9A77DE</key>
+		<key>4EFAF7117079655F1C1DB467139F8184</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -202,17 +202,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>81404D0273D3B84F4FA711737C0A1888</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>871A7BA32C7B5C87DF08B9ECB4DFDC3C</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>8E87ADD4AB9D85900D80FEB8122CD688</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -242,7 +232,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>AEE18A952385821C30176695A527D2F7</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>BE7A5E8E0FDE9CA58316BC4D6568818D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C1D04E24B63C7A44BAFB535C72B6D81C</key>
 		<dict>
 			<key>primary</key>
 			<true/>

@@ -11,15 +11,16 @@ PODS:
   - EAIntroView (2.8.3):
     - EARestrictedScrollView (~> 1.1.0)
   - EARestrictedScrollView (1.1.0)
-  - FDWaveformView (0.3.1)
+  - FDWaveformView (1.0.0)
   - FMDB (2.6.2):
     - FMDB/standard (= 2.6.2)
   - FMDB/standard (2.6.2)
-  - HTMLReader (0.9.6)
+  - HTMLReader (1.0)
   - IQAudioRecorderController (1.1.0):
     - SCSiriWaveformView
   - Masonry (1.0.1)
   - MBProgressHUD (0.9.2)
+  - MJRefresh (3.1.9)
   - MWPhotoBrowser (2.1.2):
     - DACircularProgress (~> 2.3)
     - MBProgressHUD (~> 0.9)
@@ -46,6 +47,7 @@ DEPENDENCIES:
   - HTMLReader
   - IQAudioRecorderController
   - Masonry
+  - MJRefresh
   - MWPhotoBrowser
   - pop
   - SCRecorder
@@ -61,12 +63,13 @@ SPEC CHECKSUMS:
   DZNWebViewController: 8e927a5de637fe0c4104c001d5cccd4fa5621e50
   EAIntroView: e948c83e642f30010d427e643c18a6f2b529afed
   EARestrictedScrollView: b0c2a3f92fb2610bb44d71c5e4893777c89e45ef
-  FDWaveformView: 9d641a95bc0abd8af27cac4c973b015735d916f0
+  FDWaveformView: 77d5d68c5a37153e32f5b703cad5f8a50ec2ed6a
   FMDB: 854a0341b4726e53276f2a8996f06f1b80f9259a
-  HTMLReader: 7e21488ee378afc56ccade8af35840c4e03e434c
+  HTMLReader: 8024d86f188a38da8d188d2433003ce652ca444a
   IQAudioRecorderController: 3a39f09c589c420b0bad09297b8294af08089f5c
   Masonry: a1a931a0d08870ed8ae415a2ea5ea68ebcac77df
   MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
+  MJRefresh: c5f1f1653e5a1b932c90f78074f2bc86f3f9bd5e
   MWPhotoBrowser: 5836d7aa041dc05a13de380c246826578adc5ea5
   pop: f667631a5108a2e60d9e8797c9b32ddaf2080bce
   SCRecorder: bbb521dbc222908876ec9cd9156bbc8a893bed44
@@ -76,6 +79,6 @@ SPEC CHECKSUMS:
   SWTableViewCell: 2a94aadc9d47b2b611fa064566bf57948b95b579
   UIColor+BFPaperColors: 03101fe6c10ed00c6daae7c26553f1de41500853
 
-PODFILE CHECKSUM: b00c2d387776050030b423049c8d1d0e1b7e28ac
+PODFILE CHECKSUM: c48c38a85967230a87068ad188659bc5cf1dfb8c
 
 COCOAPODS: 1.0.1

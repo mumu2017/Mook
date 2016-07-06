@@ -27,6 +27,7 @@
 #import "CLLinesObjModel.h"
 #import "CLTableBackView.h"
 #import "CLAddView.h"
+#import "MJRefresh.h"
 
 //#import "MASonry.h"
 #import "BFPaperButton.h"
@@ -64,16 +65,6 @@ typedef enum {
 @end
 
 @implementation CLMediaVC
-
-- (void)setMediaType:(MediaType )mediaType {
-    
-    if (_mediaType != mediaType) {
-        
-        _mediaType = mediaType;
-        [self update];
-
-    }
-}
 
 - (NSMutableArray *)allMedia {
     if (!_allMedia) {
@@ -169,7 +160,13 @@ typedef enum {
         NSArray *items = [NSArray arrayWithObjects:NSLocalizedString(@"视频", nil), NSLocalizedString(@"图片", nil), NSLocalizedString(@"全部", nil), nil];
         _menu = [[BTNavigationDropdownMenu alloc] initWithTitle:items[0] items:items];
         self.mediaType = kMediaTypeVideos;
+        
+        __weak typeof(self) weakself = self;
+
         [_menu setDidSelectItemAtIndexHandler:^(NSInteger index) {
+            
+            typeof(self) strongself = weakself;
+
             switch (index) {
                 case 0:
                     _mediaType = kMediaTypeVideos;
@@ -184,7 +181,26 @@ typedef enum {
                     break;
             }
             
-            [[NSNotificationCenter defaultCenter] postNotificationName:kUpdateDataNotification object:nil];
+            strongself.allMedia = nil;
+            strongself.photos = nil;
+            strongself.dataList = nil;
+            
+            [strongself allMedia];
+            [strongself photos];
+            [strongself dataList];
+            
+            [strongself.collectionView reloadData];
+            
+            if ([strongself.collectionView.dataSource collectionView:strongself.collectionView numberOfItemsInSection:0] > 0) {
+                
+                [strongself.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UICollectionViewScrollPositionNone animated:NO];
+            }
+            
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [strongself prepareVisibleCellsForAnimation];
+                [strongself animateVisibleCells];
+            });
+
         }];
         
         _menu.cellBackgroundColor = kAppThemeColor;
@@ -327,6 +343,9 @@ typedef enum {
 
 static NSString * const reuseIdentifier = @"Cell";
 
+
+#pragma mark - VC 生命周期
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -348,6 +367,94 @@ static NSString * const reuseIdentifier = @"Cell";
     
     [self addView];
 //    [self mediaButton];
+    [self setRefreshHeader];
+}
+
+- (void)setRefreshHeader {
+    
+    
+    // 设置回调（一旦进入刷新状态，就调用target的action，也就是调用self的loadNewData方法）
+    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(showMenu)];
+    
+    // 设置文字
+    [header setTitle:@"下拉可以切换笔记" forState:MJRefreshStateIdle];
+    [header setTitle:@"松开马上切换笔记" forState:MJRefreshStatePulling];
+    [header setTitle:@"" forState:MJRefreshStateRefreshing];
+    
+    header.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhite;
+    // 设置字体
+    header.stateLabel.font = [UIFont systemFontOfSize:16];
+    
+    // 设置颜色
+    header.stateLabel.textColor = [UIColor whiteColor];
+    header.lastUpdatedTimeLabel.hidden = YES;
+    //    header.lastUpdatedTimeLabel.textColor = [UIColor clearColor];
+    
+    header.automaticallyChangeAlpha = YES;
+    
+    // 设置刷新控件
+    self.collectionView.mj_header = header;
+}
+
+- (void)showMenu {
+    [self.collectionView.mj_header endRefreshing];
+    [self.menu show];
+}
+
+#pragma mark - Private Cell的动画效果
+
+- (void)prepareVisibleCellsForAnimation {
+    
+    for (int i = 0; i < [self.collectionView.visibleCells count]; i++) {
+        CLMediaCollectionCell * cell = (CLMediaCollectionCell *) [self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:i inSection:0]];
+        cell.frame = CGRectMake(CGRectGetMinX(cell.frame)-CGRectGetWidth(self.collectionView.bounds), cell.frame.origin.y, CGRectGetWidth(cell.bounds), CGRectGetHeight(cell.bounds));
+        cell.alpha = 0.f;
+    }
+    
+//    NSArray *indexArr = [self.collectionView indexPathsForVisibleItems];
+//    NSIndexPath *topIndexPath = [indexArr firstObject];
+//    NSIndexPath *bottomIndexPath = [indexArr lastObject];
+//    
+//    for (NSInteger i = topIndexPath.row; i < bottomIndexPath.row+1; i++) {
+//        CLMediaCollectionCell * cell = (CLMediaCollectionCell *) [self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:i inSection:0]];
+//
+//        cell.frame = CGRectMake(-CGRectGetWidth(cell.bounds), cell.frame.origin.y, CGRectGetWidth(cell.bounds), CGRectGetHeight(cell.bounds));
+//        cell.alpha = 0.f;
+//    }
+}
+
+- (void)animateVisibleCells {
+    
+    
+    for (int i = 0; i < [self.collectionView.visibleCells count]; i++) {
+        CLMediaCollectionCell * cell = (CLMediaCollectionCell *) [self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:i inSection:0]];
+        
+        cell.alpha = 1.f;
+        [UIView animateWithDuration:0.15f
+                              delay:i/3 * 0.1
+                            options:UIViewAnimationOptionCurveEaseOut
+                         animations:^{
+                             cell.frame = CGRectMake(CGRectGetMinX(cell.frame)+CGRectGetWidth(self.collectionView.bounds), cell.frame.origin.y, CGRectGetWidth(cell.bounds), CGRectGetHeight(cell.bounds));
+                         }
+                         completion:nil];
+    }
+    
+//    NSArray *indexArr = [self.collectionView indexPathsForVisibleItems];
+//    NSIndexPath *topIndexPath = [indexArr firstObject];
+//    NSIndexPath *bottomIndexPath = [indexArr lastObject];
+//    
+//    for (NSInteger i = topIndexPath.row; i < bottomIndexPath.row+1; i++) {
+//        CLMediaCollectionCell * cell = (CLMediaCollectionCell *) [self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:i inSection:0]];
+//        
+//        cell.alpha = 1.f;
+//        [UIView animateWithDuration:0.2f
+//                              delay:(i-topIndexPath.row) * 0.2
+//                            options:UIViewAnimationOptionCurveEaseOut
+//                         animations:^{
+//                             cell.frame = CGRectMake(0.f, cell.frame.origin.y, CGRectGetWidth(cell.bounds), CGRectGetHeight(cell.bounds));
+//                         }
+//                         completion:nil];
+//    }
 }
 
 - (void) update {
@@ -622,6 +729,7 @@ static NSString * const reuseIdentifier = @"Cell";
 #pragma mark - 新建笔记方法
 
 - (IBAction)toggleAddView {
+    
     POPSpringAnimation *springAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerPosition];
     
     //弹性值

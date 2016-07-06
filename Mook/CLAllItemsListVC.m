@@ -43,6 +43,7 @@
 @class BTNavigationDropdownMenu;
 
 #import "BFPaperButton.h"
+#import "MJRefresh.h"
 
 @interface CLAllItemsListVC ()<SWTableViewCellDelegate, MBProgressHUDDelegate, UIDocumentInteractionControllerDelegate>
 
@@ -87,58 +88,6 @@
     }
     return _coverButton;
 }
-
-//- (BFPaperButton *)addButton {
-//    if (!_addButton) {
-//        _addButton = [[BFPaperButton alloc] initWithRaised:YES];
-//        [self.navigationController.view addSubview:_addButton];
-//        
-//        [_addButton addTarget:self action:@selector(addNewEntry:) forControlEvents:UIControlEventTouchUpInside];
-//        [_addButton setImage:[UIImage imageNamed:@"plus"] forState:UIControlStateNormal];
-//        [_addButton mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.right.equalTo(self.navigationController.view.mas_right).with.offset(-10);
-//            make.bottom.equalTo(self.navigationController.view.mas_bottom).with.offset(-64);
-//            make.width.height.equalTo(@kAddButtonHeight);
-//        }];
-//        _addButton.cornerRadius = kAddButtonHeight/2;
-//        _addButton.backgroundColor = [kAppThemeColor darkenByPercentage:0.05];
-//        _addButton.alpha = 1.0f;
-//        
-//    }
-//    
-//    return _addButton;
-//}
-//
-//
-//- (BFPaperButton *)mediaButton {
-//    if (!_mediaButton) {
-//        _mediaButton = [[BFPaperButton alloc] initWithRaised:YES];
-//        [self.navigationController.view addSubview:_mediaButton];
-//        
-//        [_mediaButton addTarget:self action:@selector(addNewEntryWithMedia) forControlEvents:UIControlEventTouchUpInside];
-//        //        [_addButton setTitle:@"添加" forState:UIControlStateNormal];
-//        if (self.listType == kListTypeLines) {
-//            [_mediaButton setImage:[UIImage imageNamed:@"addAudio"] forState:UIControlStateNormal];
-//
-//        } else {
-//            [_mediaButton setImage:[UIImage imageNamed:@"addMedia"] forState:UIControlStateNormal];
-//
-//        }
-//        [_mediaButton mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.right.equalTo(self.navigationController.view.mas_right).with.offset(-10);
-//            make.bottom.equalTo(self.addButton.mas_top).with.offset(-15);
-//            make.width.height.equalTo(@kAddButtonHeight);
-//        }];
-//        _mediaButton.cornerRadius = kAddButtonHeight/2;
-//        _mediaButton.backgroundColor = [kAppThemeColor darkenByPercentage:0.05];
-//        _mediaButton.alpha = 1.0f;
-//        _mediaButton.hidden = (self.listType == kListTypeAll);
-//
-//
-//    }
-//    
-//    return _mediaButton;
-//}
 
 - (CLAddView *)addView {
     if (!_addView) {
@@ -230,11 +179,15 @@
             
             if ([strongself.tableView.dataSource tableView:strongself.tableView numberOfRowsInSection:0] > 0) {
                 [strongself.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:NO];
-
+                
             }
 
-            [strongself prepareVisibleCellsForAnimation];
-            [strongself animateVisibleCells];
+            
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [strongself prepareVisibleCellsForAnimation];
+                [strongself animateVisibleCells];
+            });
+
         }];
         
         _menu.cellBackgroundColor = kAppThemeColor;
@@ -298,7 +251,7 @@
     self.tableView.backgroundColor = [UIColor whiteColor];
     self.tableView.rowHeight = kListCellHeight;
     self.tableView.tableFooterView = [UIView new];
-//    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, kAddButtonHeight*2, 0);
+//    self.tableView.contentInset = UIEdgeInsetsMake(10, 0, 10, 0);
     
     self.navigationItem.titleView = self.menu;
     
@@ -316,9 +269,39 @@
                                                object:nil];
     
     [self addView];
-//    [self addButton];
-//    [self mediaButton];
 
+    [self setRefreshHeader];
+}
+
+- (void)setRefreshHeader {
+    
+
+    // 设置回调（一旦进入刷新状态，就调用target的action，也就是调用self的loadNewData方法）
+    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(showMenu)];
+    
+    // 设置文字
+    [header setTitle:@"下拉可以切换笔记" forState:MJRefreshStateIdle];
+    [header setTitle:@"松开马上切换笔记" forState:MJRefreshStatePulling];
+    [header setTitle:@"" forState:MJRefreshStateRefreshing];
+    
+    header.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhite;
+    // 设置字体
+    header.stateLabel.font = [UIFont systemFontOfSize:16];
+    
+    // 设置颜色
+    header.stateLabel.textColor = kAppThemeColor;
+    header.lastUpdatedTimeLabel.hidden = YES;
+//    header.lastUpdatedTimeLabel.textColor = [UIColor clearColor];
+    
+    header.automaticallyChangeAlpha = YES;
+    
+    // 设置刷新控件
+    self.tableView.mj_header = header;
+}
+
+- (void)showMenu {
+    [self.tableView.mj_header endRefreshing];
+    [self.menu show];
 }
 
 - (void)toggleAddView {
@@ -357,6 +340,10 @@
     if (noti.object == self) return;
     
 //    self.addButton.backgroundColor = [kAppThemeColor darkenByPercentage:0.05];
+    
+    MJRefreshNormalHeader * header = (MJRefreshNormalHeader *)self.tableView.mj_header;
+    header.stateLabel.textColor = kAppThemeColor;
+
     self.menu.cellBackgroundColor = kAppThemeColor;
 //    self.mediaButton.backgroundColor = self.addButton.backgroundColor;
     
@@ -423,7 +410,7 @@
         CLListImageCell * cell = (CLListImageCell *) [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForItem:i inSection:0]];
         
         cell.alpha = 1.f;
-        [UIView animateWithDuration:0.2f
+        [UIView animateWithDuration:0.15f
                               delay:(i-topIndexPath.row) * 0.1
                             options:UIViewAnimationOptionCurveEaseOut
                          animations:^{
