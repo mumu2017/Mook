@@ -1321,7 +1321,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2X7-4M-W3z" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-12936" y="-4028.25"/>
+            <point key="canvasLocation" x="-13011" y="-3905.25"/>
         </scene>
         <!--Edting ManageVC-->
         <scene sceneID="Cby-fe-S5c">
@@ -1565,13 +1565,13 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c9k-8l-LxL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-12504" y="-4923"/>
+            <point key="canvasLocation" x="-12993" y="-4896"/>
         </scene>
-        <!--工具箱-->
+        <!--发现-->
         <scene sceneID="ENp-8f-x2r">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="a3j-i3-6iI" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="工具箱" image="iconlibraryLine" selectedImage="iconlibraryFill" id="JG5-Ax-guD"/>
+                    <tabBarItem key="tabBarItem" title="发现" image="iconlibraryLine" selectedImage="iconlibraryFill" id="JG5-Ax-guD"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="FzY-UC-DJK">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -1586,24 +1586,14 @@
             </objects>
             <point key="canvasLocation" x="-12154.5" y="-4445.25"/>
         </scene>
-        <!--ToolsVC-->
+        <!--WebVC-->
         <scene sceneID="8Iw-aS-wzM">
             <objects>
-                <tableViewController id="iz5-xj-AUP" customClass="CLToolsVC" sceneMemberID="viewController">
+                <tableViewController id="iz5-xj-AUP" customClass="CLWebVC" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="nEI-Nc-wX4">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ID" id="a3u-iz-RV8">
-                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="a3u-iz-RV8" id="s5K-pX-3lv">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="iz5-xj-AUP" id="LxT-ip-fM1"/>
                             <outlet property="delegate" destination="iz5-xj-AUP" id="7WZ-Ex-pHb"/>
@@ -1613,7 +1603,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WC0-QS-mTS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-11166" y="-4277.25"/>
+            <point key="canvasLocation" x="-11487" y="-4305.75"/>
         </scene>
         <!--多媒体-->
         <scene sceneID="C5G-wl-0Wc">

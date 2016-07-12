@@ -52,7 +52,7 @@
     
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"ID"];
     
-    self.title = @"Magic in Web";
+    self.title = @"发现";
     
     self.extendedLayoutIncludesOpaqueBars = YES;
     self.edgesForExtendedLayout = UIRectEdgeBottom;
@@ -101,6 +101,8 @@
     CLWebSiteModel *model = self.webSiteList[indexPath.row];
 
     _webVC = [[CLWebViewController alloc] initWithURL:model.url];
+    
+    _webVC.hidesBottomBarWhenPushed = YES;
     
     [self.navigationController pushViewController:_webVC animated:YES];
 }

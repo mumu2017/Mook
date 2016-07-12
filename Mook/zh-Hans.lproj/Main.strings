@@ -89,8 +89,8 @@
 /* Class = "UINavigationItem"; title = "导入"; ObjectID = "I8N-8V-IS7"; */
 "I8N-8V-IS7.title" = "导入";
 
-/* Class = "UITabBarItem"; title = "工具"; ObjectID = "JG5-Ax-guD"; */
-"JG5-Ax-guD.title" = "工具";
+/* Class = "UITabBarItem"; title = "发现"; ObjectID = "JG5-Ax-guD"; */
+"JG5-Ax-guD.title" = "发现";
 
 /* Class = "UILabel"; text = "主题色"; ObjectID = "JXg-c4-CCQ"; */
 "JXg-c4-CCQ.text" = "主题色";
@@ -202,6 +202,9 @@
 
 /* Class = "UILabel"; text = "说明"; ObjectID = "l60-bq-03D"; */
 "l60-bq-03D.text" = "说明";
+
+/* Class = "UILabel"; text = "Detail"; ObjectID = "m7Q-fo-EnD"; */
+"m7Q-fo-EnD.text" = "Detail";
 
 /* Class = "UILabel"; text = "Detail"; ObjectID = "mc8-zK-47L"; */
 "mc8-zK-47L.text" = "Detail";

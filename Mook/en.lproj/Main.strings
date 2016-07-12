@@ -53,7 +53,7 @@
 /* Class = "UINavigationItem"; title = "Title"; ObjectID = "Ave-VD-eNz"; */
 "Ave-VD-eNz.title" = "Title";
 
-/* Class = "UILabel"; text = "想法"; ObjectID = "BM9-IE-Ckv"; */
+/* Class = "UILabel"; text = "Idea"; ObjectID = "BM9-IE-Ckv"; */
 "BM9-IE-Ckv.text" = "Idea";
 
 /* Class = "UILabel"; text = "About"; ObjectID = "CYd-co-fVL"; */
@@ -89,8 +89,8 @@
 /* Class = "UINavigationItem"; title = "Import"; ObjectID = "I8N-8V-IS7"; */
 "I8N-8V-IS7.title" = "Import";
 
-/* Class = "UITabBarItem"; title = "Tools"; ObjectID = "JG5-Ax-guD"; */
-"JG5-Ax-guD.title" = "Tools";
+/* Class = "UITabBarItem"; title = "Discover"; ObjectID = "JG5-Ax-guD"; */
+"JG5-Ax-guD.title" = "Discover";
 
 /* Class = "UILabel"; text = "Theme Color"; ObjectID = "JXg-c4-CCQ"; */
 "JXg-c4-CCQ.text" = "Theme Color";
@@ -202,6 +202,9 @@
 
 /* Class = "UILabel"; text = "Details"; ObjectID = "l60-bq-03D"; */
 "l60-bq-03D.text" = "Details";
+
+/* Class = "UILabel"; text = "Detail"; ObjectID = "m7Q-fo-EnD"; */
+"m7Q-fo-EnD.text" = "Detail";
 
 /* Class = "UILabel"; text = "Detail"; ObjectID = "mc8-zK-47L"; */
 "mc8-zK-47L.text" = "Detail";
