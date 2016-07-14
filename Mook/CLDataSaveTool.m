@@ -22,6 +22,7 @@
 #import "CLPrepModel.h"
 #import "CLPerformModel.h"
 #import "CLNotesModel.h"
+#import "CLWebSiteModel.h"
 
 @implementation CLDataSaveTool
 
@@ -63,6 +64,14 @@ static FMDatabase *_db;
 //        NSLog(@"创建Media索引表成功");
     }else{
 //        NSLog(@"创建Media索引表失败");
+    }
+    
+    // 创建WebSite表格
+    BOOL flag4 = [_db executeUpdate:@"create table if not exists t_website (id integer primary key autoincrement,type text,name text,url_string text,time_stamp text,dict blob);"];
+    if (flag4) {
+        //        NSLog(@"创建Web索引表成功");
+    }else{
+        //        NSLog(@"创建Web索引表失败");
     }
 }
 
@@ -805,6 +814,94 @@ static FMDatabase *_db;
 //        NSLog(@"删除成功");
     }else{
 //        NSLog(@"删除失败");
+    }
+}
+
+#pragma mark - WebSite部分
+
++ (NSMutableArray<CLWebSiteModel *> *)allWebSites {
+    
+    // 进入程序第一次获取的查询语句
+    FMResultSet *set = [_db executeQuery:@"select * from t_website;"];
+    NSMutableArray *arrM = [NSMutableArray array];
+    CLWebSiteModel *site;
+    while ([set next]) {
+        
+        NSString *name = [set stringForColumn:@"name"];
+        NSString *urlString = [set stringForColumn:@"url_string"];
+        NSString *timeStamp = [set stringForColumn:@"time_stamp"];
+
+        site = [CLWebSiteModel modelWithTitle:name withUrlString:urlString];
+        [site setTimeStamp:timeStamp];
+        
+        [arrM addObject:site];
+        
+    }
+    
+    return arrM;
+}
+
+
++ (CLWebSiteModel *)webSiteByName:(NSString *)name {
+    
+    FMResultSet *set = [_db executeQuery:@"select * from t_website wherename=?;", name];
+    CLWebSiteModel *site = nil;
+
+    while ([set next]) {
+        
+        NSString *name = [set stringForColumn:@"name"];
+        NSString *urlString = [set stringForColumn:@"url_string"];
+        
+        NSString *timeStamp = [set stringForColumn:@"time_stamp"];
+        
+        site = [CLWebSiteModel modelWithTitle:name withUrlString:urlString];
+        [site setTimeStamp:timeStamp];
+    }
+    return site;
+}
+
++ (BOOL)updateWebSite:(CLWebSiteModel *)webSite{
+    
+    NSString *name = webSite.title;
+    NSString *urlString = webSite.url.absoluteString;
+    NSString *timeStamp = webSite.timeStamp;
+    
+    BOOL flag;
+    
+    FMResultSet *set = [_db executeQuery:@"select * from t_website where time_stamp=?", timeStamp];
+    // 如果[set next]不为空,则表示查询到至少一个结果.所以更新数据.
+    if ([set next]) {
+        
+        flag = [_db executeUpdate:@"update t_website set name=?, url_string=? where time_stamp=?", name, urlString, timeStamp];
+        if (flag) {
+            //            NSLog(@"更新成功");
+        }else{
+            //            NSLog(@"更新失败");
+        }
+        
+    } else {    // 如果为空,则表示没有查询到任何符合条件的结果,所以插入数据.
+        flag = [_db executeUpdate:@"insert into t_website (name, time_stamp, url_string) values(?,?,?)",name, timeStamp, urlString];
+        if (flag) {
+            //            NSLog(@"插入成功");
+        }else{
+            //            NSLog(@"插入失败");
+        }
+    }
+    
+    return flag;
+
+}
+
+
++ (void)deleteWebSite:(CLWebSiteModel *)webSite {
+    
+    NSString *timeStamp = webSite.timeStamp;
+
+    BOOL flag = [_db executeUpdate:@"delete from t_website where time_stamp=?", timeStamp];
+    if (flag) {
+        //        NSLog(@"删除成功");
+    }else{
+        //        NSLog(@"删除失败");
     }
 }
 

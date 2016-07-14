@@ -16,6 +16,14 @@
 // 网站地址
 @property (strong, nonatomic) NSURL *url;
 
+@property (nonatomic, copy) NSDate *date;
+
+@property (nonatomic, copy) NSString *timeStamp;
+
+@property (nonatomic, strong) NSMutableArray <NSString*> *tags;
+
+@property (nonatomic, assign) BOOL isStarred;
+
 + (CLWebSiteModel *)modelWithTitle:(NSString *)title withUrlString:(NSString *)urlString;
 
 @end

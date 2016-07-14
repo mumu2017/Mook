@@ -20,6 +20,7 @@
 #import "CLLinesObjModel.h"
 
 #import "UIImage+Color.h"
+#import "MASonry.h"
 
 @implementation CLListImageCell
 
@@ -31,7 +32,7 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     
-    self.containerView.layer.cornerRadius = 3.0;
+    self.containerView.layer.cornerRadius = 0.f;
 }
 
 - (void)setModel:(id)modelUnknown utilityButtons:(NSArray *)rightButtons delegate:(id<SWTableViewCellDelegate>)delegate {
@@ -99,9 +100,6 @@
         });
     });
     
-    
-    
-    
 }
 
 - (void)configureCellWithImage:(UIImage *)image title:(NSString *)title content:(NSString *)content time:(NSString *)time {
@@ -121,18 +119,23 @@
         self.letterLabel.hidden = YES;
         self.iconView.hidden = NO;
         self.iconView.image = image;
+        
+        self.containerView.hidden = NO;
+
     } else {
         
 //        UIImage *colorImage = [UIImage createImageWithColor:kAppThemeColor];
 //        self.iconView.image = colorImage;
         
-        self.iconView.hidden = YES;
-        self.letterLabel.hidden = NO;
-        self.containerView.backgroundColor = [UIColor blackColor];
-        NSString *firstLetter = [self.title substringToIndex:1];
+        self.containerView.hidden = YES;
         
-        firstLetter = [firstLetter uppercaseString];
-        self.letterLabel.text = firstLetter;
+//        self.iconView.hidden = YES;
+//        self.letterLabel.hidden = NO;
+//        self.containerView.backgroundColor = [UIColor blackColor];
+//        NSString *firstLetter = [self.title substringToIndex:1];
+//        
+//        firstLetter = [firstLetter uppercaseString];
+//        self.letterLabel.text = firstLetter;
     }
 }
 

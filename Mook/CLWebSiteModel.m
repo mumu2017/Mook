@@ -19,4 +19,22 @@
     return model;
 }
 
+- (instancetype)init {
+    self = [super init];
+    
+    if (self) {
+        [self timeStamp];
+    }
+    
+    return self;
+}
+
+- (NSString *)timeStamp {
+    if (_timeStamp == nil) {
+        _timeStamp = kTimestamp;
+    }
+    
+    return _timeStamp;
+}
+
 @end

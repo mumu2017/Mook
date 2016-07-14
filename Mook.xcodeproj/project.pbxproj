@@ -50,7 +50,6 @@
 		43068C001CB74EF600BA1A57 /* libz.1.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 43F5F7AA1CB4B03F007BFB0C /* libz.1.tbd */; };
 		43068C011CB74EF600BA1A57 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 43F5F76B1CB3E447007BFB0C /* libz.tbd */; };
 		43068C041CB7546400BA1A57 /* ISRDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 43068C031CB7546400BA1A57 /* ISRDataHelper.m */; };
-		4306BC8A1D213CEB0015F8D3 /* FKFaviconManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4306BC891D213CEB0015F8D3 /* FKFaviconManager.m */; };
 		4307A3CA1D20F9FB002C3527 /* CLTextAudioCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4307A3C91D20F9FB002C3527 /* CLTextAudioCell.m */; };
 		4307A3CD1D20FA20002C3527 /* CLTextAudioImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4307A3CC1D20FA20002C3527 /* CLTextAudioImageCell.m */; };
 		4307A3D01D20FD5F002C3527 /* CLTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4307A3CF1D20FD5F002C3527 /* CLTextCell.m */; };
@@ -270,8 +269,6 @@
 		43068C031CB7546400BA1A57 /* ISRDataHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ISRDataHelper.m; sourceTree = "<group>"; };
 		43068C061CB7B9D000BA1A57 /* UINavigationBar+Awesome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+Awesome.h"; sourceTree = "<group>"; };
 		43068C071CB7B9D000BA1A57 /* UINavigationBar+Awesome.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+Awesome.m"; sourceTree = "<group>"; };
-		4306BC881D213CEB0015F8D3 /* FKFaviconManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FKFaviconManager.h; sourceTree = "<group>"; };
-		4306BC891D213CEB0015F8D3 /* FKFaviconManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FKFaviconManager.m; sourceTree = "<group>"; };
 		4307A3C81D20F9FB002C3527 /* CLTextAudioCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLTextAudioCell.h; sourceTree = "<group>"; };
 		4307A3C91D20F9FB002C3527 /* CLTextAudioCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLTextAudioCell.m; sourceTree = "<group>"; };
 		4307A3CB1D20FA20002C3527 /* CLTextAudioImageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLTextAudioImageCell.h; sourceTree = "<group>"; };
@@ -724,7 +721,7 @@
 				439519CF1CC0908A00505E5B /* Info.plist */,
 				4323453B1C94045000200833 /* AppDelegate.h */,
 				4323453C1C94045000200833 /* AppDelegate.m */,
-				438342751D10FB1A0089B58E /* Tools */,
+				438342751D10FB1A0089B58E /* Discover发现 */,
 				432345BF1C94050B00200833 /* 模型类 */,
 				43E0F7221CA0F897005CAD97 /* Tools(业务类) */,
 				43DF3AC31CAA48B000712D81 /* Home */,
@@ -885,7 +882,7 @@
 			name = "Notes(笔记)";
 			sourceTree = "<group>";
 		};
-		438342751D10FB1A0089B58E /* Tools */ = {
+		438342751D10FB1A0089B58E /* Discover发现 */ = {
 			isa = PBXGroup;
 			children = (
 				4383428F1D139E2B0089B58E /* CLWebVC.h */,
@@ -894,10 +891,8 @@
 				43FAB4E41D267BF80046997D /* CLWebViewController.m */,
 				438342791D11331A0089B58E /* CLWebSiteModel.h */,
 				4383427A1D11331A0089B58E /* CLWebSiteModel.m */,
-				4306BC881D213CEB0015F8D3 /* FKFaviconManager.h */,
-				4306BC891D213CEB0015F8D3 /* FKFaviconManager.m */,
 			);
-			name = Tools;
+			name = "Discover发现";
 			sourceTree = "<group>";
 		};
 		438342851D12831F0089B58E /* InfiniteScrollPicker */ = {
@@ -1671,7 +1666,6 @@
 				4364861F1CE1BAEA00FC191B /* CLSizeListVC.m in Sources */,
 				43E9D0C01D19236700036DDD /* CLGetMediaTool.m in Sources */,
 				43C206921CB12BED00CEF992 /* CLMediaCollectionCell.m in Sources */,
-				4306BC8A1D213CEB0015F8D3 /* FKFaviconManager.m in Sources */,
 				432346801C9409BB00200833 /* XLButtonBarViewCell.m in Sources */,
 				4364861B1CE1A99000FC191B /* CLSizeVC.m in Sources */,
 				43F5F7A31CB4978C007BFB0C /* WJTouchID.m in Sources */,

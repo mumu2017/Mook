@@ -8,6 +8,7 @@
 
 #import "CLWebViewController.h"
 #import "UIButton+HitTest.h"
+#import "HTMLReader.h"
 
 #define kBackButtonHitTestEdgeInsets UIEdgeInsetsMake(-15, -15, -15, -15)
 
@@ -17,7 +18,8 @@
     UIBarButtonItem *_backItem;
     UIBarButtonItem *_closeItem;
     UIBarButtonItem *_negativeSpacer;
-    
+    UIBarButtonItem *_collectItem;
+    NSInteger _scale;
 }
 
 @end
@@ -27,6 +29,7 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
+    _scale = 15;
     
     self.extendedLayoutIncludesOpaqueBars = YES;
     self.edgesForExtendedLayout = UIRectEdgeBottom;
@@ -53,7 +56,10 @@
 
     _closeItem = [[UIBarButtonItem alloc] initWithTitle:@"关闭" style:UIBarButtonItemStylePlain target:self action:@selector(closeWebVC)];
     
+    _collectItem = [[UIBarButtonItem alloc] initWithTitle:@"收藏" style:UIBarButtonItemStylePlain target:self action:@selector(collectWebNote)];
+
     self.navigationItem.leftBarButtonItems = @[_negativeSpacer, _backItem];
+    self.navigationItem.rightBarButtonItem = _collectItem;
 
     // 设置webView的属性
     self.showPageTitleAndURL = NO;
@@ -71,6 +77,46 @@
     self.reloadButtonImage = [[UIImage imageNamed:@"dzn_icn_toolbar_reload" inBundle:[NSBundle bundleForClass:[DZNWebViewController class]] compatibleWithTraitCollection:nil] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     self.stopButtonImage = [[UIImage imageNamed:@"dzn_icn_toolbar_stop" inBundle:[NSBundle bundleForClass:[DZNWebViewController class]] compatibleWithTraitCollection:nil] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     self.navigationController.toolbar.tintColor = kAppThemeColor;
+}
+
+#define DEFAULTWEBVIEWFONTSIZE 14
+
+- (void)collectWebNote {
+    
+
+    NSString *link = [@"http://www.readability.com/m?url=" stringByAppendingString:self.URL.absoluteString];
+    NSURL *newUrl = [NSURL URLWithString:link];
+    NSURLRequest *request = [NSURLRequest requestWithURL:newUrl cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:60*24];
+
+    [self.webView loadRequest:request];
+    
+    
+//    NSString *jsForTextSize = [[NSString alloc] initWithFormat:@"document.getElementsByTagName('body')[0].style.webkitTextSizeAdjust= '%ld%%'", _scale*100/DEFAULTWEBVIEWFONTSIZE];
+//    [self.webView evaluateJavaScript:jsForTextSize completionHandler:^(id _Nullable object, NSError * _Nullable error) {
+//        _scale += 5;
+//    }];
+    
+    
+    // Load a web page.
+//
+//    NSURLSession *session = [NSURLSession sharedSession];
+//    [[session dataTaskWithURL:self.URL completionHandler:
+//      ^(NSData *data, NSURLResponse *response, NSError *error) {
+//          NSString *contentType = nil;
+//          if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
+//              NSDictionary *headers = [(NSHTTPURLResponse *)response allHeaderFields];
+//              contentType = headers[@"Content-Type"];
+//          }
+//          HTMLDocument *home = [HTMLDocument documentWithData:data
+//                                            contentTypeHeader:contentType];
+//          HTMLElement *div = [home firstNodeMatchingSelector:@".repository-meta-content"];
+//          NSCharacterSet *whitespace = [NSCharacterSet whitespaceAndNewlineCharacterSet];
+//          
+//          NSString *string = [div.textContent stringByTrimmingCharactersInSet:whitespace];
+//          
+//          NSLog(@"webNote == %@", string);
+//          // => A WHATWG-compliant HTML parser in Objective-C.
+//      }] resume];
 }
 
 - (void)goBackward {

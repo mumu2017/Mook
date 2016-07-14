@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-@class CLRoutineModel, CLShowModel, CLIdeaObjModel, CLSleightObjModel, CLPropObjModel, CLLinesObjModel, CLEffectModel;
+@class CLRoutineModel, CLShowModel, CLIdeaObjModel, CLSleightObjModel, CLPropObjModel, CLLinesObjModel, CLEffectModel, CLWebSiteModel;
 
 @interface CLDataSaveTool : NSObject
 
@@ -87,5 +87,15 @@
 + (void)deleteMediaInEffectModel:(CLEffectModel *)effectModel prepModelList:(NSMutableArray *)prepModelList performModelList:(NSMutableArray *)performModelList;
 //+ (void)deleteVideoByName:(NSString *)name;
 //+ (void)deleteImageByName:(NSString *)name;
+
+#pragma mark - 网站部分
+
++ (NSMutableArray <CLWebSiteModel *>*)allWebSites;
+
+// 获取单个模型
++ (CLWebSiteModel *)webSiteByName:(NSString *)name;
+
++ (BOOL)updateWebSite:(CLWebSiteModel *)webSite;
++ (void)deleteWebSite:(CLWebSiteModel *)webSite;
 
 @end
