@@ -661,13 +661,13 @@
             
             CLTextAudioCell *cell = [self.tableView dequeueReusableCellWithIdentifier:kTextAudioCell forIndexPath:indexPath];
             
-            [cell setAttributedString:[self.effectModel.effect styledString]  audioName:self.effectModel.audio playBlock:^(NSString *audioName, FDWaveformView *waveformView) {
-                
-//                [self quickPlay:audioName waveformView:waveformView];
-                
-            } audioBlock:^(NSString *audioName) {
-                [self playAudio:audioName];
-            }];
+//            [cell setAttributedString:[self.effectModel.effect styledString]  audioName:self.effectModel.audio playBlock:^(NSString *audioName, FDWaveformView *waveformView) {
+//                
+////                [self quickPlay:audioName waveformView:waveformView];
+//                
+//            } audioBlock:^(NSString *audioName) {
+//                [self playAudio:audioName];
+//            }];
             
             return cell;
             // 有文字,图片/视频
@@ -690,20 +690,20 @@
         } else if (self.effectModel.isWithAudio && (self.effectModel.isWithImage || self.effectModel.isWithVideo)) {
             
             CLTextAudioImageCell *cell = [self.tableView dequeueReusableCellWithIdentifier:kTextAudioImageCell forIndexPath:indexPath];
-            
-            [cell setAttributedString:[self.effectModel.effect styledString] audioName:self.effectModel.audio audioBlock:^(NSString *audioName) {
-                [self playAudio:audioName];
-                
-            } imageName:self.effectModel.image imageBlock:^(NSString *imageName) {
-                
-                NSInteger index = 0;
-                [self showPhotoBrowser:index];
-                
-            } videoName:self.effectModel.video videoBlock:^(NSString *videoName) {
-                
-                NSInteger index = 0;
-                [self showPhotoBrowser:index];
-            }];
+//            
+//            [cell setAttributedString:[self.effectModel.effect styledString] audioName:self.effectModel.audio audioBlock:^(NSString *audioName) {
+//                [self playAudio:audioName];
+//                
+//            } imageName:self.effectModel.image imageBlock:^(NSString *imageName) {
+//                
+//                NSInteger index = 0;
+//                [self showPhotoBrowser:index];
+//                
+//            } videoName:self.effectModel.video videoBlock:^(NSString *videoName) {
+//                
+//                NSInteger index = 0;
+//                [self showPhotoBrowser:index];
+//            }];
             
             return cell;
         }
@@ -760,13 +760,13 @@
                 
                 CLTextAudioCell *cell = [self.tableView dequeueReusableCellWithIdentifier:kTextAudioCell forIndexPath:indexPath];
 
-                [cell setAttributedString:[model.prep styledString]  audioName:model.audio playBlock:^(NSString *audioName, FDWaveformView *waveformView) {
-                    
-//                    [self quickPlay:audioName waveformView:waveformView];
-                    
-                } audioBlock:^(NSString *audioName) {
-                    [self playAudio:audioName];
-                }];
+//                [cell setAttributedString:[model.prep styledString]  audioName:model.audio playBlock:^(NSString *audioName, FDWaveformView *waveformView) {
+//                    
+////                    [self quickPlay:audioName waveformView:waveformView];
+//                    
+//                } audioBlock:^(NSString *audioName) {
+//                    [self playAudio:audioName];
+//                }];
 
                 
                 return cell;
@@ -791,19 +791,19 @@
                 
                 CLTextAudioImageCell *cell = [self.tableView dequeueReusableCellWithIdentifier:kTextAudioImageCell forIndexPath:indexPath];
                 
-                [cell setAttributedString:[model.prep styledString] audioName:model.audio audioBlock:^(NSString *audioName) {
-                    [self playAudio:audioName];
-                    
-                } imageName:model.image imageBlock:^(NSString *imageName) {
-                    
-                    NSInteger index = [self getButtonTagWithPrepModel:model];
-                    [self showPhotoBrowser:index];
-                    
-                } videoName:model.video videoBlock:^(NSString *videoName) {
-                    
-                    NSInteger index = [self getButtonTagWithPrepModel:model];
-                    [self showPhotoBrowser:index];
-                }];
+//                [cell setAttributedString:[model.prep styledString] audioName:model.audio audioBlock:^(NSString *audioName) {
+//                    [self playAudio:audioName];
+//                    
+//                } imageName:model.image imageBlock:^(NSString *imageName) {
+//                    
+//                    NSInteger index = [self getButtonTagWithPrepModel:model];
+//                    [self showPhotoBrowser:index];
+//                    
+//                } videoName:model.video videoBlock:^(NSString *videoName) {
+//                    
+//                    NSInteger index = [self getButtonTagWithPrepModel:model];
+//                    [self showPhotoBrowser:index];
+//                }];
                 
                 return cell;
             }
@@ -828,13 +828,13 @@
                 
                 CLTextAudioCell *cell = [self.tableView dequeueReusableCellWithIdentifier:kTextAudioCell forIndexPath:indexPath];
                 
-                [cell setAttributedString:[model.prep styledString]  audioName:model.audio playBlock:^(NSString *audioName, FDWaveformView *waveformView) {
-                    
-//                    [self quickPlay:audioName waveformView:waveformView];
-                    
-                } audioBlock:^(NSString *audioName) {
-                    [self playAudio:audioName];
-                }];
+//                [cell setAttributedString:[model.prep styledString]  audioName:model.audio playBlock:^(NSString *audioName, FDWaveformView *waveformView) {
+//                    
+////                    [self quickPlay:audioName waveformView:waveformView];
+//                    
+//                } audioBlock:^(NSString *audioName) {
+//                    [self playAudio:audioName];
+//                }];
                 
                 return cell;
                 // 有文字,图片/视频
@@ -857,20 +857,20 @@
             } else if (model.isWithAudio && (model.isWithImage || model.isWithVideo)) {
                 
                 CLTextAudioImageCell *cell = [self.tableView dequeueReusableCellWithIdentifier:kTextAudioImageCell forIndexPath:indexPath];
-                
-                [cell setAttributedString:[model.prep styledString] audioName:model.audio audioBlock:^(NSString *audioName) {
-                    [self playAudio:audioName];
-                    
-                } imageName:model.image imageBlock:^(NSString *imageName) {
-                    
-                    NSInteger index = [self getButtonTagWithPrepModel:model];
-                    [self showPhotoBrowser:index];
-                    
-                } videoName:model.video videoBlock:^(NSString *videoName) {
-                    
-                    NSInteger index = [self getButtonTagWithPrepModel:model];
-                    [self showPhotoBrowser:index];
-                }];
+//                
+//                [cell setAttributedString:[model.prep styledString] audioName:model.audio audioBlock:^(NSString *audioName) {
+//                    [self playAudio:audioName];
+//                    
+//                } imageName:model.image imageBlock:^(NSString *imageName) {
+//                    
+//                    NSInteger index = [self getButtonTagWithPrepModel:model];
+//                    [self showPhotoBrowser:index];
+//                    
+//                } videoName:model.video videoBlock:^(NSString *videoName) {
+//                    
+//                    NSInteger index = [self getButtonTagWithPrepModel:model];
+//                    [self showPhotoBrowser:index];
+//                }];
                 
                 return cell;
             }
@@ -891,14 +891,14 @@
         } else if (model.isWithAudio && !model.isWithImage && !model.isWithVideo) {
             
             CLTextAudioCell *cell = [self.tableView dequeueReusableCellWithIdentifier:kTextAudioCell forIndexPath:indexPath];
-
-            [cell setAttributedString:[model.perform styledString]  audioName:model.audio playBlock:^(NSString *audioName, FDWaveformView *waveformView) {
-                
-//                [self quickPlay:audioName waveformView:waveformView];
-                
-            } audioBlock:^(NSString *audioName) {
-                [self playAudio:audioName];
-            }];
+//
+//            [cell setAttributedString:[model.perform styledString]  audioName:model.audio playBlock:^(NSString *audioName, FDWaveformView *waveformView) {
+//                
+////                [self quickPlay:audioName waveformView:waveformView];
+//                
+//            } audioBlock:^(NSString *audioName) {
+//                [self playAudio:audioName];
+//            }];
             
             return cell;
             // 有文字,图片/视频
@@ -922,19 +922,19 @@
             
             CLTextAudioImageCell *cell = [self.tableView dequeueReusableCellWithIdentifier:kTextAudioImageCell forIndexPath:indexPath];
             
-            [cell setAttributedString:[model.perform styledString] audioName:model.audio audioBlock:^(NSString *audioName) {
-                [self playAudio:audioName];
-                
-            } imageName:model.image imageBlock:^(NSString *imageName) {
-                
-                NSInteger index = [self getButtonTagWithPerformModel:model];
-                [self showPhotoBrowser:index];
-                
-            } videoName:model.video videoBlock:^(NSString *videoName) {
-                
-                NSInteger index = [self getButtonTagWithPerformModel:model];
-                [self showPhotoBrowser:index];
-            }];
+//            [cell setAttributedString:[model.perform styledString] audioName:model.audio audioBlock:^(NSString *audioName) {
+//                [self playAudio:audioName];
+//                
+//            } imageName:model.image imageBlock:^(NSString *imageName) {
+//                
+//                NSInteger index = [self getButtonTagWithPerformModel:model];
+//                [self showPhotoBrowser:index];
+//                
+//            } videoName:model.video videoBlock:^(NSString *videoName) {
+//                
+//                NSInteger index = [self getButtonTagWithPerformModel:model];
+//                [self showPhotoBrowser:index];
+//            }];
             
             return cell;
         }
@@ -955,13 +955,13 @@
             
             CLTextAudioCell *cell = [self.tableView dequeueReusableCellWithIdentifier:kTextAudioCell forIndexPath:indexPath];
 
-            [cell setAttributedString:[model.notes styledString]  audioName:model.audio playBlock:^(NSString *audioName, FDWaveformView *waveformView) {
-                
-//                [self quickPlay:audioName waveformView:waveformView];
-                
-            } audioBlock:^(NSString *audioName) {
-                [self playAudio:audioName];
-            }];
+//            [cell setAttributedString:[model.notes styledString]  audioName:model.audio playBlock:^(NSString *audioName, FDWaveformView *waveformView) {
+//                
+////                [self quickPlay:audioName waveformView:waveformView];
+//                
+//            } audioBlock:^(NSString *audioName) {
+//                [self playAudio:audioName];
+//            }];
             
             
             return cell;

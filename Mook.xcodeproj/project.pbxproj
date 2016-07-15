@@ -192,6 +192,7 @@
 		43E0F73F1CA10D27005CAD97 /* NSObject+MJIvar.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E0F7371CA10D27005CAD97 /* NSObject+MJIvar.m */; };
 		43E0F7401CA10D27005CAD97 /* NSObject+MJKeyValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E0F7391CA10D27005CAD97 /* NSObject+MJKeyValue.m */; };
 		43E7EE941D38B4A000D22E9B /* CLWhatIsMagicVCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E7EE931D38B4A000D22E9B /* CLWhatIsMagicVCViewController.m */; };
+		43E7EE971D38D45900D22E9B /* CLAudioView.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E7EE961D38D45800D22E9B /* CLAudioView.m */; };
 		43E9D0C01D19236700036DDD /* CLGetMediaTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E9D0BF1D19236700036DDD /* CLGetMediaTool.m */; };
 		43EEE7D61CACD3ED00F0BCCF /* CLNewShowNavVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 43EEE7D51CACD3ED00F0BCCF /* CLNewShowNavVC.m */; };
 		43EEE7D91CAD0B5E00F0BCCF /* CLRoutineChooseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 43EEE7D81CAD0B5E00F0BCCF /* CLRoutineChooseVC.m */; };
@@ -546,6 +547,8 @@
 		43E0F7391CA10D27005CAD97 /* NSObject+MJKeyValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSObject+MJKeyValue.m"; path = "MJExtension/NSObject+MJKeyValue.m"; sourceTree = "<group>"; };
 		43E7EE921D38B4A000D22E9B /* CLWhatIsMagicVCViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLWhatIsMagicVCViewController.h; sourceTree = "<group>"; };
 		43E7EE931D38B4A000D22E9B /* CLWhatIsMagicVCViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLWhatIsMagicVCViewController.m; sourceTree = "<group>"; };
+		43E7EE951D38D45800D22E9B /* CLAudioView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLAudioView.h; sourceTree = "<group>"; };
+		43E7EE961D38D45800D22E9B /* CLAudioView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLAudioView.m; sourceTree = "<group>"; };
 		43E9D0BE1D19236700036DDD /* CLGetMediaTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLGetMediaTool.h; sourceTree = "<group>"; };
 		43E9D0BF1D19236700036DDD /* CLGetMediaTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLGetMediaTool.m; sourceTree = "<group>"; };
 		43EEE7D41CACD3ED00F0BCCF /* CLNewShowNavVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLNewShowNavVC.h; sourceTree = "<group>"; };
@@ -1361,6 +1364,8 @@
 				4307A3CF1D20FD5F002C3527 /* CLTextCell.m */,
 				4307A3D11D20FDDA002C3527 /* CLTextImageCell.h */,
 				4307A3D21D20FDDA002C3527 /* CLTextImageCell.m */,
+				43E7EE951D38D45800D22E9B /* CLAudioView.h */,
+				43E7EE961D38D45800D22E9B /* CLAudioView.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -1708,6 +1713,7 @@
 				4323467F1C9409BB00200833 /* XLButtonBarView.m in Sources */,
 				4323456A1C9404A800200833 /* UITextView+Tools.m in Sources */,
 				432345B61C9404FB00200833 /* CLSettingNavVC.m in Sources */,
+				43E7EE971D38D45900D22E9B /* CLAudioView.m in Sources */,
 				439519C41CBF886C00505E5B /* FCFileManager.m in Sources */,
 				432345A51C9404FB00200833 /* CLEdtingManageVC.m in Sources */,
 				432345AF1C9404FB00200833 /* CLPropChooseNavVC.m in Sources */,

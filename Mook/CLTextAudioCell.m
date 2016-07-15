@@ -7,7 +7,6 @@
 //
 
 #import "CLTextAudioCell.h"
-#import "FDWaveformView.h"
 
 @implementation CLTextAudioCell
 
@@ -17,9 +16,11 @@
     if (self) {
         self.contentView.clipsToBounds = YES;
         self.backgroundColor = kCellBgColor;
+
         [self contentLabel];
-        [self audioButton];
-        [self waveformView];
+        [self audioView];
+        
+        self.audioView.audioPlayMode = kAudioPlayModeReady;
 
     }
     return self;
@@ -32,8 +33,9 @@
         self.contentView.clipsToBounds = YES;
         
         [self contentLabel];
-        [self audioButton];
-        [self waveformView];
+        [self audioView];
+        
+        self.audioView.audioPlayMode = kAudioPlayModeReady;
     }
     return self;
 }
@@ -55,152 +57,40 @@
     return _contentLabel;
 }
 
-- (UIButton *)playButton {
-    if (!_playButton) {
-        _playButton = [[UIButton alloc] init];
-        [self.contentView addSubview:_playButton];
-        [_playButton mas_remakeConstraints:^(MASConstraintMaker *make) {
-            
+- (CLAudioView *)audioView {
+    
+    if (!_audioView) {
+        _audioView = [[CLAudioView alloc] init];
+        [self.contentView addSubview:_audioView];
+        [_audioView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.contentLabel.mas_bottom).offset(20);
-            make.left.equalTo(self.contentLabel);
-            make.bottom.equalTo(self.contentView).offset(-20);
-            make.height.width.equalTo(@44);
-        }];
-    }
-    
-    _playButton.titleLabel.font = kFontSys14;
-    
-    [_playButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    _playButton.backgroundColor = [UIColor blueColor];
-    
-    return _playButton;
-}
-
-- (UIButton *)audioButton {
-    if (!_audioButton) {
-        _audioButton = [[UIButton alloc] init];
-        [self.waveformView addSubview:_audioButton];
-        [_audioButton mas_remakeConstraints:^(MASConstraintMaker *make) {
-            
-            make.edges.equalTo(self.waveformView);
-            
-        }];
-    }
-    
-    _audioButton.titleLabel.font = kFontSys14;
-    
-    [_audioButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    _audioButton.backgroundColor = [UIColor clearColor];
-    
-    return _audioButton;
-}
-
-- (FDWaveformView *)waveformView {
-    if (!_waveformView) {
-        _waveformView = [[FDWaveformView alloc] init];
-        [self.contentView addSubview:_waveformView];
-        
-        [_waveformView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.contentLabel.mas_bottom).offset(20);
-            make.left.equalTo(self.playButton.mas_right).offset(20);
-            make.right.equalTo(self.contentLabel);
-            make.bottom.equalTo(self.contentView).offset(-20);
+            make.left.right.equalTo(self.contentView);
             make.height.equalTo(@44);
+            make.bottom.equalTo(self.contentView).offset(-20);
         }];
-        
-        _waveformView.wavesColor = [UIColor whiteColor];
-        _waveformView.backgroundColor = [UIColor grayColor];
-        _waveformView.doesAllowScroll = NO;
-        _waveformView.doesAllowScrubbing = NO;
-        _waveformView.doesAllowStretch = NO;
-        _waveformView.layer.cornerRadius = 1.0;
-        
     }
-    return _waveformView;
+    
+    return _audioView;
 }
+
+
 
 - (void)setAttributedString:(NSAttributedString *)text audioName:(NSString *)audioName playBlock:(PlayBlock)playBlock audioBlock:(AudioBlock)audioBlock
 {
-    _audioName = audioName;
-    _audioBlock = audioBlock;
-    _playBlock = playBlock;
-    
     
     self.contentLabel.attributedText = text;
-    
-    [self.audioButton addTarget:self action:@selector(playAudio) forControlEvents:UIControlEventTouchUpInside];
-    
-    [self.playButton addTarget:self action:@selector(quickPlay) forControlEvents:UIControlEventTouchUpInside];
-    
-    dispatch_async(dispatch_get_global_queue(0, 0), ^{
-        NSString *duration = [audioName getDurationForNamedAudio];
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.audioButton setTitle:duration forState:UIControlStateNormal];
-//            [self.audioButton setImage:[UIImage imageNamed:@"PlayButtonOverlayLarge"] forState:UIControlStateNormal];
-        });
-    });
-    
-    self.waveformView.audioURL = [NSURL fileURLWithPath:[audioName getNamedAudio]];
+    self.audioView.audioName = audioName;
+    self.audioView.audioBlock = audioBlock;
+    self.audioView.playBlock = playBlock;
     
 }
 
-
-- (void)quickPlay {
-    
-    _playBlock(_audioName, self.waveformView);
-}
-
-- (void)playAudio {
-    
-    _audioBlock(_audioName);
-}
 
 - (instancetype)init {
     
     if (self = [super init]) {
         self.backgroundColor = kCellBgColor;
         self.contentView.clipsToBounds = YES;
-        
-    }
-    return self;
-}
-
-
-- (BOOL)isWithAudio {
-    if (self.audioName.length == 0) {
-        return NO;
-    }
-    
-    NSString *path = [[NSString audioPath] stringByAppendingPathComponent:self.audioName];
-    
-    BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:path];
-    
-    return fileExists;
-}
-
-- (void)awakeFromNib {
-    // Initialization code
-    self.backgroundColor = kCellBgColor;
-}
-
--(id)initWithCoder:(NSCoder *)aDecoder
-{
-    self = [super initWithCoder:aDecoder];
-    if (self) {
-        
-        self.backgroundColor = kCellBgColor;
-        
-    }
-    return self;
-    
-}
-
-- (id)awakeAfterUsingCoder:(NSCoder *)aDecoder {
-    
-    self = [super awakeAfterUsingCoder:aDecoder];
-    if (self) {
-        self.backgroundColor = kCellBgColor;
         
     }
     return self;
