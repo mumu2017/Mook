@@ -198,7 +198,7 @@ typedef enum {
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.tableView.backgroundView = self.tableBackView;
-    self.tableView.backgroundColor = [UIColor whiteColor];
+    self.tableView.backgroundColor = [UIColor flatWhiteColor];
     self.tableView.rowHeight = kListCellHeight;
     self.tableView.tableFooterView = [UIView new];
 //    self.tableView.contentInset = UIEdgeInsetsMake(10, 0, 10, 0);
@@ -243,7 +243,7 @@ typedef enum {
     header.stateLabel.font = [UIFont systemFontOfSize:16];
     
     // 设置颜色
-    header.stateLabel.textColor = kAppThemeColor;
+//    header.stateLabel.textColor = kAppThemeColor;
     header.lastUpdatedTimeLabel.hidden = YES;
     
     header.automaticallyChangeAlpha = YES;
@@ -263,8 +263,8 @@ typedef enum {
     
 //    self.addButton.backgroundColor = [kAppThemeColor darkenByPercentage:0.05];
     
-    MJRefreshNormalHeader * header = (MJRefreshNormalHeader *)self.tableView.mj_header;
-    header.stateLabel.textColor = kAppThemeColor;
+//    MJRefreshNormalHeader * header = (MJRefreshNormalHeader *)self.tableView.mj_header;
+//    header.stateLabel.textColor = kAppThemeColor;
 
     self.menu.cellBackgroundColor = kAppThemeColor;
 //    self.mediaButton.backgroundColor = self.addButton.backgroundColor;
