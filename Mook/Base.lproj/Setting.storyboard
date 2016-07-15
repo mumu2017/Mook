@@ -90,7 +90,7 @@
         <!--What is Magic?-->
         <scene sceneID="01V-oJ-8sX">
             <objects>
-                <viewController storyboardIdentifier="magicVC" id="Pzo-yf-WOF" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="magicVC" id="Pzo-yf-WOF" customClass="CLWhatIsMagicVCViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="B7d-Jc-RW8"/>
                         <viewControllerLayoutGuide type="bottom" id="oVr-Ld-zCf"/>
@@ -114,8 +114,8 @@
                         </subviews>
                         <color key="backgroundColor" red="0.111818932" green="0.11183650050000001" blue="0.1118125319" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="oVr-Ld-zCf" firstAttribute="top" secondItem="fr1-PX-6WE" secondAttribute="bottom" id="5xN-cv-osO"/>
-                            <constraint firstItem="fr1-PX-6WE" firstAttribute="top" secondItem="B7d-Jc-RW8" secondAttribute="bottom" id="jLm-JJ-0l8"/>
+                            <constraint firstItem="fr1-PX-6WE" firstAttribute="top" secondItem="B7d-Jc-RW8" secondAttribute="bottom" constant="5" id="8jT-GO-Cvd"/>
+                            <constraint firstItem="oVr-Ld-zCf" firstAttribute="top" secondItem="fr1-PX-6WE" secondAttribute="bottom" constant="5" id="fEf-36-xtO"/>
                             <constraint firstItem="fr1-PX-6WE" firstAttribute="leading" secondItem="t5v-9E-ot2" secondAttribute="leadingMargin" id="jZN-j9-eEA"/>
                             <constraint firstItem="fr1-PX-6WE" firstAttribute="trailing" secondItem="t5v-9E-ot2" secondAttribute="trailingMargin" id="ujD-0N-Ruc"/>
                         </constraints>
@@ -124,10 +124,10 @@
                                 <exclude reference="fr1-PX-6WE"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="5xN-cv-osO"/>
-                                <exclude reference="jLm-JJ-0l8"/>
+                                <exclude reference="8jT-GO-Cvd"/>
                                 <exclude reference="jZN-j9-eEA"/>
                                 <exclude reference="ujD-0N-Ruc"/>
+                                <exclude reference="fEf-36-xtO"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -135,10 +135,10 @@
                                 <include reference="fr1-PX-6WE"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="5xN-cv-osO"/>
-                                <include reference="jLm-JJ-0l8"/>
+                                <include reference="8jT-GO-Cvd"/>
                                 <include reference="jZN-j9-eEA"/>
                                 <include reference="ujD-0N-Ruc"/>
+                                <include reference="fEf-36-xtO"/>
                             </mask>
                         </variation>
                     </view>

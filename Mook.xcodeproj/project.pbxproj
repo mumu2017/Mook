@@ -191,6 +191,7 @@
 		43E0F73E1CA10D27005CAD97 /* NSObject+MJCoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E0F7351CA10D27005CAD97 /* NSObject+MJCoding.m */; };
 		43E0F73F1CA10D27005CAD97 /* NSObject+MJIvar.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E0F7371CA10D27005CAD97 /* NSObject+MJIvar.m */; };
 		43E0F7401CA10D27005CAD97 /* NSObject+MJKeyValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E0F7391CA10D27005CAD97 /* NSObject+MJKeyValue.m */; };
+		43E7EE941D38B4A000D22E9B /* CLWhatIsMagicVCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E7EE931D38B4A000D22E9B /* CLWhatIsMagicVCViewController.m */; };
 		43E9D0C01D19236700036DDD /* CLGetMediaTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E9D0BF1D19236700036DDD /* CLGetMediaTool.m */; };
 		43EEE7D61CACD3ED00F0BCCF /* CLNewShowNavVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 43EEE7D51CACD3ED00F0BCCF /* CLNewShowNavVC.m */; };
 		43EEE7D91CAD0B5E00F0BCCF /* CLRoutineChooseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 43EEE7D81CAD0B5E00F0BCCF /* CLRoutineChooseVC.m */; };
@@ -543,6 +544,8 @@
 		43E0F7371CA10D27005CAD97 /* NSObject+MJIvar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSObject+MJIvar.m"; path = "MJExtension/NSObject+MJIvar.m"; sourceTree = "<group>"; };
 		43E0F7381CA10D27005CAD97 /* NSObject+MJKeyValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSObject+MJKeyValue.h"; path = "MJExtension/NSObject+MJKeyValue.h"; sourceTree = "<group>"; };
 		43E0F7391CA10D27005CAD97 /* NSObject+MJKeyValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSObject+MJKeyValue.m"; path = "MJExtension/NSObject+MJKeyValue.m"; sourceTree = "<group>"; };
+		43E7EE921D38B4A000D22E9B /* CLWhatIsMagicVCViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLWhatIsMagicVCViewController.h; sourceTree = "<group>"; };
+		43E7EE931D38B4A000D22E9B /* CLWhatIsMagicVCViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLWhatIsMagicVCViewController.m; sourceTree = "<group>"; };
 		43E9D0BE1D19236700036DDD /* CLGetMediaTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLGetMediaTool.h; sourceTree = "<group>"; };
 		43E9D0BF1D19236700036DDD /* CLGetMediaTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLGetMediaTool.m; sourceTree = "<group>"; };
 		43EEE7D41CACD3ED00F0BCCF /* CLNewShowNavVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLNewShowNavVC.h; sourceTree = "<group>"; };
@@ -1166,6 +1169,7 @@
 				432345931C9404FB00200833 /* CLSettingNavVC.m */,
 				432345941C9404FB00200833 /* CLSettingVC.h */,
 				432345951C9404FB00200833 /* CLSettingVC.m */,
+				43E7EE911D38B48500D22E9B /* WhatIsMagic */,
 				4364861C1CE1BAD400FC191B /* Size */,
 				43951A001CC530B200505E5B /* Password */,
 				439519F91CC51F1600505E5B /* Language */,
@@ -1315,6 +1319,15 @@
 				43E0F7391CA10D27005CAD97 /* NSObject+MJKeyValue.m */,
 			);
 			name = MJ;
+			sourceTree = "<group>";
+		};
+		43E7EE911D38B48500D22E9B /* WhatIsMagic */ = {
+			isa = PBXGroup;
+			children = (
+				43E7EE921D38B4A000D22E9B /* CLWhatIsMagicVCViewController.h */,
+				43E7EE931D38B4A000D22E9B /* CLWhatIsMagicVCViewController.m */,
+			);
+			name = WhatIsMagic;
 			sourceTree = "<group>";
 		};
 		43F5F75B1CB391F5007BFB0C /* Content */ = {
@@ -1651,6 +1664,7 @@
 				43F5F7651CB3A4EE007BFB0C /* NSAttributedString+Tools.m in Sources */,
 				4300C42D1D1A98EF0065E94E /* IQPlaybackDurationView.m in Sources */,
 				4307A3CD1D20FA20002C3527 /* CLTextAudioImageCell.m in Sources */,
+				43E7EE941D38B4A000D22E9B /* CLWhatIsMagicVCViewController.m in Sources */,
 				432345DE1C94051A00200833 /* CLInfoModel.m in Sources */,
 				4323462C1C94054300200833 /* CLQuickStringCell.m in Sources */,
 				43E0F73D1CA10D27005CAD97 /* MJType.m in Sources */,
