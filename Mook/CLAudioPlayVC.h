@@ -7,11 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-@class FDWaveformView;
+@class FDWaveformView, AVAudioPlayer;
 
 @interface CLAudioPlayVC : UIViewController
 
 @property (strong, nonatomic) NSString * _Nonnull audioPath;
+
+//Playing
+@property (strong, nonatomic) AVAudioPlayer * _Nullable audioPlayer;
 
 @property(nonatomic,assign) UIBarStyle barStyle;
 

@@ -20,7 +20,7 @@
         [self contentLabel];
         [self audioView];
         
-        self.audioView.audioPlayMode = kAudioPlayModeReady;
+        self.audioView.audioPlayMode = kAudioPlayModeNotLoaded;
 
     }
     return self;
@@ -35,7 +35,7 @@
         [self contentLabel];
         [self audioView];
         
-        self.audioView.audioPlayMode = kAudioPlayModeReady;
+        self.audioView.audioPlayMode = kAudioPlayModeNotLoaded;
     }
     return self;
 }
@@ -47,7 +47,7 @@
         [_contentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.contentView).offset(15);
             make.left.equalTo(self.contentView).offset(20);
-            make.right.equalTo(self.contentView).offset(-20);
+//            make.right.equalTo(self.contentView).offset(-20);
             make.bottom.lessThanOrEqualTo(self.contentView).offset(-10);
         }];
         _contentLabel.numberOfLines = 0;
@@ -63,17 +63,15 @@
         _audioView = [[CLAudioView alloc] init];
         [self.contentView addSubview:_audioView];
         [_audioView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.contentLabel.mas_bottom).offset(20);
-            make.left.right.equalTo(self.contentView);
-            make.height.equalTo(@44);
-            make.bottom.equalTo(self.contentView).offset(-20);
+
+            make.centerY.equalTo(self.contentLabel);
+            make.left.equalTo(self.contentLabel.mas_right);
+            make.right.equalTo(self.contentView);
         }];
     }
     
     return _audioView;
 }
-
-
 
 - (void)setAttributedString:(NSAttributedString *)text audioName:(NSString *)audioName playBlock:(PlayBlock)playBlock audioBlock:(AudioBlock)audioBlock
 {

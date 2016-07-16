@@ -28,13 +28,23 @@
 #import "UIViewController+BlurPresenting.h"
 
 #import <AVFoundation/AVFoundation.h>
-#import "FDWaveformView.h"
+#import "CLAudioView.h"
 
 @interface CLShowVC ()<SWTableViewCellDelegate, MWPhotoBrowserDelegate, AVAudioPlayerDelegate>
 {
     AVAudioPlayer *_audioPlayer;
     CADisplayLink *_playProgressDisplayLink;
-    FDWaveformView * _waveformView;
+
+    CLAudioView *_audioView;
+    
+    UIBarButtonItem *_flexibleSpace;
+    
+    UIBarButtonItem *_playItem;
+    UIBarButtonItem *_pauseItem;
+    UIBarButtonItem *_detailItem;
+    UIBarButtonItem *_stopItem;
+    
+    UIProgressView *_progressView;
 }
 
 @property (nonatomic, strong) NSMutableArray *routineModelList;
@@ -225,7 +235,36 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(update) name:kUpdateDataNotification
                                                object:nil];
 
+    [self initToolBarItems];
+    
 }
+
+
+- (void)initToolBarItems {
+    
+    self.navigationController.toolbar.tintColor = kMenuBackgroundColor;
+    
+    _flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    
+    // 播放状态
+    _stopItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"stop_playing"] style:UIBarButtonItemStylePlain target:self action:@selector(stopAction)];
+    
+    _playItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemPlay target:self action:@selector(playAction)];
+    
+    _pauseItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemPause target:self action:@selector(pauseAction)];
+    
+    _detailItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"more"] style:UIBarButtonItemStylePlain target:self action:@selector(detailAction)];
+    
+    //进度条
+    _progressView = [[UIProgressView alloc] init];
+    
+    _progressView.backgroundColor = [UIColor clearColor];
+    
+    _progressView.progressTintColor = kAppThemeColor;
+    _progressView.tintColor = [UIColor whiteColor];
+    
+}
+
 
 - (void) update {
     // 重新刷新所有数据
@@ -345,13 +384,16 @@
                 
                 CLTextAudioCell *cell = [self.tableView dequeueReusableCellWithIdentifier:kTextAudioCell forIndexPath:indexPath];
                 
-//                [cell setAttributedString:text audioName:self.showModel.effectModel.audio playBlock:^(NSString *audioName, FDWaveformView *waveformView) {
-//                    
-//                    [self quickPlay:audioName waveformView:waveformView];
-//                    
-//                }  audioBlock:^(NSString *audioName) {
-//                    [self playAudio:audioName];
-//                }];
+                [cell setAttributedString:text audioName:self.showModel.effectModel.audio playBlock:^(CLAudioView *audioView) {
+                    
+                    [self quickPlayWithAudioView:audioView];
+                    
+                } audioBlock:^(NSString *audioName) {
+                    [self playAudio:audioName];
+                }];
+                
+                [self setAudioViewStatusBeforeDisplay:cell.audioView];
+
    
                 return cell;
                 // 有文字,图片/视频
@@ -375,19 +417,27 @@
                 
                 CLTextAudioImageCell *cell = [self.tableView dequeueReusableCellWithIdentifier:kTextAudioImageCell forIndexPath:indexPath];
                 
-//                [cell setAttributedString:text audioName:self.showModel.effectModel.audio audioBlock:^(NSString *audioName) {
-//                    [self playAudio:audioName];
-//                    
-//                } imageName:self.showModel.effectModel.image imageBlock:^(NSString *imageName) {
-//                    
-//                    NSInteger index = [self getTagWithMediaName:self.showModel.effectModel.image];
-//                    [self showPhotoBrowser:index];
-//                    
-//                } videoName:self.showModel.effectModel.video videoBlock:^(NSString *videoName) {
-//                    
-//                    NSInteger index = [self getTagWithMediaName:self.showModel.effectModel.video];
-//                    [self showPhotoBrowser:index];
-//                }];
+                [cell setAttributedString:text audioName:self.showModel.effectModel.audio playBlock:^(CLAudioView *audioView) {
+                    
+                    [self quickPlayWithAudioView:audioView];
+                    
+                } audioBlock:^(NSString *audioName) {
+                    
+                    [self playAudio:audioName];
+                    
+                } imageName:self.showModel.effectModel.image imageBlock:^(NSString *imageName) {
+                    
+                    NSInteger index = 0;
+                    [self showPhotoBrowser:index];
+                    
+                } videoName:self.showModel.effectModel.video videoBlock:^(NSString *videoName) {
+                    
+                    NSInteger index = 0;
+                    [self showPhotoBrowser:index];
+                }];
+
+                
+                [self setAudioViewStatusBeforeDisplay:cell.audioView];
                 
                 return cell;
             }
@@ -501,63 +551,176 @@
 
 }
 
-#pragma mark -Audio 方法
+#pragma mark - Audio播放方法
 - (void)playAudio:(NSString *)audioName {
     
     if (_audioPlayer.isPlaying) {
-        [_audioPlayer stop];
         
+        [self pauseAction];
     }
-    [CLAudioPlayTool playAudioFromCurrentController:self audioPath:[audioName getNamedAudio]];
+    
+    [CLAudioPlayTool playAudioFromCurrentController:self audioPath:[audioName getNamedAudio] audioPlayer:_audioPlayer];
     
 }
 
-- (void)quickPlay:(NSString *)audioName waveformView:(FDWaveformView *)waveformView {
+- (void)quickPlayWithAudioView:(CLAudioView *)audioView {
     
-    _waveformView = waveformView;
+    [self toolBarAudioReady];
+    
+    NSString *audioName = audioView.audioName; //获取音频路径
     
     NSURL *url = [NSURL fileURLWithPath:[audioName getNamedAudio]];
     
-    if ([_audioPlayer.url.absoluteString isEqualToString:url.absoluteString]) {
+    // 检测是否已经正在播放同一份音频
+    if ([_audioPlayer.url.absoluteString isEqualToString:url.absoluteString]) { //正在播放同一份音频
         
-        if (_audioPlayer.isPlaying) {
-            [_audioPlayer pause];
-            
-        } else {
-            
-            [_audioPlayer play];
-        }
+        [self stopAction]; // 停止播放
         
-    } else {
+    } else { //没有播放同一份音频
         
-        if (_audioPlayer) {
+        if (_audioPlayer) { // 音频播放器已存在, 说明可能正在播放, 则停止
             [_audioPlayer stop];
+            
+            [_audioView setAudioPlayMode:kAudioPlayModeNotLoaded]; //更改上一个音频cell的状态(UI)
+            
         }
+        
+        _audioView = audioView; // 处理完上一个音频view后, 将当前audioView设置为播放的audioView
+        [_audioView setAudioPlayMode:kAudioPlayModeLoaded]; //更改音频状态为Loaded
         
         _audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];
         _audioPlayer.delegate = self;
         _audioPlayer.meteringEnabled = YES;
         
-        [_playProgressDisplayLink invalidate];
-        _playProgressDisplayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(updatePlayProgress)];
+        [self playAction];
         
-        [_playProgressDisplayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
-        
-        [_audioPlayer prepareToPlay];
-        [_audioPlayer play];
     }
     
 }
 
+- (void)setAudioViewStatusBeforeDisplay:(CLAudioView *)audioView {
+    
+    NSString *audioName = audioView.audioName; //获取音频路径
+    
+    NSURL *url = [NSURL fileURLWithPath:[audioName getNamedAudio]];
+    
+    // 检测是否已经正在播放同一份音频
+    if ([_audioPlayer.url.absoluteString isEqualToString:url.absoluteString]) { //正在播放同一份音频
+        if (_audioView != audioView) { //如果在播放同一份音频, 且控制器的_audioView并不是当前的audioView, 说明是当前audioView的Cell之前被tableView重用, 现在又滑到了相应Model的位置, 因此将两者设置为同一个audioView, 以便更新UI
+            _audioView = audioView;
+            
+            [_audioView setAudioPlayMode:kAudioPlayModeLoaded];
+            
+        }
+        
+    } else { //没有播放同一份音频, 或者audioPlayer没有播放
+        
+        if (_audioPlayer.url == nil) return;
+        
+        if (_audioView == audioView) { //如果不是同一份音频, 则说明tableView重用了包含当前audioView的cell,为了防止UI错乱, 将系统的_audioView设为空
+            _audioView = nil;
+            
+            [audioView setAudioPlayMode:kAudioPlayModeNotLoaded]; //更改状态为准备播放
+            
+        }
+        
+    }
+}
+
+
+#pragma mark 播放控件方法
+
+- (void)playAction {
+    
+    [_audioPlayer prepareToPlay];
+    [_audioPlayer play];
+    
+    //UI Update
+    [self toolBarAudioPlaying];
+    
+    {
+        [_playProgressDisplayLink invalidate];
+        _playProgressDisplayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(updatePlayProgress)];
+        [_playProgressDisplayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
+    }
+    
+}
+
+- (void)pauseAction {
+    
+    [_audioPlayer pause];
+    [self toolBarAudioReady];
+}
+
+- (void)stopAction {
+    
+    [self toolBarNormalAction];
+    _audioPlayer = nil;
+    [_audioView setAudioPlayMode:kAudioPlayModeNotLoaded];
+    
+}
+
+- (void)detailAction {
+    
+    [self playAudio:_audioView.audioName];
+}
+
+
+
+- (void)toolBarAudioReady {
+    
+    self.navigationController.toolbar.hidden = NO;
+
+    [self setToolbarItems:@[_stopItem,_flexibleSpace, _playItem,_flexibleSpace,_detailItem] animated:YES];
+    
+    if ([self.navigationController.toolbar.subviews containsObject:_progressView] == NO) {
+        
+        [self.navigationController.toolbar addSubview:_progressView];
+        _progressView.frame = CGRectMake(0, 0, self.navigationController.toolbar.frame.size.width, 5);
+    }
+    
+}
+
+- (void)toolBarAudioPlaying {
+    
+    self.navigationController.toolbar.hidden = NO;
+
+    [self setToolbarItems:@[_stopItem,_flexibleSpace, _pauseItem,_flexibleSpace,_detailItem] animated:YES];
+    
+    if ([self.navigationController.toolbar.subviews containsObject:_progressView] == NO) {
+        
+        [self.navigationController.toolbar addSubview:_progressView];
+        _progressView.frame = CGRectMake(0, 0, self.navigationController.toolbar.frame.size.width, 5);
+    }
+    
+    
+}
+
+- (void)toolBarNormalAction {
+    
+    self.navigationController.toolbar.hidden = YES;
+    [self setToolbarItems:nil];
+    
+    if ([self.navigationController.toolbar.subviews containsObject:_progressView]) {
+        
+        [_progressView removeFromSuperview];
+    }
+}
+
 -(void)updatePlayProgress
 {
-    _waveformView.progressSamples = _waveformView.totalSamples*(_audioPlayer.currentTime/_audioPlayer.duration);
+    // 更新进度
+    if (_progressView) {
+        
+        [_progressView setProgress:_audioPlayer.currentTime/_audioPlayer.duration];
+    }
+    
 }
 
 - (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag {
     if (flag) {
         NSLog(@"播放完毕");
-        
+        [self toolBarAudioReady];
     }
 }
 
@@ -565,6 +728,7 @@
     NSLog(@"%@", error);
 }
 
+#pragma mark - 导航方法
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     id destVC = segue.destinationViewController;
     

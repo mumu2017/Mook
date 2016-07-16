@@ -8,8 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
+@class AVAudioPlayer;
+
 @interface CLAudioPlayTool : NSObject
 
 + (void)playAudioFromCurrentController:(UIViewController *)controller audioPath:(NSString *)audioPath;
+
++ (void)playAudioFromCurrentController:(UIViewController *)controller audioPath:(NSString *)audioPath audioPlayer:(AVAudioPlayer *)audioPlayer;
 
 @end

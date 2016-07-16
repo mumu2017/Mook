@@ -35,8 +35,8 @@
 #import "QuartzCore/QuartzCore.h"
 #import <AVFoundation/AVFoundation.h>
 #import "CLAudioPlayTool.h"
-#import "FDWaveformView.h"
 #import "CLAudioView.h"
+
 
 @interface CLContentVC ()<UIDocumentInteractionControllerDelegate, MBProgressHUDDelegate, AVAudioPlayerDelegate>
 
@@ -44,6 +44,17 @@
     AVAudioPlayer *_audioPlayer;
     CADisplayLink *_playProgressDisplayLink;
     CLAudioView *_audioView;
+    
+    UIBarButtonItem *_grid;
+    UIBarButtonItem *_flexibleSpace;
+    UIBarButtonItem *_action;
+    
+    UIBarButtonItem *_playItem;
+    UIBarButtonItem *_pauseItem;
+    UIBarButtonItem *_detailItem;
+    UIBarButtonItem *_stopItem;
+
+    UIProgressView *_progressView;
 
 }
 
@@ -73,10 +84,12 @@
 
 @property (nonatomic, strong) UIDocumentInteractionController *documentInteractionController;
 @property (nonatomic, copy) NSString *exportPath;
+//
+//typedef void (^AudioBlock)(NSString *audioName);
+//typedef void (^ImageBlock)(NSString *imageName);
+//typedef void (^VideoBlock)(NSString *videoName);
 
-typedef void (^AudioBlock)(NSString *audioName);
-typedef void (^ImageBlock)(NSString *imageName);
-typedef void (^VideoBlock)(NSString *videoName);
+
 
 @end
 
@@ -315,6 +328,12 @@ typedef void (^VideoBlock)(NSString *videoName);
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    
+    // 用了下面两行代码之后, toolBar上方的黑边就去掉了
+    self.extendedLayoutIncludesOpaqueBars = YES;
+    self.edgesForExtendedLayout = UIRectEdgeBottom;
+    
+    
     [self setContentTitle];
         
     self.tableView.backgroundColor = kCellBgColor;
@@ -336,23 +355,40 @@ typedef void (^VideoBlock)(NSString *videoName);
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(update) name:kUpdateDataNotification
                                                object:nil];
     
-    [self setToolBarStatus];
+    [self initToolBarItems];
     
 }
 
-- (void)setToolBarStatus {
-    
+
+- (void)initToolBarItems {
     
     self.navigationController.toolbar.tintColor = kMenuBackgroundColor;
     
-    // 用了下面两行代码之后, toolBar上方的黑边就去掉了
-    self.extendedLayoutIncludesOpaqueBars = YES;
-    self.edgesForExtendedLayout = UIRectEdgeBottom;
     
-    UIBarButtonItem *grid = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"iconGrid"] style:UIBarButtonItemStyleDone target:self action:@selector(showGrid)];
-    UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-    UIBarButtonItem *action = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(export)];
-    self.toolbarItems = @[grid, flexibleSpace, action];
+    // 普通状态
+    _grid  = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"iconGrid"] style:UIBarButtonItemStylePlain target:self action:@selector(showGrid)];
+    _flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    _action = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(export)];
+    
+    // 播放状态
+    _stopItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"stop_playing"] style:UIBarButtonItemStylePlain target:self action:@selector(stopAction)];
+    
+    _playItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemPlay target:self action:@selector(playAction)];
+    
+    _pauseItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemPause target:self action:@selector(pauseAction)];
+    
+    _detailItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"more"] style:UIBarButtonItemStylePlain target:self action:@selector(detailAction)];
+    
+    //进度条
+    _progressView = [[UIProgressView alloc] init];
+    
+    _progressView.backgroundColor = [UIColor clearColor];
+    
+    _progressView.progressTintColor = kAppThemeColor;
+    _progressView.tintColor = [UIColor whiteColor];
+    
+    [self setToolbarItems:@[_grid, _flexibleSpace, _action]];
+    
 }
 
 
@@ -401,9 +437,7 @@ typedef void (^VideoBlock)(NSString *videoName);
     // 如果要去其他页面, 则停止播放录音
     if (_audioPlayer.isPlaying) {
         
-        [_audioPlayer pause];
-
-        [_audioView setAudioPlayMode:kAudioPlayModePause]; //更改音频View的状态(UI)
+        [self pauseAction];
     }
 }
 
@@ -889,16 +923,50 @@ typedef void (^VideoBlock)(NSString *videoName);
     return kLabelHeight;
 }
 
-#pragma mark -Audio 方法
+#pragma mark - Audio播放方法
 - (void)playAudio:(NSString *)audioName {
 
     if (_audioPlayer.isPlaying) {
-        [_audioPlayer pause];
         
-        [_audioView setAudioPlayMode:kAudioPlayModePause]; //更改音频cell的状态(UI)
+        [self pauseAction];
     }
     
-    [CLAudioPlayTool playAudioFromCurrentController:self audioPath:[audioName getNamedAudio]];
+    [CLAudioPlayTool playAudioFromCurrentController:self audioPath:[audioName getNamedAudio] audioPlayer:_audioPlayer];
+    
+}
+
+- (void)quickPlayWithAudioView:(CLAudioView *)audioView {
+    
+    [self toolBarAudioReady];
+    
+    NSString *audioName = audioView.audioName; //获取音频路径
+    
+    NSURL *url = [NSURL fileURLWithPath:[audioName getNamedAudio]];
+    
+    // 检测是否已经正在播放同一份音频
+    if ([_audioPlayer.url.absoluteString isEqualToString:url.absoluteString]) { //正在播放同一份音频
+        
+        [self stopAction]; // 停止播放
+        
+    } else { //没有播放同一份音频
+        
+        if (_audioPlayer) { // 音频播放器已存在, 说明可能正在播放, 则停止
+            [_audioPlayer stop];
+            
+            [_audioView setAudioPlayMode:kAudioPlayModeNotLoaded]; //更改上一个音频cell的状态(UI)
+            
+        }
+        
+        _audioView = audioView; // 处理完上一个音频view后, 将当前audioView设置为播放的audioView
+        [_audioView setAudioPlayMode:kAudioPlayModeLoaded]; //更改音频状态为Loaded
+        
+        _audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];
+        _audioPlayer.delegate = self;
+        _audioPlayer.meteringEnabled = YES;
+        
+        [self playAction];
+        
+    }
     
 }
 
@@ -913,16 +981,7 @@ typedef void (^VideoBlock)(NSString *videoName);
         if (_audioView != audioView) { //如果在播放同一份音频, 且控制器的_audioView并不是当前的audioView, 说明是当前audioView的Cell之前被tableView重用, 现在又滑到了相应Model的位置, 因此将两者设置为同一个audioView, 以便更新UI
             _audioView = audioView;
             
-            if (_audioPlayer.isPlaying) { // 如果在播放, 则更改状态为正在播放
-
-                [_audioView setAudioPlayMode:kAudioPlayModePlaying];
-                
-            } else { //如果暂停了, 则更改状态为正在暂停
-                
-                [_audioView setAudioPlayMode:kAudioPlayModePause];
-                [self updatePlayProgress]; //并更具当前播放进度更新UI
-                
-            }
+            [_audioView setAudioPlayMode:kAudioPlayModeLoaded];
 
         }
         
@@ -933,72 +992,93 @@ typedef void (^VideoBlock)(NSString *videoName);
         if (_audioView == audioView) { //如果不是同一份音频, 则说明tableView重用了包含当前audioView的cell,为了防止UI错乱, 将系统的_audioView设为空
             _audioView = nil;
             
-            [audioView setAudioPlayMode:kAudioPlayModeReady]; //更改状态为准备播放
+            [audioView setAudioPlayMode:kAudioPlayModeNotLoaded]; //更改状态为准备播放
 
         }
         
     }
+}
+
+#pragma mark 播放控件方法
+
+- (void)playAction {
     
+    [_audioPlayer prepareToPlay];
+    [_audioPlayer play];
+    
+    //UI Update
+    [self toolBarAudioPlaying];
+    
+    {
+        [_playProgressDisplayLink invalidate];
+        _playProgressDisplayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(updatePlayProgress)];
+        [_playProgressDisplayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
+    }
+
+}
+
+- (void)pauseAction {
+    
+    [_audioPlayer pause];
+    [self toolBarAudioReady];
+}
+
+- (void)stopAction {
+    
+    [self toolBarNormalAction];
+    _audioPlayer = nil;
+    [_audioView setAudioPlayMode:kAudioPlayModeNotLoaded];
+
+}
+
+- (void)detailAction {
+    
+    [self playAudio:_audioView.audioName];
+}
+
+
+
+- (void)toolBarAudioReady {
+    
+    [self setToolbarItems:@[_stopItem,_flexibleSpace, _playItem,_flexibleSpace,_detailItem] animated:YES];
+    
+    if ([self.navigationController.toolbar.subviews containsObject:_progressView] == NO) {
+        
+        [self.navigationController.toolbar addSubview:_progressView];
+        _progressView.frame = CGRectMake(0, 0, self.navigationController.toolbar.frame.size.width, 5);
+    }
+    
+}
+
+- (void)toolBarAudioPlaying {
+    
+    [self setToolbarItems:@[_stopItem,_flexibleSpace, _pauseItem,_flexibleSpace,_detailItem] animated:YES];
+    
+    if ([self.navigationController.toolbar.subviews containsObject:_progressView] == NO) {
+        
+        [self.navigationController.toolbar addSubview:_progressView];
+        _progressView.frame = CGRectMake(0, 0, self.navigationController.toolbar.frame.size.width, 5);
+    }
 
     
 }
 
-- (void)quickPlayWithAudioView:(CLAudioView *)audioView {
+- (void)toolBarNormalAction {
     
-    NSString *audioName = audioView.audioName; //获取音频路径
+    [self setToolbarItems:@[_grid, _flexibleSpace, _action] animated:YES];
     
-    NSURL *url = [NSURL fileURLWithPath:[audioName getNamedAudio]];
-    
-    // 检测是否已经正在播放同一份音频
-    if ([_audioPlayer.url.absoluteString isEqualToString:url.absoluteString]) { //正在播放同一份音频
+    if ([self.navigationController.toolbar.subviews containsObject:_progressView]) {
         
-        if (_audioPlayer.isPlaying) { // 如果在播放, 则暂停
-            [_audioPlayer pause];
-            [_audioView setAudioPlayMode:kAudioPlayModePause];
-
-            
-        } else { //如果暂停了, 则继续播放
-            
-            [_audioPlayer play];
-            [_audioView setAudioPlayMode:kAudioPlayModePlaying];
-
-        }
-        
-    } else { //没有播放同一份音频
-        
-        if (_audioPlayer) { // 音频播放器已存在, 说明可能正在播放, 则停止
-            [_audioPlayer stop];
-            
-            [_audioView setAudioPlayMode:kAudioPlayModeReady]; //更改上一个音频cell的状态(UI)
-            
-        }
-        
-        _audioView = audioView; // 处理完上一个音频view后, 将当前audioView设置为播放的audioView
-        
-        _audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];
-        _audioPlayer.delegate = self;
-        _audioPlayer.meteringEnabled = YES;
-        
-        // 设置进度显示
-        [_playProgressDisplayLink invalidate];
-        _playProgressDisplayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(updatePlayProgress)];
-        
-        [_playProgressDisplayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
-        
-        [_audioPlayer prepareToPlay];
-        [_audioPlayer play];
-        [_audioView setAudioPlayMode:kAudioPlayModePlaying];
-
+        [_progressView removeFromSuperview];
     }
-    
 }
 
 -(void)updatePlayProgress
 {
     // 更新进度
-    if (_audioView) {
+    if (_progressView) {
         
-        _audioView.waveformView.progressSamples = _audioView.waveformView.totalSamples*(_audioPlayer.currentTime/_audioPlayer.duration);
+        [_progressView setProgress:_audioPlayer.currentTime/_audioPlayer.duration];
     }
 
 }
@@ -1006,9 +1086,7 @@ typedef void (^VideoBlock)(NSString *videoName);
 - (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag {
     if (flag) {
         NSLog(@"播放完毕");
-
-        [_audioView setAudioPlayMode:kAudioPlayModeReady]; //更改上一个音频cell的状态(UI)
-
+        [self toolBarAudioReady];
     }
 }
 

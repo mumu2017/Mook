@@ -120,6 +120,8 @@
 		432346901C96B42A00200833 /* CLNewEntryTextCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4323468E1C96B42A00200833 /* CLNewEntryTextCell.xib */; };
 		432346941C96B4C200200833 /* CLTextInputCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 432346921C96B4C200200833 /* CLTextInputCell.m */; };
 		432346951C96B4C200200833 /* CLTextInputCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 432346931C96B4C200200833 /* CLTextInputCell.xib */; };
+		43277ADC1D392D8F004E3F4A /* CLAudioPlayBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 43277ADB1D392D8F004E3F4A /* CLAudioPlayBar.m */; };
+		43277ADE1D392DAA004E3F4A /* CLAuidoPlayBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43277ADD1D392DAA004E3F4A /* CLAuidoPlayBar.xib */; };
 		435E47FC1D2D14A50002D157 /* CLListRefreshHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 435E47FB1D2D14A50002D157 /* CLListRefreshHeader.m */; };
 		4364861B1CE1A99000FC191B /* CLSizeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4364861A1CE1A99000FC191B /* CLSizeVC.m */; };
 		4364861F1CE1BAEA00FC191B /* CLSizeListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4364861E1CE1BAEA00FC191B /* CLSizeListVC.m */; };
@@ -412,6 +414,9 @@
 		432346911C96B4C200200833 /* CLTextInputCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLTextInputCell.h; sourceTree = "<group>"; };
 		432346921C96B4C200200833 /* CLTextInputCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLTextInputCell.m; sourceTree = "<group>"; };
 		432346931C96B4C200200833 /* CLTextInputCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CLTextInputCell.xib; sourceTree = "<group>"; };
+		43277ADA1D392D8F004E3F4A /* CLAudioPlayBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLAudioPlayBar.h; sourceTree = "<group>"; };
+		43277ADB1D392D8F004E3F4A /* CLAudioPlayBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLAudioPlayBar.m; sourceTree = "<group>"; };
+		43277ADD1D392DAA004E3F4A /* CLAuidoPlayBar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CLAuidoPlayBar.xib; sourceTree = "<group>"; };
 		435E47FA1D2D14A50002D157 /* CLListRefreshHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLListRefreshHeader.h; sourceTree = "<group>"; };
 		435E47FB1D2D14A50002D157 /* CLListRefreshHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLListRefreshHeader.m; sourceTree = "<group>"; };
 		436486191CE1A99000FC191B /* CLSizeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLSizeVC.h; sourceTree = "<group>"; };
@@ -1366,6 +1371,9 @@
 				4307A3D21D20FDDA002C3527 /* CLTextImageCell.m */,
 				43E7EE951D38D45800D22E9B /* CLAudioView.h */,
 				43E7EE961D38D45800D22E9B /* CLAudioView.m */,
+				43277ADA1D392D8F004E3F4A /* CLAudioPlayBar.h */,
+				43277ADB1D392D8F004E3F4A /* CLAudioPlayBar.m */,
+				43277ADD1D392DAA004E3F4A /* CLAuidoPlayBar.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -1529,6 +1537,7 @@
 				4300C4401D1A9B8C0065E94E /* audio_record@2x.png in Resources */,
 				432346311C94054300200833 /* CLTableBackView.xib in Resources */,
 				439519CB1CC0904A00505E5B /* LaunchScreen.storyboard in Resources */,
+				43277ADE1D392DAA004E3F4A /* CLAuidoPlayBar.xib in Resources */,
 				43EEE7E31CAD329B00F0BCCF /* CLRoutineTextCell.xib in Resources */,
 				43C2068B1CB10CF300CEF992 /* CLListCell.xib in Resources */,
 				4300C4481D1A9B8C0065E94E /* stop_playing.png in Resources */,
@@ -1727,6 +1736,7 @@
 				432346751C9409A400200833 /* XLPagerTabStripViewController.m in Sources */,
 				432345E81C94051A00200833 /* CLShowModel.m in Sources */,
 				432345B01C9404FB00200833 /* CLPropInputVC.m in Sources */,
+				43277ADC1D392D8F004E3F4A /* CLAudioPlayBar.m in Sources */,
 				432345B31C9404FB00200833 /* CLQuickStringVC.m in Sources */,
 				432346451C94055700200833 /* SMTagField.m in Sources */,
 				43E0F7401CA10D27005CAD97 /* NSObject+MJKeyValue.m in Sources */,

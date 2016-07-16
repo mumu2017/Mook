@@ -8,9 +8,8 @@
 // 单独管理音频控件的控件
 
 typedef enum {
-    kAudioPlayModeReady = 0, //未播放状态
-    kAudioPlayModePlaying,  //播放状态
-    kAudioPlayModePause     //暂停状态
+    kAudioPlayModeNotLoaded = 0, //未播放状态
+    kAudioPlayModeLoaded,  //播放状态
 } AudioPlayMode;
 
 #import <UIKit/UIKit.h>
@@ -21,11 +20,7 @@ typedef enum {
 typedef void (^PlayBlock)(CLAudioView *audioView);
 typedef void (^AudioBlock)(NSString *audioName);
 
-@property (strong, nonatomic) UIButton *audioButton;
-
 @property (strong, nonatomic) UIButton *playButton;
-
-@property (strong, nonatomic) FDWaveformView *waveformView;
 
 @property (strong, nonatomic) NSString *audioName;
 

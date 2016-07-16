@@ -41,6 +41,8 @@
     [self imageContainer];
     [self iconView];
     [self imageButton];
+    self.audioView.audioPlayMode = kAudioPlayModeNotLoaded;
+
 }
 
 - (void)loadCellWithImage {
@@ -92,7 +94,7 @@
         [_contentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.contentView).offset(15);
             make.left.equalTo(self.contentView).offset(20);
-            make.right.equalTo(self.contentView).offset(-20);
+            //            make.right.equalTo(self.contentView).offset(-20);
             make.bottom.lessThanOrEqualTo(self.contentView).offset(-10);
         }];
         _contentLabel.numberOfLines = 0;
@@ -102,7 +104,6 @@
     return _contentLabel;
 }
 
-
 - (CLAudioView *)audioView {
     
     if (!_audioView) {
@@ -110,9 +111,9 @@
         [self.contentView addSubview:_audioView];
         [_audioView mas_makeConstraints:^(MASConstraintMaker *make) {
             
-            make.top.equalTo(self.contentLabel.mas_bottom).offset(20);
-            make.left.right.equalTo(self.contentView);
-            make.height.equalTo(@44);
+            make.centerY.equalTo(self.contentLabel);
+            make.left.equalTo(self.contentLabel.mas_right);
+            make.right.equalTo(self.contentView);
         }];
     }
     
@@ -125,8 +126,7 @@
         [self.contentView addSubview:_imageContainer];
         
         [_imageContainer mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.audioView.mas_bottom).offset(20);
-//            make.top.equalTo(self.audioView.mas_bottom);
+            make.top.equalTo(self.contentLabel.mas_bottom).offset(20);
 
             make.left.right.equalTo(self.contentView);
             make.bottom.equalTo(self.contentView).offset(-20);

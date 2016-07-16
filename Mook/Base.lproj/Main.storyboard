@@ -1571,7 +1571,7 @@
         <scene sceneID="ENp-8f-x2r">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="a3j-i3-6iI" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="发现" image="iconlibraryLine" selectedImage="iconlibraryFill" id="JG5-Ax-guD"/>
+                    <tabBarItem key="tabBarItem" title="发现" image="internetLine" selectedImage="internetFill" id="JG5-Ax-guD"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="FzY-UC-DJK">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -1622,7 +1622,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SfF-Ho-9Qx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-12007.5" y="-3847.5"/>
+            <point key="canvasLocation" x="-12046" y="-3664"/>
         </scene>
         <!--aboutVC-->
         <scene sceneID="81Q-w2-srJ">
@@ -2178,13 +2178,14 @@
     <resources>
         <image name="addMedia" width="22" height="22"/>
         <image name="iconlibraryFill" width="16" height="16"/>
-        <image name="iconlibraryLine" width="22" height="22"/>
         <image name="iconmediaFill" width="22" height="22"/>
         <image name="iconmediaLine" width="22" height="22"/>
         <image name="iconnotesFill" width="22" height="22"/>
         <image name="iconnotesLine" width="22" height="22"/>
         <image name="iconsettingFill" width="22" height="22"/>
         <image name="iconsettingLine" width="22" height="22"/>
+        <image name="internetFill" width="22" height="22"/>
+        <image name="internetLine" width="22" height="22"/>
         <image name="tagIcon" width="16" height="16"/>
     </resources>
     <inferredMetricsTieBreakers>

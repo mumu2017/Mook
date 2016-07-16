@@ -25,4 +25,18 @@
 //    [controller presentBlurredNavigationViewControllerAnimated:vc barStyle:UIBarStyleDefault];
 }
 
++ (void)playAudioFromCurrentController:(UIViewController *)controller audioPath:(NSString *)audioPath audioPlayer:(AVAudioPlayer *)audioPlayer {
+    
+    CLAudioPlayVC *vc = [[CLAudioPlayVC alloc] init];
+    vc.audioPath = audioPath;
+    vc.barStyle = UIBarStyleBlack;
+    vc.audioPlayer = audioPlayer;
+    
+    [controller presentBlurredAudioPlayViewControllerAnimated:vc];
+    
+    //    [controller presentNavigationViewControllerAnimated:vc barStyle:UIBarStyleDefault];
+    //
+    //    [controller presentBlurredNavigationViewControllerAnimated:vc barStyle:UIBarStyleDefault];
+}
+
 @end

@@ -473,7 +473,6 @@
             
             UIImage *image = [kToolBarWriteImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
             [self.toolBar.nextButton setImage:image forState:UIControlStateNormal];
-            self.toolBar.nextButton.tintColor = [UIColor redColor];
             
             [self.delegate editingVC:self startAudioRecognitionWithContent:self.editTextView.text andIdentifierTag:self.identifierTag];
         }

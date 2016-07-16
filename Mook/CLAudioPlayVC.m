@@ -46,8 +46,7 @@
     UIView *_bottomBorder;
     UIView *_centerLine;
 
-    //Playing
-    AVAudioPlayer *_audioPlayer;
+
     //    BOOL _wasPlaying;
     CADisplayLink *playProgressDisplayLink;
     
@@ -173,13 +172,6 @@
     
     _isFirstTime = YES;
     
-    {
-        if (self.title.length == 0)
-        {
-            self.navigationItem.title = @"录音";
-        }
-    }
-    
     NSURL *audioURL = [NSURL fileURLWithPath:self.audioPath];
     
     CGRect frame = CGRectMake(0, 0, self.view.frame.size.width, 200);
@@ -191,22 +183,13 @@
     [visualEffectView.contentView addSubview:middleContainerView];
     
     {
-        
-//        _centerLine = [[UIView alloc] init];
-//        [middleContainerView addSubview:_centerLine];
-//        [_centerLine mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.centerY.equalTo(middleContainerView);
-//            make.left.right.equalTo(self.view);
-//            make.height.equalTo(@1);
-//        }];
-//        _centerLine.backgroundColor = [UIColor whiteColor];
-        
+
         waveformView = [[FDWaveformView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(middleContainerView.frame), 100)];
         waveformView.delegate = self;
         waveformView.center = CGPointMake(CGRectGetMidX(middleContainerView.bounds), CGRectGetMidY(middleContainerView.bounds));
         waveformView.audioURL = audioURL;
         waveformView.wavesColor = [UIColor whiteColor];
-        waveformView.progressColor = [UIColor redColor];
+        waveformView.progressColor = kAppThemeColor;
         
         waveformView.doesAllowScroll = NO;
         waveformView.doesAllowScrubbing = NO;
@@ -235,9 +218,12 @@
     }
     
     {
-        _audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:audioURL error:nil];
-        _audioPlayer.delegate = self;
-        _audioPlayer.meteringEnabled = YES;
+        if (!_audioPlayer) {
+            _audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:audioURL error:nil];
+            _audioPlayer.delegate = self;
+            _audioPlayer.meteringEnabled = YES;
+        }
+
     }
     
     {
@@ -377,6 +363,11 @@
             }
         }
     }
+    
+    // 如果播放时间不为零, 则更新UI
+    if (_audioPlayer.currentTime != 0.f) {
+        [self updatePlayProgress];
+    }
 }
 
 
@@ -485,6 +476,8 @@
     [UIApplication sharedApplication].idleTimerDisabled = _wasIdleTimerDisabled;
     
     [_audioPlayer pause];
+    
+    [self updatePlayProgress];
     
     // UI Update
     {
@@ -615,9 +608,9 @@
     
     // convert the time to an integer, as we don't need double precision, and we do need to use the modulous operator
     int time = (int)timeInterval;
-    int millisecond = round(timeInterval * 100.0) - time * 100;
+//    int millisecond = round(timeInterval * 100.0) - time * 100;
     
-    return [NSString stringWithFormat:@"%.2d:%.2d:%.2d", ((time / 60) % 60), (time % 60), millisecond];
+    return [NSString stringWithFormat:@"%.2d:%.2d", ((time / 60) % 60), (time % 60)];
     
 }
 
