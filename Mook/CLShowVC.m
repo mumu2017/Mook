@@ -201,6 +201,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    // 用了下面两行代码之后, toolBar上方的黑边就去掉了
+    self.extendedLayoutIncludesOpaqueBars = YES;
+    self.edgesForExtendedLayout = UIRectEdgeBottom;
+    
     self.title = NSLocalizedString(@"演出", nil);
     self.tableView.estimatedRowHeight = 44;
     
@@ -565,8 +569,6 @@
 
 - (void)quickPlayWithAudioView:(CLAudioView *)audioView {
     
-    [self toolBarAudioReady];
-    
     NSString *audioName = audioView.audioName; //获取音频路径
     
     NSURL *url = [NSURL fileURLWithPath:[audioName getNamedAudio]];
@@ -669,7 +671,7 @@
 
 - (void)toolBarAudioReady {
     
-    self.navigationController.toolbar.hidden = NO;
+    [self.navigationController setToolbarHidden:NO];
 
     [self setToolbarItems:@[_stopItem,_flexibleSpace, _playItem,_flexibleSpace,_detailItem] animated:YES];
     
@@ -683,8 +685,8 @@
 
 - (void)toolBarAudioPlaying {
     
-    self.navigationController.toolbar.hidden = NO;
-
+    [self.navigationController setToolbarHidden:NO];
+    
     [self setToolbarItems:@[_stopItem,_flexibleSpace, _pauseItem,_flexibleSpace,_detailItem] animated:YES];
     
     if ([self.navigationController.toolbar.subviews containsObject:_progressView] == NO) {
@@ -698,7 +700,7 @@
 
 - (void)toolBarNormalAction {
     
-    self.navigationController.toolbar.hidden = YES;
+    [self.navigationController setToolbarHidden:YES];
     [self setToolbarItems:nil];
     
     if ([self.navigationController.toolbar.subviews containsObject:_progressView]) {
