@@ -75,9 +75,9 @@ typedef enum {
 - (BTNavigationDropdownMenu *)menu {
     if (!_menu) {
 
-        NSArray *items = [NSArray arrayWithObjects:NSLocalizedString(@"演出", nil), NSLocalizedString(@"流程", nil), NSLocalizedString(@"想法", nil), NSLocalizedString(@"技巧", nil), NSLocalizedString(@"道具", nil), NSLocalizedString(@"台词", nil), NSLocalizedString(@"全部", nil), nil];
-        _menu = [[BTNavigationDropdownMenu alloc] initWithTitle:items[1] items:items];
-        self.listType = kListTypeRoutine;
+        NSArray *items = [NSArray arrayWithObjects:NSLocalizedString(@"全部", nil),NSLocalizedString(@"演出", nil), NSLocalizedString(@"流程", nil), NSLocalizedString(@"想法", nil), NSLocalizedString(@"技巧", nil), NSLocalizedString(@"道具", nil), NSLocalizedString(@"台词", nil),  nil];
+        _menu = [[BTNavigationDropdownMenu alloc] initWithTitle:items[0] items:items];
+        self.listType = kListTypeAll;
         
         __weak typeof(self) weakself = self;
 
@@ -88,25 +88,26 @@ typedef enum {
             switch (index) {
                     
                 case 0:
-                    _listType = kListTypeShow;
+                    _listType = kListTypeAll;
                     break;
                 case 1:
-                    _listType = kListTypeRoutine;
+                    _listType = kListTypeShow;
                     break;
                 case 2:
-                    _listType = kListTypeIdea;
+                    _listType = kListTypeRoutine;
                     break;
                 case 3:
-                    _listType = kListTypeSleight;
+                    _listType = kListTypeIdea;
                     break;
                 case 4:
-                    _listType = kListTypeProp;
+                    _listType = kListTypeSleight;
                     break;
                 case 5:
-                    _listType = kListTypeLines;
+                    _listType = kListTypeProp;
                     break;
                 case 6:
-                    _listType = kListTypeAll;
+                    _listType = kListTypeLines;
+
                     break;
                     
                 default:

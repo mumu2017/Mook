@@ -78,9 +78,9 @@ typedef enum {
 - (BTNavigationDropdownMenu *)menu {
     if (!_menu) {
         
-        NSArray *items = [NSArray arrayWithObjects:NSLocalizedString(@"视频", nil), NSLocalizedString(@"图片", nil), NSLocalizedString(@"全部", nil), nil];
+        NSArray *items = [NSArray arrayWithObjects:NSLocalizedString(@"全部", nil), NSLocalizedString(@"视频", nil), NSLocalizedString(@"图片", nil), nil];
         _menu = [[BTNavigationDropdownMenu alloc] initWithTitle:items[0] items:items];
-        self.mediaType = kMediaTypeVideos;
+        self.mediaType = kMediaTypeAll;
         
         __weak typeof(self) weakself = self;
 
@@ -90,13 +90,15 @@ typedef enum {
 
             switch (index) {
                 case 0:
-                    _mediaType = kMediaTypeVideos;
+                    _mediaType = kMediaTypeAll;
+
                     break;
                 case 1:
-                    _mediaType = kMediaTypeImages;
+                    _mediaType = kMediaTypeVideos;
+
                     break;
                 case 2:
-                    _mediaType = kMediaTypeAll;
+                    _mediaType = kMediaTypeImages;
                     break;
                 default:
                     break;

@@ -100,7 +100,7 @@
         
         dispatch_async(dispatch_get_main_queue(), ^{
             
-            self.iconView.image = image;
+            [self.iconView setImage:image];
             self.titleLabel.text = title;
             self.contentLabel.text = content;
             self.timeLabel.text = [NSString stringWithFormat:@"%@ %@",type, time];;
