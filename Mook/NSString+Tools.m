@@ -22,8 +22,8 @@
 - (NSAttributedString *)styledString {
 
     NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
-    [style setLineSpacing:6];
-    [style setParagraphSpacing:12];
+    [style setLineSpacing:8];
+    [style setParagraphSpacing:16];
     NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:self];
     [attrString addAttribute:NSParagraphStyleAttributeName
                        value:style
