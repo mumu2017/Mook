@@ -10,4 +10,7 @@
 
 @interface CLWebViewController : DZNWebViewController
 
+@property (strong, nonatomic) NSMutableArray *webSiteList;
+
+
 @end

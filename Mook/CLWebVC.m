@@ -11,10 +11,11 @@
 #import "CLWebViewController.h"
 #import "CLWebSiteModel.h"
 #import "CLDataSaveTool.h"
+#import "CLWebCell.h"
 
 @interface CLWebVC ()
 {
-    CLWebViewController *_webVC;
+//    CLWebViewController *_webVC;
     UIBarButtonItem *_addItem;
     UIBarButtonItem *_collectItem;
     NSInteger _scale;
@@ -74,10 +75,11 @@
     self.extendedLayoutIncludesOpaqueBars = YES;
     self.edgesForExtendedLayout = UIRectEdgeBottom;
     
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"ID"];
-
+    [self.tableView registerNib:[UINib nibWithNibName:@"CLWebCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"webCell"];
+    self.tableView.rowHeight = 80;
+    self.tableView.tableFooterView = [UIView new];
+    self.tableView.backgroundColor = [UIColor flatWhiteColor];
     
-
 }
 
 - (void)initSubviews {
@@ -85,7 +87,7 @@
     _addItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addWebSite)];
 
     
-    _collectItem = [[UIBarButtonItem alloc] initWithTitle:@"收藏" style:UIBarButtonItemStylePlain target:self action:@selector(showCollection)];
+    _collectItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemBookmarks target:self action:@selector(showCollection)];
     
     self.navigationItem.rightBarButtonItems = @[_addItem, _collectItem];
 }
@@ -95,6 +97,13 @@
     [super viewWillAppear:animated];
     
     self.navigationController.toolbar.hidden = YES;
+    [self.navigationController setHidesBarsOnSwipe:NO];
+    [self.navigationController setHidesBarsWhenKeyboardAppears:NO];
+
+    [self.navigationController setHidesBarsWhenVerticallyCompact:NO];
+
+    
+    [self.tableView reloadData];
 
 }
 
@@ -143,9 +152,6 @@
             NSString *urlString = @"";
             urlString = urlTF.text;
 
-            
-            
-            
             CLWebSiteModel *webSite = [CLWebSiteModel modelWithTitle:name withUrlString:urlString];
             
             [self.webSiteList addObject:webSite];
@@ -260,15 +266,13 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ID" forIndexPath:indexPath];
-     if (!cell) {
-     cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"ID"];
-     }
+     CLWebCell *cell = [tableView dequeueReusableCellWithIdentifier:@"webCell" forIndexPath:indexPath];
      
      CLWebSiteModel *model = self.webSiteList[indexPath.row];
     
-     cell.textLabel.text = model.title;
-     
+     [cell setTitle:model.title];
+     cell.backgroundColor = [UIColor flatWhiteColor];
+
      return cell;
 }
 
@@ -277,15 +281,24 @@
     CLWebSiteModel *model = self.webSiteList[indexPath.row];
 
 #warning 检查网络连接
-    if ([self checkIfStringIsValidUrl:model.url.absoluteString] == NO) {
-        [MBProgressHUD showGlobalProgressHUDWithTitle:@"无效的地址, 无法加载!" hideAfterDelay:0.5];
-    } else {
-        _webVC = [[CLWebViewController alloc] initWithURL:model.url];
-        
-        _webVC.hidesBottomBarWhenPushed = YES;
-        
-        [self.navigationController pushViewController:_webVC animated:YES];
-    }
+    CLWebViewController *_webVC = [[CLWebViewController alloc] initWithURL:model.url];
+    _webVC.webSiteList = self.webSiteList;
+    
+    _webVC.hidesBottomBarWhenPushed = YES;
+    
+    [self.navigationController pushViewController:_webVC animated:YES];
+    
+//    if ([self checkIfStringIsValidUrl:model.url.absoluteString] == NO) {
+//        [MBProgressHUD showGlobalProgressHUDWithTitle:@"无效的地址, 无法加载!" hideAfterDelay:0.5];
+//        
+//    } else {
+//        _webVC = [[CLWebViewController alloc] initWithURL:model.url];
+//        _webVC.webSiteList = self.webSiteList;
+//        
+//        _webVC.hidesBottomBarWhenPushed = YES;
+//        
+//        [self.navigationController pushViewController:_webVC animated:YES];
+//    }
     
 
 }

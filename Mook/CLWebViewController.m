@@ -9,8 +9,11 @@
 #import "CLWebViewController.h"
 #import "UIButton+HitTest.h"
 #import "HTMLReader.h"
+#import "CLWebSiteModel.h"
+#import "CLDataSaveTool.h"
 
 #define kBackButtonHitTestEdgeInsets UIEdgeInsetsMake(-15, -15, -15, -15)
+static char DZNWebViewControllerKVOContext = 0;
 
 @interface CLWebViewController()
 
@@ -83,13 +86,14 @@
 
 - (void)collectWebNote {
     
+    [self addWebSite];
 
-    NSString *link = [@"http://www.readability.com/m?url=" stringByAppendingString:self.URL.absoluteString];
-    NSURL *newUrl = [NSURL URLWithString:link];
-    NSURLRequest *request = [NSURLRequest requestWithURL:newUrl cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:60*24];
-
-    [self.webView loadRequest:request];
-    
+//    NSString *link = [@"http://www.readability.com/m?url=" stringByAppendingString:self.URL.absoluteString];
+//    NSURL *newUrl = [NSURL URLWithString:link];
+//    NSURLRequest *request = [NSURLRequest requestWithURL:newUrl cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:60*24];
+//
+//    [self.webView loadRequest:request];
+//    
     
 //    NSString *jsForTextSize = [[NSString alloc] initWithFormat:@"document.getElementsByTagName('body')[0].style.webkitTextSizeAdjust= '%ld%%'", _scale*100/DEFAULTWEBVIEWFONTSIZE];
 //    [self.webView evaluateJavaScript:jsForTextSize completionHandler:^(id _Nullable object, NSError * _Nullable error) {
@@ -119,6 +123,90 @@
 //      }] resume];
 }
 
+- (void)addWebSite {
+    
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"添加网站", nil) message:nil preferredStyle:UIAlertControllerStyleAlert];
+    
+    [alertController addTextFieldWithConfigurationHandler:^(UITextField *textField){
+        textField.placeholder = NSLocalizedString(@"网站标题", nil);
+        textField.clearButtonMode = UITextFieldViewModeWhileEditing;
+        
+        textField.font = kFontSys16;
+        textField.text = self.webView.title;
+        
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(alertTextFieldDidChange:) name:UITextFieldTextDidChangeNotification object:textField];
+        
+    }];
+    
+    [alertController addTextFieldWithConfigurationHandler:^(UITextField *textField){
+        textField.placeholder = NSLocalizedString(@"网站地址", nil);
+        textField.clearButtonMode = UITextFieldViewModeWhileEditing;
+        textField.font = kFontSys16;
+        textField.text = self.webView.URL.absoluteString;
+
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(alertTextFieldDidChange:) name:UITextFieldTextDidChangeNotification object:textField];
+        
+    }];
+    
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"确定", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            
+            UITextField *nameTF = alertController.textFields.firstObject;
+            UITextField *urlTF = alertController.textFields.lastObject;
+            
+            NSString *name = @"";
+            name = nameTF.text;
+            NSString *urlString = @"";
+            urlString = urlTF.text;
+            
+            CLWebSiteModel *webSite = [CLWebSiteModel modelWithTitle:name withUrlString:urlString];
+            
+            if (_webSiteList) {
+                [self.webSiteList addObject:webSite];
+            }
+            [CLDataSaveTool updateWebSite:webSite];
+            
+            
+            [[NSNotificationCenter defaultCenter] removeObserver:self name:UITextFieldTextDidChangeNotification object:nil];
+            
+        });
+        
+    }];
+    
+    
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:NSLocalizedString(@"取消", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:UITextFieldTextDidChangeNotification object:nil];
+        
+    }];
+    
+    [alertController addAction:okAction];
+    [alertController addAction:cancel];
+    
+    [self presentViewController:alertController animated:YES completion:^{
+        UIAlertAction *okAction = alertController.actions.firstObject;
+        UITextField *nameTF = alertController.textFields.firstObject;
+        UITextField *urlTF = alertController.textFields.lastObject;
+        okAction.enabled = (nameTF.text.length > 0 &&urlTF.text.length > 0 );
+    }];
+}
+
+
+- (void)alertTextFieldDidChange:(NSNotification *)notification{
+    UIAlertController *alertController = (UIAlertController *)self.presentedViewController;
+    if (alertController) {
+        UITextField *nameTF = alertController.textFields.firstObject;
+        UITextField *urlTF = alertController.textFields.lastObject;
+        
+        UIAlertAction *okAction = alertController.actions.firstObject;
+        okAction.enabled = (nameTF.text.length > 0 &&urlTF.text.length > 0 );
+    }
+}
+
+
 - (void)goBackward {
     
     if (self.webView.canGoBack) {
@@ -127,7 +215,7 @@
         
     } else {
         
-        [self.navigationController popViewControllerAnimated:YES];
+        [self closeWebVC];
         
     }
 }
@@ -135,6 +223,11 @@
 - (void)closeWebVC {
     
     [self.navigationController popViewControllerAnimated:YES];
+    
+}
+
+- (void)dealloc {
+    
 }
 
 - (void)webView:(DZNWebView *)webView didFinishNavigation:(WKNavigation *)navigation {

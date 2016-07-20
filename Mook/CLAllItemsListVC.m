@@ -124,10 +124,6 @@ typedef enum {
                 
             }
             
-//            if (strongself.navigationController.visibleViewController == strongself) {
-//                strongself.mediaButton.hidden = (self.listType == kListTypeAll);
-//                
-//            }
             
             if ([strongself.tableView.dataSource tableView:strongself.tableView numberOfRowsInSection:0] > 0) {
                 [strongself.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:NO];

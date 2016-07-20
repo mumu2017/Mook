@@ -166,6 +166,8 @@
 		43951A181CC65C7000505E5B /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43951A171CC65C7000505E5B /* CFNetwork.framework */; };
 		43951A1A1CC65C8900505E5B /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43951A191CC65C8900505E5B /* StoreKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		43951A1C1CC6681700505E5B /* mookFileIcon.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 43951A1B1CC6681700505E5B /* mookFileIcon.jpg */; };
+		43A06F3D1D3F898500ABEA4B /* CLWebCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A06F3B1D3F898500ABEA4B /* CLWebCell.m */; };
+		43A06F3E1D3F898500ABEA4B /* CLWebCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43A06F3C1D3F898500ABEA4B /* CLWebCell.xib */; };
 		43A281181CB224BC009C2785 /* CLMookTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A281171CB224BC009C2785 /* CLMookTabBarController.m */; };
 		43A2811F1CB2276A009C2785 /* CLLibraryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A2811D1CB2276A009C2785 /* CLLibraryCell.m */; };
 		43A281201CB2276A009C2785 /* CLLibraryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43A2811E1CB2276A009C2785 /* CLLibraryCell.xib */; };
@@ -502,6 +504,9 @@
 		43951A171CC65C7000505E5B /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		43951A191CC65C8900505E5B /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		43951A1B1CC6681700505E5B /* mookFileIcon.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = mookFileIcon.jpg; sourceTree = "<group>"; };
+		43A06F3A1D3F898500ABEA4B /* CLWebCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLWebCell.h; sourceTree = "<group>"; };
+		43A06F3B1D3F898500ABEA4B /* CLWebCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLWebCell.m; sourceTree = "<group>"; };
+		43A06F3C1D3F898500ABEA4B /* CLWebCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CLWebCell.xib; sourceTree = "<group>"; };
 		43A281161CB224BC009C2785 /* CLMookTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLMookTabBarController.h; sourceTree = "<group>"; };
 		43A281171CB224BC009C2785 /* CLMookTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLMookTabBarController.m; sourceTree = "<group>"; };
 		43A2811C1CB2276A009C2785 /* CLLibraryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLLibraryCell.h; sourceTree = "<group>"; };
@@ -902,6 +907,9 @@
 				43FAB4E41D267BF80046997D /* CLWebViewController.m */,
 				438342791D11331A0089B58E /* CLWebSiteModel.h */,
 				4383427A1D11331A0089B58E /* CLWebSiteModel.m */,
+				43A06F3A1D3F898500ABEA4B /* CLWebCell.h */,
+				43A06F3B1D3F898500ABEA4B /* CLWebCell.m */,
+				43A06F3C1D3F898500ABEA4B /* CLWebCell.xib */,
 			);
 			name = "Discover发现";
 			sourceTree = "<group>";
@@ -1551,6 +1559,7 @@
 				439519BE1CBD26C600505E5B /* CLImportPasswordInputView.xib in Resources */,
 				4300C4431D1A9B8C0065E94E /* microphone_access@2x.png in Resources */,
 				43951A011CC5DAEA00505E5B /* Setting.storyboard in Resources */,
+				43A06F3E1D3F898500ABEA4B /* CLWebCell.xib in Resources */,
 				4323462D1C94054300200833 /* CLQuickStringCell.xib in Resources */,
 				439519EB1CC0EEB900505E5B /* CLTagField.xib in Resources */,
 				43F5F7B51CB50039007BFB0C /* tag.jpg in Resources */,
@@ -1679,6 +1688,7 @@
 				4300C42D1D1A98EF0065E94E /* IQPlaybackDurationView.m in Sources */,
 				4307A3CD1D20FA20002C3527 /* CLTextAudioImageCell.m in Sources */,
 				43E7EE941D38B4A000D22E9B /* CLWhatIsMagicVCViewController.m in Sources */,
+				43A06F3D1D3F898500ABEA4B /* CLWebCell.m in Sources */,
 				432345DE1C94051A00200833 /* CLInfoModel.m in Sources */,
 				4323462C1C94054300200833 /* CLQuickStringCell.m in Sources */,
 				43E0F73D1CA10D27005CAD97 /* MJType.m in Sources */,
