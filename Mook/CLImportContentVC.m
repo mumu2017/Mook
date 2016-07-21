@@ -91,8 +91,10 @@
         
         [MBProgressHUD showGlobalProgressHUDWithTitle:NSLocalizedString(@"预览失败", nil) hideAfterDelay:1.0];
         
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"dismissImportContentVC" object:nil];
-        
+        [self dismissViewControllerAnimated:YES completion:^{
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"dismissImportContentVC" object:nil];
+            
+        }];
     } else { // 如果模型字典不为空, 则执行数据读取
         
         if ([modelType isEqualToString:kTypeRoutine]) {
@@ -107,8 +109,10 @@
             } else { // 如果模型为空, 则退出预览
                 
                 [MBProgressHUD showGlobalProgressHUDWithTitle:NSLocalizedString(@"预览失败", nil) hideAfterDelay:1.0];
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"dismissImportContentVC" object:nil];
-
+                [self dismissViewControllerAnimated:YES completion:^{
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"dismissImportContentVC" object:nil];
+                    
+                }];
             }
             
             
@@ -124,8 +128,10 @@
                 
             } else { // 如果模型为空, 则退出预览
                 [MBProgressHUD showGlobalProgressHUDWithTitle:NSLocalizedString(@"预览失败", nil) hideAfterDelay:1.0];
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"dismissImportContentVC" object:nil];
-                
+                [self dismissViewControllerAnimated:YES completion:^{
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"dismissImportContentVC" object:nil];
+                    
+                }];
             }
         } else if ([modelType isEqualToString:kTypeSleight]) {
             
@@ -139,8 +145,10 @@
                 
             } else { // 如果模型为空, 则退出预览
                 [MBProgressHUD showGlobalProgressHUDWithTitle:NSLocalizedString(@"预览失败", nil) hideAfterDelay:1.0];
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"dismissImportContentVC" object:nil];
-                
+                [self dismissViewControllerAnimated:YES completion:^{
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"dismissImportContentVC" object:nil];
+                    
+                }];
             }
         } else if ([modelType isEqualToString:kTypeProp]) {
             
@@ -154,8 +162,10 @@
                 
             } else { // 如果模型为空, 则退出预览
                 [MBProgressHUD showGlobalProgressHUDWithTitle:NSLocalizedString(@"预览失败", nil) hideAfterDelay:1.0];
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"dismissImportContentVC" object:nil];
-                
+                [self dismissViewControllerAnimated:YES completion:^{
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"dismissImportContentVC" object:nil];
+                    
+                }];
             }
         } else if ([modelType isEqualToString:kTypeLines]) {
             
@@ -169,8 +179,10 @@
                 
             } else { // 如果模型为空, 则退出预览
                 [MBProgressHUD showGlobalProgressHUDWithTitle:NSLocalizedString(@"预览失败", nil) hideAfterDelay:1.0];
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"dismissImportContentVC" object:nil];
-                
+                [self dismissViewControllerAnimated:YES completion:^{
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"dismissImportContentVC" object:nil];
+                    
+                }];
             }
         }
 
@@ -546,8 +558,10 @@
     [MBProgressHUD showGlobalProgressHUDWithTitle:title hideAfterDelay:1.5];
 
     [[NSNotificationCenter defaultCenter] postNotificationName:kUpdateDataNotification object:nil];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"dismissImportContentVC" object:nil];
-}
+    [self dismissViewControllerAnimated:YES completion:^{
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"dismissImportContentVC" object:nil];
+        
+    }];}
 
 - (IBAction)cancelImport:(id)sender {
     
@@ -580,8 +594,10 @@
     
     [MBProgressHUD showGlobalProgressHUDWithTitle:NSLocalizedString(@"导入取消", nil) hideAfterDelay:1.5];
 
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"dismissImportContentVC" object:nil];
-}
+    [self dismissViewControllerAnimated:YES completion:^{
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"dismissImportContentVC" object:nil];
+        
+    }];}
 
 
 #pragma mark - Table view data source

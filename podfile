@@ -13,9 +13,8 @@ target ‘Mook’ do
  pod 'BTNavigationDropdownMenu'
  pod 'DZNWebViewController'
  pod 'IQAudioRecorderController'
- pod 'SCRecorder'
  pod 'FDWaveformView'
- pod "HTMLReader"
+ pod 'CYLTabBarController'
  pod 'MJRefresh'
 end
 

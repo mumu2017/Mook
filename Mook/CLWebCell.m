@@ -7,6 +7,7 @@
 //
 
 #import "CLWebCell.h"
+#import "CLWebSiteModel.h"
 
 @implementation CLWebCell
 
@@ -24,16 +25,20 @@
 
 }
 
-- (void)setTitle:(NSString *)title {
+- (void)setModel:(CLWebSiteModel *)model utilityButtons:(NSArray *)rightButtons delegate:(id<SWTableViewCellDelegate>)delegate {
     
-    self.titleLabel.text = title;
+    self.rightUtilityButtons = rightButtons;
+    self.delegate = delegate;
     
+    self.titleLabel.text = model.title;
+    self.urlLabel.text = model.url.absoluteString;
     
     self.iconView.backgroundColor = kAppThemeColor;
-    NSString *firstLetter = [title substringToIndex:1];
-
+    NSString *firstLetter = [model.title substringToIndex:1];
+    
     firstLetter = [firstLetter uppercaseString];
     self.iconLabel.text = firstLetter;
 }
+
 
 @end

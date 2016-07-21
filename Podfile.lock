@@ -4,6 +4,7 @@ PODS:
   - ChameleonFramework (2.1.0):
     - ChameleonFramework/Default (= 2.1.0)
   - ChameleonFramework/Default (2.1.0)
+  - CYLTabBarController (1.6.0)
   - DACircularProgress (2.3.1)
   - DZNWebViewController (3.2)
   - EAIntroView (2.8.3):
@@ -13,7 +14,6 @@ PODS:
   - FMDB (2.6.2):
     - FMDB/standard (= 2.6.2)
   - FMDB/standard (2.6.2)
-  - HTMLReader (1.0)
   - IQAudioRecorderController (1.1.0):
     - SCSiriWaveformView
   - Masonry (1.0.1)
@@ -23,28 +23,26 @@ PODS:
     - DACircularProgress (~> 2.3)
     - MBProgressHUD (~> 0.9)
     - SDWebImage (!= 3.7.2, ~> 3.7)
-  - SCRecorder (2.7.0)
   - SCSiriWaveformView (1.0.3)
   - SDWebImage (3.8.1):
     - SDWebImage/Core (= 3.8.1)
   - SDWebImage/Core (3.8.1)
-  - SSZipArchive (1.2)
+  - SSZipArchive (1.4)
   - SWTableViewCell (0.3.7)
 
 DEPENDENCIES:
   - Appirater
   - BTNavigationDropdownMenu
   - ChameleonFramework
+  - CYLTabBarController
   - DZNWebViewController
   - EAIntroView (~> 2.8.0)
   - FDWaveformView
   - FMDB
-  - HTMLReader
   - IQAudioRecorderController
   - Masonry
   - MJRefresh
   - MWPhotoBrowser
-  - SCRecorder
   - SSZipArchive
   - SWTableViewCell (~> 0.3.7)
 
@@ -52,24 +50,23 @@ SPEC CHECKSUMS:
   Appirater: e7c0a47fb67ee5041ce8479e6ba960927fb40264
   BTNavigationDropdownMenu: c36d20785253699046fdd295698c24b1d1c18f53
   ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
+  CYLTabBarController: efbdd574772be17f17965acd7ee993f5972ff02f
   DACircularProgress: 4dd437c0fc3da5161cb289e07ac449493d41db71
   DZNWebViewController: 8e927a5de637fe0c4104c001d5cccd4fa5621e50
   EAIntroView: e948c83e642f30010d427e643c18a6f2b529afed
   EARestrictedScrollView: b0c2a3f92fb2610bb44d71c5e4893777c89e45ef
   FDWaveformView: 77d5d68c5a37153e32f5b703cad5f8a50ec2ed6a
   FMDB: 854a0341b4726e53276f2a8996f06f1b80f9259a
-  HTMLReader: 8024d86f188a38da8d188d2433003ce652ca444a
   IQAudioRecorderController: 3a39f09c589c420b0bad09297b8294af08089f5c
   Masonry: a1a931a0d08870ed8ae415a2ea5ea68ebcac77df
   MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
   MJRefresh: bb72948c985914b0b5cecac573a2c69a8915fb02
   MWPhotoBrowser: 5836d7aa041dc05a13de380c246826578adc5ea5
-  SCRecorder: bbb521dbc222908876ec9cd9156bbc8a893bed44
   SCSiriWaveformView: b8b2756af42addcd31900c3945f24edafefb5395
   SDWebImage: 35f9627a3e44b4f292a8a8ce6a531fa488239b91
-  SSZipArchive: 251093c65f98d6ea282c50bc404bfa631d9fd721
+  SSZipArchive: bab21000ee11b7ba68d5880bcd87d80e4eb93e65
   SWTableViewCell: 2a94aadc9d47b2b611fa064566bf57948b95b579
 
-PODFILE CHECKSUM: 5f67a4d88e330b5c49e765f304b9c83fc2afbe0f
+PODFILE CHECKSUM: b664cbe74150a0c08c4122ee54fc4f7b3da36d4f
 
 COCOAPODS: 1.0.1

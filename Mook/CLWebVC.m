@@ -13,7 +13,7 @@
 #import "CLDataSaveTool.h"
 #import "CLWebCell.h"
 
-@interface CLWebVC ()
+@interface CLWebVC ()<SWTableViewCellDelegate>
 {
 //    CLWebViewController *_webVC;
     UIBarButtonItem *_addItem;
@@ -160,7 +160,6 @@
             
             NSIndexPath *path = [NSIndexPath indexPathForRow:self.webSiteList.count-1 inSection:0];
             [self.tableView insertRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationFade];
-//            self.tableBackView.hidden = !(self.quickStringList.count == 0);
             
             
             [[NSNotificationCenter defaultCenter] removeObserver:self name:UITextFieldTextDidChangeNotification object:nil];
@@ -270,7 +269,8 @@
      
      CLWebSiteModel *model = self.webSiteList[indexPath.row];
     
-     [cell setTitle:model.title];
+    [cell setModel:model utilityButtons:[self rightButtons] delegate:self];
+    
      cell.backgroundColor = [UIColor flatWhiteColor];
 
      return cell;
@@ -302,6 +302,60 @@
     
 
 }
+
+#pragma mark - SWTableViewCellDelegate
+ // 其他笔记的右滑按钮,包含导出按钮
+ - (NSArray *)rightButtons
+{
+    NSMutableArray *rightUtilityButtons = [NSMutableArray new];
+    
+    [rightUtilityButtons sw_addUtilityButtonWithColor:[UIColor flatRedColor] icon:[UIImage imageNamed:@"iconBin"]];
+    
+    return rightUtilityButtons;
+}
+
+- (BOOL)swipeableTableViewCellShouldHideUtilityButtonsOnSwipe:(SWTableViewCell *)cell{
+    return YES;
+}
+
+- (void)swipeableTableViewCell:(SWTableViewCell *)cell didTriggerRightUtilityButtonWithIndex:(NSInteger)index
+{
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    
+    [self delete:indexPath];
+    
+    [cell hideUtilityButtonsAnimated:YES];
+}
+
+#pragma mark - 删除和导出笔记方法
+// 删除笔记
+- (void)delete:(NSIndexPath *)indexPath {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:NSLocalizedString(@"提示: 删除内容后将无法恢复,确定要删除当前内容吗?", nil) preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    UIAlertAction* delete = [UIAlertAction actionWithTitle:NSLocalizedString(@"删除", nil) style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            
+            CLWebSiteModel *model = self.webSiteList[indexPath.row];
+
+            [CLDataSaveTool deleteWebSite:model];
+            [self.webSiteList removeObject:model];
+            
+            [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
+
+        });
+    }];
+    
+    UIAlertAction* cancel = [UIAlertAction actionWithTitle:NSLocalizedString(@"取消", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
+    }];
+    
+    [alert addAction:delete];
+    [alert addAction:cancel];
+    
+    [self presentViewController:alert animated:YES completion:nil];
+    
+}
+
 
 #pragma mark - helper
 

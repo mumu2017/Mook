@@ -26,8 +26,221 @@
 #import "CLPropModel.h"
 #import "CLPrepModel.h"
 #import "CLPerformModel.h"
+#import "CLGetMediaTool.h"
 
 @implementation CLNewEntryTool
+
+#pragma mark - 直接方法
+
++ (void)addNewEntryWithEntryMode:(NewEntryMode)entryMode inViewController:(UIViewController *)controller listType:(ListType)listType {
+    
+    if (entryMode == kNewEntryModeText) {
+        
+        switch (listType) {
+            case kListTypeAll:
+                [self addNewEntryInViewController:controller WithMode:entryMode];
+                break;
+                
+            case kListTypeIdea:
+                [CLNewEntryTool addNewIdeaFromCurrentController:controller withVideo:nil orImage:nil];
+                
+                break;
+                
+            case kListTypeShow:
+                [CLNewEntryTool addNewShowFromCurrentController:controller withVideo:nil orImage:nil];
+                
+                break;
+                
+            case kListTypeRoutine:
+                [CLNewEntryTool addNewRoutineFromCurrentController:controller withVideo:nil  orImage:nil];
+                
+                break;
+                
+            case kListTypeSleight:
+                [CLNewEntryTool addNewSleightFromCurrentController:controller withVideo:nil  orImage:nil];
+                break;
+                
+            case kListTypeProp:
+                [CLNewEntryTool addNewPropFromCurrentController:controller withVideo:nil  orImage:nil];
+                break;
+                
+            case kListTypeLines:
+                [CLNewEntryTool addNewLinesFromCurrentController:controller];
+                break;
+                
+            default:
+                break;
+        }
+        
+    } else if (entryMode == kNewEntryModeMedia) {
+        
+        switch (listType) {
+            case kListTypeAll:
+                [self addNewEntryInViewController:controller WithMode:entryMode];
+                
+                break;
+                
+            case kListTypeIdea:
+            {
+                [[CLGetMediaTool getInstance] loadCameraFromCurrentViewController:controller maximumDuration:30.0 completion:^(NSURL *videoURL, UIImage *photo) {
+                    [CLNewEntryTool quickAddNewIdeaFromCurrentController:controller withVideo:videoURL orImage:photo];
+                }];
+                break;
+            }
+            case kListTypeShow:
+            {
+                [[CLGetMediaTool getInstance] loadCameraFromCurrentViewController:controller maximumDuration:600.0 completion:^(NSURL *videoURL, UIImage *photo) {
+                    [CLNewEntryTool quickAddNewShowFromCurrentController:controller withVideo:videoURL orImage:photo];
+                }];
+                break;
+            }
+            case kListTypeRoutine:
+            {
+                [[CLGetMediaTool getInstance] loadCameraFromCurrentViewController:controller maximumDuration:180.0 completion:^(NSURL *videoURL, UIImage *photo) {
+                    [CLNewEntryTool quickAddNewRoutineFromCurrentController:controller withVideo:videoURL orImage:photo];
+                }];
+                break;
+            }
+            case kListTypeSleight:
+            {
+                [[CLGetMediaTool getInstance] loadCameraFromCurrentViewController:controller maximumDuration:30.0 completion:^(NSURL *videoURL, UIImage *photo) {
+                    [CLNewEntryTool quickAddNewSleightFromCurrentController:controller withVideo:videoURL orImage:photo];
+                }];
+                break;
+            }
+            case kListTypeProp:
+            {
+                [[CLGetMediaTool getInstance] loadCameraFromCurrentViewController:controller maximumDuration:30.0 completion:^(NSURL *videoURL, UIImage *photo) {
+                    [CLNewEntryTool quickAddNewPropFromCurrentController:controller withVideo:videoURL orImage:photo];
+                    
+                }];
+                break;
+            }
+            case kListTypeLines:
+            {
+                [[CLGetMediaTool getInstance] recordAudioFromCurrentController:controller.tabBarController audioBlock:^(NSString *filePath) {
+                    [CLNewEntryTool quickAddNewLinesFromCurrentController:controller withAudio:filePath];
+                }];
+                
+                break;
+            }
+            default:
+                break;
+        }
+
+    }
+    
+
+}
+
++ (void)addNewEntryInViewController:(UIViewController *)controller WithMode:(NewEntryMode)mode { // 选择一项新的笔记进行添加
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    UIAlertAction* addShow = [UIAlertAction actionWithTitle:NSLocalizedString(@"新建演出", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        if (mode == kNewEntryModeText) {
+            
+            [CLNewEntryTool addNewShowFromCurrentController:controller withVideo:nil orImage:nil];
+
+        } else if (mode == kNewEntryModeMedia) {
+            
+            [[CLGetMediaTool getInstance] loadCameraFromCurrentViewController:controller maximumDuration:600.0 completion:^(NSURL *videoURL, UIImage *photo) {
+                [CLNewEntryTool quickAddNewShowFromCurrentController:controller withVideo:videoURL orImage:photo];
+            }];
+        }
+        
+    }];
+    
+    UIAlertAction* addRoutine = [UIAlertAction actionWithTitle:NSLocalizedString(@"新建流程", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        if (mode == kNewEntryModeText) {
+            [CLNewEntryTool addNewRoutineFromCurrentController:controller withVideo:nil  orImage:nil];
+            
+        } else if (mode == kNewEntryModeMedia) {
+            [[CLGetMediaTool getInstance] loadCameraFromCurrentViewController:controller maximumDuration:180.0 completion:^(NSURL *videoURL, UIImage *photo) {
+                [CLNewEntryTool quickAddNewRoutineFromCurrentController:controller withVideo:videoURL orImage:photo];
+            }];
+        }
+    }];
+    
+    UIAlertAction* addIdea = [UIAlertAction actionWithTitle:NSLocalizedString(@"新建想法", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        if (mode == kNewEntryModeText) {
+            [CLNewEntryTool addNewIdeaFromCurrentController:controller withVideo:nil orImage:nil];
+
+            
+        } else if (mode == kNewEntryModeMedia) {
+            [[CLGetMediaTool getInstance] loadCameraFromCurrentViewController:controller maximumDuration:30.0 completion:^(NSURL *videoURL, UIImage *photo) {
+                [CLNewEntryTool quickAddNewIdeaFromCurrentController:controller withVideo:videoURL orImage:photo];
+            }];
+        }
+        
+    }];
+    
+    UIAlertAction* addSleight = [UIAlertAction actionWithTitle:NSLocalizedString(@"新建技巧", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        if (mode == kNewEntryModeText) {
+            [CLNewEntryTool addNewSleightFromCurrentController:controller withVideo:nil  orImage:nil];
+            
+        } else if (mode == kNewEntryModeMedia) {
+            [[CLGetMediaTool getInstance] loadCameraFromCurrentViewController:controller maximumDuration:30.0 completion:^(NSURL *videoURL, UIImage *photo) {
+                [CLNewEntryTool quickAddNewSleightFromCurrentController:controller withVideo:videoURL orImage:photo];
+            }];
+            
+        }
+        
+        
+    }];
+    
+    UIAlertAction* addProp = [UIAlertAction actionWithTitle:NSLocalizedString(@"新建道具", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        
+        if (mode == kNewEntryModeText) {
+            [CLNewEntryTool addNewPropFromCurrentController:controller withVideo:nil  orImage:nil];
+            
+        } else if (mode == kNewEntryModeMedia) {
+            [[CLGetMediaTool getInstance] loadCameraFromCurrentViewController:controller maximumDuration:30.0 completion:^(NSURL *videoURL, UIImage *photo) {
+                [CLNewEntryTool quickAddNewPropFromCurrentController:controller withVideo:videoURL orImage:photo];
+                
+            }];
+            
+        }
+        
+        
+    }];
+    
+    UIAlertAction* addLines = [UIAlertAction actionWithTitle:NSLocalizedString(@"新建台词", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        
+        if (mode == kNewEntryModeText) {
+            [CLNewEntryTool addNewLinesFromCurrentController:controller];
+            
+        } else if (mode == kNewEntryModeMedia) {
+            [[CLGetMediaTool getInstance] recordAudioFromCurrentController:controller.tabBarController audioBlock:^(NSString *filePath) {
+                [CLNewEntryTool quickAddNewLinesFromCurrentController:controller withAudio:filePath];
+            }];
+        }
+        
+    }];
+    
+    UIAlertAction* cancel = [UIAlertAction actionWithTitle:NSLocalizedString(@"取消", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
+    }];
+    
+    [alert addAction:addShow];
+    [alert addAction:addRoutine];
+    [alert addAction:addIdea];
+    
+    [alert addAction:addSleight];
+    [alert addAction:addProp];
+    [alert addAction:addLines];
+    
+    [alert addAction:cancel];
+    
+    [controller presentViewController:alert animated:YES completion:nil];
+    
+}
+
 
 #pragma mark - 快速添加
 

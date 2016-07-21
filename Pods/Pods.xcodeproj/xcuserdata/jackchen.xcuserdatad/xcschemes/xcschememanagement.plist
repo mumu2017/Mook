@@ -19,6 +19,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>CYLTabBarController.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>ChameleonFramework.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -54,11 +59,6 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>HTMLReader.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>IQAudioRecorderController.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -90,11 +90,6 @@
 			<false/>
 		</dict>
 		<key>Pods-Mook.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>SCRecorder.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -142,17 +137,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>35AB4E645558A256E1C06F38C71F4836</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>38B2474207004164BABDA2224ECB3965</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>6101DD654BB4E5594D9322F0DC0F0CBA</key>
+		<key>559008CAB5A1844D6086E5255DFDEADF</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -163,11 +153,6 @@
 			<true/>
 		</dict>
 		<key>6918E3DB32B2936FD18B206A341CEDE0</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>6C12A16C60E65026EBAD4F1E5ABAE5AE</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -207,12 +192,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>D8BF146EAE696DCA97C90C51BE045947</key>
+		<key>C5270037EC5CDF389D94CCEDB4413E13</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>E0D0815D232B33043736FD2BC76DCB27</key>
+		<key>CC3602C14EF765BBCFBC2B29DB6589F6</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D8BF146EAE696DCA97C90C51BE045947</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -227,12 +217,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>FD23F1DA220A44C7E84F356B64871271</key>
+		<key>EBF6745D43FF3B5D5730AC7438776E8F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>FF52360D67C3AC36149FE9EF4FB2262E</key>
+		<key>FD23F1DA220A44C7E84F356B64871271</key>
 		<dict>
 			<key>primary</key>
 			<true/>

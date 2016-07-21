@@ -12,6 +12,8 @@
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+@property (strong, nonatomic) UIViewController *mainController;
+
 
 @property (nonatomic, strong) NSMutableArray *allItems;
 @property (nonatomic, strong) NSMutableArray *allTags;

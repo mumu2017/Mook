@@ -40,12 +40,12 @@
 @class BTNavigationDropdownMenu;
 
 #import "CLListRefreshHeader.h"
-
-typedef enum {
-    kNewEntryModeText = 1,
-    kNewEntryModeMedia
-    
-} NewEntryMode;
+//
+//typedef enum {
+//    kNewEntryModeText = 1,
+//    kNewEntryModeMedia
+//    
+//} NewEntryMode;
 
 @interface CLAllItemsListVC ()<SWTableViewCellDelegate, MBProgressHUDDelegate, UIDocumentInteractionControllerDelegate>
 
@@ -138,6 +138,8 @@ typedef enum {
 
         }];
         
+        _menu.cellTextLabelColor = [UIColor whiteColor];
+        _menu.menuTitleColor = [UIColor whiteColor];
         _menu.cellBackgroundColor = kAppThemeColor;
         _menu.cellSelectionColor = [UIColor whiteColor];
         _menu.cellSeparatorColor = [UIColor flatGrayColorDark];
@@ -438,6 +440,8 @@ typedef enum {
     return cell;
     
 }
+
+#pragma mark - SWTableViewCellDelegate
 
 // 演出的右滑按钮,不含导出
 - (NSArray *)showRightButtons
@@ -1024,245 +1028,12 @@ typedef enum {
 
 - (IBAction)addNewEntry:(id)sender {
 
-    switch (self.listType) {
-        case kListTypeAll:
-            [self addNewEntryWithMode:kNewEntryModeText];
-            break;
-            
-        case kListTypeIdea:
-            [self addNewIdea];
-            break;
-            
-        case kListTypeShow:
-            [self addNewShow];
-            break;
-            
-        case kListTypeRoutine:
-            [self addNewRoutine];
-            break;
-            
-        case kListTypeSleight:
-            [self addNewSleight];
-            break;
-            
-        case kListTypeProp:
-            [self addNewProp];
-            break;
-            
-        case kListTypeLines:
-            [self addNewLines];
-            break;
-            
-        default:
-            break;
-    }
-
-//    滚动到第一行
-//    if ([self.tableView numberOfRowsInSection:0] > 0) {
-//        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
-//        
-//    }
-    
+    [CLNewEntryTool addNewEntryWithEntryMode:kNewEntryModeText inViewController:self listType:self.listType];
 }
 
 - (IBAction)addNewEntryWithMedia {
     
-    switch (self.listType) {
-        case kListTypeAll:
-            [self addNewEntryWithMode:kNewEntryModeMedia];
-            break;
-            
-        case kListTypeIdea:
-            [self addNewIdeaWithVideo];
-            break;
-            
-        case kListTypeShow:
-            [self addNewShowWithVideo];
-            break;
-            
-        case kListTypeRoutine:
-            [self addNewRoutineWithVideo];
-            break;
-            
-        case kListTypeSleight:
-            [self addNewSleightWithVideo];
-            break;
-            
-        case kListTypeProp:
-            [self addNewPropWithVideo];
-            break;
-            
-        case kListTypeLines:
-            [self addNewLinesWithAudio];
-            break;
-            
-        default:
-            break;
-    }
-}
-
-- (void)addNewEntryWithMode:(NewEntryMode)mode { // 选择一项新的笔记进行添加
-    
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
-    
-    UIAlertAction* addShow = [UIAlertAction actionWithTitle:NSLocalizedString(@"新建演出", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        
-        if (mode == kNewEntryModeText) {
-            [self addNewShow];
-        } else if (mode == kNewEntryModeMedia) {
-            [self addNewShowWithVideo];
-        }
-        
-    }];
-    
-    UIAlertAction* addRoutine = [UIAlertAction actionWithTitle:NSLocalizedString(@"新建流程", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        
-        if (mode == kNewEntryModeText) {
-            [self addNewRoutine];
-            
-        } else if (mode == kNewEntryModeMedia) {
-            [self addNewRoutineWithVideo];
-        }
-    }];
-    
-    UIAlertAction* addIdea = [UIAlertAction actionWithTitle:NSLocalizedString(@"新建想法", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        
-        if (mode == kNewEntryModeText) {
-            [self addNewIdea];
-            
-        } else if (mode == kNewEntryModeMedia) {
-            [self addNewIdeaWithVideo];
-        }
-        
-    }];
-    
-    UIAlertAction* addSleight = [UIAlertAction actionWithTitle:NSLocalizedString(@"新建技巧", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        
-        if (mode == kNewEntryModeText) {
-            [self addNewSleight];
-            
-        } else if (mode == kNewEntryModeMedia) {
-            [self addNewSleightWithVideo];
-        }
-        
-        
-    }];
-    
-    UIAlertAction* addProp = [UIAlertAction actionWithTitle:NSLocalizedString(@"新建道具", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        
-        
-        if (mode == kNewEntryModeText) {
-            [self addNewProp];
-            
-        } else if (mode == kNewEntryModeMedia) {
-            [self addNewPropWithVideo];
-        }
-        
-        
-    }];
-    
-    UIAlertAction* addLines = [UIAlertAction actionWithTitle:NSLocalizedString(@"新建台词", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        
-        
-        if (mode == kNewEntryModeText) {
-            [self addNewLines];
-            
-        } else if (mode == kNewEntryModeMedia) {
-            [self addNewLinesWithAudio];
-        }
-        
-        
-        [self addNewLines];
-    }];
-    
-    UIAlertAction* cancel = [UIAlertAction actionWithTitle:NSLocalizedString(@"取消", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
-    }];
-    
-    [alert addAction:addShow];
-    [alert addAction:addRoutine];
-    [alert addAction:addIdea];
-    
-    [alert addAction:addSleight];
-    [alert addAction:addProp];
-    [alert addAction:addLines];
-    
-    [alert addAction:cancel];
-    
-    [self presentViewController:alert animated:YES completion:nil];
-    
-}
-
-- (void)addNewLinesWithAudio {
-
-    [[CLGetMediaTool getInstance] recordAudioFromCurrentController:self.tabBarController audioBlock:^(NSString *filePath) {
-        [CLNewEntryTool quickAddNewLinesFromCurrentController:self withAudio:filePath];
-    }];
-}
-
-- (void)addNewShowWithVideo {
-
-    [[CLGetMediaTool getInstance] loadCameraFromCurrentViewController:self maximumDuration:600.0 completion:^(NSURL *videoURL, UIImage *photo) {
-        [CLNewEntryTool quickAddNewShowFromCurrentController:self withVideo:videoURL orImage:photo];
-    }];
-}
-
-
-- (void)addNewIdeaWithVideo {
-    
-    [[CLGetMediaTool getInstance] loadCameraFromCurrentViewController:self maximumDuration:30.0 completion:^(NSURL *videoURL, UIImage *photo) {
-        [CLNewEntryTool quickAddNewIdeaFromCurrentController:self withVideo:videoURL orImage:photo];
-    }];
-}
-
-- (void)addNewRoutineWithVideo {
-
-    [[CLGetMediaTool getInstance] loadCameraFromCurrentViewController:self maximumDuration:180.0 completion:^(NSURL *videoURL, UIImage *photo) {
-        [CLNewEntryTool quickAddNewRoutineFromCurrentController:self withVideo:videoURL orImage:photo];
-    }];
-}
-
-- (void)addNewSleightWithVideo {
-
-    [[CLGetMediaTool getInstance] loadCameraFromCurrentViewController:self maximumDuration:30.0 completion:^(NSURL *videoURL, UIImage *photo) {
-        [CLNewEntryTool quickAddNewSleightFromCurrentController:self withVideo:videoURL orImage:photo];
-    }];
-}
-
-- (void)addNewPropWithVideo {
-
-    [[CLGetMediaTool getInstance] loadCameraFromCurrentViewController:self maximumDuration:30.0 completion:^(NSURL *videoURL, UIImage *photo) {
-        [CLNewEntryTool quickAddNewPropFromCurrentController:self withVideo:videoURL orImage:photo];
-        
-    }];
-}
-
-- (void)addNewIdea {
-
-    [CLNewEntryTool addNewIdeaFromCurrentController:self withVideo:nil orImage:nil];
-}
-
-- (void)addNewShow {
-
-    [CLNewEntryTool addNewShowFromCurrentController:self withVideo:nil orImage:nil];
-}
-
-- (void)addNewRoutine {
-
-    [CLNewEntryTool addNewRoutineFromCurrentController:self withVideo:nil  orImage:nil];
-}
-
-- (void)addNewSleight {
-    
-    [CLNewEntryTool addNewSleightFromCurrentController:self withVideo:nil  orImage:nil];
-}
-
-- (void)addNewProp {
-
-    [CLNewEntryTool addNewPropFromCurrentController:self withVideo:nil  orImage:nil];
-}
-
-- (void)addNewLines {
-    [CLNewEntryTool addNewLinesFromCurrentController:self];
+    [CLNewEntryTool addNewEntryWithEntryMode:kNewEntryModeMedia inViewController:self listType:self.listType];
 }
 
 

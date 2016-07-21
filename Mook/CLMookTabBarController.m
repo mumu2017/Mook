@@ -10,6 +10,7 @@
 #import "EAIntroView.h"
 #import "CLImportContentNavVC.h"
 #import "CLDataSaveTool.h"
+#import "CLPasswordVC.h"
 
 #import "CLShowModel.h"
 #import "CLIdeaObjModel.h"
@@ -29,10 +30,66 @@
 @property (nonatomic, assign) BOOL isImportingData;
 @property (nonatomic, strong) NSDictionary *importDict;
 
+@property(strong,nonatomic)NSTimer *passwordTimer;
+
+// 直接跳过密码页面(默认为NO)
+@property (nonatomic, assign) BOOL showContentWithoutPassword;
+
 @end
 
 @implementation CLMookTabBarController
 
+#pragma - 定时器
+
+/**
+ *  开启定时器
+ */
+-(void)startTimer
+{
+    if(self.passwordTimer == nil){
+        
+        // 30秒钟之内,如果用户退出页面, 则可以不用输入密码而进入应用
+        self.passwordTimer = [NSTimer scheduledTimerWithTimeInterval:30.0f target:self selector:@selector(setPassowrdSkipping) userInfo:nil repeats:YES];
+        
+        //如果不添加下面这条语句，在UITableView拖动的时候，会阻塞定时器的调用
+        [[NSRunLoop currentRunLoop] addTimer:self.passwordTimer forMode:UITrackingRunLoopMode];
+    }
+}
+/**
+ *  关闭定时器
+ */
+-(void)closeTimer
+{
+    if (self.passwordTimer) {
+
+        [self.passwordTimer invalidate];
+        self.passwordTimer = nil;
+    }
+}
+
+- (void)setPassowrdSkipping {
+    
+    self.showContentWithoutPassword = NO;
+    
+    [self closeTimer];
+}
+
+#pragma mark - 工厂方法
+
+- (instancetype)initWithViewControllers:(NSArray<UIViewController *> *)viewControllers tabBarItemsAttributes:(NSArray<NSDictionary *> *)tabBarItemsAttributes {
+    if (self = [super initWithViewControllers:viewControllers tabBarItemsAttributes:tabBarItemsAttributes]) {
+        
+        self.tabBarItemsAttributes = tabBarItemsAttributes;
+        self.viewControllers = viewControllers;
+    }
+    return self;
+}
+
++ (instancetype)tabBarControllerWithViewControllers:(NSArray<UIViewController *> *)viewControllers tabBarItemsAttributes:(NSArray<NSDictionary *> *)tabBarItemsAttributes {
+    CLMookTabBarController *tabBarController = [[CLMookTabBarController alloc] initWithViewControllers:viewControllers tabBarItemsAttributes:tabBarItemsAttributes];
+    
+    return tabBarController;
+}
 
 - (BOOL)isNotFirstTimeLaunch { // 检测是否是第一次启动应用
 
@@ -46,6 +103,7 @@
     self.rootView = self.view;
     
     self.isLaunched = [[NSUserDefaults standardUserDefaults] boolForKey:kUsePasswordKey];
+    
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deleteEntry:) name:kDeleteEntryNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cancelEntry:) name:kCancelEntryNotification object:nil];
@@ -81,16 +139,34 @@
     } else {    // 如果不需要输入密码, 则直接进行跳转
         
         if (self.importDict) {
-            [self performSegueWithIdentifier:kSegueImportContent sender:self.importDict];
+            [self openImportVC];
             self.isImportingData = NO;
         }
     }
 }
 
+- (void)openImportVC {
+    
+    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+    CLImportContentNavVC *navVC =  [sb instantiateViewControllerWithIdentifier:@"importNavVC"];
+    navVC.importDict = self.importDict;
+    
+    [self presentViewController:navVC animated:YES completion:nil];
+    
+}
+
+- (void)openPasswordVC {
+    
+    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Setting" bundle:[NSBundle mainBundle]];
+    CLPasswordVC *vc =  [sb instantiateViewControllerWithIdentifier:@"passwordVC"];
+    
+    [[kAppDelegate window] setRootViewController:vc];
+
+}
+
 - (void)importFinish { // 导入完成
     self.isImportingData = NO;
     self.importDict = nil;
-    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 // 取消新建笔记
@@ -244,21 +320,32 @@
 - (void)inputPassword {
     
     if ([[NSUserDefaults standardUserDefaults] boolForKey:kCheckIfShouldPasswordKey]) {
-        [self performSegueWithIdentifier:kMookToPasswordSegue sender:nil];
+        // 如果可以跳过密码, 则跳过
+        if (self.showContentWithoutPassword) {
+            
+        } else { //否则, 展示密码页
+            
+            [self openPasswordVC];
+
+        }
     }
 }
 
 // 密码核对正确后的操作
 - (void)passwordMatch {
     
-    [self dismissViewControllerAnimated:YES completion:^{
-        if (self.isImportingData) {
-            if (self.importDict) {
-                [self performSegueWithIdentifier:kSegueImportContent sender:self.importDict];
-                self.isImportingData = NO;
-            }
+    [[kAppDelegate window] setRootViewController:[kAppDelegate mainController]];
+    
+    self.showContentWithoutPassword = YES;
+
+    [self startTimer];
+    
+    if (self.isImportingData) {
+        if (self.importDict) {
+            [self openImportVC];
+            self.isImportingData = NO;
         }
-    }];
+    }
     
 }
 
@@ -276,25 +363,25 @@
     
     if (self.isLaunched) {
         
-        [self performSegueWithIdentifier:kMookToPasswordSegue sender:nil];
+        [self openPasswordVC];
         self.isLaunched = NO;
     }
 
 }
-
-#pragma mark - Navigation
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)modelUnknown {
-    
-    id destVC = segue.destinationViewController;
-    
-    if ([destVC isKindOfClass:[CLImportContentNavVC class]]) {
-        CLImportContentNavVC *vc = (CLImportContentNavVC *)destVC;
-        vc.hidesBottomBarWhenPushed = YES;
-        vc.importDict = self.importDict;
-        
-    }
-}
-
+//
+//#pragma mark - Navigation
+//
+//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)modelUnknown {
+//    
+//    id destVC = segue.destinationViewController;
+//    
+//    if ([destVC isKindOfClass:[CLImportContentNavVC class]]) {
+//        CLImportContentNavVC *vc = (CLImportContentNavVC *)destVC;
+//        vc.hidesBottomBarWhenPushed = YES;
+//        
+//        
+//    }
+//}
+//
 
 @end

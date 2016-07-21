@@ -481,10 +481,12 @@ typedef enum {
  *  Authentication Successul  Authorize Success
  */
 - (void) WJTouchIDAuthorizeSuccess {
+    
     self.resultNoticeLabel.hidden = NO;
     self.resultNoticeLabel.text = WJNotice(@"TouchID验证成功", @"Authorize Success");
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        
         [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"passwordMatch" object:nil]];
     });
 
@@ -496,6 +498,7 @@ typedef enum {
  *  Authentication Failure
  */
 - (void) WJTouchIDAuthorizeFailure {
+    
     self.resultNoticeLabel.hidden = NO;
     
     self.resultNoticeLabel.text = WJNotice(@"TouchID验证失败", @"Authorize Failure");

@@ -7,12 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+@class CLWebSiteModel;
 
-@interface CLWebCell : UITableViewCell
+@interface CLWebCell : SWTableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *iconLabel;
 @property (weak, nonatomic) IBOutlet UIView *iconView;
+@property (weak, nonatomic) IBOutlet UILabel *urlLabel;
 
-- (void)setTitle:(NSString *)title;
+- (void)setModel:(CLWebSiteModel *)model utilityButtons:(NSArray *)rightButtons delegate:(id<SWTableViewCellDelegate>)delegate;
 
 @end

@@ -8,7 +8,20 @@
 
 #import <Foundation/Foundation.h>
 
+
+typedef enum {
+    kNewEntryModeText = 1,
+    kNewEntryModeMedia
+    
+} NewEntryMode;
+
+
 @interface CLNewEntryTool : NSObject
+
+#pragma mark - 直接方法
++ (void)addNewEntryWithEntryMode:(NewEntryMode)entryMode inViewController:(UIViewController *_Nonnull)controller listType:(ListType)listType;
+
++ (void)addNewEntryInViewController:(UIViewController * _Nonnull)controller WithMode:(NewEntryMode)mode;
 
 #pragma mark - 快速添加
 

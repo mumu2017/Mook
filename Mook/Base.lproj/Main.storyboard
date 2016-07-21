@@ -1178,7 +1178,6 @@
                     <connections>
                         <segue destination="ZNK-Ui-Mmt" kind="relationship" relationship="viewControllers" id="QBb-ng-PS8"/>
                         <segue destination="Q9D-A1-sVC" kind="relationship" relationship="viewControllers" id="s68-Em-xc7"/>
-                        <segue destination="JRa-iv-CFM" kind="presentation" identifier="importContentSegue" id="M7U-bR-kMk"/>
                         <segue destination="tYr-nI-P3n" kind="presentation" identifier="mookToPasswordSegue" id="eSP-0F-ROY"/>
                         <segue destination="a3j-i3-6iI" kind="relationship" relationship="viewControllers" id="J07-Oo-GJN"/>
                         <segue destination="0aN-7l-1wA" kind="relationship" relationship="viewControllers" id="v25-sq-CEx"/>
@@ -1186,7 +1185,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uq2-ld-y6u" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-12661.5" y="-4632.75"/>
+            <point key="canvasLocation" x="-12702" y="-4266.75"/>
         </scene>
         <!--笔记-->
         <scene sceneID="wFR-qS-uql">
@@ -1306,7 +1305,7 @@
         <!--设置-->
         <scene sceneID="Bll-BA-05a">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="0aN-7l-1wA" customClass="CLSettingNavVC" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="settingNavVC" automaticallyAdjustsScrollViewInsets="NO" id="0aN-7l-1wA" customClass="CLSettingNavVC" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="设置" image="iconsettingLine" selectedImage="iconsettingFill" id="7UM-em-4Mb"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="0zu-k4-g2O">
@@ -1321,7 +1320,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2X7-4M-W3z" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-13011" y="-3905.25"/>
+            <point key="canvasLocation" x="-13653" y="-3647.25"/>
         </scene>
         <!--Edting ManageVC-->
         <scene sceneID="Cby-fe-S5c">
@@ -1486,7 +1485,7 @@
         <!--笔记-->
         <scene sceneID="7HN-8R-7kn">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ZNK-Ui-Mmt" customClass="CLHomeNavVC" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="homeNavVC" automaticallyAdjustsScrollViewInsets="NO" id="ZNK-Ui-Mmt" customClass="CLHomeNavVC" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="笔记" image="iconnotesLine" selectedImage="iconnotesFill" id="7U8-cH-grM"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="eMn-os-yaZ">
@@ -1570,7 +1569,7 @@
         <!--发现-->
         <scene sceneID="ENp-8f-x2r">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="a3j-i3-6iI" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="discoverNavVC" automaticallyAdjustsScrollViewInsets="NO" id="a3j-i3-6iI" customClass="CLDiscoverNavVC" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="发现" image="internetLine" selectedImage="internetFill" id="JG5-Ax-guD"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="FzY-UC-DJK">
@@ -1584,7 +1583,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NRt-qZ-mya" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-12154.5" y="-4445.25"/>
+            <point key="canvasLocation" x="-11581.5" y="-4464.75"/>
         </scene>
         <!--WebVC-->
         <scene sceneID="8Iw-aS-wzM">
@@ -1608,7 +1607,7 @@
         <!--多媒体-->
         <scene sceneID="C5G-wl-0Wc">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Q9D-A1-sVC" customClass="CLMediaNavVC" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="mediaNavVC" automaticallyAdjustsScrollViewInsets="NO" id="Q9D-A1-sVC" customClass="CLMediaNavVC" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="多媒体" image="iconmediaLine" selectedImage="iconmediaFill" id="hKg-es-jeP"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="n3U-Su-yMZ">
@@ -1622,7 +1621,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SfF-Ho-9Qx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-12046" y="-3664"/>
+            <point key="canvasLocation" x="-12028.5" y="-3565.5"/>
         </scene>
         <!--aboutVC-->
         <scene sceneID="81Q-w2-srJ">
@@ -1696,7 +1695,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dhP-jU-AQC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-12675" y="-4857.75"/>
+            <point key="canvasLocation" x="-12363" y="-5094.75"/>
         </scene>
         <!--Title-->
         <scene sceneID="aQo-Q1-W6q">

@@ -217,6 +217,9 @@
 		43F5F7B71CB50151007BFB0C /* routine.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 43F5F7B61CB50151007BFB0C /* routine.jpg */; };
 		43F5F7B91CB5020F007BFB0C /* prop.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 43F5F7B81CB5020F007BFB0C /* prop.jpg */; };
 		43F5F7BF1CB50AD3007BFB0C /* launch.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 43F5F7BE1CB50AD3007BFB0C /* launch.jpg */; };
+		43FA89181D407F4A00583D93 /* CYLPlusButtonSubclass.m in Sources */ = {isa = PBXBuildFile; fileRef = 43FA89171D407F4A00583D93 /* CYLPlusButtonSubclass.m */; };
+		43FA891B1D409B7600583D93 /* CYLTabBarControllerConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 43FA891A1D409B7600583D93 /* CYLTabBarControllerConfig.m */; };
+		43FA891E1D40D61100583D93 /* CLDiscoverNavVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 43FA891D1D40D61100583D93 /* CLDiscoverNavVC.m */; };
 		43FAB4DD1D2655390046997D /* UINavigationController+FDFullscreenPopGesture.m in Sources */ = {isa = PBXBuildFile; fileRef = 43FAB4DC1D2655390046997D /* UINavigationController+FDFullscreenPopGesture.m */; };
 		43FAB4E51D267BF80046997D /* CLWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43FAB4E41D267BF80046997D /* CLWebViewController.m */; };
 /* End PBXBuildFile section */
@@ -595,6 +598,12 @@
 		43F5F7B61CB50151007BFB0C /* routine.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = routine.jpg; sourceTree = "<group>"; };
 		43F5F7B81CB5020F007BFB0C /* prop.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = prop.jpg; sourceTree = "<group>"; };
 		43F5F7BE1CB50AD3007BFB0C /* launch.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = launch.jpg; sourceTree = "<group>"; };
+		43FA89161D407F4A00583D93 /* CYLPlusButtonSubclass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CYLPlusButtonSubclass.h; sourceTree = "<group>"; };
+		43FA89171D407F4A00583D93 /* CYLPlusButtonSubclass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CYLPlusButtonSubclass.m; sourceTree = "<group>"; };
+		43FA89191D409B7600583D93 /* CYLTabBarControllerConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CYLTabBarControllerConfig.h; sourceTree = "<group>"; };
+		43FA891A1D409B7600583D93 /* CYLTabBarControllerConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CYLTabBarControllerConfig.m; sourceTree = "<group>"; };
+		43FA891C1D40D61100583D93 /* CLDiscoverNavVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLDiscoverNavVC.h; sourceTree = "<group>"; };
+		43FA891D1D40D61100583D93 /* CLDiscoverNavVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLDiscoverNavVC.m; sourceTree = "<group>"; };
 		43FAB4DB1D2655390046997D /* UINavigationController+FDFullscreenPopGesture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+FDFullscreenPopGesture.h"; sourceTree = "<group>"; };
 		43FAB4DC1D2655390046997D /* UINavigationController+FDFullscreenPopGesture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+FDFullscreenPopGesture.m"; sourceTree = "<group>"; };
 		43FAB4E31D267BF80046997D /* CLWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLWebViewController.h; sourceTree = "<group>"; };
@@ -910,6 +919,8 @@
 				43A06F3A1D3F898500ABEA4B /* CLWebCell.h */,
 				43A06F3B1D3F898500ABEA4B /* CLWebCell.m */,
 				43A06F3C1D3F898500ABEA4B /* CLWebCell.xib */,
+				43FA891C1D40D61100583D93 /* CLDiscoverNavVC.h */,
+				43FA891D1D40D61100583D93 /* CLDiscoverNavVC.m */,
 			);
 			name = "Discover发现";
 			sourceTree = "<group>";
@@ -1042,6 +1053,10 @@
 		43DF3AC31CAA48B000712D81 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				43FA89191D409B7600583D93 /* CYLTabBarControllerConfig.h */,
+				43FA891A1D409B7600583D93 /* CYLTabBarControllerConfig.m */,
+				43FA89161D407F4A00583D93 /* CYLPlusButtonSubclass.h */,
+				43FA89171D407F4A00583D93 /* CYLPlusButtonSubclass.m */,
 				43A281161CB224BC009C2785 /* CLMookTabBarController.h */,
 				43A281171CB224BC009C2785 /* CLMookTabBarController.m */,
 				439519B11CBBF45D00505E5B /* CLImportContentVC.h */,
@@ -1651,6 +1666,7 @@
 				432345E51C94051A00200833 /* CLPropObjModel.m in Sources */,
 				4300C4261D1A98EF0065E94E /* IQAudioCropperViewController.m in Sources */,
 				436927261D053D400041ED9C /* CLShowCell.m in Sources */,
+				43FA891B1D409B7600583D93 /* CYLTabBarControllerConfig.m in Sources */,
 				432345651C9404A800200833 /* UIImageView+Tools.m in Sources */,
 				431388AC1D3506BE0065D3E8 /* UIButton+HitTest.m in Sources */,
 				439519FC1CC51F6200505E5B /* CLBackUpVC.m in Sources */,
@@ -1732,9 +1748,11 @@
 				4323467F1C9409BB00200833 /* XLButtonBarView.m in Sources */,
 				4323456A1C9404A800200833 /* UITextView+Tools.m in Sources */,
 				432345B61C9404FB00200833 /* CLSettingNavVC.m in Sources */,
+				43FA891E1D40D61100583D93 /* CLDiscoverNavVC.m in Sources */,
 				43E7EE971D38D45900D22E9B /* CLAudioView.m in Sources */,
 				439519C41CBF886C00505E5B /* FCFileManager.m in Sources */,
 				432345A51C9404FB00200833 /* CLEdtingManageVC.m in Sources */,
+				43FA89181D407F4A00583D93 /* CYLPlusButtonSubclass.m in Sources */,
 				432345AF1C9404FB00200833 /* CLPropChooseNavVC.m in Sources */,
 				4300C42A1D1A98EF0065E94E /* IQCropSelectionEndView.m in Sources */,
 				43F5F75A1CB390EB007BFB0C /* CLMediaNavVC.m in Sources */,
@@ -1949,6 +1967,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.linchen.project.Mook;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "b3c1146b-9d44-4007-9274-17061760e032";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -1976,6 +1995,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.linchen.project.Mook;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "b3c1146b-9d44-4007-9274-17061760e032";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

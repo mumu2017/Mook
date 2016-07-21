@@ -146,7 +146,6 @@ typedef enum {
 #pragma mark - segue ID
 // segue
 
-#define kSegueImportContent @"importContentSegue"
 #define kSegueHomeToNewShowSegue    @"homeToNewShowSegue"
 #define kSegueHomeToContentSegue    @"homeToContentSegue"
 #define kSegueHomeToShowSegue   @"homeToShowSegue"

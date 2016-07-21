@@ -34,19 +34,29 @@
                             <constraint firstItem="pBo-O3-a65" firstAttribute="centerY" secondItem="kqS-Oh-DfE" secondAttribute="centerY" id="qSw-QV-K4Q"/>
                         </constraints>
                     </view>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vOb-Ci-054">
-                        <rect key="frame" x="89.5" y="29.5" width="210.5" height="21"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vOb-Ci-054">
+                        <rect key="frame" x="89" y="15" width="210.5" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hBF-Do-odo">
+                        <rect key="frame" x="89" y="43.5" width="210.5" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="hBF-Do-odo" firstAttribute="trailing" secondItem="vOb-Ci-054" secondAttribute="trailing" id="DUL-Kv-hgg"/>
+                    <constraint firstItem="hBF-Do-odo" firstAttribute="leading" secondItem="vOb-Ci-054" secondAttribute="leading" id="OC2-Ej-yIP"/>
+                    <constraint firstItem="hBF-Do-odo" firstAttribute="top" relation="greaterThanOrEqual" secondItem="vOb-Ci-054" secondAttribute="bottom" constant="5" id="PW8-7b-bVz"/>
                     <constraint firstItem="kqS-Oh-DfE" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="W4b-V8-emm"/>
                     <constraint firstAttribute="trailing" secondItem="vOb-Ci-054" secondAttribute="trailing" constant="20" id="Xef-PJ-1Z4"/>
+                    <constraint firstItem="vOb-Ci-054" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="ZdP-rQ-sPh"/>
                     <constraint firstItem="kqS-Oh-DfE" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="cE3-yM-jOH"/>
                     <constraint firstItem="vOb-Ci-054" firstAttribute="leading" secondItem="kqS-Oh-DfE" secondAttribute="trailing" constant="20" id="nf2-lI-Q6O"/>
-                    <constraint firstItem="vOb-Ci-054" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="vvQ-9e-9Fy"/>
+                    <constraint firstAttribute="bottom" secondItem="hBF-Do-odo" secondAttribute="bottom" constant="15" id="puP-GB-CCw"/>
                     <constraint firstItem="kqS-Oh-DfE" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="ytT-Tw-A1U"/>
                 </constraints>
             </tableViewCellContentView>
@@ -54,8 +64,9 @@
                 <outlet property="iconLabel" destination="pBo-O3-a65" id="ZWf-bs-A49"/>
                 <outlet property="iconView" destination="kqS-Oh-DfE" id="h9U-GS-D4w"/>
                 <outlet property="titleLabel" destination="vOb-Ci-054" id="MX3-dv-6YO"/>
+                <outlet property="urlLabel" destination="hBF-Do-odo" id="2mY-QK-IJj"/>
             </connections>
-            <point key="canvasLocation" x="135" y="286"/>
+            <point key="canvasLocation" x="114" y="347"/>
         </tableViewCell>
     </objects>
 </document>

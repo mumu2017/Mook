@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CYLTabBarController.h"
 
-@interface CLMookTabBarController : UITabBarController
+@interface CLMookTabBarController : CYLTabBarController
 
 @end

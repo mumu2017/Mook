@@ -8,12 +8,10 @@
 
 #import "CLWebViewController.h"
 #import "UIButton+HitTest.h"
-#import "HTMLReader.h"
 #import "CLWebSiteModel.h"
 #import "CLDataSaveTool.h"
 
 #define kBackButtonHitTestEdgeInsets UIEdgeInsetsMake(-15, -15, -15, -15)
-static char DZNWebViewControllerKVOContext = 0;
 
 @interface CLWebViewController()
 
@@ -226,9 +224,6 @@ static char DZNWebViewControllerKVOContext = 0;
     
 }
 
-- (void)dealloc {
-    
-}
 
 - (void)webView:(DZNWebView *)webView didFinishNavigation:(WKNavigation *)navigation {
     
