@@ -150,7 +150,7 @@
     [[UINavigationBar appearance] setTintColor:kTintColor];
     [[UINavigationBar appearance] setBarTintColor:self.themeColor];
     
-//    [[UITabBar appearance] setTintColor:self.themeColor];
+    [[UITabBar appearance] setTintColor:self.themeColor];
     
 //     设置导航栏没有边线
 //    [[UINavigationBar appearance] setBackgroundImage:[[UIImage alloc] init]
@@ -224,7 +224,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    
+
     // 设置主窗口,并设置根控制器
     self.window = [[UIWindow alloc]init];
     self.window.frame = [UIScreen mainScreen].bounds;

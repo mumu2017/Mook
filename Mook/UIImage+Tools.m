@@ -12,6 +12,18 @@
 
 @implementation UIImage (Tools)
 
++ (UIImage *)imageWithColor:(UIColor *)color size:(CGSize)size {
+    if (!color || size.width <= 0 || size.height <= 0) return nil;
+    CGRect rect = CGRectMake(0.0f, 0.0f, size.width + 1, size.height);
+    UIGraphicsBeginImageContextWithOptions(rect.size, NO, 0);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetFillColorWithColor(context, color.CGColor);
+    CGContextFillRect(context, rect);
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return image;
+}
+
 + (UIImage*) processImage :(UIImage*) image
 {
     const CGFloat colorMasking[6]={222,255,222,255,222,255};

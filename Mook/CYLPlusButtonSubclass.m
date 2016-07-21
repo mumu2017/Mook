@@ -45,31 +45,31 @@
 }
 
 //上下结构的 button
-- (void)layoutSubviews {
-    [super layoutSubviews];
-    
-    // 控件大小,间距大小
-    // 注意：一定要根据项目中的图片去调整下面的0.7和0.9，Demo之所以这么设置，因为demo中的 plusButton 的 icon 不是正方形。
-    CGFloat const imageViewEdgeWidth   = self.bounds.size.width * 0.7;
-    CGFloat const imageViewEdgeHeight  = imageViewEdgeWidth * 0.9;
-    
-    CGFloat const centerOfView    = self.bounds.size.width * 0.5;
-    CGFloat const labelLineHeight = self.titleLabel.font.lineHeight;
-    CGFloat const verticalMarginT = self.bounds.size.height - labelLineHeight - imageViewEdgeWidth;
-    CGFloat const verticalMargin  = verticalMarginT / 2;
-    
-    // imageView 和 titleLabel 中心的 Y 值
-    CGFloat const centerOfImageView  = verticalMargin + imageViewEdgeWidth * 0.5;
-    CGFloat const centerOfTitleLabel = imageViewEdgeWidth  + verticalMargin * 2 + labelLineHeight * 0.5 + 5;
-    
-    //imageView position 位置
-    self.imageView.bounds = CGRectMake(0, 0, imageViewEdgeWidth, imageViewEdgeHeight);
-    self.imageView.center = CGPointMake(centerOfView, centerOfImageView);
-    
-    //title position 位置
-    self.titleLabel.bounds = CGRectMake(0, 0, self.bounds.size.width, labelLineHeight);
-    self.titleLabel.center = CGPointMake(centerOfView, centerOfTitleLabel);
-}
+//- (void)layoutSubviews {
+//    [super layoutSubviews];
+//    
+//    // 控件大小,间距大小
+//    // 注意：一定要根据项目中的图片去调整下面的0.7和0.9，Demo之所以这么设置，因为demo中的 plusButton 的 icon 不是正方形。
+//    CGFloat const imageViewEdgeWidth   = self.bounds.size.width * 0.7;
+//    CGFloat const imageViewEdgeHeight  = imageViewEdgeWidth * 0.9;
+//    
+//    CGFloat const centerOfView    = self.bounds.size.width * 0.5;
+//    CGFloat const labelLineHeight = self.titleLabel.font.lineHeight;
+//    CGFloat const verticalMarginT = self.bounds.size.height - labelLineHeight - imageViewEdgeWidth;
+//    CGFloat const verticalMargin  = verticalMarginT / 2;
+//    
+//    // imageView 和 titleLabel 中心的 Y 值
+//    CGFloat const centerOfImageView  = verticalMargin + imageViewEdgeWidth * 0.5;
+//    CGFloat const centerOfTitleLabel = imageViewEdgeWidth  + verticalMargin * 2 + labelLineHeight * 0.5 + 5;
+//    
+//    //imageView position 位置
+//    self.imageView.bounds = CGRectMake(0, 0, imageViewEdgeWidth, imageViewEdgeHeight);
+//    self.imageView.center = CGPointMake(centerOfView, centerOfImageView);
+//    
+//    //title position 位置
+//    self.titleLabel.bounds = CGRectMake(0, 0, self.bounds.size.width, labelLineHeight);
+//    self.titleLabel.center = CGPointMake(centerOfView, centerOfTitleLabel);
+//}
 
 #pragma mark -
 #pragma mark - CYLPlusButtonSubclassing Methods
@@ -105,16 +105,39 @@
 + (id)plusButton
 {
 
-    UIImage *buttonImage = [UIImage imageNamed:@"post_normal"];
-    UIImage *highlightImage = [UIImage imageNamed:@"post_normal"];
-
-    CYLPlusButtonSubclass* button = [CYLPlusButtonSubclass buttonWithType:UIButtonTypeCustom];
-
+//    UIImage *buttonImage = [UIImage imageWithColor:[UIColor blackColor] size:CGSizeMake(kScreenW/5, 40)];
+//    UIImage *highlightImage = [UIImage imageWithColor:[UIColor blackColor] size:CGSizeMake(kScreenW/5, 40)];
+    
+    
+    
+    UIImage *iconImage = [[UIImage imageNamed:@"addMedia"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    UIImage *highlightIconImage = [[UIImage imageNamed:@"addMedia"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    
+    CYLPlusButtonSubclass *button = [CYLPlusButtonSubclass buttonWithType:UIButtonTypeCustom];
+    
     button.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleTopMargin;
-    button.frame = CGRectMake(0.0, 0.0, buttonImage.size.width, buttonImage.size.height);
-    [button setBackgroundImage:buttonImage forState:UIControlStateNormal];
-    [button setBackgroundImage:highlightImage forState:UIControlStateHighlighted];
+    button.frame = CGRectMake(0.0, 0.0, kScreenW/5, 44);
+    button.tintColor = [UIColor whiteColor];
+    button.backgroundColor = [UIColor blackColor];
+    
+
+    [button setImage:iconImage forState:UIControlStateNormal];
+    [button setImage:highlightIconImage forState:UIControlStateHighlighted];
+//    [button setBackgroundImage:buttonImage forState:UIControlStateNormal];
+//    [button setBackgroundImage:highlightImage forState:UIControlStateHighlighted];
     [button addTarget:button action:@selector(clickPublish) forControlEvents:UIControlEventTouchUpInside];
+
+    
+//    UIImage *buttonImage = [UIImage imageNamed:@"post_normal"];
+//    UIImage *highlightImage = [UIImage imageNamed:@"post_normal"];
+//
+//    CYLPlusButtonSubclass* button = [CYLPlusButtonSubclass buttonWithType:UIButtonTypeCustom];
+//
+//    button.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleTopMargin;
+//    button.frame = CGRectMake(0.0, 0.0, buttonImage.size.width, buttonImage.size.height);
+//    [button setBackgroundImage:buttonImage forState:UIControlStateNormal];
+//    [button setBackgroundImage:highlightImage forState:UIControlStateHighlighted];
+//    [button addTarget:button action:@selector(clickPublish) forControlEvents:UIControlEventTouchUpInside];
 
     return button;
 }
@@ -183,12 +206,12 @@
 //    return 4;
 //}
 
-+ (CGFloat)multiplierOfTabBarHeight:(CGFloat)tabBarHeight {
-    return  0.3;
-}
-
-+ (CGFloat)constantOfPlusButtonCenterYOffsetForTabBarHeight:(CGFloat)tabBarHeight {
-    return  -10;
-}
+//+ (CGFloat)multiplierOfTabBarHeight:(CGFloat)tabBarHeight {
+//    return  0.3;
+//}
+//
+//+ (CGFloat)constantOfPlusButtonCenterYOffsetForTabBarHeight:(CGFloat)tabBarHeight {
+//    return  -10;
+//}
 
 @end

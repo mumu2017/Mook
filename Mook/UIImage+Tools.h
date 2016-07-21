@@ -10,6 +10,8 @@
 
 @interface UIImage (Tools)
 
++ (UIImage *)imageWithColor:(UIColor *)color size:(CGSize)size;
+
 + (UIImage*)imageWithImage:(UIImage*)image
               scaledToNewSize:(CGSize)newSize;
 // 将图片的白色部分变为透明
