@@ -124,10 +124,10 @@
                                 <exclude reference="fr1-PX-6WE"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="fEf-36-xtO"/>
                                 <exclude reference="8jT-GO-Cvd"/>
                                 <exclude reference="jZN-j9-eEA"/>
                                 <exclude reference="ujD-0N-Ruc"/>
-                                <exclude reference="fEf-36-xtO"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -135,10 +135,10 @@
                                 <include reference="fr1-PX-6WE"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="fEf-36-xtO"/>
                                 <include reference="8jT-GO-Cvd"/>
                                 <include reference="jZN-j9-eEA"/>
                                 <include reference="ujD-0N-Ruc"/>
-                                <include reference="fEf-36-xtO"/>
                             </mask>
                         </variation>
                     </view>

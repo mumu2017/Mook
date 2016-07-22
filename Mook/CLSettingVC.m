@@ -84,7 +84,21 @@
 
     }
     
-    self.storageDetailLabel.text = [CLDataSizeTool totalSize]; // 每次重新打开页面就重新计算一次文件尺寸
+    self.storageDetailLabel.text = @"计算中...";
+    
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        
+        
+        NSString *sizeString = [CLDataSizeTool totalSize]; // 每次重新打开页面就重新计算一次文件尺寸
+
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            self.storageDetailLabel.text = sizeString; // 每次重新打开页面就重新计算一次文件尺寸
+
+        });
+    });
+    
     self.themeColorView.backgroundColor = kAppThemeColor;
     [self getUserDefaultsData];
 }

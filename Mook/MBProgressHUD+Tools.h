@@ -15,5 +15,6 @@
 
 + (void)dismissGlobalHUD;
 
++ (void)showAnimated:(BOOL)animated whileExecutingBlockOnGloableQueue:(dispatch_block_t)block completionBlock:(MBProgressHUDCompletionBlock)completion;
 
 @end

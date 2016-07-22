@@ -136,7 +136,6 @@
 		4383427B1D11331A0089B58E /* CLWebSiteModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4383427A1D11331A0089B58E /* CLWebSiteModel.m */; };
 		4383428A1D1283350089B58E /* InfiniteScrollPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 438342871D1283350089B58E /* InfiniteScrollPicker.m */; };
 		4383428B1D1283350089B58E /* UIView+viewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 438342891D1283350089B58E /* UIView+viewController.m */; };
-		438342911D139E2B0089B58E /* CLWebVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 438342901D139E2B0089B58E /* CLWebVC.m */; };
 		438540391CE56CF200F82AAB /* CLThemeColorVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 438540381CE56CF200F82AAB /* CLThemeColorVC.m */; };
 		4385403C1CE56D4000F82AAB /* CLThemeColorNavVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4385403B1CE56D4000F82AAB /* CLThemeColorNavVC.m */; };
 		438540421CE5C59A00F82AAB /* mookTitle.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 438540411CE5C59A00F82AAB /* mookTitle.jpg */; };
@@ -152,7 +151,6 @@
 		439519BC1CBD26B900505E5B /* CLImportPasswordInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 439519BB1CBD26B900505E5B /* CLImportPasswordInputView.m */; };
 		439519BE1CBD26C600505E5B /* CLImportPasswordInputView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 439519BD1CBD26C600505E5B /* CLImportPasswordInputView.xib */; };
 		439519C11CBF610700505E5B /* MBProgressHUD+Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = 439519C01CBF610700505E5B /* MBProgressHUD+Tools.m */; };
-		439519C41CBF886C00505E5B /* FCFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 439519C31CBF886C00505E5B /* FCFileManager.m */; };
 		439519C71CBF888900505E5B /* CLDataSizeTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 439519C61CBF888900505E5B /* CLDataSizeTool.m */; };
 		439519C81CC0903800505E5B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 439519CA1CC0903800505E5B /* Main.storyboard */; };
 		439519CB1CC0904A00505E5B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 439519CD1CC0904A00505E5B /* LaunchScreen.storyboard */; };
@@ -180,6 +178,8 @@
 		43C2068E1CB12A6400CEF992 /* CLMediaVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 43C2068D1CB12A6400CEF992 /* CLMediaVC.m */; };
 		43C206921CB12BED00CEF992 /* CLMediaCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 43C206901CB12BED00CEF992 /* CLMediaCollectionCell.m */; };
 		43C206931CB12BED00CEF992 /* CLMediaCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43C206911CB12BED00CEF992 /* CLMediaCollectionCell.xib */; };
+		43C5425F1D423FF100898655 /* FCFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 43C5425E1D423FF100898655 /* FCFileManager.m */; };
+		43C542611D424F2E00898655 /* CLWebVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 43C542601D424F2E00898655 /* CLWebVC.m */; };
 		43DDCF3A1D1B72E4007E5CAC /* NSString+Media.m in Sources */ = {isa = PBXBuildFile; fileRef = 43DDCF391D1B72E4007E5CAC /* NSString+Media.m */; };
 		43DDCF3D1D1BA5C2007E5CAC /* CLAudioPlayVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 43DDCF3C1D1BA5C2007E5CAC /* CLAudioPlayVC.m */; };
 		43DDCF401D1BAA01007E5CAC /* UIViewController+BlurPresenting.m in Sources */ = {isa = PBXBuildFile; fileRef = 43DDCF3F1D1BAA01007E5CAC /* UIViewController+BlurPresenting.m */; };
@@ -447,7 +447,6 @@
 		438342881D1283350089B58E /* UIView+viewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+viewController.h"; sourceTree = "<group>"; };
 		438342891D1283350089B58E /* UIView+viewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+viewController.m"; sourceTree = "<group>"; };
 		4383428F1D139E2B0089B58E /* CLWebVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLWebVC.h; sourceTree = "<group>"; };
-		438342901D139E2B0089B58E /* CLWebVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLWebVC.m; sourceTree = "<group>"; };
 		438540361CE56CD300F82AAB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Setting.strings; sourceTree = "<group>"; };
 		438540371CE56CF200F82AAB /* CLThemeColorVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLThemeColorVC.h; sourceTree = "<group>"; };
 		438540381CE56CF200F82AAB /* CLThemeColorVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLThemeColorVC.m; sourceTree = "<group>"; };
@@ -477,8 +476,6 @@
 		439519BD1CBD26C600505E5B /* CLImportPasswordInputView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CLImportPasswordInputView.xib; sourceTree = "<group>"; };
 		439519BF1CBF610700505E5B /* MBProgressHUD+Tools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD+Tools.h"; sourceTree = "<group>"; };
 		439519C01CBF610700505E5B /* MBProgressHUD+Tools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MBProgressHUD+Tools.m"; sourceTree = "<group>"; };
-		439519C21CBF886C00505E5B /* FCFileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FCFileManager.h; sourceTree = "<group>"; };
-		439519C31CBF886C00505E5B /* FCFileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FCFileManager.m; sourceTree = "<group>"; };
 		439519C51CBF888900505E5B /* CLDataSizeTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLDataSizeTool.h; sourceTree = "<group>"; };
 		439519C61CBF888900505E5B /* CLDataSizeTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLDataSizeTool.m; sourceTree = "<group>"; };
 		439519C91CC0903800505E5B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -526,6 +523,9 @@
 		43C2068F1CB12BED00CEF992 /* CLMediaCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLMediaCollectionCell.h; sourceTree = "<group>"; };
 		43C206901CB12BED00CEF992 /* CLMediaCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLMediaCollectionCell.m; sourceTree = "<group>"; };
 		43C206911CB12BED00CEF992 /* CLMediaCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CLMediaCollectionCell.xib; sourceTree = "<group>"; };
+		43C5425D1D423FF100898655 /* FCFileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FCFileManager.h; sourceTree = "<group>"; };
+		43C5425E1D423FF100898655 /* FCFileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FCFileManager.m; sourceTree = "<group>"; };
+		43C542601D424F2E00898655 /* CLWebVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLWebVC.m; sourceTree = "<group>"; };
 		43DDCF381D1B72E4007E5CAC /* NSString+Media.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Media.h"; sourceTree = "<group>"; };
 		43DDCF391D1B72E4007E5CAC /* NSString+Media.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Media.m"; sourceTree = "<group>"; };
 		43DDCF3B1D1BA5C2007E5CAC /* CLAudioPlayVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLAudioPlayVC.h; sourceTree = "<group>"; };
@@ -700,8 +700,8 @@
 		430DFBDF1CA3F3470054DF6B /* Other */ = {
 			isa = PBXGroup;
 			children = (
-				439519C21CBF886C00505E5B /* FCFileManager.h */,
-				439519C31CBF886C00505E5B /* FCFileManager.m */,
+				43C5425D1D423FF100898655 /* FCFileManager.h */,
+				43C5425E1D423FF100898655 /* FCFileManager.m */,
 				43068C061CB7B9D000BA1A57 /* UINavigationBar+Awesome.h */,
 				43068C071CB7B9D000BA1A57 /* UINavigationBar+Awesome.m */,
 				43DF3AC61CAA78A100712D81 /* UIImage+WaterMark.h */,
@@ -905,7 +905,7 @@
 			isa = PBXGroup;
 			children = (
 				4383428F1D139E2B0089B58E /* CLWebVC.h */,
-				438342901D139E2B0089B58E /* CLWebVC.m */,
+				43C542601D424F2E00898655 /* CLWebVC.m */,
 				43FAB4E31D267BF80046997D /* CLWebViewController.h */,
 				43FAB4E41D267BF80046997D /* CLWebViewController.m */,
 				438342791D11331A0089B58E /* CLWebSiteModel.h */,
@@ -1662,6 +1662,7 @@
 				43DDCF401D1BAA01007E5CAC /* UIViewController+BlurPresenting.m in Sources */,
 				43885F791CA6A8AC00269CE1 /* CLHomeNavVC.m in Sources */,
 				4323468A1C96B0DA00200833 /* CLNewEntryImageCell.m in Sources */,
+				43C542611D424F2E00898655 /* CLWebVC.m in Sources */,
 				43E0F73B1CA10D27005CAD97 /* MJFoundation.m in Sources */,
 				43885F711CA5079100269CE1 /* CLContentVC.m in Sources */,
 				432346341C94054300200833 /* CLTagField.m in Sources */,
@@ -1672,6 +1673,7 @@
 				432345661C9404A800200833 /* UINavigationBar+Awesome.m in Sources */,
 				438342731D0FE16B0089B58E /* PFTableViewCell.m in Sources */,
 				432345E91C94051A00200833 /* CLSleightObjModel.m in Sources */,
+				43C5425F1D423FF100898655 /* FCFileManager.m in Sources */,
 				43DDCF431D1BACB2007E5CAC /* CLAudioPlayTool.m in Sources */,
 				43F5F7681CB3BD63007BFB0C /* CLQuickStringNavVC.m in Sources */,
 				4307A3CA1D20F9FB002C3527 /* CLTextAudioCell.m in Sources */,
@@ -1716,7 +1718,6 @@
 				432345DD1C94051A00200833 /* CLIdeaObjModel.m in Sources */,
 				432345641C9404A800200833 /* UIImage+Tools.m in Sources */,
 				432345B71C9404FB00200833 /* CLSettingVC.m in Sources */,
-				438342911D139E2B0089B58E /* CLWebVC.m in Sources */,
 				432345DF1C94051A00200833 /* CLLinesObjModel.m in Sources */,
 				43EEE7D91CAD0B5E00F0BCCF /* CLRoutineChooseVC.m in Sources */,
 				432345E41C94051A00200833 /* CLPropModel.m in Sources */,
@@ -1739,7 +1740,6 @@
 				432345B61C9404FB00200833 /* CLSettingNavVC.m in Sources */,
 				43FA891E1D40D61100583D93 /* CLDiscoverNavVC.m in Sources */,
 				43E7EE971D38D45900D22E9B /* CLAudioView.m in Sources */,
-				439519C41CBF886C00505E5B /* FCFileManager.m in Sources */,
 				432345A51C9404FB00200833 /* CLEdtingManageVC.m in Sources */,
 				432345AF1C9404FB00200833 /* CLPropChooseNavVC.m in Sources */,
 				4300C42A1D1A98EF0065E94E /* IQCropSelectionEndView.m in Sources */,

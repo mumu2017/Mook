@@ -34,5 +34,13 @@
     [MBProgressHUD hideHUDForView:window animated:YES];
 }
 
++ (void)showAnimated:(BOOL)animated whileExecutingBlockOnGloableQueue:(dispatch_block_t)block completionBlock:(MBProgressHUDCompletionBlock)completion {
+    
+    UIWindow *window = [[UIApplication sharedApplication] delegate].window;
+    [MBProgressHUD hideAllHUDsForView:window animated:YES];
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:window animated:YES];
+    [hud showAnimated:YES whileExecutingBlock:block onQueue:dispatch_get_global_queue(0, 0) completionBlock:completion];
+}
+
 
 @end

@@ -43,7 +43,7 @@
     } else if (section == 1) {
         number = 6;
     } else if (section == 2) {
-        number = 2;
+        number = 3;
     }
     
     return number;
@@ -51,51 +51,192 @@
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     
+    cell.detailTextLabel.text = NSLocalizedString(@"计算中...", nil);
+
     switch (indexPath.section) {
         case 0:
             if (indexPath.row == 0) {
                 cell.textLabel.text = NSLocalizedString(@"总共占用", nil);
-                cell.detailTextLabel.text = [CLDataSizeTool totalSize];
+                
+                
+                dispatch_async(dispatch_get_global_queue(0, 0), ^{
+                    
+                    NSString *sizeString = [CLDataSizeTool totalSize]; // 每次重新打开页面就重新计算一次文件尺寸
+                    
+                    
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        
+                        cell.detailTextLabel.text = sizeString; // 每次重新打开页面就重新计算一次文件尺寸
+                        
+                    });
+                });
             }
+            
             break;
         case 1:
+        {
             switch (indexPath.row) {
                 case 0:
+                {
                     cell.textLabel.text = NSLocalizedString(@"想法", nil);
-                    cell.detailTextLabel.text = [CLDataSizeTool sizeOfAllIdeas];
+                    
+                    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+                        
+                        NSString *sizeString = [CLDataSizeTool sizeOfAllIdeas]; // 每次重新打开页面就重新计算一次文件尺寸
+                        
+                        
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            
+                            cell.detailTextLabel.text = sizeString; // 每次重新打开页面就重新计算一次文件尺寸
+                            
+                        });
+                    });
+
                     break;
+                }
                 case 1:
+                {
                     cell.textLabel.text = NSLocalizedString(@"演出", nil);
-                    cell.detailTextLabel.text = [CLDataSizeTool sizeOfAllShows];
+                    
+                    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+                        
+                        NSString *sizeString = [CLDataSizeTool sizeOfAllShows]; // 每次重新打开页面就重新计算一次文件尺寸
+                        
+                        
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            
+                            cell.detailTextLabel.text = sizeString; // 每次重新打开页面就重新计算一次文件尺寸
+                            
+                        });
+                    });
+
                     break;
+                }
                 case 2:
+                {
                     cell.textLabel.text = NSLocalizedString(@"流程", nil);
-                    cell.detailTextLabel.text = [CLDataSizeTool sizeOfAllRoutines];
+                    
+                    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+                        
+                        NSString *sizeString = [CLDataSizeTool sizeOfAllRoutines]; // 每次重新打开页面就重新计算一次文件尺寸
+                        
+                        
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            
+                            cell.detailTextLabel.text = sizeString; // 每次重新打开页面就重新计算一次文件尺寸
+                            
+                        });
+                    });
                     break;
+                }
                 case 3:
+                {
                     cell.textLabel.text = NSLocalizedString(@"技巧", nil);
-                    cell.detailTextLabel.text = [CLDataSizeTool sizeOfAllSleights];
+                    
+                    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+                        
+                        NSString *sizeString = [CLDataSizeTool sizeOfAllSleights]; // 每次重新打开页面就重新计算一次文件尺寸
+                        
+                        
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            
+                            cell.detailTextLabel.text = sizeString; // 每次重新打开页面就重新计算一次文件尺寸
+                            
+                        });
+                    });
+
                     break;
+                }
                 case 4:
+                {
                     cell.textLabel.text = NSLocalizedString(@"道具", nil);
-                    cell.detailTextLabel.text = [CLDataSizeTool sizeOfAllProps];
+                    
+                    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+                        
+                        NSString *sizeString = [CLDataSizeTool sizeOfAllProps]; // 每次重新打开页面就重新计算一次文件尺寸
+                        
+                        
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            
+                            cell.detailTextLabel.text = sizeString; // 每次重新打开页面就重新计算一次文件尺寸
+                            
+                        });
+                    });
+
                     break;
+                }
                 case 5:
+                {
                     cell.textLabel.text = NSLocalizedString(@"台词", nil);
-                    cell.detailTextLabel.text = [CLDataSizeTool sizeOfAllLines];
+                    
+                    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+                        
+                        NSString *sizeString = [CLDataSizeTool sizeOfAllLines]; // 每次重新打开页面就重新计算一次文件尺寸
+                        
+                        
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            
+                            cell.detailTextLabel.text = sizeString; // 每次重新打开页面就重新计算一次文件尺寸
+                            
+                        });
+                    });
+
                     break;
+            }
                 default:
                     break;
             }
             break;
+        }
         case 2:
             if (indexPath.row == 0) {
                 cell.textLabel.text = NSLocalizedString(@"备份文件", nil);
-                cell.detailTextLabel.text = [CLDataSizeTool sizeOfBackUp];
+                
+                dispatch_async(dispatch_get_global_queue(0, 0), ^{
+                    
+                    NSString *sizeString = [CLDataSizeTool sizeOfBackUp]; // 每次重新打开页面就重新计算一次文件尺寸
+                    
+                    
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        
+                        cell.detailTextLabel.text = sizeString; // 每次重新打开页面就重新计算一次文件尺寸
+                        
+                    });
+                });
+
             } else if (indexPath.row == 1) {
                 cell.textLabel.text = NSLocalizedString(@"缓存与临时文件", nil);
-                cell.detailTextLabel.text = [CLDataSizeTool sizeOfCacheAndTemporaryData];
+                
+                dispatch_async(dispatch_get_global_queue(0, 0), ^{
+                    
+                    NSString *sizeString = [CLDataSizeTool sizeOfCacheAndTemporaryData]; // 每次重新打开页面就重新计算一次文件尺寸
+                    
+                    
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        
+                        cell.detailTextLabel.text = sizeString; // 每次重新打开页面就重新计算一次文件尺寸
+                        
+                    });
+                });
+
+            } else if (indexPath.row == 2) {
+                cell.textLabel.text = NSLocalizedString(@"网络缓存文件", nil);
+                
+                dispatch_async(dispatch_get_global_queue(0, 0), ^{
+                    
+                    NSString *sizeString = [CLDataSizeTool sizeOfWebCache]; // 每次重新打开页面就重新计算一次文件尺寸
+                    
+                    
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        
+                        cell.detailTextLabel.text = sizeString; // 每次重新打开页面就重新计算一次文件尺寸
+                        
+                    });
+                });
+                
             }
+
+            
             break;
             
         default:
@@ -113,9 +254,46 @@
         }
     }
     
+    if (indexPath.section == 2 && indexPath.row == 2) {
+        
+        [self cleanWebCache];
+    }
+    
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
 }
 
+- (void)cleanWebCache {
+    
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    
+#warning 国际化语言
+    UIAlertAction* delete = [UIAlertAction actionWithTitle:NSLocalizedString(@"删除网络缓存", nil) style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        
+        __block BOOL flag;
+        
+        [MBProgressHUD showAnimated:YES whileExecutingBlockOnGloableQueue:^{
+            flag = [CLDataSizeTool cleanWebCache];
+        } completionBlock:^{
+            if (flag) {
+        
+                [self.tableView reloadData];
+            }
+
+        }];
+
+        
+    }];
+    
+    UIAlertAction* cancel = [UIAlertAction actionWithTitle:NSLocalizedString(@"取消", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
+    }];
+    
+    [alert addAction:delete];
+    [alert addAction:cancel];
+    
+    [self presentViewController:alert animated:YES completion:nil];
+    
+}
 
 #pragma mark - Navigation
 

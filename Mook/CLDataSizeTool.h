@@ -15,6 +15,8 @@
 + (NSString *)totalSize;
 + (NSString *)sizeOfMook;
 + (NSString *)sizeOfCache;
++ (NSString *)sizeOfWebCache;
+
 + (NSString *)sizeOfTemp;
 
 + (NSString *)sizeOfAllShows;
@@ -34,5 +36,7 @@
 + (NSNumber *)textAverageSize;
 + (NSString *)sizeOfCacheAndTemporaryData;
 + (NSString *)sizeOfBackUp;
+
++ (BOOL)cleanWebCache;
 
 @end

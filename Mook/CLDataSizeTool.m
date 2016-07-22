@@ -32,12 +32,13 @@
     
     NSNumber *cacheSize = [FCFileManager sizeOfDirectoryAtPath:[FCFileManager pathForCachesDirectory]];
     NSNumber *tempSize = [FCFileManager sizeOfDirectoryAtPath:[FCFileManager pathForTemporaryDirectory]];
-
+    NSNumber *webCacheSize = [FCFileManager sizeOfDirectoryAtPath:[self webCachePath]];
+    NSLog(@"WEBCACHE: %@", webCacheSize);
     NSString *mookPath = [NSString mookPath];
     // 拼接文件名
     NSString *filePath = [mookPath stringByAppendingPathComponent:@"mook.sqlite"];
     NSNumber *dataBaseSize = [FCFileManager sizeOfFileAtPath:filePath];
-    NSNumber *total = @([documentSize intValue] + [cacheSize intValue] + [dataBaseSize intValue] + [tempSize intValue]);
+    NSNumber *total = @([documentSize intValue] + [cacheSize intValue] + [dataBaseSize intValue] + [tempSize intValue] + [webCacheSize intValue]);
     
     for (CLShowModel *model in kDataListShow) {
         total = @([total intValue] + [[self sizeOfShow:model] intValue]);
@@ -70,6 +71,12 @@
 + (NSString *)sizeOfCache {
     
     return [FCFileManager sizeFormattedOfDirectoryAtPath:[FCFileManager pathForCachesDirectory]];
+}
+
++ (NSString *)sizeOfWebCache {
+    
+    return [FCFileManager sizeFormattedOfDirectoryAtPath:[self webCachePath]];
+
 }
 
 + (NSString *)sizeOfTemp {
@@ -250,5 +257,55 @@
     return nil;
 }
 
++ (BOOL)cleanWebCache {
+    
+    NSString *path = [self webCachePath];
+    
+    BOOL flag = YES;
+
+    if ([FCFileManager isDirectoryItemAtPath:path]) {
+        
+        flag = [self totalCleanInDirectoryItemAtPath:path];
+    }
+    
+    return flag;
+}
+
++ (BOOL)totalCleanInDirectoryItemAtPath:(NSString *)path {
+    
+    NSArray *subPaths = [FCFileManager listFilesInDirectoryAtPath:path deep:YES];
+    
+    BOOL flag = YES;
+    
+    for (NSString *subPath in subPaths) {
+        
+        if ([FCFileManager isDirectoryItemAtPath:subPath]) {
+            
+            flag = [self totalCleanInDirectoryItemAtPath:subPath];
+            
+        } else if ([FCFileManager isFileItemAtPath:subPath]) {
+            
+            flag = [FCFileManager removeItemAtPath:subPath];
+            
+        }
+        
+        if (flag == NO) {
+            
+            return NO;
+        }
+    }
+
+    return flag;
+    
+}
+
++ (NSString *)webCachePath {
+    NSError *error;
+    NSString *path = [[FCFileManager pathForCachesDirectory] stringByAppendingPathComponent:@"WebKit"];
+    
+    if (![[NSFileManager defaultManager] fileExistsAtPath:path])
+        [[NSFileManager defaultManager] createDirectoryAtPath:path withIntermediateDirectories:NO attributes:nil error:&error]; //Create folder
+    return path;
+}
 
 @end
