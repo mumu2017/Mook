@@ -37,6 +37,13 @@ typedef enum {
     kContentTypeTag
 } ContentType;
 
+
+typedef enum {
+    kWebSiteModeSite = 0,
+    kWebSiteModeNotes
+} WebSiteMode;
+
+
 typedef enum {
     kEditingContentTypeIdea = 0,
     kEditingContentTypeRoutine,
@@ -421,6 +428,9 @@ typedef enum {
 #define kTypeProp    @"prop"
 #define kTypeLines    @"lines"
 
+#define kTypeWebSite    @"webSite"
+#define kTypeWebNote    @"webNote"
+
 #define kDefaultTitleAll   NSLocalizedString(@"全部", nil)
 #define kDefaultTitleShow  NSLocalizedString(@"演出", nil)
 #define kDefaultTitleRoutine   NSLocalizedString(@"流程", nil)
@@ -473,6 +483,10 @@ typedef enum {
 #define kDismissNewShowNavVCNotification   @"kDismissNewShowNavVCNotification"
 #define kDismissNewEntryNavVCNotification   @"kDismissNewEntryNavVCNotification"
 #define kDismissSettingNavVCNotification  @"kDismissSettingNavVCNotification"
+
+#pragma mark 搜索域名
+
+#define kSearchUrlString  @"http://www.bing.com/"
 
 #pragma mark - BOOL
 #define kLinesInstructionsMode  0

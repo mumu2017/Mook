@@ -24,8 +24,6 @@
 #import "Appirater.h"
 #import "CLMookTabBarController.h"
 
-#import "CYLTabBarControllerConfig.h"
-
 @interface AppDelegate ()<MBProgressHUDDelegate>
 
 @end
@@ -226,14 +224,20 @@
     // Override point for customization after application launch.
 
     // 设置主窗口,并设置根控制器
+//    self.window = [[UIWindow alloc]init];
+//    self.window.frame = [UIScreen mainScreen].bounds;
+//    CYLTabBarControllerConfig *tabBarControllerConfig = [[CYLTabBarControllerConfig alloc] init];
+//    [self.window setRootViewController:tabBarControllerConfig.tabBarController];
+//    [self.window makeKeyAndVisible];
+//
+
+//
     self.window = [[UIWindow alloc]init];
     self.window.frame = [UIScreen mainScreen].bounds;
-    CYLTabBarControllerConfig *tabBarControllerConfig = [[CYLTabBarControllerConfig alloc] init];
-    [self.window setRootViewController:tabBarControllerConfig.tabBarController];
+    
+    [self.window setRootViewController:self.mainController];
     [self.window makeKeyAndVisible];
-    
-    self.mainController = tabBarControllerConfig.tabBarController;
-    
+
     [self setAppUI];
     [self checkPasswordInfo];
     [self registerIFlyVoiceRecognition];
@@ -467,6 +471,18 @@
     if (_linesObjModelList) {
         _linesObjModelList = [CLDataSaveTool allLines];
     }
+}
+
+- (UIViewController *)mainController {
+    
+    if (!_mainController) {
+    
+        UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+        CLMookTabBarController *navVC =  [sb instantiateViewControllerWithIdentifier:@"mookVC"];
+        _mainController = navVC;
+    }
+    
+    return _mainController;
 }
 
 @end

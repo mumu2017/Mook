@@ -4,7 +4,6 @@ PODS:
   - ChameleonFramework (2.1.0):
     - ChameleonFramework/Default (= 2.1.0)
   - ChameleonFramework/Default (2.1.0)
-  - CYLTabBarController (1.6.0)
   - DACircularProgress (2.3.1)
   - DZNWebViewController (3.2)
   - EAIntroView (2.8.3):
@@ -34,7 +33,6 @@ DEPENDENCIES:
   - Appirater
   - BTNavigationDropdownMenu
   - ChameleonFramework
-  - CYLTabBarController
   - DZNWebViewController
   - EAIntroView (~> 2.8.0)
   - FDWaveformView
@@ -50,7 +48,6 @@ SPEC CHECKSUMS:
   Appirater: e7c0a47fb67ee5041ce8479e6ba960927fb40264
   BTNavigationDropdownMenu: c36d20785253699046fdd295698c24b1d1c18f53
   ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
-  CYLTabBarController: efbdd574772be17f17965acd7ee993f5972ff02f
   DACircularProgress: 4dd437c0fc3da5161cb289e07ac449493d41db71
   DZNWebViewController: 8e927a5de637fe0c4104c001d5cccd4fa5621e50
   EAIntroView: e948c83e642f30010d427e643c18a6f2b529afed
@@ -67,6 +64,6 @@ SPEC CHECKSUMS:
   SSZipArchive: bab21000ee11b7ba68d5880bcd87d80e4eb93e65
   SWTableViewCell: 2a94aadc9d47b2b611fa064566bf57948b95b579
 
-PODFILE CHECKSUM: b664cbe74150a0c08c4122ee54fc4f7b3da36d4f
+PODFILE CHECKSUM: 9993fa20d4cf0176e290353a2c6bfda3a8762dd1
 
 COCOAPODS: 1.0.1

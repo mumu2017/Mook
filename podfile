@@ -14,7 +14,6 @@ target ‘Mook’ do
  pod 'DZNWebViewController'
  pod 'IQAudioRecorderController'
  pod 'FDWaveformView'
- pod 'CYLTabBarController'
  pod 'MJRefresh'
 end
 

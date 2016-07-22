@@ -86,7 +86,6 @@ strip_invalid_archs() {
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/Appirater/Appirater.framework"
   install_framework "$BUILT_PRODUCTS_DIR/BTNavigationDropdownMenu/BTNavigationDropdownMenu.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/CYLTabBarController/CYLTabBarController.framework"
   install_framework "$BUILT_PRODUCTS_DIR/ChameleonFramework/ChameleonFramework.framework"
   install_framework "$BUILT_PRODUCTS_DIR/DACircularProgress/DACircularProgress.framework"
   install_framework "$BUILT_PRODUCTS_DIR/DZNWebViewController/DZNWebViewController.framework"
@@ -107,7 +106,6 @@ fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/Appirater/Appirater.framework"
   install_framework "$BUILT_PRODUCTS_DIR/BTNavigationDropdownMenu/BTNavigationDropdownMenu.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/CYLTabBarController/CYLTabBarController.framework"
   install_framework "$BUILT_PRODUCTS_DIR/ChameleonFramework/ChameleonFramework.framework"
   install_framework "$BUILT_PRODUCTS_DIR/DACircularProgress/DACircularProgress.framework"
   install_framework "$BUILT_PRODUCTS_DIR/DZNWebViewController/DZNWebViewController.framework"

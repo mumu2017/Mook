@@ -76,20 +76,20 @@
 
 #pragma mark - 工厂方法
 
-- (instancetype)initWithViewControllers:(NSArray<UIViewController *> *)viewControllers tabBarItemsAttributes:(NSArray<NSDictionary *> *)tabBarItemsAttributes {
-    if (self = [super initWithViewControllers:viewControllers tabBarItemsAttributes:tabBarItemsAttributes]) {
-        
-        self.tabBarItemsAttributes = tabBarItemsAttributes;
-        self.viewControllers = viewControllers;
-    }
-    return self;
-}
-
-+ (instancetype)tabBarControllerWithViewControllers:(NSArray<UIViewController *> *)viewControllers tabBarItemsAttributes:(NSArray<NSDictionary *> *)tabBarItemsAttributes {
-    CLMookTabBarController *tabBarController = [[CLMookTabBarController alloc] initWithViewControllers:viewControllers tabBarItemsAttributes:tabBarItemsAttributes];
-    
-    return tabBarController;
-}
+//- (instancetype)initWithViewControllers:(NSArray<UIViewController *> *)viewControllers tabBarItemsAttributes:(NSArray<NSDictionary *> *)tabBarItemsAttributes {
+//    if (self = [super initWithViewControllers:viewControllers tabBarItemsAttributes:tabBarItemsAttributes]) {
+//        
+//        self.tabBarItemsAttributes = tabBarItemsAttributes;
+//        self.viewControllers = viewControllers;
+//    }
+//    return self;
+//}
+//
+//+ (instancetype)tabBarControllerWithViewControllers:(NSArray<UIViewController *> *)viewControllers tabBarItemsAttributes:(NSArray<NSDictionary *> *)tabBarItemsAttributes {
+//    CLMookTabBarController *tabBarController = [[CLMookTabBarController alloc] initWithViewControllers:viewControllers tabBarItemsAttributes:tabBarItemsAttributes];
+//    
+//    return tabBarController;
+//}
 
 - (BOOL)isNotFirstTimeLaunch { // 检测是否是第一次启动应用
 
@@ -127,6 +127,7 @@
     }
     
 }
+
 
 // 开始导入操作
 - (void)importStart:(NSNotification *)noti {

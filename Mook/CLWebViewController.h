@@ -10,7 +10,10 @@
 
 @interface CLWebViewController : DZNWebViewController
 
+@property (assign, nonatomic) BOOL isAddingWebSite;
+
 @property (strong, nonatomic) NSMutableArray *webSiteList;
 
+@property (strong, nonatomic) NSMutableArray *webNoteList;
 
 @end

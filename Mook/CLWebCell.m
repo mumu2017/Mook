@@ -33,7 +33,7 @@
     self.titleLabel.text = model.title;
     self.urlLabel.text = model.url.absoluteString;
     
-    self.iconView.backgroundColor = kAppThemeColor;
+    self.iconView.backgroundColor = [UIColor colorWithRandomFlatColorOfShadeStyle:UIShadeStyleDark];
     NSString *firstLetter = [model.title substringToIndex:1];
     
     firstLetter = [firstLetter uppercaseString];

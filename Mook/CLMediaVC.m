@@ -126,6 +126,8 @@ typedef enum {
 
         }];
         
+        _menu.cellTextLabelColor = kTintColor;
+        _menu.menuTitleColor = kTintColor;
         _menu.cellBackgroundColor = kAppThemeColor;
         _menu.cellSelectionColor = [UIColor whiteColor];
         _menu.cellSeparatorColor = [UIColor flatGrayColorDark];
@@ -280,6 +282,7 @@ static NSString * const reuseIdentifier = @"Cell";
     self.collectionView.alwaysBounceVertical = YES;
     self.collectionView.backgroundColor = [UIColor blackColor];
     [self.collectionView registerNib:[UINib nibWithNibName:@"CLMediaCollectionCell" bundle: nil] forCellWithReuseIdentifier:reuseIdentifier];
+    
     // Do any additional setup after loading the view.
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(update) name:kUpdateDataNotification
                                                object:nil];

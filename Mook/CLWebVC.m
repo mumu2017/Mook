@@ -23,11 +23,26 @@
 }
 
 @property (strong, nonatomic) NSMutableArray *webSiteList;
+@property (strong, nonatomic) NSMutableArray *webNotesList;
+
+@property (strong, nonatomic) UISegmentedControl *segControl;
+
+@property (assign, nonatomic) WebSiteMode webSiteMode;
 
 
 @end
 
 @implementation CLWebVC
+
+- (NSMutableArray *)webNotesList {
+    
+    if (!_webNotesList) {
+
+        _webNotesList = [CLDataSaveTool allWebNotes];
+    }
+
+    return _webNotesList;
+}
 
 - (NSMutableArray *)webSiteList {
     if (!_webSiteList) {
@@ -65,6 +80,49 @@
     return _webSiteList;
 }
 
+- (UISegmentedControl *)segControl {
+    
+    if (!_segControl) {
+        _segControl = [[UISegmentedControl alloc] initWithItems:@[@"书签", @"收藏"]];
+        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 132, 30)];
+        view.backgroundColor = [UIColor clearColor];
+        [view addSubview:_segControl];
+        self.navigationItem.titleView = view;
+        
+        [_segControl mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.edges.equalTo(view);
+        }];
+        
+        _segControl.selectedSegmentIndex = 0;
+        _segControl.backgroundColor = [UIColor clearColor];
+        _segControl.tintColor = [UIColor whiteColor];
+        [_segControl addTarget:self action:@selector(changeList:) forControlEvents:UIControlEventValueChanged];
+    }
+    
+    return _segControl;
+}
+
+- (void)changeList:(UISegmentedControl *)segControl {
+    
+    if (segControl.selectedSegmentIndex == 0) {
+        
+        self.webSiteMode = kWebSiteModeSite;
+        self.navigationItem.rightBarButtonItem = _addItem;
+        
+    } else if (segControl.selectedSegmentIndex == 1) {
+        
+        self.webSiteMode = kWebSiteModeNotes;
+        self.navigationItem.rightBarButtonItem = nil;
+
+    }
+    
+    [self.tableView reloadData];
+    
+}
+
+#pragma mark - VC生命周期
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -76,7 +134,7 @@
     self.edgesForExtendedLayout = UIRectEdgeBottom;
     
     [self.tableView registerNib:[UINib nibWithNibName:@"CLWebCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"webCell"];
-    self.tableView.rowHeight = 80;
+    self.tableView.rowHeight = 70;
     self.tableView.tableFooterView = [UIView new];
     self.tableView.backgroundColor = [UIColor flatWhiteColor];
     
@@ -84,12 +142,15 @@
 
 - (void)initSubviews {
     
-    _addItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addWebSite)];
+    [self segControl];
 
+    _addItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(chooseWayToWebSite)];
+
+    self.navigationItem.rightBarButtonItem = _addItem;
     
-    _collectItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemBookmarks target:self action:@selector(showCollection)];
-    
-    self.navigationItem.rightBarButtonItems = @[_addItem, _collectItem];
+//    _collectItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemBookmarks target:self action:@selector(showCollection)];
+//    
+//    self.navigationItem.rightBarButtonItems = @[_addItem, _collectItem];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -107,15 +168,48 @@
 
 }
 
-#pragma mark - 控件方法
-
-
-- (void)showCollection {
+#pragma mark - 添加网址
+- (void)chooseWayToWebSite {
     
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"添加网址", nil)  message:NSLocalizedString(@"Mook推荐您使用搜索添加", nil)  preferredStyle:UIAlertControllerStyleActionSheet];
     
+    UIAlertAction* addWebSite = [UIAlertAction actionWithTitle:NSLocalizedString(@"搜索添加", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        [self addWebSiteWithSearching];
+        
+    }];
+    
+    UIAlertAction* addWebNote = [UIAlertAction actionWithTitle:NSLocalizedString(@"手动添加", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        [self addWebSiteWithTyping];
+    }];
+    
+    UIAlertAction* cancel = [UIAlertAction actionWithTitle:NSLocalizedString(@"取消", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
+    }];
+    
+    [alert addAction:addWebSite];
+    [alert addAction:addWebNote];
+    
+    [alert addAction:cancel];
+    
+    [self presentViewController:alert animated:YES completion:nil];
+
 }
 
-- (void)addWebSite {
+- (void)addWebSiteWithSearching {
+
+    CLWebViewController *_webVC = [[CLWebViewController alloc] initWithURL:[NSURL URLWithString:kSearchUrlString]];
+    _webVC.webSiteList = self.webSiteList;
+    _webVC.webNoteList = self.webNotesList;
+    
+    _webVC.isAddingWebSite = YES;
+    
+    _webVC.hidesBottomBarWhenPushed = YES;
+    
+    [self.navigationController pushViewController:_webVC animated:YES];
+}
+
+- (void)addWebSiteWithTyping {
     
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"添加网站", nil) message:nil preferredStyle:UIAlertControllerStyleAlert];
     
@@ -258,7 +352,17 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 
-    return self.webSiteList.count;
+    NSInteger number = 0;
+    
+    if (self.webSiteMode == kWebSiteModeSite) {
+        
+        number = self.webSiteList.count;
+    } else if (self.webSiteMode == kWebSiteModeNotes) {
+            
+        number = self.webNotesList.count;
+    }
+    
+    return number;
 
 }
 
@@ -267,7 +371,17 @@
     
      CLWebCell *cell = [tableView dequeueReusableCellWithIdentifier:@"webCell" forIndexPath:indexPath];
      
-     CLWebSiteModel *model = self.webSiteList[indexPath.row];
+    CLWebSiteModel *model;
+    
+    if (self.webSiteMode == kWebSiteModeSite) {
+        
+        model = self.webSiteList[indexPath.row];
+        
+    } else if (self.webSiteMode == kWebSiteModeNotes) {
+        
+        model = self.webNotesList[indexPath.row];
+
+    }
     
     [cell setModel:model utilityButtons:[self rightButtons] delegate:self];
     
@@ -278,12 +392,25 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    CLWebSiteModel *model = self.webSiteList[indexPath.row];
+    CLWebSiteModel *model;
+    
+    if (self.webSiteMode == kWebSiteModeSite) {
+        
+        model = self.webSiteList[indexPath.row];
+        
+    } else if (self.webSiteMode == kWebSiteModeNotes) {
+        
+        model = self.webNotesList[indexPath.row];
+        
+    }
 
-#warning 检查网络连接
+//TODO: 检查网络连接
+    
     CLWebViewController *_webVC = [[CLWebViewController alloc] initWithURL:model.url];
     _webVC.webSiteList = self.webSiteList;
-    
+    _webVC.webNoteList = self.webNotesList;
+    _webVC.isAddingWebSite = NO;
+
     _webVC.hidesBottomBarWhenPushed = YES;
     
     [self.navigationController pushViewController:_webVC animated:YES];
@@ -336,10 +463,21 @@
         
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             
-            CLWebSiteModel *model = self.webSiteList[indexPath.row];
+            CLWebSiteModel *model;
+            
+            if (self.webSiteMode == kWebSiteModeSite) {
+                
+                model = self.webSiteList[indexPath.row];
+                [self.webSiteList removeObject:model];
 
+            } else if (self.webSiteMode == kWebSiteModeNotes) {
+                
+                model = self.webNotesList[indexPath.row];
+                [self.webNotesList removeObject:model];
+
+            }
+            
             [CLDataSaveTool deleteWebSite:model];
-            [self.webSiteList removeObject:model];
             
             [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
 

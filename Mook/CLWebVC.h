@@ -10,6 +10,4 @@
 
 @interface CLWebVC : UITableViewController
 
-- (void)addWebSite;
-
 @end

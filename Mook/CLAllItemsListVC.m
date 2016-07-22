@@ -138,8 +138,8 @@
 
         }];
         
-        _menu.cellTextLabelColor = [UIColor whiteColor];
-        _menu.menuTitleColor = [UIColor whiteColor];
+        _menu.cellTextLabelColor = kTintColor;
+        _menu.menuTitleColor = kTintColor;
         _menu.cellBackgroundColor = kAppThemeColor;
         _menu.cellSelectionColor = [UIColor whiteColor];
         _menu.cellSeparatorColor = [UIColor flatGrayColorDark];

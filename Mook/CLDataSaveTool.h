@@ -91,11 +91,15 @@
 #pragma mark - 网站部分
 
 + (NSMutableArray <CLWebSiteModel *>*)allWebSites;
++ (NSMutableArray <CLWebSiteModel *>*)allWebNotes;
 
 // 获取单个模型
 + (CLWebSiteModel *)webSiteByName:(NSString *)name;
++ (CLWebSiteModel *)webSiteByUrlString:(NSString *)string;
 
 + (BOOL)updateWebSite:(CLWebSiteModel *)webSite;
++ (BOOL)updateWebNote:(CLWebSiteModel *)webSite;
+
 + (void)deleteWebSite:(CLWebSiteModel *)webSite;
 
 @end

@@ -20,8 +20,11 @@
     UIBarButtonItem *_closeItem;
     UIBarButtonItem *_negativeSpacer;
     UIBarButtonItem *_collectItem;
+    
     NSInteger _scale;
 }
+
+@property (strong, nonatomic) CLWebSiteModel *matchModel;
 
 @end
 
@@ -57,8 +60,15 @@
 
     _closeItem = [[UIBarButtonItem alloc] initWithTitle:@"关闭" style:UIBarButtonItemStylePlain target:self action:@selector(closeWebVC)];
     
-    _collectItem = [[UIBarButtonItem alloc] initWithTitle:@"收藏" style:UIBarButtonItemStylePlain target:self action:@selector(collectWebNote)];
+    if (self.isAddingWebSite) {
+        _collectItem = [[UIBarButtonItem alloc] initWithTitle:@"添加书签" style:UIBarButtonItemStylePlain target:self action:@selector(addWebSiteWithSearching)];
 
+    } else {
+        
+        _collectItem = [[UIBarButtonItem alloc] initWithTitle:@"收藏" style:UIBarButtonItemStylePlain target:self action:@selector(collectWebNote)];
+
+    }
+    
     self.navigationItem.leftBarButtonItems = @[_negativeSpacer, _backItem];
     self.navigationItem.rightBarButtonItem = _collectItem;
 
@@ -69,7 +79,7 @@
     self.supportedWebActions = DZNWebActionAll;
     self.showLoadingProgress = YES;
     self.allowHistory = YES;
-    self.hideBarsWithGestures = YES;
+    self.hideBarsWithGestures = !self.isAddingWebSite;
 
     // 设置图标
     self.actionButtonImage = [[UIImage imageNamed:@"iconAction"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
@@ -82,9 +92,42 @@
 
 #define DEFAULTWEBVIEWFONTSIZE 14
 
+- (void)addWebSiteWithSearching {
+    
+    [self addWebSite:kWebSiteModeSite];
+
+}
+
 - (void)collectWebNote {
     
-    [self addWebSite];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    UIAlertAction* addWebSite = [UIAlertAction actionWithTitle:NSLocalizedString(@"添加当前地址到书签", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        [self addWebSite:kWebSiteModeSite];
+    }];
+    
+    UIAlertAction* addWebNote = [UIAlertAction actionWithTitle:NSLocalizedString(@"添加当前地址到收藏", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        [self addWebSite:kWebSiteModeNotes];
+
+    }];
+    
+    UIAlertAction* cancel = [UIAlertAction actionWithTitle:NSLocalizedString(@"取消", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
+    }];
+    
+    [alert addAction:addWebSite];
+    [alert addAction:addWebNote];
+
+    [alert addAction:cancel];
+    
+    [self presentViewController:alert animated:YES completion:nil];
+
+}
+
+- (void)collectWebNote1 {
+    
+//    [self addWebSite:];
 
 //    NSString *link = [@"http://www.readability.com/m?url=" stringByAppendingString:self.URL.absoluteString];
 //    NSURL *newUrl = [NSURL URLWithString:link];
@@ -121,7 +164,7 @@
 //      }] resume];
 }
 
-- (void)addWebSite {
+- (void)addWebSite:(WebSiteMode)mode {
     
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"添加网站", nil) message:nil preferredStyle:UIAlertControllerStyleAlert];
     
@@ -148,6 +191,7 @@
         
     }];
     
+    
     UIAlertAction *okAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"确定", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -161,11 +205,31 @@
             urlString = urlTF.text;
             
             CLWebSiteModel *webSite = [CLWebSiteModel modelWithTitle:name withUrlString:urlString];
-            
-            if (_webSiteList) {
-                [self.webSiteList addObject:webSite];
+            BOOL flag;
+
+            if (mode == kWebSiteModeSite) {
+                
+                if (_webSiteList) {
+                    [self.webSiteList addObject:webSite];
+                }
+                flag = [CLDataSaveTool updateWebSite:webSite];
+
+            } else if (mode == kWebSiteModeNotes) {
+                
+                if (_webNoteList) {
+                    [self.webNoteList addObject:webSite];
+                }
+                flag = [CLDataSaveTool updateWebNote:webSite];
+                
             }
-            [CLDataSaveTool updateWebSite:webSite];
+            
+            if (flag) {
+                
+                [MBProgressHUD showGlobalProgressHUDWithTitle:@"添加成功!" hideAfterDelay:0.5f];
+            } else {
+                [MBProgressHUD showGlobalProgressHUDWithTitle:@"添加失败, 请稍后重试!" hideAfterDelay:0.5f];
+
+            }
             
             
             [[NSNotificationCenter defaultCenter] removeObserver:self name:UITextFieldTextDidChangeNotification object:nil];
@@ -243,7 +307,19 @@
         
     }
 
+//    if (self.matchModel) {
+//        
+//        _collectItem = [[UIBarButtonItem alloc] initWithTitle:@"已收藏" style:UIBarButtonItemStylePlain target:self action:@selector(collectWebNote)];
+//        
+//        self.navigationItem.rightBarButtonItem = _collectItem;
+//
+//    }
+
+}
+
+- (CLWebSiteModel *)matchModel {
     
+    return [CLDataSaveTool webSiteByUrlString:self.webView.URL.absoluteString];
 }
 
 @end

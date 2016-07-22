@@ -822,7 +822,7 @@ static FMDatabase *_db;
 + (NSMutableArray<CLWebSiteModel *> *)allWebSites {
     
     // 进入程序第一次获取的查询语句
-    FMResultSet *set = [_db executeQuery:@"select * from t_website;"];
+    FMResultSet *set = [_db executeQuery:@"select * from t_website where type=?", kTypeWebSite];
     NSMutableArray *arrM = [NSMutableArray array];
     CLWebSiteModel *site;
     while ([set next]) {
@@ -841,10 +841,31 @@ static FMDatabase *_db;
     return arrM;
 }
 
++ (NSMutableArray<CLWebSiteModel *> *)allWebNotes {
+    
+    // 进入程序第一次获取的查询语句
+    FMResultSet *set = [_db executeQuery:@"select * from t_website where type=?", kTypeWebNote];
+    NSMutableArray *arrM = [NSMutableArray array];
+    CLWebSiteModel *site;
+    while ([set next]) {
+        
+        NSString *name = [set stringForColumn:@"name"];
+        NSString *urlString = [set stringForColumn:@"url_string"];
+        NSString *timeStamp = [set stringForColumn:@"time_stamp"];
+        
+        site = [CLWebSiteModel modelWithTitle:name withUrlString:urlString];
+        [site setTimeStamp:timeStamp];
+        
+        [arrM addObject:site];
+        
+    }
+    
+    return arrM;
+}
 
 + (CLWebSiteModel *)webSiteByName:(NSString *)name {
     
-    FMResultSet *set = [_db executeQuery:@"select * from t_website wherename=?;", name];
+    FMResultSet *set = [_db executeQuery:@"select * from t_website where name=?;", name];
     CLWebSiteModel *site = nil;
 
     while ([set next]) {
@@ -860,6 +881,26 @@ static FMDatabase *_db;
     return site;
 }
 
++ (CLWebSiteModel *)webSiteByUrlString:(NSString *)string {
+    
+    FMResultSet *set = [_db executeQuery:@"select * from t_website where url_string=?;", string];
+    CLWebSiteModel *site = nil;
+    
+    while ([set next]) {
+        
+        NSString *name = [set stringForColumn:@"name"];
+        NSString *urlString = [set stringForColumn:@"url_string"];
+        
+        NSString *timeStamp = [set stringForColumn:@"time_stamp"];
+        
+        site = [CLWebSiteModel modelWithTitle:name withUrlString:urlString];
+        [site setTimeStamp:timeStamp];
+    }
+    
+    return site;
+
+}
+
 + (BOOL)updateWebSite:(CLWebSiteModel *)webSite{
     
     NSString *name = webSite.title;
@@ -872,7 +913,7 @@ static FMDatabase *_db;
     // 如果[set next]不为空,则表示查询到至少一个结果.所以更新数据.
     if ([set next]) {
         
-        flag = [_db executeUpdate:@"update t_website set name=?, url_string=? where time_stamp=?", name, urlString, timeStamp];
+        flag = [_db executeUpdate:@"update t_website set name=?, url_string=? type=? where time_stamp=?", name, urlString, kTypeWebSite, timeStamp];
         if (flag) {
             //            NSLog(@"更新成功");
         }else{
@@ -880,7 +921,7 @@ static FMDatabase *_db;
         }
         
     } else {    // 如果为空,则表示没有查询到任何符合条件的结果,所以插入数据.
-        flag = [_db executeUpdate:@"insert into t_website (name, time_stamp, url_string) values(?,?,?)",name, timeStamp, urlString];
+        flag = [_db executeUpdate:@"insert into t_website (name, time_stamp, url_string, type) values(?,?,?,?)",name, timeStamp, urlString, kTypeWebSite];
         if (flag) {
             //            NSLog(@"插入成功");
         }else{
@@ -890,6 +931,38 @@ static FMDatabase *_db;
     
     return flag;
 
+}
+
++ (BOOL)updateWebNote:(CLWebSiteModel *)webSite{
+    
+    NSString *name = webSite.title;
+    NSString *urlString = webSite.url.absoluteString;
+    NSString *timeStamp = webSite.timeStamp;
+    
+    BOOL flag;
+    
+    FMResultSet *set = [_db executeQuery:@"select * from t_website where time_stamp=?", timeStamp];
+    // 如果[set next]不为空,则表示查询到至少一个结果.所以更新数据.
+    if ([set next]) {
+        
+        flag = [_db executeUpdate:@"update t_website set name=?, url_string=? type=? where time_stamp=?", name, urlString, kTypeWebNote, timeStamp];
+        if (flag) {
+            //            NSLog(@"更新成功");
+        }else{
+            //            NSLog(@"更新失败");
+        }
+        
+    } else {    // 如果为空,则表示没有查询到任何符合条件的结果,所以插入数据.
+        flag = [_db executeUpdate:@"insert into t_website (name, time_stamp, url_string, type) values(?,?,?,?)",name, timeStamp, urlString, kTypeWebNote];
+        if (flag) {
+            //            NSLog(@"插入成功");
+        }else{
+            //            NSLog(@"插入失败");
+        }
+    }
+    
+    return flag;
+    
 }
 
 
