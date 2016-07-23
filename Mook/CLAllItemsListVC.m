@@ -39,7 +39,7 @@
 #import "BTNavigationDropdownMenu-Swift.h"
 @class BTNavigationDropdownMenu;
 
-#import "CLListRefreshHeader.h"
+//#import "CLListRefreshHeader.h"
 //
 //typedef enum {
 //    kNewEntryModeText = 1,
@@ -218,69 +218,50 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(update:) name:kUpdateMookNotification
                                                object:nil];
     
-    [self setRefreshHeader];
+//    [self setRefreshHeader];
 }
 
-- (void)setRefreshHeader {
-    
-    // 设置回调（一旦进入刷新状态，就调用target的action，也就是调用self的loadNewData方法）
-    CLListRefreshHeader *header = [CLListRefreshHeader headerWithRefreshingBlock:^{
-        
-        [self.tableView.mj_header endRefreshing];
-    }];
-    
-    header.endRefreshingCompletionBlock = ^ () {
-        
-        [self showMenu];
-    };
-    
-    // 设置文字
-    [header setTitle:@"下拉可以切换笔记" forState:MJRefreshStateIdle];
-    [header setTitle:@"松开马上切换笔记" forState:MJRefreshStatePulling];
-    [header setTitle:@"" forState:MJRefreshStateRefreshing];
-    
-    // 设置字体
-    header.stateLabel.font = [UIFont systemFontOfSize:16];
-    
-    // 设置颜色
-//    header.stateLabel.textColor = kAppThemeColor;
-    header.lastUpdatedTimeLabel.hidden = YES;
-    
-    header.automaticallyChangeAlpha = YES;
-    
-    // 设置刷新控件
-    self.tableView.mj_header = header;
-}
+//- (void)setRefreshHeader {
+//    
+//    // 设置回调（一旦进入刷新状态，就调用target的action，也就是调用self的loadNewData方法）
+//    CLListRefreshHeader *header = [CLListRefreshHeader headerWithRefreshingBlock:^{
+//        
+//        [self.tableView.mj_header endRefreshing];
+//    }];
+//    
+//    header.endRefreshingCompletionBlock = ^ () {
+//        
+//        [self showMenu];
+//    };
+//    
+//    // 设置文字
+//    [header setTitle:@"下拉可以切换笔记" forState:MJRefreshStateIdle];
+//    [header setTitle:@"松开马上切换笔记" forState:MJRefreshStatePulling];
+//    [header setTitle:@"" forState:MJRefreshStateRefreshing];
+//    
+//    // 设置字体
+//    header.stateLabel.font = [UIFont systemFontOfSize:16];
+//    
+//    // 设置颜色
+////    header.stateLabel.textColor = kAppThemeColor;
+//    header.lastUpdatedTimeLabel.hidden = YES;
+//    
+//    header.automaticallyChangeAlpha = YES;
+//    
+//    // 设置刷新控件
+//    self.tableView.mj_header = header;
+//}
 
-- (void)showMenu {
-    [self.tableView.mj_header endRefreshing];
-    [self.menu show];
-}
+//- (void)showMenu {
+//    [self.tableView.mj_header endRefreshing];
+//    [self.menu show];
+//}
 
 
 - (void)update:(NSNotification *)noti {
     if (noti.object == self) return;
-    
-//    self.addButton.backgroundColor = [kAppThemeColor darkenByPercentage:0.05];
-    
-//    MJRefreshNormalHeader * header = (MJRefreshNormalHeader *)self.tableView.mj_header;
-//    header.stateLabel.textColor = kAppThemeColor;
 
     self.menu.cellBackgroundColor = kAppThemeColor;
-//    self.mediaButton.backgroundColor = self.addButton.backgroundColor;
-    
-//    if (self.listType == kListTypeLines) {
-////        [_mediaButton setImage:[UIImage imageNamed:@"addAudio"] forState:UIControlStateNormal];
-//        
-//    } else {
-////        [_mediaButton setImage:[UIImage imageNamed:@"addMedia"] forState:UIControlStateNormal];
-//        
-//    }
-//
-//    if (self.navigationController.visibleViewController == self) {
-//        self.mediaButton.hidden = (self.listType == kListTypeAll);
-//
-//    }
     
     [self.tableView reloadData];
 }

@@ -458,7 +458,7 @@ class BTConfiguration {
         self.cellSelectionColor = UIColor.lightGrayColor()
         self.checkMarkImage = UIImage(contentsOfFile: checkMarkImagePath!)
         self.keepSelectedCellColor = false
-        self.animationDuration = 0.1
+        self.animationDuration = 0.2
         self.arrowImage = UIImage(contentsOfFile: arrowImagePath!)
         self.arrowPadding = 15
         self.maskBackgroundColor = UIColor.blackColor()
