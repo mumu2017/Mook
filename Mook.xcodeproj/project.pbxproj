@@ -134,8 +134,6 @@
 		438342721D0FE16B0089B58E /* PFTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4383426B1D0FE16B0089B58E /* PFTableView.m */; };
 		438342731D0FE16B0089B58E /* PFTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4383426D1D0FE16B0089B58E /* PFTableViewCell.m */; };
 		4383427B1D11331A0089B58E /* CLWebSiteModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4383427A1D11331A0089B58E /* CLWebSiteModel.m */; };
-		4383428A1D1283350089B58E /* InfiniteScrollPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 438342871D1283350089B58E /* InfiniteScrollPicker.m */; };
-		4383428B1D1283350089B58E /* UIView+viewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 438342891D1283350089B58E /* UIView+viewController.m */; };
 		438540391CE56CF200F82AAB /* CLThemeColorVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 438540381CE56CF200F82AAB /* CLThemeColorVC.m */; };
 		4385403C1CE56D4000F82AAB /* CLThemeColorNavVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4385403B1CE56D4000F82AAB /* CLThemeColorNavVC.m */; };
 		438540421CE5C59A00F82AAB /* mookTitle.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 438540411CE5C59A00F82AAB /* mookTitle.jpg */; };
@@ -442,10 +440,6 @@
 		4383426D1D0FE16B0089B58E /* PFTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFTableViewCell.m; sourceTree = "<group>"; };
 		438342791D11331A0089B58E /* CLWebSiteModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLWebSiteModel.h; sourceTree = "<group>"; };
 		4383427A1D11331A0089B58E /* CLWebSiteModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLWebSiteModel.m; sourceTree = "<group>"; };
-		438342861D1283350089B58E /* InfiniteScrollPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfiniteScrollPicker.h; sourceTree = "<group>"; };
-		438342871D1283350089B58E /* InfiniteScrollPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfiniteScrollPicker.m; sourceTree = "<group>"; };
-		438342881D1283350089B58E /* UIView+viewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+viewController.h"; sourceTree = "<group>"; };
-		438342891D1283350089B58E /* UIView+viewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+viewController.m"; sourceTree = "<group>"; };
 		4383428F1D139E2B0089B58E /* CLWebVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLWebVC.h; sourceTree = "<group>"; };
 		438540361CE56CD300F82AAB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Setting.strings; sourceTree = "<group>"; };
 		438540371CE56CF200F82AAB /* CLThemeColorVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLThemeColorVC.h; sourceTree = "<group>"; };
@@ -919,17 +913,6 @@
 			name = "Discover发现";
 			sourceTree = "<group>";
 		};
-		438342851D12831F0089B58E /* InfiniteScrollPicker */ = {
-			isa = PBXGroup;
-			children = (
-				438342861D1283350089B58E /* InfiniteScrollPicker.h */,
-				438342871D1283350089B58E /* InfiniteScrollPicker.m */,
-				438342881D1283350089B58E /* UIView+viewController.h */,
-				438342891D1283350089B58E /* UIView+viewController.m */,
-			);
-			name = InfiniteScrollPicker;
-			sourceTree = "<group>";
-		};
 		4385403D1CE56D5000F82AAB /* ThemeColor */ = {
 			isa = PBXGroup;
 			children = (
@@ -1223,7 +1206,6 @@
 			isa = PBXGroup;
 			children = (
 				43FAB4DE1D26553E0046997D /* FullScreenPopGesture */,
-				438342851D12831F0089B58E /* InfiniteScrollPicker */,
 				438342621D0FE1600089B58E /* PFNavigationDropdownMenu */,
 				432346861C96AFBB00200833 /* XLStripTabPager */,
 				43F5F76E1CB3E90B007BFB0C /* WJTouchID */,
@@ -1637,7 +1619,6 @@
 				438342701D0FE16B0089B58E /* PFNavigationDropdownMenu.m in Sources */,
 				439519FF1CC5271C00505E5B /* CLLanguageVC.m in Sources */,
 				432345BC1C9404FB00200833 /* CLTagChooseNavVC.m in Sources */,
-				4383428A1D1283350089B58E /* InfiniteScrollPicker.m in Sources */,
 				43A2811F1CB2276A009C2785 /* CLLibraryCell.m in Sources */,
 				438540391CE56CF200F82AAB /* CLThemeColorVC.m in Sources */,
 				439519B61CBBF46F00505E5B /* CLImportContentNavVC.m in Sources */,
@@ -1647,7 +1628,6 @@
 				439519C71CBF888900505E5B /* CLDataSizeTool.m in Sources */,
 				4300C42E1D1A98EF0065E94E /* NSString+IQTimeIntervalFormatter.m in Sources */,
 				43068BFD1CB74E5900BA1A57 /* IATConfig.m in Sources */,
-				4383428B1D1283350089B58E /* UIView+viewController.m in Sources */,
 				43E0F73C1CA10D27005CAD97 /* MJIvar.m in Sources */,
 				43DF3AC81CAA78A100712D81 /* UIImage+WaterMark.m in Sources */,
 				43C2068E1CB12A6400CEF992 /* CLMediaVC.m in Sources */,

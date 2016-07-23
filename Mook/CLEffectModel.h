@@ -29,7 +29,6 @@
 
 + (instancetype) effectModel;
 
-- (MediaUnitType)mediaType;
 - (void)deleteMedia;
 - (NSNumber *)mediaSize;
 
