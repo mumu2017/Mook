@@ -401,6 +401,7 @@ typedef enum {
 #define kBarTintColor     [UIColor colorWithRed:247/255.0 green:247/255.0 blue:247/255.0 alpha:1.0]
 
 #define kTintColor          [UIColor colorWithContrastingBlackOrWhiteColorOn:kMenuBackgroundColor isFlat:YES]    // FlatColor
+
 #define kMenuBackgroundColor    kAppThemeColor
 // contentVC的背景色
 #define kCellBgColor     [UIColor colorWithRed:247/255.0 green:247/255.0 blue:247/255.0 alpha:1]
