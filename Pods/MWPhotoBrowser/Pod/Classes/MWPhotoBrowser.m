@@ -1125,15 +1125,36 @@ static void * MWVideoPlayerObservation = &MWVideoPlayerObservation;
 	_previousButton.enabled = (_currentPageIndex > 0);
 	_nextButton.enabled = (_currentPageIndex < numberOfPhotos - 1);
     
+    
     // Disable action button if there is no image or it's a video
     MWPhoto *photo = [self photoAtIndex:_currentPageIndex];
     if ([photo underlyingImage] == nil || ([photo respondsToSelector:@selector(isVideo)] && photo.isVideo)) {
-        _actionButton.enabled = NO;
-        _actionButton.tintColor = [UIColor clearColor]; // Tint to hide button
+#warning 自己的改动:如果代理实现了actionButton的方法,就不隐藏actionButton
+        if ([self.delegate respondsToSelector:@selector(photoBrowser:actionButtonPressedForPhotoAtIndex:)]) {
+            
+            _actionButton.enabled = YES;
+            _actionButton.tintColor = nil;
+            
+        } else {
+            _actionButton.enabled = NO;
+            _actionButton.tintColor = [UIColor clearColor]; // Tint to hide button
+        }
+        
+        
     } else {
         _actionButton.enabled = YES;
         _actionButton.tintColor = nil;
     }
+
+//    // Disable action button if there is no image or it's a video
+//    MWPhoto *photo = [self photoAtIndex:_currentPageIndex];
+//    if ([photo underlyingImage] == nil || ([photo respondsToSelector:@selector(isVideo)] && photo.isVideo)) {
+//        _actionButton.enabled = NO;
+//        _actionButton.tintColor = [UIColor clearColor]; // Tint to hide button
+//    } else {
+//        _actionButton.enabled = YES;
+//        _actionButton.tintColor = nil;
+//    }
 	
 }
 
