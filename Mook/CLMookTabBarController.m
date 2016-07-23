@@ -137,6 +137,16 @@
     if ([[NSUserDefaults standardUserDefaults] boolForKey:kUsePasswordKey]) {
         
         // 如果需要输入密码, 那么不需要做任何操作, 密码填写正确后会在block中进行segue跳转
+        // 如果可以跳过密码, 则打开导入页面
+        if (self.showContentWithoutPassword) {
+            
+            // 如果需要导入, 则打开导入页面
+            if (self.importDict) {
+                [self openImportVC];
+                self.isImportingData = NO;
+            }
+            
+        }
     } else {    // 如果不需要输入密码, 则直接进行跳转
         
         if (self.importDict) {

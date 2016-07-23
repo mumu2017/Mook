@@ -34,7 +34,31 @@
 #import "CLImportPasswordInputView.h"
 
 #import "MWPhotoBrowser.h"
-@interface CLImportContentVC ()<CLImportPasswordInputViewDelegate, UITextFieldDelegate, MBProgressHUDDelegate, MWPhotoBrowserDelegate>
+
+#import "QuartzCore/QuartzCore.h"
+#import <AVFoundation/AVFoundation.h>
+#import "CLAudioPlayTool.h"
+#import "CLAudioView.h"
+
+@interface CLImportContentVC ()<CLImportPasswordInputViewDelegate, UITextFieldDelegate, MBProgressHUDDelegate, MWPhotoBrowserDelegate, AVAudioPlayerDelegate>
+
+{
+    AVAudioPlayer *_audioPlayer;
+    CADisplayLink *_playProgressDisplayLink;
+    CLAudioView *_audioView;
+    
+    UIBarButtonItem *_grid;
+    UIBarButtonItem *_flexibleSpace;
+    UIBarButtonItem *_action;
+    
+    UIBarButtonItem *_playItem;
+    UIBarButtonItem *_pauseItem;
+    UIBarButtonItem *_detailItem;
+    UIBarButtonItem *_stopItem;
+    
+    UIProgressView *_progressView;
+    
+}
 
 @property (nonatomic, assign) ContentType contentType;
 

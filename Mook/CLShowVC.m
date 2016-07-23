@@ -267,6 +267,13 @@
     _progressView.progressTintColor = kAppThemeColor;
     _progressView.tintColor = [UIColor whiteColor];
     
+    for (UIView *view in self.navigationController.toolbar.subviews) {
+        if ([view isKindOfClass:[UIProgressView class]]) {
+            
+            [view removeFromSuperview];
+        }
+    }
+    
 }
 
 

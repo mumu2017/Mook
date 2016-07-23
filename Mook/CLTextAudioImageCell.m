@@ -113,7 +113,7 @@
             
             make.centerY.equalTo(self.contentLabel);
             make.left.equalTo(self.contentLabel.mas_right);
-            make.right.equalTo(self.contentView);
+            make.right.equalTo(self.contentView).offset(-10);
         }];
     }
     

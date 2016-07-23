@@ -54,7 +54,7 @@
     _playButton.titleLabel.font = kFontSys14;
     
     _playButton.backgroundColor = [UIColor clearColor];
-    _playButton.tintColor = [UIColor whiteColor];
+    _playButton.tintColor = [UIColor flatGrayColorDark];
     
     [_playButton addTarget:self action:@selector(quickPlay) forControlEvents:UIControlEventTouchUpInside];
     
@@ -72,7 +72,7 @@
     
     if (audioPlayMode == kAudioPlayModeNotLoaded) {
         
-        self.playButton.tintColor = [UIColor whiteColor];
+        self.playButton.tintColor = [UIColor flatGrayColorDark];
         
     } else if (audioPlayMode == kAudioPlayModeLoaded) {
         

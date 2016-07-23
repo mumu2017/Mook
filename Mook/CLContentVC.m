@@ -84,12 +84,6 @@
 
 @property (nonatomic, strong) UIDocumentInteractionController *documentInteractionController;
 @property (nonatomic, copy) NSString *exportPath;
-//
-//typedef void (^AudioBlock)(NSString *audioName);
-//typedef void (^ImageBlock)(NSString *imageName);
-//typedef void (^VideoBlock)(NSString *videoName);
-
-
 
 @end
 
@@ -387,7 +381,16 @@
     _progressView.progressTintColor = kAppThemeColor;
     _progressView.tintColor = [UIColor whiteColor];
     
+    [self toolBarNormalAction];
+    
     [self setToolbarItems:@[_grid, _flexibleSpace, _action]];
+    
+    for (UIView *view in self.navigationController.toolbar.subviews) {
+        if ([view isKindOfClass:[UIProgressView class]]) {
+            
+            [view removeFromSuperview];
+        }
+    }
     
 }
 
