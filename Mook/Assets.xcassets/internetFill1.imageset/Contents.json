@@ -3,16 +3,16 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "internetFill1.png"
+      "filename" : "internetFill__backup~__backup~.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "internetFill1@2x.png"
+      "filename" : "internetFill@2x__backup~__backup~.png"
     },
     {
       "idiom" : "universal",
-      "filename" : "internetFill1@3x.png",
+      "filename" : "internetFill@3x__backup~__backup~.png",
       "scale" : "3x"
     }
   ],

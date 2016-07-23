@@ -2,15 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "network-1.png",
-      "scale" : "1x"
+      "scale" : "1x",
+      "filename" : "iconsettingFill1-1.png"
     },
     {
       "idiom" : "universal",
-      "scale" : "2x"
+      "scale" : "2x",
+      "filename" : "iconsettingFill1-1@2x.png"
     },
     {
       "idiom" : "universal",
+      "filename" : "iconsettingFill1-1@3x.png",
       "scale" : "3x"
     }
   ],

@@ -24,10 +24,10 @@
 #import "CLPropObjModel.h"
 #import "CLLinesObjModel.h"
 #import "CLTableBackView.h"
-#import "CLListRefreshHeader.h"
+//#import "CLListRefreshHeader.h"
 
-#import "BTNavigationDropdownMenu-Swift.h"
-@class BTNavigationDropdownMenu;
+//#import "BTNavigationDropdownMenu-Swift.h"
+//@class BTNavigationDropdownMenu;
 
 
 typedef enum {
@@ -48,7 +48,9 @@ typedef enum {
 @property (nonatomic, strong) NSMutableArray *photos;
 @property (nonatomic, strong) NSMutableArray *thumbs;
 
-@property (strong, nonatomic) BTNavigationDropdownMenu *menu;
+//@property (strong, nonatomic) BTNavigationDropdownMenu *menu;
+
+@property (strong, nonatomic) UISegmentedControl *segControl;
 
 @property (nonatomic, strong) CLTableBackView *tableBackView;
 
@@ -75,66 +77,132 @@ typedef enum {
 }
 
 
-- (BTNavigationDropdownMenu *)menu {
-    if (!_menu) {
+- (UISegmentedControl *)segControl {
+    
+    if (!_segControl) {
+        _segControl = [[UISegmentedControl alloc] initWithItems:@[NSLocalizedString(@"视频", nil), NSLocalizedString(@"图片", nil)]];
+        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 132, 30)];
+        view.backgroundColor = [UIColor clearColor];
+        [view addSubview:_segControl];
+        self.navigationItem.titleView = view;
         
-        NSArray *items = [NSArray arrayWithObjects:NSLocalizedString(@"全部", nil), NSLocalizedString(@"视频", nil), NSLocalizedString(@"图片", nil), nil];
-        _menu = [[BTNavigationDropdownMenu alloc] initWithTitle:items[0] items:items];
-        self.mediaType = kMediaTypeAll;
-        
-        __weak typeof(self) weakself = self;
-
-        [_menu setDidSelectItemAtIndexHandler:^(NSInteger index) {
+        [_segControl mas_makeConstraints:^(MASConstraintMaker *make) {
             
-            typeof(self) strongself = weakself;
-
-            switch (index) {
-                case 0:
-                    _mediaType = kMediaTypeAll;
-
-                    break;
-                case 1:
-                    _mediaType = kMediaTypeVideos;
-
-                    break;
-                case 2:
-                    _mediaType = kMediaTypeImages;
-                    break;
-                default:
-                    break;
-            }
-            
-            strongself.allMedia = nil;
-            strongself.photos = nil;
-            strongself.dataList = nil;
-            
-            [strongself allMedia];
-            [strongself photos];
-            [strongself dataList];
-            
-            [strongself.collectionView reloadData];
-            
-            if ([strongself.collectionView.dataSource collectionView:strongself.collectionView numberOfItemsInSection:0] > 0) {
-                
-                [strongself.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UICollectionViewScrollPositionNone animated:NO];
-            }
-            
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                [strongself prepareVisibleCellsForAnimation];
-                [strongself animateVisibleCells];
-            });
-
+            make.edges.equalTo(view);
         }];
         
-        _menu.cellTextLabelColor = kTintColor;
-        _menu.menuTitleColor = kTintColor;
-        _menu.cellBackgroundColor = kAppThemeColor;
-        _menu.cellSelectionColor = [UIColor whiteColor];
-        _menu.cellSeparatorColor = [UIColor flatGrayColorDark];
+        _segControl.selectedSegmentIndex = 0;
+        _mediaType = kMediaTypeVideos;
         
+        
+        _segControl.backgroundColor = [UIColor clearColor];
+        _segControl.tintColor = [UIColor whiteColor];
+        [_segControl addTarget:self action:@selector(changeList:) forControlEvents:UIControlEventValueChanged];
     }
-    return _menu;
+    
+    return _segControl;
 }
+
+- (void)changeList:(UISegmentedControl *)segControl {
+    
+    switch (segControl.selectedSegmentIndex) {
+//        case 0:
+//            _mediaType = kMediaTypeAll;
+//            
+//            break;
+        case 0:
+            _mediaType = kMediaTypeVideos;
+            
+            break;
+        case 1:
+            _mediaType = kMediaTypeImages;
+            break;
+        default:
+            break;
+    }
+    
+    self.allMedia = nil;
+    self.photos = nil;
+    self.dataList = nil;
+    
+    [self allMedia];
+    [self photos];
+    [self dataList];
+    
+    [self.collectionView reloadData];
+    
+    if ([self.collectionView.dataSource collectionView:self.collectionView numberOfItemsInSection:0] > 0) {
+        
+        [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UICollectionViewScrollPositionNone animated:NO];
+    }
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self prepareVisibleCellsForAnimation];
+        [self animateVisibleCells];
+    });
+
+}
+
+//- (BTNavigationDropdownMenu *)menu {
+//    if (!_menu) {
+//        
+//        NSArray *items = [NSArray arrayWithObjects:NSLocalizedString(@"全部", nil), NSLocalizedString(@"视频", nil), NSLocalizedString(@"图片", nil), nil];
+//        _menu = [[BTNavigationDropdownMenu alloc] initWithTitle:items[0] items:items];
+//        self.mediaType = kMediaTypeAll;
+//        
+//        __weak typeof(self) weakself = self;
+//
+//        [_menu setDidSelectItemAtIndexHandler:^(NSInteger index) {
+//            
+//            typeof(self) strongself = weakself;
+//
+//            switch (index) {
+//                case 0:
+//                    _mediaType = kMediaTypeAll;
+//
+//                    break;
+//                case 1:
+//                    _mediaType = kMediaTypeVideos;
+//
+//                    break;
+//                case 2:
+//                    _mediaType = kMediaTypeImages;
+//                    break;
+//                default:
+//                    break;
+//            }
+//            
+//            strongself.allMedia = nil;
+//            strongself.photos = nil;
+//            strongself.dataList = nil;
+//            
+//            [strongself allMedia];
+//            [strongself photos];
+//            [strongself dataList];
+//            
+//            [strongself.collectionView reloadData];
+//            
+//            if ([strongself.collectionView.dataSource collectionView:strongself.collectionView numberOfItemsInSection:0] > 0) {
+//                
+//                [strongself.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UICollectionViewScrollPositionNone animated:NO];
+//            }
+//            
+//            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//                [strongself prepareVisibleCellsForAnimation];
+//                [strongself animateVisibleCells];
+//            });
+//
+//        }];
+//        
+//        _menu.cellTextLabelColor = kTintColor;
+//        _menu.menuTitleColor = kTintColor;
+//        _menu.cellBackgroundColor = kAppThemeColor;
+//        _menu.cellSelectionColor = [UIColor whiteColor];
+//        _menu.cellSeparatorColor = [UIColor flatGrayColorDark];
+//        
+//    }
+//    return _menu;
+//}
 
 - (CLTableBackView *)tableBackView {
     if (!_tableBackView) {
@@ -274,7 +342,9 @@ static NSString * const reuseIdentifier = @"Cell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.navigationItem.titleView = self.menu;
+    [self segControl];
+    
+//    self.navigationItem.titleView = self.menu;
     
 //    self.collectionView.contentInset = UIEdgeInsetsMake(10, 0, 10, 0);
     
@@ -290,44 +360,44 @@ static NSString * const reuseIdentifier = @"Cell";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(update:) name:kUpdateMookNotification
                                                object:nil];
     
-    [self setRefreshHeader];
+//    [self setRefreshHeader];
 }
 
-- (void)setRefreshHeader {
-    
-    // 设置回调（一旦进入刷新状态，就调用target的action，也就是调用self的loadNewData方法）
-    CLListRefreshHeader *header = [CLListRefreshHeader headerWithRefreshingBlock:^{
-        
-        [self.collectionView.mj_header endRefreshing];
-    }];
-    
-    header.endRefreshingCompletionBlock = ^ () {
-        
-        [self showMenu];
-    };
-    
-    // 设置文字
-    [header setTitle:@"下拉可以切换笔记" forState:MJRefreshStateIdle];
-    [header setTitle:@"松开马上切换笔记" forState:MJRefreshStatePulling];
-    [header setTitle:@"" forState:MJRefreshStateRefreshing];
-    
-    // 设置字体
-    header.stateLabel.font = [UIFont systemFontOfSize:16];
-    
-    // 设置颜色
-    header.stateLabel.textColor = [UIColor whiteColor];
-    header.lastUpdatedTimeLabel.hidden = YES;
-    
-    header.automaticallyChangeAlpha = YES;
-    
-    // 设置刷新控件
-    self.collectionView.mj_header = header;
-}
+//- (void)setRefreshHeader {
+//    
+//    // 设置回调（一旦进入刷新状态，就调用target的action，也就是调用self的loadNewData方法）
+//    CLListRefreshHeader *header = [CLListRefreshHeader headerWithRefreshingBlock:^{
+//        
+//        [self.collectionView.mj_header endRefreshing];
+//    }];
+//    
+//    header.endRefreshingCompletionBlock = ^ () {
+//        
+//        [self showMenu];
+//    };
+//    
+//    // 设置文字
+//    [header setTitle:@"下拉可以切换笔记" forState:MJRefreshStateIdle];
+//    [header setTitle:@"松开马上切换笔记" forState:MJRefreshStatePulling];
+//    [header setTitle:@"" forState:MJRefreshStateRefreshing];
+//    
+//    // 设置字体
+//    header.stateLabel.font = [UIFont systemFontOfSize:16];
+//    
+//    // 设置颜色
+//    header.stateLabel.textColor = [UIColor whiteColor];
+//    header.lastUpdatedTimeLabel.hidden = YES;
+//    
+//    header.automaticallyChangeAlpha = YES;
+//    
+//    // 设置刷新控件
+//    self.collectionView.mj_header = header;
+//}
 
-- (void)showMenu {
-    [self.collectionView.mj_header endRefreshing];
-    [self.menu show];
-}
+//- (void)showMenu {
+//    [self.collectionView.mj_header endRefreshing];
+//    [self.menu show];
+//}
 
 #pragma mark - Private Cell的动画效果
 
@@ -395,12 +465,12 @@ static NSString * const reuseIdentifier = @"Cell";
     [self photos];
     [self dataList];
         
-    self.menu.cellBackgroundColor = kAppThemeColor;
+//    self.menu.cellBackgroundColor = kAppThemeColor;
 
     [self.collectionView reloadData];
     
 //    self.mediaButton.backgroundColor = [kAppThemeColor darkenByPercentage:0.05];
-    self.menu.cellBackgroundColor = kAppThemeColor;
+//    self.menu.cellBackgroundColor = kAppThemeColor;
 }
 
 - (void) update:(NSNotification *)noti {
@@ -419,13 +489,13 @@ static NSString * const reuseIdentifier = @"Cell";
     [self.navigationController setToolbarHidden:YES];
 }
 
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    
-//    self.mediaButton.hidden = YES;
-    [self.menu hide];
-
-}
+//- (void)viewWillDisappear:(BOOL)animated {
+//    [super viewWillDisappear:animated];
+//    
+////    self.mediaButton.hidden = YES;
+//    [self.menu hide];
+//
+//}
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];

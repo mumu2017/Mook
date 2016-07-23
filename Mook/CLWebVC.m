@@ -119,7 +119,54 @@
     
     [self.tableView reloadData];
     
+    
+    if ([self.tableView.dataSource tableView:self.tableView numberOfRowsInSection:0] > 0) {
+        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:NO];
+        
+    }
+    
+    
+    [self prepareVisibleCellsForAnimation];
+    [self animateVisibleCells];
+
+    
 }
+
+#pragma mark - Private Cell的动画效果
+
+- (void)prepareVisibleCellsForAnimation {
+    
+    NSArray *indexArr = [self.tableView indexPathsForVisibleRows];
+    NSIndexPath *topIndexPath = [indexArr firstObject];
+    NSIndexPath *bottomIndexPath = [indexArr lastObject];
+    
+    for (NSInteger i = topIndexPath.row; i < bottomIndexPath.row+1; i++) {
+        CLWebCell * cell = (CLWebCell *) [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForItem:i inSection:0]];
+        cell.frame = CGRectMake(-CGRectGetWidth(cell.bounds), cell.frame.origin.y, CGRectGetWidth(cell.bounds), CGRectGetHeight(cell.bounds));
+        cell.alpha = 0.f;
+    }
+}
+
+- (void)animateVisibleCells {
+    
+    NSArray *indexArr = [self.tableView indexPathsForVisibleRows];
+    NSIndexPath *topIndexPath = [indexArr firstObject];
+    NSIndexPath *bottomIndexPath = [indexArr lastObject];
+    
+    for (NSInteger i = topIndexPath.row; i < bottomIndexPath.row+1; i++) {
+        CLWebCell * cell = (CLWebCell *) [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForItem:i inSection:0]];
+        
+        cell.alpha = 1.f;
+        [UIView animateWithDuration:0.15f
+                              delay:(i-topIndexPath.row) * 0.1
+                            options:UIViewAnimationOptionCurveEaseOut
+                         animations:^{
+                             cell.frame = CGRectMake(0.f, cell.frame.origin.y, CGRectGetWidth(cell.bounds), CGRectGetHeight(cell.bounds));
+                         }
+                         completion:nil];
+    }
+}
+
 
 #pragma mark - VC生命周期
 

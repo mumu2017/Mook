@@ -1176,10 +1176,10 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="ZNK-Ui-Mmt" kind="relationship" relationship="viewControllers" id="QBb-ng-PS8"/>
-                        <segue destination="Q9D-A1-sVC" kind="relationship" relationship="viewControllers" id="s68-Em-xc7"/>
                         <segue destination="tYr-nI-P3n" kind="presentation" identifier="mookToPasswordSegue" id="eSP-0F-ROY"/>
+                        <segue destination="ZNK-Ui-Mmt" kind="relationship" relationship="viewControllers" id="QBb-ng-PS8"/>
                         <segue destination="a3j-i3-6iI" kind="relationship" relationship="viewControllers" id="J07-Oo-GJN"/>
+                        <segue destination="Q9D-A1-sVC" kind="relationship" relationship="viewControllers" id="s68-Em-xc7"/>
                         <segue destination="0aN-7l-1wA" kind="relationship" relationship="viewControllers" id="v25-sq-CEx"/>
                     </connections>
                 </tabBarController>
@@ -2038,14 +2038,14 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="a4Z-wA-J0F" detailTextLabel="H12-Po-ECo" style="IBUITableViewCellStyleValue1" id="o8Y-fg-7Mx">
-                                        <rect key="frame" x="0.0" y="523" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="567" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="o8Y-fg-7Mx" id="QUY-35-gYa">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="网络缓存文件" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="a4Z-wA-J0F">
-                                                    <rect key="frame" x="15" y="12" width="119" height="20.5"/>
+                                                    <rect key="frame" x="15" y="12" width="102" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
