@@ -84,7 +84,7 @@
 
 + (void)deleteMediaByName:(NSString *)name;
 
-+ (void)deleteMediaInEffectModel:(CLEffectModel *)effectModel prepModelList:(NSMutableArray *)prepModelList performModelList:(NSMutableArray *)performModelList;
++ (void)deleteMediaInEffectModel:(CLEffectModel *)effectModel prepModelList:(NSMutableArray *)prepModelList performModelList:(NSMutableArray *)performModelList notesModelList:(NSMutableArray *)notesModelList;
 //+ (void)deleteVideoByName:(NSString *)name;
 //+ (void)deleteImageByName:(NSString *)name;
 

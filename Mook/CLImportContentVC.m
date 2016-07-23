@@ -49,7 +49,7 @@
     
     UIBarButtonItem *_grid;
     UIBarButtonItem *_flexibleSpace;
-    UIBarButtonItem *_action;
+//    UIBarButtonItem *_action;
     
     UIBarButtonItem *_playItem;
     UIBarButtonItem *_pauseItem;
@@ -97,6 +97,8 @@
 
 @property (nonatomic, strong) NSMutableArray *photos;
 @property (nonatomic, strong) NSMutableArray *thumbs;
+
+@property (nonatomic, assign) BOOL importSuccess; // 成功导入
 
 @end
 
@@ -456,6 +458,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.importSuccess = NO;
+    
     self.tableView.backgroundView = self.importPasswordInputView;
 
     // 设置解锁状态
@@ -486,28 +490,96 @@
     [self.tableView registerClass:[CLTextAudioImageCell class]
            forCellReuseIdentifier:kTextAudioImageCell];
     
+    [self initToolBarItems];
+
 }
+
+- (void)initToolBarItems {
+    
+    self.navigationController.toolbar.tintColor = kMenuBackgroundColor;
+    
+    
+    // 普通状态
+    _grid  = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"iconGrid"] style:UIBarButtonItemStylePlain target:self action:@selector(showGrid)];
+    _flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+//    _action = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(export)];
+    
+    // 播放状态
+    _stopItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"stop_playing"] style:UIBarButtonItemStylePlain target:self action:@selector(stopAction)];
+    
+    _playItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemPlay target:self action:@selector(playAction)];
+    
+    _pauseItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemPause target:self action:@selector(pauseAction)];
+    
+    _detailItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"more"] style:UIBarButtonItemStylePlain target:self action:@selector(detailAction)];
+    
+    //进度条
+    _progressView = [[UIProgressView alloc] init];
+    
+    _progressView.backgroundColor = [UIColor clearColor];
+    
+    _progressView.progressTintColor = kAppThemeColor;
+    _progressView.tintColor = [UIColor whiteColor];
+    
+    [self setToolbarItems:@[_grid, _flexibleSpace]];
+    
+    for (UIView *view in self.navigationController.toolbar.subviews) {
+        if ([view isKindOfClass:[UIProgressView class]]) {
+            
+            [view removeFromSuperview];
+        }
+    }
+    
+}
+
 
 - (void)setContentTitle {
    
     self.navigationItem.title = NSLocalizedString(@"预览", nil);
 }
 
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
     
     if (self.unlocked == NO) {
         [self.passwordTF becomeFirstResponder];
     }
+    [self.navigationController setToolbarHidden:NO];
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    [self.navigationController setToolbarHidden:YES];
+    
+    // 如果要去其他页面, 则停止播放录音
+    if (_audioPlayer.isPlaying) {
+        
+        [self pauseAction];
+    }
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    
+    [super viewDidDisappear:animated];
+    
+    // 如果是非用户主动dismiss本页面 (例如导入过程中切换了页面或者有电话进来等情况), 如果没有导入成功, 则删除掉模型中的数据
+    
+    if (self.importSuccess == NO) {
+        
+        [self deleteModelData];
+    }
+}
 
 #pragma mark - 导入笔记
 
 
 - (IBAction)importData:(id)sender {
     
-    BOOL flag;
+    BOOL flag; // 导入是否成功的flag
+    
     NSString *title;
     
     switch (self.contentType) {
@@ -517,6 +589,7 @@
                 [kDataListAll insertObject:self.ideaObjModel atIndex:0];
                 [kDataListIdea insertObject:self.ideaObjModel atIndex:0];
                 title = NSLocalizedString(@"导入成功", nil);
+                                
             } else {
                 title = NSLocalizedString(@"导入失败", nil);
             }
@@ -579,15 +652,33 @@
             break;
     }
     
+    // 设置导入成功与否的bool值, 用于在非用户主动dismiss导入页面时处理导入的数据.
+    
+    self.importSuccess = flag;
+    
     [MBProgressHUD showGlobalProgressHUDWithTitle:title hideAfterDelay:1.5];
 
     [[NSNotificationCenter defaultCenter] postNotificationName:kUpdateDataNotification object:nil];
     [self dismissViewControllerAnimated:YES completion:^{
         [[NSNotificationCenter defaultCenter] postNotificationName:@"dismissImportContentVC" object:nil];
         
-    }];}
+    }];
+
+}
 
 - (IBAction)cancelImport:(id)sender {
+    
+    [self deleteModelData];
+    
+    [MBProgressHUD showGlobalProgressHUDWithTitle:NSLocalizedString(@"导入取消", nil) hideAfterDelay:1.5];
+
+    [self dismissViewControllerAnimated:YES completion:^{
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"dismissImportContentVC" object:nil];
+        
+    }];
+}
+
+- (void)deleteModelData {
     
     switch (self.contentType) {
         case kContentTypeIdea:
@@ -615,14 +706,8 @@
         default:
             break;
     }
-    
-    [MBProgressHUD showGlobalProgressHUDWithTitle:NSLocalizedString(@"导入取消", nil) hideAfterDelay:1.5];
 
-    [self dismissViewControllerAnimated:YES completion:^{
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"dismissImportContentVC" object:nil];
-        
-    }];}
-
+}
 
 #pragma mark - Table view data source
 
@@ -700,14 +785,15 @@
         } else if (self.effectModel.isWithAudio && !self.effectModel.isWithImage && !self.effectModel.isWithVideo) {
             
             CLTextAudioCell *cell = [self.tableView dequeueReusableCellWithIdentifier:kTextAudioCell forIndexPath:indexPath];
+            [cell setAttributedString:[self.effectModel.effect styledString] audioName:self.effectModel.audio playBlock:^(CLAudioView *audioView) {
+                
+                [self quickPlayWithAudioView:audioView];
+                
+            } audioBlock:^(NSString *audioName) {
+                [self playAudio:audioName];
+            }];
             
-//            [cell setAttributedString:[self.effectModel.effect styledString]  audioName:self.effectModel.audio playBlock:^(NSString *audioName, FDWaveformView *waveformView) {
-//                
-////                [self quickPlay:audioName waveformView:waveformView];
-//                
-//            } audioBlock:^(NSString *audioName) {
-//                [self playAudio:audioName];
-//            }];
+            [self setAudioViewStatusBeforeDisplay:cell.audioView];
             
             return cell;
             // 有文字,图片/视频
@@ -730,20 +816,26 @@
         } else if (self.effectModel.isWithAudio && (self.effectModel.isWithImage || self.effectModel.isWithVideo)) {
             
             CLTextAudioImageCell *cell = [self.tableView dequeueReusableCellWithIdentifier:kTextAudioImageCell forIndexPath:indexPath];
-//            
-//            [cell setAttributedString:[self.effectModel.effect styledString] audioName:self.effectModel.audio audioBlock:^(NSString *audioName) {
-//                [self playAudio:audioName];
-//                
-//            } imageName:self.effectModel.image imageBlock:^(NSString *imageName) {
-//                
-//                NSInteger index = 0;
-//                [self showPhotoBrowser:index];
-//                
-//            } videoName:self.effectModel.video videoBlock:^(NSString *videoName) {
-//                
-//                NSInteger index = 0;
-//                [self showPhotoBrowser:index];
-//            }];
+            
+            [cell setAttributedString:[self.effectModel.effect styledString] audioName:self.effectModel.audio playBlock:^(CLAudioView *audioView) {
+                
+                [self quickPlayWithAudioView:audioView];
+                
+            } audioBlock:^(NSString *audioName) {
+                
+                [self playAudio:audioName];
+                
+            } imageName:self.effectModel.image imageBlock:^(NSString *imageName) {
+                
+                NSInteger index = 0;
+                [self showPhotoBrowser:index];
+                
+            } videoName:self.effectModel.video videoBlock:^(NSString *videoName) {
+                
+                NSInteger index = 0;
+                [self showPhotoBrowser:index];
+            }];
+            [self setAudioViewStatusBeforeDisplay:cell.audioView];
             
             return cell;
         }
@@ -799,15 +891,14 @@
             } else if (model.isWithAudio && !model.isWithImage && !model.isWithVideo) {
                 
                 CLTextAudioCell *cell = [self.tableView dequeueReusableCellWithIdentifier:kTextAudioCell forIndexPath:indexPath];
-
-//                [cell setAttributedString:[model.prep styledString]  audioName:model.audio playBlock:^(NSString *audioName, FDWaveformView *waveformView) {
-//                    
-////                    [self quickPlay:audioName waveformView:waveformView];
-//                    
-//                } audioBlock:^(NSString *audioName) {
-//                    [self playAudio:audioName];
-//                }];
-
+                [cell setAttributedString:[model.prep styledString] audioName:model.audio playBlock:^(CLAudioView *audioView) {
+                    
+                    [self quickPlayWithAudioView:audioView];
+                    
+                } audioBlock:^(NSString *audioName) {
+                    [self playAudio:audioName];
+                }];
+                [self setAudioViewStatusBeforeDisplay:cell.audioView];
                 
                 return cell;
                 // 有文字,图片/视频
@@ -831,19 +922,25 @@
                 
                 CLTextAudioImageCell *cell = [self.tableView dequeueReusableCellWithIdentifier:kTextAudioImageCell forIndexPath:indexPath];
                 
-//                [cell setAttributedString:[model.prep styledString] audioName:model.audio audioBlock:^(NSString *audioName) {
-//                    [self playAudio:audioName];
-//                    
-//                } imageName:model.image imageBlock:^(NSString *imageName) {
-//                    
-//                    NSInteger index = [self getButtonTagWithPrepModel:model];
-//                    [self showPhotoBrowser:index];
-//                    
-//                } videoName:model.video videoBlock:^(NSString *videoName) {
-//                    
-//                    NSInteger index = [self getButtonTagWithPrepModel:model];
-//                    [self showPhotoBrowser:index];
-//                }];
+                [cell setAttributedString:[model.prep styledString] audioName:model.audio playBlock:^(CLAudioView *audioView) {
+                    
+                    [self quickPlayWithAudioView:audioView];
+                    
+                } audioBlock:^(NSString *audioName) {
+                    
+                    [self playAudio:audioName];
+                    
+                } imageName:model.image imageBlock:^(NSString *imageName) {
+                    
+                    NSInteger index = [self getButtonTagWithPrepModel:model];
+                    [self showPhotoBrowser:index];
+                    
+                } videoName:model.video videoBlock:^(NSString *videoName) {
+                    
+                    NSInteger index = [self getButtonTagWithPrepModel:model];
+                    [self showPhotoBrowser:index];
+                }];
+                [self setAudioViewStatusBeforeDisplay:cell.audioView];
                 
                 return cell;
             }
@@ -867,14 +964,14 @@
             } else if (model.isWithAudio && !model.isWithImage && !model.isWithVideo) {
                 
                 CLTextAudioCell *cell = [self.tableView dequeueReusableCellWithIdentifier:kTextAudioCell forIndexPath:indexPath];
-                
-//                [cell setAttributedString:[model.prep styledString]  audioName:model.audio playBlock:^(NSString *audioName, FDWaveformView *waveformView) {
-//                    
-////                    [self quickPlay:audioName waveformView:waveformView];
-//                    
-//                } audioBlock:^(NSString *audioName) {
-//                    [self playAudio:audioName];
-//                }];
+                [cell setAttributedString:[model.prep styledString] audioName:model.audio playBlock:^(CLAudioView *audioView) {
+                    
+                    [self quickPlayWithAudioView:audioView];
+                    
+                } audioBlock:^(NSString *audioName) {
+                    [self playAudio:audioName];
+                }];
+                [self setAudioViewStatusBeforeDisplay:cell.audioView];
                 
                 return cell;
                 // 有文字,图片/视频
@@ -897,20 +994,26 @@
             } else if (model.isWithAudio && (model.isWithImage || model.isWithVideo)) {
                 
                 CLTextAudioImageCell *cell = [self.tableView dequeueReusableCellWithIdentifier:kTextAudioImageCell forIndexPath:indexPath];
-//                
-//                [cell setAttributedString:[model.prep styledString] audioName:model.audio audioBlock:^(NSString *audioName) {
-//                    [self playAudio:audioName];
-//                    
-//                } imageName:model.image imageBlock:^(NSString *imageName) {
-//                    
-//                    NSInteger index = [self getButtonTagWithPrepModel:model];
-//                    [self showPhotoBrowser:index];
-//                    
-//                } videoName:model.video videoBlock:^(NSString *videoName) {
-//                    
-//                    NSInteger index = [self getButtonTagWithPrepModel:model];
-//                    [self showPhotoBrowser:index];
-//                }];
+                
+                [cell setAttributedString:[model.prep styledString] audioName:model.audio playBlock:^(CLAudioView *audioView) {
+                    
+                    [self quickPlayWithAudioView:audioView];
+                    
+                } audioBlock:^(NSString *audioName) {
+                    
+                    [self playAudio:audioName];
+                    
+                } imageName:model.image imageBlock:^(NSString *imageName) {
+                    
+                    NSInteger index = [self getButtonTagWithPrepModel:model];
+                    [self showPhotoBrowser:index];
+                    
+                } videoName:model.video videoBlock:^(NSString *videoName) {
+                    
+                    NSInteger index = [self getButtonTagWithPrepModel:model];
+                    [self showPhotoBrowser:index];
+                }];
+                [self setAudioViewStatusBeforeDisplay:cell.audioView];
                 
                 return cell;
             }
@@ -931,14 +1034,14 @@
         } else if (model.isWithAudio && !model.isWithImage && !model.isWithVideo) {
             
             CLTextAudioCell *cell = [self.tableView dequeueReusableCellWithIdentifier:kTextAudioCell forIndexPath:indexPath];
-//
-//            [cell setAttributedString:[model.perform styledString]  audioName:model.audio playBlock:^(NSString *audioName, FDWaveformView *waveformView) {
-//                
-////                [self quickPlay:audioName waveformView:waveformView];
-//                
-//            } audioBlock:^(NSString *audioName) {
-//                [self playAudio:audioName];
-//            }];
+            [cell setAttributedString:[model.perform styledString] audioName:model.audio playBlock:^(CLAudioView *audioView) {
+                
+                [self quickPlayWithAudioView:audioView];
+                
+            } audioBlock:^(NSString *audioName) {
+                [self playAudio:audioName];
+            }];
+            [self setAudioViewStatusBeforeDisplay:cell.audioView];
             
             return cell;
             // 有文字,图片/视频
@@ -962,19 +1065,25 @@
             
             CLTextAudioImageCell *cell = [self.tableView dequeueReusableCellWithIdentifier:kTextAudioImageCell forIndexPath:indexPath];
             
-//            [cell setAttributedString:[model.perform styledString] audioName:model.audio audioBlock:^(NSString *audioName) {
-//                [self playAudio:audioName];
-//                
-//            } imageName:model.image imageBlock:^(NSString *imageName) {
-//                
-//                NSInteger index = [self getButtonTagWithPerformModel:model];
-//                [self showPhotoBrowser:index];
-//                
-//            } videoName:model.video videoBlock:^(NSString *videoName) {
-//                
-//                NSInteger index = [self getButtonTagWithPerformModel:model];
-//                [self showPhotoBrowser:index];
-//            }];
+            [cell setAttributedString:[model.perform styledString] audioName:model.audio playBlock:^(CLAudioView *audioView) {
+                
+                [self quickPlayWithAudioView:audioView];
+                
+            } audioBlock:^(NSString *audioName) {
+                
+                [self playAudio:audioName];
+                
+            } imageName:model.image imageBlock:^(NSString *imageName) {
+                
+                NSInteger index = [self getButtonTagWithPerformModel:model];
+                [self showPhotoBrowser:index];
+                
+            } videoName:model.video videoBlock:^(NSString *videoName) {
+                
+                NSInteger index = [self getButtonTagWithPerformModel:model];
+                [self showPhotoBrowser:index];
+            }];
+            [self setAudioViewStatusBeforeDisplay:cell.audioView];
             
             return cell;
         }
@@ -994,15 +1103,14 @@
         } else if (model.isWithAudio) {
             
             CLTextAudioCell *cell = [self.tableView dequeueReusableCellWithIdentifier:kTextAudioCell forIndexPath:indexPath];
-
-//            [cell setAttributedString:[model.notes styledString]  audioName:model.audio playBlock:^(NSString *audioName, FDWaveformView *waveformView) {
-//                
-////                [self quickPlay:audioName waveformView:waveformView];
-//                
-//            } audioBlock:^(NSString *audioName) {
-//                [self playAudio:audioName];
-//            }];
-            
+            [cell setAttributedString:[model.notes styledString] audioName:model.audio playBlock:^(CLAudioView *audioView) {
+                
+                [self quickPlayWithAudioView:audioView];
+                
+            } audioBlock:^(NSString *audioName) {
+                [self playAudio:audioName];
+            }];
+            [self setAudioViewStatusBeforeDisplay:cell.audioView];
             
             return cell;
             // 有文字,图片/视频
@@ -1081,6 +1189,178 @@
     return kLabelHeight;
 }
 
+#pragma mark - Audio播放方法
+- (void)playAudio:(NSString *)audioName {
+    
+    if (_audioPlayer.isPlaying) {
+        
+        [self pauseAction];
+    }
+    
+    [CLAudioPlayTool playAudioFromCurrentController:self audioPath:[audioName getNamedAudio] audioPlayer:_audioPlayer];
+    
+}
+
+- (void)quickPlayWithAudioView:(CLAudioView *)audioView {
+    
+    [self toolBarAudioReady];
+    
+    NSString *audioName = audioView.audioName; //获取音频路径
+    
+    NSURL *url = [NSURL fileURLWithPath:[audioName getNamedAudio]];
+    
+    // 检测是否已经正在播放同一份音频
+    if ([_audioPlayer.url.absoluteString isEqualToString:url.absoluteString]) { //正在播放同一份音频
+        
+        [self stopAction]; // 停止播放
+        
+    } else { //没有播放同一份音频
+        
+        if (_audioPlayer) { // 音频播放器已存在, 说明可能正在播放, 则停止
+            [_audioPlayer stop];
+            
+            [_audioView setAudioPlayMode:kAudioPlayModeNotLoaded]; //更改上一个音频cell的状态(UI)
+            
+        }
+        
+        _audioView = audioView; // 处理完上一个音频view后, 将当前audioView设置为播放的audioView
+        [_audioView setAudioPlayMode:kAudioPlayModeLoaded]; //更改音频状态为Loaded
+        
+        _audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];
+        _audioPlayer.delegate = self;
+        _audioPlayer.meteringEnabled = YES;
+        
+        [self playAction];
+        
+    }
+    
+}
+
+- (void)setAudioViewStatusBeforeDisplay:(CLAudioView *)audioView {
+    
+    NSString *audioName = audioView.audioName; //获取音频路径
+    
+    NSURL *url = [NSURL fileURLWithPath:[audioName getNamedAudio]];
+    
+    // 检测是否已经正在播放同一份音频
+    if ([_audioPlayer.url.absoluteString isEqualToString:url.absoluteString]) { //正在播放同一份音频
+        if (_audioView != audioView) { //如果在播放同一份音频, 且控制器的_audioView并不是当前的audioView, 说明是当前audioView的Cell之前被tableView重用, 现在又滑到了相应Model的位置, 因此将两者设置为同一个audioView, 以便更新UI
+            _audioView = audioView;
+            
+            [_audioView setAudioPlayMode:kAudioPlayModeLoaded];
+            
+        }
+        
+    } else { //没有播放同一份音频, 或者audioPlayer没有播放
+        
+        if (_audioPlayer.url == nil) return;
+        
+        if (_audioView == audioView) { //如果不是同一份音频, 则说明tableView重用了包含当前audioView的cell,为了防止UI错乱, 将系统的_audioView设为空
+            _audioView = nil;
+            
+            [audioView setAudioPlayMode:kAudioPlayModeNotLoaded]; //更改状态为准备播放
+            
+        }
+        
+    }
+}
+
+#pragma mark 播放控件方法
+
+- (void)playAction {
+    
+    [_audioPlayer prepareToPlay];
+    [_audioPlayer play];
+    
+    //UI Update
+    [self toolBarAudioPlaying];
+    
+    {
+        [_playProgressDisplayLink invalidate];
+        _playProgressDisplayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(updatePlayProgress)];
+        [_playProgressDisplayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
+    }
+    
+}
+
+- (void)pauseAction {
+    
+    [_audioPlayer pause];
+    [self toolBarAudioReady];
+}
+
+- (void)stopAction {
+    
+    [self toolBarNormalAction];
+    _audioPlayer = nil;
+    [_audioView setAudioPlayMode:kAudioPlayModeNotLoaded];
+    
+}
+
+- (void)detailAction {
+    
+    [self playAudio:_audioView.audioName];
+}
+
+
+
+- (void)toolBarAudioReady {
+    
+    [self setToolbarItems:@[_stopItem,_flexibleSpace, _playItem,_flexibleSpace,_detailItem] animated:YES];
+    
+    if ([self.navigationController.toolbar.subviews containsObject:_progressView] == NO) {
+        
+        [self.navigationController.toolbar addSubview:_progressView];
+        _progressView.frame = CGRectMake(0, 0, self.navigationController.toolbar.frame.size.width, 5);
+    }
+    
+}
+
+- (void)toolBarAudioPlaying {
+    
+    [self setToolbarItems:@[_stopItem,_flexibleSpace, _pauseItem,_flexibleSpace,_detailItem] animated:YES];
+    
+    if ([self.navigationController.toolbar.subviews containsObject:_progressView] == NO) {
+        
+        [self.navigationController.toolbar addSubview:_progressView];
+        _progressView.frame = CGRectMake(0, 0, self.navigationController.toolbar.frame.size.width, 5);
+    }
+    
+    
+}
+
+- (void)toolBarNormalAction {
+    
+    [self setToolbarItems:@[_grid, _flexibleSpace] animated:YES];
+    
+    if ([self.navigationController.toolbar.subviews containsObject:_progressView]) {
+        
+        [_progressView removeFromSuperview];
+    }
+}
+
+-(void)updatePlayProgress
+{
+    // 更新进度
+    if (_progressView) {
+        
+        [_progressView setProgress:_audioPlayer.currentTime/_audioPlayer.duration];
+    }
+    
+}
+
+- (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag {
+    if (flag) {
+        NSLog(@"播放完毕");
+        [self toolBarAudioReady];
+    }
+}
+
+- (void)audioPlayerDecodeErrorDidOccur:(AVAudioPlayer *)player error:(NSError *)error {
+    NSLog(@"%@", error);
+}
+
+
 #pragma mark - textField 代理方法
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
     
@@ -1113,12 +1393,6 @@
     }
 }
 
-#pragma mark -Audio 方法
-- (void)playAudio:(NSString *)audioName {
-    
-    [CLAudioPlayTool playAudioFromCurrentController:self audioPath:[audioName getNamedAudio]];
-    
-}
 
 #pragma mark - PhotoBrowser方法
 // 遍历模型,加载图片
@@ -1318,6 +1592,32 @@
     browser.enableSwipeToDismiss = NO;
     browser.autoPlayOnAppear = autoPlayOnAppear;
     [browser setCurrentPhotoIndex:index];
+    // Show
+    [self.navigationController pushViewController:browser animated:YES];
+}
+
+
+- (void)showGrid {
+    BOOL displayActionButton = YES;
+    BOOL displaySelectionButtons = NO;
+    BOOL displayNavArrows = NO;
+    BOOL enableGrid = YES;
+    BOOL startOnGrid = YES;
+    BOOL autoPlayOnAppear = NO;
+    
+    // Create browser
+    MWPhotoBrowser *browser = [[MWPhotoBrowser alloc] initWithDelegate:self];
+    
+    browser.displayActionButton = displayActionButton;
+    browser.displayNavArrows = displayNavArrows;
+    browser.displaySelectionButtons = displaySelectionButtons;
+    browser.alwaysShowControls = displaySelectionButtons;
+    browser.zoomPhotosToFill = YES;
+    browser.enableGrid = enableGrid;
+    browser.startOnGrid = startOnGrid;
+    browser.enableSwipeToDismiss = NO;
+    browser.autoPlayOnAppear = autoPlayOnAppear;
+    [browser setCurrentPhotoIndex:0];
     // Show
     [self.navigationController pushViewController:browser animated:YES];
 }

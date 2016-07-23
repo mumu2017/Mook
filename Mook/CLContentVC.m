@@ -381,8 +381,6 @@
     _progressView.progressTintColor = kAppThemeColor;
     _progressView.tintColor = [UIColor whiteColor];
     
-    [self toolBarNormalAction];
-    
     [self setToolbarItems:@[_grid, _flexibleSpace, _action]];
     
     for (UIView *view in self.navigationController.toolbar.subviews) {

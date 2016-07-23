@@ -30,6 +30,11 @@
 //        [CLDataSaveTool deleteVideoByName:self.video];
         self.video = nil;
     }
+    
+    if (self.isWithAudio) {
+        [self.audio deleteNamedAudioFromDocument];
+        self.audio = nil;
+    }
 }
 
 - (void)encodeWithCoder:(NSCoder *)coder

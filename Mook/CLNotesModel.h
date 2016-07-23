@@ -21,4 +21,6 @@
 
 + (instancetype) notesModel;
 
+- (void)deleteMedia;
+
 @end

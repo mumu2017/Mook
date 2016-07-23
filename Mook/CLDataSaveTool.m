@@ -412,7 +412,7 @@ static FMDatabase *_db;
     
     NSString *timeStamp = routineModel.timeStamp;
     [self deleteDataWithStamp:timeStamp];
-    [self deleteMediaInEffectModel:routineModel.effectModel prepModelList:routineModel.prepModelList performModelList:routineModel.performModelList];
+    [self deleteMediaInEffectModel:routineModel.effectModel prepModelList:routineModel.prepModelList performModelList:routineModel.performModelList notesModelList:routineModel.notesModelLsit];
     
 }
 
@@ -420,26 +420,28 @@ static FMDatabase *_db;
     NSString *timeStamp = ideaObjModel.timeStamp;
     [self deleteDataWithStamp:timeStamp];
     
-    [self deleteMediaInEffectModel:ideaObjModel.effectModel prepModelList:ideaObjModel.prepModelList performModelList:nil];
+    [self deleteMediaInEffectModel:ideaObjModel.effectModel prepModelList:ideaObjModel.prepModelList performModelList:nil notesModelList:nil];
 }
 
 + (void)deleteSleight:(CLSleightObjModel *)sleightObjModel {
     NSString *timeStamp = sleightObjModel.timeStamp;
     [self deleteDataWithStamp:timeStamp];
     
-    [self deleteMediaInEffectModel:sleightObjModel.effectModel prepModelList:sleightObjModel.prepModelList performModelList:nil];
+    [self deleteMediaInEffectModel:sleightObjModel.effectModel prepModelList:sleightObjModel.prepModelList performModelList:nil notesModelList:nil];
 }
 
 + (void)deleteProp:(CLPropObjModel *)propObjModel {
     NSString *timeStamp = propObjModel.timeStamp;
     [self deleteDataWithStamp:timeStamp];
     
-    [self deleteMediaInEffectModel:propObjModel.effectModel prepModelList:propObjModel.prepModelList performModelList:nil];
+    [self deleteMediaInEffectModel:propObjModel.effectModel prepModelList:propObjModel.prepModelList performModelList:nil notesModelList:nil];
 }
 
 + (void)deleteLines:(CLLinesObjModel *)linesObjModel {
     NSString *timeStamp = linesObjModel.timeStamp;
     [self deleteDataWithStamp:timeStamp];
+    
+    [self deleteMediaInEffectModel:linesObjModel.effectModel prepModelList:nil performModelList:nil notesModelList:nil];
 
 }
 
@@ -454,7 +456,7 @@ static FMDatabase *_db;
 }
 
 #pragma mark - 删除多媒体数据
-+ (void)deleteMediaInEffectModel:(CLEffectModel *)effectModel prepModelList:(NSMutableArray *)prepModelList performModelList:(NSMutableArray *)performModelList {
++ (void)deleteMediaInEffectModel:(CLEffectModel *)effectModel prepModelList:(NSMutableArray *)prepModelList performModelList:(NSMutableArray *)performModelList notesModelList:(NSMutableArray *)notesModelList {
     
     [effectModel deleteMedia];
     
@@ -465,6 +467,11 @@ static FMDatabase *_db;
     for (CLPerformModel *performModel in performModelList) {
         [performModel deleteMedia];
     }
+    
+    for (CLNotesModel *notesModel in notesModelList) {
+        [notesModel deleteMedia];
+    }
+    
 }
 
 #pragma mark - 标签方法

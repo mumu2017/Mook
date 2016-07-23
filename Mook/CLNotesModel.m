@@ -15,6 +15,14 @@
     return [[self alloc] init];
 }
 
+- (void)deleteMedia {
+    
+    if (self.isWithAudio) {
+        [self.audio deleteNamedAudioFromDocument];
+        self.audio = nil;
+    }
+}
+
 - (void)encodeWithCoder:(NSCoder *)coder
 {
     [coder encodeObject:self.notes forKey:kNotesKey];

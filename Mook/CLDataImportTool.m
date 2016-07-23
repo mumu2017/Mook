@@ -106,28 +106,28 @@
 
 + (void)cancelImportRoutine:(CLRoutineModel *)routineModel {
     
-    [CLDataSaveTool deleteMediaInEffectModel:routineModel.effectModel prepModelList:routineModel.prepModelList performModelList:routineModel.performModelList];
+    [CLDataSaveTool deleteMediaInEffectModel:routineModel.effectModel prepModelList:routineModel.prepModelList performModelList:routineModel.performModelList notesModelList:routineModel.notesModelLsit];
 }
 
 + (void)cancelImportIdea:(CLIdeaObjModel *)ideaObjModel {
     
-    [CLDataSaveTool deleteMediaInEffectModel:ideaObjModel.effectModel prepModelList:ideaObjModel.prepModelList performModelList:nil];
+    [CLDataSaveTool deleteMediaInEffectModel:ideaObjModel.effectModel prepModelList:ideaObjModel.prepModelList performModelList:nil notesModelList:nil];
 
 }
 
 + (void)cancelImportSleight:(CLSleightObjModel *)sleightObjModel {
     
-    [CLDataSaveTool deleteMediaInEffectModel:sleightObjModel.effectModel prepModelList:sleightObjModel.prepModelList performModelList:nil];
+    [CLDataSaveTool deleteMediaInEffectModel:sleightObjModel.effectModel prepModelList:sleightObjModel.prepModelList performModelList:nil notesModelList:nil];
 }
 
 + (void)cancelImportProp:(CLPropObjModel *)propObjModel {
     
-    [CLDataSaveTool deleteMediaInEffectModel:propObjModel.effectModel prepModelList:propObjModel.prepModelList performModelList:nil];
+    [CLDataSaveTool deleteMediaInEffectModel:propObjModel.effectModel prepModelList:propObjModel.prepModelList performModelList:nil notesModelList:nil];
 }
 
 + (void)cancelImportLines:(CLLinesObjModel *)linesObjModel {
     
-    // 没有多媒体,什么也不用执行
+    [CLDataSaveTool deleteMediaInEffectModel:linesObjModel.effectModel prepModelList:nil performModelList:nil notesModelList:nil];
 }
 
 #pragma mark - 拷贝多媒体数据到本地多媒体文件夹
@@ -156,6 +156,12 @@
         
     }
     
+    if (routineModel.effectModel.audio.length > 0) {
+        
+        routineModel.effectModel.audio = [CLDataImportTool copyTempUnzipAudioToMook:routineModel.effectModel.audio modelTimeStamp:routineModel.timeStamp content:routineModel.effectModel.effect type:kTypeRoutine];
+        
+    }
+    
     for (CLPerformModel *model in routineModel.performModelList) {
         if (model.image.length > 0) {
             
@@ -165,6 +171,12 @@
         } else if (model.video.length > 0) {
             
             model.video = [CLDataImportTool copyTempUnzipVideoToMook:model.video modelTimeStamp:routineModel.timeStamp content:model.perform type:kTypeRoutine];
+            
+        }
+        
+        if (model.audio.length > 0) {
+            
+            model.audio = [CLDataImportTool copyTempUnzipAudioToMook:model.audio modelTimeStamp:routineModel.timeStamp content:model.perform type:kTypeRoutine];
             
         }
     }
@@ -177,6 +189,12 @@
         } else if (model.video.length > 0) {
             
             model.video = [CLDataImportTool copyTempUnzipVideoToMook:model.video modelTimeStamp:routineModel.timeStamp content:model.prep type:kTypeRoutine];
+            
+        }
+        
+        if (model.audio.length > 0) {
+            
+            model.audio = [CLDataImportTool copyTempUnzipAudioToMook:model.audio modelTimeStamp:routineModel.timeStamp content:model.prep type:kTypeRoutine];
             
         }
     }
@@ -208,6 +226,12 @@
         
     }
     
+    if (ideaObjModel.effectModel.audio.length > 0) {
+        
+        ideaObjModel.effectModel.audio = [CLDataImportTool copyTempUnzipAudioToMook:ideaObjModel.effectModel.audio modelTimeStamp:ideaObjModel.timeStamp content:ideaObjModel.effectModel.effect type:kTypeIdea];
+        
+    }
+    
     for (CLPrepModel *model in ideaObjModel.prepModelList) {
         if (model.image.length > 0) {
             
@@ -216,6 +240,12 @@
         } else if (model.video.length > 0) {
             
             model.video = [CLDataImportTool copyTempUnzipVideoToMook:model.video modelTimeStamp:ideaObjModel.timeStamp content:model.prep type:kTypeIdea];
+            
+        }
+        
+        if (model.audio.length > 0) {
+            
+            model.audio = [CLDataImportTool copyTempUnzipAudioToMook:model.audio modelTimeStamp:ideaObjModel.timeStamp content:model.prep type:kTypeIdea];
             
         }
     }
@@ -246,6 +276,12 @@
         
     }
     
+    if (sleightObjModel.effectModel.audio.length > 0) {
+        
+        sleightObjModel.effectModel.audio = [CLDataImportTool copyTempUnzipAudioToMook:sleightObjModel.effectModel.audio modelTimeStamp:sleightObjModel.timeStamp content:sleightObjModel.effectModel.effect type:kTypeSleight];
+        
+    }
+    
     for (CLPrepModel *model in sleightObjModel.prepModelList) {
         if (model.image.length > 0) {
             
@@ -254,6 +290,12 @@
         } else if (model.video.length > 0) {
             
             model.video = [CLDataImportTool copyTempUnzipVideoToMook:model.video modelTimeStamp:sleightObjModel.timeStamp content:model.prep type:kTypeSleight];
+            
+        }
+        
+        if (model.audio.length > 0) {
+            
+            model.audio = [CLDataImportTool copyTempUnzipAudioToMook:model.audio modelTimeStamp:sleightObjModel.timeStamp content:model.prep type:kTypeSleight];
             
         }
     }
@@ -284,6 +326,12 @@
         
     }
     
+    if (propObjModel.effectModel.audio.length > 0) {
+        
+        propObjModel.effectModel.audio = [CLDataImportTool copyTempUnzipAudioToMook:propObjModel.effectModel.audio modelTimeStamp:propObjModel.timeStamp content:propObjModel.effectModel.effect type:kTypeProp];
+        
+    }
+    
     for (CLPrepModel *model in propObjModel.prepModelList) {
         if (model.image.length > 0) {
             
@@ -292,6 +340,12 @@
         } else if (model.video.length > 0) {
             
             model.video = [CLDataImportTool copyTempUnzipVideoToMook:model.video modelTimeStamp:propObjModel.timeStamp content:model.prep type:kTypeProp];
+            
+        }
+        
+        if (model.audio.length > 0) {
+            
+            model.audio = [CLDataImportTool copyTempUnzipAudioToMook:model.audio modelTimeStamp:propObjModel.timeStamp content:model.prep type:kTypeProp];
             
         }
     }
@@ -308,9 +362,15 @@
         linesObjModel.infoModel.name = [NSString stringWithFormat:@"%@(%@)", [linesObjModel getTitle], tag];
     }
 
-
     linesObjModel.tags = [NSMutableArray arrayWithObject:tag];
     [CLDataSaveTool addTag:tag type:kTypeLines];
+
+    if (linesObjModel.effectModel.audio.length > 0) {
+        
+        linesObjModel.effectModel.audio = [CLDataImportTool copyTempUnzipAudioToMook:linesObjModel.effectModel.audio modelTimeStamp:linesObjModel.timeStamp content:linesObjModel.effectModel.effect type:kTypeLines];
+        
+    }
+
 }
 
 
@@ -365,5 +425,30 @@
     return nil;
 }
 
++ (NSString *)copyTempUnzipAudioToMook:(NSString *)audioName modelTimeStamp:(NSString *)timeStamp content:(NSString *)content type:(NSString *)type {
+    
+    
+    if (audioName.length > 0) {
+        NSString *mediaPath = [[NSString tempUnzipPath] stringByAppendingPathComponent:audioName];
+        
+        BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:mediaPath];
+        
+        if (fileExists) {
+            NSError *error;
+            NSString *newAudioName = [kTimestamp stringByAppendingString:@".m4a"];
+            
+            NSString *destPath = [[NSString audioPath] stringByAppendingPathComponent:newAudioName];
+            BOOL flag = [[NSFileManager defaultManager] copyItemAtPath:mediaPath
+                                                                toPath:destPath
+                                                                 error:&error];
+            if (flag) {
+                [CLDataSaveTool addAudioByName:newAudioName timesStamp:timeStamp content:content type:type];
+                return newAudioName;
+            }
+        }
+    }
+    
+    return nil;
+}
 
 @end

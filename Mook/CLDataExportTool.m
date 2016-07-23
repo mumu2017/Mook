@@ -54,6 +54,13 @@
         
     }
     
+    if (routineModel.effectModel.isWithAudio) {
+        
+        mediaPath = [[NSString audioPath] stringByAppendingPathComponent:routineModel.effectModel.audio];
+        if (mediaPath != nil) [pathArrM addObject:mediaPath];
+        
+    }
+    
     for (CLPerformModel *model in routineModel.performModelList) {
         if (model.isWithImage) {
             mediaPath = [[NSString imagePath] stringByAppendingPathComponent:model.image];
@@ -61,6 +68,13 @@
             
         } else if (model.isWithVideo) {
             mediaPath = [[NSString videoPath] stringByAppendingPathComponent:model.video];
+            if (mediaPath != nil) [pathArrM addObject:mediaPath];
+            
+        }
+        
+        if (model.isWithAudio) {
+            
+            mediaPath = [[NSString audioPath] stringByAppendingPathComponent:model.audio];
             if (mediaPath != nil) [pathArrM addObject:mediaPath];
             
         }
@@ -73,6 +87,13 @@
             
         } else if (model.isWithVideo) {
             mediaPath = [[NSString videoPath] stringByAppendingPathComponent:model.video];
+            if (mediaPath != nil) [pathArrM addObject:mediaPath];
+            
+        }
+        
+        if (model.isWithAudio) {
+            
+            mediaPath = [[NSString audioPath] stringByAppendingPathComponent:model.audio];
             if (mediaPath != nil) [pathArrM addObject:mediaPath];
             
         }
@@ -114,6 +135,13 @@
         if (mediaPath != nil) [pathArrM addObject:mediaPath];   // 获取视频路径
         
     }
+    
+    if (ideaObjModel.effectModel.isWithAudio) {
+        
+        mediaPath = [[NSString audioPath] stringByAppendingPathComponent:ideaObjModel.effectModel.audio];
+        if (mediaPath != nil) [pathArrM addObject:mediaPath];
+        
+    }
 
     
     for (CLPrepModel *model in ideaObjModel.prepModelList) {
@@ -124,6 +152,13 @@
         } else if (model.isWithVideo) {
             mediaPath = [[NSString videoPath] stringByAppendingPathComponent:model.video];
             if (mediaPath != nil) [pathArrM addObject:mediaPath];   // 获取视频路径
+            
+        }
+        
+        if (model.isWithAudio) {
+            
+            mediaPath = [[NSString audioPath] stringByAppendingPathComponent:model.audio];
+            if (mediaPath != nil) [pathArrM addObject:mediaPath];
             
         }
     }
@@ -167,6 +202,13 @@
         
     }
     
+    if (sleightObjModel.effectModel.isWithAudio) {
+        
+        mediaPath = [[NSString audioPath] stringByAppendingPathComponent:sleightObjModel.effectModel.audio];
+        if (mediaPath != nil) [pathArrM addObject:mediaPath];
+        
+    }
+    
     
     for (CLPrepModel *model in sleightObjModel.prepModelList) {
         if (model.isWithImage) {
@@ -176,6 +218,13 @@
         } else if (model.isWithVideo) {
             mediaPath = [[NSString videoPath] stringByAppendingPathComponent:model.video];
             if (mediaPath != nil) [pathArrM addObject:mediaPath];   // 获取视频路径
+            
+        }
+        
+        if (model.isWithAudio) {
+            
+            mediaPath = [[NSString audioPath] stringByAppendingPathComponent:model.audio];
+            if (mediaPath != nil) [pathArrM addObject:mediaPath];
             
         }
     }
@@ -220,6 +269,12 @@
         
     }
     
+    if (propObjModel.effectModel.isWithAudio) {
+        
+        mediaPath = [[NSString audioPath] stringByAppendingPathComponent:propObjModel.effectModel.audio];
+        if (mediaPath != nil) [pathArrM addObject:mediaPath];
+        
+    }
     
     for (CLPrepModel *model in propObjModel.prepModelList) {
         if (model.isWithImage) {
@@ -229,6 +284,13 @@
         } else if (model.isWithVideo) {
             mediaPath = [[NSString videoPath] stringByAppendingPathComponent:model.video];
             if (mediaPath != nil) [pathArrM addObject:mediaPath];   // 获取视频路径
+            
+        }
+        
+        if (model.isWithAudio) {
+            
+            mediaPath = [[NSString audioPath] stringByAppendingPathComponent:model.audio];
+            if (mediaPath != nil) [pathArrM addObject:mediaPath];
             
         }
     }
@@ -259,6 +321,15 @@
     
     NSMutableArray *pathArrM = [NSMutableArray array];
     [pathArrM addObject:[NSString tempSharePath]]; // 加入模型data路径
+    
+    NSString *mediaPath;
+
+    if (linesObjModel.effectModel.isWithAudio) {
+        
+        mediaPath = [[NSString audioPath] stringByAppendingPathComponent:linesObjModel.effectModel.audio];
+        if (mediaPath != nil) [pathArrM addObject:mediaPath];
+        
+    }
     
     // 根据模型名称生成压缩文件路径
     NSString *title = [NSString stringWithFormat:@"%@.mook", [linesObjModel getTitle]];
