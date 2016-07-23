@@ -127,12 +127,6 @@
 		4364861F1CE1BAEA00FC191B /* CLSizeListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4364861E1CE1BAEA00FC191B /* CLSizeListVC.m */; };
 		436927261D053D400041ED9C /* CLShowCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 436927241D053D400041ED9C /* CLShowCell.m */; };
 		436927271D053D400041ED9C /* CLShowCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 436927251D053D400041ED9C /* CLShowCell.xib */; };
-		4383426E1D0FE16B0089B58E /* PFConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 438342641D0FE16B0089B58E /* PFConfiguration.m */; };
-		4383426F1D0FE16B0089B58E /* PFNavigationDropdownMenu.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 438342651D0FE16B0089B58E /* PFNavigationDropdownMenu.bundle */; };
-		438342701D0FE16B0089B58E /* PFNavigationDropdownMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 438342671D0FE16B0089B58E /* PFNavigationDropdownMenu.m */; };
-		438342711D0FE16B0089B58E /* PFTableCellContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 438342691D0FE16B0089B58E /* PFTableCellContentView.m */; };
-		438342721D0FE16B0089B58E /* PFTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4383426B1D0FE16B0089B58E /* PFTableView.m */; };
-		438342731D0FE16B0089B58E /* PFTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4383426D1D0FE16B0089B58E /* PFTableViewCell.m */; };
 		4383427B1D11331A0089B58E /* CLWebSiteModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4383427A1D11331A0089B58E /* CLWebSiteModel.m */; };
 		438540391CE56CF200F82AAB /* CLThemeColorVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 438540381CE56CF200F82AAB /* CLThemeColorVC.m */; };
 		4385403C1CE56D4000F82AAB /* CLThemeColorNavVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4385403B1CE56D4000F82AAB /* CLThemeColorNavVC.m */; };
@@ -190,9 +184,6 @@
 		43E0F73B1CA10D27005CAD97 /* MJFoundation.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E0F72F1CA10D27005CAD97 /* MJFoundation.m */; };
 		43E0F73C1CA10D27005CAD97 /* MJIvar.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E0F7311CA10D27005CAD97 /* MJIvar.m */; };
 		43E0F73D1CA10D27005CAD97 /* MJType.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E0F7331CA10D27005CAD97 /* MJType.m */; };
-		43E0F73E1CA10D27005CAD97 /* NSObject+MJCoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E0F7351CA10D27005CAD97 /* NSObject+MJCoding.m */; };
-		43E0F73F1CA10D27005CAD97 /* NSObject+MJIvar.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E0F7371CA10D27005CAD97 /* NSObject+MJIvar.m */; };
-		43E0F7401CA10D27005CAD97 /* NSObject+MJKeyValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E0F7391CA10D27005CAD97 /* NSObject+MJKeyValue.m */; };
 		43E7EE941D38B4A000D22E9B /* CLWhatIsMagicVCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E7EE931D38B4A000D22E9B /* CLWhatIsMagicVCViewController.m */; };
 		43E7EE971D38D45900D22E9B /* CLAudioView.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E7EE961D38D45800D22E9B /* CLAudioView.m */; };
 		43E9D0C01D19236700036DDD /* CLGetMediaTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E9D0BF1D19236700036DDD /* CLGetMediaTool.m */; };
@@ -427,17 +418,6 @@
 		436927231D053D400041ED9C /* CLShowCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLShowCell.h; sourceTree = "<group>"; };
 		436927241D053D400041ED9C /* CLShowCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLShowCell.m; sourceTree = "<group>"; };
 		436927251D053D400041ED9C /* CLShowCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CLShowCell.xib; sourceTree = "<group>"; };
-		438342631D0FE16B0089B58E /* PFConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFConfiguration.h; sourceTree = "<group>"; };
-		438342641D0FE16B0089B58E /* PFConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFConfiguration.m; sourceTree = "<group>"; };
-		438342651D0FE16B0089B58E /* PFNavigationDropdownMenu.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = PFNavigationDropdownMenu.bundle; sourceTree = "<group>"; };
-		438342661D0FE16B0089B58E /* PFNavigationDropdownMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFNavigationDropdownMenu.h; sourceTree = "<group>"; };
-		438342671D0FE16B0089B58E /* PFNavigationDropdownMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFNavigationDropdownMenu.m; sourceTree = "<group>"; };
-		438342681D0FE16B0089B58E /* PFTableCellContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFTableCellContentView.h; sourceTree = "<group>"; };
-		438342691D0FE16B0089B58E /* PFTableCellContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFTableCellContentView.m; sourceTree = "<group>"; };
-		4383426A1D0FE16B0089B58E /* PFTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFTableView.h; sourceTree = "<group>"; };
-		4383426B1D0FE16B0089B58E /* PFTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFTableView.m; sourceTree = "<group>"; };
-		4383426C1D0FE16B0089B58E /* PFTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFTableViewCell.h; sourceTree = "<group>"; };
-		4383426D1D0FE16B0089B58E /* PFTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFTableViewCell.m; sourceTree = "<group>"; };
 		438342791D11331A0089B58E /* CLWebSiteModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLWebSiteModel.h; sourceTree = "<group>"; };
 		4383427A1D11331A0089B58E /* CLWebSiteModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLWebSiteModel.m; sourceTree = "<group>"; };
 		4383428F1D139E2B0089B58E /* CLWebVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLWebVC.h; sourceTree = "<group>"; };
@@ -537,19 +517,12 @@
 		43E0F7281CA0FC6E005CAD97 /* CLDataSaveTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLDataSaveTool.m; sourceTree = "<group>"; };
 		43E0F72B1CA10D27005CAD97 /* MJConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MJConst.h; path = MJExtension/MJConst.h; sourceTree = "<group>"; };
 		43E0F72C1CA10D27005CAD97 /* MJConst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MJConst.m; path = MJExtension/MJConst.m; sourceTree = "<group>"; };
-		43E0F72D1CA10D27005CAD97 /* MJExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MJExtension.h; path = MJExtension/MJExtension.h; sourceTree = "<group>"; };
 		43E0F72E1CA10D27005CAD97 /* MJFoundation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MJFoundation.h; path = MJExtension/MJFoundation.h; sourceTree = "<group>"; };
 		43E0F72F1CA10D27005CAD97 /* MJFoundation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MJFoundation.m; path = MJExtension/MJFoundation.m; sourceTree = "<group>"; };
 		43E0F7301CA10D27005CAD97 /* MJIvar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MJIvar.h; path = MJExtension/MJIvar.h; sourceTree = "<group>"; };
 		43E0F7311CA10D27005CAD97 /* MJIvar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MJIvar.m; path = MJExtension/MJIvar.m; sourceTree = "<group>"; };
 		43E0F7321CA10D27005CAD97 /* MJType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MJType.h; path = MJExtension/MJType.h; sourceTree = "<group>"; };
 		43E0F7331CA10D27005CAD97 /* MJType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MJType.m; path = MJExtension/MJType.m; sourceTree = "<group>"; };
-		43E0F7341CA10D27005CAD97 /* NSObject+MJCoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSObject+MJCoding.h"; path = "MJExtension/NSObject+MJCoding.h"; sourceTree = "<group>"; };
-		43E0F7351CA10D27005CAD97 /* NSObject+MJCoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSObject+MJCoding.m"; path = "MJExtension/NSObject+MJCoding.m"; sourceTree = "<group>"; };
-		43E0F7361CA10D27005CAD97 /* NSObject+MJIvar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSObject+MJIvar.h"; path = "MJExtension/NSObject+MJIvar.h"; sourceTree = "<group>"; };
-		43E0F7371CA10D27005CAD97 /* NSObject+MJIvar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSObject+MJIvar.m"; path = "MJExtension/NSObject+MJIvar.m"; sourceTree = "<group>"; };
-		43E0F7381CA10D27005CAD97 /* NSObject+MJKeyValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSObject+MJKeyValue.h"; path = "MJExtension/NSObject+MJKeyValue.h"; sourceTree = "<group>"; };
-		43E0F7391CA10D27005CAD97 /* NSObject+MJKeyValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSObject+MJKeyValue.m"; path = "MJExtension/NSObject+MJKeyValue.m"; sourceTree = "<group>"; };
 		43E7EE921D38B4A000D22E9B /* CLWhatIsMagicVCViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLWhatIsMagicVCViewController.h; sourceTree = "<group>"; };
 		43E7EE931D38B4A000D22E9B /* CLWhatIsMagicVCViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLWhatIsMagicVCViewController.m; sourceTree = "<group>"; };
 		43E7EE951D38D45800D22E9B /* CLAudioView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLAudioView.h; sourceTree = "<group>"; };
@@ -864,24 +837,6 @@
 				4364861E1CE1BAEA00FC191B /* CLSizeListVC.m */,
 			);
 			name = Size;
-			sourceTree = "<group>";
-		};
-		438342621D0FE1600089B58E /* PFNavigationDropdownMenu */ = {
-			isa = PBXGroup;
-			children = (
-				438342631D0FE16B0089B58E /* PFConfiguration.h */,
-				438342641D0FE16B0089B58E /* PFConfiguration.m */,
-				438342651D0FE16B0089B58E /* PFNavigationDropdownMenu.bundle */,
-				438342661D0FE16B0089B58E /* PFNavigationDropdownMenu.h */,
-				438342671D0FE16B0089B58E /* PFNavigationDropdownMenu.m */,
-				438342681D0FE16B0089B58E /* PFTableCellContentView.h */,
-				438342691D0FE16B0089B58E /* PFTableCellContentView.m */,
-				4383426A1D0FE16B0089B58E /* PFTableView.h */,
-				4383426B1D0FE16B0089B58E /* PFTableView.m */,
-				4383426C1D0FE16B0089B58E /* PFTableViewCell.h */,
-				4383426D1D0FE16B0089B58E /* PFTableViewCell.m */,
-			);
-			name = PFNavigationDropdownMenu;
 			sourceTree = "<group>";
 		};
 		438342741D10FAFB0089B58E /* Notes(笔记) */ = {
@@ -1206,7 +1161,6 @@
 			isa = PBXGroup;
 			children = (
 				43FAB4DE1D26553E0046997D /* FullScreenPopGesture */,
-				438342621D0FE1600089B58E /* PFNavigationDropdownMenu */,
 				432346861C96AFBB00200833 /* XLStripTabPager */,
 				43F5F76E1CB3E90B007BFB0C /* WJTouchID */,
 				430DFBDF1CA3F3470054DF6B /* Other */,
@@ -1307,19 +1261,12 @@
 			children = (
 				43E0F72B1CA10D27005CAD97 /* MJConst.h */,
 				43E0F72C1CA10D27005CAD97 /* MJConst.m */,
-				43E0F72D1CA10D27005CAD97 /* MJExtension.h */,
 				43E0F72E1CA10D27005CAD97 /* MJFoundation.h */,
 				43E0F72F1CA10D27005CAD97 /* MJFoundation.m */,
 				43E0F7301CA10D27005CAD97 /* MJIvar.h */,
 				43E0F7311CA10D27005CAD97 /* MJIvar.m */,
 				43E0F7321CA10D27005CAD97 /* MJType.h */,
 				43E0F7331CA10D27005CAD97 /* MJType.m */,
-				43E0F7341CA10D27005CAD97 /* NSObject+MJCoding.h */,
-				43E0F7351CA10D27005CAD97 /* NSObject+MJCoding.m */,
-				43E0F7361CA10D27005CAD97 /* NSObject+MJIvar.h */,
-				43E0F7371CA10D27005CAD97 /* NSObject+MJIvar.m */,
-				43E0F7381CA10D27005CAD97 /* NSObject+MJKeyValue.h */,
-				43E0F7391CA10D27005CAD97 /* NSObject+MJKeyValue.m */,
 			);
 			name = MJ;
 			sourceTree = "<group>";
@@ -1515,7 +1462,6 @@
 				4300C44A1D1A9B8C0065E94E /* stop_playing@3x.png in Resources */,
 				43F5F7B91CB5020F007BFB0C /* prop.jpg in Resources */,
 				4323461F1C94054300200833 /* CLListImageCell.xib in Resources */,
-				4383426F1D0FE16B0089B58E /* PFNavigationDropdownMenu.bundle in Resources */,
 				43F5F7B31CB4FEE6007BFB0C /* sleight.jpg in Resources */,
 				432346951C96B4C200200833 /* CLTextInputCell.xib in Resources */,
 				4300C43F1D1A9B8C0065E94E /* audio_record.png in Resources */,
@@ -1616,7 +1562,6 @@
 				4385403C1CE56D4000F82AAB /* CLThemeColorNavVC.m in Sources */,
 				4300C42B1D1A98EF0065E94E /* IQCropSelectionView.m in Sources */,
 				439519B01CBBB60300505E5B /* CLDataImportTool.m in Sources */,
-				438342701D0FE16B0089B58E /* PFNavigationDropdownMenu.m in Sources */,
 				439519FF1CC5271C00505E5B /* CLLanguageVC.m in Sources */,
 				432345BC1C9404FB00200833 /* CLTagChooseNavVC.m in Sources */,
 				43A2811F1CB2276A009C2785 /* CLLibraryCell.m in Sources */,
@@ -1651,7 +1596,6 @@
 				432345681C9404A800200833 /* UITableView+Tools.m in Sources */,
 				43EEE7DD1CAD328500F0BCCF /* CLRoutineImageCell.m in Sources */,
 				432345661C9404A800200833 /* UINavigationBar+Awesome.m in Sources */,
-				438342731D0FE16B0089B58E /* PFTableViewCell.m in Sources */,
 				432345E91C94051A00200833 /* CLSleightObjModel.m in Sources */,
 				43C5425F1D423FF100898655 /* FCFileManager.m in Sources */,
 				43DDCF431D1BACB2007E5CAC /* CLAudioPlayTool.m in Sources */,
@@ -1667,7 +1611,6 @@
 				432345671C9404A800200833 /* UIResponder+FirstResponder.m in Sources */,
 				432346731C9409A400200833 /* XLBarPagerTabStripViewController.m in Sources */,
 				432345AD1C9404FB00200833 /* CLNewShowVC.m in Sources */,
-				43E0F73F1CA10D27005CAD97 /* NSObject+MJIvar.m in Sources */,
 				439519B91CBCC14000505E5B /* CLAllItemsListVC.m in Sources */,
 				432346621C94094D00200833 /* CLMediaView.m in Sources */,
 				4300C4281D1A98EF0065E94E /* IQAudioRecorderViewController.m in Sources */,
@@ -1681,7 +1624,6 @@
 				43E0F73D1CA10D27005CAD97 /* MJType.m in Sources */,
 				43F5F7611CB3922B007BFB0C /* CLShowInfoCell.m in Sources */,
 				4383427B1D11331A0089B58E /* CLWebSiteModel.m in Sources */,
-				438342721D0FE16B0089B58E /* PFTableView.m in Sources */,
 				432345E31C94051A00200833 /* CLPrepModel.m in Sources */,
 				432346301C94054300200833 /* CLTableBackView.m in Sources */,
 				43951A161CC5E7BE00505E5B /* CLBackUpInfoVC.m in Sources */,
@@ -1724,8 +1666,6 @@
 				432345AF1C9404FB00200833 /* CLPropChooseNavVC.m in Sources */,
 				4300C42A1D1A98EF0065E94E /* IQCropSelectionEndView.m in Sources */,
 				43F5F75A1CB390EB007BFB0C /* CLMediaNavVC.m in Sources */,
-				438342711D0FE16B0089B58E /* PFTableCellContentView.m in Sources */,
-				4383426E1D0FE16B0089B58E /* PFConfiguration.m in Sources */,
 				432346941C96B4C200200833 /* CLTextInputCell.m in Sources */,
 				432346761C9409A400200833 /* XLSegmentedPagerTabStripViewController.m in Sources */,
 				432346741C9409A400200833 /* XLButtonBarPagerTabStripViewController.m in Sources */,
@@ -1735,7 +1675,6 @@
 				43277ADC1D392D8F004E3F4A /* CLAudioPlayBar.m in Sources */,
 				432345B31C9404FB00200833 /* CLQuickStringVC.m in Sources */,
 				432346451C94055700200833 /* SMTagField.m in Sources */,
-				43E0F7401CA10D27005CAD97 /* NSObject+MJKeyValue.m in Sources */,
 				43A281241CB2299B009C2785 /* CLLibraryVC.m in Sources */,
 				43DDCF3D1D1BA5C2007E5CAC /* CLAudioPlayVC.m in Sources */,
 				43DDCF471D1CE8F3007E5CAC /* UIImage+Color.m in Sources */,
@@ -1744,7 +1683,6 @@
 				439519C11CBF610700505E5B /* MBProgressHUD+Tools.m in Sources */,
 				432345AC1C9404FB00200833 /* CLNewEntryVC.m in Sources */,
 				432345DC1C94051A00200833 /* CLEffectModel.m in Sources */,
-				43E0F73E1CA10D27005CAD97 /* NSObject+MJCoding.m in Sources */,
 				432345B91C9404FB00200833 /* CLShowVC.m in Sources */,
 				43FAB4DD1D2655390046997D /* UINavigationController+FDFullscreenPopGesture.m in Sources */,
 				432345691C9404A800200833 /* UITextField+Tools.m in Sources */,

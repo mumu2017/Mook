@@ -32,7 +32,7 @@
     if (passWord == nil) {
         passWord = @"";
     }
-    NSDictionary *modelDict = [routineModel keyValues];
+    NSDictionary *modelDict = [routineModel mj_keyValues];
     NSDictionary *dict = @{@"type":kTypeRoutine, @"model":modelDict, @"passWord":passWord};
     
     NSData *data = [NSKeyedArchiver archivedDataWithRootObject:dict];
@@ -114,7 +114,7 @@
     if (passWord == nil) {
         passWord = @"";
     }
-    NSDictionary *modelDict = [ideaObjModel keyValues];  // 模型转字典
+    NSDictionary *modelDict = [ideaObjModel mj_keyValues];  // 模型转字典
     NSDictionary *dict = @{@"type":kTypeIdea, @"model":modelDict, @"passWord":passWord};   // 加入模型类型标识
 
     NSData *data = [NSKeyedArchiver archivedDataWithRootObject:dict];
@@ -180,7 +180,7 @@
     if (passWord == nil) {
         passWord = @"";
     }
-    NSDictionary *modelDict = [sleightObjModel keyValues];  // 模型转字典
+    NSDictionary *modelDict = [sleightObjModel mj_keyValues];  // 模型转字典
     NSDictionary *dict = @{@"type":kTypeSleight, @"model":modelDict, @"passWord":passWord};   // 加入模型类型标识
 
     NSData *data = [NSKeyedArchiver archivedDataWithRootObject:dict];
@@ -247,7 +247,7 @@
         passWord = @"";
     }
     
-    NSDictionary *modelDict = [propObjModel keyValues];  // 模型转字典
+    NSDictionary *modelDict = [propObjModel mj_keyValues];  // 模型转字典
     NSDictionary *dict = @{@"type":kTypeProp, @"model":modelDict, @"passWord":passWord};   // 加入模型类型标识
 
     NSData *data = [NSKeyedArchiver archivedDataWithRootObject:dict];
@@ -313,7 +313,7 @@
         passWord = @"";
     }
     
-    NSDictionary *modelDict = [linesObjModel keyValues];  // 模型转字典
+    NSDictionary *modelDict = [linesObjModel mj_keyValues];  // 模型转字典
     NSDictionary *dict = @{@"type":kTypeLines, @"model":modelDict, @"passWord":passWord};   // 加入模型类型标识
 
     NSData *data = [NSKeyedArchiver archivedDataWithRootObject:dict];

@@ -22,7 +22,7 @@ Go ahead and **import** BTNavigationDropdownMenu into your own Swift files
 ```swift
 import BTNavigationDropdownMenu
 ```
-Note: This library mainly supports for **Xcode 7, Swift 2.0** and embedded frameworks. For older versions of XCode, use branch [swift-1.2](https://github.com/PhamBaTho/BTNavigationDropdownMenu/tree/swift-1.2)
+Note: This library mainly supports for **Xcode 7, Swift 2.0** and embedded frameworks.
 
 ## Usage:
 ### Instantiating
@@ -32,22 +32,34 @@ let items = ["Most Popular", "Latest", "Trending", "Nearest", "Top Picks"]
 ```
 Create a **new instance** of BTNavigationDropdownMenu:
 ```swift
-let menuView = BTNavigationDropdownMenu(navigationController: self.navigationController, title: items.first!, items: items)
+let menuView = BTNavigationDropdownMenu(navigationController: self.navigationController, containerView: self.navigationController!.view, title: "Dropdown Menu", items: items)
 ```
+or just simple like this:
+```swift
+let menuView = BTNavigationDropdownMenu(title: items[0], items: items)
+```
+By default, `navigationController` is the top most navigation controller and `containerView` is keyWindow. 
+
+(`keyWindow` is recommended for `containerView` because in this way, the black overlay can cover the whole screen. But in some cases, `keyWindow` doesn't work properly, like using with side menu, (e.g. SWRevealViewController), the dropdown menu didn't move along with their parent view controller or navigation controller. To resolve this issue, you can use `self.navigationController!.view` instead.)
+
 Set **title of navigation bar** as menuView:
 ```swift
 self.navigationItem.titleView = menuView
 ```
 Call BTNavigationDropdownMenu closure to get **the index of selected cell**:
 ```swift
-menuView.didSelectItemAtIndexHandler = {(indexPath: Int) -> () in
-            println("Did select item at index: \(indexPath)")
+menuView.didSelectItemAtIndexHandler = {[weak self] (indexPath: Int) -> () in
+            print("Did select item at index: \(indexPath)")
             self.selectedCellLabel.text = items[indexPath]
 }
 ```
 Use `menuView.show()` or `menuView.hide()` if you want to show or hide dropdown menu manually.
 
+Use `menuView.toggle()` to toogle dropdown menu shown/hide.
+
 Use `menuView.isShown` (Boolean type) property to check showing state of dropdown menu.
+
+Use `menuView.updateItems(items: [AnyObject])` to update items in dropdown menu if needed.
 
 ### Customization
 Once you have assigned the items and frame for dropdown menu, you can custom the look and the feel of menu. You can override these properties for your favor:
@@ -66,11 +78,11 @@ Once you have assigned the items and frame for dropdown menu, you can custom the
 
 `cellSelectionColor`  **- The color of the cell when the cell is selected.** *Default is lightGrayColor()*
 
+`keepSelectedCellColor` **- The boolean value that decides if selected color of cell is visible when the menu is shown.** *Default is false*
+
 `checkMarkImage`  **- The checkmark icon of the cell.**
 
 `animationDuration`  **- The animation duration of showing/hiding menu.** *Default is 0.5s*
-
-`bounceOffset`  **- The value of bounce offset.** *Default is 10*
 
 `arrowImage`  **- The arrow next to navigation title**
 
@@ -83,6 +95,9 @@ Once you have assigned the items and frame for dropdown menu, you can custom the
 ## Requirement
 - iOS 8.0+ (CocoaPods with Swift support will only work on iOS 8.0+. Alternatively, you will have to import library manually to your project)
 - Xcode 7.0+, Swift 2.0+
+
+## Changelog
+See the [CHANGELOG](https://github.com/PhamBaTho/BTNavigationDropdownMenu/blob/master/CHANGELOG.md) for details
 
 ## License
 BTNavigationDropdownMenu is available under the MIT License. See the [LICENSE](https://github.com/PhamBaTho/BTNavigationDropdownMenu/blob/master/LICENSE) for details.

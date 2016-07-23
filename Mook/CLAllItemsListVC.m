@@ -76,7 +76,8 @@
     if (!_menu) {
 
         NSArray *items = [NSArray arrayWithObjects:NSLocalizedString(@"全部", nil),NSLocalizedString(@"演出", nil), NSLocalizedString(@"流程", nil), NSLocalizedString(@"想法", nil), NSLocalizedString(@"技巧", nil), NSLocalizedString(@"道具", nil), NSLocalizedString(@"台词", nil),  nil];
-        _menu = [[BTNavigationDropdownMenu alloc] initWithTitle:items[0] items:items];
+        _menu = [[BTNavigationDropdownMenu alloc] initWithNavigationController:self.navigationController containerView:self.navigationController.view title:items[0] items:items];
+
         self.listType = kListTypeAll;
         
         __weak typeof(self) weakself = self;

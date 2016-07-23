@@ -38,17 +38,17 @@ public class BTNavigationDropdownMenu: UIView {
             self.configuration.menuTitleColor = value
         }
     }
-    
+
     // The height of the cell. Default is 50
-    public var cellHeight: CGFloat! {
+    public var cellHeight: NSNumber! {
         get {
-            return self.configuration.cellHeight
+            return CGFloat(self.configuration.cellHeight)
         }
         set(value) {
-            self.configuration.cellHeight = value
+            self.configuration.cellHeight = CGFloat(value)
         }
     }
-    
+
     // The color of the cell background. Default is whiteColor()
     public var cellBackgroundColor: UIColor! {
         get {
@@ -131,7 +131,6 @@ public class BTNavigationDropdownMenu: UIView {
     // The animation duration of showing/hiding menu. Default is 0.3
     public var animationDuration: NSTimeInterval! {
         get {
-            
             return self.configuration.animationDuration
         }
         set(value) {
@@ -198,12 +197,7 @@ public class BTNavigationDropdownMenu: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    @available(*, deprecated, message="Use init(navigationController:title:items:) instead", renamed="BTNavigationDropdownMenu(navigationController: UINavigationController?, title: String, items: [AnyObject])")
-    public convenience init(title: String, items: [AnyObject]) {
-        self.init(navigationController: nil, title: title, items: items)
-    }
-    
-    public init(navigationController: UINavigationController? = nil, title: String, items: [AnyObject]) {
+    public init(navigationController: UINavigationController? = nil, containerView: UIView = UIApplication.sharedApplication().keyWindow!, title: String, items: [AnyObject]) {
         
         // Navigation controller
         if let navigationController = navigationController {
@@ -258,7 +252,9 @@ public class BTNavigationDropdownMenu: UIView {
         self.backgroundView.addGestureRecognizer(backgroundTapRecognizer)
         
         // Init table view
-        self.tableView = BTTableView(frame: CGRectMake(menuWrapperBounds.origin.x, menuWrapperBounds.origin.y + 0.5, menuWrapperBounds.width, menuWrapperBounds.height + 300), items: items, title: title, configuration: self.configuration)
+        let navBarHeight = self.navigationController?.navigationBar.bounds.size.height ?? 0
+        let statusBarHeight = UIApplication.sharedApplication().statusBarFrame.height ?? 0
+        self.tableView = BTTableView(frame: CGRectMake(menuWrapperBounds.origin.x, menuWrapperBounds.origin.y + 0.5, menuWrapperBounds.width, menuWrapperBounds.height + 300 - navBarHeight - statusBarHeight), items: items, title: title, configuration: self.configuration)
         
         self.tableView.selectRowAtIndexPathHandler = { [weak self] (indexPath: Int) -> () in
             self?.didSelectItemAtIndexHandler!(indexPath: indexPath)
@@ -277,7 +273,7 @@ public class BTNavigationDropdownMenu: UIView {
         self.menuWrapper.addSubview(self.topSeparator)
         
         // Add Menu View to container view
-        window.addSubview(self.menuWrapper)
+        containerView.addSubview(self.menuWrapper)
         
         // By default, hide menu view
         self.menuWrapper.hidden = true
@@ -310,6 +306,13 @@ public class BTNavigationDropdownMenu: UIView {
             self.hideMenu();
         } else {
             self.showMenu();
+        }
+    }
+    
+    public func updateItems(items: [AnyObject]) {
+        if !items.isEmpty {
+            self.tableView.items = items
+            self.tableView.reloadData()
         }
     }
     
@@ -455,7 +458,7 @@ class BTConfiguration {
         self.cellSelectionColor = UIColor.lightGrayColor()
         self.checkMarkImage = UIImage(contentsOfFile: checkMarkImagePath!)
         self.keepSelectedCellColor = false
-        self.animationDuration = 0.2
+        self.animationDuration = 0.1
         self.arrowImage = UIImage(contentsOfFile: arrowImagePath!)
         self.arrowPadding = 15
         self.maskBackgroundColor = UIColor.blackColor()
@@ -472,7 +475,7 @@ class BTTableView: UITableView, UITableViewDelegate, UITableViewDataSource {
     
     // Private properties
     private var items: [AnyObject]!
-    private var selectedIndexPath: Int!
+    private var selectedIndexPath: Int?
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -518,16 +521,7 @@ class BTTableView: UITableView, UITableViewDelegate, UITableViewDataSource {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = BTTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "Cell", configuration: self.configuration)
         cell.textLabel?.text = self.items[indexPath.row] as? String
-        
-        if selectedIndexPath == nil {
-            selectedIndexPath == 0;
-        }
-            cell.checkmarkIcon.hidden = (indexPath.row == selectedIndexPath) ? false : true
-
-        if self.configuration.keepSelectedCellColor == true {
-            cell.contentView.backgroundColor = (indexPath.row == selectedIndexPath) ? self.configuration.cellSelectionColor : self.configuration.cellBackgroundColor
-        }
-        
+        cell.checkmarkIcon.hidden = (indexPath.row == selectedIndexPath) ? false : true
         return cell
     }
     
@@ -544,6 +538,13 @@ class BTTableView: UITableView, UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.cellForRowAtIndexPath(indexPath) as? BTTableViewCell
         cell?.checkmarkIcon.hidden = true
         cell?.contentView.backgroundColor = self.configuration.cellBackgroundColor
+    }
+
+    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        if self.configuration.keepSelectedCellColor == true {
+            cell.backgroundColor = self.configuration.cellBackgroundColor
+            cell.contentView.backgroundColor = (indexPath.row == selectedIndexPath) ? self.configuration.cellSelectionColor : self.configuration.cellBackgroundColor
+        }
     }
 }
 

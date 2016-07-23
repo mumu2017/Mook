@@ -125,7 +125,7 @@
         
         if ([modelType isEqualToString:kTypeRoutine]) {
             
-            CLRoutineModel *model = [CLRoutineModel objectWithKeyValues:modelDict];
+            CLRoutineModel *model = [CLRoutineModel mj_objectWithKeyValues:modelDict];
             
             if (model != nil) { // 如果模型不为空, 则执行数据读取
                 self.contentType = kContentTypeRoutine;
@@ -144,7 +144,7 @@
             
         } else if ([modelType isEqualToString:kTypeIdea]) {
             
-            CLIdeaObjModel *model = [CLIdeaObjModel objectWithKeyValues:modelDict];
+            CLIdeaObjModel *model = [CLIdeaObjModel mj_objectWithKeyValues:modelDict];
             
             if (model != nil) {
                 
@@ -161,7 +161,7 @@
             }
         } else if ([modelType isEqualToString:kTypeSleight]) {
             
-            CLSleightObjModel *model = [CLSleightObjModel objectWithKeyValues:modelDict];
+            CLSleightObjModel *model = [CLSleightObjModel mj_objectWithKeyValues:modelDict];
             
             if (model != nil) {
                 
@@ -178,7 +178,7 @@
             }
         } else if ([modelType isEqualToString:kTypeProp]) {
             
-            CLPropObjModel *model = [CLPropObjModel objectWithKeyValues:modelDict];
+            CLPropObjModel *model = [CLPropObjModel mj_objectWithKeyValues:modelDict];
             
             if (model != nil) {
                 
@@ -195,7 +195,7 @@
             }
         } else if ([modelType isEqualToString:kTypeLines]) {
             
-            CLLinesObjModel *model = [CLLinesObjModel objectWithKeyValues:modelDict];
+            CLLinesObjModel *model = [CLLinesObjModel mj_objectWithKeyValues:modelDict];
             
             if (model != nil) {
                 

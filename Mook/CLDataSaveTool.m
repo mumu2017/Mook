@@ -85,22 +85,22 @@ static FMDatabase *_db;
         NSDictionary *dict = [NSKeyedUnarchiver unarchiveObjectWithData:data];
         
         if ([type isEqualToString:kTypeIdea]) {
-            CLIdeaObjModel *model = [CLIdeaObjModel objectWithKeyValues:dict];
+            CLIdeaObjModel *model = [CLIdeaObjModel mj_objectWithKeyValues:dict];
             [arrM insertObject:model atIndex:0];
         } else if ([type isEqualToString:kTypeShow]) {
-            CLShowModel *model = [CLShowModel objectWithKeyValues:dict];
+            CLShowModel *model = [CLShowModel mj_objectWithKeyValues:dict];
             [arrM insertObject:model atIndex:0];
         } else if ([type isEqualToString:kTypeRoutine]) {
-            CLRoutineModel *model = [CLRoutineModel objectWithKeyValues:dict];
+            CLRoutineModel *model = [CLRoutineModel mj_objectWithKeyValues:dict];
             [arrM insertObject:model atIndex:0];
         } else if ([type isEqualToString:kTypeSleight]) {
-            CLSleightObjModel *model = [CLSleightObjModel objectWithKeyValues:dict];
+            CLSleightObjModel *model = [CLSleightObjModel mj_objectWithKeyValues:dict];
             [arrM insertObject:model atIndex:0];
         } else if ([type isEqualToString:kTypeProp]) {
-            CLPropObjModel *model = [CLPropObjModel objectWithKeyValues:dict];
+            CLPropObjModel *model = [CLPropObjModel mj_objectWithKeyValues:dict];
             [arrM insertObject:model atIndex:0];
         } else if ([type isEqualToString:kTypeLines]) {
-            CLLinesObjModel *model = [CLLinesObjModel objectWithKeyValues:dict];
+            CLLinesObjModel *model = [CLLinesObjModel mj_objectWithKeyValues:dict];
             [arrM insertObject:model atIndex:0];
         }
     }
@@ -115,7 +115,7 @@ static FMDatabase *_db;
     while ([set next]) {
         NSData *data = [set dataForColumn:@"dict"];
         NSDictionary *dict = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-        CLShowModel *showModel = [CLShowModel objectWithKeyValues:dict];
+        CLShowModel *showModel = [CLShowModel mj_objectWithKeyValues:dict];
         [arrM insertObject:showModel atIndex:0];
     }
     
@@ -129,7 +129,7 @@ static FMDatabase *_db;
     while ([set next]) {
         NSData *data = [set dataForColumn:@"dict"];
         NSDictionary *dict = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-        CLRoutineModel *routineModel = [CLRoutineModel objectWithKeyValues:dict];
+        CLRoutineModel *routineModel = [CLRoutineModel mj_objectWithKeyValues:dict];
 //        [arrM addObject:routineModel];
         [arrM insertObject:routineModel atIndex:0];
     }
@@ -146,7 +146,7 @@ static FMDatabase *_db;
     while ([set next]) {
         NSData *data = [set dataForColumn:@"dict"];
         NSDictionary *dict = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-        CLIdeaObjModel *ideaObjModel = [CLIdeaObjModel objectWithKeyValues:dict];
+        CLIdeaObjModel *ideaObjModel = [CLIdeaObjModel mj_objectWithKeyValues:dict];
 //        [arrM addObject:ideaObjModel];
         [arrM insertObject:ideaObjModel atIndex:0];
 
@@ -164,7 +164,7 @@ static FMDatabase *_db;
     while ([set next]) {
         NSData *data = [set dataForColumn:@"dict"];
         NSDictionary *dict = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-        CLSleightObjModel *sleightObjModel = [CLSleightObjModel objectWithKeyValues:dict];
+        CLSleightObjModel *sleightObjModel = [CLSleightObjModel mj_objectWithKeyValues:dict];
 //        [arrM addObject:sleightObjModel];
         [arrM insertObject:sleightObjModel atIndex:0];
 
@@ -181,7 +181,7 @@ static FMDatabase *_db;
     while ([set next]) {
         NSData *data = [set dataForColumn:@"dict"];
         NSDictionary *dict = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-        CLPropObjModel *propObjModel = [CLPropObjModel objectWithKeyValues:dict];
+        CLPropObjModel *propObjModel = [CLPropObjModel mj_objectWithKeyValues:dict];
 //        [arrM addObject:propObjModel];
         [arrM insertObject:propObjModel atIndex:0];
 
@@ -198,7 +198,7 @@ static FMDatabase *_db;
     while ([set next]) {
         NSData *data = [set dataForColumn:@"dict"];
         NSDictionary *dict = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-        CLLinesObjModel *linesObjModel = [CLLinesObjModel objectWithKeyValues:dict];
+        CLLinesObjModel *linesObjModel = [CLLinesObjModel mj_objectWithKeyValues:dict];
 //        [arrM addObject:linesObjModel];
         [arrM insertObject:linesObjModel atIndex:0];
 
@@ -214,7 +214,7 @@ static FMDatabase *_db;
     while ([set next]) {
         NSData *data = [set dataForColumn:@"dict"];
         NSDictionary *dict = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-        CLShowModel *model = [CLShowModel objectWithKeyValues:dict];
+        CLShowModel *model = [CLShowModel mj_objectWithKeyValues:dict];
         return model;
     }
     
@@ -226,7 +226,7 @@ static FMDatabase *_db;
     while ([set next]) {
         NSData *data = [set dataForColumn:@"dict"];
         NSDictionary *dict = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-        CLRoutineModel *model = [CLRoutineModel objectWithKeyValues:dict];
+        CLRoutineModel *model = [CLRoutineModel mj_objectWithKeyValues:dict];
         return model;
     }
     return nil;
@@ -237,7 +237,7 @@ static FMDatabase *_db;
     while ([set next]) {
         NSData *data = [set dataForColumn:@"dict"];
         NSDictionary *dict = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-        CLIdeaObjModel *model = [CLIdeaObjModel objectWithKeyValues:dict];
+        CLIdeaObjModel *model = [CLIdeaObjModel mj_objectWithKeyValues:dict];
         return model;
     }
     return nil;
@@ -248,7 +248,7 @@ static FMDatabase *_db;
     while ([set next]) {
         NSData *data = [set dataForColumn:@"dict"];
         NSDictionary *dict = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-        CLSleightObjModel *model = [CLSleightObjModel objectWithKeyValues:dict];
+        CLSleightObjModel *model = [CLSleightObjModel mj_objectWithKeyValues:dict];
         return model;
     }
     return nil;
@@ -259,7 +259,7 @@ static FMDatabase *_db;
     while ([set next]) {
         NSData *data = [set dataForColumn:@"dict"];
         NSDictionary *dict = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-        CLPropObjModel *model = [CLPropObjModel objectWithKeyValues:dict];
+        CLPropObjModel *model = [CLPropObjModel mj_objectWithKeyValues:dict];
         return model;
     }
     return nil;
@@ -270,7 +270,7 @@ static FMDatabase *_db;
     while ([set next]) {
         NSData *data = [set dataForColumn:@"dict"];
         NSDictionary *dict = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-        CLLinesObjModel *model = [CLLinesObjModel objectWithKeyValues:dict];
+        CLLinesObjModel *model = [CLLinesObjModel mj_objectWithKeyValues:dict];
         return model;
     }
     return nil;
@@ -279,7 +279,7 @@ static FMDatabase *_db;
 + (BOOL)updateShow:(CLShowModel *)showModel;
 {
     BOOL flag;
-    NSDictionary *dict = [showModel keyValues];
+    NSDictionary *dict = [showModel mj_keyValues];
     NSString *timeStamp = showModel.timeStamp;
     NSData *data = [NSKeyedArchiver archivedDataWithRootObject:dict];
     
@@ -322,7 +322,7 @@ static FMDatabase *_db;
 #pragma mark - 存储数据
 + (BOOL)updateRoutine:(CLRoutineModel *)routineModel {
     
-    NSDictionary *dict = [routineModel keyValues];
+    NSDictionary *dict = [routineModel mj_keyValues];
     NSString *timeStamp = routineModel.timeStamp;
     NSString *type = routineModel.type;
     NSData *data = [NSKeyedArchiver archivedDataWithRootObject:dict];
@@ -333,7 +333,7 @@ static FMDatabase *_db;
 
 + (BOOL)updateIdea:(CLIdeaObjModel *)ideaObjModel {
     
-    NSDictionary *dict = [ideaObjModel keyValues];
+    NSDictionary *dict = [ideaObjModel mj_keyValues];
     NSString *timeStamp = ideaObjModel.timeStamp;
     NSString *type = ideaObjModel.type;
     NSData *data = [NSKeyedArchiver archivedDataWithRootObject:dict];
@@ -344,7 +344,7 @@ static FMDatabase *_db;
 
 + (BOOL)updateSleight:(CLSleightObjModel *)sleightObjModel {
     
-    NSDictionary *dict = [sleightObjModel keyValues];
+    NSDictionary *dict = [sleightObjModel mj_keyValues];
     NSString *timeStamp = sleightObjModel.timeStamp;
     NSString *type = sleightObjModel.type;
     NSData *data = [NSKeyedArchiver archivedDataWithRootObject:dict];
@@ -356,7 +356,7 @@ static FMDatabase *_db;
 
 + (BOOL)updateProp:(CLPropObjModel *)propObjModel {
     
-    NSDictionary *dict = [propObjModel keyValues];
+    NSDictionary *dict = [propObjModel mj_keyValues];
     NSString *timeStamp = propObjModel.timeStamp;
     NSString *type = propObjModel.type;
     NSData *data = [NSKeyedArchiver archivedDataWithRootObject:dict];
@@ -368,7 +368,7 @@ static FMDatabase *_db;
 
 + (BOOL)updateLines:(CLLinesObjModel *)linesObjModel {
     
-    NSDictionary *dict = [linesObjModel keyValues];
+    NSDictionary *dict = [linesObjModel mj_keyValues];
     NSString *timeStamp = linesObjModel.timeStamp;
     NSString *type = linesObjModel.type;
     NSData *data = [NSKeyedArchiver archivedDataWithRootObject:dict];
