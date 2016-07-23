@@ -171,7 +171,10 @@
     }
     // Configure the cell...
     
-    NSString *title, *size;
+    cell.detailTextLabel.text = NSLocalizedString(@"计算中...", nil);
+
+    
+    NSString *title;
     UIImage *image;
     
     switch (self.listType) {
@@ -183,7 +186,19 @@
             CLIdeaObjModel *model = self.ideaObjModelList[indexPath.row];
             image = [model getThumbnail];
             title = [model getTitle];
-            size = [FCFileManager sizeFormatted: [CLDataSizeTool sizeOfIdea:model]];
+            
+            dispatch_async(dispatch_get_global_queue(0, 0), ^{
+                
+                NSString *sizeString = [FCFileManager sizeFormatted: [CLDataSizeTool sizeOfIdea:model]]; // 每次重新打开页面就重新计算一次文件尺寸
+                
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    
+                    cell.detailTextLabel.text = sizeString; // 每次重新打开页面就重新计算一次文件尺寸
+                    
+                });
+            });
+
             break;
         }
             
@@ -192,7 +207,18 @@
             CLShowModel *model = self.showModelList[indexPath.row];
             image = [model getThumbnail];
             title = [model getTitle];
-            size = [FCFileManager sizeFormatted: [CLDataSizeTool sizeOfShow:model]];
+            
+            dispatch_async(dispatch_get_global_queue(0, 0), ^{
+                
+                NSString *sizeString = [FCFileManager sizeFormatted: [CLDataSizeTool sizeOfShow:model]]; // 每次重新打开页面就重新计算一次文件尺寸
+                
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    
+                    cell.detailTextLabel.text = sizeString; // 每次重新打开页面就重新计算一次文件尺寸
+                    
+                });
+            });
 
             break;
         }
@@ -201,7 +227,18 @@
             CLRoutineModel *model = self.routineModelList[indexPath.row];
             image = [model getThumbnail];
             title = [model getTitle];
-            size = [FCFileManager sizeFormatted: [CLDataSizeTool sizeOfRoutine:model]];
+            
+            dispatch_async(dispatch_get_global_queue(0, 0), ^{
+                
+                NSString *sizeString = [FCFileManager sizeFormatted: [CLDataSizeTool sizeOfRoutine:model]]; // 每次重新打开页面就重新计算一次文件尺寸
+                
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    
+                    cell.detailTextLabel.text = sizeString; // 每次重新打开页面就重新计算一次文件尺寸
+                    
+                });
+            });
 
             break;
         }
@@ -210,7 +247,18 @@
             CLSleightObjModel *model = self.sleightObjModelList[indexPath.row];
             image = [model getThumbnail];
             title = [model getTitle];
-            size = [FCFileManager sizeFormatted: [CLDataSizeTool sizeOfSleight:model]];
+            
+            dispatch_async(dispatch_get_global_queue(0, 0), ^{
+                
+                NSString *sizeString = [FCFileManager sizeFormatted: [CLDataSizeTool sizeOfSleight:model]]; // 每次重新打开页面就重新计算一次文件尺寸
+                
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    
+                    cell.detailTextLabel.text = sizeString; // 每次重新打开页面就重新计算一次文件尺寸
+                    
+                });
+            });
 
             break;
         }
@@ -221,14 +269,37 @@
             CLPropObjModel *model = self.propObjModelList[indexPath.row];
             image = [model getThumbnail];
             title = [model getTitle];
-            size = [FCFileManager sizeFormatted: [CLDataSizeTool sizeOfProp:model]];
+            
+            dispatch_async(dispatch_get_global_queue(0, 0), ^{
+                
+                NSString *sizeString = [FCFileManager sizeFormatted: [CLDataSizeTool sizeOfProp:model]]; // 每次重新打开页面就重新计算一次文件尺寸
+                
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    
+                    cell.detailTextLabel.text = sizeString; // 每次重新打开页面就重新计算一次文件尺寸
+                    
+                });
+            });
             break;
         }
         case kListTypeLines:
         {
             CLLinesObjModel *model = self.linesObjModelList[indexPath.row];
             title = [model getTitle];
-            size = [FCFileManager sizeFormatted: [CLDataSizeTool sizeOfLines:model]];
+            
+            dispatch_async(dispatch_get_global_queue(0, 0), ^{
+                
+                NSString *sizeString = [FCFileManager sizeFormatted: [CLDataSizeTool sizeOfLines:model]]; // 每次重新打开页面就重新计算一次文件尺寸
+                
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    
+                    cell.detailTextLabel.text = sizeString; // 每次重新打开页面就重新计算一次文件尺寸
+                    
+                });
+            });
+
             break;
         }
         default:
@@ -237,7 +308,6 @@
 
     cell.imageView.image = image;
     cell.textLabel.text = title;
-    cell.detailTextLabel.text = size;
 
     return cell;
 }

@@ -176,10 +176,22 @@ static void * MWVideoPlayerObservation = &MWVideoPlayerObservation;
         _previousButton = [[UIBarButtonItem alloc] initWithImage:previousButtonImage style:UIBarButtonItemStylePlain target:self action:@selector(gotoPreviousPage)];
         _nextButton = [[UIBarButtonItem alloc] initWithImage:nextButtonImage style:UIBarButtonItemStylePlain target:self action:@selector(gotoNextPage)];
     }
-    if (self.displayActionButton) {
-        _actionButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(actionButtonPressed:)];
-    }
     
+    if (self.displayActionButton) {
+        
+        if ([self.delegate respondsToSelector:@selector(photoBrowser:actionButtonPressedForPhotoAtIndex:)]) {
+#warning 改动:根据代理方法设置actionButton样式
+            _actionButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"详细信息", nil) style:UIBarButtonItemStylePlain target:self action:@selector(actionButtonPressed:)];
+            
+        } else {
+            _actionButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(actionButtonPressed:)];
+        }
+    }
+
+//    if (self.displayActionButton) {
+//        _actionButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(actionButtonPressed:)];
+//    }
+//    
     // Update
     [self reloadData];
     
@@ -441,18 +453,24 @@ static void * MWVideoPlayerObservation = &MWVideoPlayerObservation;
 
 - (void)setNavBarAppearance:(BOOL)animated {
     [self.navigationController setNavigationBarHidden:NO animated:animated];
-    UINavigationBar *navBar = self.navigationController.navigationBar;
-    navBar.tintColor = [UIColor whiteColor];
-    navBar.barTintColor = nil;
-    navBar.shadowImage = nil;
-    navBar.translucent = YES;
-    navBar.barStyle = UIBarStyleBlackTranslucent;
-    [navBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
-    [navBar setBackgroundImage:nil forBarMetrics:UIBarMetricsLandscapePhone];
+    
+    // 不设置任何navigationbar的UI改动
+
+//    UINavigationBar *navBar = self.navigationController.navigationBar;
+//    navBar.tintColor = [UIColor whiteColor];
+//    navBar.barTintColor = nil;
+//    navBar.shadowImage = nil;
+//    navBar.translucent = YES;
+//    navBar.barStyle = UIBarStyleBlackTranslucent;
+//    [navBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
+//    [navBar setBackgroundImage:nil forBarMetrics:UIBarMetricsLandscapePhone];
 }
 
 - (void)storePreviousNavBarAppearance {
-    _didSavePreviousStateOfNavBar = YES;
+    
+    _didSavePreviousStateOfNavBar = NO; // 设置不恢复,因为上面的- (void)setNavBarAppearance:(BOOL)animated 方法中取消了对导航栏的改动
+
+//    _didSavePreviousStateOfNavBar = YES;
     _previousNavBarBarTintColor = self.navigationController.navigationBar.barTintColor;
     _previousNavBarTranslucent = self.navigationController.navigationBar.translucent;
     _previousNavBarTintColor = self.navigationController.navigationBar.tintColor;

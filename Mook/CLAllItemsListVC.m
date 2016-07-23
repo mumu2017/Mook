@@ -458,7 +458,7 @@
 {
     NSMutableArray *rightUtilityButtons = [NSMutableArray new];
     
-    [rightUtilityButtons sw_addUtilityButtonWithColor:[UIColor flatGrayColorDark] icon:[UIImage imageNamed:@"iconAction"]];
+    [rightUtilityButtons sw_addUtilityButtonWithColor:[UIColor flatBlackColorDark] icon:[UIImage imageNamed:@"iconAction"]];
     [rightUtilityButtons sw_addUtilityButtonWithColor:[UIColor flatRedColor] icon:[UIImage imageNamed:@"iconBin"]];
     
     return rightUtilityButtons;

@@ -318,7 +318,7 @@
     NSMutableArray *rightUtilityButtons = [NSMutableArray new];
 
     if (self.listType != kListTypeShow) {
-        [rightUtilityButtons sw_addUtilityButtonWithColor:[UIColor flatGrayColorDark] icon:[UIImage imageNamed:@"iconAction"]];
+        [rightUtilityButtons sw_addUtilityButtonWithColor:[UIColor flatBlackColorDark] icon:[UIImage imageNamed:@"iconAction"]];
     }
     
     [rightUtilityButtons sw_addUtilityButtonWithColor:[UIColor flatRedColor] icon:[UIImage imageNamed:@"iconBin"]];
