@@ -156,7 +156,7 @@
 //                                          barMetrics:UIBarMetricsDefault];
     
     [[UINavigationBar appearance] setShadowImage:[[UIImage alloc] init]];
-    [[UINavigationBar appearance] setTranslucent:NO]; // 半透明效果
+    [[UINavigationBar appearance] setTranslucent:YES]; // 毛玻璃半透明效果
     [[UINavigationBar appearance] setOpaque:YES];
     
     [[UINavigationBar appearance] setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:

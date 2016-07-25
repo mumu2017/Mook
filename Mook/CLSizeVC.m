@@ -267,7 +267,6 @@
     
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     
-#warning 国际化语言
     UIAlertAction* delete = [UIAlertAction actionWithTitle:NSLocalizedString(@"删除网络缓存", nil) style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
         
         __block BOOL flag;

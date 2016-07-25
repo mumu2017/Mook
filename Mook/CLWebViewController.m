@@ -42,9 +42,11 @@
     UIImage *image = [[UIImage imageNamed:@"backArrow"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     UIButton* customButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [customButton setImage:image forState:UIControlStateNormal];
-    [customButton setTitle:@" 返回" forState:UIControlStateNormal];
+    [customButton setTitle:NSLocalizedString(@" 返回", nil) forState:UIControlStateNormal];
+    [customButton setTintColor:kTintColor];
     customButton.titleLabel.font = kFontSys17;
     [customButton sizeToFit];
+    
 
     customButton.hitTestEdgeInsets = kBackButtonHitTestEdgeInsets;
 
@@ -58,14 +60,14 @@
                                        target:nil action:nil];
     _negativeSpacer.width = -10;
 
-    _closeItem = [[UIBarButtonItem alloc] initWithTitle:@"关闭" style:UIBarButtonItemStylePlain target:self action:@selector(closeWebVC)];
+    _closeItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"关闭", nil) style:UIBarButtonItemStylePlain target:self action:@selector(closeWebVC)];
     
     if (self.isAddingWebSite) {
-        _collectItem = [[UIBarButtonItem alloc] initWithTitle:@"添加书签" style:UIBarButtonItemStylePlain target:self action:@selector(addWebSiteWithSearching)];
+        _collectItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"添加书签", nil) style:UIBarButtonItemStylePlain target:self action:@selector(addWebSiteWithSearching)];
 
     } else {
         
-        _collectItem = [[UIBarButtonItem alloc] initWithTitle:@"收藏" style:UIBarButtonItemStylePlain target:self action:@selector(collectWebNote)];
+        _collectItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"添加", nil) style:UIBarButtonItemStylePlain target:self action:@selector(collectWebNote)];
 
     }
     
@@ -225,9 +227,9 @@
             
             if (flag) {
                 
-                [MBProgressHUD showGlobalProgressHUDWithTitle:@"添加成功!" hideAfterDelay:0.5f];
+                [MBProgressHUD showGlobalProgressHUDWithTitle:NSLocalizedString(@"添加成功!", nil) hideAfterDelay:0.5f];
             } else {
-                [MBProgressHUD showGlobalProgressHUDWithTitle:@"添加失败, 请稍后重试!" hideAfterDelay:0.5f];
+                [MBProgressHUD showGlobalProgressHUDWithTitle:NSLocalizedString(@"添加失败, 请稍后重试!", nil)hideAfterDelay:0.5f];
 
             }
             

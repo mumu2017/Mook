@@ -84,7 +84,7 @@
 
     }
     
-    self.storageDetailLabel.text = @"计算中...";
+    self.storageDetailLabel.text = NSLocalizedString(@"计算中...", nil);
     
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         

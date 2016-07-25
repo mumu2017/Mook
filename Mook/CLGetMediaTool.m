@@ -175,7 +175,7 @@
     IQAudioRecorderViewController *vc = [[IQAudioRecorderViewController alloc] init];
     vc.delegate = self;
     
-    vc.title = @"录音";
+    vc.title = NSLocalizedString(@"录音", nil);
     vc.maximumRecordDuration = 60.0f;
     vc.allowCropping = NO;
     vc.barStyle = UIBarStyleBlack;

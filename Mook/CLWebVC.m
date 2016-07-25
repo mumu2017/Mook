@@ -83,8 +83,9 @@
 - (UISegmentedControl *)segControl {
     
     if (!_segControl) {
-        _segControl = [[UISegmentedControl alloc] initWithItems:@[@"书签", @"收藏"]];
-        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 132, 30)];
+        _segControl = [[UISegmentedControl alloc] initWithItems:@[NSLocalizedString(@"书签", nil), NSLocalizedString(@"收藏", nil)]];
+        
+        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 200, 30)];
         view.backgroundColor = [UIColor clearColor];
         [view addSubview:_segControl];
         self.navigationItem.titleView = view;
@@ -173,7 +174,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title = @"发现";
+    self.title = NSLocalizedString(@"发现", nil);
 
     [self initSubviews];
     
@@ -218,7 +219,7 @@
 #pragma mark - 添加网址
 - (void)chooseWayToWebSite {
     
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"添加网址", nil)  message:NSLocalizedString(@"Mook推荐您使用搜索添加", nil)  preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"添加网址", nil)  message:NSLocalizedString(@"推荐使用搜索添加", nil)  preferredStyle:UIAlertControllerStyleActionSheet];
     
     UIAlertAction* addWebSite = [UIAlertAction actionWithTitle:NSLocalizedString(@"搜索添加", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
@@ -544,11 +545,11 @@
 
 #pragma mark - helper
 
-- (BOOL)checkIfStringIsValidUrl:(NSString *)string {
-    NSString *urlRegEx =
-    @"(http|https)://((\\w)*|([0-9]*)|([-|_])*)+([\\.|/]((\\w)*|([0-9]*)|([-|_])*))+";
-    NSPredicate *urlTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", urlRegEx];
-    return [urlTest evaluateWithObject:string];
-}
+//- (BOOL)checkIfStringIsValidUrl:(NSString *)string {
+//    NSString *urlRegEx =
+//    @"(http|https)://((\\w)*|([0-9]*)|([-|_])*)+([\\.|/]((\\w)*|([0-9]*)|([-|_])*))+";
+//    NSPredicate *urlTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", urlRegEx];
+//    return [urlTest evaluateWithObject:string];
+//}
 
 @end

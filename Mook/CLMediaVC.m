@@ -81,7 +81,7 @@ typedef enum {
     
     if (!_segControl) {
         _segControl = [[UISegmentedControl alloc] initWithItems:@[NSLocalizedString(@"视频", nil), NSLocalizedString(@"图片", nil)]];
-        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 132, 30)];
+        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 200, 30)];
         view.backgroundColor = [UIColor clearColor];
         [view addSubview:_segControl];
         self.navigationItem.titleView = view;
