@@ -1309,6 +1309,9 @@
     // Create browser
     MWPhotoBrowser *browser = [[MWPhotoBrowser alloc] initWithDelegate:self];
     
+    // 手势返回的触发宽度(距离屏幕左边)只占screenWidth的1/10
+//    browser.fd_interactivePopMaxAllowedInitialDistanceToLeftEdge = kScreenW/10;
+    
     browser.displayActionButton = displayActionButton;
     browser.displayNavArrows = displayNavArrows;
     browser.displaySelectionButtons = displaySelectionButtons;

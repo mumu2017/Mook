@@ -326,7 +326,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.fd_interactivePopDisabled = YES;
+//    self.fd_interactivePopDisabled = YES;
 
     [self mediaView];
     self.isProgressiveIndicator = YES;
