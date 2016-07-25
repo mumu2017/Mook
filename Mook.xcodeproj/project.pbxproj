@@ -154,7 +154,6 @@
 		43951A121CC5E7A200505E5B /* CLAboutVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 43951A111CC5E7A200505E5B /* CLAboutVC.m */; };
 		43951A161CC5E7BE00505E5B /* CLBackUpInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 43951A151CC5E7BE00505E5B /* CLBackUpInfoVC.m */; };
 		43951A181CC65C7000505E5B /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43951A171CC65C7000505E5B /* CFNetwork.framework */; };
-		43951A1A1CC65C8900505E5B /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43951A191CC65C8900505E5B /* StoreKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		43951A1C1CC6681700505E5B /* mookFileIcon.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 43951A1B1CC6681700505E5B /* mookFileIcon.jpg */; };
 		43A06F3D1D3F898500ABEA4B /* CLWebCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A06F3B1D3F898500ABEA4B /* CLWebCell.m */; };
 		43A06F3E1D3F898500ABEA4B /* CLWebCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43A06F3C1D3F898500ABEA4B /* CLWebCell.xib */; };
@@ -474,7 +473,6 @@
 		43951A141CC5E7BE00505E5B /* CLBackUpInfoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLBackUpInfoVC.h; sourceTree = "<group>"; };
 		43951A151CC5E7BE00505E5B /* CLBackUpInfoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLBackUpInfoVC.m; sourceTree = "<group>"; };
 		43951A171CC65C7000505E5B /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
-		43951A191CC65C8900505E5B /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		43951A1B1CC6681700505E5B /* mookFileIcon.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = mookFileIcon.jpg; sourceTree = "<group>"; };
 		43A06F3A1D3F898500ABEA4B /* CLWebCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLWebCell.h; sourceTree = "<group>"; };
 		43A06F3B1D3F898500ABEA4B /* CLWebCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLWebCell.m; sourceTree = "<group>"; };
@@ -578,7 +576,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				43951A1A1CC65C8900505E5B /* StoreKit.framework in Frameworks */,
 				43068BE71CB745A400BA1A57 /* SystemConfiguration.framework in Frameworks */,
 				43951A181CC65C7000505E5B /* CFNetwork.framework in Frameworks */,
 				43068BFE1CB74EF600BA1A57 /* libz.1.1.3.tbd in Frameworks */,
@@ -1353,7 +1350,6 @@
 		867DD05412560E63BB6BCE80 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				43951A191CC65C8900505E5B /* StoreKit.framework */,
 				43951A171CC65C7000505E5B /* CFNetwork.framework */,
 				43068BF61CB746A600BA1A57 /* CoreTelephony.framework */,
 				43068BF41CB7461700BA1A57 /* CoreGraphics.framework */,
@@ -1420,6 +1416,11 @@
 					432345341C94045000200833 = {
 						CreatedOnToolsVersion = 7.2.1;
 						DevelopmentTeam = 5F6SU7K647;
+						SystemCapabilities = {
+							com.apple.InAppPurchase = {
+								enabled = 0;
+							};
+						};
 					};
 				};
 			};
@@ -1778,7 +1779,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_BITCODE = NO;
@@ -1802,7 +1804,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "ce8c90e8-361e-4f67-9d0c-86c3e4ff9100";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -1824,8 +1826,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_BITCODE = NO;
@@ -1842,7 +1844,7 @@
 				INFOPLIST_FILE = /Users/jackchen/MyProjects/Mook/Mook/Base.lproj/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "ce8c90e8-361e-4f67-9d0c-86c3e4ff9100";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1854,8 +1856,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = YES;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1872,7 +1874,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.linchen.project.Mook;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "ce8c90e8-361e-4f67-9d0c-86c3e4ff9100";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -1883,7 +1885,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = YES;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1900,7 +1902,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.linchen.project.Mook;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "ce8c90e8-361e-4f67-9d0c-86c3e4ff9100";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

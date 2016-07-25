@@ -108,5 +108,12 @@
     return _effectModel;
 }
 
++ (NSDictionary *)mj_objectClassInArray
+{
+    return @{
+             @"tags" : [NSString class],
+             
+             };
+}
 
 @end

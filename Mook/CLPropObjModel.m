@@ -190,4 +190,13 @@
     NSString *infoString = [modelString stringByAppendingString:[NSString getDateString:self.date]];    return [effect contentStringWithDate:infoString];
 }
 
++ (NSDictionary *)mj_objectClassInArray
+{
+    return @{
+             @"tags" : [NSString class],
+             @"prepModelList" : [CLPrepModel class],
+             
+             };
+}
+
 @end

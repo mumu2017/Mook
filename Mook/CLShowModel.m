@@ -189,4 +189,13 @@
     return effect;
 }
 
++ (NSDictionary *)mj_objectClassInArray
+{
+    return @{
+             @"tags" : [NSString class],
+             @"routineTimeStampList" : [NSString class]
+
+             };
+}
+
 @end

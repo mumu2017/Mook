@@ -266,4 +266,16 @@
    return image;
 }
 
++ (NSDictionary *)mj_objectClassInArray
+{
+    return @{
+             @"tags" : [NSString class],
+             @"propModelList" : [CLPropModel class],
+             @"prepModelList" : [CLPrepModel class],
+             @"performModelList" : [CLPerformModel class],
+             @"notesModelLsit" : [CLNotesModel class],
+
+             };
+}
+
 @end
