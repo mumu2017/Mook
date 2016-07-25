@@ -1178,8 +1178,8 @@
                     <connections>
                         <segue destination="tYr-nI-P3n" kind="presentation" identifier="mookToPasswordSegue" id="eSP-0F-ROY"/>
                         <segue destination="ZNK-Ui-Mmt" kind="relationship" relationship="viewControllers" id="QBb-ng-PS8"/>
-                        <segue destination="a3j-i3-6iI" kind="relationship" relationship="viewControllers" id="J07-Oo-GJN"/>
                         <segue destination="Q9D-A1-sVC" kind="relationship" relationship="viewControllers" id="s68-Em-xc7"/>
+                        <segue destination="a3j-i3-6iI" kind="relationship" relationship="viewControllers" id="J07-Oo-GJN"/>
                         <segue destination="0aN-7l-1wA" kind="relationship" relationship="viewControllers" id="v25-sq-CEx"/>
                     </connections>
                 </tabBarController>
