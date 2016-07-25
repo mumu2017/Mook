@@ -33,7 +33,7 @@
     NSNumber *cacheSize = [FCFileManager sizeOfDirectoryAtPath:[FCFileManager pathForCachesDirectory]];
     NSNumber *tempSize = [FCFileManager sizeOfDirectoryAtPath:[FCFileManager pathForTemporaryDirectory]];
     NSNumber *webCacheSize = [FCFileManager sizeOfDirectoryAtPath:[self webCachePath]];
-    NSLog(@"WEBCACHE: %@", webCacheSize);
+//    NSLog(@"WEBCACHE: %@", webCacheSize);
     NSString *mookPath = [NSString mookPath];
     // 拼接文件名
     NSString *filePath = [mookPath stringByAppendingPathComponent:@"mook.sqlite"];
