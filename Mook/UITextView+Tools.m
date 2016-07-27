@@ -7,6 +7,7 @@
 //
 
 #import "UITextView+Tools.h"
+#import "MASonry.h"
 
 #define kPlaceholderTag     98
 
@@ -27,9 +28,12 @@
 - (void) addPlaceHolderWithText:(NSString *)text andFont:(UIFont *)font {
     
     // make a placeholder label
-    CGFloat placeholderW = self.frame.size.width - 5;
-    CGRect placeholderFrame = CGRectMake(5, 10, placeholderW, 16);
-    UILabel *placeholder = [[UILabel alloc] initWithFrame:placeholderFrame];
+//    CGFloat placeholderW = self.frame.size.width - 10;
+//    CGRect placeholderFrame = CGRectMake(5, 10, placeholderW, self.frame.size.height-20);
+//    UILabel *placeholder = [[UILabel alloc] initWithFrame:placeholderFrame];
+    
+    UILabel *placeholder = [[UILabel alloc] init];
+    
     placeholder.numberOfLines = 0;
     // set the text attributes
     placeholder.backgroundColor = [UIColor clearColor];
@@ -43,6 +47,11 @@
     placeholder.hidden = NO;
     // add placeholder into textview
     [self addSubview:placeholder];
+    
+    UIEdgeInsets padding = UIEdgeInsetsMake(10, 5, 10, 5);
+    [placeholder mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self).insets(padding);
+    }];
 }
 
 - (void)setPlaceHolderText:(NSString *)text {
