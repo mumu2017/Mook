@@ -223,15 +223,17 @@
     } else {
         
         
-        NSString *ph1, *ph2, *ph3, *ph4, *ph5;
+        NSString *ph1, *ph2, *ph3, *ph4, *ph5, *ph6, *ph7;
         ph1 = NSLocalizedString(@"提示:左右滑动屏幕可切换编辑内容", nil);
-        ph2 = NSLocalizedString(@"提示:点击话筒按钮可以语音输入", nil);
+        ph2 = NSLocalizedString(@"提示:点击话筒按钮可以开始录音", nil);
         ph3 = NSLocalizedString(@"提示:点击相机按钮可以插入多媒体", nil);
         ph4 = NSLocalizedString(@"提示:常用短语可以添加到快捷短语", nil);
         ph5 = NSLocalizedString(@"提示:点击加号按钮可快速添加内容", nil);
-        
-        NSArray *placeHolder = @[ph1, ph2, ph3, ph4, ph5];
-        NSInteger index = arc4random_uniform(5);
+        ph6 = NSLocalizedString(@"提示:点击书写按钮可进行语音识别输入", nil);
+        ph7 = NSLocalizedString(@"提示:输入@可添加您的快捷短语", nil);
+
+        NSArray *placeHolder = @[ph1, ph2, ph3, ph4, ph5, ph6, ph7];
+        NSInteger index = arc4random_uniform(7);
         
         [self.editTextView addPlaceHolderWithText:placeHolder[index] andFont:kFontSys16];
     }

@@ -92,6 +92,7 @@
 }
 
 - (NSUInteger)indexInPerformModelList {
+    
     return (self.currentIndex > self.prepModelList.count + self.propModelList.count + kEffectIndex) ? self.currentIndex - self.prepModelList.count - self.propModelList.count - kEffectIndex : 0;
 }
 

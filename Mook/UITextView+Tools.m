@@ -48,9 +48,14 @@
     // add placeholder into textview
     [self addSubview:placeholder];
     
-    UIEdgeInsets padding = UIEdgeInsetsMake(10, 5, 10, 5);
+//    UIEdgeInsets padding = UIEdgeInsetsMake(10, 5, 10, 20);
     [placeholder mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self).insets(padding);
+//        make.edges.equalTo(self).insets(padding);
+        make.left.equalTo(self).offset(10);
+        make.right.lessThanOrEqualTo(self).offset(-20);
+        make.top.equalTo(self).offset(5);
+        make.bottom.lessThanOrEqualTo(self).offset(-20);
+        make.width.lessThanOrEqualTo(@(kScreenW -40));
     }];
 }
 

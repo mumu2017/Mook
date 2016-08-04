@@ -230,7 +230,7 @@
 
 
 "Mook版本" = "Mook 2.0.0";
-"关于内容" = "A craft made by a magic amateur, to help magicians and amateurs manage their magic asset in a more efficient way.\n\nMook includes open-soure components:\n\nFMDB\nSWTableViewCell\nMWPhotoBrowser\nChameleonFramework\nSSZipArchive\nEAIntroView\nMBProgressHUD\nWJTouchID\nJGActionSheet\nAppirater\n\nPlus the voice recognition service provided by IFLYTEK.\n\nA special thanks to my wonderful wife, for the everlasting support and encouragement.\n\nMany thanks to my friends for the tests and feedbacks, and Mr. Michael Lam for the idea of 'What is magic?'.\n\nMook   by Chen Lin\n\nCopyright © 2016. All rights reserved.\n";
+"关于内容" = "A craft made by a magic amateur, to help magicians and amateurs manage their magic asset in a more efficient way.\n\nMook includes open-soure components:\nFMDB\nSWTableViewCell\nMWPhotoBrowser\nChameleonFramework\nSSZipArchive\nEAIntroView\nMBProgressHUD\nWJTouchID\nAppirater\nMJExtension\nBTNavigationDropdownMenu\nDZNWebViewController\nFDWaveformView\nMasonry\nIQAudioRecorderController\n\nPlus the voice recognition service provided by IFLYTEK.\n\nA special thanks to my wonderful wife, for the everlasting support and encouragement.\n\nMany thanks to my friends for the tests and feedbacks, and Mr. Michael Lam for the idea of 'What is magic?'.\n\nMook   by Chen Lin\n\nCopyright © 2016. All rights reserved.\n";
 
 "备份说明内容" = "1. Create Backup:\n\nOnce you've clicked Creat Backup cell, Mook would put all your magic data into a backup file (file name: backup.mook), you can store your backup in your PC or Mac:\n\n\tConnect your iPhone to your PC or Mac(please make sure that you it has iTunes installed). Use the iTunes File Sharing function to copy your backup file to your PC or Mac.\n\n\tIf you do not know how to use iTunes File Sharing function, please see the link below:\n\thttps://support.apple.com/en-us/HT201301\n\n2. Restore Backup:\n\nWhen the backup file(backup.mook) is in the file folder of Mook, you can restore the backup file. And all your current data in Mook will be permanately replaced by the backup data. \n\n3. Delete Backup:\n\nIf you have already stored your backup file in your PC, Mac or other places, Mook suggests you to delete the backup file to save storage space. When you want to restore your backup, you can use the iTunes File Sharing function to put the backup file back into Mook and restore afterwards.";
 
@@ -286,8 +286,10 @@
 "识别结束" = "Recognition ended";
 
 //CLEditingVC
+"提示:点击书写按钮可进行语音识别输入" = "Tip:click write button to start voice recognition";
+"提示:输入@可添加您的快捷短语" = "Tip:input '@' to quickly add your quick phrases";
 
-"提示:点击话筒按钮可以语音输入" = "Tip:click speaker button to voice input";
+"提示:点击话筒按钮可以开始录音" = "Tip:click speaker button to start voice recording";
 "提示:点击相机按钮可以插入多媒体" = "Tip:click camera button to add images";
 "提示:常用短语可以添加到快捷短语" = "Tip:quick phrase can improve type speed";
 "提示:点击加号按钮可快速添加内容" = "Tip:click plust button to add content";

@@ -56,8 +56,8 @@ typedef enum {
 
 typedef enum {
     
-    flatBlueColorDark = 0,
-    flatBlackColorDark,
+    flatBlackColorDark = 0,
+    flatBlueColorDark,
     flatForestGreenColorDark,
     flatGreenColorDark,
     flatMagentaColorDark,

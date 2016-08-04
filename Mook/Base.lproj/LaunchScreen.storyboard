@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" initialViewController="01J-lp-oVM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" initialViewController="01J-lp-oVM">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -17,36 +17,21 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MOOK" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nYx-HO-j5q">
-                                <rect key="frame" x="-42" y="-21" width="42" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launchImage" translatesAutoresizingMaskIntoConstraints="NO" id="CTn-Ls-SUg">
+                                <rect key="frame" x="96" y="220" width="128" height="128"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="128" id="11N-Sf-sdl"/>
+                                    <constraint firstAttribute="width" constant="128" id="CJr-t9-GLw"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="nYx-HO-j5q" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="IQM-HL-Ayg"/>
-                            <constraint firstItem="nYx-HO-j5q" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="sjP-bZ-K7H"/>
+                            <constraint firstItem="CTn-Ls-SUg" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="E3a-yD-SgM"/>
+                            <constraint firstItem="CTn-Ls-SUg" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="pi9-xs-ZD2"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="subviews">
-                                <exclude reference="nYx-HO-j5q"/>
-                            </mask>
-                            <mask key="constraints">
-                                <exclude reference="IQM-HL-Ayg"/>
-                                <exclude reference="sjP-bZ-K7H"/>
-                            </mask>
-                        </variation>
-                        <variation key="heightClass=regular-widthClass=compact">
-                            <mask key="subviews">
-                                <include reference="nYx-HO-j5q"/>
-                            </mask>
-                            <mask key="constraints">
-                                <include reference="IQM-HL-Ayg"/>
-                                <include reference="sjP-bZ-K7H"/>
-                            </mask>
-                        </variation>
                     </view>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
@@ -56,4 +41,7 @@
             <point key="canvasLocation" x="383" y="323"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="launchImage" width="341" height="196"/>
+    </resources>
 </document>

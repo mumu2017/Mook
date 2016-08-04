@@ -128,7 +128,7 @@
     }
     
     if (!_themeColor) {
-        _themeColor = [UIColor flatSkyBlueColorDark];
+        _themeColor = [UIColor flatBlackColorDark];
     }
     
     return _themeColor;
