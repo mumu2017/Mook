@@ -176,7 +176,7 @@
     vc.delegate = self;
     
     vc.title = NSLocalizedString(@"录音", nil);
-    vc.maximumRecordDuration = 60.0f;
+    vc.maximumRecordDuration = 180.0f;
     vc.allowCropping = NO;
     vc.barStyle = UIBarStyleBlack;
 

@@ -82,7 +82,7 @@
                 
             case kListTypeIdea:
             {
-                [[CLGetMediaTool getInstance] loadCameraFromCurrentViewController:controller maximumDuration:30.0 completion:^(NSURL *videoURL, UIImage *photo) {
+                [[CLGetMediaTool getInstance] loadCameraFromCurrentViewController:controller maximumDuration:180.0 completion:^(NSURL *videoURL, UIImage *photo) {
                     [CLNewEntryTool quickAddNewIdeaFromCurrentController:controller withVideo:videoURL orImage:photo];
                 }];
                 break;
@@ -96,21 +96,21 @@
             }
             case kListTypeRoutine:
             {
-                [[CLGetMediaTool getInstance] loadCameraFromCurrentViewController:controller maximumDuration:180.0 completion:^(NSURL *videoURL, UIImage *photo) {
+                [[CLGetMediaTool getInstance] loadCameraFromCurrentViewController:controller maximumDuration:600.0 completion:^(NSURL *videoURL, UIImage *photo) {
                     [CLNewEntryTool quickAddNewRoutineFromCurrentController:controller withVideo:videoURL orImage:photo];
                 }];
                 break;
             }
             case kListTypeSleight:
             {
-                [[CLGetMediaTool getInstance] loadCameraFromCurrentViewController:controller maximumDuration:30.0 completion:^(NSURL *videoURL, UIImage *photo) {
+                [[CLGetMediaTool getInstance] loadCameraFromCurrentViewController:controller maximumDuration:180.0 completion:^(NSURL *videoURL, UIImage *photo) {
                     [CLNewEntryTool quickAddNewSleightFromCurrentController:controller withVideo:videoURL orImage:photo];
                 }];
                 break;
             }
             case kListTypeProp:
             {
-                [[CLGetMediaTool getInstance] loadCameraFromCurrentViewController:controller maximumDuration:30.0 completion:^(NSURL *videoURL, UIImage *photo) {
+                [[CLGetMediaTool getInstance] loadCameraFromCurrentViewController:controller maximumDuration:180.0 completion:^(NSURL *videoURL, UIImage *photo) {
                     [CLNewEntryTool quickAddNewPropFromCurrentController:controller withVideo:videoURL orImage:photo];
                     
                 }];
@@ -158,7 +158,7 @@
             [CLNewEntryTool addNewRoutineFromCurrentController:controller withVideo:nil  orImage:nil];
             
         } else if (mode == kNewEntryModeMedia) {
-            [[CLGetMediaTool getInstance] loadCameraFromCurrentViewController:controller maximumDuration:180.0 completion:^(NSURL *videoURL, UIImage *photo) {
+            [[CLGetMediaTool getInstance] loadCameraFromCurrentViewController:controller maximumDuration:600.0 completion:^(NSURL *videoURL, UIImage *photo) {
                 [CLNewEntryTool quickAddNewRoutineFromCurrentController:controller withVideo:videoURL orImage:photo];
             }];
         }
@@ -171,7 +171,7 @@
 
             
         } else if (mode == kNewEntryModeMedia) {
-            [[CLGetMediaTool getInstance] loadCameraFromCurrentViewController:controller maximumDuration:30.0 completion:^(NSURL *videoURL, UIImage *photo) {
+            [[CLGetMediaTool getInstance] loadCameraFromCurrentViewController:controller maximumDuration:180.0 completion:^(NSURL *videoURL, UIImage *photo) {
                 [CLNewEntryTool quickAddNewIdeaFromCurrentController:controller withVideo:videoURL orImage:photo];
             }];
         }
@@ -184,7 +184,7 @@
             [CLNewEntryTool addNewSleightFromCurrentController:controller withVideo:nil  orImage:nil];
             
         } else if (mode == kNewEntryModeMedia) {
-            [[CLGetMediaTool getInstance] loadCameraFromCurrentViewController:controller maximumDuration:30.0 completion:^(NSURL *videoURL, UIImage *photo) {
+            [[CLGetMediaTool getInstance] loadCameraFromCurrentViewController:controller maximumDuration:180.0 completion:^(NSURL *videoURL, UIImage *photo) {
                 [CLNewEntryTool quickAddNewSleightFromCurrentController:controller withVideo:videoURL orImage:photo];
             }];
             
@@ -200,7 +200,7 @@
             [CLNewEntryTool addNewPropFromCurrentController:controller withVideo:nil  orImage:nil];
             
         } else if (mode == kNewEntryModeMedia) {
-            [[CLGetMediaTool getInstance] loadCameraFromCurrentViewController:controller maximumDuration:30.0 completion:^(NSURL *videoURL, UIImage *photo) {
+            [[CLGetMediaTool getInstance] loadCameraFromCurrentViewController:controller maximumDuration:180.0 completion:^(NSURL *videoURL, UIImage *photo) {
                 [CLNewEntryTool quickAddNewPropFromCurrentController:controller withVideo:videoURL orImage:photo];
                 
             }];

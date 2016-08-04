@@ -868,31 +868,31 @@
     }];
 }
 
-
-- (void)addNewIdeaWithVideo {
-    
-    [[CLGetMediaTool getInstance] loadCameraFromCurrentViewController:self maximumDuration:30.0 completion:^(NSURL *videoURL, UIImage *photo) {
-        [self addNewIdeaWithVideo:videoURL orImage:photo];
-    }];
-}
-
 - (void)addNewRoutineWithVideo {
     
-    [[CLGetMediaTool getInstance] loadCameraFromCurrentViewController:self maximumDuration:180.0 completion:^(NSURL *videoURL, UIImage *photo) {
+    [[CLGetMediaTool getInstance] loadCameraFromCurrentViewController:self maximumDuration:600.0 completion:^(NSURL *videoURL, UIImage *photo) {
         [self addNewRoutineWithVideo:videoURL orImage:photo];
     }];
 }
 
+- (void)addNewIdeaWithVideo {
+    
+    [[CLGetMediaTool getInstance] loadCameraFromCurrentViewController:self maximumDuration:180.0 completion:^(NSURL *videoURL, UIImage *photo) {
+        [self addNewIdeaWithVideo:videoURL orImage:photo];
+    }];
+}
+
+
 - (void)addNewSleightWithVideo {
     
-    [[CLGetMediaTool getInstance] loadCameraFromCurrentViewController:self maximumDuration:30.0 completion:^(NSURL *videoURL, UIImage *photo) {
+    [[CLGetMediaTool getInstance] loadCameraFromCurrentViewController:self maximumDuration:180.0 completion:^(NSURL *videoURL, UIImage *photo) {
         [self addNewSleightWithVideo:videoURL orImage:photo];
     }];
 }
 
 - (void)addNewPropWithVideo {
     
-    [[CLGetMediaTool getInstance] loadCameraFromCurrentViewController:self maximumDuration:30.0 completion:^(NSURL *videoURL, UIImage *photo) {
+    [[CLGetMediaTool getInstance] loadCameraFromCurrentViewController:self maximumDuration:180.0 completion:^(NSURL *videoURL, UIImage *photo) {
         [self addNewPropWithVideo:videoURL orImage:photo];
         
     }];
