@@ -5,6 +5,13 @@
   Created by 陈林 on 16/4/7.
 
 */
+
+"编辑标题" = "Edit Title";
+"保存笔记" = "Save";
+"标题" = "Title";
+"继续编辑" = "Detail Edit";
+"取消保存" = "Delete";
+
 "添加" = "Add";
 "删除网络缓存" = "Clear Web Cache";
 "网络缓存文件" = "Web Cache";

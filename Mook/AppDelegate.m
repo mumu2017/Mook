@@ -274,9 +274,9 @@
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
     
     // 退到后台后,就dismiss所有的Modal ViewController
-    CLMookTabBarController* rootVC = (CLMookTabBarController*)self.window.rootViewController;
-    
-    [rootVC dismissViewControllerAnimated:NO completion:nil];
+//    CLMookTabBarController* rootVC = (CLMookTabBarController*)self.window.rootViewController;
+//    
+//    [rootVC dismissViewControllerAnimated:NO completion:nil];
     
 }
 

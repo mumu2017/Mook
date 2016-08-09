@@ -744,7 +744,6 @@
         NSString *title = nameTF.text;
         comfirmHandler(title);
 
-        
     }];
     
     UIAlertAction *editMore = [UIAlertAction actionWithTitle:NSLocalizedString(@"继续编辑", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {

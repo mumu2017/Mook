@@ -69,13 +69,13 @@
         if (self.editingModel == kEditingModeEffect) {
             _videoDuration = 600;
         } else {
-            _videoDuration = 30;
+            _videoDuration = 60;
         }
     } else {
         if (self.editingModel == kEditingModeEffect) {
             _videoDuration = 180;
         } else {
-            _videoDuration = 30;
+            _videoDuration = 60;
         }
     }
     
