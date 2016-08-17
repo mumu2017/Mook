@@ -18,6 +18,21 @@ typedef enum {
 
 @interface CLNewEntryTool : NSObject
 
+/**
+ *  取消新建笔记
+ *
+ *  @param model 笔记Model
+ */
++ (void)cancelNewEntry:(id _Nonnull)modelUnknown;
+
+/**
+ *  删除笔记
+ *
+ *  @param model 笔记Model
+ */
++ (void)deleteEntry:(id _Nonnull)modelUnknown;
+
+
 #pragma mark - 直接方法
 + (void)addNewEntryWithEntryMode:(NewEntryMode)entryMode inViewController:(UIViewController *_Nonnull)controller listType:(ListType)listType;
 

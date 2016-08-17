@@ -18,6 +18,7 @@
 #import "CLSleightObjModel.h"
 #import "CLPropObjModel.h"
 #import "CLLinesObjModel.h"
+#import "CLNewEntryTool.h"
 
 @interface CLMookTabBarController ()<EAIntroDelegate>
 
@@ -187,45 +188,7 @@
         return;
     } else {
         id modelUnknown = noti.object;
-        if ([modelUnknown isKindOfClass:[CLIdeaObjModel class]]) {
-            CLIdeaObjModel *model = (CLIdeaObjModel *)modelUnknown;
-            
-            [kDataListIdea removeObject:model];
-            [kDataListAll removeObject:model];
-            
-        } else if ([modelUnknown isKindOfClass:[CLShowModel class]]) {
-            CLShowModel *model = (CLShowModel *)modelUnknown;
-            
-            [kDataListShow removeObject:model];
-            [kDataListAll removeObject:model];
-            
-        } else if ([modelUnknown isKindOfClass:[CLRoutineModel class]]) {
-            CLRoutineModel *model = (CLRoutineModel *)modelUnknown;
-            
-            [kDataListRoutine removeObject:model];
-            [kDataListAll removeObject:model];
-            
-        } else if ([modelUnknown isKindOfClass:[CLSleightObjModel class]]) {
-            CLSleightObjModel *model = (CLSleightObjModel *)modelUnknown;
-            
-            [kDataListSleight removeObject:model];
-            [kDataListAll removeObject:model];
-            
-        } else if ([modelUnknown isKindOfClass:[CLPropObjModel class]]) {
-            CLPropObjModel *model = (CLPropObjModel *)modelUnknown;
-            
-            [kDataListProp removeObject:model];
-            [kDataListAll removeObject:model];
-            
-        } else if ([modelUnknown isKindOfClass:[CLLinesObjModel class]]) {
-            CLLinesObjModel *model = (CLLinesObjModel *)modelUnknown;
-            
-            [kDataListLines removeObject:model];
-            [kDataListAll removeObject:model];
-            
-        }
-        
-//        NSLog(@"cancel entry sucess!");
+        [CLNewEntryTool cancelNewEntry:modelUnknown];
     }
     
 }
@@ -237,55 +200,8 @@
         return;
     } else {
         id modelUnknown = noti.object;
-        if ([modelUnknown isKindOfClass:[CLIdeaObjModel class]]) {
-            CLIdeaObjModel *model = (CLIdeaObjModel *)modelUnknown;
-            
-            [CLDataSaveTool deleteIdea:model];
-            
-            [kDataListIdea removeObject:model];
-            [kDataListAll removeObject:model];
-            
-        } else if ([modelUnknown isKindOfClass:[CLShowModel class]]) {
-            CLShowModel *model = (CLShowModel *)modelUnknown;
-            
-            [CLDataSaveTool deleteShow:model];
-            
-            [kDataListShow removeObject:model];
-            [kDataListAll removeObject:model];
-            
-        } else if ([modelUnknown isKindOfClass:[CLRoutineModel class]]) {
-            CLRoutineModel *model = (CLRoutineModel *)modelUnknown;
-            
-            [CLDataSaveTool deleteRoutine:model];
-            
-            [kDataListRoutine removeObject:model];
-            [kDataListAll removeObject:model];
-            
-        } else if ([modelUnknown isKindOfClass:[CLSleightObjModel class]]) {
-            CLSleightObjModel *model = (CLSleightObjModel *)modelUnknown;
-            
-            [kDataListSleight removeObject:model];
-            [kDataListAll removeObject:model];
-            
-        } else if ([modelUnknown isKindOfClass:[CLPropObjModel class]]) {
-            CLPropObjModel *model = (CLPropObjModel *)modelUnknown;
-            
-            [CLDataSaveTool deleteProp:model];
-            
-            [kDataListProp removeObject:model];
-            [kDataListAll removeObject:model];
-            
-        } else if ([modelUnknown isKindOfClass:[CLLinesObjModel class]]) {
-            CLLinesObjModel *model = (CLLinesObjModel *)modelUnknown;
-            
-            [CLDataSaveTool deleteLines:model];
-            
-            [kDataListLines removeObject:model];
-            [kDataListAll removeObject:model];
-            
-        }
-        
-//        NSLog(@"delete entry sucess!");
+        [CLNewEntryTool deleteEntry:modelUnknown];
+
     }
 }
 

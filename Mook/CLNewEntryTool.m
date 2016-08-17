@@ -32,6 +32,104 @@
 
 #pragma mark - 直接方法
 
++ (void)cancelNewEntry:(id _Nonnull)modelUnknown {
+    
+    if ([modelUnknown isKindOfClass:[CLIdeaObjModel class]]) {
+        CLIdeaObjModel *model = (CLIdeaObjModel *)modelUnknown;
+        
+        [kDataListIdea removeObject:model];
+        [kDataListAll removeObject:model];
+        
+    } else if ([modelUnknown isKindOfClass:[CLShowModel class]]) {
+        CLShowModel *model = (CLShowModel *)modelUnknown;
+        
+        [kDataListShow removeObject:model];
+        [kDataListAll removeObject:model];
+        
+    } else if ([modelUnknown isKindOfClass:[CLRoutineModel class]]) {
+        CLRoutineModel *model = (CLRoutineModel *)modelUnknown;
+        
+        [kDataListRoutine removeObject:model];
+        [kDataListAll removeObject:model];
+        
+    } else if ([modelUnknown isKindOfClass:[CLSleightObjModel class]]) {
+        CLSleightObjModel *model = (CLSleightObjModel *)modelUnknown;
+        
+        [kDataListSleight removeObject:model];
+        [kDataListAll removeObject:model];
+        
+    } else if ([modelUnknown isKindOfClass:[CLPropObjModel class]]) {
+        CLPropObjModel *model = (CLPropObjModel *)modelUnknown;
+        
+        [kDataListProp removeObject:model];
+        [kDataListAll removeObject:model];
+        
+    } else if ([modelUnknown isKindOfClass:[CLLinesObjModel class]]) {
+        CLLinesObjModel *model = (CLLinesObjModel *)modelUnknown;
+        
+        [kDataListLines removeObject:model];
+        [kDataListAll removeObject:model];
+        
+    }
+
+}
+
++ (void)deleteEntry:(id _Nonnull)modelUnknown {
+    
+    if ([modelUnknown isKindOfClass:[CLIdeaObjModel class]]) {
+        CLIdeaObjModel *model = (CLIdeaObjModel *)modelUnknown;
+        
+        [CLDataSaveTool deleteIdea:model];
+        
+        [kDataListIdea removeObject:model];
+        [kDataListAll removeObject:model];
+        
+    } else if ([modelUnknown isKindOfClass:[CLShowModel class]]) {
+        CLShowModel *model = (CLShowModel *)modelUnknown;
+        
+        [CLDataSaveTool deleteShow:model];
+        
+        [kDataListShow removeObject:model];
+        [kDataListAll removeObject:model];
+        
+    } else if ([modelUnknown isKindOfClass:[CLRoutineModel class]]) {
+        CLRoutineModel *model = (CLRoutineModel *)modelUnknown;
+        
+        [CLDataSaveTool deleteRoutine:model];
+        
+        [kDataListRoutine removeObject:model];
+        [kDataListAll removeObject:model];
+        
+    } else if ([modelUnknown isKindOfClass:[CLSleightObjModel class]]) {
+        CLSleightObjModel *model = (CLSleightObjModel *)modelUnknown;
+        
+        [CLDataSaveTool deleteSleight:model];
+
+        [kDataListSleight removeObject:model];
+        [kDataListAll removeObject:model];
+        
+    } else if ([modelUnknown isKindOfClass:[CLPropObjModel class]]) {
+        CLPropObjModel *model = (CLPropObjModel *)modelUnknown;
+        
+        [CLDataSaveTool deleteProp:model];
+        
+        [kDataListProp removeObject:model];
+        [kDataListAll removeObject:model];
+        
+    } else if ([modelUnknown isKindOfClass:[CLLinesObjModel class]]) {
+        CLLinesObjModel *model = (CLLinesObjModel *)modelUnknown;
+        
+        [CLDataSaveTool deleteLines:model];
+        
+        [kDataListLines removeObject:model];
+        [kDataListAll removeObject:model];
+        
+    }
+    //删除文件后, 发送更新数据的通知, 各个界面会更新UI
+    [[NSNotificationCenter defaultCenter] postNotificationName:kUpdateDataNotification object:nil];
+
+}
+
 + (void)addNewEntryWithEntryMode:(NewEntryMode)entryMode inViewController:(UIViewController *)controller listType:(ListType)listType {
     
     if (entryMode == kNewEntryModeText) {

@@ -10,7 +10,7 @@
 #import "CLShowModel.h"
 #import "CLDataSaveTool.h"
 #import "CLListVC.h"
-
+#import "CLAllItemsListVC.h"
 #import "CLNewShowNavVC.h"
 #import "CLEdtingManageVC.h"
 
@@ -472,6 +472,37 @@
             
             self.currentEntryDelteted = YES;
             [[NSNotificationCenter defaultCenter] postNotificationName:kDeleteEntryNotification object:self.showModel];
+            
+            //This for loop iterates through all the view controllers in navigation stack.
+            UIViewController *lastListVC = nil;
+            
+            for (UIViewController* viewController in self.navigationController.viewControllers) {
+                
+                if ([viewController isKindOfClass:[CLListVC class]] ) {
+                    
+                    lastListVC = viewController;
+                    
+                    break;
+                    
+                } else if ([viewController isKindOfClass:[CLAllItemsListVC class]] ) {
+                    
+                    lastListVC = viewController;
+                    
+                }
+            }
+            
+            
+            if ([lastListVC isKindOfClass:[CLListVC class]]) {
+                CLListVC *vc = (CLListVC *)lastListVC;
+                [self.navigationController popToViewController:vc animated:YES];
+                
+            } else if ([lastListVC isKindOfClass:[CLAllItemsListVC class]]) {
+                CLAllItemsListVC *vc = (CLAllItemsListVC *)lastListVC;
+                [self.navigationController popToViewController:vc animated:YES];
+                
+            } else {
+                [self.navigationController popToRootViewControllerAnimated:YES];
+            }
             
         });
         

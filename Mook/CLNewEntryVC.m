@@ -9,6 +9,7 @@
 #import "CLNewEntryVC.h"
 #import "CLNewEntryNavVC.h"
 #import "CLListVC.h"
+#import "CLAllItemsListVC.h"
 #import "CLDataSaveTool.h"
 
 #import "CLTagChooseNavVC.h"
@@ -1312,11 +1313,40 @@
     
     UIAlertAction* delete = [UIAlertAction actionWithTitle:NSLocalizedString(@"确定", nil) style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
         
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
 //            NSLog(@"delete current entry");
-            [self sendDeleteNotification];
+        [self sendDeleteNotification];
+        
+        //This for loop iterates through all the view controllers in navigation stack.
+        UIViewController *lastListVC = nil;
+        
+        for (UIViewController* viewController in self.navigationController.viewControllers) {
             
-        });
+            if ([viewController isKindOfClass:[CLListVC class]] ) {
+                
+                lastListVC = viewController;
+
+                break;
+                
+            } else if ([viewController isKindOfClass:[CLAllItemsListVC class]] ) {
+                
+                lastListVC = viewController;
+
+            }
+        }
+        
+        
+        if ([lastListVC isKindOfClass:[CLListVC class]]) {
+            CLListVC *vc = (CLListVC *)lastListVC;
+            [self.navigationController popToViewController:vc animated:YES];
+
+        } else if ([lastListVC isKindOfClass:[CLAllItemsListVC class]]) {
+            CLAllItemsListVC *vc = (CLAllItemsListVC *)lastListVC;
+            [self.navigationController popToViewController:vc animated:YES];
+
+        } else {
+            [self.navigationController popToRootViewControllerAnimated:YES];
+        }
+
     }];
     
     UIAlertAction* cancel = [UIAlertAction actionWithTitle:NSLocalizedString(@"取消", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
@@ -1356,15 +1386,6 @@
             break;
     }
     
-    //This for loop iterates through all the view controllers in navigation stack.
-    for (UIViewController* viewController in self.navigationController.viewControllers) {
-
-        if ([viewController isKindOfClass:[CLListVC class]] ) {
-        
-            CLListVC *vc = (CLListVC*)viewController;
-            [self.navigationController popToViewController:vc animated:YES];
-        }
-    }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

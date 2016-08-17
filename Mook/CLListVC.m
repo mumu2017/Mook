@@ -92,7 +92,8 @@
     [super viewDidLoad];
 
     self.tableView.backgroundView = self.tableBackView;
-    self.tableView.backgroundColor = [UIColor whiteColor];
+    self.tableView.backgroundColor = [UIColor flatWhiteColor];
+
     self.tableView.rowHeight = kListCellHeight;
     self.tableView.tableFooterView = [UIView new];
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 96, 0);
@@ -140,6 +141,8 @@
     
     [self.tableView reloadData];
 }
+
+// 删除掉tag页面的listVC中的model, 但是并不删除沙盒中的文件. 沙盒中的文件的删除在CLMookTabBarController中.
 
 - (void)removeEntryIfWithTag:(NSNotification *)noti {
     if (self.tag == nil) return;
@@ -192,6 +195,7 @@
             }
         }
         
+        [self.tableView reloadData];
 //        NSLog(@"cancel entry sucess!");
     }
 
@@ -251,7 +255,8 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     CLListImageCell *cell = [tableView dequeueReusableCellWithIdentifier:kListImageCellID forIndexPath:indexPath];
-    
+    cell.backgroundColor = [UIColor flatWhiteColor];
+
     switch (self.listType) {
         case kListTypeAll:
         {
