@@ -49,6 +49,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self.tableView setEditing:YES];
+
     self.tableView.allowsMultipleSelection = YES;
     
     UIBarButtonItem *doneBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(finishPickRoutines)];
@@ -96,6 +98,7 @@
     CLListImageCell *cell = [tableView dequeueReusableCellWithIdentifier:kListImageCellID forIndexPath:indexPath];
     CLRoutineModel *model = self.routineModelList[indexPath.row];
     [cell setModel:model utilityButtons:nil delegate:nil];
+    cell.tintColor = kAppThemeColor;
     
     return cell;
     
@@ -103,16 +106,6 @@
 
 #pragma mark 选中cell跳转
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
-    cell.accessoryType = UITableViewCellAccessoryCheckmark;
-    
-    cell.selectedBackgroundView = [[UIView alloc] initWithFrame:cell.frame];
-    cell.selectedBackgroundView.backgroundColor = [UIColor flatSkyBlueColor];
-
-    cell.layer.borderColor = [UIColor whiteColor].CGColor;
-    cell.layer.borderWidth = 1.0;
-    cell.layer.cornerRadius = 0.0;
-    cell.layer.masksToBounds = YES;
     
     CLRoutineModel *model = self.routineModelList[indexPath.row];
     if ([self.pickedRoutines containsObject:model] == NO) {
@@ -122,19 +115,20 @@
 
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
-    
-    cell.accessoryType = UITableViewCellAccessoryNone;
-    cell.selectedBackgroundView = nil;
-    cell.layer.borderColor = nil;
-    cell.layer.borderWidth = 0.0;
-    cell.layer.cornerRadius = 0.0;
-    cell.layer.masksToBounds = YES;
-    
     CLRoutineModel *model = self.routineModelList[indexPath.row];
     if ([self.pickedRoutines containsObject:model] == YES) {
         [self.pickedRoutines removeObject:model];
     }
+}
+
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    return UITableViewCellEditingStyleDelete|UITableViewCellEditingStyleInsert;
+}
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    return YES;
 }
 
 @end
