@@ -246,15 +246,13 @@
 
 - (void)addWebSiteWithSearching {
 
-    CLWebViewController *_webVC = [[CLWebViewController alloc] initWithURL:[NSURL URLWithString:kSearchUrlString]];
-    _webVC.webSiteList = self.webSiteList;
-    _webVC.webNoteList = self.webNotesList;
+    CLWebViewController *webVC = [[CLWebViewController alloc] initWithURL:[NSURL URLWithString:kSearchUrlString]];
+    webVC.webSiteList = self.webSiteList;
+    webVC.webNoteList = self.webNotesList;
     
-    _webVC.isAddingWebSite = YES;
+    webVC.hidesBottomBarWhenPushed = YES;
     
-    _webVC.hidesBottomBarWhenPushed = YES;
-    
-    [self.navigationController pushViewController:_webVC animated:YES];
+    [self.navigationController pushViewController:webVC animated:YES];
 }
 
 - (void)addWebSiteWithTyping {
@@ -277,6 +275,13 @@
         textField.clearButtonMode = UITextFieldViewModeWhileEditing;
         textField.font = kFontSys16;
         
+        // 检测剪切板中的文本, 如果是以http开头, 则直接拷贝到textField中
+        UIPasteboard *pboard = [UIPasteboard generalPasteboard];
+        NSString *copyString = pboard.string;
+        
+        if ([copyString hasPrefix:@"http"]) {
+            textField.text = copyString;
+        }
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(alertTextFieldDidChange:) name:UITextFieldTextDidChangeNotification object:textField];
         
@@ -454,14 +459,13 @@
 
 //TODO: 检查网络连接
     
-    CLWebViewController *_webVC = [[CLWebViewController alloc] initWithURL:model.url];
-    _webVC.webSiteList = self.webSiteList;
-    _webVC.webNoteList = self.webNotesList;
-    _webVC.isAddingWebSite = NO;
+    CLWebViewController *webVC = [[CLWebViewController alloc] initWithURL:model.url];
+    webVC.webSiteList = self.webSiteList;
+    webVC.webNoteList = self.webNotesList;
 
-    _webVC.hidesBottomBarWhenPushed = YES;
+    webVC.hidesBottomBarWhenPushed = YES;
     
-    [self.navigationController pushViewController:_webVC animated:YES];
+    [self.navigationController pushViewController:webVC animated:YES];
     
 //    if ([self checkIfStringIsValidUrl:model.url.absoluteString] == NO) {
 //        [MBProgressHUD showGlobalProgressHUDWithTitle:@"无效的地址, 无法加载!" hideAfterDelay:0.5];

@@ -81,7 +81,7 @@
     self.supportedWebActions = DZNWebActionAll;
     self.showLoadingProgress = YES;
     self.allowHistory = YES;
-    self.hideBarsWithGestures = !self.isAddingWebSite;
+    self.hideBarsWithGestures = NO;
 
     // 设置图标
     self.actionButtonImage = [[UIImage imageNamed:@"iconAction"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
@@ -90,6 +90,18 @@
     self.reloadButtonImage = [[UIImage imageNamed:@"dzn_icn_toolbar_reload" inBundle:[NSBundle bundleForClass:[DZNWebViewController class]] compatibleWithTraitCollection:nil] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     self.stopButtonImage = [[UIImage imageNamed:@"dzn_icn_toolbar_stop" inBundle:[NSBundle bundleForClass:[DZNWebViewController class]] compatibleWithTraitCollection:nil] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     self.navigationController.toolbar.tintColor = kAppThemeColor;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    
+    [super viewWillAppear:animated];
+    [self.navigationController setToolbarHidden:NO];
+
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [self.navigationController setToolbarHidden:YES];
 }
 
 #define DEFAULTWEBVIEWFONTSIZE 14
