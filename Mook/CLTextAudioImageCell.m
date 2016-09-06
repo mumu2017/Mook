@@ -128,7 +128,9 @@
         [_imageContainer mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.contentLabel.mas_bottom).offset(20);
 
-            make.left.right.equalTo(self.contentView);
+            make.left.equalTo(self.contentView).offset(20);
+            make.right.equalTo(self.contentView).offset(-20);
+
             make.bottom.equalTo(self.contentView).offset(-20);
         }];
         

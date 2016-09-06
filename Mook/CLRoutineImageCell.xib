@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -23,7 +23,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kyg-Fc-HhG">
-                        <rect key="frame" x="232" y="6.5" width="68" height="38"/>
+                        <rect key="frame" x="232" y="-23" width="68" height="98"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="tintColor" red="0.15410047769546509" green="0.41306763887405396" blue="0.69063264131546021" alpha="1" colorSpace="calibratedRGB"/>
                         <state key="normal" title="查看流程">
@@ -31,26 +31,26 @@
                         </state>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="效果:但肯垃圾分开撒酒疯凯撒就分开送大家分开撒娇发牢骚 " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hn4-Jj-CaZ">
-                        <rect key="frame" x="20" y="64.5" width="280" height="41"/>
+                        <rect key="frame" x="20" y="95" width="280" height="41"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lines.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="T8U-Qy-jw3">
-                        <rect key="frame" x="0.0" y="125.5" width="320" height="240"/>
+                        <rect key="frame" x="20" y="156" width="280" height="210"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="width" relation="greaterThanOrEqual" secondItem="T8U-Qy-jw3" secondAttribute="height" multiplier="4:3" id="ioB-oI-6hF"/>
                         </constraints>
                     </imageView>
                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P5x-qZ-Tjc">
-                        <rect key="frame" x="0.0" y="125.5" width="320" height="240"/>
+                        <rect key="frame" x="20" y="156" width="280" height="210"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </button>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="T8U-Qy-jw3" secondAttribute="trailing" id="1vr-wx-rM8"/>
+                    <constraint firstAttribute="trailing" secondItem="T8U-Qy-jw3" secondAttribute="trailing" constant="20" id="1vr-wx-rM8"/>
                     <constraint firstAttribute="trailingMargin" secondItem="jQx-38-Fm0" secondAttribute="trailing" constant="80" id="Cyc-BM-S70"/>
                     <constraint firstItem="P5x-qZ-Tjc" firstAttribute="height" secondItem="T8U-Qy-jw3" secondAttribute="height" id="G7F-f5-xkf"/>
                     <constraint firstItem="P5x-qZ-Tjc" firstAttribute="width" secondItem="T8U-Qy-jw3" secondAttribute="width" id="M30-fo-qJx"/>
@@ -61,7 +61,7 @@
                     <constraint firstItem="jQx-38-Fm0" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="gPL-2h-N8v"/>
                     <constraint firstAttribute="trailing" secondItem="Hn4-Jj-CaZ" secondAttribute="trailing" constant="20" id="ing-9h-ocv"/>
                     <constraint firstAttribute="trailing" secondItem="kyg-Fc-HhG" secondAttribute="trailing" constant="20" id="qQk-g2-Zvd"/>
-                    <constraint firstItem="T8U-Qy-jw3" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="rDM-1V-lOL"/>
+                    <constraint firstItem="T8U-Qy-jw3" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="rDM-1V-lOL"/>
                     <constraint firstItem="P5x-qZ-Tjc" firstAttribute="centerX" secondItem="T8U-Qy-jw3" secondAttribute="centerX" id="rQO-vA-S2v"/>
                     <constraint firstItem="Hn4-Jj-CaZ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="ul9-jO-dZn"/>
                     <constraint firstAttribute="bottom" secondItem="T8U-Qy-jw3" secondAttribute="bottom" constant="5" id="xMN-9i-llY"/>
