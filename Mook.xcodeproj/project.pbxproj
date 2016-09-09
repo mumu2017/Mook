@@ -418,7 +418,6 @@
 		438342791D11331A0089B58E /* CLWebSiteModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLWebSiteModel.h; sourceTree = "<group>"; };
 		4383427A1D11331A0089B58E /* CLWebSiteModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLWebSiteModel.m; sourceTree = "<group>"; };
 		4383428F1D139E2B0089B58E /* CLWebVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLWebVC.h; sourceTree = "<group>"; };
-		438540361CE56CD300F82AAB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Setting.strings; sourceTree = "<group>"; };
 		438540371CE56CF200F82AAB /* CLThemeColorVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLThemeColorVC.h; sourceTree = "<group>"; };
 		438540381CE56CF200F82AAB /* CLThemeColorVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLThemeColorVC.m; sourceTree = "<group>"; };
 		4385403A1CE56D4000F82AAB /* CLThemeColorNavVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLThemeColorNavVC.h; sourceTree = "<group>"; };
@@ -464,7 +463,6 @@
 		439519FE1CC5271C00505E5B /* CLLanguageVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLLanguageVC.m; sourceTree = "<group>"; };
 		43951A021CC5DAEA00505E5B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Setting.storyboard; sourceTree = "<group>"; };
 		43951A071CC5DAEF00505E5B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Setting.strings"; sourceTree = "<group>"; };
-		43951A091CC5DAF100505E5B /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Setting.strings"; sourceTree = "<group>"; };
 		43951A101CC5E7A200505E5B /* CLAboutVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLAboutVC.h; sourceTree = "<group>"; };
 		43951A111CC5E7A200505E5B /* CLAboutVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLAboutVC.m; sourceTree = "<group>"; };
 		43951A141CC5E7BE00505E5B /* CLBackUpInfoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLBackUpInfoVC.h; sourceTree = "<group>"; };
@@ -495,6 +493,8 @@
 		43C5425D1D423FF100898655 /* FCFileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FCFileManager.h; sourceTree = "<group>"; };
 		43C5425E1D423FF100898655 /* FCFileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FCFileManager.m; sourceTree = "<group>"; };
 		43C542601D424F2E00898655 /* CLWebVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLWebVC.m; sourceTree = "<group>"; };
+		43D5C7701D825CBD008B671A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Setting.strings; sourceTree = "<group>"; };
+		43D5C7711D825CF4008B671A /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Setting.strings"; sourceTree = "<group>"; };
 		43DDCF381D1B72E4007E5CAC /* NSString+Media.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Media.h"; sourceTree = "<group>"; };
 		43DDCF391D1B72E4007E5CAC /* NSString+Media.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Media.m"; sourceTree = "<group>"; };
 		43DDCF3B1D1BA5C2007E5CAC /* CLAudioPlayVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLAudioPlayVC.h; sourceTree = "<group>"; };
@@ -1747,8 +1747,8 @@
 			children = (
 				43951A021CC5DAEA00505E5B /* Base */,
 				43951A071CC5DAEF00505E5B /* zh-Hans */,
-				43951A091CC5DAF100505E5B /* zh-Hant */,
-				438540361CE56CD300F82AAB /* en */,
+				43D5C7701D825CBD008B671A /* en */,
+				43D5C7711D825CF4008B671A /* zh-Hant */,
 			);
 			name = Setting.storyboard;
 			sourceTree = "<group>";
@@ -1773,8 +1773,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_BITCODE = NO;
@@ -1820,8 +1820,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_BITCODE = NO;
@@ -1849,9 +1849,9 @@
 			baseConfigurationReference = 41EFA00EF9667E60B4BC3CCB /* Pods-Mook.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				DEFINES_MODULE = YES;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1878,8 +1878,8 @@
 			baseConfigurationReference = F0417F5619A3E977F1F0B558 /* Pods-Mook.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				DEFINES_MODULE = YES;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (

@@ -315,7 +315,7 @@
     MFMailComposeViewController *picker = [[MFMailComposeViewController alloc] init];
     picker.mailComposeDelegate = self;
     
-    [picker setSubject:@"Mook反馈"];
+    [picker setSubject:NSLocalizedString(@"Mook反馈", nil)];
     
     // Set up recipients
     NSArray *toRecipients = [NSArray arrayWithObject:@"mookformagic@hotmail.com"];

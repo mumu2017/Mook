@@ -35,6 +35,7 @@
     [super viewDidLoad];
     _scale = 15;
     
+//    self.navigationItem.leftItemsSupplementBackButton = YES;
     self.extendedLayoutIncludesOpaqueBars = YES;
     self.edgesForExtendedLayout = UIRectEdgeBottom;
     
