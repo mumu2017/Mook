@@ -12,7 +12,6 @@
 
 - (void)placeCursorAtEnd;
 
-
 - (void) addPlaceHolderWithText:(NSString *)text andFont:(UIFont *)font;
 - (void) setPlaceHolderText:(NSString *)text;
 - (void) showPlaceHolder;
