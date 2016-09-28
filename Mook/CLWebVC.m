@@ -71,11 +71,8 @@
             [CLDataSaveTool updateWebSite:t11];
             [CLDataSaveTool updateWebSite:collegeMagic];
             [CLDataSaveTool updateWebSite:magicTieBa];
-
         }
-        
 
-        
     }
     return _webSiteList;
 }
@@ -186,6 +183,20 @@
     self.tableView.tableFooterView = [UIView new];
     self.tableView.backgroundColor = [UIColor flatWhiteColor];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(update) name:kUpdateMookNotification
+                                               object:nil];
+}
+
+- (void)update {
+    
+    self.webNotesList = nil;
+    self.webSiteList = nil;
+
+    [self.tableView reloadData];
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)initSubviews {
